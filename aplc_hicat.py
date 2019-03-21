@@ -14,7 +14,7 @@ num_pix_foc = 50 # px diameter
 foc_inner = 8.543 #lambda_0/D diameter
 spectral_bandwidth = 0.1 # fractional
 num_wavelengths = 3
-testing = True
+testing = False
 
 if testing:
 	num_pix = 128
