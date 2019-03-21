@@ -5725,3 +5725,1084 @@ Gurobi 7.0.0 (linux64, Python) logging started Thu Mar 21 16:16:34 2019
 Changed value of parameter Threads to 4
    Prev: 0  Min: 0  Max: 1024  Default: 0
 Warning for adding constraints: zero or small (< 1e-13) coefficients, ignored
+
+Gurobi 7.0.0 (linux64, Python) logging started Thu Mar 21 17:10:40 2019
+
+Parameter Threads unchanged
+   Value: 0  Min: 0  Max: 1024  Default: 0
+Changed value of parameter Crossover to 0
+   Prev: -1  Min: -1  Max: 5  Default: -1
+Changed value of parameter Method to 2
+   Prev: -1  Min: -1  Max: 4  Default: -1
+
+Gurobi 7.0.0 (linux64, Python) logging started Thu Mar 21 17:14:05 2019
+
+Parameter Threads unchanged
+   Value: 0  Min: 0  Max: 1024  Default: 0
+Changed value of parameter Crossover to 0
+   Prev: -1  Min: -1  Max: 5  Default: -1
+Changed value of parameter Method to 2
+   Prev: -1  Min: -1  Max: 4  Default: -1
+
+Gurobi 7.0.0 (linux64, Python) logging started Thu Mar 21 17:14:35 2019
+
+Parameter Threads unchanged
+   Value: 0  Min: 0  Max: 1024  Default: 0
+Changed value of parameter Crossover to 0
+   Prev: -1  Min: -1  Max: 5  Default: -1
+Changed value of parameter Method to 2
+   Prev: -1  Min: -1  Max: 4  Default: -1
+
+Gurobi 7.0.0 (linux64, Python) logging started Thu Mar 21 17:18:10 2019
+
+Parameter Threads unchanged
+   Value: 0  Min: 0  Max: 1024  Default: 0
+Changed value of parameter Crossover to 0
+   Prev: -1  Min: -1  Max: 5  Default: -1
+Changed value of parameter Method to 2
+   Prev: -1  Min: -1  Max: 4  Default: -1
+
+Gurobi 7.0.0 (linux64, Python) logging started Thu Mar 21 17:27:12 2019
+
+Parameter Threads unchanged
+   Value: 0  Min: 0  Max: 1024  Default: 0
+Changed value of parameter Crossover to 0
+   Prev: -1  Min: -1  Max: 5  Default: -1
+Changed value of parameter Method to 2
+   Prev: -1  Min: -1  Max: 4  Default: -1
+
+Gurobi 7.0.0 (linux64, Python) logging started Thu Mar 21 17:32:10 2019
+
+Parameter Threads unchanged
+   Value: 0  Min: 0  Max: 1024  Default: 0
+Changed value of parameter Crossover to 0
+   Prev: -1  Min: -1  Max: 5  Default: -1
+Changed value of parameter Method to 2
+   Prev: -1  Min: -1  Max: 4  Default: -1
+
+Gurobi 7.0.0 (linux64, Python) logging started Thu Mar 21 17:33:07 2019
+
+Parameter Threads unchanged
+   Value: 0  Min: 0  Max: 1024  Default: 0
+Changed value of parameter Crossover to 0
+   Prev: -1  Min: -1  Max: 5  Default: -1
+Changed value of parameter Method to 2
+   Prev: -1  Min: -1  Max: 4  Default: -1
+
+Gurobi 7.0.0 (linux64, Python) logging started Thu Mar 21 17:36:16 2019
+
+Parameter Threads unchanged
+   Value: 0  Min: 0  Max: 1024  Default: 0
+Changed value of parameter Crossover to 0
+   Prev: -1  Min: -1  Max: 5  Default: -1
+Changed value of parameter Method to 2
+   Prev: -1  Min: -1  Max: 4  Default: -1
+
+Gurobi 7.0.0 (linux64, Python) logging started Thu Mar 21 17:41:34 2019
+
+Parameter Threads unchanged
+   Value: 0  Min: 0  Max: 1024  Default: 0
+Changed value of parameter Crossover to 0
+   Prev: -1  Min: -1  Max: 5  Default: -1
+Changed value of parameter Method to 2
+   Prev: -1  Min: -1  Max: 4  Default: -1
+
+Gurobi 7.0.0 (linux64, Python) logging started Thu Mar 21 17:42:10 2019
+
+Parameter Threads unchanged
+   Value: 0  Min: 0  Max: 1024  Default: 0
+Changed value of parameter Crossover to 0
+   Prev: -1  Min: -1  Max: 5  Default: -1
+Changed value of parameter Method to 2
+   Prev: -1  Min: -1  Max: 4  Default: -1
+
+Gurobi 7.0.0 (linux64, Python) logging started Thu Mar 21 17:43:17 2019
+
+Parameter Threads unchanged
+   Value: 0  Min: 0  Max: 1024  Default: 0
+Changed value of parameter Crossover to 0
+   Prev: -1  Min: -1  Max: 5  Default: -1
+Changed value of parameter Method to 2
+   Prev: -1  Min: -1  Max: 4  Default: -1
+Optimize a model with 17376 rows, 3244 columns and 0 nonzeros
+Coefficient statistics:
+  Matrix range     [0e+00, 0e+00]
+  Objective range  [2e-01, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [6e-05, 6e-05]
+Presolve removed 3244 rows and 20620 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Barrier solved model in 0 iterations and 0.00 seconds
+Optimal objective 2.85700000e+03
+
+Gurobi 7.0.0 (linux64, Python) logging started Thu Mar 21 17:44:35 2019
+
+Parameter Threads unchanged
+   Value: 0  Min: 0  Max: 1024  Default: 0
+Changed value of parameter Crossover to 0
+   Prev: -1  Min: -1  Max: 5  Default: -1
+Changed value of parameter Method to 2
+   Prev: -1  Min: -1  Max: 4  Default: -1
+Optimize a model with 17376 rows, 3244 columns and 0 nonzeros
+Coefficient statistics:
+  Matrix range     [0e+00, 0e+00]
+  Objective range  [2e-01, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [6e-05, 6e-05]
+Presolve removed 3244 rows and 20620 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Barrier solved model in 0 iterations and 0.00 seconds
+Optimal objective 2.85700000e+03
+
+Gurobi 7.0.0 (linux64, Python) logging started Thu Mar 21 17:47:28 2019
+
+Parameter Threads unchanged
+   Value: 0  Min: 0  Max: 1024  Default: 0
+Changed value of parameter Crossover to 0
+   Prev: -1  Min: -1  Max: 5  Default: -1
+Changed value of parameter Method to 2
+   Prev: -1  Min: -1  Max: 4  Default: -1
+Warning for adding constraints: zero or small (< 1e-13) coefficients, ignored
+Optimize a model with 17376 rows, 3244 columns and 56357808 nonzeros
+Coefficient statistics:
+  Matrix range     [4e-11, 3e-04]
+  Objective range  [2e-01, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [6e-05, 6e-05]
+Presolve removed 0 rows and 8688 columns (presolve time = 6s) ...
+Presolve removed 0 rows and 8688 columns
+Presolve time: 9.28s
+Presolved: 3244 rows, 11932 columns, 28182148 nonzeros
+Ordering time: 0.06s
+
+Barrier statistics:
+ AA' NZ     : 5.260e+06
+ Factor NZ  : 5.263e+06 (roughly 50 MBytes of memory)
+ Factor Ops : 1.138e+10 (roughly 1 second per iteration)
+ Threads    : 4
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0   9.25219994e+03  0.00000000e+00  0.00e+00 0.00e+00  8.55e-01    14s
+   1   4.50677380e+03  1.00594644e+03  0.00e+00 2.22e-16  2.31e-01    17s
+   2   3.01892407e+03  1.94480090e+03  0.00e+00 2.22e-16  7.08e-02    20s
+   3   2.46564017e+03  2.09062590e+03  0.00e+00 2.22e-16  2.47e-02    23s
+   4   2.22092016e+03  2.16823744e+03  0.00e+00 3.33e-16  3.47e-03    26s
+   5   2.20320103e+03  2.19027642e+03  0.00e+00 4.44e-16  8.52e-04    29s
+   6   2.19870804e+03  2.19720948e+03  0.00e+00 3.33e-16  9.87e-05    32s
+   7   2.19803456e+03  2.19790828e+03  0.00e+00 3.33e-16  8.32e-06    35s
+   8   2.19796461e+03  2.19795708e+03  0.00e+00 3.33e-16  4.97e-07    39s
+   9   2.19795949e+03  2.19795914e+03  0.00e+00 3.33e-16  2.35e-08    43s
+  10   2.19795949e+03  2.19795914e+03  1.48e-08 3.33e-16  2.33e-08    47s
+  11   2.19795949e+03  2.19795914e+03  5.93e-08 3.33e-16  2.33e-08    50s
+  12   2.19795949e+03  2.19795915e+03  9.62e-08 1.98e-13  2.29e-08    53s
+  13   2.19795949e+03  2.19795915e+03  9.07e-08 2.50e-13  2.24e-08    57s
+  14   2.19795949e+03  2.19795918e+03  1.52e-07 1.49e-13  2.04e-08    60s
+  15   2.19795949e+03  2.19795918e+03  2.26e-07 1.95e-13  2.02e-08    64s
+  16   2.19795949e+03  2.19795919e+03  3.03e-07 2.07e-13  1.98e-08    67s
+  17   2.19795949e+03  2.19795919e+03  4.18e-07 1.37e-13  1.95e-08    70s
+  18   2.19795948e+03  2.19795920e+03  2.99e-07 1.89e-13  1.85e-08    73s
+  19   2.19795948e+03  2.19795920e+03  4.53e-07 1.46e-13  1.83e-08    76s
+  20   2.19795948e+03  2.19795920e+03  6.48e-07 2.87e-13  1.82e-08    79s
+  21   2.19795948e+03  2.19795921e+03  5.88e-07 1.84e-13  1.80e-08    82s
+  22   2.19795947e+03  2.19795921e+03  6.98e-07 2.05e-13  1.74e-08    85s
+  23   2.19795947e+03  2.19795921e+03  6.90e-07 2.19e-13  1.73e-08    88s
+  24   2.19795947e+03  2.19795921e+03  7.01e-07 1.89e-13  1.73e-08    91s
+  25   2.19795947e+03  2.19795921e+03  8.50e-07 2.41e-13  1.70e-08    93s
+  26   2.19795947e+03  2.19795921e+03  9.11e-07 1.90e-13  1.68e-08    96s
+  27   2.19795946e+03  2.19795921e+03  9.06e-07 2.32e-13  1.68e-08    99s
+  28   2.19795947e+03  2.19795921e+03  9.67e-07 2.31e-13  1.67e-08   102s
+  29   2.19795946e+03  2.19795922e+03  1.25e-06 1.59e-13  1.62e-08   105s
+  30   2.19795945e+03  2.19795922e+03  2.03e-06 2.31e-13  1.52e-08   109s
+  31   2.19795944e+03  2.19795923e+03  2.23e-06 2.16e-13  1.43e-08   112s
+  32   2.19795945e+03  2.19795923e+03  2.12e-06 1.46e-13  1.42e-08   115s
+  33   2.19795944e+03  2.19795923e+03  2.96e-06 2.11e-13  1.30e-08   118s
+  34   2.19795943e+03  2.19795924e+03  2.55e-06 1.46e-13  1.23e-08   121s
+  35   2.19795943e+03  2.19795924e+03  2.45e-06 2.34e-13  1.20e-08   124s
+  36   2.19795942e+03  2.19795924e+03  2.38e-06 2.39e-13  1.11e-08   127s
+  37   2.19795942e+03  2.19795924e+03  2.29e-06 1.61e-13  1.10e-08   130s
+  38   2.19795941e+03  2.19795925e+03  2.42e-06 1.92e-13  1.01e-08   133s
+  39   2.19795941e+03  2.19795925e+03  2.37e-06 2.02e-13  9.89e-09   136s
+  40   2.19795941e+03  2.19795925e+03  2.39e-06 3.34e-13  9.82e-09   139s
+  41   2.19795940e+03  2.19795925e+03  2.16e-06 1.41e-13  9.33e-09   142s
+  42   2.19795940e+03  2.19795925e+03  1.91e-06 2.41e-13  9.10e-09   145s
+  43   2.19795940e+03  2.19795925e+03  1.91e-06 1.77e-13  9.09e-09   148s
+  44   2.19795940e+03  2.19795925e+03  2.04e-06 1.96e-13  8.83e-09   151s
+  45   2.19795940e+03  2.19795925e+03  2.02e-06 2.13e-13  8.79e-09   154s
+  46   2.19795939e+03  2.19795925e+03  1.96e-06 2.56e-13  8.64e-09   157s
+  47   2.19795940e+03  2.19795925e+03  2.01e-06 2.24e-13  8.53e-09   160s
+  48   2.19795940e+03  2.19795925e+03  2.04e-06 1.84e-13  8.53e-09   163s
+  49   2.19795939e+03  2.19795925e+03  1.85e-06 1.69e-13  8.52e-09   166s
+  50   2.19795939e+03  2.19795925e+03  1.96e-06 4.43e-13  8.25e-09   169s
+  51   2.19795939e+03  2.19795926e+03  2.95e-06 4.87e-13  7.83e-09   172s
+  52   2.19795939e+03  2.19795926e+03  3.02e-06 4.29e-13  7.65e-09   175s
+  53   2.19795939e+03  2.19795926e+03  4.12e-06 3.33e-13  6.65e-09   178s
+  54   2.19795938e+03  2.19795926e+03  3.82e-06 4.46e-13  6.50e-09   181s
+  55   2.19795939e+03  2.19795926e+03  3.93e-06 3.47e-13  6.50e-09   184s
+  56   2.19795937e+03  2.19795927e+03  2.90e-06 2.96e-13  5.58e-09   188s
+  57   2.19795937e+03  2.19795927e+03  2.95e-06 4.52e-13  5.55e-09   191s
+  58   2.19795938e+03  2.19795927e+03  3.08e-06 3.67e-13  5.38e-09   195s
+  59   2.19795938e+03  2.19795927e+03  3.06e-06 3.26e-13  5.22e-09   198s
+  60   2.19795938e+03  2.19795927e+03  2.85e-06 4.21e-13  5.21e-09   201s
+  61   2.19795937e+03  2.19795927e+03  5.09e-06 3.39e-13  5.02e-09   204s
+  62   2.19795936e+03  2.19795927e+03  4.57e-06 2.69e-13  4.91e-09   207s
+  63   2.19795937e+03  2.19795927e+03  5.02e-06 2.44e-13  4.67e-09   210s
+  64   2.19795936e+03  2.19795927e+03  4.85e-06 2.46e-13  4.67e-09   213s
+  65   2.19795936e+03  2.19795927e+03  4.75e-06 4.00e-13  4.65e-09   216s
+  66   2.19795935e+03  2.19795927e+03  4.52e-06 3.77e-13  4.42e-09   219s
+  67   2.19795936e+03  2.19795927e+03  4.47e-06 1.84e-13  4.30e-09   222s
+  68   2.19795936e+03  2.19795927e+03  3.79e-06 2.48e-13  4.20e-09   225s
+  69   2.19795936e+03  2.19795927e+03  3.69e-06 2.93e-13  4.08e-09   229s
+  70   2.19795936e+03  2.19795927e+03  3.73e-06 3.74e-13  4.06e-09   232s
+  71   2.19795935e+03  2.19795928e+03  4.66e-06 1.71e-13  3.58e-09   235s
+  72   2.19795935e+03  2.19795928e+03  5.10e-06 3.46e-13  3.52e-09   238s
+  73   2.19795935e+03  2.19795928e+03  4.57e-06 2.27e-13  3.39e-09   241s
+  74   2.19795936e+03  2.19795928e+03  4.26e-06 2.95e-13  3.27e-09   245s
+  75   2.19795935e+03  2.19795928e+03  4.20e-06 1.70e-13  3.19e-09   248s
+  76   2.19795935e+03  2.19795928e+03  3.59e-06 2.33e-13  3.06e-09   251s
+  77   2.19795935e+03  2.19795928e+03  3.66e-06 3.11e-13  3.05e-09   254s
+  78   2.19795935e+03  2.19795928e+03  3.63e-06 2.27e-13  2.97e-09   257s
+  79   2.19795934e+03  2.19795928e+03  3.26e-06 1.48e-13  2.85e-09   261s
+  80   2.19795934e+03  2.19795928e+03  3.90e-06 1.66e-13  2.61e-09   264s
+  81   2.19795934e+03  2.19795928e+03  3.84e-06 2.43e-13  2.61e-09   267s
+  82   2.19795934e+03  2.19795928e+03  3.37e-06 1.66e-13  2.49e-09   270s
+  83   2.19795934e+03  2.19795928e+03  3.36e-06 2.00e-13  2.48e-09   274s
+
+Barrier performed 83 iterations in 275.36 seconds
+Optimization interrupted
+
+
+Gurobi 7.0.0 (linux64, Python) logging started Thu Mar 21 17:53:31 2019
+
+Parameter Threads unchanged
+   Value: 0  Min: 0  Max: 1024  Default: 0
+Changed value of parameter Crossover to 0
+   Prev: -1  Min: -1  Max: 5  Default: -1
+Changed value of parameter Method to 2
+   Prev: -1  Min: -1  Max: 4  Default: -1
+Warning for adding constraints: zero or small (< 1e-13) coefficients, ignored
+Optimize a model with 5792 rows, 3244 columns and 18785936 nonzeros
+Coefficient statistics:
+  Matrix range     [2e-10, 3e-04]
+  Objective range  [2e-01, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [6e-05, 6e-05]
+Presolve removed 4344 rows and 0 columns
+Presolve time: 2.86s
+Presolved: 1448 rows, 4692 columns, 4697932 nonzeros
+Ordering time: 0.01s
+
+Barrier statistics:
+ AA' NZ     : 1.048e+06
+ Factor NZ  : 1.049e+06 (roughly 10 MBytes of memory)
+ Factor Ops : 1.013e+09 (less than 1 second per iteration)
+ Threads    : 4
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0   5.95730666e+05  5.67095767e+03  4.17e+00 4.55e-13  2.60e+02     3s
+   1   1.94540829e+03  5.65485517e+03  2.87e-14 9.09e-12  3.95e-01     4s
+   2   2.49056281e+03  2.76738134e+03  6.89e-17 1.09e-11  2.95e-02     4s
+   3   2.56413790e+03  2.64518761e+03  1.47e-16 1.73e-11  8.64e-03     4s
+   4   2.59286316e+03  2.61422269e+03  1.27e-16 1.55e-11  2.28e-03     4s
+   5   2.60562795e+03  2.60952960e+03  2.81e-16 1.36e-11  4.16e-04     4s
+   6   2.60807968e+03  2.60864438e+03  1.02e-15 1.55e-11  6.02e-05     4s
+   7   2.60833841e+03  2.60849614e+03  2.48e-15 1.68e-11  1.68e-05     5s
+   8   2.60845117e+03  2.60847291e+03  8.81e-15 1.68e-11  2.32e-06     5s
+   9   2.60846028e+03  2.60846326e+03  8.91e-15 1.91e-11  3.18e-07     5s
+  10   2.60846165e+03  2.60846184e+03  1.15e-13 1.59e-11  2.01e-08     5s
+  11   2.60846170e+03  2.60846170e+03  1.75e-13 1.82e-11  2.12e-11     5s
+
+Barrier solved model in 11 iterations and 5.27 seconds
+Optimal objective 2.60846170e+03
+
+Parameter Threads unchanged
+   Value: 0  Min: 0  Max: 1024  Default: 0
+Changed value of parameter Crossover to 0
+   Prev: -1  Min: -1  Max: 5  Default: -1
+Changed value of parameter Method to 2
+   Prev: -1  Min: -1  Max: 4  Default: -1
+Warning for adding constraints: zero or small (< 1e-13) coefficients, ignored
+Optimize a model with 5792 rows, 3800 columns and 22008160 nonzeros
+Coefficient statistics:
+  Matrix range     [2e-11, 7e-05]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [3e-05, 2e-02]
+Presolve removed 4344 rows and 0 columns
+Presolve time: 3.49s
+Presolved: 1448 rows, 5248 columns, 5503488 nonzeros
+Ordering time: 0.01s
+
+Barrier statistics:
+ AA' NZ     : 1.048e+06
+ Factor NZ  : 1.049e+06 (roughly 10 MBytes of memory)
+ Factor Ops : 1.013e+09 (less than 1 second per iteration)
+ Threads    : 4
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0   2.37097959e+06  3.79451463e+03  3.01e+01 6.91e-11  3.28e+02     4s
+   1   2.84630158e+03  3.79203554e+03  1.24e-02 8.00e-11  3.18e-01     4s
+   2   1.93830959e+03  2.42825309e+03  7.23e-04 6.91e-11  5.48e-02     4s
+   3   1.91518564e+03  1.98356156e+03  9.72e-05 7.09e-11  7.34e-03     5s
+   4   1.92907101e+03  1.93810586e+03  9.19e-06 6.73e-11  9.37e-04     5s
+   5   1.93195926e+03  1.93402501e+03  1.03e-06 8.91e-11  2.05e-04     5s
+   6   1.93249078e+03  1.93279208e+03  1.84e-07 7.82e-11  3.02e-05     5s
+   7   1.93262524e+03  1.93266619e+03  2.68e-08 7.28e-11  4.12e-06     5s
+   8   1.93264665e+03  1.93265324e+03  4.78e-09 9.64e-11  6.67e-07     6s
+   9   1.93265123e+03  1.93265170e+03  1.93e-10 7.28e-11  4.65e-08     6s
+  10   1.93265146e+03  1.93265150e+03  2.67e-11 6.37e-11  4.36e-09     6s
+  11   1.93265150e+03  1.93265150e+03  1.82e-12 5.28e-11  6.39e-11     6s
+
+Barrier solved model in 11 iterations and 6.26 seconds
+Optimal objective 1.93265150e+03
+
+Parameter Threads unchanged
+   Value: 0  Min: 0  Max: 1024  Default: 0
+Changed value of parameter Crossover to 0
+   Prev: -1  Min: -1  Max: 5  Default: -1
+Changed value of parameter Method to 2
+   Prev: -1  Min: -1  Max: 4  Default: -1
+Warning for adding constraints: zero or small (< 1e-13) coefficients, ignored
+Optimize a model with 5792 rows, 12644 columns and 73227568 nonzeros
+Coefficient statistics:
+  Matrix range     [2e-11, 7e-05]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [6e-05, 6e-05]
+Presolve removed 2896 rows and 0 columns (presolve time = 7s) ...
+Presolve removed 2896 rows and 0 columns (presolve time = 10s) ...
+Presolve removed 4344 rows and 0 columns
+Presolve time: 11.13s
+Presolved: 1448 rows, 14092 columns, 18308340 nonzeros
+Ordering time: 0.01s
+
+Barrier statistics:
+ AA' NZ     : 1.048e+06
+ Factor NZ  : 1.049e+06 (roughly 15 MBytes of memory)
+ Factor Ops : 1.013e+09 (less than 1 second per iteration)
+ Threads    : 4
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0   9.36744588e+06  2.09583359e+04  1.35e+01 0.00e+00  9.23e+02    13s
+   1   8.07975684e+03  2.09425611e+04  3.12e-13 1.09e-11  4.56e-01    14s
+   2   9.97240910e+03  1.11917765e+04  2.93e-14 4.00e-11  4.33e-02    14s
+   3   1.03137227e+04  1.05151446e+04  5.55e-15 6.55e-11  7.15e-03    15s
+   4   1.03973913e+04  1.04755345e+04  1.98e-15 6.91e-11  2.77e-03    15s
+   5   1.04307661e+04  1.04587150e+04  9.34e-16 7.09e-11  9.92e-04    16s
+   6   1.04407956e+04  1.04520324e+04  3.77e-16 7.64e-11  3.99e-04    17s
+   7   1.04455484e+04  1.04501825e+04  3.31e-16 7.64e-11  1.64e-04    17s
+   8   1.04480848e+04  1.04496566e+04  8.23e-16 8.91e-11  5.58e-05    18s
+   9   1.04485917e+04  1.04495216e+04  1.35e-15 6.91e-11  3.30e-05    18s
+  10   1.04489596e+04  1.04494423e+04  1.40e-15 8.91e-11  1.71e-05    19s
+  11   1.04492961e+04  1.04493930e+04  1.37e-15 8.19e-11  3.44e-06    19s
+  12   1.04493612e+04  1.04493783e+04  6.65e-15 6.55e-11  6.07e-07    20s
+  13   1.04493713e+04  1.04493715e+04  1.00e-14 1.06e-10  9.28e-09    21s
+  14   1.04493713e+04  1.04493713e+04  1.06e-14 8.00e-11  9.25e-11    21s
+
+Barrier solved model in 14 iterations and 21.20 seconds
+Optimal objective 1.04493713e+04
+
+
+Gurobi 7.0.0 (linux64, Python) logging started Thu Mar 21 17:58:34 2019
+
+Parameter Threads unchanged
+   Value: 0  Min: 0  Max: 1024  Default: 0
+Changed value of parameter Crossover to 0
+   Prev: -1  Min: -1  Max: 5  Default: -1
+Changed value of parameter Method to 2
+   Prev: -1  Min: -1  Max: 4  Default: -1
+Warning for adding constraints: zero or small (< 1e-13) coefficients, ignored
+Optimize a model with 5792 rows, 3244 columns and 18785936 nonzeros
+Coefficient statistics:
+  Matrix range     [2e-10, 3e-04]
+  Objective range  [2e-01, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [6e-05, 6e-05]
+Presolve removed 4344 rows and 0 columns
+Presolve time: 2.94s
+Presolved: 1448 rows, 4692 columns, 4697932 nonzeros
+Ordering time: 0.01s
+
+Barrier statistics:
+ AA' NZ     : 1.048e+06
+ Factor NZ  : 1.049e+06 (roughly 10 MBytes of memory)
+ Factor Ops : 1.013e+09 (less than 1 second per iteration)
+ Threads    : 4
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0   5.95730666e+05  5.67095767e+03  4.17e+00 4.55e-13  2.60e+02     3s
+   1   1.94540829e+03  5.65485517e+03  2.87e-14 9.09e-12  3.95e-01     4s
+   2   2.49056281e+03  2.76738134e+03  6.89e-17 1.09e-11  2.95e-02     4s
+   3   2.56413790e+03  2.64518761e+03  1.47e-16 1.73e-11  8.64e-03     4s
+   4   2.59286316e+03  2.61422269e+03  1.27e-16 1.55e-11  2.28e-03     4s
+   5   2.60562795e+03  2.60952960e+03  2.81e-16 1.36e-11  4.16e-04     4s
+   6   2.60807968e+03  2.60864438e+03  1.02e-15 1.55e-11  6.02e-05     5s
+   7   2.60833841e+03  2.60849614e+03  2.48e-15 1.68e-11  1.68e-05     5s
+   8   2.60845117e+03  2.60847291e+03  8.81e-15 1.68e-11  2.32e-06     5s
+   9   2.60846028e+03  2.60846326e+03  8.91e-15 1.91e-11  3.18e-07     5s
+  10   2.60846165e+03  2.60846184e+03  1.15e-13 1.59e-11  2.01e-08     5s
+  11   2.60846170e+03  2.60846170e+03  1.75e-13 1.82e-11  2.12e-11     5s
+
+Barrier solved model in 11 iterations and 5.41 seconds
+Optimal objective 2.60846170e+03
+
+Parameter Threads unchanged
+   Value: 0  Min: 0  Max: 1024  Default: 0
+Changed value of parameter Crossover to 0
+   Prev: -1  Min: -1  Max: 5  Default: -1
+Changed value of parameter Method to 2
+   Prev: -1  Min: -1  Max: 4  Default: -1
+Warning for adding constraints: zero or small (< 1e-13) coefficients, ignored
+Optimize a model with 5792 rows, 3800 columns and 22008160 nonzeros
+Coefficient statistics:
+  Matrix range     [2e-11, 7e-05]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [3e-05, 2e-02]
+Presolve removed 4344 rows and 0 columns
+Presolve time: 3.47s
+Presolved: 1448 rows, 5248 columns, 5503488 nonzeros
+Ordering time: 0.01s
+
+Barrier statistics:
+ AA' NZ     : 1.048e+06
+ Factor NZ  : 1.049e+06 (roughly 10 MBytes of memory)
+ Factor Ops : 1.013e+09 (less than 1 second per iteration)
+ Threads    : 4
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0   2.37097959e+06  3.79451463e+03  3.01e+01 6.91e-11  3.28e+02     4s
+   1   2.84630158e+03  3.79203554e+03  1.24e-02 8.00e-11  3.18e-01     4s
+   2   1.93830959e+03  2.42825309e+03  7.23e-04 6.91e-11  5.48e-02     4s
+   3   1.91518564e+03  1.98356156e+03  9.72e-05 7.09e-11  7.34e-03     5s
+   4   1.92907101e+03  1.93810586e+03  9.19e-06 6.73e-11  9.37e-04     5s
+   5   1.93195926e+03  1.93402501e+03  1.03e-06 8.91e-11  2.05e-04     5s
+   6   1.93249078e+03  1.93279208e+03  1.84e-07 7.82e-11  3.02e-05     5s
+   7   1.93262524e+03  1.93266619e+03  2.68e-08 7.28e-11  4.12e-06     5s
+   8   1.93264665e+03  1.93265324e+03  4.78e-09 9.64e-11  6.67e-07     6s
+   9   1.93265123e+03  1.93265170e+03  1.93e-10 7.28e-11  4.65e-08     6s
+  10   1.93265146e+03  1.93265150e+03  2.67e-11 6.37e-11  4.36e-09     6s
+  11   1.93265150e+03  1.93265150e+03  1.82e-12 5.28e-11  6.39e-11     6s
+
+Barrier solved model in 11 iterations and 6.19 seconds
+Optimal objective 1.93265150e+03
+
+Parameter Threads unchanged
+   Value: 0  Min: 0  Max: 1024  Default: 0
+Changed value of parameter Crossover to 0
+   Prev: -1  Min: -1  Max: 5  Default: -1
+Changed value of parameter Method to 2
+   Prev: -1  Min: -1  Max: 4  Default: -1
+Warning for adding constraints: zero or small (< 1e-13) coefficients, ignored
+Optimize a model with 5792 rows, 12644 columns and 73227568 nonzeros
+Coefficient statistics:
+  Matrix range     [2e-11, 7e-05]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [6e-05, 6e-05]
+Presolve removed 2896 rows and 0 columns (presolve time = 7s) ...
+Presolve removed 2896 rows and 0 columns (presolve time = 10s) ...
+Presolve removed 4344 rows and 0 columns
+Presolve time: 11.33s
+Presolved: 1448 rows, 14092 columns, 18308340 nonzeros
+Ordering time: 0.01s
+
+Barrier statistics:
+ AA' NZ     : 1.048e+06
+ Factor NZ  : 1.049e+06 (roughly 15 MBytes of memory)
+ Factor Ops : 1.013e+09 (less than 1 second per iteration)
+ Threads    : 4
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0   9.36744588e+06  2.09583359e+04  1.35e+01 0.00e+00  9.23e+02    13s
+   1   8.07975684e+03  2.09425611e+04  3.12e-13 1.09e-11  4.56e-01    14s
+   2   9.97240910e+03  1.11917765e+04  2.93e-14 4.00e-11  4.33e-02    14s
+   3   1.03137227e+04  1.05151446e+04  5.55e-15 6.55e-11  7.15e-03    15s
+   4   1.03973913e+04  1.04755345e+04  1.98e-15 6.91e-11  2.77e-03    16s
+   5   1.04307661e+04  1.04587150e+04  9.34e-16 7.09e-11  9.92e-04    16s
+   6   1.04407956e+04  1.04520324e+04  3.77e-16 7.64e-11  3.99e-04    17s
+   7   1.04455484e+04  1.04501825e+04  3.31e-16 7.64e-11  1.64e-04    18s
+   8   1.04480848e+04  1.04496566e+04  8.23e-16 8.91e-11  5.58e-05    18s
+   9   1.04485917e+04  1.04495216e+04  1.35e-15 6.91e-11  3.30e-05    19s
+  10   1.04489596e+04  1.04494423e+04  1.40e-15 8.91e-11  1.71e-05    19s
+  11   1.04492961e+04  1.04493930e+04  1.37e-15 8.19e-11  3.44e-06    20s
+  12   1.04493612e+04  1.04493783e+04  6.65e-15 6.55e-11  6.07e-07    21s
+  13   1.04493713e+04  1.04493715e+04  1.00e-14 1.06e-10  9.28e-09    21s
+  14   1.04493713e+04  1.04493713e+04  1.06e-14 8.00e-11  9.25e-11    22s
+
+Barrier solved model in 14 iterations and 21.83 seconds
+Optimal objective 1.04493713e+04
+
+
+Gurobi 7.0.0 (linux64, Python) logging started Thu Mar 21 18:04:38 2019
+
+Parameter Threads unchanged
+   Value: 0  Min: 0  Max: 1024  Default: 0
+Changed value of parameter Crossover to 0
+   Prev: -1  Min: -1  Max: 5  Default: -1
+Changed value of parameter Method to 2
+   Prev: -1  Min: -1  Max: 4  Default: -1
+Warning for adding constraints: zero or small (< 1e-13) coefficients, ignored
+Optimize a model with 5792 rows, 3244 columns and 18785936 nonzeros
+Coefficient statistics:
+  Matrix range     [2e-10, 3e-04]
+  Objective range  [2e-01, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [6e-05, 6e-05]
+Presolve removed 4344 rows and 0 columns
+Presolve time: 2.88s
+Presolved: 1448 rows, 4692 columns, 4697932 nonzeros
+Ordering time: 0.01s
+
+Barrier statistics:
+ AA' NZ     : 1.048e+06
+ Factor NZ  : 1.049e+06 (roughly 10 MBytes of memory)
+ Factor Ops : 1.013e+09 (less than 1 second per iteration)
+ Threads    : 4
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0   5.95730666e+05  5.67095767e+03  4.17e+00 4.55e-13  2.60e+02     3s
+   1   1.94540829e+03  5.65485517e+03  2.87e-14 9.09e-12  3.95e-01     4s
+   2   2.49056281e+03  2.76738134e+03  6.89e-17 1.09e-11  2.95e-02     4s
+   3   2.56413790e+03  2.64518761e+03  1.47e-16 1.73e-11  8.64e-03     4s
+   4   2.59286316e+03  2.61422269e+03  1.27e-16 1.55e-11  2.28e-03     4s
+   5   2.60562795e+03  2.60952960e+03  2.81e-16 1.36e-11  4.16e-04     4s
+   6   2.60807968e+03  2.60864438e+03  1.02e-15 1.55e-11  6.02e-05     4s
+   7   2.60833841e+03  2.60849614e+03  2.48e-15 1.68e-11  1.68e-05     5s
+   8   2.60845117e+03  2.60847291e+03  8.81e-15 1.68e-11  2.32e-06     5s
+   9   2.60846028e+03  2.60846326e+03  8.91e-15 1.91e-11  3.18e-07     5s
+  10   2.60846165e+03  2.60846184e+03  1.15e-13 1.59e-11  2.01e-08     5s
+  11   2.60846170e+03  2.60846170e+03  1.75e-13 1.82e-11  2.12e-11     5s
+
+Barrier solved model in 11 iterations and 5.24 seconds
+Optimal objective 2.60846170e+03
+
+
+Gurobi 7.0.0 (linux64, Python) logging started Thu Mar 21 18:05:34 2019
+
+Parameter Threads unchanged
+   Value: 0  Min: 0  Max: 1024  Default: 0
+Changed value of parameter Crossover to 0
+   Prev: -1  Min: -1  Max: 5  Default: -1
+Changed value of parameter Method to 2
+   Prev: -1  Min: -1  Max: 4  Default: -1
+Warning for adding constraints: zero or small (< 1e-13) coefficients, ignored
+Optimize a model with 17376 rows, 3244 columns and 56357808 nonzeros
+Coefficient statistics:
+  Matrix range     [4e-11, 3e-04]
+  Objective range  [2e-01, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [6e-05, 6e-05]
+Presolve removed 0 rows and 8688 columns (presolve time = 6s) ...
+Presolve removed 0 rows and 8688 columns
+Presolve time: 9.26s
+Presolved: 3244 rows, 11932 columns, 28182148 nonzeros
+Ordering time: 0.06s
+
+Barrier statistics:
+ AA' NZ     : 5.260e+06
+ Factor NZ  : 5.263e+06 (roughly 50 MBytes of memory)
+ Factor Ops : 1.138e+10 (roughly 1 second per iteration)
+ Threads    : 4
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0   9.25219994e+03  0.00000000e+00  0.00e+00 0.00e+00  8.55e-01    14s
+   1   4.50677380e+03  1.00594644e+03  0.00e+00 2.22e-16  2.31e-01    17s
+   2   3.01892407e+03  1.94480090e+03  0.00e+00 2.22e-16  7.08e-02    20s
+   3   2.46564017e+03  2.09062590e+03  0.00e+00 2.22e-16  2.47e-02    22s
+   4   2.22092016e+03  2.16823744e+03  0.00e+00 3.33e-16  3.47e-03    25s
+   5   2.20320103e+03  2.19027642e+03  0.00e+00 4.44e-16  8.52e-04    28s
+   6   2.19870804e+03  2.19720948e+03  0.00e+00 3.33e-16  9.87e-05    31s
+   7   2.19803456e+03  2.19790828e+03  0.00e+00 3.33e-16  8.32e-06    34s
+   8   2.19796461e+03  2.19795708e+03  0.00e+00 3.33e-16  4.97e-07    37s
+   9   2.19795949e+03  2.19795914e+03  0.00e+00 3.33e-16  2.35e-08    41s
+  10   2.19795949e+03  2.19795914e+03  1.48e-08 3.33e-16  2.33e-08    44s
+  11   2.19795949e+03  2.19795914e+03  5.93e-08 3.33e-16  2.33e-08    47s
+  12   2.19795949e+03  2.19795915e+03  9.62e-08 1.98e-13  2.29e-08    50s
+  13   2.19795949e+03  2.19795915e+03  9.07e-08 2.50e-13  2.24e-08    53s
+  14   2.19795949e+03  2.19795918e+03  1.52e-07 1.49e-13  2.04e-08    57s
+  15   2.19795949e+03  2.19795918e+03  2.26e-07 1.95e-13  2.02e-08    60s
+  16   2.19795949e+03  2.19795919e+03  3.03e-07 2.07e-13  1.98e-08    63s
+  17   2.19795949e+03  2.19795919e+03  4.18e-07 1.37e-13  1.95e-08    66s
+  18   2.19795948e+03  2.19795920e+03  2.99e-07 1.89e-13  1.85e-08    69s
+  19   2.19795948e+03  2.19795920e+03  4.53e-07 1.46e-13  1.83e-08    73s
+  20   2.19795948e+03  2.19795920e+03  6.48e-07 2.87e-13  1.82e-08    76s
+  21   2.19795948e+03  2.19795921e+03  5.88e-07 1.84e-13  1.80e-08    79s
+  22   2.19795947e+03  2.19795921e+03  6.98e-07 2.05e-13  1.74e-08    82s
+  23   2.19795947e+03  2.19795921e+03  6.90e-07 2.19e-13  1.73e-08    85s
+  24   2.19795947e+03  2.19795921e+03  7.01e-07 1.89e-13  1.73e-08    88s
+  25   2.19795947e+03  2.19795921e+03  8.50e-07 2.41e-13  1.70e-08    91s
+  26   2.19795947e+03  2.19795921e+03  9.11e-07 1.90e-13  1.68e-08    94s
+  27   2.19795946e+03  2.19795921e+03  9.06e-07 2.32e-13  1.68e-08    97s
+  28   2.19795947e+03  2.19795921e+03  9.67e-07 2.31e-13  1.67e-08   100s
+  29   2.19795946e+03  2.19795922e+03  1.25e-06 1.59e-13  1.62e-08   104s
+  30   2.19795945e+03  2.19795922e+03  2.03e-06 2.31e-13  1.52e-08   107s
+
+Barrier performed 30 iterations in 108.78 seconds
+Optimization interrupted
+
+
+Gurobi 7.0.0 (linux64, Python) logging started Thu Mar 21 18:08:25 2019
+
+Parameter Threads unchanged
+   Value: 0  Min: 0  Max: 1024  Default: 0
+Changed value of parameter Crossover to 0
+   Prev: -1  Min: -1  Max: 5  Default: -1
+Changed value of parameter Method to 2
+   Prev: -1  Min: -1  Max: 4  Default: -1
+Warning for adding constraints: zero or small (< 1e-13) coefficients, ignored
+
+Gurobi 7.0.0 (linux64, Python) logging started Thu Mar 21 18:08:38 2019
+
+Parameter Threads unchanged
+   Value: 0  Min: 0  Max: 1024  Default: 0
+Changed value of parameter Crossover to 0
+   Prev: -1  Min: -1  Max: 5  Default: -1
+Changed value of parameter Method to 2
+   Prev: -1  Min: -1  Max: 4  Default: -1
+Warning for adding constraints: zero or small (< 1e-13) coefficients, ignored
+Optimize a model with 5792 rows, 3244 columns and 18785936 nonzeros
+Coefficient statistics:
+  Matrix range     [2e-10, 3e-04]
+  Objective range  [2e-01, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [6e-05, 6e-05]
+Presolve removed 4344 rows and 0 columns
+Presolve time: 2.87s
+Presolved: 1448 rows, 4692 columns, 4697932 nonzeros
+Ordering time: 0.01s
+
+Barrier statistics:
+ AA' NZ     : 1.048e+06
+ Factor NZ  : 1.049e+06 (roughly 10 MBytes of memory)
+ Factor Ops : 1.013e+09 (less than 1 second per iteration)
+ Threads    : 4
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0   5.95730666e+05  5.67095767e+03  4.17e+00 4.55e-13  2.60e+02     3s
+   1   1.94540829e+03  5.65485517e+03  2.53e-14 5.91e-12  3.95e-01     4s
+   2   2.49056281e+03  2.76738134e+03  9.27e-17 1.64e-11  2.95e-02     4s
+   3   2.56413790e+03  2.64518761e+03  9.32e-17 1.41e-11  8.64e-03     4s
+   4   2.59286316e+03  2.61422269e+03  1.93e-16 1.55e-11  2.28e-03     4s
+   5   2.60562795e+03  2.60952960e+03  3.90e-16 1.77e-11  4.16e-04     4s
+   6   2.60807968e+03  2.60864438e+03  1.00e-15 1.59e-11  6.02e-05     4s
+   7   2.60833841e+03  2.60849614e+03  2.69e-15 1.82e-11  1.68e-05     5s
+   8   2.60845117e+03  2.60847291e+03  9.94e-15 1.82e-11  2.32e-06     5s
+   9   2.60846028e+03  2.60846326e+03  8.53e-15 1.59e-11  3.18e-07     5s
+  10   2.60846165e+03  2.60846184e+03  1.32e-13 2.23e-11  2.01e-08     5s
+  11   2.60846170e+03  2.60846170e+03  1.77e-13 1.64e-11  2.12e-11     5s
+
+Barrier solved model in 11 iterations and 5.20 seconds
+Optimal objective 2.60846170e+03
+
+
+Gurobi 7.0.0 (linux64, Python) logging started Thu Mar 21 18:09:20 2019
+
+Parameter Threads unchanged
+   Value: 0  Min: 0  Max: 1024  Default: 0
+Changed value of parameter Crossover to 0
+   Prev: -1  Min: -1  Max: 5  Default: -1
+Changed value of parameter Method to 2
+   Prev: -1  Min: -1  Max: 4  Default: -1
+Warning for adding constraints: zero or small (< 1e-13) coefficients, ignored
+Optimize a model with 5792 rows, 3244 columns and 18785936 nonzeros
+Coefficient statistics:
+  Matrix range     [2e-10, 3e-04]
+  Objective range  [2e-01, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [6e-05, 6e-05]
+Presolve removed 4344 rows and 0 columns
+Presolve time: 2.82s
+Presolved: 1448 rows, 4692 columns, 4697932 nonzeros
+Ordering time: 0.01s
+
+Barrier statistics:
+ AA' NZ     : 1.048e+06
+ Factor NZ  : 1.049e+06 (roughly 10 MBytes of memory)
+ Factor Ops : 1.013e+09 (less than 1 second per iteration)
+ Threads    : 4
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0   5.95730666e+05  5.67095767e+03  4.17e+00 4.55e-13  2.60e+02     3s
+   1   1.94540829e+03  5.65485517e+03  2.53e-14 5.91e-12  3.95e-01     3s
+   2   2.49056281e+03  2.76738134e+03  9.27e-17 1.64e-11  2.95e-02     4s
+   3   2.56413790e+03  2.64518761e+03  9.32e-17 1.41e-11  8.64e-03     4s
+   4   2.59286316e+03  2.61422269e+03  1.93e-16 1.55e-11  2.28e-03     4s
+   5   2.60562795e+03  2.60952960e+03  3.90e-16 1.77e-11  4.16e-04     4s
+   6   2.60807968e+03  2.60864438e+03  1.00e-15 1.59e-11  6.02e-05     4s
+   7   2.60833841e+03  2.60849614e+03  2.69e-15 1.82e-11  1.68e-05     4s
+   8   2.60845117e+03  2.60847291e+03  9.94e-15 1.82e-11  2.32e-06     5s
+   9   2.60846028e+03  2.60846326e+03  8.53e-15 1.59e-11  3.18e-07     5s
+  10   2.60846165e+03  2.60846184e+03  1.32e-13 2.23e-11  2.01e-08     5s
+  11   2.60846170e+03  2.60846170e+03  1.77e-13 1.64e-11  2.12e-11     5s
+
+Barrier solved model in 11 iterations and 5.06 seconds
+Optimal objective 2.60846170e+03
+
+Parameter Threads unchanged
+   Value: 0  Min: 0  Max: 1024  Default: 0
+Changed value of parameter Crossover to 0
+   Prev: -1  Min: -1  Max: 5  Default: -1
+Changed value of parameter Method to 2
+   Prev: -1  Min: -1  Max: 4  Default: -1
+Warning for adding constraints: zero or small (< 1e-13) coefficients, ignored
+Optimize a model with 5792 rows, 5356 columns and 31019504 nonzeros
+Coefficient statistics:
+  Matrix range     [2e-11, 7e-05]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [4e-05, 3e-02]
+Presolve removed 4344 rows and 0 columns
+Presolve time: 5.00s
+Presolved: 1448 rows, 6804 columns, 7756324 nonzeros
+Ordering time: 0.01s
+
+Barrier statistics:
+ AA' NZ     : 1.048e+06
+ Factor NZ  : 1.049e+06 (roughly 12 MBytes of memory)
+ Factor Ops : 1.013e+09 (less than 1 second per iteration)
+ Threads    : 4
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0   3.41417458e+06  6.64094146e+03  3.91e+01 7.46e-11  4.73e+02     6s
+   1   3.95777616e+03  6.63591830e+03  1.03e-02 7.82e-11  3.87e-01     6s
+   2   3.08954242e+03  3.91057670e+03  2.08e-16 6.55e-11  6.03e-02     6s
+   3   3.14534266e+03  3.26463187e+03  2.91e-16 8.73e-11  8.77e-03     7s
+   4   3.17734152e+03  3.19590674e+03  3.37e-16 8.00e-11  1.36e-03     7s
+   5   3.18299176e+03  3.18672799e+03  3.37e-16 9.64e-11  2.75e-04     7s
+   6   3.18468736e+03  3.18553318e+03  5.76e-16 9.64e-11  6.22e-05     7s
+   7   3.18525363e+03  3.18541973e+03  1.19e-15 1.00e-10  1.22e-05     8s
+   8   3.18533762e+03  3.18538581e+03  2.58e-15 8.19e-11  3.54e-06     8s
+   9   3.18536393e+03  3.18537472e+03  2.94e-15 7.09e-11  7.92e-07     8s
+  10   3.18537099e+03  3.18537174e+03  9.52e-15 8.37e-11  5.51e-08     9s
+  11   3.18537131e+03  3.18537145e+03  6.75e-15 7.28e-11  9.72e-09     9s
+  12   3.18537132e+03  3.18537133e+03  4.99e-15 9.46e-11  4.64e-10     9s
+
+Barrier solved model in 12 iterations and 9.11 seconds
+Optimal objective 3.18537132e+03
+
+Parameter Threads unchanged
+   Value: 0  Min: 0  Max: 1024  Default: 0
+Changed value of parameter Crossover to 0
+   Prev: -1  Min: -1  Max: 5  Default: -1
+Changed value of parameter Method to 2
+   Prev: -1  Min: -1  Max: 4  Default: -1
+Warning for adding constraints: zero or small (< 1e-13) coefficients, ignored
+Optimize a model with 5792 rows, 12644 columns and 73227568 nonzeros
+Coefficient statistics:
+  Matrix range     [2e-11, 7e-05]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [6e-05, 6e-05]
+Presolve removed 2896 rows and 0 columns (presolve time = 7s) ...
+Presolve removed 2896 rows and 0 columns (presolve time = 10s) ...
+Presolve removed 4344 rows and 0 columns
+Presolve time: 11.31s
+Presolved: 1448 rows, 14092 columns, 18308340 nonzeros
+Ordering time: 0.01s
+
+Barrier statistics:
+ AA' NZ     : 1.048e+06
+ Factor NZ  : 1.049e+06 (roughly 15 MBytes of memory)
+ Factor Ops : 1.013e+09 (less than 1 second per iteration)
+ Threads    : 4
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0   9.36744588e+06  2.09583359e+04  1.35e+01 0.00e+00  9.23e+02    13s
+   1   8.07975684e+03  2.09425611e+04  3.30e-13 7.28e-12  4.56e-01    14s
+   2   9.97240910e+03  1.11917765e+04  3.12e-14 4.18e-11  4.33e-02    14s
+   3   1.03137227e+04  1.05151446e+04  5.79e-15 6.91e-11  7.15e-03    15s
+   4   1.03973913e+04  1.04755345e+04  2.01e-15 6.18e-11  2.77e-03    15s
+   5   1.04307661e+04  1.04587150e+04  7.42e-16 8.91e-11  9.92e-04    16s
+   6   1.04407956e+04  1.04520324e+04  3.49e-16 8.91e-11  3.99e-04    17s
+   7   1.04455484e+04  1.04501825e+04  5.77e-16 7.46e-11  1.64e-04    17s
+   8   1.04480848e+04  1.04496566e+04  8.53e-16 8.19e-11  5.58e-05    18s
+   9   1.04485917e+04  1.04495216e+04  1.46e-15 7.64e-11  3.30e-05    18s
+  10   1.04489596e+04  1.04494423e+04  1.57e-15 7.64e-11  1.71e-05    19s
+  11   1.04492961e+04  1.04493930e+04  1.43e-15 8.19e-11  3.44e-06    19s
+  12   1.04493612e+04  1.04493783e+04  5.31e-15 9.82e-11  6.07e-07    20s
+  13   1.04493713e+04  1.04493715e+04  7.91e-15 9.82e-11  9.28e-09    20s
+  14   1.04493713e+04  1.04493713e+04  1.22e-14 1.13e-10  9.25e-11    21s
+
+Barrier solved model in 14 iterations and 21.03 seconds
+Optimal objective 1.04493713e+04
+
+
+Gurobi 7.0.0 (linux64, Python) logging started Thu Mar 21 18:12:06 2019
+
+Parameter Threads unchanged
+   Value: 0  Min: 0  Max: 1024  Default: 0
+Changed value of parameter Crossover to 0
+   Prev: -1  Min: -1  Max: 5  Default: -1
+Changed value of parameter Method to 2
+   Prev: -1  Min: -1  Max: 4  Default: -1
+Warning for adding constraints: zero or small (< 1e-13) coefficients, ignored
+Optimize a model with 5792 rows, 3244 columns and 18785936 nonzeros
+Coefficient statistics:
+  Matrix range     [2e-10, 3e-04]
+  Objective range  [2e-01, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [6e-05, 6e-05]
+Presolve removed 4344 rows and 0 columns
+Presolve time: 2.86s
+Presolved: 1448 rows, 4692 columns, 4697932 nonzeros
+Ordering time: 0.01s
+
+Barrier statistics:
+ AA' NZ     : 1.048e+06
+ Factor NZ  : 1.049e+06 (roughly 10 MBytes of memory)
+ Factor Ops : 1.013e+09 (less than 1 second per iteration)
+ Threads    : 4
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0   5.95730666e+05  5.67095767e+03  4.17e+00 4.55e-13  2.60e+02     3s
+   1   1.94540829e+03  5.65485517e+03  2.53e-14 5.91e-12  3.95e-01     4s
+   2   2.49056281e+03  2.76738134e+03  9.27e-17 1.64e-11  2.95e-02     4s
+   3   2.56413790e+03  2.64518761e+03  9.32e-17 1.41e-11  8.64e-03     4s
+   4   2.59286316e+03  2.61422269e+03  1.93e-16 1.55e-11  2.28e-03     4s
+   5   2.60562795e+03  2.60952960e+03  3.90e-16 1.77e-11  4.16e-04     4s
+   6   2.60807968e+03  2.60864438e+03  1.00e-15 1.59e-11  6.02e-05     4s
+   7   2.60833841e+03  2.60849614e+03  2.69e-15 1.82e-11  1.68e-05     4s
+   8   2.60845117e+03  2.60847291e+03  9.94e-15 1.82e-11  2.32e-06     5s
+   9   2.60846028e+03  2.60846326e+03  8.53e-15 1.59e-11  3.18e-07     5s
+  10   2.60846165e+03  2.60846184e+03  1.32e-13 2.23e-11  2.01e-08     5s
+  11   2.60846170e+03  2.60846170e+03  1.77e-13 1.64e-11  2.12e-11     5s
+
+Barrier solved model in 11 iterations and 5.09 seconds
+Optimal objective 2.60846170e+03
+
+Parameter Threads unchanged
+   Value: 0  Min: 0  Max: 1024  Default: 0
+Changed value of parameter Crossover to 0
+   Prev: -1  Min: -1  Max: 5  Default: -1
+Changed value of parameter Method to 2
+   Prev: -1  Min: -1  Max: 4  Default: -1
+Warning for adding constraints: zero or small (< 1e-13) coefficients, ignored
+Optimize a model with 5792 rows, 4699 columns and 27214340 nonzeros
+Coefficient statistics:
+  Matrix range     [2e-11, 7e-05]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e-07, 3e-02]
+Presolve removed 4344 rows and 0 columns
+Presolve time: 4.26s
+Presolved: 1448 rows, 6147 columns, 6805033 nonzeros
+Ordering time: 0.01s
+
+Barrier statistics:
+ AA' NZ     : 1.048e+06
+ Factor NZ  : 1.049e+06 (roughly 11 MBytes of memory)
+ Factor Ops : 1.013e+09 (less than 1 second per iteration)
+ Threads    : 4
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0   2.92455513e+06  5.31370375e+03  3.58e+01 6.37e-11  4.14e+02     5s
+   1   3.48119983e+03  5.30989865e+03  1.21e-02 6.73e-11  3.69e-01     5s
+   2   2.51243944e+03  3.33381019e+03  2.84e-16 6.18e-11  6.68e-02     5s
+   3   2.55384589e+03  2.64772752e+03  2.12e-16 8.37e-11  7.64e-03     6s
+   4   2.58323848e+03  2.59375217e+03  2.67e-16 8.37e-11  8.55e-04     6s
+   5   2.58668902e+03  2.58936022e+03  3.89e-16 8.55e-11  2.17e-04     6s
+   6   2.58765563e+03  2.58845204e+03  2.72e-16 8.73e-11  6.48e-05     6s
+   7   2.58794728e+03  2.58819801e+03  4.27e-16 8.37e-11  2.04e-05     7s
+   8   2.58809218e+03  2.58816252e+03  1.08e-15 7.64e-11  5.72e-06     7s
+   9   2.58811481e+03  2.58814843e+03  1.47e-15 7.28e-11  2.74e-06     7s
+  10   2.58812837e+03  2.58814297e+03  5.48e-15 6.55e-11  1.19e-06     7s
+  11   2.58813351e+03  2.58813823e+03  6.47e-15 9.82e-11  3.84e-07     7s
+  12   2.58813661e+03  2.58813698e+03  4.01e-15 7.64e-11  2.96e-08     8s
+  13   2.58813685e+03  2.58813686e+03  1.45e-13 8.19e-11  4.39e-10     8s
+
+Barrier solved model in 13 iterations and 7.83 seconds
+Optimal objective 2.58813685e+03
+
+Parameter Threads unchanged
+   Value: 0  Min: 0  Max: 1024  Default: 0
+Changed value of parameter Crossover to 0
+   Prev: -1  Min: -1  Max: 5  Default: -1
+Changed value of parameter Method to 2
+   Prev: -1  Min: -1  Max: 4  Default: -1
+Warning for adding constraints: zero or small (< 1e-13) coefficients, ignored
+Optimize a model with 5792 rows, 12644 columns and 73227568 nonzeros
+Coefficient statistics:
+  Matrix range     [2e-11, 7e-05]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [6e-05, 6e-05]
+Presolve removed 2896 rows and 0 columns (presolve time = 7s) ...
+Presolve removed 2896 rows and 0 columns (presolve time = 10s) ...
+Presolve removed 4344 rows and 0 columns
+Presolve time: 11.22s
+Presolved: 1448 rows, 14092 columns, 18308340 nonzeros
+Ordering time: 0.01s
+
+Barrier statistics:
+ AA' NZ     : 1.048e+06
+ Factor NZ  : 1.049e+06 (roughly 15 MBytes of memory)
+ Factor Ops : 1.013e+09 (less than 1 second per iteration)
+ Threads    : 4
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0   9.36744588e+06  2.09583359e+04  1.35e+01 0.00e+00  9.23e+02    13s
+   1   8.07975684e+03  2.09425611e+04  3.30e-13 7.28e-12  4.56e-01    13s
+   2   9.97240910e+03  1.11917765e+04  3.12e-14 4.18e-11  4.33e-02    14s
+   3   1.03137227e+04  1.05151446e+04  5.79e-15 6.91e-11  7.15e-03    15s
+   4   1.03973913e+04  1.04755345e+04  2.01e-15 6.18e-11  2.77e-03    15s
+   5   1.04307661e+04  1.04587150e+04  7.42e-16 8.91e-11  9.92e-04    16s
+   6   1.04407956e+04  1.04520324e+04  3.49e-16 8.91e-11  3.99e-04    16s
+   7   1.04455484e+04  1.04501825e+04  5.77e-16 7.46e-11  1.64e-04    17s
+   8   1.04480848e+04  1.04496566e+04  8.53e-16 8.19e-11  5.58e-05    18s
+   9   1.04485917e+04  1.04495216e+04  1.46e-15 7.64e-11  3.30e-05    18s
+  10   1.04489596e+04  1.04494423e+04  1.57e-15 7.64e-11  1.71e-05    19s
+  11   1.04492961e+04  1.04493930e+04  1.43e-15 8.19e-11  3.44e-06    19s
+  12   1.04493612e+04  1.04493783e+04  5.31e-15 9.82e-11  6.07e-07    20s
+  13   1.04493713e+04  1.04493715e+04  7.91e-15 9.82e-11  9.28e-09    21s
+  14   1.04493713e+04  1.04493713e+04  1.22e-14 1.13e-10  9.25e-11    21s
+
+Barrier solved model in 14 iterations and 21.19 seconds
+Optimal objective 1.04493713e+04
+
+
+Gurobi 7.0.0 (linux64, Python) logging started Thu Mar 21 18:15:09 2019
+
+Parameter Threads unchanged
+   Value: 0  Min: 0  Max: 1024  Default: 0
+Changed value of parameter Crossover to 0
+   Prev: -1  Min: -1  Max: 5  Default: -1
+Changed value of parameter Method to 2
+   Prev: -1  Min: -1  Max: 4  Default: -1
+Warning for adding constraints: zero or small (< 1e-13) coefficients, ignored
+Optimize a model with 17376 rows, 3244 columns and 56357808 nonzeros
+Coefficient statistics:
+  Matrix range     [4e-11, 3e-04]
+  Objective range  [2e-01, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [6e-05, 6e-05]
+Presolve removed 0 rows and 8688 columns (presolve time = 6s) ...
+Presolve removed 0 rows and 8688 columns
+Presolve time: 9.36s
+Presolved: 3244 rows, 11932 columns, 28182148 nonzeros
+Ordering time: 0.06s
+
+Barrier statistics:
+ AA' NZ     : 5.260e+06
+ Factor NZ  : 5.263e+06 (roughly 50 MBytes of memory)
+ Factor Ops : 1.138e+10 (roughly 1 second per iteration)
+ Threads    : 4
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0   9.25219994e+03  0.00000000e+00  0.00e+00 0.00e+00  8.55e-01    14s
+   1   4.50677380e+03  1.00594644e+03  0.00e+00 2.22e-16  2.31e-01    17s
+   2   3.01892407e+03  1.94480090e+03  0.00e+00 3.33e-16  7.08e-02    20s
+   3   2.46564017e+03  2.09062590e+03  0.00e+00 2.22e-16  2.47e-02    23s
+   4   2.22092016e+03  2.16823744e+03  0.00e+00 3.33e-16  3.47e-03    26s
+   5   2.20320103e+03  2.19027642e+03  0.00e+00 3.33e-16  8.52e-04    28s
+   6   2.19870804e+03  2.19720948e+03  0.00e+00 3.33e-16  9.87e-05    31s
+   7   2.19803456e+03  2.19790828e+03  0.00e+00 3.33e-16  8.32e-06    34s
+   8   2.19796461e+03  2.19795708e+03  0.00e+00 3.33e-16  4.97e-07    38s
+   9   2.19795949e+03  2.19795914e+03  0.00e+00 3.33e-16  2.35e-08    42s
+  10   2.19795949e+03  2.19795916e+03  2.79e-08 4.44e-16  2.17e-08    45s
+  11   2.19795949e+03  2.19795918e+03  4.67e-08 3.33e-16  2.04e-08    48s
+  12   2.19795949e+03  2.19795919e+03  3.74e-08 2.22e-16  1.99e-08    51s
+  13   2.19795949e+03  2.19795922e+03  7.24e-08 3.33e-16  1.78e-08    54s
+  14   2.19795949e+03  2.19795923e+03  1.06e-07 2.22e-16  1.73e-08    57s
+  15   2.19795949e+03  2.19795923e+03  1.50e-07 2.22e-16  1.67e-08    60s
+  16   2.19795948e+03  2.19795924e+03  3.79e-07 2.22e-16  1.62e-08    63s
+  17   2.19795949e+03  2.19795924e+03  4.05e-07 2.22e-16  1.61e-08    66s
+  18   2.19795948e+03  2.19795924e+03  3.96e-07 2.22e-16  1.59e-08    69s
+  19   2.19795948e+03  2.19795924e+03  4.12e-07 2.12e-13  1.57e-08    72s
+  20   2.19795948e+03  2.19795924e+03  4.19e-07 1.33e-13  1.55e-08    75s
+  21   2.19795948e+03  2.19795924e+03  4.89e-07 1.24e-13  1.53e-08    78s
+  22   2.19795948e+03  2.19795925e+03  5.52e-07 2.18e-13  1.48e-08    81s
+  23   2.19795948e+03  2.19795925e+03  6.17e-07 1.79e-13  1.44e-08    85s
+
+Gurobi 7.0.0 (linux64, Python) logging started Thu Mar 21 18:18:01 2019
+
+Parameter Threads unchanged
+   Value: 0  Min: 0  Max: 1024  Default: 0
+Changed value of parameter Crossover to 0
+   Prev: -1  Min: -1  Max: 5  Default: -1
+Changed value of parameter Method to 2
+   Prev: -1  Min: -1  Max: 4  Default: -1
+Warning for adding constraints: zero or small (< 1e-13) coefficients, ignored
+Optimize a model with 11584 rows, 3244 columns and 37571872 nonzeros
+Coefficient statistics:
+  Matrix range     [4e-11, 3e-04]
+  Objective range  [2e-01, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [6e-05, 6e-05]
+Presolve removed 0 rows and 5792 columns (presolve time = 5s) ...
+Presolve removed 0 rows and 5792 columns
+Presolve time: 6.07s
+Presolved: 3244 rows, 9036 columns, 18789180 nonzeros
+Ordering time: 0.06s
+
+Barrier statistics:
+ AA' NZ     : 5.260e+06
+ Factor NZ  : 5.263e+06 (roughly 50 MBytes of memory)
+ Factor Ops : 1.138e+10 (roughly 1 second per iteration)
+ Threads    : 4
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0   9.10334423e+03  0.00000000e+00  0.00e+00 0.00e+00  1.02e+00     9s
+   1   4.25101812e+03  1.04086753e+03  0.00e+00 2.22e-16  2.62e-01    11s
+   2   2.94864407e+03  2.01434812e+03  0.00e+00 2.22e-16  7.61e-02    13s
+   3   2.29793385e+03  2.14650439e+03  0.00e+00 3.33e-16  1.23e-02    15s
+   4   2.21958169e+03  2.18519419e+03  0.00e+00 3.33e-16  2.80e-03    17s
+   5   2.20181978e+03  2.19491530e+03  0.00e+00 4.44e-16  5.62e-04    19s
+   6   2.19949007e+03  2.19806392e+03  0.00e+00 3.33e-16  1.16e-04    21s
+   7   2.19896676e+03  2.19880707e+03  0.00e+00 3.33e-16  1.30e-05    24s
+   8   2.19890298e+03  2.19887646e+03  0.00e+00 3.33e-16  2.16e-06    26s
+   9   2.19889097e+03  2.19888733e+03  0.00e+00 3.33e-16  2.96e-07    28s
+  10   2.19888896e+03  2.19888885e+03  0.00e+00 3.33e-16  9.03e-09    30s
+  11   2.19888896e+03  2.19888886e+03  6.63e-08 4.41e-14  8.18e-09    33s
+  12   2.19888896e+03  2.19888886e+03  1.34e-07 1.00e-13  7.83e-09    35s
+  13   2.19888896e+03  2.19888886e+03  1.62e-07 7.33e-14  7.78e-09    37s
+  14   2.19888896e+03  2.19888887e+03  1.98e-07 8.28e-14  7.17e-09    39s
+  15   2.19888896e+03  2.19888887e+03  3.29e-07 3.21e-13  6.86e-09    41s
+  16   2.19888895e+03  2.19888887e+03  5.73e-07 1.67e-13  6.67e-09    43s
+  17   2.19888895e+03  2.19888887e+03  6.30e-07 1.54e-13  6.67e-09    45s
+  18   2.19888894e+03  2.19888890e+03  8.49e-07 3.77e-13  3.80e-09    47s
+  19   2.19888894e+03  2.19888890e+03  1.19e-06 2.76e-13  3.24e-09    50s
+  20   2.19888894e+03  2.19888890e+03  1.55e-06 5.51e-13  3.12e-09    52s
+  21   2.19888893e+03  2.19888890e+03  1.42e-06 3.42e-13  2.61e-09    54s
+  22   2.19888893e+03  2.19888890e+03  1.89e-06 3.55e-13  2.58e-09    56s
+  23   2.19888893e+03  2.19888890e+03  1.63e-06 2.82e-13  2.50e-09    58s
+  24   2.19888892e+03  2.19888890e+03  2.52e-06 4.89e-13  2.50e-09    61s
+  25   2.19888892e+03  2.19888891e+03  2.30e-06 2.86e-13  2.14e-09    63s
+  26   2.19888891e+03  2.19888891e+03  4.98e-06 3.21e-13  1.71e-09    65s
+  27   2.19888895e+03  2.19888891e+03  3.94e-06 2.50e-13  9.55e-10    67s
+  28   2.19888893e+03  2.19888891e+03  1.75e-06 3.87e-13  1.90e-10    69s
+  29   2.19888892e+03  2.19888891e+03  9.01e-07 3.85e-13  6.70e-11    71s
+  30   2.19888891e+03  2.19888891e+03  3.70e-07 3.31e-13  3.08e-12    74s
+  31   2.19888891e+03  2.19888891e+03  8.80e-08 3.38e-13  1.89e-14    76s
+
+Barrier solved model in 31 iterations and 75.73 seconds
+Optimal objective 2.19888891e+03
+
+Parameter Threads unchanged
+   Value: 0  Min: 0  Max: 1024  Default: 0
+Changed value of parameter Crossover to 0
+   Prev: -1  Min: -1  Max: 5  Default: -1
+Changed value of parameter Method to 2
+   Prev: -1  Min: -1  Max: 4  Default: -1
+Warning for adding constraints: zero or small (< 1e-13) coefficients, ignored
