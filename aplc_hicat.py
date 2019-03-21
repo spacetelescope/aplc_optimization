@@ -6,11 +6,14 @@ from scipy.ndimage.morphology import grey_erosion, grey_dilation
 
 contrast = 1e-8
 num_pix = 486 #px
+tau = 0.4
 q_sci = 3 #px / (lambda_0/D)
 iwa = 3.75 # lambda_0/D radius
 owa = 15 # lambda_0/D radius
 num_pix_foc = 50 # px diameter
 foc_inner = 8.543 #lambda_0/D diameter
+spectral_bandwidth = 0.1 # fractional
+num_wavelengths = 3
 
 pupil_grid = make_pupil_grid(num_pix)
 focal_grid = make_focal_grid(pupil_grid, q_sci, 15)
@@ -30,9 +33,9 @@ lyot_stop = Field(lyot_stop.ravel(), pupil_grid)
 coro = LyotCoronagraph(pupil_grid, focal_plane_mask, lyot_stop)
 coro_prop = OpticalSystem([coro, fraun_prop])
 
-def optimize_at_scale(pupil_grid, focal_grid, focal_mask, prop, aperture, lyot_stop, last_optim, subsampling, contrast):
+def optimize_at_scale(pupil_grid, focal_grid, focal_mask, prop, aperture, lyot_stop, last_optim, subsampling, contrast, wavelengths):
 	'''
-	last_optim=None means no previous knowledge is known
+	last_optim=None means no previous knowledge is known; all pixels will be optimized
 	'''
 	inds = np.arange(pupil_grid.size).reshape((pupil_grid.shape[1]//subsampling, subsampling, pupil_grid.shape[0]//subsampling, subsampling))
 	inds = np.swapaxes(inds, 1, 2).reshape((pupil_grid.size//(subsampling**2), -1))
@@ -71,53 +74,58 @@ def optimize_at_scale(pupil_grid, focal_grid, focal_mask, prop, aperture, lyot_s
 
 	print('Calculating mask for %d/%d variables.' % (np.sum(pixels_to_optimize * (aperture_subsampled > 0)), np.sum(aperture_subsampled > 0)))
 	print('Number of constraints: %d' % (np.sum(focal_mask) * 2))
+	print('Number of wavelengths: %d' % len(wavelengths))
 
-	for ind, amp, to_optimize in zip(inds, last_optim, pixels_to_optimize):
-		if np.sum(aperture[ind]) < 1e-3:
-			optimize_mask.append(False)
-		else:
-			x = Field(np.zeros(pupil_grid.size), pupil_grid)
-			x[ind] = aperture[ind]
-			
-			if not to_optimize:
-				x0 += x * amp
-				optimize_mask.append(False)
-			else:
-				y = prop(Wavefront(x)).electric_field[focal_mask]
-				mat.append(y)
-				optimize_mask.append(True)
-				if np.sum(optimize_mask) % 1000 == 0:
-					print(np.sum(optimize_mask))
-
-	optimize_mask = np.array(optimize_mask)
-	base_electric_field = prop(Wavefront(x0)).electric_field[focal_mask]
-
-	M = np.array(mat).T
-	M = np.vstack([M.real, M.imag])
-
-	M_max = (aperture_subsampled * lyot_stop_subsampled)[optimize_mask]
-
-	E_0 = np.concatenate((base_electric_field.real, base_electric_field.imag))
-
-	m, n = M.shape
-	print(m, n)
-
-	contrast_requirement = np.ones(m) * np.sqrt(contrast)
-
+	# Create model
 	model = gp.Model('lp')
-	model.Params.Threads = 4
+	model.Params.Threads = 0
+	model.Params.Crossover = 0
+	model.Params.Method = 2
 
+	n = np.sum(pixels_to_optimize * (aperture_subsampled > 0))
 	x = model.addVars(n, lb=0, ub=1)
 
+	M_max = (aperture_subsampled * lyot_stop_subsampled)[optimize_mask]
 	obj = gp.quicksum((x[i] * M_max[i] for i in range(n)))
 	model.setObjective(obj, gp.GRB.MAXIMIZE)
 
-	for i, ee in enumerate(M):
-		e = gp.quicksum((x[i] * ee[i] for i in range(n)))
-		model.addConstr(e <= -E_0[i] + contrast_requirement[i])
-		model.addConstr(e >= -E_0[i] - contrast_requirement[i])
-	
-	del M
+	for wavelength in wavelengths:
+		for ind, amp, to_optimize in zip(inds, last_optim, pixels_to_optimize):
+			if np.sum(aperture[ind]) < 1e-3:
+				optimize_mask.append(False)
+			else:
+				x = Field(np.zeros(pupil_grid.size), pupil_grid)
+				x[ind] = aperture[ind]
+				
+				if not to_optimize:
+					x0 += x * amp
+					optimize_mask.append(False)
+				else:
+					y = prop(Wavefront(x, wavelength)).electric_field[focal_mask]
+					mat.append(y)
+					optimize_mask.append(True)
+					if np.sum(optimize_mask) % 1000 == 0:
+						print('Wavelength:', i, '/', len(wavelengths), '; Variable:', np.sum(optimize_mask), '/', n)
+
+		optimize_mask = np.array(optimize_mask)
+		base_electric_field = prop(Wavefront(x0, wavelength)).electric_field[focal_mask]
+
+		M = np.array(mat).T
+		M = np.vstack([M.real, M.imag])
+
+		E_0 = np.concatenate((base_electric_field.real, base_electric_field.imag))
+
+		m, n = M.shape
+		print(m, n)
+
+		contrast_requirement = np.ones(m) * np.sqrt(contrast)
+
+		for i, ee in enumerate(M):
+			e = gp.quicksum((x[i] * ee[i] for i in range(n)))
+			model.addConstr(e <= -E_0[i] + contrast_requirement[i])
+			model.addConstr(e >= -E_0[i] - contrast_requirement[i])
+		
+		del M
 	
 	model.optimize()
 
@@ -133,8 +141,9 @@ def optimize_at_scale(pupil_grid, focal_grid, focal_mask, prop, aperture, lyot_s
 	return sol
 
 last_optim = None
+wavelengths = np.linspace(-spectral_bandwidth / 2, spectral_bandwidth / 2, num_wavelengths) + 1
 
 for subsampling in [2,1]:
-	last_optim = optimize_at_scale(pupil_grid, focal_grid, focal_mask, coro_prop, aperture, lyot_stop, last_optim, subsampling, contrast)
+	last_optim = optimize_at_scale(pupil_grid, focal_grid, focal_mask, coro_prop, aperture, lyot_stop, last_optim, subsampling, contrast*tau, wavelengths)
 
 write_fits('final_solution_aplc_refined.fits')
