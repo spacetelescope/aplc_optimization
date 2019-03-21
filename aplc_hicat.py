@@ -14,7 +14,7 @@ num_pix_foc = 50 # px diameter
 foc_inner = 8.543 #lambda_0/D diameter
 spectral_bandwidth = 0.1 # fractional
 num_wavelengths = 3
-testing = False
+testing = True
 
 if testing:
 	num_pix = 128
@@ -83,8 +83,6 @@ def optimize_at_scale(pupil_grid, focal_grid, focal_mask, prop, aperture, lyot_s
 		plt.savefig('pixels_to_optimize%d.pdf' % subsampling)
 		plt.clf()
 
-	x0 = Field(np.zeros(pupil_grid.size), pupil_grid)
-
 	print('Calculating mask for %d/%d variables.' % (np.sum(pixels_to_optimize * (aperture_subsampled > 0)), np.sum(aperture_subsampled > 0)))
 	print('Number of constraints: %d' % (np.sum(focal_mask) * 2))
 	print('Number of wavelengths: %d' % len(wavelengths))
@@ -108,6 +106,7 @@ def optimize_at_scale(pupil_grid, focal_grid, focal_mask, prop, aperture, lyot_s
 		j = 0
 		mat = []
 		base_electric_field = np.zeros(focal_grid.size, dtype='complex')
+		x0 = Field(np.zeros(pupil_grid.size), pupil_grid)
 
 		for ind, amp, to_optimize in zip(inds, last_optim, pixels_to_optimize):
 			if np.sum(aperture[ind]) < 1e-3:
@@ -168,5 +167,5 @@ for subsampling in [2,1]:
 	aperture_subsampled = subsample_field(aperture, subsampling)
 	write_fits(last_optim * aperture_subsampled, 'final_solution_aplc_refined_%d.fits' % subsampling)
 
-optim = optimize_at_scale(pupil_grid, focal_grid, focal_mask, coro_prop, aperture, lyot_stop, None, subsampling, contrast*tau, wavelengths)
+optim = optimize_at_scale(pupil_grid, focal_grid, focal_mask, coro_prop, aperture, lyot_stop, None, 1, contrast*tau, wavelengths)
 write_fits(optim * aperture, 'final_solution_aplc_fullres.fits')
