@@ -1,3 +1,5 @@
+import matplotlib as mpl
+mpl.use('Agg')
 from hcipy import *
 import numpy as np
 import matplotlib.pyplot as plt
@@ -14,10 +16,10 @@ num_pix_foc = 50 # px diameter
 foc_inner = 8.543 #lambda_0/D diameter
 spectral_bandwidth = 0.1 # fractional
 num_wavelengths = 3
-testing = False
+testing = True
 
 if testing:
-	num_pix = 128
+	num_pix = 256
 	owa = 8
 	num_wavelengths = 2
 
@@ -25,10 +27,14 @@ pupil_grid = make_pupil_grid(num_pix)
 focal_grid = make_focal_grid(pupil_grid, q_sci, owa * (1 + spectral_bandwidth))
 focal_mask = (circular_aperture(owa*2)(focal_grid) - circular_aperture(iwa*2)(focal_grid)).astype('bool')
 
+# Remove point symmetry from focal-plane mask
+focal_mask *= np.logical_and(focal_grid.x >= 0, np.logical_not(np.logical_and(focal_grid.x == 0, focal_grid.y < 0)))
+
 fraun_prop = FraunhoferPropagator(pupil_grid, focal_grid)
 
 if testing:
-	aperture = circular_aperture(1)(pupil_grid)
+	aperture = make_obstructed_circular_aperture(1, 0.3, 3, 0.01)
+	aperture = evaluate_supersampled(aperture, pupil_grid, 4)
 else:
 	aperture = read_fits('masks/SYM-HiCAT-Aper_F-N0486_Hex3-Ctr0972-Obs0195-SpX0017-Gap0004.fits')
 	aperture = Field(aperture.ravel(), pupil_grid)
@@ -37,7 +43,8 @@ small_focal_grid = make_pupil_grid(num_pix_foc, foc_inner)
 focal_plane_mask = 1 - circular_aperture(foc_inner)(small_focal_grid)
 
 if testing:
-	lyot_stop = circular_aperture(0.95)(pupil_grid)
+	lyot_stop = make_obstructed_circular_aperture(0.95, 0.3, 3, 0.02)
+	lyot_stop = evaluate_supersampled(lyot_stop, pupil_grid, 4)
 else:
 	lyot_stop = read_fits('masks/HiCAT-Lyot_F-N0486_LS-Ann-bw-ID0345-OD0807-SpX0036.fits')
 	lyot_stop = Field(lyot_stop.ravel(), pupil_grid)
@@ -64,8 +71,8 @@ def optimize_at_scale(pupil_grid, focal_grid, focal_mask, prop, aperture, lyot_s
 		last_optim = Field(last_optim, aperture_subsampled.grid)
 
 	structure = np.array([[0,1,0],[1,1,1],[0,1,0]])
-	structure = np.array([[0,1,1,1,0],[1,1,1,1,1],[1,1,1,1,1],[1,1,1,1,1],[0,1,1,1,0]])
-	structure = np.array([[0,1,1,0],[1,1,1,1],[1,1,1,1],[0,1,1,0]])
+	#structure = np.array([[0,1,1,0],[1,1,1,1],[1,1,1,1],[0,1,1,0]])
+	#structure = np.array([[0,1,1,1,0],[1,1,1,1,1],[1,1,1,1,1],[1,1,1,1,1],[0,1,1,1,0]])
 
 	pixels_to_optimize = (grey_dilation(last_optim.shaped, structure=structure) - grey_erosion(last_optim.shaped, structure=structure)).ravel() - 2
 	pixels_to_optimize = Field(pixels_to_optimize, last_optim.grid)
@@ -94,12 +101,13 @@ def optimize_at_scale(pupil_grid, focal_grid, focal_mask, prop, aperture, lyot_s
 	model.Params.Method = 2
 
 	optimize_mask = np.logical_and(pixels_to_optimize, aperture_subsampled > 0)
-	n = np.sum(optimize_mask)
-	n = int(n)
+	n = int(np.sum(optimize_mask))
+	m = int(np.sum(focal_mask))
 	x_vars = model.addVars(n, lb=0, ub=1)
 
 	M_max = (aperture_subsampled * lyot_stop_subsampled)[optimize_mask]
-	obj = gp.quicksum((x_vars[i] * M_max[i] for i in range(n)))
+	#obj = gp.quicksum((x_vars[i] * M_max[i] for i in range(n)))
+	obj = gp.LinExpr(M_max, x_vars.values())
 	model.setObjective(obj, gp.GRB.MAXIMIZE)
 
 	for i, wavelength in enumerate(wavelengths):
@@ -107,6 +115,9 @@ def optimize_at_scale(pupil_grid, focal_grid, focal_mask, prop, aperture, lyot_s
 		mat = []
 		base_electric_field = np.zeros(focal_grid.size, dtype='complex')
 		x0 = Field(np.zeros(pupil_grid.size), pupil_grid)
+
+		M = np.empty((2*m, n))
+		print(M.shape)
 
 		for ind, amp, to_optimize in zip(inds, last_optim, pixels_to_optimize):
 			if np.sum(aperture[ind]) < 1e-3:
@@ -120,26 +131,23 @@ def optimize_at_scale(pupil_grid, focal_grid, focal_mask, prop, aperture, lyot_s
 				else:
 					y = prop(Wavefront(x, wavelength)).electric_field[focal_mask]
 					mat.append(y)
+					
+					M[:m,j] = y.real
+					M[m:,j] = y.imag
+
 					j += 1
 					if j % 1000 == 0:
 						print('Wavelength: %d/%d; Variables: %d/%d' % (i+1, len(wavelengths), j, n))
 
 		base_electric_field = prop(Wavefront(x0, wavelength)).electric_field[focal_mask]
+		base_electric_field = np.concatenate([base_electric_field.real, base_electric_field.imag])
 
-		M = np.array(mat).T
-		M = np.vstack([M.real, M.imag])
+		contrast_requirement = np.concatenate([np.ones(m) * np.sqrt(contrast)]*2)
 
-		E_0 = np.concatenate((base_electric_field.real, base_electric_field.imag))
-
-		m, n = M.shape
-		print(m, n)
-
-		contrast_requirement = np.ones(m) * np.sqrt(contrast)
-
-		for i, ee in enumerate(M):
-			e = gp.quicksum((x_vars[i] * ee[i] for i in range(n)))
-			model.addConstr(e <= -E_0[i] + contrast_requirement[i])
-			model.addConstr(e >= -E_0[i] - contrast_requirement[i])
+		for ee, e0, c0 in zip(M, base_electric_field, contrast_requirement):
+			e = gp.LinExpr(ee, x_vars.values())
+			model.addConstr(e <= (-e0 + c0))
+			model.addConstr(e >= (-e0 - c0))
 		
 		del M
 	
