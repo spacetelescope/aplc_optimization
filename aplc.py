@@ -7,6 +7,9 @@ import gurobipy as gp
 from scipy.ndimage.morphology import grey_erosion, grey_dilation
 
 def calculate_pixels_to_optimize(last_optim, pupil_subsampled):
+	if last_optim is None:
+		return pupil_subsampled > 0
+	
 	structure = np.array([[0,1,0],[1,1,1],[0,1,0]])
 	#structure = np.array([[0,1,1,0],[1,1,1,1],[1,1,1,1],[0,1,1,0]])
 	#structure = np.array([[0,1,1,1,0],[1,1,1,1,1],[1,1,1,1,1],[1,1,1,1,1],[0,1,1,1,0]])
@@ -48,7 +51,7 @@ def optimize_aplc(pupil, focal_plane_mask, lyot_stops, dark_zone_mask, wavelengt
 	x_symm_lyot_stops = [np.allclose(lyot_stop.shaped[:,::-1], lyot_stop.shaped) for lyot_stop in lyot_stops]
 	y_symm_lyot_stops = [np.allclose(lyot_stop.shaped[::-1,:], lyot_stop.shaped) for lyot_stop in lyot_stops]
 
-	# Determine optimization problem symmetries
+	# Determine problem symmetries of the entire optimization problem
 	if x_symm_pupil:
 		if np.all(x_symm_lyot_stops):
 			x_symm = True
@@ -71,18 +74,50 @@ def optimize_aplc(pupil, focal_plane_mask, lyot_stops, dark_zone_mask, wavelengt
 	else:
 		y_symm = False
 
-	# x_symm and y_symm now the symmetry of the total problem, which affects the number of 
-	# variables that need to be taken into account
+	# Remove Lyot stops from the list if they are covered by symmetry from others
+	lyot_stop_duplication = np.zeros(len(lyot_stops), dtype='bool')
+	for i, a in enumerate(lyot_stops):
+		if x_symm:
+			if not x_symm_lyot_stops[i]:
+				for j, b in enumerate(lyot_stops):
+					if j <= i:
+						continue
+					if np.allclose(a[:,::-1], b):
+						lyot_stop_duplication[i] = True
+		if y_symm:
+			if not y_symm_lyot_stops[i]:
+				for j, b in enumerate(lyot_stops):
+					if j <= i:
+						continue
+					if np.allclose(a[::-1,:], b):
+						lyot_stop_duplication[i] = True
 
-	# TODO: still need to remove redundant Lyot stops; fill in lyot_stop_duplication array!
+	# Find number of constraints per focal-plane point
+	num_constraints_per_focal_point = []
+	for i, lyot_stop in enumerate(lyot_stops):
+		if lyot_stop_duplication[i]:
+			# Lyot stop already taken into account due to symmetries
+			num_constraints_per_focal_point.append(0)
+		elif (x_symm_pupil and x_symm_lyot_stops[i]) and (y_symm_pupil and y_symm_lyot_stops[i]):
+			# Only constrain real part
+			num_constraints_per_focal_point.append(1)
+		else:
+			# Constrain both real and imag part
+			num_constraints_per_focal_point.append(2)
+	mm = int(np.sum(dark_zone_mask))
 	
 	# We are optimizing amplitude (=real part) only
 	dark_zone_mask *= focal_grid.x > 0
 
 	if x_symm or y_symm:
 		dark_zone_mask *= focal_grid.y > 0
+	
+	# Calculate number of constraints per wavelength
+	m = int(np.sum(num_constraints_per_focal_point)) * mm
 
+	# Iterate from lowest to highest resolution
 	for subsampling in subsamplings:
+		# Calculated subsampled pupil and lyot stops
 		pupil_subsampled = subsample_field(pupil, subsampling)
 		lyot_stops_subsampled = [subsample_field(lyot_stop, subsampling) for lyot_stop in lyot_stops]
 		pupil_grid_subsampled = pupil_subsampled.grid
@@ -127,21 +162,6 @@ def optimize_aplc(pupil, focal_plane_mask, lyot_stops, dark_zone_mask, wavelengt
 		model.Params.Method = 2
 		x_vars = model.addVars(n, lb=0, ub=1)
 
-		# Find number of constraints
-		num_constraints_per_focal_point = []
-		for i, lyot_stop in enumerate(lyot_stops):
-			if lyot_stop_duplication[i]:
-				# Lyot stop already taken into account due to symmetries
-				num_constraints_per_focal_point.append(0)
-			elif (x_symm_pupil and x_symm_lyot_stops[i]) and (y_symm_pupil and y_symm_lyot_stops[i]):
-				# Only constrain real part
-				num_constraints_per_focal_point.append(1)
-			else:
-				# Constrain both real and imag part
-				num_constraints_per_focal_point.append(2)
-		mm = int(np.sum(dark_zone_mask))
-		m = int(np.sum(num_constraints_per_focal_point)) * mm
-
 		# Create problem matrix for one wavelength but for all Lyot stops
 		M = np.empty((m, n))
 
@@ -156,7 +176,8 @@ def optimize_aplc(pupil, focal_plane_mask, lyot_stops, dark_zone_mask, wavelengt
 				x[ind] = pupil[ind]
 
 				if not to_optimize:
-					# Add to accumulator
+					# Do not optimize this pixel
+					# Add to accumulator pupil-plane wavefront
 					x0 += x * amp
 				else:
 					# Calculate field before the Lyot stop
@@ -224,6 +245,8 @@ def optimize_aplc(pupil, focal_plane_mask, lyot_stops, dark_zone_mask, wavelengt
 		
 		last_optim = sol
 	
+	return last_optim
+	
 if __name__ == '__main__':
 	contrast = 1e-8
 	num_pix = 486
@@ -243,18 +266,36 @@ if __name__ == '__main__':
 		num_wavelengths = 2
 
 	pupil_grid = make_pupil_grid(num_pix)
+
+	if testing:
+		pupil = evaluate_supersampled(make_hicat_aperture(True), pupil_grid, 4)
+	else:
+		pupil = read_fits('masks/SYM-HiCAT-Aper_F-N0486_Hex3-Ctr0972-Obs0195-SpX0017-Gap0004.fits')
+		pupil = Field(pupil.ravel(), pupil_grid)
 	
-	n_sci = int((ceil(owa) + 1) * q_sci) * 2
+	if testing:
+		lyot_stop = evaluate_supersampled(make_hicat_lyot_stop(True), pupil_grid, 4)
+	else:
+		lyot_stop = read_fits('masks/HiCAT-Lyot_F-N0486_LS-Ann-bw-ID0345-OD0807-SpX0036.fits')
+		lyot_stop = Field(lyot_stop.ravel(), pupil_grid)
+
+	lyot_stops = [lyot_stop]
+	
+	n_sci = int((np.ceil(owa) + 1) * q_sci) * 2
 	x_sci = (np.arange(n_sci) + 0.5 - n_sci / 2) / q_sci
 	focal_grid = CartesianGrid(SeparatedCoords((x_sci, x_sci)))
 
 	dark_zone_mask = circular_aperture(owa * 2)(focal_grid) - circular_aperture(iwa * 2)(focal_grid)
 
-	q_foc = foc_inner / n_foc
+	q_foc = n_foc / foc_inner
 	x_foc = (np.arange(n_foc) + 0.5 - n_foc / 2) / q_foc
 	focal_mask_grid = CartesianGrid(SeparatedCoords((x_foc, x_foc)))
 
 	focal_plane_mask = circular_aperture(foc_inner)(focal_mask_grid)
 
-	imshow_field(focal_plane_mask)
-	plt.show()
+	if num_wavelengths == 1:
+		wavelengths = [1]
+	else:
+		wavelengths = np.linspace(-spectral_bandwidth / 2, spectral_bandwidth / 2, num_wavelengths) + 1
+
+	res = optimize_aplc(pupil, focal_plane_mask, lyot_stops, dark_zone_mask, wavelengths, contrast, num_scalings=1)
