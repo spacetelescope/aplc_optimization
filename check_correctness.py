@@ -5,7 +5,7 @@ import numpy as np
 fullres = read_fits('final_solution_aplc_fullres.fits')
 refined = read_fits('final_solution_aplc_refined_1.fits')
 
-print('Relative transmission between an interpolated and full optimization:', refined.sum() / fullres.sum())
+print('Relative loss in throughput between an interpolated and full optimization:', 100 * (refined.sum() - fullres.sum()) / fullres.sum(), '%')
 
 contrast = 1e-8
 num_pix = 486 #px
