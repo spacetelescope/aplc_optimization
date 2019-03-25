@@ -129,10 +129,10 @@ def optimize_aplc(pupil, focal_plane_mask, lyot_stops, dark_zone_mask, wavelengt
 		# Apply x,y-mirror-symmetries
 		mask = Field(np.ones(pupil_grid_subsampled.size), pupil_grid_subsampled)
 		if x_symm:
-			inds = np.concatenate(inds, inds[:,::-1,:])
+			inds = np.concatenate((inds, inds[:,::-1,:]))
 			mask *= pupil_grid_subsampled.x > 0
 		if y_symm:
-			inds = np.concatenate(inds, inds[::-1,:,:])
+			inds = np.concatenate((inds, inds[::-1,:,:]))
 			mask *= pupil_grid_subsampled.y > 0
 		
 		mask = mask.astype('bool')
