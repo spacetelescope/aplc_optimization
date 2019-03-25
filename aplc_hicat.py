@@ -16,7 +16,7 @@ num_pix_foc = 50 # px diameter
 foc_inner = 8.543 #lambda_0/D diameter
 spectral_bandwidth = 0.1 # fractional
 num_wavelengths = 3
-testing = True
+testing = False
 
 if testing:
 	num_pix = 256
@@ -40,6 +40,7 @@ else:
 	aperture = Field(aperture.ravel(), pupil_grid)
 
 small_focal_grid = make_pupil_grid(num_pix_foc, foc_inner)
+#small_focal_grid = CartesianGrid(SeparatedCoords(x, y))
 focal_plane_mask = 1 - circular_aperture(foc_inner)(small_focal_grid)
 
 if testing:
@@ -106,18 +107,15 @@ def optimize_at_scale(pupil_grid, focal_grid, focal_mask, prop, aperture, lyot_s
 	x_vars = model.addVars(n, lb=0, ub=1)
 
 	M_max = (aperture_subsampled * lyot_stop_subsampled)[optimize_mask]
-	#obj = gp.quicksum((x_vars[i] * M_max[i] for i in range(n)))
 	obj = gp.LinExpr(M_max, x_vars.values())
 	model.setObjective(obj, gp.GRB.MAXIMIZE)
 
 	for i, wavelength in enumerate(wavelengths):
 		j = 0
-		mat = []
 		base_electric_field = np.zeros(focal_grid.size, dtype='complex')
 		x0 = Field(np.zeros(pupil_grid.size), pupil_grid)
 
 		M = np.empty((2*m, n))
-		print(M.shape)
 
 		for ind, amp, to_optimize in zip(inds, last_optim, pixels_to_optimize):
 			if np.sum(aperture[ind]) < 1e-3:
@@ -130,7 +128,6 @@ def optimize_at_scale(pupil_grid, focal_grid, focal_mask, prop, aperture, lyot_s
 					x0 += x * amp
 				else:
 					y = prop(Wavefront(x, wavelength)).electric_field[focal_mask]
-					mat.append(y)
 					
 					M[:m,j] = y.real
 					M[m:,j] = y.imag
@@ -164,16 +161,19 @@ def optimize_at_scale(pupil_grid, focal_grid, focal_mask, prop, aperture, lyot_s
 
 	return sol
 
-last_optim = None
-if num_wavelengths > 1:
-	wavelengths = np.linspace(-spectral_bandwidth / 2, spectral_bandwidth / 2, num_wavelengths) + 1
-else:
-	wavelengths = [1]
+if __name__ == '__main__':
+	last_optim = None
+	if num_wavelengths > 1:
+		wavelengths = np.linspace(-spectral_bandwidth / 2, spectral_bandwidth / 2, num_wavelengths) + 1
+	else:
+		wavelengths = [1]
 
-for subsampling in [2,1]:
-	last_optim = optimize_at_scale(pupil_grid, focal_grid, focal_mask, coro_prop, aperture, lyot_stop, last_optim, subsampling, contrast*tau, wavelengths)
-	aperture_subsampled = subsample_field(aperture, subsampling)
-	write_fits(last_optim * aperture_subsampled, 'final_solution_aplc_refined_%d.fits' % subsampling)
-
-optim = optimize_at_scale(pupil_grid, focal_grid, focal_mask, coro_prop, aperture, lyot_stop, None, 1, contrast*tau, wavelengths)
-write_fits(optim * aperture, 'final_solution_aplc_fullres.fits')
+	'''
+	for subsampling in [2,1]:
+		last_optim = optimize_at_scale(pupil_grid, focal_grid, focal_mask, coro_prop, aperture, lyot_stop, last_optim, subsampling, contrast*tau, wavelengths)
+		aperture_subsampled = subsample_field(aperture, subsampling)
+		write_fits(last_optim * aperture_subsampled, 'final_solution_aplc_refined_%d.fits' % subsampling)
+	'''
+	optim = optimize_at_scale(pupil_grid, focal_grid, focal_mask, coro_prop, aperture, lyot_stop, None, 1, contrast*tau, wavelengths)
+	write_fits(optim * aperture, 'final_solution_aplc_fullres.fits')
+	
