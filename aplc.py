@@ -304,14 +304,16 @@ if __name__ == '__main__':
 	pupil_grid = make_pupil_grid(num_pix)
 
 	if testing:
-		pupil = make_obstructed_circular_aperture(1, 0.3, 3, 0.01)
+		#pupil = make_obstructed_circular_aperture(1, 0.3, 3, 0.01)
+		pupil = make_hicat_aperture(True)
 		pupil = evaluate_supersampled(pupil, pupil_grid, 4)
 	else:
 		pupil = read_fits('masks/SYM-HiCAT-Aper_F-N0486_Hex3-Ctr0972-Obs0195-SpX0017-Gap0004.fits')
 		pupil = Field(pupil.ravel(), pupil_grid)
 
 	if testing:
-		lyot_stop = make_obstructed_circular_aperture(0.95, 0.3, 3, 0.02)
+		#lyot_stop = make_obstructed_circular_aperture(0.95, 0.3, 3, 0.02)
+		lyot_stop = make_hicat_lyot_stop(True)
 		dx = dy = lyot_stop_shift
 		shifts = [[0,0], [dx, 0], [0, dy], [-dx, 0], [0, -dy]]
 
