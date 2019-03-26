@@ -244,7 +244,6 @@ def optimize_aplc(pupil, focal_plane_mask, lyot_stops, dark_zone_mask, wavelengt
 				if num_constraints_per_focal_point[i] == 2:
 					base_electric_field.append(img.electric_field.real)
 			base_electric_field = np.concatenate(base_electric_field)
-			print('Base', (np.abs(base_electric_field)**2).sum())
 
 			# Calculate contrast requirement
 			contrast_requirement = np.tile((np.ones(dark_zone_mask.size) * np.sqrt(contrast))[dark_zone_mask], int(np.sum(num_constraints_per_focal_point)))
@@ -295,7 +294,7 @@ if __name__ == '__main__':
 	lyot_stop_robustness = False
 	lyot_stop_shift = 0.003
 
-	testing = True
+	testing = False
 
 	if testing:
 		num_pix = 256
@@ -305,13 +304,14 @@ if __name__ == '__main__':
 	pupil_grid = make_pupil_grid(num_pix)
 
 	if testing:
-		pupil = evaluate_supersampled(make_hicat_aperture(True), pupil_grid, 4)
+		pupil = make_obstructed_circular_aperture(1, 0.3, 3, 0.01)
+		pupil = evaluate_supersampled(pupil, pupil_grid, 4)
 	else:
 		pupil = read_fits('masks/SYM-HiCAT-Aper_F-N0486_Hex3-Ctr0972-Obs0195-SpX0017-Gap0004.fits')
 		pupil = Field(pupil.ravel(), pupil_grid)
 
 	if testing:
-		lyot_stop = make_hicat_lyot_stop(True)
+		lyot_stop = make_obstructed_circular_aperture(0.95, 0.3, 3, 0.02)
 		dx = dy = lyot_stop_shift
 		shifts = [[0,0], [dx, 0], [0, dy], [-dx, 0], [0, -dy]]
 

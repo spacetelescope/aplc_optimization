@@ -17,7 +17,7 @@ num_pix_foc = 50 # px diameter
 foc_inner = 8.543 #lambda_0/D diameter
 spectral_bandwidth = 0.1 # fractional
 num_wavelengths = 3
-testing = False
+testing = True
 
 #num_pix_foc = 256
 
@@ -31,18 +31,19 @@ focal_grid = make_focal_grid(pupil_grid, 8, owa*1.5)
 
 prop = FraunhoferPropagator(pupil_grid, focal_grid)
 if not testing:
-    aperture = read_fits('final_solution_aplc_refined_1_hicat.fits')
-    #aperture = read_fits('HiCAT-Apod_F-N0486_nImg0032_Hex3-Ctr0972-Obs0195-SpX0017-Gap0004_GreyFPM8543-M050_LS-Ann-gy-ID0345-OD0807-SpX0036_DZ-C030-080-Sep037-150_Bw10-Lam3_shiftXY050.fits')
-    aperture = Field(aperture.ravel(), pupil_grid)
+	aperture = read_fits('final_solution_aplc_refined_1_hicat.fits')
+	#aperture = read_fits('HiCAT-Apod_F-N0486_nImg0032_Hex3-Ctr0972-Obs0195-SpX0017-Gap0004_GreyFPM8543-M050_LS-Ann-gy-ID0345-OD0807-SpX0036_DZ-C030-080-Sep037-150_Bw10-Lam3_shiftXY050.fits')
+	aperture = Field(aperture.ravel(), pupil_grid)
 else:
-    aperture = read_fits('')
+	aperture = read_fits('symmetric_optim_first_result.fits')
+	aperture = Field(aperture.ravel(), pupil_grid)
 
 small_focal_grid = make_pupil_grid(num_pix_foc, foc_inner)
 focal_plane_mask = 1 - circular_aperture(foc_inner)(small_focal_grid)
 focal_plane_mask2 = 1 - circular_aperture(foc_inner)(focal_grid)
 
 if testing:
-	lyot_stop = make_obstructed_circular_aperture(0.95, 0.3, 3, 0.02)
+	lyot_stop = make_hicat_lyot_stop(True)
 	lyot_stop = evaluate_supersampled(lyot_stop, pupil_grid, 4)
 else:
 	lyot_stop = read_fits('masks/HiCAT-Lyot_F-N0486_LS-Ann-bw-ID0345-OD0807-SpX0036.fits')
