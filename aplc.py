@@ -169,9 +169,9 @@ def optimize_aplc(pupil, focal_plane_mask, lyot_stops, dark_zone_mask, wavelengt
 			last_optim = Field(last_optim, pupil_grid_subsampled)
 		
 		# Get pixels to optimize
-		optimize_mask = calculate_pixels_to_optimize(last_optim, pupil_subsampled)[mask]
+		optimize_mask = np.logical_and(calculate_pixels_to_optimize(last_optim, pupil_subsampled), mask)
 		if blind:
-			optimize_mask[:] = (pupil_subsampled > 0)[mask]
+			optimize_mask[:] = np.logical_and(pupil_subsampled > 0, mask)
 		n = int(np.sum(optimize_mask))
 
 		print('Starting optimization at scale %d with %d variables and %d constraints.' % (subsampling, n, m*len(wavelengths)))
@@ -275,7 +275,7 @@ def optimize_aplc(pupil, focal_plane_mask, lyot_stops, dark_zone_mask, wavelengt
 		last_optim = sol
 	
 	return last_optim
-	
+
 if __name__ == '__main__':
 	contrast = 1e-8
 	num_pix = 486
