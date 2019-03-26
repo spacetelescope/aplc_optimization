@@ -336,3 +336,6 @@ if __name__ == '__main__':
 		wavelengths = np.linspace(-spectral_bandwidth / 2, spectral_bandwidth / 2, num_wavelengths) + 1
 
 	res = optimize_aplc(pupil, focal_plane_mask, lyot_stops, dark_zone_mask, wavelengths, contrast, num_scalings=1)
+
+	imshow_field(res, mask=pupil)
+	plt.savefig('symmetric_optim_first_result.pdf')
