@@ -184,7 +184,7 @@ def optimize_aplc(pupil, focal_plane_mask, lyot_stops, dark_zone_mask, wavelengt
 		model.Params.Method = 2
 		x_vars = model.addVars(n, lb=0, ub=1)
 
-		print('Calculating and adding constraints...')')
+		print('Calculating and adding constraints...')
 
 		# Create problem matrix for one wavelength but for all Lyot stops
 		M = np.empty((m, n))
