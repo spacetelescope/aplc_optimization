@@ -1,4 +1,4 @@
-run_without_gurobipy = True
+run_without_gurobipy = False
 
 import matplotlib as mpl
 mpl.use('Agg')
