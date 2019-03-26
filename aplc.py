@@ -9,14 +9,14 @@ from scipy.ndimage.morphology import grey_erosion, grey_dilation
 def calculate_pixels_to_optimize(last_optim, pupil_subsampled):
 	if last_optim is None:
 		return pupil_subsampled > 0
-	
+
 	structure = np.array([[0,1,0],[1,1,1],[0,1,0]])
 	#structure = np.array([[0,1,1,0],[1,1,1,1],[1,1,1,1],[0,1,1,0]])
 	#structure = np.array([[0,1,1,1,0],[1,1,1,1,1],[1,1,1,1,1],[1,1,1,1,1],[0,1,1,1,0]])
 
 	a = (grey_dilation(last_optim.shaped, structure=structure) - grey_erosion(last_optim.shaped, structure=structure)).ravel() - 2
 	a = np.abs(a) > 1e-3
-	
+
 	b = np.logical_and(last_optim < (1 - 1e-3), last_optim > 1e-3)
 
 	c = np.logical_or(a, b)
@@ -31,7 +31,7 @@ def optimize_aplc(pupil, focal_plane_mask, lyot_stops, dark_zone_mask, wavelengt
 	aplc = LyotCoronagraph(pupil_grid, focal_plane_mask)
 	prop = FraunhoferPropagator(pupil_grid, focal_grid)
 
-	last_optim = None
+	prior = None
 	subsamplings = 2**np.arange(num_scalings)[::-1]
 
 	# Determine pupil symmetries
@@ -42,7 +42,7 @@ def optimize_aplc(pupil, focal_plane_mask, lyot_stops, dark_zone_mask, wavelengt
 	print('   Mirror symmetry in x: %s' % ('yes' if x_symm_pupil else 'no'))
 	print('   Mirror symmetry in y: %s' % ('yes' if y_symm_pupil else 'no'))
 	print('')
-	
+
 	# Determine lyot stop symmetries
 	x_symm_lyot_stops = [np.allclose(lyot_stop.shaped[:,::-1], lyot_stop.shaped) for lyot_stop in lyot_stops]
 	y_symm_lyot_stops = [np.allclose(lyot_stop.shaped[::-1,:], lyot_stop.shaped) for lyot_stop in lyot_stops]
@@ -63,7 +63,7 @@ def optimize_aplc(pupil, focal_plane_mask, lyot_stops, dark_zone_mask, wavelengt
 
 		print('   Mirror symmetry in x: %s' % ('yes' if x_symm_lyot_stops[i] else 'no'))
 		print('   Mirror symmetry in y: %s' % ('yes' if y_symm_lyot_stops[i] else 'no'))
-		
+
 		if x_symm_pupil and not x_symm_lyot_stops[i]:
 			print('   Searching for mirror symmetric Lyot stops in x...')
 			for j, b in enumerate(lyot_stops):
@@ -79,7 +79,7 @@ def optimize_aplc(pupil, focal_plane_mask, lyot_stops, dark_zone_mask, wavelengt
 			else:
 				print('      No Lyot stop found with this symmetry. This breaks the mirror symmetry in x of the optimization.')
 				x_symm = False
-		
+
 		if y_symm_pupil and not y_symm_lyot_stops[i]:
 			print('   Searching for mirror symmetric Lyot stops in y...')
 			for j, b in enumerate(lyot_stops):
@@ -96,11 +96,11 @@ def optimize_aplc(pupil, focal_plane_mask, lyot_stops, dark_zone_mask, wavelengt
 				print('      No Lyot stop found with this symmetry. This breaks the mirror symmetry in y of the optimization.')
 				y_symm = False
 	print('')
-	
+
 	print('Complete APLC:')
 	print('   Mirror symmetry in x: %s' % ('yes' if x_symm else 'no'))
 	print('   Mirror symmetry in y: %s' % ('yes' if y_symm else 'no'))
-	
+
 	if force_no_x_symmetry:
 		print('   The user forced me to ignore mirror-symmetries in x.')
 		x_symm = False
@@ -121,16 +121,16 @@ def optimize_aplc(pupil, focal_plane_mask, lyot_stops, dark_zone_mask, wavelengt
 		else:
 			# Constrain both real and imag part
 			num_constraints_per_focal_point.append(2)
-	
+
 	# We are optimizing amplitude (=real part) only
 	dark_zone_mask *= focal_grid.x > 0
 
 	if x_symm or y_symm:
 		dark_zone_mask *= focal_grid.y > 0
-	
+
 	dark_zone_mask = dark_zone_mask.astype('bool')
 	mm = int(np.sum(dark_zone_mask))
-	
+
 	# Calculate number of constraints per wavelength
 	m = int(np.sum(num_constraints_per_focal_point)) * mm
 
@@ -153,26 +153,28 @@ def optimize_aplc(pupil, focal_plane_mask, lyot_stops, dark_zone_mask, wavelengt
 		if y_symm:
 			inds = np.concatenate((inds, inds[::-1,:,:]), axis=2)
 			mask *= pupil_grid_subsampled.y < 0
-		
+
 		mask = mask.astype('bool')
 		inds = inds.reshape((pupil_grid_subsampled.size, -1))
 		#inds = [inds[i,:] for i in range(pupil_grid_subsampled.size) if mask[i]]
 
 		# Upscale last optim to current resolution
-		blind = last_optim is None
+		blind = prior is None
 		if blind:
 			# No prior information; assume totally dark apodizer
 			last_optim = Field(np.zeros(pupil_grid_subsampled.size), pupil_grid_subsampled)
+			prior = Field(np.zeros(pupil_grid.size), pupil_grid)
 		else:
 			# Upscale prior information by factor 2
-			last_optim = np.repeat(np.repeat(last_optim.shaped, 2, 1), 2, 0).ravel()
-			last_optim = Field(last_optim, pupil_grid_subsampled)
-		
+			#last_optim = np.repeat(np.repeat(last_optim.shaped, 2, 1), 2, 0).ravel()
+			last_optim = subsampled_field(prior, subsampling)
+			#last_optim = Field(last_optim, pupil_grid_subsampled)
+
 		# Get pixels to optimize
 		optimize_mask = np.logical_and(calculate_pixels_to_optimize(last_optim, pupil_subsampled), mask)
 		if blind:
 			optimize_mask[:] = np.logical_and(pupil_subsampled > 0, mask)
-		n = int(np.sum(optimize_mask))
+		n = int(np.sum(optimize_mask*mask))
 
 		print('Starting optimization at scale %d with %d variables and %d constraints.' % (subsampling, n, m*len(wavelengths)))
 		print('Creating model...')
@@ -194,8 +196,8 @@ def optimize_aplc(pupil, focal_plane_mask, lyot_stops, dark_zone_mask, wavelengt
 			j = 0
 			x0 = Field(np.zeros(pupil_grid.size), pupil_grid)
 			x = Field(np.zeros(pupil_grid.size), pupil_grid)
-			
-			for ind, amp, to_optimize in zip(inds, last_optim, optimize_mask):
+
+			for ind, amp, to_optimize, masked in zip(inds, last_optim, optimize_mask, mask):
 				x[:] = 0
 				x[ind] = pupil[ind]
 
@@ -211,7 +213,7 @@ def optimize_aplc(pupil, focal_plane_mask, lyot_stops, dark_zone_mask, wavelengt
 					for i, lyot_stop in enumerate(lyot_stops):
 						if num_constraints_per_focal_point[i] == 0:
 							continue
-						
+
 						# Apply the Lyot stop and get focal-plane electric field
 						lyot_copy = lyot.copy()
 						lyot_copy.electric_field *= lyot_stop
@@ -221,7 +223,7 @@ def optimize_aplc(pupil, focal_plane_mask, lyot_stops, dark_zone_mask, wavelengt
 						M[k*mm:(k+1)*mm,j] = E.imag
 						if num_constraints_per_focal_point[i] == 2:
 							M[(k+1)*mm:(k+2)*mm,j] = E.real
-						
+
 						k += num_constraints_per_focal_point[i]
 					j += 1
 
@@ -233,15 +235,16 @@ def optimize_aplc(pupil, focal_plane_mask, lyot_stops, dark_zone_mask, wavelengt
 			for i, lyot_stop in enumerate(lyot_stops):
 				if num_constraints_per_focal_point[i] == 0:
 					continue
-				
+
 				wf = aplc(Wavefront(x0, wavelength))
 				wf.electric_field *= lyot_stop
 				img = prop(wf)
-				
+
 				base_electric_field.append(img.electric_field.imag)
 				if num_constraints_per_focal_point[i] == 2:
 					base_electric_field.append(img.electric_field.real)
 			base_electric_field = np.concatenate(base_electric_field)
+			print('Base', (np.abs(base_electric_field)**2).sum())
 
 			# Calculate contrast requirement
 			contrast_requirement = np.tile((np.ones(dark_zone_mask.size) * np.sqrt(contrast))[dark_zone_mask], int(np.sum(num_constraints_per_focal_point)))
@@ -251,7 +254,7 @@ def optimize_aplc(pupil, focal_plane_mask, lyot_stops, dark_zone_mask, wavelengt
 				e = gp.LinExpr(ee, x_vars.values())
 				model.addConstr(e <= (-e0 + c0))
 				model.addConstr(e >= (-e0 - c0))
-		
+
 		del M
 
 		# Use central Lyot stop for throughput metric (assume that this is the unshifted Lyot stop)
@@ -268,13 +271,16 @@ def optimize_aplc(pupil, focal_plane_mask, lyot_stops, dark_zone_mask, wavelengt
 		solution = np.array([x_vars[i].x for i in range(n)])
 
 		# Integrate solution into upsampled old solution
-		sol = last_optim
-		sol[optimize_mask] = solution
-		sol = Field(sol, make_subsampled_grid(pupil_grid, subsampling))
-		
-		last_optim = sol
-	
-	return last_optim
+		sol = prior
+		j = 0
+		for ind, to_optimize in zip(inds, optimize_mask):
+			if to_optimize:
+				sol[ind] = solution[j]
+				j += 1
+		sol = Field(sol, pupil_grid)
+		prior = sol
+
+	return prior
 
 if __name__ == '__main__':
 	contrast = 1e-8
@@ -288,7 +294,7 @@ if __name__ == '__main__':
 	num_wavelengths = 3
 	lyot_stop_robustness = False
 	lyot_stop_shift = 0.003
-	
+
 	testing = True
 
 	if testing:
@@ -303,7 +309,7 @@ if __name__ == '__main__':
 	else:
 		pupil = read_fits('masks/SYM-HiCAT-Aper_F-N0486_Hex3-Ctr0972-Obs0195-SpX0017-Gap0004.fits')
 		pupil = Field(pupil.ravel(), pupil_grid)
-	
+
 	if testing:
 		lyot_stop = make_hicat_lyot_stop(True)
 		dx = dy = lyot_stop_shift
@@ -317,7 +323,7 @@ if __name__ == '__main__':
 		lyot_stop = read_fits('masks/HiCAT-Lyot_F-N0486_LS-Ann-bw-ID0345-OD0807-SpX0036.fits')
 		lyot_stop = Field(lyot_stop.ravel(), pupil_grid)
 		lyot_stops = [lyot_stop]
-	
+
 	n_sci = int((np.ceil(owa) + 1) * q_sci) * 2
 	x_sci = (np.arange(n_sci) + 0.5 - n_sci / 2) / q_sci
 	focal_grid = CartesianGrid(SeparatedCoords((x_sci, x_sci)))
@@ -328,14 +334,17 @@ if __name__ == '__main__':
 	x_foc = (np.arange(n_foc) + 0.5 - n_foc / 2) / q_foc
 	focal_mask_grid = CartesianGrid(SeparatedCoords((x_foc, x_foc)))
 
-	focal_plane_mask = circular_aperture(foc_inner)(focal_mask_grid)
+	focal_plane_mask = 1 - circular_aperture(foc_inner)(focal_mask_grid)
 
 	if num_wavelengths == 1:
 		wavelengths = [1]
 	else:
 		wavelengths = np.linspace(-spectral_bandwidth / 2, spectral_bandwidth / 2, num_wavelengths) + 1
 
-	res = optimize_aplc(pupil, focal_plane_mask, lyot_stops, dark_zone_mask, wavelengths, contrast, num_scalings=1)
+	res = optimize_aplc(pupil, focal_plane_mask, lyot_stops, dark_zone_mask, wavelengths, contrast, num_scalings=1, force_no_x_symmetry=False, force_no_y_symmetry=False)
 
 	imshow_field(res, mask=pupil)
 	plt.savefig('symmetric_optim_first_result.pdf')
+
+	write_fits(res * pupil, 'symmetric_optim_first_result.fits')
+	write_fits(res, 'symmetric_optim_apodizer.fits')
