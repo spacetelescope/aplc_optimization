@@ -31,6 +31,9 @@ def optimize_aplc(pupil, focal_plane_mask, lyot_stops, dark_zone_mask, wavelengt
 	aplc = LyotCoronagraph(pupil_grid, focal_plane_mask)
 	prop = FraunhoferPropagator(pupil_grid, focal_grid)
 
+	focal_grid_0 = CartesianGrid(UnstructuredCoords([[0],[0]]), [1])
+	prop_0 = FraunhoferPropagator(pupil_grid, focal_grid_0)
+
 	prior = None
 	subsamplings = 2**np.arange(num_scalings)[::-1]
 
@@ -115,7 +118,7 @@ def optimize_aplc(pupil, focal_plane_mask, lyot_stops, dark_zone_mask, wavelengt
 		if lyot_stop_duplication[i]:
 			# Lyot stop already taken into account due to symmetries
 			num_constraints_per_focal_point.append(0)
-		elif (x_symm_pupil and x_symm_lyot_stops[i]) and (y_symm_pupil and y_symm_lyot_stops[i]):
+		elif (x_symm and x_symm_lyot_stops[i]) and (y_symm and y_symm_lyot_stops[i]):
 			# Only constrain real part
 			num_constraints_per_focal_point.append(1)
 		else:
@@ -197,6 +200,11 @@ def optimize_aplc(pupil, focal_plane_mask, lyot_stops, dark_zone_mask, wavelengt
 			x0 = Field(np.zeros(pupil_grid.size), pupil_grid)
 			x = Field(np.zeros(pupil_grid.size), pupil_grid)
 
+			# Calculate norm electric field for each Lyot stop
+			norms = []
+			for lyot_stop in lyot_stops:
+				norms.append(prop_0(Wavefront(pupil * lyot_stop, wavelength)).electric_field[0])
+
 			for ind, amp, to_optimize, masked in zip(inds, last_optim, optimize_mask, mask):
 				x[:] = 0
 				x[ind] = pupil[ind]
@@ -218,6 +226,7 @@ def optimize_aplc(pupil, focal_plane_mask, lyot_stops, dark_zone_mask, wavelengt
 						lyot_copy = lyot.copy()
 						lyot_copy.electric_field *= lyot_stop
 						E = prop(lyot_copy).electric_field[dark_zone_mask]
+						E /= norms[i]
 
 						# Add only imaginary or both imaginary and real constraints depending on symmetry
 						M[k*mm:(k+1)*mm,j] = E.imag

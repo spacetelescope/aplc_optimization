@@ -17,14 +17,9 @@ num_pix_foc = 50 # px diameter
 foc_inner = 8.543 #lambda_0/D diameter
 spectral_bandwidth = 0.1 # fractional
 num_wavelengths = 3
-testing = True
+testing = False
 
 #num_pix_foc = 256
-
-if testing:
-	num_pix = 256
-	owa = 8
-	num_wavelengths = 2
 
 pupil_grid = make_pupil_grid(num_pix)
 focal_grid = make_focal_grid(pupil_grid, 8, owa*1.5)
