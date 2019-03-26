@@ -31,7 +31,7 @@ def optimize_aplc(pupil, focal_plane_mask, lyot_stops, dark_zone_mask, wavelengt
 	aplc = LyotCoronagraph(pupil_grid, focal_plane_mask)
 	prop = FraunhoferPropagator(pupil_grid, focal_grid)
 
-	focal_grid_0 = CartesianGrid(UnstructuredCoords([[0],[0]]), np.array([1]))
+	focal_grid_0 = CartesianGrid(UnstructuredCoords([np.array([0]),np.array([0])]), np.array([1]))
 	prop_0 = FraunhoferPropagator(pupil_grid, focal_grid_0)
 
 	prior = None
