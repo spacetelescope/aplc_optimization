@@ -306,6 +306,7 @@ if __name__ == '__main__':
 	num_wavelengths = 3
 	lyot_stop_robustness = False
 	lyot_stop_shift = 0.003
+	tau = 0.55
 
 	testing = False
 
@@ -356,7 +357,7 @@ if __name__ == '__main__':
 	else:
 		wavelengths = np.linspace(-spectral_bandwidth / 2, spectral_bandwidth / 2, num_wavelengths) + 1
 
-	res = optimize_aplc(pupil, focal_plane_mask, lyot_stops, dark_zone_mask, wavelengths, contrast, num_scalings=1, force_no_x_symmetry=False, force_no_y_symmetry=False)
+	res = optimize_aplc(pupil, focal_plane_mask, lyot_stops, dark_zone_mask, wavelengths, contrast * tau, num_scalings=1, force_no_x_symmetry=False, force_no_y_symmetry=False)
 
 	imshow_field(res, mask=pupil)
 	plt.savefig('symmetric_optim_first_result.pdf')
