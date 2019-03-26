@@ -306,27 +306,21 @@ if __name__ == '__main__':
 	num_wavelengths = 3
 	lyot_stop_robustness = False
 	lyot_stop_shift = 0.003
-	tau = 0.55
+	tau = 0.55 # expected planet peak intensity (relative to without focal plane mask)
+	own_apertures = True
 
-	testing = False
-
-	if testing:
+	if own_apertures:
 		num_pix = 256
-		owa = 8
-		num_wavelengths = 2
-
 	pupil_grid = make_pupil_grid(num_pix)
 
-	if testing:
-		#pupil = make_obstructed_circular_aperture(1, 0.3, 3, 0.01)
+	if own_apertures:
 		pupil = make_hicat_aperture(True)
 		pupil = evaluate_supersampled(pupil, pupil_grid, 4)
 	else:
 		pupil = read_fits('masks/SYM-HiCAT-Aper_F-N0486_Hex3-Ctr0972-Obs0195-SpX0017-Gap0004.fits')
 		pupil = Field(pupil.ravel(), pupil_grid)
 
-	if testing:
-		#lyot_stop = make_obstructed_circular_aperture(0.95, 0.3, 3, 0.02)
+	if own_apertures:
 		lyot_stop = make_hicat_lyot_stop(True)
 		dx = dy = lyot_stop_shift
 		shifts = [[0,0], [dx, 0], [0, dy], [-dx, 0], [0, -dy]]
@@ -357,7 +351,7 @@ if __name__ == '__main__':
 	else:
 		wavelengths = np.linspace(-spectral_bandwidth / 2, spectral_bandwidth / 2, num_wavelengths) + 1
 
-	res = optimize_aplc(pupil, focal_plane_mask, lyot_stops, dark_zone_mask, wavelengths, contrast * tau, num_scalings=1, force_no_x_symmetry=False, force_no_y_symmetry=False)
+	res = optimize_aplc(pupil, focal_plane_mask, lyot_stops, dark_zone_mask, wavelengths, contrast * tau, num_scalings=2, force_no_x_symmetry=False, force_no_y_symmetry=False)
 
 	imshow_field(res, mask=pupil)
 	plt.savefig('symmetric_optim_first_result.pdf')
