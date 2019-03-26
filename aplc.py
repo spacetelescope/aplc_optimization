@@ -1,9 +1,12 @@
+run_without_gurobipy = True
+
 import matplotlib as mpl
 mpl.use('Agg')
 from hcipy import *
 import numpy as np
 import matplotlib.pyplot as plt
-import gurobipy as gp
+if not run_without_gurobipy:
+	import gurobipy as gp
 from scipy.ndimage.morphology import grey_erosion, grey_dilation
 
 def calculate_pixels_to_optimize(last_optim, pupil_subsampled):
@@ -31,7 +34,7 @@ def optimize_aplc(pupil, focal_plane_mask, lyot_stops, dark_zone_mask, wavelengt
 	aplc = LyotCoronagraph(pupil_grid, focal_plane_mask)
 	prop = FraunhoferPropagator(pupil_grid, focal_grid)
 
-	focal_grid_0 = CartesianGrid(UnstructuredCoords([np.array([0]),np.array([0])]), np.array([1]))
+	focal_grid_0 = CartesianGrid(UnstructuredCoords([np.array([0.0]), np.array([0.0])]), np.array([1.0]))
 	prop_0 = FraunhoferPropagator(pupil_grid, focal_grid_0)
 
 	prior = None
@@ -183,11 +186,12 @@ def optimize_aplc(pupil, focal_plane_mask, lyot_stops, dark_zone_mask, wavelengt
 		print('Creating model...')
 
 		# Create Gurobi model
-		model = gp.Model('lp')
-		model.Params.Threads = 0
-		model.Params.Crossover = 0
-		model.Params.Method = 2
-		x_vars = model.addVars(n, lb=0, ub=1)
+		if not run_without_gurobipy:
+			model = gp.Model('lp')
+			model.Params.Threads = 0
+			model.Params.Crossover = 0
+			model.Params.Method = 2
+			x_vars = model.addVars(n, lb=0, ub=1)
 
 		print('Calculating and adding constraints...')
 
