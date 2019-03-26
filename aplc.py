@@ -174,6 +174,9 @@ def optimize_aplc(pupil, focal_plane_mask, lyot_stops, dark_zone_mask, wavelengt
 			optimize_mask[:] = (pupil_subsampled > 0)[mask]
 		n = int(np.sum(optimize_mask))
 
+		print('Starting optimization at scale %d with %d variables and %d constraints.' % (subsampling, n, m*len(wavelengths)))
+		print('Creating model...')
+
 		# Create Gurobi model
 		model = gp.Model('lp')
 		model.Params.Threads = 0
@@ -181,11 +184,10 @@ def optimize_aplc(pupil, focal_plane_mask, lyot_stops, dark_zone_mask, wavelengt
 		model.Params.Method = 2
 		x_vars = model.addVars(n, lb=0, ub=1)
 
+		print('Calculating and adding constraints...')')
+
 		# Create problem matrix for one wavelength but for all Lyot stops
 		M = np.empty((m, n))
-
-		print('Starting optimization at scale %d with %d variables and %d constraints.' % (subsampling, n, m*len(wavelengths)))
-		print('Calculating constraints...')
 
 		# Add constraints for each wavelength
 		for wl_i, wavelength in enumerate(wavelengths):
@@ -253,12 +255,14 @@ def optimize_aplc(pupil, focal_plane_mask, lyot_stops, dark_zone_mask, wavelengt
 		del M
 
 		# Use central Lyot stop for throughput metric (assume that this is the unshifted Lyot stop)
-		M_max = (pupil_subsampled * lyot_stops_subsampled[0])
+		M_max = (pupil_subsampled * lyot_stops_subsampled[0])[optimize_mask]
 		obj = gp.LinExpr(M_max, x_vars.values())
 		model.setObjective(obj, gp.GRB.MAXIMIZE)
 
 		# Optimize model
+		print('Start optimization...')
 		model.optimize()
+		print('Optimization finished!')
 
 		# Extract solution from Gurobi
 		solution = np.array([x_vars[i].x for i in range(n)])
