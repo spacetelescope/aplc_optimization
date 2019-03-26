@@ -233,9 +233,9 @@ def optimize_aplc(pupil, focal_plane_mask, lyot_stops, dark_zone_mask, wavelengt
 						E /= norms[i]
 
 						# Add only imaginary or both imaginary and real constraints depending on symmetry
-						M[k*mm:(k+1)*mm,j] = E.imag
+						M[k*mm:(k+1)*mm,j] = E.real
 						if num_constraints_per_focal_point[i] == 2:
-							M[(k+1)*mm:(k+2)*mm,j] = E.real
+							M[(k+1)*mm:(k+2)*mm,j] = E.imag
 
 						k += num_constraints_per_focal_point[i]
 					j += 1
@@ -253,9 +253,9 @@ def optimize_aplc(pupil, focal_plane_mask, lyot_stops, dark_zone_mask, wavelengt
 				wf.electric_field *= lyot_stop
 				img = prop(wf)
 
-				base_electric_field.append(img.electric_field.imag)
+				base_electric_field.append(img.electric_field.real)
 				if num_constraints_per_focal_point[i] == 2:
-					base_electric_field.append(img.electric_field.real)
+					base_electric_field.append(img.electric_field.imag)
 			base_electric_field = np.concatenate(base_electric_field)
 
 			# Calculate contrast requirement
