@@ -10,6 +10,22 @@ if not run_without_gurobipy:
 from scipy.ndimage.morphology import grey_erosion, grey_dilation
 
 def calculate_pixels_to_optimize(last_optim, pupil_subsampled):
+	"""Calculate the pixels to be used for the optimization for the adaptive algorithm.
+
+	The exact selection of the pixels to be taken into account depends on future research.
+
+	Parameters
+	----------
+	last_optim : Field
+		The previously-optimized apodizer.
+	pupil_subsampled : Field
+		The telescope pupil subsampled to the same resolution as `last_optim`.
+
+	Returns
+	-------
+	Field
+		A boolean mask to indicate which pixels to take into account.
+	"""
 	if last_optim is None:
 		return pupil_subsampled > 0
 
@@ -28,6 +44,35 @@ def calculate_pixels_to_optimize(last_optim, pupil_subsampled):
 
 def optimize_aplc(pupil, focal_plane_mask, lyot_stops, dark_zone_mask, wavelengths, contrast, num_scalings=1,
 	force_no_x_symmetry=False, force_no_y_symmetry=False):
+	"""Optimize an APLC with a (optional) iterative algorithm taking into account x and/or y mirror symemtries.
+
+	Parameters
+	----------
+	pupil : Field
+		The telescope pupil
+	focal_plane_mask : Field
+		The focal plane mask of the APLC. The grid is assumed to be in lambda_0/D.
+	lyot_stops : list of Fields
+		A list of the Lyot stops used in the optimization problem.
+	dark_zone_mask : Field
+		A binary field indicating which pixels belong to the dark zone.
+	wavelengths : array_like
+		An array of wavelengths as fractions of lambda_0.
+	contrast : scalar
+		The contrast that needs to be achieved in the dark zone.
+	num_scalings : int
+		The number of scalings that need to be performed in the adaptive algorithm. A value of 1 effectively turns
+		the adaptive algorithm off.
+	force_no_x_symmetry : boolean
+		Force the algorithm to ignore any x mirror symmetry that might exist in the problem.
+	force_no_y_symmetry : boolean
+		Force the algorithm to ignore any y mirror symmetry that might exist in the problem.
+
+	Returns
+	-------
+	Field
+		The optimized apodizer for the APLC. This has not been multiplied by the telescope pupil.
+	"""
 	pupil_grid = pupil.grid
 	focal_grid = dark_zone_mask.grid
 
@@ -173,7 +218,7 @@ def optimize_aplc(pupil, focal_plane_mask, lyot_stops, dark_zone_mask, wavelengt
 		else:
 			# Upscale prior information by factor 2
 			#last_optim = np.repeat(np.repeat(last_optim.shaped, 2, 1), 2, 0).ravel()
-			last_optim = subsampled_field(prior, subsampling)
+			last_optim = subsample_field(prior, subsampling)
 			#last_optim = Field(last_optim, pupil_grid_subsampled)
 
 		# Get pixels to optimize
@@ -351,10 +396,18 @@ if __name__ == '__main__':
 	else:
 		wavelengths = np.linspace(-spectral_bandwidth / 2, spectral_bandwidth / 2, num_wavelengths) + 1
 
-	res = optimize_aplc(pupil, focal_plane_mask, lyot_stops, dark_zone_mask, wavelengths, contrast * tau, num_scalings=2, force_no_x_symmetry=False, force_no_y_symmetry=False)
+	iterative_res = optimize_aplc(pupil, focal_plane_mask, lyot_stops, dark_zone_mask, wavelengths, contrast * tau, num_scalings=2)#, force_no_x_symmetry=False, force_no_y_symmetry=False)
 
-	imshow_field(res, mask=pupil)
-	plt.savefig('symmetric_optim_first_result.pdf')
+	imshow_field(iterative_res, mask=pupil)
+	plt.savefig('iterative.pdf')
 
-	write_fits(res * pupil, 'symmetric_optim_first_result.fits')
-	write_fits(res, 'symmetric_optim_apodizer.fits')
+	write_fits(iterative_res * pupil, 'pupil_apodizer_iterative.fits')
+	write_fits(iterative_res, 'apodizer_iterative.fits')
+
+	full_res = optimize_aplc(pupil, focal_plane_mask, lyot_stops, dark_zone_mask, wavelengths, contrast * tau, num_scalings=1)
+
+	imshow_field(full_res, mask=pupil)
+	plt.savefig('fullres.pdf')
+
+	write_fits(full_res * pupil, 'pupil_apodizer_full.fits')
+	write_fits(full_res, 'apodizer_full.fits')
