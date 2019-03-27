@@ -361,8 +361,7 @@ if __name__ == '__main__':
 		num_pix = 256
 	#pupil_grid = make_pupil_grid(num_pix)
 
-	x_pup = (np.arange(num_pix) + 0.5 - num_pix / 2) / num_pix
-	pupil_grid = CartesianGrid(SeparatedCoords((x_pup, x_pup))
+	pupil_grid = make_uniform_grid((num_pix, num_pix), 1)
 
 	if own_apertures:
 		pupil = make_hicat_aperture(True)
