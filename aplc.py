@@ -43,7 +43,7 @@ def calculate_pixels_to_optimize(last_optim, pupil_subsampled):
 	return np.logical_and(c, pupil_subsampled > 0)
 
 def optimize_aplc(pupil, focal_plane_mask, lyot_stops, dark_zone_mask, wavelengths, contrast, num_scalings=1,
-	force_no_x_symmetry=False, force_no_y_symmetry=False):
+	force_no_x_symmetry=False, force_no_y_symmetry=False, do_apodizer_throughput_maximization=False):
 	"""Optimize an APLC with a (optional) iterative algorithm taking into account x and/or y mirror symemtries.
 
 	Parameters
@@ -315,7 +315,10 @@ def optimize_aplc(pupil, focal_plane_mask, lyot_stops, dark_zone_mask, wavelengt
 		del M
 
 		# Use central Lyot stop for throughput metric (assume that this is the unshifted Lyot stop)
-		M_max = (pupil_subsampled * lyot_stops_subsampled[0])[optimize_mask]
+		if do_apodizer_throughput_maximization:
+			M_max = pupil_subsampled[optimize_mask]
+		else:
+			M_max = (pupil_subsampled * lyot_stops_subsampled[0])[optimize_mask]
 		obj = gp.LinExpr(M_max, x_vars.values())
 		model.setObjective(obj, gp.GRB.MAXIMIZE)
 
@@ -352,11 +355,14 @@ if __name__ == '__main__':
 	lyot_stop_robustness = False
 	lyot_stop_shift = 0.003
 	tau = 0.55 # expected planet peak intensity (relative to without focal plane mask)
-	own_apertures = True
+	own_apertures = False
 
 	if own_apertures:
 		num_pix = 256
-	pupil_grid = make_pupil_grid(num_pix)
+	#pupil_grid = make_pupil_grid(num_pix)
+
+	x_pup = (np.arange(num_pix) + 0.5 - num_pix / 2) / num_pix
+	pupil_grid = CartesianGrid(SeparatedCoords((x_pup, x_pup))
 
 	if own_apertures:
 		pupil = make_hicat_aperture(True)
@@ -395,7 +401,7 @@ if __name__ == '__main__':
 		wavelengths = [1]
 	else:
 		wavelengths = np.linspace(-spectral_bandwidth / 2, spectral_bandwidth / 2, num_wavelengths) + 1
-
+	'''
 	iterative_res = optimize_aplc(pupil, focal_plane_mask, lyot_stops, dark_zone_mask, wavelengths, contrast * tau, num_scalings=2)#, force_no_x_symmetry=False, force_no_y_symmetry=False)
 
 	imshow_field(iterative_res, mask=pupil)
@@ -403,8 +409,8 @@ if __name__ == '__main__':
 
 	write_fits(iterative_res * pupil, 'pupil_apodizer_iterative.fits')
 	write_fits(iterative_res, 'apodizer_iterative.fits')
-
-	full_res = optimize_aplc(pupil, focal_plane_mask, lyot_stops, dark_zone_mask, wavelengths, contrast * tau, num_scalings=1)
+	'''
+	full_res = optimize_aplc(pupil, focal_plane_mask, lyot_stops, dark_zone_mask, wavelengths, contrast * tau, num_scalings=1, force_no_x_symmetry=False, force_no_y_symmetry=False, do_apodizer_throughput_maximization=False)
 
 	imshow_field(full_res, mask=pupil)
 	plt.savefig('fullres.pdf')
