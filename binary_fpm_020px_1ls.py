@@ -1,4 +1,4 @@
-run_without_gurobipy = True
+run_without_gurobipy = False
 
 import matplotlib as mpl
 mpl.use('Agg')
@@ -348,21 +348,18 @@ if __name__ == '__main__':
 	q_sci = 2 # px / (lambda_0/D)
 	iwa = 3.75 # lambda_0/D
 	owa = 15 # lambda_0/D
-	n_foc = 50 # px diameter
+	n_foc = 20 # px diameter
 	foc_inner = 8.543 # lambda_0/D diameter
 	spectral_bandwidth = 0.1 # fractional
 	num_wavelengths = 3
-	lyot_stop_robustness = True
+	lyot_stop_robustness = False
 	lyot_stop_shift = 1 # px
 	tau = 0.55 # expected planet peak intensity (relative to without focal plane mask)
 
-	fname_pupil = 'masks/SYM-HiCAT-Aper_F-N0486_Hex3-Ctr0972-Obs0195-SpX0017-Gap0004.fits'
-	fname_lyot_stop = 'masks/HiCAT-Lyot_F-N0486_LS-Ann-gy-ID0345-OD0807-SpX0036_shiftX+000.fits'
+	fname_pupil = 'masks/ehpor_apodizer_mask_486_gy.fits'
+	fname_lyot_stop = 'masks/ehpor_lyot_mask_486_gy.fits'
 
-	#fname_pupil = 'masks/ehpor_apodizer_mask.fits'
-	#fname_lyot_stop = 'masks/ehpor_lyot_mask.fits'
-
-	fname = 'apodizers/HiCAT-N%04d_NFOC%04d_DZ%04d_%04d_C%03d_BW%02d_NLAM%02d_SHIFT%02d_9LS' % (num_pix, n_foc, iwa*100, owa*100, -10*np.log10(contrast), spectral_bandwidth*100, num_wavelengths, lyot_stop_shift*10)
+	fname = 'apodizers/HiCAT-N%04d_NFOC%04d_DZ%04d_%04d_C%03d_BW%02d_NLAM%02d_SHIFT%02d_BWFPM' % (num_pix, n_foc, iwa*100, owa*100, -10*np.log10(contrast), spectral_bandwidth*100, num_wavelengths, lyot_stop_shift*10)
 	print('Apodizer will be saved to:')
 	print('   ' + fname + '.fits')
 	print('')
@@ -381,13 +378,8 @@ if __name__ == '__main__':
 		lyot_stop_neg_x = np.roll(lyot_stop.shaped, -lyot_stop_shift, 1).ravel()
 		lyot_stop_pos_y = np.roll(lyot_stop.shaped, lyot_stop_shift, 0).ravel()
 		lyot_stop_neg_y = np.roll(lyot_stop.shaped, -lyot_stop_shift, 0).ravel()
-		lyot_stop_pos_x_pos_y = np.roll(np.roll(lyot_stop.shaped, lyot_stop_shift, 1), lyot_stop_shift, 0).ravel()
-		lyot_stop_pos_x_neg_y = np.roll(np.roll(lyot_stop.shaped, lyot_stop_shift, 1), -lyot_stop_shift, 0).ravel()
-		lyot_stop_neg_x_pos_y = np.roll(np.roll(lyot_stop.shaped, -lyot_stop_shift, 1), lyot_stop_shift, 0).ravel()
-		lyot_stop_neg_x_neg_y = np.roll(np.roll(lyot_stop.shaped, -lyot_stop_shift, 1), -lyot_stop_shift, 0).ravel()
 
 		lyot_stops.extend([lyot_stop_pos_x, lyot_stop_neg_x, lyot_stop_pos_y, lyot_stop_neg_y])
-		lyot_stops.extend([lyot_stop_pos_x_pos_y, lyot_stop_pos_x_neg_y, lyot_stop_neg_x_pos_y, lyot_stop_neg_x_neg_y])
 
 	n_sci = int((np.ceil(owa) + 1) * q_sci) * 2
 	x_sci = (np.arange(n_sci) + 0.5 - n_sci / 2) / q_sci
