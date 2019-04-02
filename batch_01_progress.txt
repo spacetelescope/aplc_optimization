@@ -1,0 +1,25 @@
+telsurf3:
+- comparison_ampl_5ls.py - (done)
+- lyot_robustness_5ls_1.py - 1h (launched)
+- lyot_robustness_5ls_2.py - 1h
+- lyot_robustness_5ls_3.py - 1h
+- binary_full_resolution_robust_5ls.py - 1h
+- gray_full_resolution_robust_5ls.py - 1h
+- binary_double_resolution_robust_5ls.py - 4h
+- gray_double_resolution_robust_5ls.py - 4h
+- large_owa_double_resolution_1ls.py - 16h
+
+telsurf3 (after bugfix):
+- lyot_robustness_9ls_1.py - 4h
+- lyot_robustness_9ls_2.py - 4h
+- lyot_robustness_9ls_3.py - 4h
+
+eelderdiep:
+- binary_fpm_020px_1ls.py - (done (25.5 mins))
+- binary_fpm_050px_1ls.py - (done (27.0 mins))
+- binary_fpm_100px_1ls.py - (running)
+- binary_fpm_200px_1ls.py -
+- gray_fpm_020px_1ls.py - 
+- gray_fpm_050px_1ls.py - 
+- gray_fpm_100px_1ls.py - 
+- gray_fpm_200px_1ls.py - 

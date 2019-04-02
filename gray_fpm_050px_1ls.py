@@ -389,7 +389,8 @@ if __name__ == '__main__':
 
 	q_foc = n_foc / foc_inner
 	x_foc = (np.arange(n_foc) + 0.5 - n_foc / 2) / q_foc
-	focal_mask_grid = CartesianGrid(SeparatedCoords((x_foc, x_foc)))
+	#focal_mask_grid = CartesianGrid(SeparatedCoords((x_foc, x_foc)))
+	focal_mask_grid = CartesianGrid(RegularCoords(1.0 / q_foc, [n_foc, n_foc], x_foc.min()))
 
 	focal_plane_mask = 1 - evaluate_supersampled(circular_aperture(foc_inner), focal_mask_grid, 8)
 
