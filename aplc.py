@@ -1,4 +1,4 @@
-run_without_gurobipy = False
+run_without_gurobipy = True
 
 import matplotlib as mpl
 mpl.use('Agg')
@@ -352,37 +352,37 @@ if __name__ == '__main__':
 	foc_inner = 8.543 # lambda_0/D diameter
 	spectral_bandwidth = 0.1 # fractional
 	num_wavelengths = 3
-	lyot_stop_robustness = False
-	lyot_stop_shift = 0.003
+	lyot_stop_robustness = True
+	lyot_stop_shift = 1 # px
 	tau = 0.55 # expected planet peak intensity (relative to without focal plane mask)
-	own_apertures = False
 
-	if own_apertures:
-		num_pix = 256
-	#pupil_grid = make_pupil_grid(num_pix)
+	fname_pupil = 'masks/SYM-HiCAT-Aper_F-N0486_Hex3-Ctr0972-Obs0195-SpX0017-Gap0004.fits'
+	fname_lyot_stop = 'masks/HiCAT-Lyot_F-N0486_LS-Ann-gy-ID0345-OD0807-SpX0036_shiftX+000.fits'
+
+	#fname_pupil = 'masks/ehpor_apodizer_mask.fits'
+	#fname_lyot_stop = 'masks/ehpor_lyot_mask.fits'
+
+	fname = 'apodizers/HiCAT-N%04d_NFOC%04d_DZ%04d_%04d_C%03d_BW%02d_NLAM%02d_SHIFT%02d' % (num_pix, n_foc, iwa*100, owa*100, -10*np.log10(contrast), spectral_bandwidth*100, num_wavelengths, lyot_stop_shift*10)
+	print('Apodizer will be saved to:')
+	print('   ' + fname + '.fits')
+	print('')
 
 	pupil_grid = make_uniform_grid((num_pix, num_pix), 1)
 
-	if own_apertures:
-		pupil = make_hicat_aperture(True)
-		pupil = evaluate_supersampled(pupil, pupil_grid, 4)
-	else:
-		pupil = read_fits('masks/SYM-HiCAT-Aper_F-N0486_Hex3-Ctr0972-Obs0195-SpX0017-Gap0004.fits')
-		pupil = Field(pupil.ravel(), pupil_grid)
+	pupil = read_fits(fname_pupil)
+	pupil = Field(pupil.ravel(), pupil_grid)
 
-	if own_apertures:
-		lyot_stop = make_hicat_lyot_stop(True)
-		dx = dy = lyot_stop_shift
-		shifts = [[0,0], [dx, 0], [0, dy], [-dx, 0], [0, -dy]]
+	lyot_stop = read_fits(fname_lyot_stop)
+	lyot_stop = Field(lyot_stop.ravel(), pupil_grid)
+	lyot_stops = [lyot_stop]
 
-		if lyot_stop_robustness:
-			lyot_stops = [evaluate_supersampled(lyot_stop, pupil_grid.shifted(shift), 4) for shift in shifts]
-		else:
-			lyot_stops = [evaluate_supersampled(lyot_stop, pupil_grid, 4)]
-	else:
-		lyot_stop = read_fits('masks/HiCAT-Lyot_F-N0486_LS-Ann-bw-ID0345-OD0807-SpX0036.fits')
-		lyot_stop = Field(lyot_stop.ravel(), pupil_grid)
-		lyot_stops = [lyot_stop]
+	if lyot_stop_robustness:
+		lyot_stop_pos_x = np.roll(lyot_stop.shaped, lyot_stop_shift, 1).ravel()
+		lyot_stop_neg_x = np.roll(lyot_stop.shaped, -lyot_stop_shift, 1).ravel()
+		lyot_stop_pos_y = np.roll(lyot_stop.shaped, lyot_stop_shift, 0).ravel()
+		lyot_stop_neg_y = np.roll(lyot_stop.shaped, -lyot_stop_shift, 0).ravel()
+
+		lyot_stops.extend([lyot_stop_pos_x, lyot_stop_neg_x, lyot_stop_pos_y, lyot_stop_neg_y])
 
 	n_sci = int((np.ceil(owa) + 1) * q_sci) * 2
 	x_sci = (np.arange(n_sci) + 0.5 - n_sci / 2) / q_sci
@@ -400,19 +400,6 @@ if __name__ == '__main__':
 		wavelengths = [1]
 	else:
 		wavelengths = np.linspace(-spectral_bandwidth / 2, spectral_bandwidth / 2, num_wavelengths) + 1
-	'''
-	iterative_res = optimize_aplc(pupil, focal_plane_mask, lyot_stops, dark_zone_mask, wavelengths, contrast * tau, num_scalings=2)#, force_no_x_symmetry=False, force_no_y_symmetry=False)
-
-	imshow_field(iterative_res, mask=pupil)
-	plt.savefig('iterative.pdf')
-
-	write_fits(iterative_res * pupil, 'pupil_apodizer_iterative.fits')
-	write_fits(iterative_res, 'apodizer_iterative.fits')
-	'''
-	full_res = optimize_aplc(pupil, focal_plane_mask, lyot_stops, dark_zone_mask, wavelengths, contrast * tau, num_scalings=1, force_no_x_symmetry=False, force_no_y_symmetry=False, do_apodizer_throughput_maximization=False)
-
-	imshow_field(full_res, mask=pupil)
-	plt.savefig('fullres.pdf')
-
-	write_fits(full_res * pupil, 'pupil_apodizer_full.fits')
-	write_fits(full_res, 'apodizer_full.fits')
+	
+	apodizer = optimize_aplc(pupil, focal_plane_mask, lyot_stops, dark_zone_mask, wavelengths, contrast * tau, num_scalings=1, force_no_x_symmetry=False, force_no_y_symmetry=False, do_apodizer_throughput_maximization=True)
+	write_fits(apodizer, fname + '.fits')
