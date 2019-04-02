@@ -352,15 +352,12 @@ if __name__ == '__main__':
 	foc_inner = 8.543 # lambda_0/D diameter
 	spectral_bandwidth = 0.1 # fractional
 	num_wavelengths = 3
-	lyot_stop_robustness = True
+	lyot_stop_robustness = False
 	lyot_stop_shift = 1 # px
 	tau = 0.55 # expected planet peak intensity (relative to without focal plane mask)
 
-	fname_pupil = 'masks/SYM-HiCAT-Aper_F-N0486_Hex3-Ctr0972-Obs0195-SpX0017-Gap0004.fits'
-	fname_lyot_stop = 'masks/HiCAT-Lyot_F-N0486_LS-Ann-gy-ID0345-OD0807-SpX0036_shiftX+000.fits'
-
-	#fname_pupil = 'masks/ehpor_apodizer_mask.fits'
-	#fname_lyot_stop = 'masks/ehpor_lyot_mask.fits'
+	fname_pupil = 'masks/ehpor_apodizer_mask_486_gy.fits'
+	fname_lyot_stop = 'masks/ehpor_lyot_mask_486_gy.fits'
 
 	fname = 'apodizers/HiCAT-N%04d_NFOC%04d_DZ%04d_%04d_C%03d_BW%02d_NLAM%02d_SHIFT%02d' % (num_pix, n_foc, iwa*100, owa*100, -10*np.log10(contrast), spectral_bandwidth*100, num_wavelengths, lyot_stop_shift*10)
 	print('Apodizer will be saved to:')
