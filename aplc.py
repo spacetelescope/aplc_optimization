@@ -242,15 +242,15 @@ def optimize_aplc(pupil, focal_plane_mask, lyot_stops, dark_zone_mask, wavelengt
 		inds = np.swapaxes(inds, 1, 2).reshape((pupil_grid_subsampled.shape[0], pupil_grid_subsampled.shape[1], -1))#.reshape((pupil_grid.size//(subsampling**2), -1))
 
 		# Apply x,y-mirror-symmetries
-		mask = Field(np.ones(pupil_grid_subsampled.size), pupil_grid_subsampled)
+		symmetry_mask = Field(np.ones(pupil_grid_subsampled.size), pupil_grid_subsampled)
 		if x_symm:
 			inds = np.concatenate((inds, inds[:,::-1,:]), axis=2)
-			mask *= pupil_grid_subsampled.x < 0
+			symmetry_mask *= pupil_grid_subsampled.x < 0
 		if y_symm:
 			inds = np.concatenate((inds, inds[::-1,:,:]), axis=2)
-			mask *= pupil_grid_subsampled.y < 0
+			symmetry_mask *= pupil_grid_subsampled.y < 0
 
-		mask = mask.astype('bool')
+		symmetry_mask = symmetry_mask.astype('bool')
 		inds = inds.reshape((pupil_grid_subsampled.size, -1))
 		#inds = [inds[i,:] for i in range(pupil_grid_subsampled.size) if mask[i]]
 
@@ -262,15 +262,13 @@ def optimize_aplc(pupil, focal_plane_mask, lyot_stops, dark_zone_mask, wavelengt
 			prior = Field(np.zeros(pupil_grid.size), pupil_grid)
 		else:
 			# Upscale prior information by factor 2
-			#last_optim = np.repeat(np.repeat(last_optim.shaped, 2, 1), 2, 0).ravel()
 			last_optim = subsample_field(prior, subsampling)
-			#last_optim = Field(last_optim, pupil_grid_subsampled)
 
 		# Get pixels to optimize
-		optimize_mask = np.logical_and(calculate_pixels_to_optimize(last_optim, pupil_subsampled), mask)
+		optimize_mask = np.logical_and(calculate_pixels_to_optimize(last_optim, pupil_subsampled), symmetry_mask)
 		if blind:
-			optimize_mask[:] = np.logical_and(pupil_subsampled > 0, mask)
-		n = int(np.sum(optimize_mask*mask))
+			optimize_mask[:] = np.logical_and(pupil_subsampled > 0, symmetry_mask)
+		n = int(np.sum(optimize_mask * symmetry_mask))
 
 		print('Starting optimization at scale %d with %d variables and %d constraints.' % (subsampling, n, m*len(wavelengths)))
 		print('Creating model...')
@@ -299,11 +297,12 @@ def optimize_aplc(pupil, focal_plane_mask, lyot_stops, dark_zone_mask, wavelengt
 			for lyot_stop in lyot_stops:
 				norms.append(prop_0(Wavefront(pupil * lyot_stop, wavelength)).electric_field[0])
 
-			for ind, amp, to_optimize, masked in zip(inds, last_optim, optimize_mask, mask):
+			for ind, amp, to_optimize, masked_by_symmetry in zip(inds, last_optim, optimize_mask, symmetry_mask):
 				if not to_optimize:
 					# Do not optimize this pixel
 					# Add to accumulator pupil-plane wavefront
-					x0[ind] += pupil[ind] * amp
+					if masked_by_symmetry:
+						x0[ind] += pupil[ind] * amp
 				else:
 					x[:] = 0
 					x[ind] = pupil[ind]
@@ -406,17 +405,22 @@ if __name__ == '__main__':
 	foc_inner = 8.543 # lambda_0/D diameter
 	spectral_bandwidth = 0.1 # fractional
 	num_wavelengths = 1
-	lyot_stop_robustness = True
+	num_lyot_stops = 1
 	lyot_stop_shift = 1 # px
 	tau = 0.55 # expected planet peak intensity (relative to without focal plane mask)
+	gray_focal_plane_mask_type = True
+	gray_pupil = False
+	gray_lyot_stop = False
 
-	fname_pupil = 'masks/ehpor_apodizer_mask_128_gy.fits'
-	fname_lyot_stop = 'masks/ehpor_lyot_mask_128_gy.fits'
-
-	fname = 'apodizers/HiCAT-N%04d_NFOC%04d_DZ%04d_%04d_C%03d_BW%02d_NLAM%02d_SHIFT%02d' % (num_pix, n_foc, iwa*100, owa*100, -10*np.log10(contrast), spectral_bandwidth*100, num_wavelengths, lyot_stop_shift*10)
+	# Build filename
+	fname = 'apodizers/HiCAT-N%04d_NFOC%04d_DZ%04d_%04d_C%03d_BW%02d_NLAM%02d_SHIFT%02d_%02dLS' % (num_pix, n_foc, iwa*100, owa*100, -10*np.log10(contrast), spectral_bandwidth*100, num_wavelengths, lyot_stop_shift*10, num_lyot_stops)
 	print('Apodizer will be saved to:')
 	print('   ' + fname + '.fits')
 	print('')
+
+	# Read in pupil and Lyot stop
+	fname_pupil = 'masks/ehpor_apodizer_mask_%d_%s.fits' % (num_pix, 'gy' if gray_pupil else 'bw')
+	fname_lyot_stop = 'masks/ehpor_lyot_mask_%d_%s.fits' % (num_pix, 'gy' if gray_lyot_stop else 'bw')
 
 	pupil_grid = make_uniform_grid((num_pix, num_pix), 1)
 
@@ -425,37 +429,51 @@ if __name__ == '__main__':
 
 	lyot_stop = read_fits(fname_lyot_stop)
 	lyot_stop = Field(lyot_stop.ravel(), pupil_grid)
-	lyot_stops = [lyot_stop]
 
-	if lyot_stop_robustness:
+	# Build Lyot stop configuration
+	if num_lyot_stops in [1, 5, 9]:
+		lyot_stops = [lyot_stop]
+	else:
+		lyot_stops = []
+
+	if num_lyot_stops in [4, 5, 9]:
 		lyot_stop_pos_x = np.roll(lyot_stop.shaped, lyot_stop_shift, 1).ravel()
 		lyot_stop_neg_x = np.roll(lyot_stop.shaped, -lyot_stop_shift, 1).ravel()
 		lyot_stop_pos_y = np.roll(lyot_stop.shaped, lyot_stop_shift, 0).ravel()
 		lyot_stop_neg_y = np.roll(lyot_stop.shaped, -lyot_stop_shift, 0).ravel()
+
+		lyot_stops.extend([lyot_stop_pos_x, lyot_stop_neg_x, lyot_stop_pos_y, lyot_stop_neg_y])
+
+	if num_lyot_stops in [9]:
 		lyot_stop_pos_x_pos_y = np.roll(np.roll(lyot_stop.shaped, lyot_stop_shift, 1), lyot_stop_shift, 0).ravel()
 		lyot_stop_pos_x_neg_y = np.roll(np.roll(lyot_stop.shaped, lyot_stop_shift, 1), -lyot_stop_shift, 0).ravel()
 		lyot_stop_neg_x_pos_y = np.roll(np.roll(lyot_stop.shaped, -lyot_stop_shift, 1), lyot_stop_shift, 0).ravel()
 		lyot_stop_neg_x_neg_y = np.roll(np.roll(lyot_stop.shaped, -lyot_stop_shift, 1), -lyot_stop_shift, 0).ravel()
 
-		lyot_stops.extend([lyot_stop_pos_x, lyot_stop_neg_x, lyot_stop_pos_y, lyot_stop_neg_y])
 		lyot_stops.extend([lyot_stop_pos_x_pos_y, lyot_stop_pos_x_neg_y, lyot_stop_neg_x_pos_y, lyot_stop_neg_x_neg_y])
 
+	# Build science focal grid
 	n_sci = int((np.ceil(owa) + 1) * q_sci) * 2
 	x_sci = (np.arange(n_sci) + 0.5 - n_sci / 2) / q_sci
 	focal_grid = CartesianGrid(SeparatedCoords((x_sci, x_sci)))
 
 	dark_zone_mask = circular_aperture(owa * 2)(focal_grid) - circular_aperture(iwa * 2)(focal_grid)
 
+	# Build focal plane mask
 	q_foc = n_foc / foc_inner
 	x_foc = (np.arange(n_foc) + 0.5 - n_foc / 2) / q_foc
-	focal_mask_grid = CartesianGrid(SeparatedCoords((x_foc, x_foc)))
+	focal_mask_grid = CartesianGrid(RegularCoords(1.0 / q_foc, [n_foc, n_foc], x_foc.min()))
 
-	focal_plane_mask = 1 - circular_aperture(foc_inner)(focal_mask_grid)
+	if gray_focal_plane_mask_type:
+		focal_plane_mask = 1 - evaluate_supersampled(circular_aperture(foc_inner), focal_mask_grid, 8)
+	else:
+		focal_plane_mask = 1 - circular_aperture(foc_inner)(focal_mask_grid)
 
 	if num_wavelengths == 1:
 		wavelengths = [1]
 	else:
 		wavelengths = np.linspace(-spectral_bandwidth / 2, spectral_bandwidth / 2, num_wavelengths) + 1
 	
+	# Optimize and write to file
 	apodizer = optimize_aplc(pupil, focal_plane_mask, lyot_stops, dark_zone_mask, wavelengths, contrast * tau, num_scalings=1, force_no_x_symmetry=False, force_no_y_symmetry=False, do_apodizer_throughput_maximization=True)
 	write_fits(apodizer, fname + '.fits')
