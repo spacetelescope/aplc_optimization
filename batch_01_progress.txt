@@ -1,8 +1,8 @@
 telsurf3:
 - comparison_ampl_5ls.py - (done)
-- lyot_robustness_5ls_1.py - 1h (launched)
-- lyot_robustness_5ls_2.py - 1h
-- lyot_robustness_5ls_3.py - 1h
+- lyot_robustness_5ls_1.py - 1h (done)
+- lyot_robustness_5ls_2.py - 1h (done)
+- lyot_robustness_5ls_3.py - 1h (launched)
 - binary_full_resolution_robust_5ls.py - 1h
 - gray_full_resolution_robust_5ls.py - 1h
 - binary_double_resolution_robust_5ls.py - 4h
@@ -15,11 +15,11 @@ telsurf3 (after bugfix):
 - lyot_robustness_9ls_3.py - 4h
 
 eelderdiep:
-- binary_fpm_020px_1ls.py - (done (25.5 mins))
-- binary_fpm_050px_1ls.py - (done (27.0 mins))
-- binary_fpm_100px_1ls.py - (running)
-- binary_fpm_200px_1ls.py -
-- gray_fpm_020px_1ls.py - 
-- gray_fpm_050px_1ls.py - 
-- gray_fpm_100px_1ls.py - 
-- gray_fpm_200px_1ls.py - 
+- binary_fpm_020px_1ls.py - done (25.5 mins)
+- binary_fpm_050px_1ls.py - done (27.0 mins)
+- binary_fpm_100px_1ls.py - done (30.0 mins)
+- binary_fpm_200px_1ls.py - done (37.0 mins)
+- gray_fpm_020px_1ls.py - done (25.5 mins)
+- gray_fpm_050px_1ls.py - done (27.1 mins)
+- gray_fpm_100px_1ls.py - done (30.5 mins)
+- gray_fpm_200px_1ls.py - done (34.5 mins)
