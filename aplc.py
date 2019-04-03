@@ -1,4 +1,4 @@
-run_without_gurobipy = True
+run_without_gurobipy = False
 
 import matplotlib as mpl
 mpl.use('Agg')
@@ -264,11 +264,18 @@ def optimize_aplc(pupil, focal_plane_mask, lyot_stops, dark_zone_mask, wavelengt
 			# Upscale prior information by factor 2
 			last_optim = subsample_field(prior, subsampling)
 
+		# Write prior to file
+		write_fits(prior * pupil, 'display/prior%d.fits' % subsampling)
+		write_fits(last_optim * pupil_subsampled, 'display/last_optim%d.fits' % subsampling)
+
 		# Get pixels to optimize
 		optimize_mask = np.logical_and(calculate_pixels_to_optimize(last_optim, pupil_subsampled), symmetry_mask)
 		if blind:
 			optimize_mask[:] = np.logical_and(pupil_subsampled > 0, symmetry_mask)
 		n = int(np.sum(optimize_mask * symmetry_mask))
+
+		# Write optimize mask to file
+		write_fits(optimize_mask.astype('int'), 'display/optimize_mask%d.fits' % subsampling)
 
 		print('Starting optimization at scale %d with %d variables and %d constraints.' % (subsampling, n, m*len(wavelengths)))
 		print('Creating model...')
@@ -334,6 +341,12 @@ def optimize_aplc(pupil, focal_plane_mask, lyot_stops, dark_zone_mask, wavelengt
 					if j % 1000 == 0:
 						print('Wavelength %d/%d; Variable %d/%d' % (wl_i + 1, len(wavelengths), j, n))
 
+			# Display x0
+			imshow_field(x0.real)
+			plt.colorbar()
+			plt.savefig('display/base_aperture%d.pdf' % subsampling)
+			plt.clf()
+
 			# Calculate base electric field
 			base_electric_field = []
 			for i, lyot_stop in enumerate(lyot_stops):
@@ -342,13 +355,14 @@ def optimize_aplc(pupil, focal_plane_mask, lyot_stops, dark_zone_mask, wavelengt
 
 				wf = aplc(Wavefront(x0, wavelength))
 				wf.electric_field *= lyot_stop
-				img = propagators[i](wf)
+				E = propagators[i](wf).electric_field[dark_zone_masks[i]]
+				E /= norms[i]
 
 				if num_constraints_per_focal_point[i] == 1:
-					base_electric_field.append(img.electric_field.real)
+					base_electric_field.append(E.real)
 				if num_constraints_per_focal_point[i] == 2:
-					base_electric_field.append(img.electric_field.real + img.electric_field.imag)
-					base_electric_field.append(img.electric_field.real - img.electric_field.imag)
+					base_electric_field.append(E.real + E.imag)
+					base_electric_field.append(E.real - E.imag)
 			base_electric_field = np.concatenate(base_electric_field)
 
 			# Calculate contrast requirement
@@ -393,11 +407,14 @@ def optimize_aplc(pupil, focal_plane_mask, lyot_stops, dark_zone_mask, wavelengt
 		sol = Field(sol, pupil_grid)
 		prior = sol
 
+		# Write result to display
+		write_fits(prior * (pupil > 0), 'display/result%d.fits' % subsampling)
+
 	return prior
 
 if __name__ == '__main__':
 	contrast = 1e-8
-	num_pix = 128
+	num_pix = 1024
 	q_sci = 2 # px / (lambda_0/D)
 	iwa = 3.75 # lambda_0/D
 	owa = 15 # lambda_0/D
@@ -406,14 +423,15 @@ if __name__ == '__main__':
 	spectral_bandwidth = 0.1 # fractional
 	num_wavelengths = 1
 	num_lyot_stops = 1
-	lyot_stop_shift = 1 # px
+	lyot_stop_shift = 2 # px
 	tau = 0.55 # expected planet peak intensity (relative to without focal plane mask)
 	gray_focal_plane_mask_type = True
 	gray_pupil = False
 	gray_lyot_stop = False
+	num_scalings = 4
 
 	# Build filename
-	fname = 'apodizers/HiCAT-N%04d_NFOC%04d_DZ%04d_%04d_C%03d_BW%02d_NLAM%02d_SHIFT%02d_%02dLS' % (num_pix, n_foc, iwa*100, owa*100, -10*np.log10(contrast), spectral_bandwidth*100, num_wavelengths, lyot_stop_shift*10, num_lyot_stops)
+	fname = 'apodizers/HiCAT-N%04d_NFOC%04d_DZ%04d_%04d_C%03d_BW%02d_NLAM%02d_SHIFT%02d_%02dLS_ADAP%d' % (num_pix, n_foc, iwa*100, owa*100, -10*np.log10(contrast), spectral_bandwidth*100, num_wavelengths, lyot_stop_shift*10, num_lyot_stops, num_scalings)
 	print('Apodizer will be saved to:')
 	print('   ' + fname + '.fits')
 	print('')
@@ -475,5 +493,5 @@ if __name__ == '__main__':
 		wavelengths = np.linspace(-spectral_bandwidth / 2, spectral_bandwidth / 2, num_wavelengths) + 1
 	
 	# Optimize and write to file
-	apodizer = optimize_aplc(pupil, focal_plane_mask, lyot_stops, dark_zone_mask, wavelengths, contrast * tau, num_scalings=1, force_no_x_symmetry=False, force_no_y_symmetry=False, do_apodizer_throughput_maximization=True)
-	write_fits(apodizer, fname + '.fits')
+	apodizer = optimize_aplc(pupil, focal_plane_mask, lyot_stops, dark_zone_mask, wavelengths, contrast * tau, num_scalings=num_scalings, force_no_x_symmetry=False, force_no_y_symmetry=False, do_apodizer_throughput_maximization=True)
+	write_fits(apodizer * (pupil > 0), fname + '.fits')
