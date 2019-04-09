@@ -1,0 +1,25 @@
+pup_fname = {:s}
+fpm_radius = {:f}
+fpm_num_pix = {:d}
+fpm_grayscale = {:b}
+ls_fname = {:s}
+ls_alignment_tolerance = {:d}
+ls_num_stops = {:d}
+img_contrast = 10**(-{:f})
+img_iwa = {:f}
+img_owa = {:f}
+img_num_wavelengths = {:d}
+img_bandwidth = {:f}
+img_resolution = {:d}
+method_force_no_x_mirror_symmetry = {:b}
+method_force_no_y_mirror_symmetry = {:b}
+method_force_no_hermitian_symmetry = {:b}
+method_starting_scale = {:d}
+method_ending_scale = {:d}
+method_edge_width_for_prior = {:d}
+method_num_throughput_iterations = {:d}
+method_initial_throughput_estimate = {:f}
+solver_num_threads = {:d}
+solver_crossover = {:d}
+solver_method = {:d}
+
