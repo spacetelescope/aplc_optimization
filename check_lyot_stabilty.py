@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 contrast = 1e-8
-num_pix = 486 #px
+num_pix = 1024 #px
 tau = 0.4
 q_sci = 3 #px / (lambda_0/D)
 iwa = 3.75 # lambda_0/D radius
@@ -18,8 +18,10 @@ focal_grid = make_focal_grid(pupil_grid, 8, owa*1.2)
 
 prop = FraunhoferPropagator(pupil_grid, focal_grid)
 
-aperture = read_fits('full_resolution_lyot_robust_apod.fits')
-aperture = read_fits('HiCAT-Apod_F-N0486_nImg0032_Hex3-Ctr0972-Obs0195-SpX0017-Gap0004_GreyFPM8543-M050_LS-Ann-gy-ID0345-OD0807-SpX0036_DZ-C030-080-Sep037-150_Bw10-Lam3_shiftXY050.fits')
+aperture = read_fits('apodizers/full_resolution_lyot_robust_apod.fits')
+aperture = read_fits('apodizers/HiCAT-Apod_F-N0486_nImg0032_Hex3-Ctr0972-Obs0195-SpX0017-Gap0004_GreyFPM8543-M050_LS-Ann-gy-ID0345-OD0807-SpX0036_DZ-C030-080-Sep037-150_Bw10-Lam3_shiftXY050.fits')
+aperture = read_fits('apodizers/HiCAT-N1024_NFOC0050_DZ0375_1500_C080_BW10_NLAM03_SHIFT20_05LS_ADAP4.fits')
+#aperture = read_fits('apodizers/HiCAT-N1024_NFOC0050_DZ0375_3000_C080_BW10_NLAM03_SHIFT10_01LS_ADAP4.fits')
 
 #aperture = np.repeat(np.repeat(aperture, 2, 0), 2, 1)
 aperture = Field(aperture.ravel(), pupil_grid)
@@ -32,6 +34,7 @@ focal_plane_mask2 = 1 - circular_aperture(foc_inner)(focal_grid)
 
 lyot_stop = read_fits('masks/HiCAT-Lyot_F-N0486_LS-Ann-bw-ID0345-OD0807-SpX0036.fits')
 lyot_stop = read_fits('masks/HiCAT-Lyot_F-N0486_LS-Ann-gy-ID0345-OD0807-SpX0036_shiftX+000.fits')
+lyot_stop = read_fits('masks/ehpor_lyot_mask_1024_bw.fits')
 #lyot_stop = np.repeat(np.repeat(lyot_stop, 2, 0), 2, 1)
 lyot_stop = Field(lyot_stop.ravel(), pupil_grid)
 
@@ -75,7 +78,7 @@ show_summary(aperture, coro, coro_without_lyot, focal_plane_mask2)
 #############################################################################
 # Shifted Lyot stop
 
-dxs = np.array([-2, -1, 0, 1, 2])
+dxs = np.array([-3, -2, -1, 0, 1, 2, 3])
 
 dither_grid = CartesianGrid(SeparatedCoords((dxs, dxs)))
 

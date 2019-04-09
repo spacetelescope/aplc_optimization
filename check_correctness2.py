@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 contrast = 1e-8
-num_pix = 486 #px
+num_pix = 1024 #px
 tau = 0.4
 q_sci = 3 #px / (lambda_0/D)
 iwa = 3.75 # lambda_0/D radius
@@ -13,25 +13,29 @@ foc_inner = 8.543 #lambda_0/D diameter
 spectral_bandwidth = 0.1 # fractional
 num_wavelengths = 3
 
-pupil_grid = make_pupil_grid(num_pix)
+pupil_grid = make_uniform_grid(num_pix, [1,1])
 focal_grid = make_focal_grid(pupil_grid, 8, owa*1.2)
 
 prop = FraunhoferPropagator(pupil_grid, focal_grid)
 
-aperture = read_fits('symmetric_optim_first_result.fits')
-aperture2 = read_fits('masks/SYM-HiCAT-Aper_F-N0486_Hex3-Ctr0972-Obs0195-SpX0017-Gap0004.fits')
+#aperture = read_fits('apodizers/HiCAT-N1024_NFOC0050_DZ0375_3000_C080_BW10_NLAM03_SHIFT10_01LS_ADAP4.fits')
+aperture = read_fits('apodizers/HiCAT-N1024_NFOC0050_DZ0375_1500_C080_BW10_NLAM03_SHIFT20_05LS_ADAP4.fits')
+#aperture2 = read_fits('masks/SYM-HiCAT-Aper_F-N0486_Hex3-Ctr0972-Obs0195-SpX0017-Gap0004.fits')
 aperture = Field(aperture.ravel(), pupil_grid)
-aperture2 = Field(aperture2.ravel(), pupil_grid)
+#aperture2 = Field(aperture2.ravel(), pupil_grid)
 
-small_focal_grid = make_pupil_grid(num_pix_foc, foc_inner)
-focal_plane_mask = 1 - circular_aperture(foc_inner)(small_focal_grid)
+q_foc = num_pix_foc / foc_inner
+x_foc = (np.arange(num_pix_foc) + 0.5 - num_pix_foc / 2) / q_foc
+small_focal_grid = CartesianGrid(RegularCoords(1.0 / q_foc, [num_pix_foc, num_pix_foc], x_foc.min()))
+
+focal_plane_mask = 1 - evaluate_supersampled(circular_aperture(foc_inner), small_focal_grid, 8)
 focal_plane_mask2 = 1 - circular_aperture(foc_inner)(focal_grid)
 
-lyot_stop = read_fits('masks/HiCAT-Lyot_F-N0486_LS-Ann-bw-ID0345-OD0807-SpX0036.fits')
+lyot_stop = read_fits('masks/ehpor_lyot_mask_1024_bw.fits')
 lyot_stop = Field(lyot_stop.ravel(), pupil_grid)
 
-a = ((aperture * lyot_stop).sum() / (aperture2 * lyot_stop).sum())**2
-print(a)
+#a = ((aperture * lyot_stop).sum() / (aperture2 * lyot_stop).sum())**2
+#print(a)
 
 coro = LyotCoronagraph(pupil_grid, focal_plane_mask, lyot_stop)
 coro_without_lyot = LyotCoronagraph(pupil_grid, focal_plane_mask, None)
