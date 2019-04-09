@@ -3,25 +3,27 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 contrast = 1e-8
-num_pix = 1024 #px
-tau = 0.4
+num_pix = 486 #px
+tau = 0.55
 q_sci = 3 #px / (lambda_0/D)
 iwa = 3.75 # lambda_0/D radius
 owa = 15 # lambda_0/D radius
 num_pix_foc = 50 # px diameter
 foc_inner = 8.543 #lambda_0/D diameter
 spectral_bandwidth = 0.1 # fractional
-num_wavelengths = 3
+num_wavelengths = 1
 
 pupil_grid = make_uniform_grid(num_pix, [1,1])
 focal_grid = make_focal_grid(pupil_grid, 8, owa*1.2)
 
 prop = FraunhoferPropagator(pupil_grid, focal_grid)
 
-aperture = read_fits('apodizers/full_resolution_lyot_robust_apod.fits')
-aperture = read_fits('apodizers/HiCAT-Apod_F-N0486_nImg0032_Hex3-Ctr0972-Obs0195-SpX0017-Gap0004_GreyFPM8543-M050_LS-Ann-gy-ID0345-OD0807-SpX0036_DZ-C030-080-Sep037-150_Bw10-Lam3_shiftXY050.fits')
-aperture = read_fits('apodizers/HiCAT-N1024_NFOC0050_DZ0375_1500_C080_BW10_NLAM03_SHIFT20_05LS_ADAP4.fits')
+#aperture = read_fits('apodizers/full_resolution_lyot_robust_apod.fits')
+#aperture = read_fits('apodizers/HiCAT-Apod_F-N0486_nImg0032_Hex3-Ctr0972-Obs0195-SpX0017-Gap0004_GreyFPM8543-M050_LS-Ann-gy-ID0345-OD0807-SpX0036_DZ-C030-080-Sep037-150_Bw10-Lam3_shiftXY050.fits')
+#aperture = read_fits('apodizers/HiCAT-N1024_NFOC0050_DZ0375_1500_C080_BW10_NLAM03_SHIFT20_05LS_ADAP4.fits')
 #aperture = read_fits('apodizers/HiCAT-N1024_NFOC0050_DZ0375_3000_C080_BW10_NLAM03_SHIFT10_01LS_ADAP4.fits')
+#aperture = read_fits('apodizers/HiCAT-N0486_NFOC0050_DZ0375_1500_C080_BW10_NLAM01_SHIFT10_09LS_ADAP1.fits')
+aperture = read_fits('apodizers/HiCAT-N0486_NFOC0050_DZ0375_1500_C080_BW10_NLAM03_SHIFT10_09LS_ADAP1.fits')
 
 #aperture = np.repeat(np.repeat(aperture, 2, 0), 2, 1)
 aperture = Field(aperture.ravel(), pupil_grid)
@@ -32,9 +34,11 @@ small_focal_grid = CartesianGrid(SeparatedCoords((x_foc, x_foc)))
 focal_plane_mask = 1 - circular_aperture(foc_inner)(small_focal_grid)
 focal_plane_mask2 = 1 - circular_aperture(foc_inner)(focal_grid)
 
-lyot_stop = read_fits('masks/HiCAT-Lyot_F-N0486_LS-Ann-bw-ID0345-OD0807-SpX0036.fits')
-lyot_stop = read_fits('masks/HiCAT-Lyot_F-N0486_LS-Ann-gy-ID0345-OD0807-SpX0036_shiftX+000.fits')
-lyot_stop = read_fits('masks/ehpor_lyot_mask_1024_bw.fits')
+#lyot_stop = read_fits('masks/HiCAT-Lyot_F-N0486_LS-Ann-bw-ID0345-OD0807-SpX0036.fits')
+#lyot_stop = read_fits('masks/HiCAT-Lyot_F-N0486_LS-Ann-gy-ID0345-OD0807-SpX0036_shiftX+000.fits')
+#lyot_stop = read_fits('masks/ehpor_lyot_mask_1024_bw.fits')
+lyot_stop = read_fits('masks/ehpor_lyot_mask_486_gy.fits')
+
 #lyot_stop = np.repeat(np.repeat(lyot_stop, 2, 0), 2, 1)
 lyot_stop = Field(lyot_stop.ravel(), pupil_grid)
 
