@@ -47,7 +47,7 @@ def calculate_pixels_to_optimize(last_optim, pupil_subsampled, edge_pixels_for_p
 
 def optimize_aplc(pupil, focal_plane_mask, lyot_stops, dark_zone_mask, wavelengths, contrast, 
 	starting_scale=1, ending_scale=1, force_no_x_symmetry=False, force_no_y_symmetry=False, 
-	force_no_hermitian_symmetry, maximize_planet_throughput=True, num_throughput_iterations=2,
+	force_no_hermitian_symmetry=False, maximize_planet_throughput=True, num_throughput_iterations=2,
 	initial_throughput_estimate=1, edge_width_for_prior=2, solver_num_threads=0, solver_crossover=0, 
 	solver_method=2, debug=False):
 	"""Optimize an APLC with a (optional) iterative algorithm taking into account x and/or y mirror symemtries.
