@@ -3,7 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 def create_coronagraph(solution_filename):
-	pupil = 
+	pupil = 0
 
 def analyze_max_throughput(solution_filename, pdf=None):
 	pass

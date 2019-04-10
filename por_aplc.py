@@ -1,6 +1,8 @@
 from survey import Coronagraph
+import por_aplc_analysis
 
 import os
+import sys
 import shutil
 
 class PorAPLC(Coronagraph):
@@ -46,15 +48,14 @@ class PorAPLC(Coronagraph):
 		}
 	
 	def __init__(self, identifier, parameters, file_organization):
-		import por_aplc_analysis
-		super(PorAPLC, self).__init__(identifier, parameters, file_organization, por_alpc_analysis)
+		super(PorAPLC, self).__init__(identifier, parameters, file_organization, por_aplc_analysis)
 	
 	def write_driver(self, overwrite=False):
 		if self.check_driver() and not overwrite:
 			print('Driver already exists and will not be overwritten.')
 			return
 		
-		driver = 'parameters = {:s}\nfile_organization = {:s}n\n'.format(str(self.parameters), str(self.file_organization))
+		driver = 'parameters = {:s}\nfile_organization = {:s}\n\n'.format(str(self.parameters), str(self.file_organization))
 
 		with open('por_aplc_driver_template.py') as template_file:
 			driver_template = template_file.read()
@@ -65,7 +66,7 @@ class PorAPLC(Coronagraph):
 			output_file.write(driver)
 		
 		fname_optimizer = os.path.join(self.file_organization['drivers_dir'], 'por_aplc_optimizer.py')
-		if os.path.exists(fname_optimizer):
+		if os.path.exists(fname_optimizer) and not overwrite:
 			print('Optimizer already exists and will not be overwritten.')
 		else:
 			shutil.copy('por_aplc_optimizer.py', fname_optimizer)
@@ -90,4 +91,4 @@ class PorAPLC(Coronagraph):
 	def get_driver_command(self):
 		fname_driver = os.path.join(self.file_organization['drivers_dir'], self.identifier + '.py')
 
-		return '{:s} {:s} &> {:s}'.format(os.__file__, fname_driver, self.log_filename)
+		return '{:s} {:s} &> {:s}'.format(sys.executable, fname_driver, self.log_filename)

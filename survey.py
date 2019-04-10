@@ -8,6 +8,7 @@ import warnings
 import itertools
 import pprint
 import os
+import sys
 import csv
 import datetime
 import socket
@@ -91,7 +92,7 @@ class DesignParameterSurvey(object):
 		# Make list of fixed parameters
 		self.fixed_parameters_indices = {}
 		for category in self.default_parameters:
-			for key in self.default_parameters[key]:
+			for key in self.default_parameters[category]:
 				if (category, key) not in self.varied_parameters_indices:
 					if category in self.fixed_parameters_indices:
 						self.fixed_parameters_indices[category].append(key)
@@ -104,9 +105,9 @@ class DesignParameterSurvey(object):
 		num_parameter_sets = 1
 		for p in self.varied_parameters:
 			num_parameter_sets *= len(p)
-		format_string = '{:.' + str(len(str(num_parameter_sets))) + 'd}'
+		format_string = '{:' + str(len(str(num_parameter_sets))) + 'd}'
 
-		params = list(itertools.product(self.varied_parameters))
+		params = list(itertools.product(*self.varied_parameters))
 		if num_parameter_sets == 1:
 			params = [{}]
 		
@@ -115,7 +116,7 @@ class DesignParameterSurvey(object):
 			new_parameter_set = self.default_parameters.copy()
 			for value, (category, key) in zip(combo, self.varied_parameters_indices):
 				new_parameter_set[category][key] = value
-			
+
 			# Create unique id
 			identifier = format_string.format(i)
 		
@@ -136,7 +137,7 @@ class DesignParameterSurvey(object):
 		pprint.pprint(self.file_organization)
 		print('')
 		print('All input files exist? {}'.format(self.check_input_files()))
-		print('All drivers exist? {}')
+		print('All drivers exist? {}'.format(self.check_drivers()))
 		print('All solutions exist? {}'.format(self.check_solutions()))
 	
 	def check_input_files(self):
