@@ -13,16 +13,28 @@ import datetime
 import socket
 import asdf
 import inspect
+import numpy as np
 
 import matplotlib as mpl
 mpl.use('Agg')
 from matplotlib.backends.backend_pdf import PdfPages
 
-import por_aplc_analysis
-
 # Check if the argument is iterable but not string_like
 def is_iterable(arg):
 	return isinstance(arg, collections.Iterable) and not isinstance(arg, six.string_types)
+
+def mark_slow(func):
+	if hasattr(func, 'marks'):
+		func.marks.append('slow')
+	else:
+		func.marks = ['slow']
+	return func
+
+def is_marked(function, mark):
+	if hasattr(function, 'marks'):
+		return mark in function.marks
+	else:
+		return False
 
 '''
 File organization structure:
@@ -111,6 +123,9 @@ class DesignParameterSurvey(object):
 			self.coronagraphs.append(coronagraph_class(identifier, new_parameter_set, self.file_organization))
 			self.parameter_sets.append(new_parameter_set)
 	
+	def union(self, b):
+		pass
+	
 	def describe(self):
 		print('This survey has {:d} design parameter combinations.'.format(len(self.parameter_sets)))
 		print('{:d} parameter are varied:'.format(len(self.varied_parameters)))
@@ -122,30 +137,38 @@ class DesignParameterSurvey(object):
 		print('')
 		print('All input files exist? {}'.format(self.check_input_files()))
 		print('All drivers exist? {}')
-		print('All output files exist? {}'.format(self.check_output_files()))
+		print('All solutions exist? {}'.format(self.check_solutions()))
 	
 	def check_input_files(self):
-		res = True
+		num_incomplete = 0
 
 		for cor in self.coronagraphs:
 			if not cor.check_input_files():
-				res = False
+				num_incomplete += 1
 		
-		return res
+		return num_incomplete == 0
 	
-	def check_output_files(self):
-		res = True
+	def check_drivers(self):
+		num_incomplete = 0
 
 		for cor in self.coronagraphs:
-			if not cor.check_output_files():
-				res = False
+			if not cor.check_driver():
+				num_incomplete += 1
+		
+		return num_incomplete == 0
+	
+	def check_solutions(self):
+		num_incomplete = 0
+
+		for cor in self.coronagraphs:
+			if not cor.check_solution():
+				num_incomplete += 1
 			
-		return res
+		return num_incomplete == 0
 	
 	def write_drivers(self, overwrite=False):
 		for cor in self.coronagraphs:
 			cor.write_driver(overwrite)
-		self.coronagraph_class.write_static_files()
 	
 	def write_serial_bash_script(self, overwrite=False):
 		fname = os.path.join(self.file_organization['drivers_dir'], 'run.sh')
@@ -160,10 +183,10 @@ class DesignParameterSurvey(object):
 	
 	def run_serial(self, force_rerun=False):
 		for cor in self.coronagraphs:
-			if not cor.check_output_files():
+			if not cor.check_solution() or force_rerun:
 				cor.run_optimization()
 		
-		return self.check_output_files()
+		return self.check_solutions()
 	
 	def write_spreadsheet(self, overwrite=False):
 		fname_tail = "{1:s}_{2:s}.csv".format(getpass.getuser(), datetime.datetime.now().strftime("%Y-%m-%d"))
@@ -198,122 +221,118 @@ class DesignParameterSurvey(object):
 				survey.writerow([category.upper(), key.lower(), str(self.varied_parameters[category][key])])
 			survey.writerow([])
 
+			# Get keys for metrics to write out
+			keys = set()
+			for coronagraph in self.coronagraphs:
+				keys.update(coronagraph.metrics.keys())
+			
+			# The keys to be written to the spreadsheet cannot be arrays.
+			for coronagraph in self.coronagraphs:
+				for key in keys:
+					if key in coronagraph.metrics:
+						if not np.isscalar(coronagraph.metrics[key]):
+							keys.discard(key)
+			keys = sorted(list(keys))
+
 			# Write individual optimizations
 			survey.write('Individual optimizations:')
 			survey.writerow([category.upper() for category, key in self.varied_parameters])
-			header = [key.lower() for category, key in self.varied_parameters] + ['input files?', 'Driver?', 'Solution?']
+			header = [key.lower() for category, key in self.varied_parameters]
+			header += ['input files?', 'Driver?', 'Solution?']
+			header += keys
 			survey.writerow(header)
+
 			for coronagraph in self.coronagraphs:
 				coro_row = [self.parameter_sets[category][key] for (category, key) in self.varied_parameters]
 				coro_row.append('Y' if coronagraph.check_input_files() else 'N')
 				coro_row.append('Y' if coronagraph.check_driver() else 'N')
 				coro_row.append('Y' if coronagraph.check_solution() else 'N')
+				for key in keys:
+					if key in coronagraph.metrics:
+						coro_row.append(str(coronagraph.metrics[key]))
+					else:
+						coro_row.append('')
 				survey.writerow(coro_row)
 
 		os.chmod(fname, 644)
 
-class PorAPLC(object):
-	_default_parameters = {
-		'pupil': {
-			'filename': 'NoFilename'
-			},
-		'focal_plane_mask': {
-			'radius': 4.0,
-			'num_pix': 50,
-			'grayscale': True,
-			'field_stop_radius': -1.0
-			},
-		'lyot_stop': {
-			'filename': 'NoFilename',
-			'alignment_tolerance': 0,
-			'num_lyot_stops': 1
-			},
-		'image': {
-			'contrast': 8.0,
-			'iwa': 3.75,
-			'owa': 15.0,
-			'num_wavelengths': 3,
-			'bandwidth': 0.1,
-			'resolution': 2
-			},
-		'method': {
-			'force_no_x_mirror_symmetry': False,
-			'force_no_y_mirror_symmetry': False,
-			'force_no_hermitian_symmetry': False,
-			'starting_scale': 1,
-			'ending_scale': 1,
-			'edge_width_for_prior': 2,
-			'num_throughput_iterations': 2,
-			'initial_throughput_estimate': 1
-			},
-		'solver': {
-			'num_threads': 0,
-			'crossover': 0,
-			'method': 2
-			}
-		}
-	
-	def __init__(self, identifier, parameters, file_organization):
-		self.identifier = identifier
+class Coronagraph(object):
+	def __init__(self, identifier, parameters, file_organization, analysis_module=None):
+		self._identifier = identifier
 		self.parameters = parameters
 		self.file_organization = file_organization
+		self.analysis_module = analysis_module
+		self.metrics = {}
 	
-	def write_driver(self, overwrite=False):
-		if self.check_driver() and not overwrite:
-			print('Driver already exists and will not be overwritten.')
-			return
-
-		with open('por_aplc_driver_template.py') as template_file:
-			driver_template = template_file.read()
-
-		fname = os.path.join(self.file_organization['drivers_dir'], self.identifier + '.py')
-		with open(fname, 'w') as output_file:
-			output_file.write(driver_template.format())
-
-	@classmethod
-	def write_static_files(self):
-		pass
+	@property
+	def identifier(self):
+		return self._identifier
 	
 	def check_input_files(self):
-		return False
+		raise NotImplementedError()
 	
 	def check_driver(self):
-		fname_driver = os.path.join(self.file_organization['drivers_dir'], self.identifier + '.py')
-		return os.path.exists(fname_driver)
+		raise NotImplementedError()
 	
 	def check_solution(self):
-		fname_sol = os.path.join(self.file_organization['solution_dir'], self.get_identifier() + '.fits')
-		return os.path.exists(fname_sol)
+		return os.path.exists(self.solution_filename)
+	
+	@property
+	def solution_filename(self):
+		return os.path.join(self.file_organization['solution_dir'], self.identifier + '.fits')
+	
+	@property
+	def log_filename(self):
+		return os.path.join(self.file_organization['log_dir'], self.identifier + '.log')
 	
 	def get_driver_command(self):
-		fname_driver = os.path.join(self.file_organization['drivers_dir'], self.identifier + '.py')
-		fname_log = os.path.join(self.file_organization['log_dir'], self.identifier + '.log')
-
-		return '{:s} {:s} &> {:s}'.format(os.__file__, fname_driver, fname_log)
-
-	def get_identifier(self):
-		return self.identifier
+		raise NotImplementedError()
 	
-	def run_optimization(self):
+	def run_optimization(self, force_rerun=False):
+		if (not self.check_driver()) or (not self.check_input_files()):
+			print('Not all driver or input files are written.')
+			return
+		
+		if self.check_solution() and not force_rerun:
+			print('Solution already exists.')
+			return
+
 		os.system(self.get_driver_command())
 	
-	def run_analysis(self, overwrite=False):
-		analysis = inspect.getmembers(por_aplc_analysis, inspect.isfunction)
-		analysis = [x for _, x in sorted(zip([name for name, function in analysis], analysis)) if _.startswith('analyze')]
+	def run_analysis(self, overwrite=False, run_slow=True):
+		if self.analysis_module is None:
+			print('No analysis module was provided. No analysis will be performed.')
+			return
 		
-		fname = os.path.join(self.file_organization['analysis_dir'], self.get_identifier() + '.pdf')
-		if os.path.exists(fname):
+		if not os.path.exists(self.solution_filename):
+			print('The solution is not optimized yet. No analysis will be performed.')
+			return
+		
+		# Read in functions from analysis_module and sort by name
+		analysis = inspect.getmembers(self.analysis_module, inspect.isfunction)
+		analysis = [x for _, x in sorted(zip([name for name, function in analysis], analysis))]
+
+		analysis_summary_filename = os.path.join(self.file_organization['analysis_dir'], self.identifier + '.pdf')
+		analysis_metrics_filename = os.path.join(self.file_organization['analysis_dir'], self.identifier + '.asdf')
+
+		if os.path.exists(analysis_summary_filename) and os.path.exists(analysis_metrics_filename):
 			print('Analysis already exists and is not overwritten.')
 			return
 		
-		pdf = PdfPages(fname)
+		pdf = PdfPages(analysis_summary_filename)
 		self.metrics = {}
 
+		# Run all analysis functions
 		for name, function in analysis:
 			if not name.startswith('analyze_'):
 				continue
-
-			fname_sol = os.path.join(self.file_organization['solution_dir'], self.get_identifier() + '.fits')
 			
-			res = function(fname_sol, pdf)
+			if is_marked(function, 'slow') and not run_slow:
+				continue
+			
+			res = function(self.solution_filename, pdf)
 			self.metrics.update(res)
+
+		# Write out metrics to a file
+		f = asdf.AsdfFile(self.metrics)
+		f.write_to(analysis_metrics_filename)
