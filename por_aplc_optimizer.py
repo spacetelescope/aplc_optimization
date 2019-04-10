@@ -484,7 +484,7 @@ def optimize_aplc(pupil, focal_plane_mask, lyot_stops, dark_zone_mask, wavelengt
 					constr.RHS = r
 
 				# Rerun optimizer
-				 print('Restarting optimization for throughput iteration %d...' % (throughput_iter + 1)
+				print('Restarting optimization for throughput iteration %d...' % (throughput_iter + 1)
 				model.optimize()
 				print('Optimization finished!')
 
