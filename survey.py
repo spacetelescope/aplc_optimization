@@ -319,7 +319,7 @@ class Coronagraph(object):
 		analysis_summary_filename = os.path.join(self.file_organization['analysis_dir'], self.identifier + '.pdf')
 		analysis_metrics_filename = os.path.join(self.file_organization['analysis_dir'], self.identifier + '.asdf')
 
-		if os.path.exists(analysis_summary_filename) and os.path.exists(analysis_metrics_filename):
+		if os.path.exists(analysis_summary_filename) and os.path.exists(analysis_metrics_filename) and not overwrite:
 			print('Analysis already exists and is not overwritten.')
 			return
 

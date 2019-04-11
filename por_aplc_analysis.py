@@ -28,6 +28,7 @@ def create_coronagraph(solution_filename):
 	num_pix = pupil.shape[0]
 	pupil_grid = make_uniform_grid(num_pix, [1, 1])
 	pupil = Field(pupil.ravel(), pupil_grid)
+	apodizer = Field(apodizer.ravel(), pupil_grid)
 
 	try:
 		lyot_stops = [Field(read_fits(ls_fname.format(i)).ravel(), pupil_grid) for i in range(ls_num_stops)]
