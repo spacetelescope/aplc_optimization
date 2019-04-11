@@ -4,7 +4,7 @@ import gurobipy as gp
 from scipy.ndimage.morphology import grey_erosion, grey_dilation
 import time
 
-def calculate_pixels_to_optimize(last_optim, pupil_subsampled, edge_pixels_for_prior):
+def calculate_pixels_to_optimize(last_optim, pupil_subsampled, edge_width_for_prior):
 	"""Calculate the pixels to be used for the optimization for the adaptive algorithm.
 
 	The exact selection of the pixels to be taken into account depends on future research.
@@ -26,11 +26,11 @@ def calculate_pixels_to_optimize(last_optim, pupil_subsampled, edge_pixels_for_p
 	if last_optim is None:
 		return pupil_subsampled > 0
 
-	if edge_pixels_for_prior == 2:
+	if edge_width_for_prior == 2:
 		structure = np.array([[0,1,0],[1,1,1],[0,1,0]])
-	elif edge_pixels_for_prior == 4:
+	elif edge_width_for_prior == 4:
 		structure = np.array([[0,1,1,0],[1,1,1,1],[1,1,1,1],[0,1,1,0]])
-	elif edge_pixels_for_prior == 6:
+	elif edge_width_for_prior == 6:
 		structure = np.array([[0,1,1,1,0],[1,1,1,1,1],[1,1,1,1,1],[1,1,1,1,1],[0,1,1,1,0]])
 	else:
 		print('The number of edge pixels for prior is not allowed. It needs to be in [2, 4, 6].')
@@ -113,7 +113,7 @@ def optimize_aplc(pupil, focal_plane_mask, lyot_stops, dark_zone_mask, wavelengt
 		import matplotlib as mpl
 		mpl.use('Agg')
 		import matplotlib.pyplot as plt
-	
+
 	pupil_grid = pupil.grid
 	focal_grid = dark_zone_mask.grid
 
@@ -123,9 +123,9 @@ def optimize_aplc(pupil, focal_plane_mask, lyot_stops, dark_zone_mask, wavelengt
 	prop_0 = FraunhoferPropagator(pupil_grid, focal_grid_0)
 
 	prior = None
-	
+
 	# Calculate subsamplings
-	num_subsamplings = int(round(np.log2(starting_scale / ending_scale)))
+	num_subsamplings = int(round(np.log2(starting_scale / ending_scale))) + 1
 	subsamplings = ending_scale * 2**np.arange(num_subsamplings)[::-1]
 
 	# Determine pupil symmetries
@@ -172,7 +172,7 @@ def optimize_aplc(pupil, focal_plane_mask, lyot_stops, dark_zone_mask, wavelengt
 			else:
 				print('      No Lyot stop found with this symmetry. This breaks the mirror symmetry in x of the optimization.')
 				x_symm = False
-	
+
 	# Y mirror symmetry for Lyot stops
 	for i, a in enumerate(lyot_stops):
 		print('Lyot stop #%d:' % i)
@@ -224,9 +224,9 @@ def optimize_aplc(pupil, focal_plane_mask, lyot_stops, dark_zone_mask, wavelengt
 		else:
 			# Constrain both real and imag part
 			num_constraints_per_focal_point.append(2)
-	
+
 	num_constraints_per_focal_point = np.array(num_constraints_per_focal_point)
-	
+
 	# Calculate dark zone masks, and propagators for each Lyot stops.
 	# These can be different due to the symmetry properties of each Lyot stop,
 	# and thus need to be calculated separately.
@@ -242,7 +242,7 @@ def optimize_aplc(pupil, focal_plane_mask, lyot_stops, dark_zone_mask, wavelengt
 			propagators.append(None)
 			num_focal_points.append(0)
 			continue
-		
+
 		# Separated coords for sub focal grid
 		x, y = focal_grid.separated_coords
 
@@ -255,11 +255,11 @@ def optimize_aplc(pupil, focal_plane_mask, lyot_stops, dark_zone_mask, wavelengt
 		if (x_symm and x_symm_lyot_stops[i]) or (y_symm and y_symm_lyot_stops[i]):
 			m *= focal_grid.y > 0
 			y = y[y > 0]
-		
+
 		# Make grid with subset of focal grid
 		focal_grid_sub = CartesianGrid(SeparatedCoords((x, y)))
 		#focal_grid_sub = focal_grid
-		
+
 		# Make propagator for this Lyot stop
 		propagators.append(FraunhoferPropagator(pupil_grid, focal_grid_sub))
 
@@ -270,7 +270,7 @@ def optimize_aplc(pupil, focal_plane_mask, lyot_stops, dark_zone_mask, wavelengt
 
 		# Calculating number of focal points
 		num_focal_points.append(int(np.sum(dark_zone_masks[-1])))
-	
+
 	num_focal_points = np.array(num_focal_points)
 
 	# Calculate number of constraints per wavelength
@@ -318,7 +318,7 @@ def optimize_aplc(pupil, focal_plane_mask, lyot_stops, dark_zone_mask, wavelengt
 			write_fits(last_optim * pupil_subsampled, debug_dir + 'last_optim%d.fits' % subsampling)
 
 		# Get pixels to optimize
-		optimize_mask = np.logical_and(calculate_pixels_to_optimize(last_optim, pupil_subsampled, edge_pixels_for_prior), symmetry_mask)
+		optimize_mask = np.logical_and(calculate_pixels_to_optimize(last_optim, pupil_subsampled, edge_width_for_prior), symmetry_mask)
 		if blind:
 			optimize_mask[:] = np.logical_and(pupil_subsampled > 0, symmetry_mask)
 		n = int(np.sum(optimize_mask * symmetry_mask))
@@ -428,7 +428,7 @@ def optimize_aplc(pupil, focal_plane_mask, lyot_stops, dark_zone_mask, wavelengt
 			contrast_requirements.append(contrast_requirement)
 
 			contrast_requirement *= throughput_estimate
-			
+
 			# Add constraints
 			for ee, e0, c0 in zip(M, base_electric_field, contrast_requirement):
 				e = gp.LinExpr(ee, x_vars.values())
@@ -436,7 +436,7 @@ def optimize_aplc(pupil, focal_plane_mask, lyot_stops, dark_zone_mask, wavelengt
 				c2 = model.addConstr(e >= (-c0 - e0))
 
 				constraints.extend([c1, c2])
-		
+
 		base_electric_fields = np.concatenate(base_electric_fields)
 		contrast_requirements = np.concatenate(contrast_requirements)
 
@@ -449,7 +449,7 @@ def optimize_aplc(pupil, focal_plane_mask, lyot_stops, dark_zone_mask, wavelengt
 			M_max = pupil_subsampled[optimize_mask]
 		obj = gp.LinExpr(M_max, x_vars.values())
 		model.setObjective(obj, gp.GRB.MAXIMIZE)
-		
+
 		# Optimize model
 		print('Start optimization...')
 		model.optimize()

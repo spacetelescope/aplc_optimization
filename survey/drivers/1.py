@@ -1,5 +1,6 @@
 parameters = {'pupil': {'filename': 'ehpor_apodizer_mask_256_bw.fits'}, 'focal_plane_mask': {'radius': 4.0, 'num_pix': 50, 'grayscale': True, 'field_stop_radius': -1.0}, 'lyot_stop': {'filename': 'ehpor_lyot_mask_256_gy.fits', 'alignment_tolerance': 0, 'num_lyot_stops': 1}, 'image': {'contrast': 8.0, 'iwa': 3.75, 'owa': 15, 'num_wavelengths': 3, 'bandwidth': 0.1, 'resolution': 2}, 'method': {'force_no_x_mirror_symmetry': False, 'force_no_y_mirror_symmetry': False, 'force_no_hermitian_symmetry': False, 'starting_scale': 1, 'ending_scale': 1, 'edge_width_for_prior': 2, 'num_throughput_iterations': 2, 'initial_throughput_estimate': 1, 'maximize_planet_throughput': True}, 'solver': {'num_threads': 0, 'crossover': 0, 'method': 2}}
 file_organization = {'survey_dir': '/data2/por/Research/Research/PhD/Coronagraphy/Optimization/progressive_refinement_coronagraphy/survey', 'solution_dir': '/data2/por/Research/Research/PhD/Coronagraphy/Optimization/progressive_refinement_coronagraphy/survey/solutions', 'analysis_dir': '/data2/por/Research/Research/PhD/Coronagraphy/Optimization/progressive_refinement_coronagraphy/survey/analysis', 'drivers_dir': '/data2/por/Research/Research/PhD/Coronagraphy/Optimization/progressive_refinement_coronagraphy/survey/drivers', 'log_dir': '/data2/por/Research/Research/PhD/Coronagraphy/Optimization/progressive_refinement_coronagraphy/survey/logs', 'input_files_dir': '/data2/por/Research/Research/PhD/Coronagraphy/Optimization/progressive_refinement_coronagraphy/masks'}
+solution_fname = "/data2/por/Research/Research/PhD/Coronagraphy/Optimization/progressive_refinement_coronagraphy/survey/solutions/1.fits"
 
 from hcipy import *
 import numpy as np
@@ -38,13 +39,12 @@ method_starting_scale = parameters['method']['starting_scale']
 method_ending_scale = parameters['method']['ending_scale']
 method_edge_width_for_prior = parameters['method']['edge_width_for_prior']
 method_num_throughput_iterations = parameters['method']['num_throughput_iterations']
-method_initial_throughput_estimate = parameters['method']['intial_throughput_estimate']
+method_initial_throughput_estimate = parameters['method']['initial_throughput_estimate']
 method_maximize_planet_throughput = parameters['method']['maximize_planet_throughput']
 solver_num_threads = parameters['solver']['num_threads']
 solver_crossover = parameters['solver']['crossover']
 solver_method = parameters['solver']['method']
 
-solution_fname = file_organization['solution_dir']
 if not os.path.isabs(pup_fname):
 	pup_fname = os.path.join(file_organization['input_files_dir'], pup_fname)
 if not os.path.isabs(ls_fname):
@@ -135,4 +135,4 @@ hdu_list.append(fits.ImageHDU((apodizer * (pupil > 0)).shaped, name='APOD'))
 tree = {'parameters': parameters, 'file_organization': file_organization, 'apodizer': hdu_list['APOD'].data}
 
 ff = asdf.fits_embed.AsdfInFits(hdu_list, tree)
-ff.write_to(solution_fname)
+ff.write_to(solution_fname, overwrite=True)

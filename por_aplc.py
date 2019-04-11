@@ -46,16 +46,16 @@ class PorAPLC(Coronagraph):
 			'method': 2
 			}
 		}
-	
+
 	def __init__(self, identifier, parameters, file_organization):
 		super(PorAPLC, self).__init__(identifier, parameters, file_organization, por_aplc_analysis)
-	
+
 	def write_driver(self, overwrite=False):
 		if self.check_driver() and not overwrite:
 			print('Driver already exists and will not be overwritten.')
 			return
-		
-		driver = 'parameters = {:s}\nfile_organization = {:s}\n\n'.format(str(self.parameters), str(self.file_organization))
+
+		driver = 'parameters = {:s}\nfile_organization = {:s}\nsolution_fname = "{:s}"\n\n'.format(str(self.parameters), str(self.file_organization), self.solution_filename)
 
 		with open('por_aplc_driver_template.py') as template_file:
 			driver_template = template_file.read()
@@ -64,13 +64,13 @@ class PorAPLC(Coronagraph):
 		fname = os.path.join(self.file_organization['drivers_dir'], self.identifier + '.py')
 		with open(fname, 'w') as output_file:
 			output_file.write(driver)
-		
+
 		fname_optimizer = os.path.join(self.file_organization['drivers_dir'], 'por_aplc_optimizer.py')
 		if os.path.exists(fname_optimizer) and not overwrite:
 			print('Optimizer already exists and will not be overwritten.')
 		else:
 			shutil.copy('por_aplc_optimizer.py', fname_optimizer)
-	
+
 	def check_input_files(self):
 		pup_fname = self.parameters['pupil']['filename']
 		ls_fname = self.parameters['lyot_stop']['filename']
@@ -79,15 +79,15 @@ class PorAPLC(Coronagraph):
 			pup_fname = os.path.join(self.file_organization['input_files_dir'], pup_fname)
 		if not os.path.isabs(ls_fname):
 			ls_fname = os.path.join(self.file_organization['input_files_dir'], ls_fname)
-		
+
 		return os.path.exists(pup_fname) and os.path.exists(ls_fname)
-	
+
 	def check_driver(self):
 		fname_driver = os.path.join(self.file_organization['drivers_dir'], self.identifier + '.py')
 		fname_optimizer = os.path.join(self.file_organization['drivers_dir'], 'por_aplc_optimizer.py')
 
 		return os.path.exists(fname_driver) and os.path.exists(fname_optimizer)
-	
+
 	def get_driver_command(self):
 		fname_driver = os.path.join(self.file_organization['drivers_dir'], self.identifier + '.py')
 

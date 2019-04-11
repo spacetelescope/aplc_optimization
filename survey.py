@@ -75,12 +75,12 @@ class DesignParameterSurvey(object):
 			if category not in coronagraph_class._default_parameters:
 				warnings.warn('Unrecognized parameter category "{0}". All parameters in this category will be ignored.'.format(category))
 				continue
-			
+
 			for key in parameter_sets[category]:
 				if key not in coronagraph_class._default_parameters[category]:
 					warnings.warn('Unrecognized parameter name "{0}" in category "{1}". This parameter will be ignored.'.format(key, category))
 					continue
-				
+
 				if is_iterable(parameter_sets[category][key]):
 					# It is a varied parameter
 					self.varied_parameters.append(parameter_sets[category][key])
@@ -88,7 +88,7 @@ class DesignParameterSurvey(object):
 				else:
 					# It is a fixed parameter
 					self.default_parameters[category][key] = parameter_sets[category][key]
-		
+
 		# Make list of fixed parameters
 		self.fixed_parameters_indices = {}
 		for category in self.default_parameters:
@@ -98,7 +98,7 @@ class DesignParameterSurvey(object):
 						self.fixed_parameters_indices[category].append(key)
 					else:
 						self.fixed_parameters_indices[category] = [key]
-		
+
 		# Create coronagraph objects with correct parameters
 		self.coronagraphs = []
 		self.parameter_sets = []
@@ -110,7 +110,7 @@ class DesignParameterSurvey(object):
 		params = list(itertools.product(*self.varied_parameters))
 		if num_parameter_sets == 1:
 			params = [{}]
-		
+
 		for i, combo in enumerate(params):
 			# Create parameter set for this coronagraph
 			new_parameter_set = self.default_parameters.copy()
@@ -119,14 +119,14 @@ class DesignParameterSurvey(object):
 
 			# Create unique id
 			identifier = format_string.format(i)
-		
+
 			# Create coronagraph
 			self.coronagraphs.append(coronagraph_class(identifier, new_parameter_set, self.file_organization))
 			self.parameter_sets.append(new_parameter_set)
-	
+
 	def union(self, b):
 		pass
-	
+
 	def describe(self):
 		print('This survey has {:d} design parameter combinations.'.format(len(self.parameter_sets)))
 		print('{:d} parameter are varied:'.format(len(self.varied_parameters)))
@@ -139,38 +139,38 @@ class DesignParameterSurvey(object):
 		print('All input files exist? {}'.format(self.check_input_files()))
 		print('All drivers exist? {}'.format(self.check_drivers()))
 		print('All solutions exist? {}'.format(self.check_solutions()))
-	
+
 	def check_input_files(self):
 		num_incomplete = 0
 
 		for cor in self.coronagraphs:
 			if not cor.check_input_files():
 				num_incomplete += 1
-		
+
 		return num_incomplete == 0
-	
+
 	def check_drivers(self):
 		num_incomplete = 0
 
 		for cor in self.coronagraphs:
 			if not cor.check_driver():
 				num_incomplete += 1
-		
+
 		return num_incomplete == 0
-	
+
 	def check_solutions(self):
 		num_incomplete = 0
 
 		for cor in self.coronagraphs:
 			if not cor.check_solution():
 				num_incomplete += 1
-			
+
 		return num_incomplete == 0
-	
+
 	def write_drivers(self, overwrite=False):
 		for cor in self.coronagraphs:
 			cor.write_driver(overwrite)
-	
+
 	def write_serial_bash_script(self, overwrite=False):
 		fname = os.path.join(self.file_organization['drivers_dir'], 'run.sh')
 
@@ -181,14 +181,13 @@ class DesignParameterSurvey(object):
 		with open(fname, 'w') as f:
 			for coronagraph in self.coronagraphs:
 				f.write(coronagraph.get_driver_command() + '\n')
-	
-	def run_serial(self, force_rerun=False):
+
+	def run_optimizations(self, force_rerun=False):
 		for cor in self.coronagraphs:
-			if not cor.check_solution() or force_rerun:
-				cor.run_optimization()
-		
+			cor.run_optimization(force_rerun)
+
 		return self.check_solutions()
-	
+
 	def write_spreadsheet(self, overwrite=False):
 		fname_tail = "{1:s}_{2:s}.csv".format(getpass.getuser(), datetime.datetime.now().strftime("%Y-%m-%d"))
 		fname = os.path.join(self.file_organization['survey_dir'], fname_tail)
@@ -226,7 +225,7 @@ class DesignParameterSurvey(object):
 			keys = set()
 			for coronagraph in self.coronagraphs:
 				keys.update(coronagraph.metrics.keys())
-			
+
 			# The keys to be written to the spreadsheet cannot be arrays.
 			for coronagraph in self.coronagraphs:
 				for key in keys:
@@ -257,6 +256,10 @@ class DesignParameterSurvey(object):
 
 		os.chmod(fname, 644)
 
+	def run_analyses(self, overwrite=False, run_slow=True):
+		for coronagraph in self.coronagraphs:
+			coronagraph.run_analysis(overwrite, run_slow)
+
 class Coronagraph(object):
 	def __init__(self, identifier, parameters, file_organization, analysis_module=None):
 		self._identifier = identifier
@@ -264,51 +267,51 @@ class Coronagraph(object):
 		self.file_organization = file_organization
 		self.analysis_module = analysis_module
 		self.metrics = {}
-	
+
 	@property
 	def identifier(self):
 		return self._identifier
-	
+
 	def check_input_files(self):
 		raise NotImplementedError()
-	
+
 	def check_driver(self):
 		raise NotImplementedError()
-	
+
 	def check_solution(self):
 		return os.path.exists(self.solution_filename)
-	
+
 	@property
 	def solution_filename(self):
 		return os.path.join(self.file_organization['solution_dir'], self.identifier + '.fits')
-	
+
 	@property
 	def log_filename(self):
 		return os.path.join(self.file_organization['log_dir'], self.identifier + '.log')
-	
+
 	def get_driver_command(self):
 		raise NotImplementedError()
-	
+
 	def run_optimization(self, force_rerun=False):
 		if (not self.check_driver()) or (not self.check_input_files()):
 			print('Not all driver or input files are written.')
 			return
-		
+
 		if self.check_solution() and not force_rerun:
 			print('Solution already exists.')
 			return
 
 		os.system(self.get_driver_command())
-	
+
 	def run_analysis(self, overwrite=False, run_slow=True):
 		if self.analysis_module is None:
 			print('No analysis module was provided. No analysis will be performed.')
 			return
-		
+
 		if not os.path.exists(self.solution_filename):
 			print('The solution is not optimized yet. No analysis will be performed.')
 			return
-		
+
 		# Read in functions from analysis_module and sort by name
 		analysis = inspect.getmembers(self.analysis_module, inspect.isfunction)
 		analysis = [x for _, x in sorted(zip([name for name, function in analysis], analysis))]
@@ -319,7 +322,7 @@ class Coronagraph(object):
 		if os.path.exists(analysis_summary_filename) and os.path.exists(analysis_metrics_filename):
 			print('Analysis already exists and is not overwritten.')
 			return
-		
+
 		pdf = PdfPages(analysis_summary_filename)
 		self.metrics = {}
 
@@ -327,12 +330,15 @@ class Coronagraph(object):
 		for name, function in analysis:
 			if not name.startswith('analyze_'):
 				continue
-			
+
 			if is_marked(function, 'slow') and not run_slow:
 				continue
-			
+
 			res = function(self.solution_filename, pdf)
-			self.metrics.update(res)
+			try:
+				self.metrics.update(res)
+			except:
+				pass
 
 		# Write out metrics to a file
 		f = asdf.AsdfFile(self.metrics)

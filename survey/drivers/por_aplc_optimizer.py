@@ -4,7 +4,7 @@ import gurobipy as gp
 from scipy.ndimage.morphology import grey_erosion, grey_dilation
 import time
 
-def calculate_pixels_to_optimize(last_optim, pupil_subsampled, edge_pixels_for_prior):
+def calculate_pixels_to_optimize(last_optim, pupil_subsampled, edge_width_for_prior):
 	"""Calculate the pixels to be used for the optimization for the adaptive algorithm.
 
 	The exact selection of the pixels to be taken into account depends on future research.
@@ -15,8 +15,8 @@ def calculate_pixels_to_optimize(last_optim, pupil_subsampled, edge_pixels_for_p
 		The previously-optimized apodizer.
 	pupil_subsampled : Field
 		The telescope pupil subsampled to the same resolution as `last_optim`.
-    edge_pixels_for_prior : int
-        The number of pixels along an edge.
+	edge_pixels_for_prior : int
+		The number of pixels along an edge.
 
 	Returns
 	-------
@@ -26,15 +26,15 @@ def calculate_pixels_to_optimize(last_optim, pupil_subsampled, edge_pixels_for_p
 	if last_optim is None:
 		return pupil_subsampled > 0
 
-    if edge_pixels_for_prior == 2:
-	    structure = np.array([[0,1,0],[1,1,1],[0,1,0]])
-    elif edge_pixels_for_prior == 4:
-	    structure = np.array([[0,1,1,0],[1,1,1,1],[1,1,1,1],[0,1,1,0]])
-    elif edge_pixels_for_prior == 6:
-	    structure = np.array([[0,1,1,1,0],[1,1,1,1,1],[1,1,1,1,1],[1,1,1,1,1],[0,1,1,1,0]])
-    else:
-        print('The number of edge pixels for prior is not allowed. It needs to be in [2, 4, 6].')
-        exit()
+	if edge_width_for_prior == 2:
+		structure = np.array([[0,1,0],[1,1,1],[0,1,0]])
+	elif edge_width_for_prior == 4:
+		structure = np.array([[0,1,1,0],[1,1,1,1],[1,1,1,1],[0,1,1,0]])
+	elif edge_width_for_prior == 6:
+		structure = np.array([[0,1,1,1,0],[1,1,1,1,1],[1,1,1,1,1],[1,1,1,1,1],[0,1,1,1,0]])
+	else:
+		print('The number of edge pixels for prior is not allowed. It needs to be in [2, 4, 6].')
+		exit()
 
 	a = (grey_dilation(last_optim.shaped, structure=structure) - grey_erosion(last_optim.shaped, structure=structure)).ravel() - 2
 	a = np.abs(a) > 1e-3
@@ -46,10 +46,10 @@ def calculate_pixels_to_optimize(last_optim, pupil_subsampled, edge_pixels_for_p
 	return np.logical_and(c, pupil_subsampled > 0)
 
 def optimize_aplc(pupil, focal_plane_mask, lyot_stops, dark_zone_mask, wavelengths, contrast, 
-    starting_scale=1, ending_scale=1, force_no_x_symmetry=False, force_no_y_symmetry=False, 
-    force_no_hermitian_symmetry, maximize_planet_throughput=True, num_throughput_iterations=2,
-    initial_throughput_estimate=1, edge_width_for_prior=2, solver_num_threads=0, solver_crossover=0, 
-    solver_method=2, debug=False):
+	starting_scale=1, ending_scale=1, force_no_x_symmetry=False, force_no_y_symmetry=False, 
+	force_no_hermitian_symmetry=False, maximize_planet_throughput=True, num_throughput_iterations=2,
+	initial_throughput_estimate=1, edge_width_for_prior=2, solver_num_threads=0, solver_crossover=0, 
+	solver_method=2, debug=False):
 	"""Optimize an APLC with a (optional) iterative algorithm taking into account x and/or y mirror symemtries.
 
 	Parameters
@@ -66,54 +66,54 @@ def optimize_aplc(pupil, focal_plane_mask, lyot_stops, dark_zone_mask, wavelengt
 		An array of wavelengths as fractions of lambda_0.
 	contrast : scalar
 		The contrast that needs to be achieved in the dark zone.
-    starting_scale : int
-        The number of pixels per unit cell for the initial solution. This is used for the 
-        adaptive algorithm. It must be a power of 2 times the `ending_scale`.
-    ending_scale : int
-        The number of pixels per unit cell for the final solution. If this is the same as `starting_scale`,
-        the adaptive algorithm is essentially turned off.
+	starting_scale : int
+		The number of pixels per unit cell for the initial solution. This is used for the 
+		adaptive algorithm. It must be a power of 2 times the `ending_scale`.
+	ending_scale : int
+		The number of pixels per unit cell for the final solution. If this is the same as `starting_scale`,
+		the adaptive algorithm is essentially turned off.
 	force_no_x_symmetry : boolean
 		Force the algorithm to ignore any x mirror symmetry that might exist in the problem.
 	force_no_y_symmetry : boolean
 		Force the algorithm to ignore any y mirror symmetry that might exist in the problem.
-    force_no_hermitian_symmetry : boolean
-        Force the algorithm to ignore the (always present) Hermitian symmetry in the problem.
-    maximize_planet_throughput : boolean
-        If this is True, the throughput through the apodizer times Lyot stop is maximized, a metric for
-        planet throughput at large angular separations. Otherwise the throughput of the apodizer is 
-        maximized.
-    num_throughput_iterations : integer
-        The number of iterations to let the throughput factor converge. Too few iterations and the contrast might be
-        a fraction too high, too high and you are wasting computation time. Setting this to 1 turns iterations off.
-    initial_throughput_estimate : float
-        The expected relative throughput of the coronagraph compared to without apodizer or focal-plane
-        mask (but including Lyot stop). A good estimate (for example from a lower resolution optimization)
-        can often eliminate the need for throughput iterations altogether.
-    edge_width_for_prior : [2,4,6]
-        The width of the optimized regions along the edges. This is only used for the adaptive algorithm.
-    solver_num_threads : integer
-        The number of threads that Gurobi is allowed to use. A value of 0 indicates that Gurobi is free to
-        choose the number.
-    solver_crossover : integer
-        The crossover strategy that Gurobi needs to use. See Gurobi documentation for more information.
-    solver_method : integer
-        The algorithm that Gurobi needs to use. See Gurobi documentation for more information.
-    debug : boolean
-        Output specific debugging information to a debug folder. This is mostly used to monitor the adaptive algorithm.
+	force_no_hermitian_symmetry : boolean
+		Force the algorithm to ignore the (always present) Hermitian symmetry in the problem.
+	maximize_planet_throughput : boolean
+		If this is True, the throughput through the apodizer times Lyot stop is maximized, a metric for
+		planet throughput at large angular separations. Otherwise the throughput of the apodizer is 
+		maximized.
+	num_throughput_iterations : integer
+		The number of iterations to let the throughput factor converge. Too few iterations and the contrast might be
+		a fraction too high, too high and you are wasting computation time. Setting this to 1 turns iterations off.
+	initial_throughput_estimate : float
+		The expected relative throughput of the coronagraph compared to without apodizer or focal-plane
+		mask (but including Lyot stop). A good estimate (for example from a lower resolution optimization)
+		can often eliminate the need for throughput iterations altogether.
+	edge_width_for_prior : [2,4,6]
+		The width of the optimized regions along the edges. This is only used for the adaptive algorithm.
+	solver_num_threads : integer
+		The number of threads that Gurobi is allowed to use. A value of 0 indicates that Gurobi is free to
+		choose the number.
+	solver_crossover : integer
+		The crossover strategy that Gurobi needs to use. See Gurobi documentation for more information.
+	solver_method : integer
+		The algorithm that Gurobi needs to use. See Gurobi documentation for more information.
+	debug : boolean
+		Output specific debugging information to a debug folder. This is mostly used to monitor the adaptive algorithm.
 
 	Returns
 	-------
 	Field
 		The optimized apodizer for the APLC. This has not been multiplied by the telescope pupil.
 	"""
-    if debug:
-        debug_dir = './debug/'
-        os.makedirs(debug_dir)
+	if debug:
+		debug_dir = './debug/'
+		os.makedirs(debug_dir)
 
-        import matplotlib as mpl
-        mpl.use('Agg')
-        import matplotlib.pyplot as plt
-    
+		import matplotlib as mpl
+		mpl.use('Agg')
+		import matplotlib.pyplot as plt
+
 	pupil_grid = pupil.grid
 	focal_grid = dark_zone_mask.grid
 
@@ -123,10 +123,10 @@ def optimize_aplc(pupil, focal_plane_mask, lyot_stops, dark_zone_mask, wavelengt
 	prop_0 = FraunhoferPropagator(pupil_grid, focal_grid_0)
 
 	prior = None
-    
-    # Calculate subsamplings
-    num_subsamplings = int(round(np.log2(starting_scale / ending_scale)))
-    subsamplings = ending_scale * 2**np.arange(num_subsamplings)[::-1]
+
+	# Calculate subsamplings
+	num_subsamplings = int(round(np.log2(starting_scale / ending_scale))) + 1
+	subsamplings = ending_scale * 2**np.arange(num_subsamplings)[::-1]
 
 	# Determine pupil symmetries
 	x_symm_pupil = np.allclose(pupil.shaped[:,::-1], pupil.shaped)
@@ -172,7 +172,7 @@ def optimize_aplc(pupil, focal_plane_mask, lyot_stops, dark_zone_mask, wavelengt
 			else:
 				print('      No Lyot stop found with this symmetry. This breaks the mirror symmetry in x of the optimization.')
 				x_symm = False
-	
+
 	# Y mirror symmetry for Lyot stops
 	for i, a in enumerate(lyot_stops):
 		print('Lyot stop #%d:' % i)
@@ -224,12 +224,12 @@ def optimize_aplc(pupil, focal_plane_mask, lyot_stops, dark_zone_mask, wavelengt
 		else:
 			# Constrain both real and imag part
 			num_constraints_per_focal_point.append(2)
-	
+
 	num_constraints_per_focal_point = np.array(num_constraints_per_focal_point)
-	
-    # Calculate dark zone masks, and propagators for each Lyot stops.
-    # These can be different due to the symmetry properties of each Lyot stop,
-    # and thus need to be calculated separately.
+
+	# Calculate dark zone masks, and propagators for each Lyot stops.
+	# These can be different due to the symmetry properties of each Lyot stop,
+	# and thus need to be calculated separately.
 	dark_zone_masks = []
 	dark_zone_masks_full = []
 	propagators = []
@@ -242,24 +242,24 @@ def optimize_aplc(pupil, focal_plane_mask, lyot_stops, dark_zone_mask, wavelengt
 			propagators.append(None)
 			num_focal_points.append(0)
 			continue
-		
+
 		# Separated coords for sub focal grid
 		x, y = focal_grid.separated_coords
 
 		# Hermitian symmetry (all planes are real)
-        if not force_no_hermitian_symmetry:
-            m = focal_grid.x > 0
-            x = x[x > 0]
+		if not force_no_hermitian_symmetry:
+			m = focal_grid.x > 0
+			x = x[x > 0]
 
 		# Only optimize quarter of roi is mirror symmetric in one or two axes
 		if (x_symm and x_symm_lyot_stops[i]) or (y_symm and y_symm_lyot_stops[i]):
 			m *= focal_grid.y > 0
 			y = y[y > 0]
-		
+
 		# Make grid with subset of focal grid
 		focal_grid_sub = CartesianGrid(SeparatedCoords((x, y)))
 		#focal_grid_sub = focal_grid
-		
+
 		# Make propagator for this Lyot stop
 		propagators.append(FraunhoferPropagator(pupil_grid, focal_grid_sub))
 
@@ -270,14 +270,14 @@ def optimize_aplc(pupil, focal_plane_mask, lyot_stops, dark_zone_mask, wavelengt
 
 		# Calculating number of focal points
 		num_focal_points.append(int(np.sum(dark_zone_masks[-1])))
-	
+
 	num_focal_points = np.array(num_focal_points)
 
 	# Calculate number of constraints per wavelength
 	m = int(np.sum(num_constraints_per_focal_point * num_focal_points))
 	cum_mms = np.concatenate(([0], np.cumsum(num_constraints_per_focal_point * num_focal_points))).astype('int')
 
-    throughput_estimate = initial_throughput_estimate
+	throughput_estimate = initial_throughput_estimate
 
 	# Iterate from lowest to highest resolution (=highest to lowest subsampling)
 	for subsampling_index, subsampling in enumerate(subsamplings):
@@ -313,37 +313,37 @@ def optimize_aplc(pupil, focal_plane_mask, lyot_stops, dark_zone_mask, wavelengt
 			last_optim = subsample_field(prior, subsampling)
 
 		# Write prior to file
-        if debug:
-            write_fits(prior * pupil, debug_dir + 'prior%d.fits' % subsampling)
-            write_fits(last_optim * pupil_subsampled, debug_dir + 'last_optim%d.fits' % subsampling)
+		if debug:
+			write_fits(prior * pupil, debug_dir + 'prior%d.fits' % subsampling)
+			write_fits(last_optim * pupil_subsampled, debug_dir + 'last_optim%d.fits' % subsampling)
 
 		# Get pixels to optimize
-		optimize_mask = np.logical_and(calculate_pixels_to_optimize(last_optim, pupil_subsampled, edge_pixels_for_prior), symmetry_mask)
+		optimize_mask = np.logical_and(calculate_pixels_to_optimize(last_optim, pupil_subsampled, edge_width_for_prior), symmetry_mask)
 		if blind:
 			optimize_mask[:] = np.logical_and(pupil_subsampled > 0, symmetry_mask)
 		n = int(np.sum(optimize_mask * symmetry_mask))
 
 		# Write optimize mask to file
-        if debug:
-		    write_fits(optimize_mask.astype('int'), debug_dir + 'optimize_mask%d.fits' % subsampling)
+		if debug:
+			write_fits(optimize_mask.astype('int'), debug_dir + 'optimize_mask%d.fits' % subsampling)
 
 		print('Starting optimization at scale %d with %d variables and %d constraints.' % (subsampling, n, m*len(wavelengths)))
 		print('Creating model...')
 
 		# Create Gurobi model
-        model = gp.Model('lp')
-        model.Params.Threads = solver_num_threads
-        model.Params.Crossover = solver_crossover
-        model.Params.Method = solver_method
-        x_vars = model.addVars(n, lb=0, ub=1)
+		model = gp.Model('lp')
+		model.Params.Threads = solver_num_threads
+		model.Params.Crossover = solver_crossover
+		model.Params.Method = solver_method
+		x_vars = model.addVars(n, lb=0, ub=1)
 
 		print('Calculating and adding constraints...')
 
 		# Create problem matrix for one wavelength but for all Lyot stops
 		M = np.empty((m, n))
-        base_electric_fields = []
-        contrast_requirements = []
-        constraints = []
+		base_electric_fields = []
+		contrast_requirements = []
+		constraints = []
 
 		# Add constraints for each wavelength
 		for wl_i, wavelength in enumerate(wavelengths):
@@ -394,11 +394,11 @@ def optimize_aplc(pupil, focal_plane_mask, lyot_stops, dark_zone_mask, wavelengt
 						print('Wavelength %d/%d; Variable %d/%d' % (wl_i + 1, len(wavelengths), j, n))
 
 			# Display x0
-            if debug:
-                imshow_field(x0.real)
-                plt.colorbar()
-                plt.savefig(debug_dir + 'base_aperture%d.pdf' % subsampling)
-                plt.clf()
+			if debug:
+				imshow_field(x0.real)
+				plt.colorbar()
+				plt.savefig(debug_dir + 'base_aperture%d.pdf' % subsampling)
+				plt.clf()
 
 			# Calculate base electric field
 			base_electric_field = []
@@ -417,7 +417,7 @@ def optimize_aplc(pupil, focal_plane_mask, lyot_stops, dark_zone_mask, wavelengt
 					base_electric_field.append(E.real + E.imag)
 					base_electric_field.append(E.real - E.imag)
 			base_electric_field = np.concatenate(base_electric_field)
-            base_electric_fields.append(base_electric_field)
+			base_electric_fields.append(base_electric_field)
 
 			# Calculate contrast requirement
 			contrast_requirement = []
@@ -425,20 +425,20 @@ def optimize_aplc(pupil, focal_plane_mask, lyot_stops, dark_zone_mask, wavelengt
 				temp = np.repeat((np.ones(focal_grid.size) * np.sqrt(contrast))[r], q)
 				contrast_requirement.append(temp)
 			contrast_requirement = np.concatenate(contrast_requirement)
-            contrast_requirements.append(contrast_requirement)
+			contrast_requirements.append(contrast_requirement)
 
-            contrast_requirement *= throughput_estimate
-			
+			contrast_requirement *= throughput_estimate
+
 			# Add constraints
 			for ee, e0, c0 in zip(M, base_electric_field, contrast_requirement):
 				e = gp.LinExpr(ee, x_vars.values())
 				c1 = model.addConstr(e <= (c0 - e0))
 				c2 = model.addConstr(e >= (-c0 - e0))
 
-                constraints.extend([c1, c2])
-        
-        base_electric_fields = np.concatenate(base_electric_fields)
-        contrast_requirements = np.concatenate(contrast_requirements)
+				constraints.extend([c1, c2])
+
+		base_electric_fields = np.concatenate(base_electric_fields)
+		contrast_requirements = np.concatenate(contrast_requirements)
 
 		del M
 
@@ -449,47 +449,47 @@ def optimize_aplc(pupil, focal_plane_mask, lyot_stops, dark_zone_mask, wavelengt
 			M_max = pupil_subsampled[optimize_mask]
 		obj = gp.LinExpr(M_max, x_vars.values())
 		model.setObjective(obj, gp.GRB.MAXIMIZE)
-        
-        # Optimize model
-        print('Start optimization...')
-        model.optimize()
-        print('Optimization finished!')
 
-        for throughput_iter in range(num_throughput_iterations):
-            # Extract solution from Gurobi
-            solution = np.array([x_vars[i].x for i in range(n)])
+		# Optimize model
+		print('Start optimization...')
+		model.optimize()
+		print('Optimization finished!')
 
-            # Integrate solution into upsampled old solution
-            sol = prior
-            j = 0
-            for ind, to_optimize in zip(inds, optimize_mask):
-                if to_optimize:
-                    sol[ind] = solution[j]
-                    j += 1
-            sol = Field(sol, pupil_grid)
-            prior = sol
+		for throughput_iter in range(num_throughput_iterations):
+			# Extract solution from Gurobi
+			solution = np.array([x_vars[i].x for i in range(n)])
 
-            throughput_estimate = ((pupil * prior * lyot_stop).sum() / (pupil * lyot_stop).sum())**2
+			# Integrate solution into upsampled old solution
+			sol = prior
+			j = 0
+			for ind, to_optimize in zip(inds, optimize_mask):
+				if to_optimize:
+					sol[ind] = solution[j]
+					j += 1
+			sol = Field(sol, pupil_grid)
+			prior = sol
 
-            # Only do throughput iterations on the first iteration for the adaptive algorithm.
-            # Doing it on later iterations might make the model infeasible. 
-            # TODO: This might be overkill, but this is to be investigated.
-            # Also, only modify and reoptimize if this is not the last iteration (mimicing do-while loop).
-            if not (throughput_iter == num_throughput_iterations - 1) and subsampling_index == 0:
-                # Update throughput estimate and rerun
-                rhs = np.empty(base_electric_fields.size * 2)
-                rhs[::2] = contrast_requirements * throughput_estimate - base_electric_fields
-                rhs[1::2] = -contrast_requirements * throughput_estimate - base_electric_fields
-                for constr, r in zip(constraints, rhs):
-                    constr.RHS = r
+			throughput_estimate = ((pupil * prior * lyot_stop).sum() / (pupil * lyot_stop).sum())**2
 
-                # Rerun optimizer
-                 print('Restarting optimization for throughput iteration %d...' % (throughput_iter + 1)
-                model.optimize()
-                print('Optimization finished!')
+			# Only do throughput iterations on the first iteration for the adaptive algorithm.
+			# Doing it on later iterations might make the model infeasible. 
+			# TODO: This might be overkill, but this is to be investigated.
+			# Also, only modify and reoptimize if this is not the last iteration (mimicing do-while loop).
+			if not (throughput_iter == num_throughput_iterations - 1) and subsampling_index == 0:
+				# Update throughput estimate and rerun
+				rhs = np.empty(base_electric_fields.size * 2)
+				rhs[::2] = contrast_requirements * throughput_estimate - base_electric_fields
+				rhs[1::2] = -contrast_requirements * throughput_estimate - base_electric_fields
+				for constr, r in zip(constraints, rhs):
+					constr.RHS = r
+
+				# Rerun optimizer
+				print('Restarting optimization for throughput iteration %d...' % (throughput_iter + 1))
+				model.optimize()
+				print('Optimization finished!')
 
 		# Write result to display
-        if debug:
-		    write_fits(prior * (pupil > 0), debug_dir + 'result%d.fits' % subsampling)
+		if debug:
+			write_fits(prior * (pupil > 0), debug_dir + 'result%d.fits' % subsampling)
 
 	return prior * (pupil > 0)
