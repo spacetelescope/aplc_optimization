@@ -76,7 +76,7 @@ def analyze_contrast_monochromatic(solution_filename, pdf=None):
 	iwa = parameters['image']['iwa']
 	owa = parameters['image']['owa']
 	contrast = parameters['image']['contrast']
-	radius_fpm = parameter['focal_plane_mask']['radius']
+	radius_fpm = parameters['focal_plane_mask']['radius']
 
 	lyot_stop = lyot_stops[0]
 
@@ -96,7 +96,7 @@ def analyze_contrast_monochromatic(solution_filename, pdf=None):
 		plt.close()
 	else:
 		plt.show()
-	
+
 	r, profile, std_profile, n_profile = radial_profile(img / img_ref.max(), 0.2)
 
 	plt.title('Monochromatic normalized irradiance (radial average)')
@@ -106,6 +106,7 @@ def analyze_contrast_monochromatic(solution_filename, pdf=None):
 	plt.axvline(radius_fpm, color='k')
 
 	plt.yscale('log')
+	plt.xlim(0, owa*1.2)
 	plt.ylim(5e-10, 2e-5)
 	plt.ylabel('Normalized irradiance')
 	plt.xlabel(r'Angular separation ($\lambda_0/D$)')
@@ -126,3 +127,60 @@ def analyze_max_throughput(solution_filename, pdf=None):
 
 def analyze_offaxis_throughput(solution_filename, pdf=None):
 	pass
+
+def analyze_summary(solution_filename, pdf=None):
+	pupil, apodizer, focal_plane_mask, lyot_stops, parameters, file_organization = create_coronagraph(solution_filename)
+	lyot_stop = lyot_stops[0]
+	owa = parameters['image']['owa']
+	bandwidth = parameters['image']['bandwidth']
+	radius_fpm = parameters['focal_plane_mask']['radius']
+
+	coro = LyotCoronagraph(pupil.grid, focal_plane_mask, lyot_stop)
+	coro_without_lyot = LyotCoronagraph(pupil.grid, focal_plane_mask)
+	focal_grid = make_focal_grid(pupil.grid, 8, owa * 1.2)
+	prop = FraunhoferPropagator(pupil.grid, focal_grid)
+	wavelengths = np.linspace(-bandwidth / 2, bandwidth / 2, 11) + 1
+
+	focal_plane_mask_large = 1 - circular_aperture(2 * radius_fpm)(focal_grid)
+
+	img = 0
+	img_ref = 0
+	img_foc = 0
+	lyot = 0
+
+	for wl in wavelengths:
+		wf = Wavefront(pupil * apodizer, wl)
+		img += prop(coro(wf)).intensity
+		img_foc += prop(wf).intensity
+		img_ref += prop(Wavefront(pupil * lyot_stop)).intensity
+		lyot += coro_without_lyot(wf).intensity
+
+	plt.subplot(2,3,1)
+	imshow_field(pupil * apodizer, cmap='gray')
+	plt.colorbar()
+	plt.subplot(2,3,2)
+	imshow_field(np.log10(img_foc / img_foc.max()), vmin=-5, vmax=0, cmap='inferno')
+	plt.colorbar()
+	plt.subplot(2,3,3)
+	imshow_field(np.log10(img_foc / img_foc.max() * (1e-20 + focal_plane_mask_large)), vmin=-5, vmax=0, cmap='inferno')
+	plt.colorbar()
+	plt.subplot(2,3,4)
+	imshow_field(np.log10(lyot / lyot.max()), vmin=-3, vmax=0, cmap='inferno')
+	plt.colorbar()
+	plt.subplot(2,3,5)
+	imshow_field(np.log10(lyot / lyot.max() * (1e-20 + lyot_stop)), vmin=-3, vmax=0, cmap='inferno')
+	plt.colorbar()
+	plt.subplot(2,3,6)
+	imshow_field(np.log10(img / img_ref.max()), vmin=-9, vmax=-5, cmap='inferno')
+	plt.colorbar()
+	if pdf is not None:
+		pdf.savefig()
+		plt.close()
+	else:
+		plt.show()
+
+	return {}
+
+def analyze_lyot_robustness(solution_filename, pdf=None):
+	pupil, apodizer, focal_plane_mask, lyot_tops, parameters, file_organization = create_coronagraph(solution_filename)
+	
