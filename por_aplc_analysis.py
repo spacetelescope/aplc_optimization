@@ -73,8 +73,10 @@ def create_coronagraph(solution_filename):
 
 def analyze_contrast_monochromatic(solution_filename, pdf=None):
 	pupil, apodizer, focal_plane_mask, lyot_stops, parameters, file_organization = create_coronagraph(solution_filename)
+	iwa = parameters['image']['iwa']
 	owa = parameters['image']['owa']
 	contrast = parameters['image']['contrast']
+	radius_fpm = parameter['focal_plane_mask']['radius']
 
 	lyot_stop = lyot_stops[0]
 
@@ -86,22 +88,40 @@ def analyze_contrast_monochromatic(solution_filename, pdf=None):
 	img = prop(coro(wf)).intensity
 	img_ref = prop(Wavefront(apodizer * lyot_stop)).intensity
 
-	plt.clf()
+	plt.title('Monochromatic normalized irradiance')
 	imshow_field(np.log10(img / img_ref.max()), vmin=-contrast-1, vmax=-contrast+4, cmap='inferno')
 	plt.colorbar()
 	if pdf is not None:
 		pdf.savefig()
+		plt.close()
+	else:
+		plt.show()
+	
+	r, profile, std_profile, n_profile = radial_profile(img / img_ref.max(), 0.2)
+
+	plt.title('Monochromatic normalized irradiance (radial average)')
+	plt.plot(r, profile)
+	plt.axvline(iwa, color=colors.red)
+	plt.axvline(owa, color=colors.red)
+	plt.axvline(radius_fpm, color='k')
+
+	plt.yscale('log')
+	plt.ylim(5e-10, 2e-5)
+	plt.ylabel('Normalized irradiance')
+	plt.xlabel(r'Angular separation ($\lambda_0/D$)')
+	if pdf is not None:
+		pdf.savefig()
+		plt.close()
 	else:
 		plt.show()
 
-	return {'normalized_irradiance_image': img / img_ref.max()}
+	return {'normalized_irradiance_image': img / img_ref.max(), 'normalized_irradiance_radial': (r, profile, std_profile, n_profile)}
 
 def analyze_max_throughput(solution_filename, pdf=None):
 	pupil, apodizer, focal_plane_mask, lyot_stops, parameters, file_organization = create_coronagraph(solution_filename)
 	lyot_stop = lyot_stops[0]
 
 	maximum_integrated_throughput = ((pupil * lyot_stop * apodizer).sum() / (pupil * lyot_stop).sum())**2
-
 	return {'maximum_integrated_throughput': maximum_integrated_throughput}
 
 def analyze_offaxis_throughput(solution_filename, pdf=None):

@@ -6,6 +6,6 @@ varying_parameters = {'pupil': {'filename': 'ehpor_apodizer_mask_256_bw.fits'}, 
 survey = DesignParameterSurvey(PorAPLC, varying_parameters, 'survey/', 'masks/')
 survey.describe()
 
-survey.write_drivers(True)
-survey.run_optimizations(True)
+survey.write_drivers(False)
+survey.run_optimizations(False)
 survey.run_analyses(True)
