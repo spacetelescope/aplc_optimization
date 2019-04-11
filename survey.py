@@ -111,10 +111,13 @@ class DesignParameterSurvey(object):
 		if num_parameter_sets == 1:
 			params = [{}]
 
+		print(params)
+
 		for i, combo in enumerate(params):
 			# Create parameter set for this coronagraph
-			new_parameter_set = self.default_parameters.copy()
+			new_parameter_set = copy.deepcopy(self.default_parameters)
 			for value, (category, key) in zip(combo, self.varied_parameters_indices):
+				print(category, key, value)
 				new_parameter_set[category][key] = value
 
 			# Create unique id
@@ -323,22 +326,22 @@ class Coronagraph(object):
 			print('Analysis already exists and is not overwritten.')
 			return
 
-		pdf = PdfPages(analysis_summary_filename)
 		self.metrics = {}
 
-		# Run all analysis functions
-		for name, function in analysis:
-			if not name.startswith('analyze_'):
-				continue
+		with PdfPages(analysis_summary_filename) as pdf:
+			# Run all analysis functions
+			for name, function in analysis:
+				if not name.startswith('analyze_'):
+					continue
 
-			if is_marked(function, 'slow') and not run_slow:
-				continue
+				if is_marked(function, 'slow') and not run_slow:
+					continue
 
-			res = function(self.solution_filename, pdf)
-			try:
-				self.metrics.update(res)
-			except:
-				pass
+				res = function(self.solution_filename, pdf)
+				try:
+					self.metrics.update(res)
+				except:
+					pass
 
 		# Write out metrics to a file
 		f = asdf.AsdfFile(self.metrics)

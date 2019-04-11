@@ -58,7 +58,7 @@ def create_coronagraph(solution_filename):
 			lyot_stop_neg_x_neg_y = np.roll(np.roll(lyot_stop.shaped, -ls_alignment_tolerance, 1), -ls_alignment_tolerance, 0).ravel()
 
 			lyot_stops.extend([lyot_stop_pos_x_pos_y, lyot_stop_pos_x_neg_y, lyot_stop_neg_x_pos_y, lyot_stop_neg_x_neg_y])
-		
+
 	# Build focal plane mask
 	q_foc = fpm_num_pix / (fpm_radius * 2)
 	x_foc = (np.arange(fpm_num_pix) + 0.5 - fpm_num_pix / 2) / q_foc
@@ -68,7 +68,7 @@ def create_coronagraph(solution_filename):
 		focal_plane_mask = 1 - evaluate_supersampled(circular_aperture(2 * fpm_radius), focal_mask_grid, 8)
 	else:
 		focal_plane_mask = 1 - circular_aperture(2 * fpm_radius)(focal_mask_grid)
-	
+
 	return pupil, apodizer, focal_plane_mask, lyot_stops, parameters, file_organization
 
 def analyze_contrast_monochromatic(solution_filename, pdf=None):
@@ -85,7 +85,7 @@ def analyze_contrast_monochromatic(solution_filename, pdf=None):
 	wf = Wavefront(apodizer)
 	img = prop(coro(wf)).intensity
 	img_ref = prop(Wavefront(apodizer * lyot_stop)).intensity
-	
+
 	plt.clf()
 	imshow_field(np.log10(img / img_ref.max()), vmin=-contrast-1, vmax=-contrast+4, cmap='inferno')
 	plt.colorbar()
@@ -93,7 +93,7 @@ def analyze_contrast_monochromatic(solution_filename, pdf=None):
 		pdf.savefig()
 	else:
 		plt.show()
-	
+
 	return {'normalized_irradiance_image': img / img_ref.max()}
 
 def analyze_max_throughput(solution_filename, pdf=None):
