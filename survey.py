@@ -82,9 +82,13 @@ class DesignParameterSurvey(object):
 					continue
 
 				if is_iterable(parameter_sets[category][key]):
-					# It is a varied parameter
-					self.varied_parameters.append(parameter_sets[category][key])
-					self.varied_parameters_indices.append((category, key))
+					if len(parameter_sets[category][key]) == 1:
+						# It is a fixed parameter
+						self.default_parameters[category][key] = parameter_sets[category][key][0]
+					else:			
+						# It is a varied parameter
+						self.varied_parameters.append(parameter_sets[category][key])
+						self.varied_parameters_indices.append((category, key))
 				else:
 					# It is a fixed parameter
 					self.default_parameters[category][key] = parameter_sets[category][key]
@@ -108,10 +112,8 @@ class DesignParameterSurvey(object):
 		format_string = '{:' + str(len(str(num_parameter_sets))) + 'd}'
 
 		params = list(itertools.product(*self.varied_parameters))
-		if num_parameter_sets == 1:
+		if len(self.varied_parameters) == 0:
 			params = [{}]
-
-		print(params)
 
 		for i, combo in enumerate(params):
 			# Create parameter set for this coronagraph

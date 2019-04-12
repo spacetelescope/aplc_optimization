@@ -48,7 +48,6 @@ class PorAPLC(Coronagraph):
 		}
 
 	def __init__(self, identifier, parameters, file_organization):
-		print('init', parameters)
 		super(PorAPLC, self).__init__(identifier, parameters, file_organization, por_aplc_analysis)
 
 	def write_driver(self, overwrite=False):
