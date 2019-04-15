@@ -107,7 +107,7 @@ def analyze_contrast_monochromatic(solution_filename, pdf=None):
 
 	plt.yscale('log')
 	plt.xlim(0, owa*1.2)
-	plt.ylim(5e-10, 2e-5)
+	plt.ylim(5e-12, 2e-5)
 	plt.ylabel('Normalized irradiance')
 	plt.xlabel(r'Angular separation ($\lambda_0/D$)')
 	if pdf is not None:

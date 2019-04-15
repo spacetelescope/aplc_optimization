@@ -1,0 +1,706 @@
+{
+ "cells": [
+  {
+   "cell_type": "code",
+   "execution_count": 1,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "%matplotlib qt\n",
+    "from hcipy import *\n",
+    "import numpy as np\n",
+<<<<<<< HEAD
+    "import matplotlib.pyplot as plt\n",
+    "from astropy.io import fits"
+=======
+    "import matplotlib.pyplot as plt"
+>>>>>>> first tests - just parameters changes
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 2,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+<<<<<<< HEAD
+    "supersampling = 4"
+=======
+    "# magnification between first plane and considered plane\n",
+    "delta_gamma = 0.004\n",
+    "\n",
+    "gamma_21 = 0.423\n",
+    "delta_gamma_21 = gamma_21 * delta_gamma\n",
+    "\n",
+    "gamma_31 = 1.008\n",
+    "delta_gamma_31 =gamma_31 * delta_gamma\n",
+    "\n",
+    "gamma_41 = 0.444\n",
+    "delta_gamma_41 = gamma_41 * delta_gamma\n",
+    "\n",
+    "gamma_51 = 0.979\n",
+    "delta_gamma_51 = gamma_51 * delta_gamma"
+>>>>>>> first tests - just parameters changes
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+<<<<<<< HEAD
+    "# P2 - LUVOIR Aperture"
+=======
+    "# P2 - LUVOIR segments"
+>>>>>>> first tests - just parameters changes
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 3,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+<<<<<<< HEAD
+    "grid = make_pupil_grid(1024)"
+=======
+    "p2_irisao_segment_size = 1.4e-3 # m\n",
+    "p2_irisao_segment_side_length = p2_irisao_segment_size / 2\n",
+    "p2_irisao_segment_gap_size = 12e-6 # m\n",
+    "p2_irisao_inscribed_circle_size = 10 * p2_irisao_segment_side_length\n",
+    "p2_irisao_flat_to_flat_size = 14 * np.sqrt(3) / 2 * p2_irisao_segment_side_length\n",
+    "p2_irisao_circumscribed_circle_size = np.sqrt(p2_irisao_flat_to_flat_size**2 + p2_irisao_segment_side_length**2)"
+>>>>>>> first tests - just parameters changes
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 4,
+   "metadata": {},
+<<<<<<< HEAD
+   "outputs": [],
+   "source": [
+    "LUVOIR = make_luvoir_a_aperture(normalized=True, with_spiders=True, with_segment_gaps=True, segment_transmissions=1)\n",
+    "pupil = evaluate_supersampled(LUVOIR,grid,supersampling)"
+=======
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "0.017142857142857144 0.017142857142857144\n"
+     ]
+    }
+   ],
+   "source": [
+    "irisao_gap_hexagon_fraction = p2_irisao_segment_gap_size / p2_irisao_segment_side_length\n",
+    "print(irisao_gap_hexagon_fraction, 0.012 / 0.7)"
+>>>>>>> first tests - just parameters changes
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 5,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+<<<<<<< HEAD
+    "plt.figure()\n",
+    "plt.title('Test LUVOIR aperture')\n",
+    "imshow_field(pupil)\n",
+    "plt.show()"
+=======
+    "p2_irisao_distance_between_segments = p2_irisao_segment_side_length * np.sqrt(3)\n",
+    "p2_irisao_segment_circumdiameter = 2 * p2_irisao_segment_side_length - np.sqrt(3) * p2_irisao_segment_gap_size\n",
+    "\n",
+    "def p2_irisao():\n",
+    "    segment = hexagonal_aperture(p2_irisao_segment_circumdiameter, np.pi/2)\n",
+    "    \n",
+    "    segment_positions = make_hexagonal_grid(p2_irisao_distance_between_segments, 6, False)\n",
+    "    \n",
+    "    aperture = make_segmented_aperture(segment, segment_positions)\n",
+    "    return aperture"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "# P1 - Pupil Mask"
+>>>>>>> first tests - just parameters changes
+   ]
+  },
+  {
+   "cell_type": "code",
+<<<<<<< HEAD
+   "execution_count": 6,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "#need to stick aperture geometry input into fits header"
+=======
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "p1_pupil_mask_size = 19.850e-3 # m\n",
+    "p2_pupil_mask_size = p1_pupil_mask_size * gamma_21\n",
+    "print(p2_pupil_mask_size)"
+>>>>>>> first tests - just parameters changes
+   ]
+  },
+  {
+   "cell_type": "code",
+<<<<<<< HEAD
+   "execution_count": 7,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "hdr = fits.header.Header()\n",
+    "fits.writeto('Test_LUVOIR_1024_2cm_gaps_10cm_strut_gy.fits', pupil.shaped, hdr, clobber=True)"
+=======
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Central segment\n",
+    "p1_pupil_mask_central_segment_size = 3.600e-3 # m\n",
+    "p2_pupil_mask_central_segment_size = p1_pupil_mask_central_segment_size * gamma_21\n",
+    "pupil_mask_central_segment_oversize_factor = p2_pupil_mask_central_segment_size / p2_irisao_segment_size\n",
+    "print(pupil_mask_central_segment_oversize_factor)"
+>>>>>>> first tests - just parameters changes
+   ]
+  },
+  {
+   "cell_type": "code",
+<<<<<<< HEAD
+   "execution_count": 8,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "#imshow_field(own_apod - mathematica_apod)\n",
+    "#plt.show()"
+=======
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Spiders\n",
+    "p1_pupil_mask_spider_thickness = 0.200e-3 # m"
+>>>>>>> first tests - just parameters changes
+   ]
+  },
+  {
+   "cell_type": "code",
+<<<<<<< HEAD
+   "execution_count": 9,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "#plt.subplot(1,2,1)\n",
+    "#imshow_field(own_apod, cmap='gray')\n",
+    "#plt.subplot(1,2,2)\n",
+    "#imshow_field(own_lyot, cmap='gray')\n",
+    "#plt.show()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Lyot Stop"
+=======
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "pupil_mask_undersize_contour = p2_pupil_mask_size / p2_irisao_circumscribed_circle_size\n",
+    "print(pupil_mask_undersize_contour)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Output\n",
+    "print('Pupil mask side-to-side contour length in P1: %d um' % (p1_pupil_mask_size * 1e6))\n",
+    "print('Pupil mask central segment side length in P1: %d um' % (p1_pupil_mask_central_segment_size * 1e6))\n",
+    "print('Pupil mask spider thickness in P1: %d um' % (p1_pupil_mask_spider_thickness * 1e6))"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "def p1_pupil_mask():\n",
+    "    segment = hexagonal_aperture(p1_pupil_mask_size / 7 / np.sqrt(3) * 2, np.pi / 2)\n",
+    "    distance_between_segments = p1_pupil_mask_size / 7\n",
+    "    segment_positions = make_hexagonal_grid(distance_between_segments, 3)\n",
+    "    contour = make_segmented_aperture(segment, segment_positions)\n",
+    "    \n",
+    "    central_segment = hexagonal_aperture(p1_pupil_mask_central_segment_size, np.pi / 2)\n",
+    "    \n",
+    "    spider1 = make_spider_infinite([0,0], 60, p1_pupil_mask_spider_thickness)\n",
+    "    spider2 = make_spider_infinite([0,0], 120, p1_pupil_mask_spider_thickness)\n",
+    "    spider3 = make_spider_infinite([0,0], -60, p1_pupil_mask_spider_thickness)\n",
+    "    spider4 = make_spider_infinite([0,0], -120, p1_pupil_mask_spider_thickness)\n",
+    "    \n",
+    "    def aper(grid):\n",
+    "        return (contour(grid) - central_segment(grid)) * spider1(grid) * spider2(grid) * spider3(grid) * spider4(grid)\n",
+    "    return aper"
+>>>>>>> first tests - just parameters changes
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+<<<<<<< HEAD
+    "Inner LS - > 0.19\n",
+    "Outer LS -> 0.937\n",
+    "\n",
+    "Relative to circular aperture Kevin used in MCMC stuff\n",
+    "\n",
+    "LUVOIR inscribed circle -> 13.7 m"
+=======
+    "# P3 - Apodizer"
+>>>>>>> first tests - just parameters changes
+   ]
+  },
+  {
+   "cell_type": "code",
+<<<<<<< HEAD
+   "execution_count": 21,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "def lyot_stop(normalized=True,spiders=False):\n",
+    "    \n",
+    "    outer_D = 13.7*0.937\n",
+    "    inner_D = 13.8*0.19\n",
+    "    spider_width = 0.10 #m\n",
+    "    \n",
+    "    if normalized:\n",
+    "        outer_D /= 15.2\n",
+    "        inner_D /= 15.2\n",
+    "        spider_width /= 15.2\n",
+    "        \n",
+    "    spid_oversize = 2\n",
+    "    \n",
+    "    outer_diameter = circular_aperture(outer_D)\n",
+    "    central_obscuration = circular_aperture(inner_D)\n",
+    "    \n",
+    "    \n",
+    "    \n",
+    "    if spiders:\n",
+    "        spider1 = make_spider_infinite([0, 0], 90, spid_oversize*spider_width)\n",
+    "        spider2 = make_spider_infinite([0, 0], 255, spid_oversize*spider_width)\n",
+    "        spider3 = make_spider_infinite([0, 0], 285, spid_oversize*spider_width)\n",
+    "        spider_multiply = spider1(grid) * spider2(grid) * spider3(grid)\n",
+    "    \n",
+    "    spider_multiply = 1\n",
+    "    \n",
+    "    def aper(grid):\n",
+    "        return (outer_diameter(grid) - central_obscuration(grid)) * spider_multiply\n",
+=======
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Contour\n",
+    "p3_apodizer_size = 19.725e-3 # m\n",
+    "p2_apodizer_size = p3_apodizer_size * gamma_21 / gamma_31\n",
+    "print(p2_apodizer_size)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Gap\n",
+    "p3_apodizer_mask_gap_size = 0.090e-3 # m\n",
+    "p3_irisao_segment_gap_size = p2_irisao_segment_gap_size * gamma_31 / gamma_21\n",
+    "apodizer_mask_gap_oversize_factor_wrt_irisao = p3_apodizer_mask_gap_size / p3_irisao_segment_gap_size"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Central segment\n",
+    "p3_apodizer_mask_central_segment_size = 3.950e-3 # m\n",
+    "p3_pupil_mask_central_segment_size = p1_pupil_mask_central_segment_size * gamma_31\n",
+    "apodizer_mask_central_segment_oversize_factor_wrt_pupil_mask = p3_apodizer_mask_central_segment_size / p3_pupil_mask_central_segment_size\n",
+    "p3_irisao_segment_size = p2_irisao_segment_size * gamma_31 / gamma_21"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Spiders\n",
+    "p3_apodizer_mask_spiders_thickness = 0.350e-3 # m"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "p3_irisao_segment_circumdiameter = p2_irisao_segment_circumdiameter * gamma_31 / gamma_21\n",
+    "p3_irisao_distance_between_segments = p2_irisao_distance_between_segments * gamma_31 / gamma_21\n",
+    "p3_apodizer_segment_circumdiameter = p3_irisao_segment_circumdiameter + (-p3_apodizer_mask_gap_size + p3_irisao_segment_gap_size) * np.sqrt(3)\n",
+    "\n",
+    "def p3_apodizer():\n",
+    "    # segmentation\n",
+    "    segment = hexagonal_aperture(p3_apodizer_segment_circumdiameter, np.pi/2)\n",
+    "    segment_positions = make_hexagonal_grid(p3_irisao_distance_between_segments, 3, False)\n",
+    "    segmentation = make_segmented_aperture(segment, segment_positions)\n",
+    "    \n",
+    "    segment = hexagonal_aperture(p3_apodizer_size / 7 / np.sqrt(3) * 2, np.pi / 2)\n",
+    "    distance_between_segments = p3_apodizer_size / 7\n",
+    "    segment_positions = make_hexagonal_grid(distance_between_segments, 3)\n",
+    "    contour = make_segmented_aperture(segment, segment_positions)\n",
+    "    \n",
+    "    central_segment = hexagonal_aperture(p3_apodizer_mask_central_segment_size, np.pi / 2)\n",
+    "    \n",
+    "    spider1 = make_spider_infinite([0,0], 60, p3_apodizer_mask_spiders_thickness)\n",
+    "    spider2 = make_spider_infinite([0,0], 120, p3_apodizer_mask_spiders_thickness)\n",
+    "    spider3 = make_spider_infinite([0,0], -60, p3_apodizer_mask_spiders_thickness)\n",
+    "    spider4 = make_spider_infinite([0,0], -120, p3_apodizer_mask_spiders_thickness)\n",
+    "    \n",
+    "    def aper(grid):\n",
+    "        return segmentation(grid) * (contour(grid) - central_segment(grid)) * spider1(grid) * spider2(grid) * spider3(grid) * spider4(grid)\n",
+    "    return aper"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "# P4 - Boston DM"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "p4_boston_dm_size = 9.9e-3 # m\n",
+    "num_actuators = 34\n",
+    "actuator_pitch = p4_boston_dm_size / num_actuators"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "p4_apodizer_size = p3_apodizer_size * gamma_41 / gamma_31\n",
+    "p4_irisao_circumscribed_circle_size = p2_irisao_circumscribed_circle_size * gamma_41 / gamma_21\n",
+    "p4_irisao_flat_to_flat_size = p2_irisao_flat_to_flat_size * gamma_41 / gamma_21"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "boston_dm_undersize_contour_wrt_apodizer_mask = p4_apodizer_size / p4_boston_dm_size\n",
+    "boston_dm_contour_oversize_factor = p4_boston_dm_size / p4_irisao_circumscribed_circle_size\n",
+    "\n",
+    "print(boston_dm_undersize_contour_wrt_apodizer_mask)\n",
+    "print(boston_dm_contour_oversize_factor)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "num_actuators_used = boston_dm_undersize_contour_wrt_apodizer_mask * num_actuators\n",
+    "print(num_actuators_used)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "print('Actuator pitch: %d um' % (actuator_pitch * 1e6))\n",
+    "print('Number of used actuators: %0.2f' % (num_actuators_used))"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "def p4_boston_dm():\n",
+    "    return circular_aperture(p4_boston_dm_size)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "# P5 - Lyot stop"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "p5_lyot_stop_size = 15.9e-3 # m\n",
+    "p5_irisao_inscribed_circle_size = p2_irisao_inscribed_circle_size * gamma_51 / gamma_21\n",
+    "lyot_stop_mask_undersize_contour_wrt_inscribed_circle = p5_lyot_stop_size / p5_irisao_inscribed_circle_size\n",
+    "\n",
+    "p5_irisao_flat_to_flat_size = p2_irisao_flat_to_flat_size * gamma_51 / gamma_21\n",
+    "p5_irisao_circumscribed_circle_size = p2_irisao_circumscribed_circle_size * gamma_51 / gamma_21\n",
+    "print(p5_irisao_circumscribed_circle_size)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "10 / (14 * np.sqrt(3) / 2) * lyot_stop_mask_undersize_contour_wrt_inscribed_circle"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Central segment\n",
+    "p5_lyot_stop_mask_central_segment_size = 6.800e-3 # m\n",
+    "p5_apodizer_mask_central_segment_size = p3_apodizer_mask_central_segment_size * gamma_51 / gamma_31\n",
+    "print(p5_apodizer_mask_central_segment_size)\n",
+    "p5_irisao_segment_size = p2_irisao_segment_size * gamma_51 / gamma_21\n",
+    "lyot_stop_mask_central_segment_oversize_factor_wrt_apodizer_mask = p5_lyot_stop_mask_central_segment_size / p5_apodizer_mask_central_segment_size\n",
+    "print(lyot_stop_mask_central_segment_oversize_factor_wrt_apodizer_mask)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Spiders\n",
+    "p5_lyot_stop_mask_spiders_thickness = 0.700e-3 # m\n",
+    "lyot_stop_mask_spiders_thickness_ratio = p5_lyot_stop_mask_spiders_thickness / p5_irisao_circumscribed_circle_size\n",
+    "print(lyot_stop_mask_spiders_thickness_ratio)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "def p5_lyot_stop():\n",
+    "    outer_diameter = circular_aperture(p5_lyot_stop_size)\n",
+    "    central_obscuration = circular_aperture(p5_lyot_stop_mask_central_segment_size)\n",
+    "    \n",
+    "    spider1 = make_spider_infinite([0,0], 60, p5_lyot_stop_mask_spiders_thickness)\n",
+    "    spider2 = make_spider_infinite([0,0], 120, p5_lyot_stop_mask_spiders_thickness)\n",
+    "    spider3 = make_spider_infinite([0,0], -60, p5_lyot_stop_mask_spiders_thickness)\n",
+    "    spider4 = make_spider_infinite([0,0], -120, p5_lyot_stop_mask_spiders_thickness)\n",
+    "    \n",
+    "    def aper(grid):\n",
+    "        return (outer_diameter(grid) - central_obscuration(grid)) * spider1(grid) * spider2(grid) * spider3(grid) * spider4(grid)\n",
+>>>>>>> first tests - just parameters changes
+    "    return aper"
+   ]
+  },
+  {
+   "cell_type": "code",
+<<<<<<< HEAD
+   "execution_count": 22,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "lyot_stop = evaluate_supersampled(lyot_stop(True,False), grid, supersampling)"
+=======
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "g = make_pupil_grid(1024, p4_boston_dm_size / gamma_41 * gamma_21)\n",
+    "supersampling = 1\n",
+    "\n",
+    "irisao = evaluate_supersampled(p2_irisao(), g, supersampling)\n",
+    "pupil_mask = evaluate_supersampled(p1_pupil_mask(), g.scaled(1 / gamma_21), supersampling)\n",
+    "apodizer = evaluate_supersampled(p3_apodizer(), g.scaled(gamma_31 / gamma_21), supersampling)\n",
+    "boston_dm = evaluate_supersampled(p4_boston_dm(), g.scaled(gamma_41 / gamma_21), supersampling)\n",
+    "lyot_stop = evaluate_supersampled(p5_lyot_stop(), g.scaled(gamma_51 / gamma_21), supersampling)"
+>>>>>>> first tests - just parameters changes
+   ]
+  },
+  {
+   "cell_type": "code",
+<<<<<<< HEAD
+   "execution_count": 23,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "plt.figure()\n",
+    "plt.title('Test LUVOIR LS')\n",
+    "imshow_field(lyot_stop)\n",
+    "plt.show()"
+=======
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "masks = [pupil_mask, irisao, apodizer, boston_dm, lyot_stop]\n",
+    "labels = ['Pupil Mask', 'IrisAO', 'Apodizer Mask', 'BostonDM', 'LyotStop']\n",
+    "\n",
+    "for mask, label in zip(masks, labels):\n",
+    "    plt.figure()\n",
+    "    plt.title(label)\n",
+    "    imshow_field(mask, cmap='gray')\n",
+    "    plt.show()"
+>>>>>>> first tests - just parameters changes
+   ]
+  },
+  {
+   "cell_type": "code",
+<<<<<<< HEAD
+   "execution_count": 24,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "hdr = fits.header.Header()\n",
+    "fits.writeto('Test_LUVOIR_LS_1024_gy.fits', lyot_stop.shaped, hdr, clobber=True)"
+=======
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "for i, (mask_a, label_a) in enumerate(zip(masks, labels)):\n",
+    "    for j, (mask_b, label_b) in enumerate(zip(masks, labels)):\n",
+    "        if j <= i:\n",
+    "            continue\n",
+    "        \n",
+    "        plt.figure()\n",
+    "        plt.title(label_a + ' - ' + label_b)\n",
+    "        imshow_field(mask_a - mask_b, cmap='gray', vmin=-1, vmax=1)\n",
+    "        plt.show()"
+>>>>>>> first tests - just parameters changes
+   ]
+  },
+  {
+   "cell_type": "code",
+<<<<<<< HEAD
+   "execution_count": 25,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "plt.figure()\n",
+    "plt.title('Test LUVOIR pupil - LS')\n",
+    "imshow_field(pupil-lyot_stop)\n",
+=======
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "for gray in [True, False]:\n",
+    "    for num_pix in [2048]:\n",
+    "        grid = make_uniform_grid(num_pix, [p3_apodizer_size, p3_apodizer_size])\n",
+    "\n",
+    "        own_apod = evaluate_supersampled(p3_apodizer(), grid, 1)\n",
+    "        write_fits(own_apod, 'ehpor_apodizer_mask_%d_%s.fits' % (num_pix, 'gy' if gray else 'bw'))\n",
+    "\n",
+    "        own_lyot = evaluate_supersampled(p5_lyot_stop(), grid.scaled(gamma_51 / gamma_31), 4 if gray else 1)\n",
+    "        write_fits(own_lyot, 'ehpor_lyot_mask_%d_%s.fits' % (num_pix, 'gy' if gray else 'bw'))"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "imshow_field(own_apod - mathematica_apod)\n",
+>>>>>>> first tests - just parameters changes
+    "plt.show()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+<<<<<<< HEAD
+   "source": []
+=======
+   "source": [
+    "plt.subplot(1,2,1)\n",
+    "imshow_field(own_apod, cmap='gray')\n",
+    "plt.subplot(1,2,2)\n",
+    "imshow_field(own_lyot, cmap='gray')\n",
+    "plt.show()"
+   ]
+>>>>>>> first tests - just parameters changes
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+<<<<<<< HEAD
+   "display_name": "Python 2",
+   "language": "python",
+   "name": "python2"
+=======
+   "display_name": "Python 3",
+   "language": "python",
+   "name": "python3"
+>>>>>>> first tests - just parameters changes
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+<<<<<<< HEAD
+    "version": 2
+=======
+    "version": 3
+>>>>>>> first tests - just parameters changes
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+<<<<<<< HEAD
+   "pygments_lexer": "ipython2",
+   "version": "2.7.16"
+=======
+   "pygments_lexer": "ipython3",
+   "version": "3.7.3"
+>>>>>>> first tests - just parameters changes
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 2
+}
