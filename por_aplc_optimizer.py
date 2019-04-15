@@ -425,9 +425,9 @@ def optimize_aplc(pupil, focal_plane_mask, lyot_stops, dark_zone_mask, wavelengt
 				temp = np.repeat((np.ones(focal_grid.size) * np.sqrt(contrast))[r], q)
 				contrast_requirement.append(temp)
 			contrast_requirement = np.concatenate(contrast_requirement)
-			contrast_requirements.append(contrast_requirement)
+			contrast_requirements.append(contrast_requirement.copy())
 
-			contrast_requirement *= throughput_estimate
+			contrast_requirement *= np.sqrt(throughput_estimate)
 
 			# Add constraints
 			for ee, e0, c0 in zip(M, base_electric_field, contrast_requirement):
@@ -478,8 +478,8 @@ def optimize_aplc(pupil, focal_plane_mask, lyot_stops, dark_zone_mask, wavelengt
 			if not (throughput_iter == num_throughput_iterations - 1) and subsampling_index == 0:
 				# Update throughput estimate and rerun
 				rhs = np.empty(base_electric_fields.size * 2)
-				rhs[::2] = contrast_requirements * throughput_estimate - base_electric_fields
-				rhs[1::2] = -contrast_requirements * throughput_estimate - base_electric_fields
+				rhs[::2] = contrast_requirements * np.sqrt(throughput_estimate) - base_electric_fields
+				rhs[1::2] = -contrast_requirements * np.sqrt(throughput_estimate) - base_electric_fields
 				for constr, r in zip(constraints, rhs):
 					constr.RHS = r
 

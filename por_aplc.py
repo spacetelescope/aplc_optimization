@@ -8,7 +8,8 @@ import shutil
 class PorAPLC(Coronagraph):
 	_default_parameters = {
 		'pupil': {
-			'filename': 'NoFilename'
+			'filename': 'NoFilename',
+			'N':None
 			},
 		'focal_plane_mask': {
 			'radius': 4.0,
@@ -19,7 +20,9 @@ class PorAPLC(Coronagraph):
 		'lyot_stop': {
 			'filename': 'NoFilename',
 			'alignment_tolerance': 0,
-			'num_lyot_stops': 1
+			'num_lyot_stops': 1,
+			'LS_ID':None,
+			'LS_OD':None
 			},
 		'image': {
 			'contrast': 8.0,
@@ -60,8 +63,8 @@ class PorAPLC(Coronagraph):
 		with open('por_aplc_driver_template.py') as template_file:
 			driver_template = template_file.read()
 		driver += driver_template
-
-		fname = os.path.join(self.file_organization['drivers_dir'], self.identifier + '.py')
+		
+		fname = os.path.join(self.file_organization['drivers_dir'], self.identifier +'.py')
 		with open(fname, 'w') as output_file:
 			output_file.write(driver)
 
@@ -83,12 +86,14 @@ class PorAPLC(Coronagraph):
 		return os.path.exists(pup_fname) and os.path.exists(ls_fname)
 
 	def check_driver(self):
-		fname_driver = os.path.join(self.file_organization['drivers_dir'], self.identifier + '.py')
+		
+		fname_driver = os.path.join(self.file_organization['drivers_dir'], self.identifier +'.py')
 		fname_optimizer = os.path.join(self.file_organization['drivers_dir'], 'por_aplc_optimizer.py')
 
 		return os.path.exists(fname_driver) and os.path.exists(fname_optimizer)
 
 	def get_driver_command(self):
-		fname_driver = os.path.join(self.file_organization['drivers_dir'], self.identifier + '.py')
+		
+		fname_driver = os.path.join(self.file_organization['drivers_dir'], self.identifier +'.py')
 
 		return '{:s} {:s} &> {:s}'.format(sys.executable, fname_driver, self.log_filename)
