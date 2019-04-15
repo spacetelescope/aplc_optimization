@@ -6,8 +6,8 @@ varying_parameters = {'pupil': {'filename': 'ehpor_hicat_apodizer_mask_256_gy.fi
 survey = DesignParameterSurvey(PorAPLC, varying_parameters, 'magnfication_survey1/', 'masks/')
 survey.describe()
 
-survey.write_drivers(False)
-survey.run_optimizations(False)
+survey.write_drivers(True)
+survey.run_optimizations(True)
 survey.run_analyses(True)
 
 varying_parameters = {'pupil': {'filename': 'ehpor_hicat_apodizer_mask_256_gy.fits'}, 'lyot_stop': {'filename': 'ehpor_hicat_lyot_mask_256_gy_{:d}.fits', 'num_stops': 5}, 'image': {'owa': 12}}
@@ -15,6 +15,6 @@ varying_parameters = {'pupil': {'filename': 'ehpor_hicat_apodizer_mask_256_gy.fi
 survey = DesignParameterSurvey(PorAPLC, varying_parameters, 'magnfication_survey5/', 'masks/')
 survey.describe()
 
-survey.write_drivers(False)
-survey.run_optimizations(False)
+survey.write_drivers(True)
+survey.run_optimizations(True)
 survey.run_analyses(True)
