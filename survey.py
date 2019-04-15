@@ -109,7 +109,13 @@ class DesignParameterSurvey(object):
 		num_parameter_sets = 1
 		for p in self.varied_parameters:
 			num_parameter_sets *= len(p)
-		format_string = '{:' + str(len(str(num_parameter_sets))) + 'd}'
+		
+		print(self.varied_parameters)
+		
+		
+		#format_string = '{:' + str(len(str(num_parameter_sets))) +  'd}'+
+		
+		format_string = 'LUVOIR_N{:}_FPM{:3d}M0{:d}_IWA{:04d}_OWA0{:04d}_C{:d}_BW{:d}_Nlam{:d}_LS_ID{:04d}_OD{:04d}'
 
 		params = list(itertools.product(*self.varied_parameters))
 		if len(self.varied_parameters) == 0:
@@ -121,9 +127,24 @@ class DesignParameterSurvey(object):
 			for value, (category, key) in zip(combo, self.varied_parameters_indices):
 				print(category, key, value)
 				new_parameter_set[category][key] = value
+			
+			N     = new_parameter_set['pupil']['N'] 	
+			fpm   = int(100*new_parameter_set['focal_plane_mask']['radius'])
+			m     = new_parameter_set['focal_plane_mask']['num_pix']
+			iwa   = int(100*new_parameter_set['image']['iwa'])			
+			owa   = int(100*new_parameter_set['image']['owa'])
+			c     = int(new_parameter_set['image']['contrast'])
+			bw    = int(100*new_parameter_set['image']['bandwidth'])
+			nlam  = new_parameter_set['image']['num_wavelengths']
+			ls_id = int(1000*new_parameter_set['lyot_stop']['LS_ID'])
+			ls_od = int(1000*new_parameter_set['lyot_stop']['LS_OD'])
+			#new_parameter_set['']['']
 
 			# Create unique id
-			identifier = format_string.format(i)
+			identifier = format_string.format(N,fpm,m,iwa,owa,c,bw,nlam,ls_id,ls_od)
+			
+			print(identifier)
+			
 
 			# Create coronagraph
 			self.coronagraphs.append(coronagraph_class(identifier, new_parameter_set, self.file_organization))
