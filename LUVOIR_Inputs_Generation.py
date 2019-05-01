@@ -2,6 +2,7 @@ from hcipy import *
 import numpy as np
 import matplotlib.pyplot as plt
 from astropy.io import fits
+from pathlib import Path
 
 def LUVOIR_inputs_gen(input_files_dict):
 	
@@ -20,7 +21,7 @@ def LUVOIR_inputs_gen(input_files_dict):
 	
 	grid                        = make_pupil_grid(N)
 	LUVOIR_ap, header           = make_luvoir_a_aperture(gap_padding, header = True)
-	pupil                       = evaluate_supersampled(LUVOIR_ap,grid,1)
+	pupil                       = evaluate_supersampled(LUVOIR_ap,grid,oversamp)
 	
 	header['EFF_GAP']  = header['GAP_PAD']*header['SEG_GAP']
 	
@@ -39,9 +40,16 @@ def LUVOIR_inputs_gen(input_files_dict):
 	hdr.set('SEG_TRAN',header['SEG_TRAN'],'The transmission for each of the segments')
 	hdr.set('EDGE','bw','black and white, or grey pixels')
 	hdr.set('PROV',header['PROV'])
-
-	fits.writeto('masks/'+pup_filename, pupil.shaped, hdr,overwrite=True)
 	
+	config = Path('masks/'+pup_filename)
+	if config.is_file():
+		print('{0:s} exists'.format('masks/'+pup_filename))
+	else:
+		fits.writeto('masks/'+pup_filename, pupil.shaped, hdr,overwrite=True)
+		print('{0:s} has been written to file'.format('masks/'+pup_filename))
+		
+		
+		
 	ls_filenames = []
 	
 	for ls_id in LS_ID:
@@ -61,7 +69,7 @@ def LUVOIR_inputs_gen(input_files_dict):
 			if ls_spid:
 				ls_filename  = filepath+'LS_LUVOIR_ID{0:04d}_OD{1:04d}_{2:s}_pad{3:02d}_{4:s}_ovsamp{5:d}_N{6:04d}.fits'.format(int(ls_id*1000),\
                                                                                                 int(ls_od*1000), \
-                                                                                                strut_key, spid_ov,\
+                                                                                                strut_key, ls_spid_ov,\
                                                                                                 edge, oversamp, N)
 			else:
 				ls_filename  = filepath+'LS_LUVOIR_ID{0:04d}_OD{1:04d}_{2:s}_{3:s}_ovsamp{4:d}_N{5:04d}.fits'.format(int(ls_id*1000), \
@@ -69,7 +77,7 @@ def LUVOIR_inputs_gen(input_files_dict):
                                                                                                 strut_key, edge, \
                                                                                                 oversamp, N)
 
-			LUVOIR_ls, ls_header = make_luvoir_a_lyot_stop(ls_id, ls_od, lyot_ref_diam, spid_oversize=ls_spid_ov, spiders=ls_spid, header=True)
+			LUVOIR_ls, ls_header = make_luvoir_a_lyot_stop(ls_id, ls_od, lyot_ref_diam, spid_oversize=ls_spid_ov, spiders=ls_spid, header = True)
 			lyot_stop = evaluate_supersampled(LUVOIR_ls, grid, oversamp)
 
 			header.update(ls_header)
@@ -94,8 +102,14 @@ def LUVOIR_inputs_gen(input_files_dict):
 			hdr.set('EDGE',header['EDGE'],'black and white, or grey pixels')
 			hdr.set('OVERSAMP',header['OVERSAMP'],'oversampling factor, # grey levels')
 
-			fits.writeto('masks/'+ls_filename, lyot_stop.shaped, hdr, overwrite=True)
-			
+			config = Path('masks/'+ls_filename)
+			if config.is_file():
+				print('{0:s} exists'.format('masks/'+ls_filename))
+			else:
+				fits.writeto('masks/'+ls_filename, lyot_stop.shaped, hdr,overwrite=True)
+				print('{0:s} has been written to file'.format('masks/'+ls_filename))
+				
+				
 			ls_filenames.append(ls_filename)
 	
 	return pup_filename, ls_filenames

@@ -84,7 +84,7 @@ def analyze_contrast_monochromatic(solution_filename, pdf=None):
 	focal_grid = make_focal_grid(pupil.grid, 8, owa * 1.2)
 	prop = FraunhoferPropagator(pupil.grid, focal_grid)
 
-	wf = Wavefront(apodizer)
+	wf = Wavefront(pupil * apodizer)
 	img = prop(coro(wf)).intensity
 	img_ref = prop(Wavefront(apodizer * lyot_stop)).intensity
 

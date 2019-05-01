@@ -1,3 +1,4 @@
 *.log
 display/*
 __pycache__/*
+masks/*

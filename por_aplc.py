@@ -20,9 +20,7 @@ class PorAPLC(Coronagraph):
 		'lyot_stop': {
 			'filename': 'NoFilename',
 			'alignment_tolerance': 0,
-			'num_lyot_stops': 1,
-			'LS_ID':None,
-			'LS_OD':None
+			'num_lyot_stops': 1
 			},
 		'image': {
 			'contrast': 8.0,

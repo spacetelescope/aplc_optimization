@@ -115,7 +115,7 @@ class DesignParameterSurvey(object):
 		
 		#format_string = '{:' + str(len(str(num_parameter_sets))) +  'd}'+
 		
-		format_string = 'LUVOIR_N{:}_FPM{:3d}M0{:d}_IWA{:04d}_OWA0{:04d}_C{:d}_BW{:d}_Nlam{:d}_LS_ID{:04d}_OD{:04d}'
+		format_string = '{:' + str(len(str(num_parameter_sets))) +  'd}'+ '_LUVOIR_N{:}_FPM{:3d}M0{:d}_IWA{:04d}_OWA0{:04d}_C{:d}_BW{:d}_Nlam{:d}_LS_ID{:s}_OD{:s}_{:s}'
 
 		params = list(itertools.product(*self.varied_parameters))
 		if len(self.varied_parameters) == 0:
@@ -128,6 +128,8 @@ class DesignParameterSurvey(object):
 				print(category, key, value)
 				new_parameter_set[category][key] = value
 			
+			#LUVOIR/LS_LUVOIR_ID0190_OD0937_no_struts_gy_ovsamp2_N0050.fits
+			
 			N     = new_parameter_set['pupil']['N'] 	
 			fpm   = int(100*new_parameter_set['focal_plane_mask']['radius'])
 			m     = new_parameter_set['focal_plane_mask']['num_pix']
@@ -136,15 +138,20 @@ class DesignParameterSurvey(object):
 			c     = int(new_parameter_set['image']['contrast'])
 			bw    = int(100*new_parameter_set['image']['bandwidth'])
 			nlam  = new_parameter_set['image']['num_wavelengths']
-			ls_id = int(1000*new_parameter_set['lyot_stop']['LS_ID'])
-			ls_od = int(1000*new_parameter_set['lyot_stop']['LS_OD'])
+			ls_id = new_parameter_set['lyot_stop']['filename'][18:23]
+			ls_od = new_parameter_set['lyot_stop']['filename'][26:30]
+			
+			ls_strut_check = new_parameter_set['lyot_stop']['filename'][31]
+			
+			if ls_strut_check == 'n':
+				ls_strut_key = 'no_ls_struts'
+			else:
+				ls_strut_key = 'ls_'+ new_parameter_set['lyot_stop']['filename'][31:43]
+			
 			#new_parameter_set['']['']
 
 			# Create unique id
-			identifier = format_string.format(N,fpm,m,iwa,owa,c,bw,nlam,ls_id,ls_od)
-			
-			print(identifier)
-			
+			identifier = format_string.format(i,N,fpm,m,iwa,owa,c,bw,nlam,ls_id,ls_od,ls_strut_key)
 
 			# Create coronagraph
 			self.coronagraphs.append(coronagraph_class(identifier, new_parameter_set, self.file_organization))
@@ -337,6 +344,8 @@ class Coronagraph(object):
 		if not os.path.exists(self.solution_filename):
 			print('The solution is not optimized yet. No analysis will be performed.')
 			return
+		
+		print(self.solution_filename)
 
 		# Read in functions from analysis_module and sort by name
 		analysis = inspect.getmembers(self.analysis_module, inspect.isfunction)
