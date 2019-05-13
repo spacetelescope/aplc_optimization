@@ -2,6 +2,8 @@ from hcipy import *
 import numpy as np
 import matplotlib as mpl
 mpl.use('Agg')
+import matplotlib
+from mpl_toolkits.axes_grid1 import make_axes_locatable
 import matplotlib.pyplot as plt
 import asdf
 import os
@@ -91,6 +93,7 @@ def analyze_contrast_monochromatic(solution_filename, pdf=None):
 	plt.title('Monochromatic normalized irradiance')
 	imshow_field(np.log10(img / img_ref.max()), vmin=-contrast-1, vmax=-contrast+4, cmap='inferno')
 	plt.colorbar()
+	plt.axis('off')
 	if pdf is not None:
 		pdf.savefig()
 		plt.close()
@@ -104,7 +107,8 @@ def analyze_contrast_monochromatic(solution_filename, pdf=None):
 	plt.axvline(iwa, color=colors.red)
 	plt.axvline(owa, color=colors.red)
 	plt.axvline(radius_fpm, color='k')
-
+	plt.axhline(10**(-contrast), xmin=0, xmax=owa*1.2, linewidth=1, color='k', linestyle='--')
+	
 	plt.yscale('log')
 	plt.xlim(0, owa*1.2)
 	plt.ylim(5e-12, 2e-5)
@@ -134,6 +138,7 @@ def analyze_summary(solution_filename, pdf=None):
 	owa = parameters['image']['owa']
 	bandwidth = parameters['image']['bandwidth']
 	radius_fpm = parameters['focal_plane_mask']['radius']
+	contrast = parameters['image']['contrast']
 
 	coro = LyotCoronagraph(pupil.grid, focal_plane_mask, lyot_stop)
 	coro_without_lyot = LyotCoronagraph(pupil.grid, focal_plane_mask)
@@ -154,25 +159,51 @@ def analyze_summary(solution_filename, pdf=None):
 		img_foc += prop(wf).intensity
 		img_ref += prop(Wavefront(pupil * lyot_stop)).intensity
 		lyot += coro_without_lyot(wf).intensity
-
+	
+	font = {'family' : 'normal', 'weight' : 'medium', 'size'   : 10}
+	matplotlib.rc('font', **font)
+	
+	#apodizer and telescope aperture
 	plt.subplot(2,3,1)
-	imshow_field(pupil * apodizer, cmap='gray')
-	plt.colorbar()
+	imshow_field(pupil * apodizer, cmap='Greys_r')
+	plt.title('Apodizer and Telescope Aperture')
+	plt.axis('off')
+	
+	#image plane
 	plt.subplot(2,3,2)
-	imshow_field(np.log10(img_foc / img_foc.max()), vmin=-5, vmax=0, cmap='inferno')
-	plt.colorbar()
+	im = imshow_field(np.log10(img_foc / img_foc.max()), vmin=-5, vmax=0, cmap='inferno')
+	plt.title('Image plane')
+	plt.colorbar(im,fraction=0.046, pad=0.04)
+	plt.axis('off')
+	
+	#image plane masked by focal plane mask
 	plt.subplot(2,3,3)
-	imshow_field(np.log10(img_foc / img_foc.max() * (1e-20 + focal_plane_mask_large)), vmin=-5, vmax=0, cmap='inferno')
-	plt.colorbar()
+	im = imshow_field(np.log10(img_foc / img_foc.max() * (1e-20 + focal_plane_mask_large)), vmin=-5, vmax=0, cmap='inferno')
+	plt.title('Image plane w/FPM')
+	plt.colorbar(im,fraction=0.046, pad=0.04)
+	plt.axis('off')
+	
+	#lyot plane
 	plt.subplot(2,3,4)
-	imshow_field(np.log10(lyot / lyot.max()), vmin=-3, vmax=0, cmap='inferno')
-	plt.colorbar()
+	im = imshow_field(np.log10(lyot / lyot.max()), vmin=-3, vmax=0, cmap='inferno')
+	plt.title('Lyot plane')
+	plt.colorbar(im,fraction=0.046, pad=0.04)
+	plt.axis('off')
+	
+	#lyot plane masked by lyot stop
 	plt.subplot(2,3,5)
-	imshow_field(np.log10(lyot / lyot.max() * (1e-20 + lyot_stop)), vmin=-3, vmax=0, cmap='inferno')
-	plt.colorbar()
+	im = imshow_field(np.log10(lyot / lyot.max() * (1e-20 + lyot_stop)), vmin=-3, vmax=0, cmap='inferno')
+	plt.title('Lyot plane w/lyot stop')
+	plt.colorbar(im,fraction=0.046, pad=0.04)
+	plt.axis('off')
+	
+	#final image plane
 	plt.subplot(2,3,6)
-	imshow_field(np.log10(img / img_ref.max()), vmin=-9, vmax=-5, cmap='inferno')
-	plt.colorbar()
+	im = imshow_field(np.log10(img / img_ref.max()), vmin=-contrast-1, vmax=-contrast+4, cmap='inferno')
+	plt.title('Final image plane')
+	plt.colorbar(im,fraction=0.046, pad=0.04)
+	plt.axis('off')
+	
 	if pdf is not None:
 		pdf.savefig()
 		plt.close()
@@ -181,6 +212,13 @@ def analyze_summary(solution_filename, pdf=None):
 
 	return {}
 
+'''
 def analyze_lyot_robustness(solution_filename, pdf=None):
-	pupil, apodizer, focal_plane_mask, lyot_tops, parameters, file_organization = create_coronagraph(solution_filename)
+	pupil, apodizer, focal_plane_mask, lyot_stops, parameters, file_organization = create_coronagraph(solution_filename)
 	
+	
+
+def analyze_calculate_throughput(solution_filename):
+	pupil, apodizer, focal_plane_mask, lyot_stops, parameters, file_organization = create_coronagraph(solution_filename)
+	
+'''

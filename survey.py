@@ -113,9 +113,9 @@ class DesignParameterSurvey(object):
 		print(self.varied_parameters)
 		
 		
-		#format_string = '{:' + str(len(str(num_parameter_sets))) +  'd}'+
+		#format_string = '{:0' + str(len(str(num_parameter_sets))) +  'd}'
 		
-		format_string = '{:' + str(len(str(num_parameter_sets))) +  'd}'+ '_LUVOIR_N{:}_FPM{:3d}M0{:d}_IWA{:04d}_OWA0{:04d}_C{:d}_BW{:d}_Nlam{:d}_LS_ID{:s}_OD{:s}_{:s}'
+		format_string = '{:0' + str(len(str(num_parameter_sets))) +  'd}' + '_LUVOIR_N{:}_FPM{:3d}M0{:d}_IWA{:04d}_OWA0{:04d}_C{:d}_BW{:d}_Nlam{:d}_LS_ID{:s}_OD{:s}_{:s}'
 
 		params = list(itertools.product(*self.varied_parameters))
 		if len(self.varied_parameters) == 0:
