@@ -4,11 +4,6 @@ from por_aplc import PorAPLC
 from astropy.io import fits
 from LUVOIR_Inputs_Generation import LUVOIR_inputs_gen
 
-n = 200
-a = 0.937
-b = 0.19
-c = b/a
-
 t0_total = time.time()
 
 input_files_dict = {'directory':'LUVOIR/', 'N':n, 'oversamp':4,\
