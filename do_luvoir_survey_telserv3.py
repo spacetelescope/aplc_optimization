@@ -26,10 +26,10 @@ luvoir_small.describe()
 
 luvoir_small.write_drivers(True)
 t0 = time.time()
-print('small optimization start time: {0:.2f}s'.format(t0))
+print('small optimization start time: {0:.2f}s'.format(t0-t0_total))
 luvoir_small.run_optimizations(True)
 t1 = time.time()
-print('small optimization fin time: {0:.2f}s'.format(t1))
+print('small optimization fin time: {0:.2f}s'.format(t1-t0_total))
 print('small optimization run time: {0:.2f}s'.format(t1-t0))
 
 luvoir_small.run_analyses(True)
@@ -53,10 +53,10 @@ luvoir_mid.describe()
 
 luvoir_mid.write_drivers(True)
 t0 = time.time()
-print('medium optimization start time: {0:.2f}s'.format(t0))
+print('medium optimization start time: {0:.2f}s'.format(t0-t0_total))
 luvoir_mid.run_optimizations(True)
 t1 = time.time()
-print('medium optimization fin time: {0:.2f}s'.format(t1))
+print('medium optimization fin time: {0:.2f}s'.format(t1-t0_total))
 print('medium optimization run time: {0:.2f}s'.format(t1-t0))
 
 luvoir_mid.run_analyses(True)
@@ -72,25 +72,15 @@ luvoir_lg.describe()
 
 luvoir_lg.write_drivers(True)
 t0 = time.time()
-print('large optimization start time: {0:.2f}s'.format(t0))
+print('large optimization start time: {0:.2f}s'.format(t0-t0_total))
 luvoir_lg.run_optimizations(True)
 t1 = time.time()
-print('large optimization fin time: {0:.2f}s'.format(t1))
+print('large optimization fin time: {0:.2f}s'.format(t1-t0_total))
 print('large optimization time: {0:.2f}s'.format(t1-t0))
 luvoir_lg.run_analyses(True)
 
 t1_total = time.time()
 print('total survey run time: {0:.2f}s'.format(t1_total-t0_total))
-
-#old LUVOIR baseline -> "10%" -> double check with Neil, fpm 0.10 margin?
-#small:  fpm: , drkhl:  3.75  - 12.00
-#medium: fpm: , drkhl:  6.72  - 21.50
-#large:  fpm: , drkhl: 12.04 - 38.53
-
-#new, from Kevin MCMC -> "18%"
-#3.82, 3.00 - 12
-#7.54, 6.72 - 21.5
-#15.87, 15.05 - 60.20
 
 #H = 0.56
 #X = 3.2

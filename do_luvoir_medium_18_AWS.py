@@ -14,7 +14,7 @@ pup_filename, ls_filenames = LUVOIR_inputs_gen(input_files_dict)
 
 survey_parameters_large = {'pupil': {'N': n,'filename': pup_filename}, \
                      'lyot_stop': {'filename': ls_filenames}, \
-                     'focal_plane_mask': {'radius':7.54},
+                     'focal_plane_mask': {'radius':7.54, 'num_pix': 250},
                      'image': {'contrast':10,'iwa':6.72,'owa':21.50,'bandwidth':0.18,'num_wavelengths':8}}
 
 
