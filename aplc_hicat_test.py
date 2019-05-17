@@ -421,14 +421,14 @@ if __name__ == '__main__':
 	n_foc = 50 # px diameter
 	foc_inner = 8.543 # lambda_0/D diameter
 	spectral_bandwidth = 0.1 # fractional
-	num_wavelengths = 1
+	num_wavelengths = 4
 	num_lyot_stops = 5
 	lyot_stop_shift = 1 # px
 	tau = 0.55 # expected planet peak intensity (relative to without focal plane mask)
 	gray_focal_plane_mask_type = True
 	gray_pupil = True
 	gray_lyot_stop = True
-	num_scalings = 1
+	num_scalings = 2
 
 	# Build filename
 	# fname = 'apodizers/HiCAT-N%04d_NFOC%04d_DZ%04d_%04d_C%03d_BW%02d_NLAM%02d_SHIFT%02d_%02dLS_ADAP%d' % (num_pix, n_foc, iwa*100, owa*100, -10*np.log10(contrast), spectral_bandwidth*100, num_wavelengths, lyot_stop_shift*10, num_lyot_stops, num_scalings)
