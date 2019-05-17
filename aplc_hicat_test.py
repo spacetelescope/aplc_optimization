@@ -433,7 +433,7 @@ if __name__ == '__main__':
 	# Build filename
 	# fname = 'apodizers/HiCAT-N%04d_NFOC%04d_DZ%04d_%04d_C%03d_BW%02d_NLAM%02d_SHIFT%02d_%02dLS_ADAP%d' % (num_pix, n_foc, iwa*100, owa*100, -10*np.log10(contrast), spectral_bandwidth*100, num_wavelengths, lyot_stop_shift*10, num_lyot_stops, num_scalings)
 	#fname = 'apodizers/LUVOIR_IWA=3.0_OWA=12.0_BW=0.18_nlam=08'
-	fname = 'apodizers/HICAT_test'
+	fname = 'apodizers/HICAT_test_500'
 	print('Apodizer will be saved to:')
 	print('   ' + fname + '.fits')
 	print('')
@@ -446,8 +446,8 @@ if __name__ == '__main__':
 	#fname_pupil = 'masks/LUVOIR/TelAp_full_luvoirss100cobs1gap2_N0250.fits'
 	#fname_lyot_stop = 'masks/LUVOIR/LS_full_luvoir_ann19D94_clear_N0250.fits'
 
-	fname_pupil = 'mask_test/remi_test_hicat_apodizer_mask_100_bw_check_gap.fits'
-	fname_lyot_stop = 'mask_test/remi_test_hicat_lyot_mask_100_bw_0.fits'
+	fname_pupil = 'mask_test/remi_test_hicat_apodizer_mask_500_gy_check_gap.fits'
+	fname_lyot_stop = 'mask_test/remi_test_hicat_lyot_mask_500_gy_0.fits'
 
 	pupil_grid = make_uniform_grid((num_pix, num_pix), 1)
 
