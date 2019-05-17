@@ -414,12 +414,12 @@ def optimize_aplc(pupil, focal_plane_mask, lyot_stops, dark_zone_mask, wavelengt
 
 if __name__ == '__main__':
 	contrast = 1e-8
-	num_pix = 100
+	num_pix = 500
 	q_sci = 2.5 # px / (lambda_0/D)
-	iwa = 4.0 # lambda_0/D
-	owa = 10 # lambda_0/D
+	iwa = 3.75 # lambda_0/D
+	owa = 15 # lambda_0/D
 	n_foc = 50 # px diameter
-	foc_inner = 2*4.0 # lambda_0/D diameter
+	foc_inner = 8.543 # lambda_0/D diameter
 	spectral_bandwidth = 0.1 # fractional
 	num_wavelengths = 1
 	num_lyot_stops = 5
