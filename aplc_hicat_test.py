@@ -446,8 +446,8 @@ if __name__ == '__main__':
 	#fname_pupil = 'masks/LUVOIR/TelAp_full_luvoirss100cobs1gap2_N0250.fits'
 	#fname_lyot_stop = 'masks/LUVOIR/LS_full_luvoir_ann19D94_clear_N0250.fits'
 
-	fname_pupil = 'masks_test/remi_test_hicat_apodizer_mask_100_bw_check_gap.fits'
-	fname_lyot_stop = 'masks_test/remi_test_hicat_lyot_mask_100_bw_0.fits'
+	fname_pupil = 'mask_test/remi_test_hicat_apodizer_mask_100_bw_check_gap.fits'
+	fname_lyot_stop = 'mask_test/remi_test_hicat_lyot_mask_100_bw_0.fits'
 
 	pupil_grid = make_uniform_grid((num_pix, num_pix), 1)
 
