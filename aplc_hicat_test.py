@@ -422,7 +422,7 @@ if __name__ == '__main__':
 	foc_inner = 2*4.0 # lambda_0/D diameter
 	spectral_bandwidth = 0.1 # fractional
 	num_wavelengths = 1
-	num_lyot_stops = 1
+	num_lyot_stops = 5
 	lyot_stop_shift = 1 # px
 	tau = 0.55 # expected planet peak intensity (relative to without focal plane mask)
 	gray_focal_plane_mask_type = True
