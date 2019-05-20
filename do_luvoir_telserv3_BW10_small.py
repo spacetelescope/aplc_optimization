@@ -16,7 +16,7 @@ survey_parameters = {'pupil': {'N': n,'filename': pup_filename}, \
                      'lyot_stop': {'filename': ls_filenames}, \
                      'focal_plane_mask': {'radius':3.5, 'num_pix': 150, 'grayscale': True,},
                      'image': {'contrast':10,'iwa':3.4,'owa':12.0,'bandwidth':0.10,'num_wavelengths':5}, \
-                     'method':{'starting_scale': 4}}
+                     'method':{'starting_scale': 1}}
 
 
 luvoir = DesignParameterSurvey(PorAPLC, survey_parameters, 'surveys/luvoir_BW10_small_N{:04d}_telserv3/'.format(n), 'masks/')

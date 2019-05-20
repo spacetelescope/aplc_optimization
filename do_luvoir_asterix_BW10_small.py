@@ -19,7 +19,7 @@ survey_parameters = {'pupil': {'N': n,'filename': pup_filename}, \
                      'method':{'starting_scale': 1}}
 
 
-luvoir = DesignParameterSurvey(PorAPLC, survey_parameters, 'surveys/luvoir_BW10_small_N{:04d}_asterix/'.format(n), 'masks/')
+luvoir = DesignParameterSurvey(PorAPLC, survey_parameters, 'surveys/luvoir_BW10_small_N{:04d}_telserv3/'.format(n), 'masks/')
 luvoir.describe()
 
 luvoir.write_drivers(True)
