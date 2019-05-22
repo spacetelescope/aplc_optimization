@@ -129,7 +129,7 @@ def optimize_aplc(pupil, focal_plane_mask, lyot_stops, dark_zone_mask, wavelengt
 			else:
 				print('      No Lyot stop found with this symmetry. This breaks the mirror symmetry in x of the optimization.')
 				x_symm = False
-	
+
 	# Y mirror symmetry for Lyot stops
 	for i, a in enumerate(lyot_stops):
 		print('Lyot stop #%d:' % i)
@@ -181,9 +181,9 @@ def optimize_aplc(pupil, focal_plane_mask, lyot_stops, dark_zone_mask, wavelengt
 		else:
 			# Constrain both real and imag part
 			num_constraints_per_focal_point.append(2)
-		
+
 	num_constraints_per_focal_point = np.array(num_constraints_per_focal_point)
-	
+
 	dark_zone_masks = []
 	dark_zone_masks_full = []
 	propagators = []
@@ -196,7 +196,7 @@ def optimize_aplc(pupil, focal_plane_mask, lyot_stops, dark_zone_mask, wavelengt
 			propagators.append(None)
 			num_focal_points.append(0)
 			continue
-		
+
 		# Separated coords for sub focal grid
 		x, y = focal_grid.separated_coords
 
@@ -208,11 +208,11 @@ def optimize_aplc(pupil, focal_plane_mask, lyot_stops, dark_zone_mask, wavelengt
 		if (x_symm and x_symm_lyot_stops[i]) or (y_symm and y_symm_lyot_stops[i]):
 			m *= focal_grid.y > 0
 			y = y[y > 0]
-		
+
 		# Make grid with subset of focal grid
 		focal_grid_sub = CartesianGrid(SeparatedCoords((x, y)))
 		#focal_grid_sub = focal_grid
-		
+
 		# Make propagator for this Lyot stop
 		propagators.append(FraunhoferPropagator(pupil_grid, focal_grid_sub))
 
@@ -223,7 +223,7 @@ def optimize_aplc(pupil, focal_plane_mask, lyot_stops, dark_zone_mask, wavelengt
 
 		# Calculating number of focal points
 		num_focal_points.append(int(np.sum(dark_zone_masks[-1])))
-	
+
 	num_focal_points = np.array(num_focal_points)
 
 	# Calculate number of constraints per wavelength
@@ -414,26 +414,26 @@ def optimize_aplc(pupil, focal_plane_mask, lyot_stops, dark_zone_mask, wavelengt
 
 if __name__ == '__main__':
 	contrast = 1e-8
-	num_pix = 500
+	num_pix = 972
 	q_sci = 2.5 # px / (lambda_0/D)
 	iwa = 3.75 # lambda_0/D
 	owa = 15 # lambda_0/D
-	n_foc = 50 # px diameter
+	n_foc = 80 # px diameter
 	foc_inner = 8.543 # lambda_0/D diameter
 	spectral_bandwidth = 0.1 # fractional
 	num_wavelengths = 4
-	num_lyot_stops = 5
-	lyot_stop_shift = 1 # px
+	num_lyot_stops = 9
+	lyot_stop_shift = 2 # px (doubled the shift value from the 486 case)
 	tau = 0.55 # expected planet peak intensity (relative to without focal plane mask)
 	gray_focal_plane_mask_type = True
-	gray_pupil = True
+	gray_pupil = False
 	gray_lyot_stop = True
 	num_scalings = 2
 
 	# Build filename
 	# fname = 'apodizers/HiCAT-N%04d_NFOC%04d_DZ%04d_%04d_C%03d_BW%02d_NLAM%02d_SHIFT%02d_%02dLS_ADAP%d' % (num_pix, n_foc, iwa*100, owa*100, -10*np.log10(contrast), spectral_bandwidth*100, num_wavelengths, lyot_stop_shift*10, num_lyot_stops, num_scalings)
 	#fname = 'apodizers/LUVOIR_IWA=3.0_OWA=12.0_BW=0.18_nlam=08'
-	fname = 'apodizers/HICAT_test_500'
+	fname = 'apodizers/HICAT_test_972_robust'
 	print('Apodizer will be saved to:')
 	print('   ' + fname + '.fits')
 	print('')
@@ -446,8 +446,8 @@ if __name__ == '__main__':
 	#fname_pupil = 'masks/LUVOIR/TelAp_full_luvoirss100cobs1gap2_N0250.fits'
 	#fname_lyot_stop = 'masks/LUVOIR/LS_full_luvoir_ann19D94_clear_N0250.fits'
 
-	fname_pupil = 'mask_test/remi_test_hicat_apodizer_mask_500_gy_check_gap.fits'
-	fname_lyot_stop = 'mask_test/remi_test_hicat_lyot_mask_500_gy_0.fits'
+	fname_pupil = 'masks/HiCAT/hicat_apodizer_mask_972_gy.fits'#fixme later... the mask is actually not gray here
+	fname_lyot_stop = 'masks/HiCAT/hicat_lyot_mask_972_gy_0.fits' # this one is really gray
 
 	pupil_grid = make_uniform_grid((num_pix, num_pix), 1)
 
@@ -500,7 +500,7 @@ if __name__ == '__main__':
 		wavelengths = [1]
 	else:
 		wavelengths = np.linspace(-spectral_bandwidth / 2, spectral_bandwidth / 2, num_wavelengths) + 1
-	
+
 	# Optimize and write to file
 	apodizer = optimize_aplc(pupil, focal_plane_mask, lyot_stops, dark_zone_mask, wavelengths, contrast * tau, num_scalings=num_scalings, force_no_x_symmetry=False, force_no_y_symmetry=False, do_apodizer_throughput_maximization=True)
 	write_fits(apodizer * (pupil > 0), fname + '.fits')
