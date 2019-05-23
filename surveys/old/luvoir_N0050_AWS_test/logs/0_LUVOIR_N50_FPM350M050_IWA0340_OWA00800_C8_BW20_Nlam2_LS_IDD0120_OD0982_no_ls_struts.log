@@ -1,0 +1,142 @@
+Optimizer called with the following parameters:
+{'focal_plane_mask': {'field_stop_radius': -1.0,
+                      'grayscale': True,
+                      'num_pix': 50,
+                      'radius': 3.5},
+ 'image': {'bandwidth': 0.2,
+           'contrast': 8,
+           'iwa': 3.4,
+           'num_wavelengths': 2,
+           'owa': 8.0,
+           'resolution': 2},
+ 'lyot_stop': {'alignment_tolerance': 0,
+               'filename': 'LUVOIR/LS_LUVOIR_ID0120_OD0982_no_struts_gy_ovsamp4_N0050.fits',
+               'num_lyot_stops': 1},
+ 'method': {'edge_width_for_prior': 2,
+            'ending_scale': 1,
+            'force_no_hermitian_symmetry': False,
+            'force_no_x_mirror_symmetry': False,
+            'force_no_y_mirror_symmetry': False,
+            'initial_throughput_estimate': 1,
+            'maximize_planet_throughput': True,
+            'num_throughput_iterations': 2,
+            'starting_scale': 1},
+ 'pupil': {'N': 50,
+           'filename': 'LUVOIR/TelAp_LUVOIR_gap_pad04_bw_ovsamp04_N0050.fits'},
+ 'solver': {'crossover': 0,
+            'method': 2,
+            'num_threads': 0}}
+
+File organization:
+{'analysis_dir': '/user/kstlaurent/git/progressive_refinement_coronagraphy/surveys/luvoir_N0050_AWS_test/analysis',
+ 'drivers_dir': '/user/kstlaurent/git/progressive_refinement_coronagraphy/surveys/luvoir_N0050_AWS_test/drivers',
+ 'input_files_dir': '/user/kstlaurent/git/progressive_refinement_coronagraphy/masks',
+ 'log_dir': '/user/kstlaurent/git/progressive_refinement_coronagraphy/surveys/luvoir_N0050_AWS_test/logs',
+ 'solution_dir': '/user/kstlaurent/git/progressive_refinement_coronagraphy/surveys/luvoir_N0050_AWS_test/solutions',
+ 'survey_dir': '/user/kstlaurent/git/progressive_refinement_coronagraphy/surveys/luvoir_N0050_AWS_test'}
+
+Telescope pupil:
+   Mirror symmetry in x: yes
+   Mirror symmetry in y: no
+
+Lyot stop #0:
+   Mirror symmetry in x: yes
+Lyot stop #0:
+   Mirror symmetry in y: yes
+
+Complete APLC:
+   Mirror symmetry in x: yes
+   Mirror symmetry in y: no
+
+Starting optimization at scale 1 with 864 variables and 664 constraints.
+Creating model...
+Academic license - for non-commercial use only
+Parameter Threads unchanged
+   Value: 0  Min: 0  Max: 1024  Default: 0
+Changed value of parameter Crossover to 0
+   Prev: -1  Min: -1  Max: 5  Default: -1
+Changed value of parameter Method to 2
+   Prev: -1  Min: -1  Max: 5  Default: -1
+Calculating and adding constraints...
+Start optimization...
+Optimize a model with 1328 rows, 864 columns and 1147392 nonzeros
+Coefficient statistics:
+  Matrix range     [2e-10, 2e-03]
+  Objective range  [2e-02, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e-04, 1e-04]
+Presolve removed 664 rows and 0 columns
+Presolve time: 0.35s
+Presolved: 664 rows, 1528 columns, 574360 nonzeros
+Ordering time: 0.00s
+
+Barrier statistics:
+ AA' NZ     : 2.201e+05
+ Factor NZ  : 2.208e+05 (roughly 3 MBytes of memory)
+ Factor Ops : 9.781e+07 (less than 1 second per iteration)
+ Threads    : 6
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0   2.39418733e+04  1.86109663e+03  2.22e+00 0.00e+00  5.82e+01     1s
+   1   6.42750963e+02  1.81423065e+03  2.15e-02 5.12e-13  1.01e+00     1s
+   2   5.22795038e+02  8.42506077e+02  7.39e-03 3.16e-11  2.58e-01     1s
+   3   4.92756477e+02  5.96373766e+02  1.24e-03 1.26e-10  5.38e-02     1s
+   4   4.92770456e+02  5.20643042e+02  1.48e-04 3.60e-10  1.08e-02     1s
+   5   4.96045272e+02  5.02566498e+02  3.97e-05 1.04e-10  2.50e-03     1s
+   6   4.97508632e+02  4.99204645e+02  8.96e-06 6.82e-11  6.34e-04     1s
+   7   4.98031445e+02  4.98417039e+02  1.83e-06 4.01e-11  1.42e-04     1s
+   8   4.98135645e+02  4.98239410e+02  6.32e-07 5.89e-11  3.95e-05     1s
+   9   4.98182812e+02  4.98210214e+02  1.53e-07 6.01e-11  1.03e-05     1s
+  10   4.98193838e+02  4.98202025e+02  4.08e-08 4.91e-11  3.04e-06     1s
+  11   4.98196335e+02  4.98199496e+02  1.66e-08 7.32e-11  1.18e-06     1s
+  12   4.98197573e+02  4.98198647e+02  4.52e-09 4.50e-11  3.91e-07     1s
+  13   4.98198002e+02  4.98198135e+02  5.65e-10 5.76e-11  4.82e-08     1s
+  14   4.98198067e+02  4.98198073e+02  2.51e-12 7.17e-11  1.85e-09     1s
+  15   4.98198068e+02  4.98198068e+02  7.26e-13 5.29e-11  3.71e-11     1s
+
+Barrier solved model in 15 iterations and 1.00 seconds
+Optimal objective 4.98198068e+02
+
+Optimization finished!
+Restarting optimization for throughput iteration 1...
+Optimize a model with 1328 rows, 864 columns and 1147392 nonzeros
+Coefficient statistics:
+  Matrix range     [2e-10, 2e-03]
+  Objective range  [2e-02, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [7e-05, 7e-05]
+Presolve removed 664 rows and 0 columns
+Presolve time: 0.36s
+Presolved: 664 rows, 1528 columns, 574360 nonzeros
+Ordering time: 0.00s
+
+Barrier statistics:
+ AA' NZ     : 2.201e+05
+ Factor NZ  : 2.208e+05 (roughly 3 MBytes of memory)
+ Factor Ops : 9.781e+07 (less than 1 second per iteration)
+ Threads    : 6
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0   2.39418733e+04  1.83964098e+03  2.22e+00 0.00e+00  5.82e+01     1s
+   1   6.42722286e+02  1.79284675e+03  2.15e-02 8.53e-13  1.00e+00     1s
+   2   5.23024197e+02  8.25112433e+02  7.59e-03 1.68e-11  2.60e-01     1s
+   3   4.87855166e+02  5.84672203e+02  1.06e-03 3.64e-11  4.98e-02     1s
+   4   4.87628867e+02  5.09821533e+02  8.30e-05 6.05e-11  8.18e-03     1s
+   5   4.91742269e+02  4.94885503e+02  5.99e-06 1.10e-10  1.08e-03     1s
+   6   4.92540021e+02  4.93378511e+02  2.16e-06 7.59e-11  2.94e-04     1s
+   7   4.92994500e+02  4.93187961e+02  2.78e-07 7.04e-11  6.58e-05     1s
+   8   4.93037878e+02  4.93116734e+02  1.35e-07 6.79e-11  2.70e-05     1s
+   9   4.93064863e+02  4.93099401e+02  5.22e-08 4.63e-11  1.18e-05     1s
+  10   4.93075837e+02  4.93091620e+02  1.92e-08 7.63e-11  5.34e-06     1s
+  11   4.93078744e+02  4.93084736e+02  1.06e-08 6.03e-11  2.06e-06     1s
+  12   4.93081301e+02  4.93083188e+02  2.92e-09 5.15e-11  6.44e-07     1s
+  13   4.93081932e+02  4.93082350e+02  1.08e-09 5.96e-11  1.46e-07     1s
+  14   4.93082305e+02  4.93082314e+02  4.89e-12 5.55e-11  2.81e-09     1s
+  15   4.93082310e+02  4.93082310e+02  2.75e-12 8.32e-11  1.10e-11     1s
+
+Barrier solved model in 15 iterations and 1.02 seconds
+Optimal objective 4.93082310e+02
+
+Optimization finished!

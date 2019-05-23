@@ -1,0 +1,311 @@
+Optimizer called with the following parameters:
+{'focal_plane_mask': {'field_stop_radius': -1.0,
+                      'grayscale': True,
+                      'num_pix': 50,
+                      'radius': 3.72},
+ 'image': {'bandwidth': 0.18,
+           'contrast': 10,
+           'iwa': 3.25,
+           'num_wavelengths': 8,
+           'owa': 12.0,
+           'resolution': 2},
+ 'lyot_stop': {'alignment_tolerance': 0,
+               'filename': 'LUVOIR/LS_LUVOIR_ID0195_OD0965_no_struts_gy_ovsamp4_N0200.fits',
+               'num_lyot_stops': 1},
+ 'method': {'edge_width_for_prior': 2,
+            'ending_scale': 1,
+            'force_no_hermitian_symmetry': False,
+            'force_no_x_mirror_symmetry': False,
+            'force_no_y_mirror_symmetry': False,
+            'initial_throughput_estimate': 1,
+            'maximize_planet_throughput': True,
+            'num_throughput_iterations': 2,
+            'starting_scale': 1},
+ 'pupil': {'N': 200,
+           'filename': 'LUVOIR/TelAp_LUVOIR_gap_pad04_bw_ovsamp04_N0200.fits'},
+ 'solver': {'crossover': 0,
+            'method': 2,
+            'num_threads': 0}}
+
+File organization:
+{'analysis_dir': '/user/kstlaurent/git/progressive_refinement_coronagraphy/surveys/luvoir_N0200_small_local/analysis',
+ 'drivers_dir': '/user/kstlaurent/git/progressive_refinement_coronagraphy/surveys/luvoir_N0200_small_local/drivers',
+ 'input_files_dir': '/user/kstlaurent/git/progressive_refinement_coronagraphy/masks',
+ 'log_dir': '/user/kstlaurent/git/progressive_refinement_coronagraphy/surveys/luvoir_N0200_small_local/logs',
+ 'solution_dir': '/user/kstlaurent/git/progressive_refinement_coronagraphy/surveys/luvoir_N0200_small_local/solutions',
+ 'survey_dir': '/user/kstlaurent/git/progressive_refinement_coronagraphy/surveys/luvoir_N0200_small_local'}
+
+Telescope pupil:
+   Mirror symmetry in x: yes
+   Mirror symmetry in y: no
+
+Lyot stop #0:
+   Mirror symmetry in x: yes
+Lyot stop #0:
+   Mirror symmetry in y: yes
+
+Complete APLC:
+   Mirror symmetry in x: yes
+   Mirror symmetry in y: no
+
+Starting optimization at scale 1 with 13749 variables and 6720 constraints.
+Creating model...
+Academic license - for non-commercial use only
+Parameter Threads unchanged
+   Value: 0  Min: 0  Max: 1024  Default: 0
+Changed value of parameter Crossover to 0
+   Prev: -1  Min: -1  Max: 5  Default: -1
+Changed value of parameter Method to 2
+   Prev: -1  Min: -1  Max: 5  Default: -1
+Calculating and adding constraints...
+Wavelength 1/8; Variable 1000/13749
+Wavelength 1/8; Variable 2000/13749
+Wavelength 1/8; Variable 3000/13749
+Wavelength 1/8; Variable 4000/13749
+Wavelength 1/8; Variable 5000/13749
+Wavelength 1/8; Variable 6000/13749
+Wavelength 1/8; Variable 7000/13749
+Wavelength 1/8; Variable 8000/13749
+Wavelength 1/8; Variable 9000/13749
+Wavelength 1/8; Variable 10000/13749
+Wavelength 1/8; Variable 11000/13749
+Wavelength 1/8; Variable 12000/13749
+Wavelength 1/8; Variable 13000/13749
+Wavelength 2/8; Variable 1000/13749
+Wavelength 2/8; Variable 2000/13749
+Wavelength 2/8; Variable 3000/13749
+Wavelength 2/8; Variable 4000/13749
+Wavelength 2/8; Variable 5000/13749
+Wavelength 2/8; Variable 6000/13749
+Wavelength 2/8; Variable 7000/13749
+Wavelength 2/8; Variable 8000/13749
+Wavelength 2/8; Variable 9000/13749
+Wavelength 2/8; Variable 10000/13749
+Wavelength 2/8; Variable 11000/13749
+Wavelength 2/8; Variable 12000/13749
+Wavelength 2/8; Variable 13000/13749
+Wavelength 3/8; Variable 1000/13749
+Wavelength 3/8; Variable 2000/13749
+Wavelength 3/8; Variable 3000/13749
+Wavelength 3/8; Variable 4000/13749
+Wavelength 3/8; Variable 5000/13749
+Wavelength 3/8; Variable 6000/13749
+Wavelength 3/8; Variable 7000/13749
+Wavelength 3/8; Variable 8000/13749
+Wavelength 3/8; Variable 9000/13749
+Wavelength 3/8; Variable 10000/13749
+Wavelength 3/8; Variable 11000/13749
+Wavelength 3/8; Variable 12000/13749
+Wavelength 3/8; Variable 13000/13749
+Wavelength 4/8; Variable 1000/13749
+Wavelength 4/8; Variable 2000/13749
+Wavelength 4/8; Variable 3000/13749
+Wavelength 4/8; Variable 4000/13749
+Wavelength 4/8; Variable 5000/13749
+Wavelength 4/8; Variable 6000/13749
+Wavelength 4/8; Variable 7000/13749
+Wavelength 4/8; Variable 8000/13749
+Wavelength 4/8; Variable 9000/13749
+Wavelength 4/8; Variable 10000/13749
+Wavelength 4/8; Variable 11000/13749
+Wavelength 4/8; Variable 12000/13749
+Wavelength 4/8; Variable 13000/13749
+Wavelength 5/8; Variable 1000/13749
+Wavelength 5/8; Variable 2000/13749
+Wavelength 5/8; Variable 3000/13749
+Wavelength 5/8; Variable 4000/13749
+Wavelength 5/8; Variable 5000/13749
+Wavelength 5/8; Variable 6000/13749
+Wavelength 5/8; Variable 7000/13749
+Wavelength 5/8; Variable 8000/13749
+Wavelength 5/8; Variable 9000/13749
+Wavelength 5/8; Variable 10000/13749
+Wavelength 5/8; Variable 11000/13749
+Wavelength 5/8; Variable 12000/13749
+Wavelength 5/8; Variable 13000/13749
+Wavelength 6/8; Variable 1000/13749
+Wavelength 6/8; Variable 2000/13749
+Wavelength 6/8; Variable 3000/13749
+Wavelength 6/8; Variable 4000/13749
+Wavelength 6/8; Variable 5000/13749
+Wavelength 6/8; Variable 6000/13749
+Wavelength 6/8; Variable 7000/13749
+Wavelength 6/8; Variable 8000/13749
+Wavelength 6/8; Variable 9000/13749
+Wavelength 6/8; Variable 10000/13749
+Wavelength 6/8; Variable 11000/13749
+Wavelength 6/8; Variable 12000/13749
+Wavelength 6/8; Variable 13000/13749
+Wavelength 7/8; Variable 1000/13749
+Wavelength 7/8; Variable 2000/13749
+Wavelength 7/8; Variable 3000/13749
+Wavelength 7/8; Variable 4000/13749
+Wavelength 7/8; Variable 5000/13749
+Wavelength 7/8; Variable 6000/13749
+Wavelength 7/8; Variable 7000/13749
+Wavelength 7/8; Variable 8000/13749
+Wavelength 7/8; Variable 9000/13749
+Wavelength 7/8; Variable 10000/13749
+Wavelength 7/8; Variable 11000/13749
+Wavelength 7/8; Variable 12000/13749
+Wavelength 7/8; Variable 13000/13749
+Wavelength 8/8; Variable 1000/13749
+Wavelength 8/8; Variable 2000/13749
+Wavelength 8/8; Variable 3000/13749
+Wavelength 8/8; Variable 4000/13749
+Wavelength 8/8; Variable 5000/13749
+Wavelength 8/8; Variable 6000/13749
+Wavelength 8/8; Variable 7000/13749
+Wavelength 8/8; Variable 8000/13749
+Wavelength 8/8; Variable 9000/13749
+Wavelength 8/8; Variable 10000/13749
+Wavelength 8/8; Variable 11000/13749
+Wavelength 8/8; Variable 12000/13749
+Wavelength 8/8; Variable 13000/13749
+Start optimization...
+Optimize a model with 13440 rows, 13749 columns and 184786560 nonzeros
+Coefficient statistics:
+  Matrix range     [4e-13, 2e-04]
+  Objective range  [1e-02, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e-05, 1e-05]
+Presolve removed 0 rows and 0 columns (presolve time = 11s) ...
+Presolve removed 0 rows and 0 columns (presolve time = 17s) ...
+Presolve removed 0 rows and 0 columns (presolve time = 29s) ...
+Presolve removed 0 rows and 0 columns (presolve time = 50s) ...
+Presolve removed 6720 rows and 0 columns (presolve time = 57s) ...
+Presolve removed 6720 rows and 0 columns
+Presolve time: 58.48s
+Presolved: 6720 rows, 20469 columns, 92399994 nonzeros
+Ordering time: 0.00s
+
+Barrier statistics:
+ AA' NZ     : 2.258e+07
+ Factor NZ  : 2.258e+07 (roughly 200 MBytes of memory)
+ Factor Ops : 1.012e+11 (roughly 3 seconds per iteration)
+ Threads    : 6
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0   4.87379030e+06  3.21010859e+04  2.54e+01 0.00e+00  9.24e+02   101s
+   1   1.47697535e+04  3.20413539e+04  4.91e-02 1.09e-11  2.43e+00   123s
+   2   7.26195877e+03  1.71446805e+04  5.90e-03 2.51e-09  4.12e-01   146s
+   3   7.30237071e+03  9.98735209e+03  3.27e-03 4.21e-09  1.30e-01   169s
+   4   7.22736190e+03  8.38051262e+03  1.68e-03 9.12e-09  5.71e-02   193s
+   5   7.16521875e+03  7.71304565e+03  1.04e-03 1.29e-08  3.12e-02   216s
+   6   7.13564478e+03  7.48916067e+03  7.50e-04 1.87e-08  2.20e-02   239s
+   7   7.11472403e+03  7.37913756e+03  6.18e-04 2.11e-08  1.80e-02   262s
+   8   7.09527092e+03  7.28616121e+03  5.21e-04 2.38e-08  1.50e-02   285s
+   9   7.06911573e+03  7.18017117e+03  4.27e-04 3.59e-08  1.23e-02   309s
+  10   7.05542893e+03  7.14320468e+03  3.97e-04 3.80e-08  1.15e-02   332s
+  11   7.04379270e+03  7.10353540e+03  3.75e-04 3.38e-08  1.08e-02   354s
+  12   7.02182762e+03  7.03952763e+03  3.39e-04 6.16e-08  9.69e-03   377s
+  13   7.00279018e+03  6.99930095e+03  3.11e-04 4.70e-08  8.90e-03   400s
+  14   6.96742316e+03  6.92132154e+03  2.73e-04 6.92e-08  7.61e-03   424s
+  15   6.93738506e+03  6.86512851e+03  2.43e-04 6.71e-08  6.56e-03   447s
+  16   6.90482221e+03  6.81359300e+03  2.13e-04 7.33e-08  5.49e-03   470s
+  17   6.87705234e+03  6.78919272e+03  1.88e-04 7.19e-08  4.82e-03   493s
+  18   6.85444066e+03  6.76238126e+03  1.69e-04 8.07e-08  4.14e-03   515s
+  19   6.82215795e+03  6.73958411e+03  1.41e-04 5.92e-08  3.40e-03   539s
+  20   6.79227566e+03  6.72015788e+03  1.14e-04 2.06e-07  2.69e-03   562s
+  21   6.76523518e+03  6.70154253e+03  9.06e-05 9.51e-08  2.02e-03   586s
+  22   6.74190964e+03  6.69124895e+03  7.06e-05 9.19e-08  1.57e-03   609s
+  23   6.72576681e+03  6.67668088e+03  5.70e-05 1.09e-07  1.09e-03   633s
+  24   6.71016351e+03  6.67175413e+03  4.43e-05 1.10e-06  8.56e-04   656s
+  25   6.70073356e+03  6.66905913e+03  3.66e-05 2.75e-06  7.11e-04   679s
+  26   6.69344537e+03  6.66714186e+03  3.08e-05 2.68e-06  6.11e-04   702s
+  27   6.68749436e+03  6.66340084e+03  2.59e-05 5.30e-06  4.67e-04   725s
+  28   6.68189251e+03  6.66082394e+03  2.13e-05 2.13e-06  3.59e-04   748s
+  29   6.67556390e+03  6.65963378e+03  1.63e-05 1.49e-07  2.81e-04   772s
+  30   6.67269522e+03  6.65824771e+03  1.41e-05 1.58e-07  2.25e-04   795s
+  31   6.66683249e+03  6.65654531e+03  9.38e-06 9.91e-07  1.35e-04   818s
+  32   6.66341400e+03  6.65602571e+03  6.73e-06 2.48e-06  9.76e-05   841s
+  33   6.66081727e+03  6.65555220e+03  4.69e-06 2.87e-06  6.55e-05   864s
+  34   6.65826625e+03  6.65510404e+03  2.69e-06 4.87e-06  3.42e-05   889s
+  35   6.65649951e+03  6.65494864e+03  1.35e-06 6.39e-07  1.83e-05   912s
+  36   6.65579977e+03  6.65479746e+03  8.34e-07 2.78e-06  1.02e-05   935s
+  37   6.65539741e+03  6.65474958e+03  5.11e-07 1.08e-06  5.40e-06   958s
+  38   6.65475495e+03  6.65469936e+03  4.62e-08 3.12e-06  5.64e-07   984s
+  39   6.65470281e+03  6.65469529e+03  7.66e-09 1.36e-06  1.33e-07  1008s
+  40   6.65469303e+03  6.65469305e+03  1.75e-10 6.75e-06  7.65e-09  1035s
+
+Barrier solved model in 40 iterations and 1034.61 seconds
+Optimal objective 6.65469303e+03
+
+Optimization finished!
+Restarting optimization for throughput iteration 1...
+Optimize a model with 13440 rows, 13749 columns and 184786560 nonzeros
+Coefficient statistics:
+  Matrix range     [4e-13, 2e-04]
+  Objective range  [1e-02, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [6e-06, 6e-06]
+Presolve removed 0 rows and 0 columns (presolve time = 11s) ...
+Presolve removed 0 rows and 0 columns (presolve time = 17s) ...
+Presolve removed 0 rows and 0 columns (presolve time = 29s) ...
+Presolve removed 0 rows and 0 columns (presolve time = 50s) ...
+Presolve removed 6720 rows and 0 columns (presolve time = 57s) ...
+Presolve removed 6720 rows and 0 columns
+Presolve time: 58.09s
+Presolved: 6720 rows, 20469 columns, 92399994 nonzeros
+Ordering time: 0.00s
+
+Barrier statistics:
+ AA' NZ     : 2.258e+07
+ Factor NZ  : 2.258e+07 (roughly 200 MBytes of memory)
+ Factor Ops : 1.012e+11 (roughly 3 seconds per iteration)
+ Threads    : 6
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0   4.87379030e+06  3.16378552e+04  2.54e+01 0.00e+00  9.24e+02   101s
+   1   1.47703648e+04  3.15778840e+04  4.91e-02 9.09e-12  2.42e+00   123s
+   2   7.46159403e+03  1.67229750e+04  7.08e-03 2.08e-09  4.34e-01   146s
+   3   7.40533383e+03  9.78916150e+03  4.11e-03 3.78e-09  1.46e-01   169s
+   4   7.27519943e+03  8.44117210e+03  2.34e-03 5.10e-08  7.62e-02   192s
+   5   7.22196648e+03  7.76894499e+03  1.65e-03 1.44e-07  4.82e-02   215s
+   6   7.14641216e+03  7.46098430e+03  1.24e-03 3.40e-07  3.64e-02   238s
+   7   7.09937698e+03  7.27398347e+03  1.08e-03 8.38e-08  3.14e-02   261s
+   8   7.03146258e+03  7.08542874e+03  9.49e-04 2.70e-07  2.76e-02   284s
+   9   6.93474027e+03  6.80998890e+03  8.32e-04 2.39e-07  2.35e-02   308s
+  10   6.84838494e+03  6.59668608e+03  7.47e-04 4.14e-07  2.02e-02   332s
+  11   6.71941372e+03  6.45604398e+03  6.29e-04 2.65e-07  1.71e-02   355s
+  12   6.64906656e+03  6.35440589e+03  5.71e-04 3.47e-07  1.51e-02   378s
+  13   6.52124501e+03  6.24056649e+03  4.78e-04 2.40e-07  1.26e-02   402s
+  14   6.44594753e+03  6.14294099e+03  4.24e-04 5.04e-07  1.04e-02   425s
+  15   6.38351132e+03  6.09205560e+03  3.79e-04 3.51e-07  9.06e-03   448s
+  16   6.33192752e+03  6.03034186e+03  3.43e-04 4.17e-07  7.56e-03   471s
+  17   6.27208381e+03  5.99774850e+03  3.01e-04 3.50e-07  6.57e-03   494s
+  18   6.23020942e+03  5.95255363e+03  2.72e-04 2.49e-07  5.67e-03   518s
+  19   6.18611985e+03  5.91747148e+03  2.43e-04 2.16e-07  4.96e-03   541s
+  20   6.15191137e+03  5.88394809e+03  2.22e-04 1.56e-07  4.36e-03   564s
+  21   6.10487889e+03  5.85605911e+03  1.94e-04 4.88e-07  3.71e-03   588s
+  22   6.06561931e+03  5.82734649e+03  1.72e-04 1.83e-07  3.15e-03   611s
+  23   6.02400109e+03  5.80635982e+03  1.49e-04 1.53e-06  2.65e-03   636s
+  24   5.99117978e+03  5.79391541e+03  1.32e-04 2.56e-06  2.33e-03   658s
+  25   5.96123019e+03  5.78436935e+03  1.16e-04 2.29e-06  2.05e-03   682s
+  26   5.93052329e+03  5.78088965e+03  9.99e-05 1.91e-06  1.81e-03   705s
+  27   5.90772561e+03  5.77145035e+03  8.80e-05 8.42e-07  1.53e-03   728s
+  28   5.85859563e+03  5.75658922e+03  6.26e-05 2.69e-06  9.83e-04   753s
+  29   5.83185899e+03  5.74526939e+03  4.83e-05 1.73e-07  5.87e-04   777s
+  30   5.81937856e+03  5.74287201e+03  4.18e-05 1.34e-07  4.80e-04   800s
+  31   5.80105730e+03  5.74106407e+03  3.24e-05 8.27e-07  3.62e-04   824s
+  32   5.78950434e+03  5.73930955e+03  2.64e-05 2.96e-07  2.75e-04   848s
+  33   5.78362925e+03  5.73861021e+03  2.36e-05 2.57e-07  2.43e-04   870s
+  34   5.76767420e+03  5.73742674e+03  1.58e-05 4.00e-07  1.64e-04   894s
+  35   5.75809706e+03  5.73696015e+03  1.10e-05 4.21e-07  1.17e-04   917s
+  36   5.75292417e+03  5.73645335e+03  8.54e-06 5.40e-07  8.79e-05   940s
+  37   5.75034301e+03  5.73599187e+03  7.29e-06 3.52e-07  6.85e-05   964s
+  38   5.74673523e+03  5.73564221e+03  5.54e-06 2.60e-06  4.76e-05   987s
+  39   5.74326447e+03  5.73547782e+03  3.87e-06 6.43e-06  3.27e-05  1010s
+  40   5.73975592e+03  5.73532494e+03  2.20e-06 2.60e-06  1.84e-05  1033s
+  41   5.73769299e+03  5.73524908e+03  1.21e-06 1.94e-06  1.01e-05  1056s
+  42   5.73561015e+03  5.73518439e+03  2.20e-07 1.40e-05  2.29e-06  1081s
+  43   5.73521217e+03  5.73516105e+03  2.71e-08 4.26e-06  3.14e-07  1106s
+  44   5.73515758e+03  5.73515738e+03  4.27e-10 9.46e-07  1.64e-08  1133s
+  45   5.73515713e+03  5.73515714e+03  4.30e-11 7.42e-06  1.42e-09  1160s
+
+Barrier solved model in 45 iterations and 1159.93 seconds
+Optimal objective 5.73515713e+03
+
+Optimization finished!

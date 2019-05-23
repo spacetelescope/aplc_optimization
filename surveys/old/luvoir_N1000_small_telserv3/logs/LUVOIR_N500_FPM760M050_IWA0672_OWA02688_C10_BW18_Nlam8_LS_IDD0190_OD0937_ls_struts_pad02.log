@@ -1,0 +1,61 @@
+Optimizer called with the following parameters:
+{'focal_plane_mask': {'field_stop_radius': -1.0,
+                      'grayscale': True,
+                      'num_pix': 50,
+                      'radius': 7.6},
+ 'image': {'bandwidth': 0.18,
+           'contrast': 10,
+           'iwa': 6.72,
+           'num_wavelengths': 8,
+           'owa': 26.88,
+           'resolution': 2},
+ 'lyot_stop': {'alignment_tolerance': 0,
+               'filename': 'LUVOIR/LS_LUVOIR_ID0190_OD0937_struts_pad02_gy_ovsamp3_N0500.fits',
+               'num_lyot_stops': 1},
+ 'method': {'edge_width_for_prior': 2,
+            'ending_scale': 1,
+            'force_no_hermitian_symmetry': False,
+            'force_no_x_mirror_symmetry': False,
+            'force_no_y_mirror_symmetry': False,
+            'initial_throughput_estimate': 1,
+            'maximize_planet_throughput': True,
+            'num_throughput_iterations': 2,
+            'starting_scale': 1},
+ 'pupil': {'N': 500,
+           'filename': 'LUVOIR/TelAp_LUVOIR_gap_pad02_bw_ovsamp03_N0500.fits'},
+ 'solver': {'crossover': 0,
+            'method': 2,
+            'num_threads': 0}}
+
+File organization:
+{'analysis_dir': '/user/kstlaurent/git/progressive_refinement_coronagraphy/survey/luvoir/analysis',
+ 'drivers_dir': '/user/kstlaurent/git/progressive_refinement_coronagraphy/survey/luvoir/drivers',
+ 'input_files_dir': '/user/kstlaurent/git/progressive_refinement_coronagraphy/masks',
+ 'log_dir': '/user/kstlaurent/git/progressive_refinement_coronagraphy/survey/luvoir/logs',
+ 'solution_dir': '/user/kstlaurent/git/progressive_refinement_coronagraphy/survey/luvoir/solutions',
+ 'survey_dir': '/user/kstlaurent/git/progressive_refinement_coronagraphy/survey/luvoir'}
+
+Telescope pupil:
+   Mirror symmetry in x: yes
+   Mirror symmetry in y: no
+
+Lyot stop #0:
+   Mirror symmetry in x: yes
+Lyot stop #0:
+   Mirror symmetry in y: no
+
+Complete APLC:
+   Mirror symmetry in x: yes
+   Mirror symmetry in y: no
+
+Starting optimization at scale 1 with 85671 variables and 34080 constraints.
+Creating model...
+Traceback (most recent call last):
+  File "/user/kstlaurent/git/progressive_refinement_coronagraphy/survey/luvoir/drivers/LUVOIR_N500_FPM760M050_IWA0672_OWA02688_C10_BW18_Nlam8_LS_IDD0190_OD0937_ls_struts_pad02.py", line 127, in <module>
+    solver_method=solver_method)
+  File "/user/kstlaurent/git/progressive_refinement_coronagraphy/survey/luvoir/drivers/por_aplc_optimizer.py", line 334, in optimize_aplc
+    model = gp.Model('lp')
+  File "model.pxi", line 63, in gurobipy.Model.__init__
+  File "gurobi.pxi", line 23, in gurobipy.gurobi._getdefaultenv
+  File "env.pxi", line 45, in gurobipy.Env.__init__
+gurobipy.GurobiError: HostID mismatch (licensed to 44eeba9b, hostid is 4212af69) - license file '/home/kstlaurent/gurobi.lic'

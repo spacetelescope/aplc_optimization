@@ -1,0 +1,911 @@
+Optimizer called with the following parameters:
+{'focal_plane_mask': {'field_stop_radius': -1.0,
+                      'grayscale': True,
+                      'num_pix': 50,
+                      'radius': 3.88},
+ 'image': {'bandwidth': 0.18,
+           'contrast': 10,
+           'iwa': 3.0,
+           'num_wavelengths': 8,
+           'owa': 12.0,
+           'resolution': 2},
+ 'lyot_stop': {'alignment_tolerance': 0,
+               'filename': 'LUVOIR/LS_LUVOIR_ID0190_OD0937_struts_pad02_gy_ovsamp3_N0500.fits',
+               'num_lyot_stops': 1},
+ 'method': {'edge_width_for_prior': 2,
+            'ending_scale': 1,
+            'force_no_hermitian_symmetry': False,
+            'force_no_x_mirror_symmetry': False,
+            'force_no_y_mirror_symmetry': False,
+            'initial_throughput_estimate': 1,
+            'maximize_planet_throughput': True,
+            'num_throughput_iterations': 2,
+            'starting_scale': 1},
+ 'pupil': {'N': 500,
+           'filename': 'LUVOIR/TelAp_LUVOIR_gap_pad02_bw_ovsamp03_N0500.fits'},
+ 'solver': {'crossover': 0,
+            'method': 2,
+            'num_threads': 0}}
+
+File organization:
+{'analysis_dir': '/user/kstlaurent/git/progressive_refinement_coronagraphy/surveys/luvoir_N0500_small_telserv3/analysis',
+ 'drivers_dir': '/user/kstlaurent/git/progressive_refinement_coronagraphy/surveys/luvoir_N0500_small_telserv3/drivers',
+ 'input_files_dir': '/user/kstlaurent/git/progressive_refinement_coronagraphy/masks',
+ 'log_dir': '/user/kstlaurent/git/progressive_refinement_coronagraphy/surveys/luvoir_N0500_small_telserv3/logs',
+ 'solution_dir': '/user/kstlaurent/git/progressive_refinement_coronagraphy/surveys/luvoir_N0500_small_telserv3/solutions',
+ 'survey_dir': '/user/kstlaurent/git/progressive_refinement_coronagraphy/surveys/luvoir_N0500_small_telserv3'}
+
+Telescope pupil:
+   Mirror symmetry in x: yes
+   Mirror symmetry in y: no
+
+Lyot stop #0:
+   Mirror symmetry in x: yes
+Lyot stop #0:
+   Mirror symmetry in y: no
+
+Complete APLC:
+   Mirror symmetry in x: yes
+   Mirror symmetry in y: no
+
+Starting optimization at scale 1 with 85671 variables and 6768 constraints.
+Creating model...
+Academic license - for non-commercial use only
+Parameter Threads unchanged
+   Value: 0  Min: 0  Max: 1024  Default: 0
+Changed value of parameter Crossover to 0
+   Prev: -1  Min: -1  Max: 5  Default: -1
+Changed value of parameter Method to 2
+   Prev: -1  Min: -1  Max: 5  Default: -1
+Calculating and adding constraints...
+Wavelength 1/8; Variable 1000/85671
+Wavelength 1/8; Variable 2000/85671
+Wavelength 1/8; Variable 3000/85671
+Wavelength 1/8; Variable 4000/85671
+Wavelength 1/8; Variable 5000/85671
+Wavelength 1/8; Variable 6000/85671
+Wavelength 1/8; Variable 7000/85671
+Wavelength 1/8; Variable 8000/85671
+Wavelength 1/8; Variable 9000/85671
+Wavelength 1/8; Variable 10000/85671
+Wavelength 1/8; Variable 11000/85671
+Wavelength 1/8; Variable 12000/85671
+Wavelength 1/8; Variable 13000/85671
+Wavelength 1/8; Variable 14000/85671
+Wavelength 1/8; Variable 15000/85671
+Wavelength 1/8; Variable 16000/85671
+Wavelength 1/8; Variable 17000/85671
+Wavelength 1/8; Variable 18000/85671
+Wavelength 1/8; Variable 19000/85671
+Wavelength 1/8; Variable 20000/85671
+Wavelength 1/8; Variable 21000/85671
+Wavelength 1/8; Variable 22000/85671
+Wavelength 1/8; Variable 23000/85671
+Wavelength 1/8; Variable 24000/85671
+Wavelength 1/8; Variable 25000/85671
+Wavelength 1/8; Variable 26000/85671
+Wavelength 1/8; Variable 27000/85671
+Wavelength 1/8; Variable 28000/85671
+Wavelength 1/8; Variable 29000/85671
+Wavelength 1/8; Variable 30000/85671
+Wavelength 1/8; Variable 31000/85671
+Wavelength 1/8; Variable 32000/85671
+Wavelength 1/8; Variable 33000/85671
+Wavelength 1/8; Variable 34000/85671
+Wavelength 1/8; Variable 35000/85671
+Wavelength 1/8; Variable 36000/85671
+Wavelength 1/8; Variable 37000/85671
+Wavelength 1/8; Variable 38000/85671
+Wavelength 1/8; Variable 39000/85671
+Wavelength 1/8; Variable 40000/85671
+Wavelength 1/8; Variable 41000/85671
+Wavelength 1/8; Variable 42000/85671
+Wavelength 1/8; Variable 43000/85671
+Wavelength 1/8; Variable 44000/85671
+Wavelength 1/8; Variable 45000/85671
+Wavelength 1/8; Variable 46000/85671
+Wavelength 1/8; Variable 47000/85671
+Wavelength 1/8; Variable 48000/85671
+Wavelength 1/8; Variable 49000/85671
+Wavelength 1/8; Variable 50000/85671
+Wavelength 1/8; Variable 51000/85671
+Wavelength 1/8; Variable 52000/85671
+Wavelength 1/8; Variable 53000/85671
+Wavelength 1/8; Variable 54000/85671
+Wavelength 1/8; Variable 55000/85671
+Wavelength 1/8; Variable 56000/85671
+Wavelength 1/8; Variable 57000/85671
+Wavelength 1/8; Variable 58000/85671
+Wavelength 1/8; Variable 59000/85671
+Wavelength 1/8; Variable 60000/85671
+Wavelength 1/8; Variable 61000/85671
+Wavelength 1/8; Variable 62000/85671
+Wavelength 1/8; Variable 63000/85671
+Wavelength 1/8; Variable 64000/85671
+Wavelength 1/8; Variable 65000/85671
+Wavelength 1/8; Variable 66000/85671
+Wavelength 1/8; Variable 67000/85671
+Wavelength 1/8; Variable 68000/85671
+Wavelength 1/8; Variable 69000/85671
+Wavelength 1/8; Variable 70000/85671
+Wavelength 1/8; Variable 71000/85671
+Wavelength 1/8; Variable 72000/85671
+Wavelength 1/8; Variable 73000/85671
+Wavelength 1/8; Variable 74000/85671
+Wavelength 1/8; Variable 75000/85671
+Wavelength 1/8; Variable 76000/85671
+Wavelength 1/8; Variable 77000/85671
+Wavelength 1/8; Variable 78000/85671
+Wavelength 1/8; Variable 79000/85671
+Wavelength 1/8; Variable 80000/85671
+Wavelength 1/8; Variable 81000/85671
+Wavelength 1/8; Variable 82000/85671
+Wavelength 1/8; Variable 83000/85671
+Wavelength 1/8; Variable 84000/85671
+Wavelength 1/8; Variable 85000/85671
+Warning for adding constraints: zero or small (< 1e-13) coefficients, ignored
+Wavelength 2/8; Variable 1000/85671
+Wavelength 2/8; Variable 2000/85671
+Wavelength 2/8; Variable 3000/85671
+Wavelength 2/8; Variable 4000/85671
+Wavelength 2/8; Variable 5000/85671
+Wavelength 2/8; Variable 6000/85671
+Wavelength 2/8; Variable 7000/85671
+Wavelength 2/8; Variable 8000/85671
+Wavelength 2/8; Variable 9000/85671
+Wavelength 2/8; Variable 10000/85671
+Wavelength 2/8; Variable 11000/85671
+Wavelength 2/8; Variable 12000/85671
+Wavelength 2/8; Variable 13000/85671
+Wavelength 2/8; Variable 14000/85671
+Wavelength 2/8; Variable 15000/85671
+Wavelength 2/8; Variable 16000/85671
+Wavelength 2/8; Variable 17000/85671
+Wavelength 2/8; Variable 18000/85671
+Wavelength 2/8; Variable 19000/85671
+Wavelength 2/8; Variable 20000/85671
+Wavelength 2/8; Variable 21000/85671
+Wavelength 2/8; Variable 22000/85671
+Wavelength 2/8; Variable 23000/85671
+Wavelength 2/8; Variable 24000/85671
+Wavelength 2/8; Variable 25000/85671
+Wavelength 2/8; Variable 26000/85671
+Wavelength 2/8; Variable 27000/85671
+Wavelength 2/8; Variable 28000/85671
+Wavelength 2/8; Variable 29000/85671
+Wavelength 2/8; Variable 30000/85671
+Wavelength 2/8; Variable 31000/85671
+Wavelength 2/8; Variable 32000/85671
+Wavelength 2/8; Variable 33000/85671
+Wavelength 2/8; Variable 34000/85671
+Wavelength 2/8; Variable 35000/85671
+Wavelength 2/8; Variable 36000/85671
+Wavelength 2/8; Variable 37000/85671
+Wavelength 2/8; Variable 38000/85671
+Wavelength 2/8; Variable 39000/85671
+Wavelength 2/8; Variable 40000/85671
+Wavelength 2/8; Variable 41000/85671
+Wavelength 2/8; Variable 42000/85671
+Wavelength 2/8; Variable 43000/85671
+Wavelength 2/8; Variable 44000/85671
+Wavelength 2/8; Variable 45000/85671
+Wavelength 2/8; Variable 46000/85671
+Wavelength 2/8; Variable 47000/85671
+Wavelength 2/8; Variable 48000/85671
+Wavelength 2/8; Variable 49000/85671
+Wavelength 2/8; Variable 50000/85671
+Wavelength 2/8; Variable 51000/85671
+Wavelength 2/8; Variable 52000/85671
+Wavelength 2/8; Variable 53000/85671
+Wavelength 2/8; Variable 54000/85671
+Wavelength 2/8; Variable 55000/85671
+Wavelength 2/8; Variable 56000/85671
+Wavelength 2/8; Variable 57000/85671
+Wavelength 2/8; Variable 58000/85671
+Wavelength 2/8; Variable 59000/85671
+Wavelength 2/8; Variable 60000/85671
+Wavelength 2/8; Variable 61000/85671
+Wavelength 2/8; Variable 62000/85671
+Wavelength 2/8; Variable 63000/85671
+Wavelength 2/8; Variable 64000/85671
+Wavelength 2/8; Variable 65000/85671
+Wavelength 2/8; Variable 66000/85671
+Wavelength 2/8; Variable 67000/85671
+Wavelength 2/8; Variable 68000/85671
+Wavelength 2/8; Variable 69000/85671
+Wavelength 2/8; Variable 70000/85671
+Wavelength 2/8; Variable 71000/85671
+Wavelength 2/8; Variable 72000/85671
+Wavelength 2/8; Variable 73000/85671
+Wavelength 2/8; Variable 74000/85671
+Wavelength 2/8; Variable 75000/85671
+Wavelength 2/8; Variable 76000/85671
+Wavelength 2/8; Variable 77000/85671
+Wavelength 2/8; Variable 78000/85671
+Wavelength 2/8; Variable 79000/85671
+Wavelength 2/8; Variable 80000/85671
+Wavelength 2/8; Variable 81000/85671
+Wavelength 2/8; Variable 82000/85671
+Wavelength 2/8; Variable 83000/85671
+Wavelength 2/8; Variable 84000/85671
+Wavelength 2/8; Variable 85000/85671
+Wavelength 3/8; Variable 1000/85671
+Wavelength 3/8; Variable 2000/85671
+Wavelength 3/8; Variable 3000/85671
+Wavelength 3/8; Variable 4000/85671
+Wavelength 3/8; Variable 5000/85671
+Wavelength 3/8; Variable 6000/85671
+Wavelength 3/8; Variable 7000/85671
+Wavelength 3/8; Variable 8000/85671
+Wavelength 3/8; Variable 9000/85671
+Wavelength 3/8; Variable 10000/85671
+Wavelength 3/8; Variable 11000/85671
+Wavelength 3/8; Variable 12000/85671
+Wavelength 3/8; Variable 13000/85671
+Wavelength 3/8; Variable 14000/85671
+Wavelength 3/8; Variable 15000/85671
+Wavelength 3/8; Variable 16000/85671
+Wavelength 3/8; Variable 17000/85671
+Wavelength 3/8; Variable 18000/85671
+Wavelength 3/8; Variable 19000/85671
+Wavelength 3/8; Variable 20000/85671
+Wavelength 3/8; Variable 21000/85671
+Wavelength 3/8; Variable 22000/85671
+Wavelength 3/8; Variable 23000/85671
+Wavelength 3/8; Variable 24000/85671
+Wavelength 3/8; Variable 25000/85671
+Wavelength 3/8; Variable 26000/85671
+Wavelength 3/8; Variable 27000/85671
+Wavelength 3/8; Variable 28000/85671
+Wavelength 3/8; Variable 29000/85671
+Wavelength 3/8; Variable 30000/85671
+Wavelength 3/8; Variable 31000/85671
+Wavelength 3/8; Variable 32000/85671
+Wavelength 3/8; Variable 33000/85671
+Wavelength 3/8; Variable 34000/85671
+Wavelength 3/8; Variable 35000/85671
+Wavelength 3/8; Variable 36000/85671
+Wavelength 3/8; Variable 37000/85671
+Wavelength 3/8; Variable 38000/85671
+Wavelength 3/8; Variable 39000/85671
+Wavelength 3/8; Variable 40000/85671
+Wavelength 3/8; Variable 41000/85671
+Wavelength 3/8; Variable 42000/85671
+Wavelength 3/8; Variable 43000/85671
+Wavelength 3/8; Variable 44000/85671
+Wavelength 3/8; Variable 45000/85671
+Wavelength 3/8; Variable 46000/85671
+Wavelength 3/8; Variable 47000/85671
+Wavelength 3/8; Variable 48000/85671
+Wavelength 3/8; Variable 49000/85671
+Wavelength 3/8; Variable 50000/85671
+Wavelength 3/8; Variable 51000/85671
+Wavelength 3/8; Variable 52000/85671
+Wavelength 3/8; Variable 53000/85671
+Wavelength 3/8; Variable 54000/85671
+Wavelength 3/8; Variable 55000/85671
+Wavelength 3/8; Variable 56000/85671
+Wavelength 3/8; Variable 57000/85671
+Wavelength 3/8; Variable 58000/85671
+Wavelength 3/8; Variable 59000/85671
+Wavelength 3/8; Variable 60000/85671
+Wavelength 3/8; Variable 61000/85671
+Wavelength 3/8; Variable 62000/85671
+Wavelength 3/8; Variable 63000/85671
+Wavelength 3/8; Variable 64000/85671
+Wavelength 3/8; Variable 65000/85671
+Wavelength 3/8; Variable 66000/85671
+Wavelength 3/8; Variable 67000/85671
+Wavelength 3/8; Variable 68000/85671
+Wavelength 3/8; Variable 69000/85671
+Wavelength 3/8; Variable 70000/85671
+Wavelength 3/8; Variable 71000/85671
+Wavelength 3/8; Variable 72000/85671
+Wavelength 3/8; Variable 73000/85671
+Wavelength 3/8; Variable 74000/85671
+Wavelength 3/8; Variable 75000/85671
+Wavelength 3/8; Variable 76000/85671
+Wavelength 3/8; Variable 77000/85671
+Wavelength 3/8; Variable 78000/85671
+Wavelength 3/8; Variable 79000/85671
+Wavelength 3/8; Variable 80000/85671
+Wavelength 3/8; Variable 81000/85671
+Wavelength 3/8; Variable 82000/85671
+Wavelength 3/8; Variable 83000/85671
+Wavelength 3/8; Variable 84000/85671
+Wavelength 3/8; Variable 85000/85671
+Wavelength 4/8; Variable 1000/85671
+Wavelength 4/8; Variable 2000/85671
+Wavelength 4/8; Variable 3000/85671
+Wavelength 4/8; Variable 4000/85671
+Wavelength 4/8; Variable 5000/85671
+Wavelength 4/8; Variable 6000/85671
+Wavelength 4/8; Variable 7000/85671
+Wavelength 4/8; Variable 8000/85671
+Wavelength 4/8; Variable 9000/85671
+Wavelength 4/8; Variable 10000/85671
+Wavelength 4/8; Variable 11000/85671
+Wavelength 4/8; Variable 12000/85671
+Wavelength 4/8; Variable 13000/85671
+Wavelength 4/8; Variable 14000/85671
+Wavelength 4/8; Variable 15000/85671
+Wavelength 4/8; Variable 16000/85671
+Wavelength 4/8; Variable 17000/85671
+Wavelength 4/8; Variable 18000/85671
+Wavelength 4/8; Variable 19000/85671
+Wavelength 4/8; Variable 20000/85671
+Wavelength 4/8; Variable 21000/85671
+Wavelength 4/8; Variable 22000/85671
+Wavelength 4/8; Variable 23000/85671
+Wavelength 4/8; Variable 24000/85671
+Wavelength 4/8; Variable 25000/85671
+Wavelength 4/8; Variable 26000/85671
+Wavelength 4/8; Variable 27000/85671
+Wavelength 4/8; Variable 28000/85671
+Wavelength 4/8; Variable 29000/85671
+Wavelength 4/8; Variable 30000/85671
+Wavelength 4/8; Variable 31000/85671
+Wavelength 4/8; Variable 32000/85671
+Wavelength 4/8; Variable 33000/85671
+Wavelength 4/8; Variable 34000/85671
+Wavelength 4/8; Variable 35000/85671
+Wavelength 4/8; Variable 36000/85671
+Wavelength 4/8; Variable 37000/85671
+Wavelength 4/8; Variable 38000/85671
+Wavelength 4/8; Variable 39000/85671
+Wavelength 4/8; Variable 40000/85671
+Wavelength 4/8; Variable 41000/85671
+Wavelength 4/8; Variable 42000/85671
+Wavelength 4/8; Variable 43000/85671
+Wavelength 4/8; Variable 44000/85671
+Wavelength 4/8; Variable 45000/85671
+Wavelength 4/8; Variable 46000/85671
+Wavelength 4/8; Variable 47000/85671
+Wavelength 4/8; Variable 48000/85671
+Wavelength 4/8; Variable 49000/85671
+Wavelength 4/8; Variable 50000/85671
+Wavelength 4/8; Variable 51000/85671
+Wavelength 4/8; Variable 52000/85671
+Wavelength 4/8; Variable 53000/85671
+Wavelength 4/8; Variable 54000/85671
+Wavelength 4/8; Variable 55000/85671
+Wavelength 4/8; Variable 56000/85671
+Wavelength 4/8; Variable 57000/85671
+Wavelength 4/8; Variable 58000/85671
+Wavelength 4/8; Variable 59000/85671
+Wavelength 4/8; Variable 60000/85671
+Wavelength 4/8; Variable 61000/85671
+Wavelength 4/8; Variable 62000/85671
+Wavelength 4/8; Variable 63000/85671
+Wavelength 4/8; Variable 64000/85671
+Wavelength 4/8; Variable 65000/85671
+Wavelength 4/8; Variable 66000/85671
+Wavelength 4/8; Variable 67000/85671
+Wavelength 4/8; Variable 68000/85671
+Wavelength 4/8; Variable 69000/85671
+Wavelength 4/8; Variable 70000/85671
+Wavelength 4/8; Variable 71000/85671
+Wavelength 4/8; Variable 72000/85671
+Wavelength 4/8; Variable 73000/85671
+Wavelength 4/8; Variable 74000/85671
+Wavelength 4/8; Variable 75000/85671
+Wavelength 4/8; Variable 76000/85671
+Wavelength 4/8; Variable 77000/85671
+Wavelength 4/8; Variable 78000/85671
+Wavelength 4/8; Variable 79000/85671
+Wavelength 4/8; Variable 80000/85671
+Wavelength 4/8; Variable 81000/85671
+Wavelength 4/8; Variable 82000/85671
+Wavelength 4/8; Variable 83000/85671
+Wavelength 4/8; Variable 84000/85671
+Wavelength 4/8; Variable 85000/85671
+Wavelength 5/8; Variable 1000/85671
+Wavelength 5/8; Variable 2000/85671
+Wavelength 5/8; Variable 3000/85671
+Wavelength 5/8; Variable 4000/85671
+Wavelength 5/8; Variable 5000/85671
+Wavelength 5/8; Variable 6000/85671
+Wavelength 5/8; Variable 7000/85671
+Wavelength 5/8; Variable 8000/85671
+Wavelength 5/8; Variable 9000/85671
+Wavelength 5/8; Variable 10000/85671
+Wavelength 5/8; Variable 11000/85671
+Wavelength 5/8; Variable 12000/85671
+Wavelength 5/8; Variable 13000/85671
+Wavelength 5/8; Variable 14000/85671
+Wavelength 5/8; Variable 15000/85671
+Wavelength 5/8; Variable 16000/85671
+Wavelength 5/8; Variable 17000/85671
+Wavelength 5/8; Variable 18000/85671
+Wavelength 5/8; Variable 19000/85671
+Wavelength 5/8; Variable 20000/85671
+Wavelength 5/8; Variable 21000/85671
+Wavelength 5/8; Variable 22000/85671
+Wavelength 5/8; Variable 23000/85671
+Wavelength 5/8; Variable 24000/85671
+Wavelength 5/8; Variable 25000/85671
+Wavelength 5/8; Variable 26000/85671
+Wavelength 5/8; Variable 27000/85671
+Wavelength 5/8; Variable 28000/85671
+Wavelength 5/8; Variable 29000/85671
+Wavelength 5/8; Variable 30000/85671
+Wavelength 5/8; Variable 31000/85671
+Wavelength 5/8; Variable 32000/85671
+Wavelength 5/8; Variable 33000/85671
+Wavelength 5/8; Variable 34000/85671
+Wavelength 5/8; Variable 35000/85671
+Wavelength 5/8; Variable 36000/85671
+Wavelength 5/8; Variable 37000/85671
+Wavelength 5/8; Variable 38000/85671
+Wavelength 5/8; Variable 39000/85671
+Wavelength 5/8; Variable 40000/85671
+Wavelength 5/8; Variable 41000/85671
+Wavelength 5/8; Variable 42000/85671
+Wavelength 5/8; Variable 43000/85671
+Wavelength 5/8; Variable 44000/85671
+Wavelength 5/8; Variable 45000/85671
+Wavelength 5/8; Variable 46000/85671
+Wavelength 5/8; Variable 47000/85671
+Wavelength 5/8; Variable 48000/85671
+Wavelength 5/8; Variable 49000/85671
+Wavelength 5/8; Variable 50000/85671
+Wavelength 5/8; Variable 51000/85671
+Wavelength 5/8; Variable 52000/85671
+Wavelength 5/8; Variable 53000/85671
+Wavelength 5/8; Variable 54000/85671
+Wavelength 5/8; Variable 55000/85671
+Wavelength 5/8; Variable 56000/85671
+Wavelength 5/8; Variable 57000/85671
+Wavelength 5/8; Variable 58000/85671
+Wavelength 5/8; Variable 59000/85671
+Wavelength 5/8; Variable 60000/85671
+Wavelength 5/8; Variable 61000/85671
+Wavelength 5/8; Variable 62000/85671
+Wavelength 5/8; Variable 63000/85671
+Wavelength 5/8; Variable 64000/85671
+Wavelength 5/8; Variable 65000/85671
+Wavelength 5/8; Variable 66000/85671
+Wavelength 5/8; Variable 67000/85671
+Wavelength 5/8; Variable 68000/85671
+Wavelength 5/8; Variable 69000/85671
+Wavelength 5/8; Variable 70000/85671
+Wavelength 5/8; Variable 71000/85671
+Wavelength 5/8; Variable 72000/85671
+Wavelength 5/8; Variable 73000/85671
+Wavelength 5/8; Variable 74000/85671
+Wavelength 5/8; Variable 75000/85671
+Wavelength 5/8; Variable 76000/85671
+Wavelength 5/8; Variable 77000/85671
+Wavelength 5/8; Variable 78000/85671
+Wavelength 5/8; Variable 79000/85671
+Wavelength 5/8; Variable 80000/85671
+Wavelength 5/8; Variable 81000/85671
+Wavelength 5/8; Variable 82000/85671
+Wavelength 5/8; Variable 83000/85671
+Wavelength 5/8; Variable 84000/85671
+Wavelength 5/8; Variable 85000/85671
+Wavelength 6/8; Variable 1000/85671
+Wavelength 6/8; Variable 2000/85671
+Wavelength 6/8; Variable 3000/85671
+Wavelength 6/8; Variable 4000/85671
+Wavelength 6/8; Variable 5000/85671
+Wavelength 6/8; Variable 6000/85671
+Wavelength 6/8; Variable 7000/85671
+Wavelength 6/8; Variable 8000/85671
+Wavelength 6/8; Variable 9000/85671
+Wavelength 6/8; Variable 10000/85671
+Wavelength 6/8; Variable 11000/85671
+Wavelength 6/8; Variable 12000/85671
+Wavelength 6/8; Variable 13000/85671
+Wavelength 6/8; Variable 14000/85671
+Wavelength 6/8; Variable 15000/85671
+Wavelength 6/8; Variable 16000/85671
+Wavelength 6/8; Variable 17000/85671
+Wavelength 6/8; Variable 18000/85671
+Wavelength 6/8; Variable 19000/85671
+Wavelength 6/8; Variable 20000/85671
+Wavelength 6/8; Variable 21000/85671
+Wavelength 6/8; Variable 22000/85671
+Wavelength 6/8; Variable 23000/85671
+Wavelength 6/8; Variable 24000/85671
+Wavelength 6/8; Variable 25000/85671
+Wavelength 6/8; Variable 26000/85671
+Wavelength 6/8; Variable 27000/85671
+Wavelength 6/8; Variable 28000/85671
+Wavelength 6/8; Variable 29000/85671
+Wavelength 6/8; Variable 30000/85671
+Wavelength 6/8; Variable 31000/85671
+Wavelength 6/8; Variable 32000/85671
+Wavelength 6/8; Variable 33000/85671
+Wavelength 6/8; Variable 34000/85671
+Wavelength 6/8; Variable 35000/85671
+Wavelength 6/8; Variable 36000/85671
+Wavelength 6/8; Variable 37000/85671
+Wavelength 6/8; Variable 38000/85671
+Wavelength 6/8; Variable 39000/85671
+Wavelength 6/8; Variable 40000/85671
+Wavelength 6/8; Variable 41000/85671
+Wavelength 6/8; Variable 42000/85671
+Wavelength 6/8; Variable 43000/85671
+Wavelength 6/8; Variable 44000/85671
+Wavelength 6/8; Variable 45000/85671
+Wavelength 6/8; Variable 46000/85671
+Wavelength 6/8; Variable 47000/85671
+Wavelength 6/8; Variable 48000/85671
+Wavelength 6/8; Variable 49000/85671
+Wavelength 6/8; Variable 50000/85671
+Wavelength 6/8; Variable 51000/85671
+Wavelength 6/8; Variable 52000/85671
+Wavelength 6/8; Variable 53000/85671
+Wavelength 6/8; Variable 54000/85671
+Wavelength 6/8; Variable 55000/85671
+Wavelength 6/8; Variable 56000/85671
+Wavelength 6/8; Variable 57000/85671
+Wavelength 6/8; Variable 58000/85671
+Wavelength 6/8; Variable 59000/85671
+Wavelength 6/8; Variable 60000/85671
+Wavelength 6/8; Variable 61000/85671
+Wavelength 6/8; Variable 62000/85671
+Wavelength 6/8; Variable 63000/85671
+Wavelength 6/8; Variable 64000/85671
+Wavelength 6/8; Variable 65000/85671
+Wavelength 6/8; Variable 66000/85671
+Wavelength 6/8; Variable 67000/85671
+Wavelength 6/8; Variable 68000/85671
+Wavelength 6/8; Variable 69000/85671
+Wavelength 6/8; Variable 70000/85671
+Wavelength 6/8; Variable 71000/85671
+Wavelength 6/8; Variable 72000/85671
+Wavelength 6/8; Variable 73000/85671
+Wavelength 6/8; Variable 74000/85671
+Wavelength 6/8; Variable 75000/85671
+Wavelength 6/8; Variable 76000/85671
+Wavelength 6/8; Variable 77000/85671
+Wavelength 6/8; Variable 78000/85671
+Wavelength 6/8; Variable 79000/85671
+Wavelength 6/8; Variable 80000/85671
+Wavelength 6/8; Variable 81000/85671
+Wavelength 6/8; Variable 82000/85671
+Wavelength 6/8; Variable 83000/85671
+Wavelength 6/8; Variable 84000/85671
+Wavelength 6/8; Variable 85000/85671
+Wavelength 7/8; Variable 1000/85671
+Wavelength 7/8; Variable 2000/85671
+Wavelength 7/8; Variable 3000/85671
+Wavelength 7/8; Variable 4000/85671
+Wavelength 7/8; Variable 5000/85671
+Wavelength 7/8; Variable 6000/85671
+Wavelength 7/8; Variable 7000/85671
+Wavelength 7/8; Variable 8000/85671
+Wavelength 7/8; Variable 9000/85671
+Wavelength 7/8; Variable 10000/85671
+Wavelength 7/8; Variable 11000/85671
+Wavelength 7/8; Variable 12000/85671
+Wavelength 7/8; Variable 13000/85671
+Wavelength 7/8; Variable 14000/85671
+Wavelength 7/8; Variable 15000/85671
+Wavelength 7/8; Variable 16000/85671
+Wavelength 7/8; Variable 17000/85671
+Wavelength 7/8; Variable 18000/85671
+Wavelength 7/8; Variable 19000/85671
+Wavelength 7/8; Variable 20000/85671
+Wavelength 7/8; Variable 21000/85671
+Wavelength 7/8; Variable 22000/85671
+Wavelength 7/8; Variable 23000/85671
+Wavelength 7/8; Variable 24000/85671
+Wavelength 7/8; Variable 25000/85671
+Wavelength 7/8; Variable 26000/85671
+Wavelength 7/8; Variable 27000/85671
+Wavelength 7/8; Variable 28000/85671
+Wavelength 7/8; Variable 29000/85671
+Wavelength 7/8; Variable 30000/85671
+Wavelength 7/8; Variable 31000/85671
+Wavelength 7/8; Variable 32000/85671
+Wavelength 7/8; Variable 33000/85671
+Wavelength 7/8; Variable 34000/85671
+Wavelength 7/8; Variable 35000/85671
+Wavelength 7/8; Variable 36000/85671
+Wavelength 7/8; Variable 37000/85671
+Wavelength 7/8; Variable 38000/85671
+Wavelength 7/8; Variable 39000/85671
+Wavelength 7/8; Variable 40000/85671
+Wavelength 7/8; Variable 41000/85671
+Wavelength 7/8; Variable 42000/85671
+Wavelength 7/8; Variable 43000/85671
+Wavelength 7/8; Variable 44000/85671
+Wavelength 7/8; Variable 45000/85671
+Wavelength 7/8; Variable 46000/85671
+Wavelength 7/8; Variable 47000/85671
+Wavelength 7/8; Variable 48000/85671
+Wavelength 7/8; Variable 49000/85671
+Wavelength 7/8; Variable 50000/85671
+Wavelength 7/8; Variable 51000/85671
+Wavelength 7/8; Variable 52000/85671
+Wavelength 7/8; Variable 53000/85671
+Wavelength 7/8; Variable 54000/85671
+Wavelength 7/8; Variable 55000/85671
+Wavelength 7/8; Variable 56000/85671
+Wavelength 7/8; Variable 57000/85671
+Wavelength 7/8; Variable 58000/85671
+Wavelength 7/8; Variable 59000/85671
+Wavelength 7/8; Variable 60000/85671
+Wavelength 7/8; Variable 61000/85671
+Wavelength 7/8; Variable 62000/85671
+Wavelength 7/8; Variable 63000/85671
+Wavelength 7/8; Variable 64000/85671
+Wavelength 7/8; Variable 65000/85671
+Wavelength 7/8; Variable 66000/85671
+Wavelength 7/8; Variable 67000/85671
+Wavelength 7/8; Variable 68000/85671
+Wavelength 7/8; Variable 69000/85671
+Wavelength 7/8; Variable 70000/85671
+Wavelength 7/8; Variable 71000/85671
+Wavelength 7/8; Variable 72000/85671
+Wavelength 7/8; Variable 73000/85671
+Wavelength 7/8; Variable 74000/85671
+Wavelength 7/8; Variable 75000/85671
+Wavelength 7/8; Variable 76000/85671
+Wavelength 7/8; Variable 77000/85671
+Wavelength 7/8; Variable 78000/85671
+Wavelength 7/8; Variable 79000/85671
+Wavelength 7/8; Variable 80000/85671
+Wavelength 7/8; Variable 81000/85671
+Wavelength 7/8; Variable 82000/85671
+Wavelength 7/8; Variable 83000/85671
+Wavelength 7/8; Variable 84000/85671
+Wavelength 7/8; Variable 85000/85671
+Wavelength 8/8; Variable 1000/85671
+Wavelength 8/8; Variable 2000/85671
+Wavelength 8/8; Variable 3000/85671
+Wavelength 8/8; Variable 4000/85671
+Wavelength 8/8; Variable 5000/85671
+Wavelength 8/8; Variable 6000/85671
+Wavelength 8/8; Variable 7000/85671
+Wavelength 8/8; Variable 8000/85671
+Wavelength 8/8; Variable 9000/85671
+Wavelength 8/8; Variable 10000/85671
+Wavelength 8/8; Variable 11000/85671
+Wavelength 8/8; Variable 12000/85671
+Wavelength 8/8; Variable 13000/85671
+Wavelength 8/8; Variable 14000/85671
+Wavelength 8/8; Variable 15000/85671
+Wavelength 8/8; Variable 16000/85671
+Wavelength 8/8; Variable 17000/85671
+Wavelength 8/8; Variable 18000/85671
+Wavelength 8/8; Variable 19000/85671
+Wavelength 8/8; Variable 20000/85671
+Wavelength 8/8; Variable 21000/85671
+Wavelength 8/8; Variable 22000/85671
+Wavelength 8/8; Variable 23000/85671
+Wavelength 8/8; Variable 24000/85671
+Wavelength 8/8; Variable 25000/85671
+Wavelength 8/8; Variable 26000/85671
+Wavelength 8/8; Variable 27000/85671
+Wavelength 8/8; Variable 28000/85671
+Wavelength 8/8; Variable 29000/85671
+Wavelength 8/8; Variable 30000/85671
+Wavelength 8/8; Variable 31000/85671
+Wavelength 8/8; Variable 32000/85671
+Wavelength 8/8; Variable 33000/85671
+Wavelength 8/8; Variable 34000/85671
+Wavelength 8/8; Variable 35000/85671
+Wavelength 8/8; Variable 36000/85671
+Wavelength 8/8; Variable 37000/85671
+Wavelength 8/8; Variable 38000/85671
+Wavelength 8/8; Variable 39000/85671
+Wavelength 8/8; Variable 40000/85671
+Wavelength 8/8; Variable 41000/85671
+Wavelength 8/8; Variable 42000/85671
+Wavelength 8/8; Variable 43000/85671
+Wavelength 8/8; Variable 44000/85671
+Wavelength 8/8; Variable 45000/85671
+Wavelength 8/8; Variable 46000/85671
+Wavelength 8/8; Variable 47000/85671
+Wavelength 8/8; Variable 48000/85671
+Wavelength 8/8; Variable 49000/85671
+Wavelength 8/8; Variable 50000/85671
+Wavelength 8/8; Variable 51000/85671
+Wavelength 8/8; Variable 52000/85671
+Wavelength 8/8; Variable 53000/85671
+Wavelength 8/8; Variable 54000/85671
+Wavelength 8/8; Variable 55000/85671
+Wavelength 8/8; Variable 56000/85671
+Wavelength 8/8; Variable 57000/85671
+Wavelength 8/8; Variable 58000/85671
+Wavelength 8/8; Variable 59000/85671
+Wavelength 8/8; Variable 60000/85671
+Wavelength 8/8; Variable 61000/85671
+Wavelength 8/8; Variable 62000/85671
+Wavelength 8/8; Variable 63000/85671
+Wavelength 8/8; Variable 64000/85671
+Wavelength 8/8; Variable 65000/85671
+Wavelength 8/8; Variable 66000/85671
+Wavelength 8/8; Variable 67000/85671
+Wavelength 8/8; Variable 68000/85671
+Wavelength 8/8; Variable 69000/85671
+Wavelength 8/8; Variable 70000/85671
+Wavelength 8/8; Variable 71000/85671
+Wavelength 8/8; Variable 72000/85671
+Wavelength 8/8; Variable 73000/85671
+Wavelength 8/8; Variable 74000/85671
+Wavelength 8/8; Variable 75000/85671
+Wavelength 8/8; Variable 76000/85671
+Wavelength 8/8; Variable 77000/85671
+Wavelength 8/8; Variable 78000/85671
+Wavelength 8/8; Variable 79000/85671
+Wavelength 8/8; Variable 80000/85671
+Wavelength 8/8; Variable 81000/85671
+Wavelength 8/8; Variable 82000/85671
+Wavelength 8/8; Variable 83000/85671
+Wavelength 8/8; Variable 84000/85671
+Wavelength 8/8; Variable 85000/85671
+Start optimization...
+Optimize a model with 13536 rows, 85671 columns and 1159642596 nonzeros
+Coefficient statistics:
+  Matrix range     [1e-13, 3e-05]
+  Objective range  [6e-02, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e-05, 1e-05]
+Presolve removed 0 rows and 0 columns (presolve time = 41s) ...
+Presolve removed 0 rows and 0 columns (presolve time = 59s) ...
+Presolve removed 0 rows and 0 columns (presolve time = 110s) ...
+Presolve removed 0 rows and 0 columns (presolve time = 239s) ...
+Presolve removed 6768 rows and 0 columns (presolve time = 260s) ...
+Presolve removed 6768 rows and 0 columns
+Presolve time: 261.00s
+Presolved: 6768 rows, 92439 columns, 579828060 nonzeros
+Ordering time: 0.00s
+
+Barrier statistics:
+ AA' NZ     : 2.290e+07
+ Factor NZ  : 2.291e+07 (roughly 220 MBytes of memory)
+ Factor Ops : 1.034e+11 (roughly 8 seconds per iteration)
+ Threads    : 24
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0   2.09479748e+08  1.88602909e+05  1.90e+02 3.64e-12  6.56e+03   354s
+   1   1.23227233e+05  1.88554853e+05  7.97e-02 8.00e-11  3.58e+00   385s
+   2   7.02322773e+04  1.45415621e+05  3.09e-02 9.09e-09  1.42e+00   417s
+   3   5.23249529e+04  9.01260723e+04  1.39e-02 2.84e-08  5.17e-01   451s
+   4   4.57193656e+04  5.86863292e+04  7.58e-03 4.70e-08  1.94e-01   486s
+   5   4.11130464e+04  4.69918399e+04  3.45e-03 5.83e-08  7.92e-02   522s
+   6   3.93591474e+04  4.32806700e+04  1.81e-03 6.04e-08  4.45e-02   556s
+   7   3.86390999e+04  4.09253386e+04  1.17e-03 1.04e-07  2.67e-02   588s
+   8   3.84068312e+04  3.99006689e+04  9.31e-04 1.10e-07  1.92e-02   620s
+   9   3.82501472e+04  3.93675015e+04  7.84e-04 1.30e-07  1.53e-02   651s
+  10   3.80856006e+04  3.88242809e+04  6.26e-04 1.34e-07  1.13e-02   682s
+  11   3.80233001e+04  3.85996892e+04  5.63e-04 1.02e-07  9.66e-03   712s
+  12   3.79087261e+04  3.83282831e+04  4.44e-04 9.83e-08  7.39e-03   742s
+  13   3.78667292e+04  3.81570526e+04  3.89e-04 1.23e-07  6.03e-03   775s
+  14   3.77763928e+04  3.80347597e+04  2.86e-04 8.77e-08  4.67e-03   808s
+  15   3.77301776e+04  3.79023969e+04  2.34e-04 1.12e-07  3.59e-03   844s
+  16   3.76916193e+04  3.78175804e+04  1.86e-04 1.02e-07  2.79e-03   878s
+  17   3.76685549e+04  3.77694958e+04  1.59e-04 8.38e-08  2.35e-03   909s
+  18   3.76504196e+04  3.77378975e+04  1.37e-04 9.59e-08  2.03e-03   938s
+  19   3.76380585e+04  3.77064101e+04  1.22e-04 8.35e-08  1.75e-03   968s
+  20   3.76242565e+04  3.76948245e+04  1.03e-04 8.25e-08  1.55e-03  1000s
+  21   3.76136853e+04  3.76620910e+04  8.89e-05 8.02e-08  1.27e-03  1034s
+  22   3.76000924e+04  3.76277139e+04  6.82e-05 9.87e-08  9.20e-04  1068s
+  23   3.75845053e+04  3.76143951e+04  4.66e-05 7.62e-08  6.88e-04  1101s
+  24   3.75824843e+04  3.76063605e+04  4.38e-05 1.05e-07  6.23e-04  1132s
+  25   3.75805689e+04  3.76010568e+04  4.13e-05 9.43e-08  5.77e-04  1162s
+  26   3.75769166e+04  3.75928790e+04  3.60e-05 8.46e-08  4.92e-04  1194s
+  27   3.75714955e+04  3.75870377e+04  2.82e-05 9.56e-08  4.02e-04  1226s
+  28   3.75695274e+04  3.75841192e+04  2.49e-05 7.64e-08  3.60e-04  1257s
+  29   3.75665602e+04  3.75800215e+04  2.06e-05 8.30e-08  3.05e-04  1289s
+  30   3.75635726e+04  3.75759750e+04  1.64e-05 9.10e-08  2.52e-04  1320s
+  31   3.75629468e+04  3.75728170e+04  1.55e-05 7.42e-08  2.28e-04  1348s
+  32   3.75609857e+04  3.75701746e+04  1.26e-05 8.54e-08  1.91e-04  1379s
+  33   3.75599650e+04  3.75669501e+04  1.11e-05 9.29e-08  1.62e-04  1412s
+  34   3.75586094e+04  3.75640825e+04  9.03e-06 1.03e-07  1.31e-04  1445s
+  35   3.75578453e+04  3.75610047e+04  7.48e-06 1.04e-07  1.01e-04  1482s
+  36   3.75569689e+04  3.75592471e+04  5.98e-06 1.04e-07  7.97e-05  1515s
+  37   3.75563942e+04  3.75577212e+04  4.92e-06 8.32e-08  6.26e-05  1549s
+  38   3.75559349e+04  3.75567936e+04  4.12e-06 9.78e-08  5.11e-05  1581s
+  39   3.75556868e+04  3.75564370e+04  3.69e-06 9.10e-08  4.56e-05  1611s
+  40   3.75553430e+04  3.75559853e+04  3.10e-06 9.81e-08  3.84e-05  1641s
+  41   3.75550761e+04  3.75555676e+04  2.63e-06 8.59e-08  3.23e-05  1670s
+  42   3.75548408e+04  3.75550547e+04  2.09e-06 1.01e-07  2.47e-05  1701s
+  43   3.75545748e+04  3.75546175e+04  1.50e-06 8.77e-08  1.71e-05  1737s
+  44   3.75543716e+04  3.75543716e+04  1.10e-06 8.74e-08  1.24e-05  1772s
+  45   3.75541894e+04  3.75541795e+04  7.73e-07 1.15e-07  8.65e-06  1805s
+  46   3.75541628e+04  3.75541351e+04  7.18e-07 9.30e-08  7.94e-06  1837s
+  47   3.75540449e+04  3.75540365e+04  5.31e-07 9.44e-08  5.93e-06  1867s
+  48   3.75539700e+04  3.75539679e+04  4.10e-07 9.64e-08  4.60e-06  1897s
+  49   3.75538994e+04  3.75538882e+04  2.92e-07 9.10e-08  3.23e-06  1929s
+  50   3.75538370e+04  3.75538364e+04  1.83e-07 1.02e-07  2.06e-06  1962s
+  51   3.75537904e+04  3.75537878e+04  9.90e-08 3.61e-07  1.10e-06  1996s
+  52   3.75537681e+04  3.75537689e+04  5.79e-08 1.07e-07  6.56e-07  2030s
+  53   3.75537563e+04  3.75537512e+04  3.61e-08 1.03e-07  3.79e-07  2060s
+  54   3.75537458e+04  3.75537459e+04  1.57e-08 1.02e-07  1.78e-07  2089s
+  55   3.75537418e+04  3.75537416e+04  7.44e-09 1.09e-07  8.27e-08  2119s
+  56   3.75537389e+04  3.75537395e+04  1.12e-09 2.78e-07  1.59e-08  2153s
+  57   3.75537386e+04  3.75537387e+04  8.97e-11 3.19e-07  1.53e-09  2190s
+
+Barrier solved model in 57 iterations and 2190.42 seconds
+Optimal objective 3.75537386e+04
+
+Optimization finished!
+Restarting optimization for throughput iteration 1...
+Optimize a model with 13536 rows, 85671 columns and 1159642596 nonzeros
+Coefficient statistics:
+  Matrix range     [1e-13, 3e-05]
+  Objective range  [6e-02, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [6e-06, 6e-06]
+Presolve removed 0 rows and 0 columns (presolve time = 40s) ...
+Presolve removed 0 rows and 0 columns (presolve time = 58s) ...
+Presolve removed 0 rows and 0 columns (presolve time = 109s) ...
+Presolve removed 0 rows and 0 columns (presolve time = 235s) ...
+Presolve removed 6768 rows and 0 columns (presolve time = 256s) ...
+Presolve removed 6768 rows and 0 columns
+Presolve time: 256.87s
+Presolved: 6768 rows, 92439 columns, 579828060 nonzeros
+Ordering time: 0.00s
+
+Barrier statistics:
+ AA' NZ     : 2.290e+07
+ Factor NZ  : 2.291e+07 (roughly 220 MBytes of memory)
+ Factor Ops : 1.034e+11 (roughly 7 seconds per iteration)
+ Threads    : 24
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0   2.09479748e+08  1.85028192e+05  1.90e+02 3.64e-12  6.56e+03   347s
+   1   1.31726293e+05  1.84981277e+05  8.74e-02 7.28e-11  3.83e+00   376s
+   2   7.11238069e+04  1.45592629e+05  3.19e-02 8.27e-09  1.47e+00   408s
+   3   5.39879641e+04  8.85897569e+04  1.55e-02 2.63e-08  5.43e-01   441s
+   4   4.63957755e+04  6.47607582e+04  8.50e-03 4.42e-08  2.54e-01   475s
+   5   4.07357260e+04  4.80881877e+04  3.61e-03 1.66e-07  9.25e-02   511s
+   6   3.93640361e+04  4.26514489e+04  2.39e-03 7.59e-08  4.94e-02   546s
+   7   3.84858292e+04  4.03729067e+04  1.59e-03 7.73e-08  3.03e-02   580s
+   8   3.80505413e+04  3.95102211e+04  1.19e-03 3.11e-07  2.28e-02   614s
+   9   3.78806649e+04  3.86171631e+04  1.05e-03 1.06e-07  1.68e-02   644s
+  10   3.76920518e+04  3.81844675e+04  8.85e-04 1.08e-07  1.34e-02   674s
+  11   3.74566408e+04  3.80483737e+04  6.77e-04 1.31e-07  1.14e-02   704s
+  12   3.73065387e+04  3.76792919e+04  5.40e-04 1.53e-07  8.51e-03   734s
+  13   3.71521372e+04  3.74756521e+04  3.86e-04 1.07e-07  6.37e-03   766s
+  14   3.70687397e+04  3.73707151e+04  3.00e-04 1.23e-07  5.22e-03   799s
+  15   3.69896111e+04  3.72476053e+04  2.23e-04 1.13e-07  4.05e-03   833s
+  16   3.69176375e+04  3.70876030e+04  1.53e-04 1.36e-07  2.74e-03   865s
+  17   3.68739897e+04  3.70559402e+04  1.07e-04 1.34e-07  2.26e-03   896s
+  18   3.68543889e+04  3.69972272e+04  8.69e-05 1.32e-07  1.80e-03   927s
+  19   3.68342811e+04  3.69455736e+04  6.51e-05 1.51e-07  1.37e-03   958s
+  20   3.68175889e+04  3.69075731e+04  4.52e-05 1.90e-07  1.02e-03   989s
+  21   3.68121035e+04  3.68671984e+04  3.76e-05 1.50e-07  7.42e-04  1022s
+  22   3.68083093e+04  3.68444500e+04  3.11e-05 1.37e-07  5.63e-04  1057s
+  23   3.68029172e+04  3.68346210e+04  2.21e-05 1.52e-07  4.33e-04  1091s
+  24   3.68009388e+04  3.68250055e+04  1.87e-05 1.42e-07  3.51e-04  1123s
+  25   3.67987722e+04  3.68217553e+04  1.48e-05 1.34e-07  2.99e-04  1153s
+  26   3.67972348e+04  3.68148582e+04  1.18e-05 1.39e-07  2.34e-04  1184s
+  27   3.67960364e+04  3.68091867e+04  9.24e-06 1.95e-07  1.80e-04  1217s
+  28   3.67949796e+04  3.68057518e+04  6.69e-06 1.49e-07  1.37e-04  1248s
+  29   3.67946247e+04  3.68014962e+04  5.55e-06 1.56e-07  1.03e-04  1281s
+  30   3.67945427e+04  3.68008795e+04  5.31e-06 2.39e-07  9.70e-05  1313s
+  31   3.67943117e+04  3.68004921e+04  4.58e-06 1.68e-07  8.75e-05  1343s
+  32   3.67940406e+04  3.67998457e+04  3.59e-06 1.75e-07  7.38e-05  1376s
+  33   3.67938939e+04  3.67979156e+04  3.05e-06 1.54e-07  5.77e-05  1410s
+  34   3.67937454e+04  3.67963269e+04  2.25e-06 1.48e-07  4.05e-05  1446s
+  35   3.67936351e+04  3.67956011e+04  1.61e-06 1.67e-07  2.97e-05  1479s
+  36   3.67935875e+04  3.67950753e+04  1.34e-06 2.38e-07  2.39e-05  1510s
+  37   3.67935210e+04  3.67946638e+04  1.05e-06 2.14e-07  1.86e-05  1539s
+  38   3.67934773e+04  3.67941462e+04  8.49e-07 4.06e-07  1.36e-05  1569s
+  39   3.67934367e+04  3.67938300e+04  5.69e-07 3.52e-07  8.84e-06  1601s
+  40   3.67934115e+04  3.67936947e+04  3.92e-07 3.28e-07  6.16e-06  1631s
+  41   3.67933963e+04  3.67935442e+04  2.67e-07 3.89e-07  3.95e-06  1665s
+  42   3.67933942e+04  3.67935005e+04  2.02e-07 4.00e-07  2.96e-06  1695s
+  43   3.67933864e+04  3.67934699e+04  1.50e-07 3.26e-07  2.23e-06  1726s
+  44   3.67933798e+04  3.67934410e+04  9.14e-08 1.65e-07  1.41e-06  1760s
+  45   3.67933747e+04  3.67934000e+04  3.50e-08 1.61e-07  5.50e-07  1799s
+  46   3.67933741e+04  3.67933866e+04  1.81e-08 2.10e-07  2.81e-07  1833s
+  47   3.67933741e+04  3.67933809e+04  8.64e-09 1.78e-07  1.39e-07  1867s
+  48   3.67933743e+04  3.67933760e+04  2.23e-09 8.79e-07  3.53e-08  1901s
+  49   3.67933747e+04  3.67933750e+04  8.69e-11 1.74e-07  2.79e-09  1938s
+
+Barrier solved model in 49 iterations and 1937.70 seconds
+Optimal objective 3.67933747e+04
+
+Optimization finished!
+/user/kstlaurent/anaconda3/envs/coron_gur/lib/python3.6/site-packages/asdf/extension.py:211: AsdfDeprecationWarning: The module asdf.asdftypes has been deprecated and will be removed in 3.0. Use asdf.types instead. (from astropy.io.misc.asdf.extension.AstropyExtension)
+  AsdfDeprecationWarning)

@@ -1,0 +1,77 @@
+Optimizer called with the following parameters:
+{'focal_plane_mask': {'field_stop_radius': -1.0,
+                      'grayscale': True,
+                      'num_pix': 50,
+                      'radius': 6.82},
+ 'image': {'bandwidth': 0.1,
+           'contrast': 10,
+           'iwa': 6.72,
+           'num_wavelengths': 4,
+           'owa': 21.5,
+           'resolution': 2},
+ 'lyot_stop': {'alignment_tolerance': 0,
+               'filename': 'LUVOIR/LS_LUVOIR_ID0190_OD0937_no_struts_gy_ovsamp3_N0500.fits',
+               'num_lyot_stops': 1},
+ 'method': {'edge_width_for_prior': 2,
+            'ending_scale': 1,
+            'force_no_hermitian_symmetry': False,
+            'force_no_x_mirror_symmetry': False,
+            'force_no_y_mirror_symmetry': False,
+            'initial_throughput_estimate': 1,
+            'maximize_planet_throughput': True,
+            'num_throughput_iterations': 2,
+            'starting_scale': 1},
+ 'pupil': {'N': 500,
+           'filename': 'LUVOIR/TelAp_LUVOIR_gap_pad02_bw_ovsamp03_N0500.fits'},
+ 'solver': {'crossover': 0,
+            'method': 2,
+            'num_threads': 0}}
+
+File organization:
+{'analysis_dir': '/user/kstlaurent/git/progressive_refinement_coronagraphy/surveys/luvoir_N0500_middle_telserv3/analysis',
+ 'drivers_dir': '/user/kstlaurent/git/progressive_refinement_coronagraphy/surveys/luvoir_N0500_middle_telserv3/drivers',
+ 'input_files_dir': '/user/kstlaurent/git/progressive_refinement_coronagraphy/masks',
+ 'log_dir': '/user/kstlaurent/git/progressive_refinement_coronagraphy/surveys/luvoir_N0500_middle_telserv3/logs',
+ 'solution_dir': '/user/kstlaurent/git/progressive_refinement_coronagraphy/surveys/luvoir_N0500_middle_telserv3/solutions',
+ 'survey_dir': '/user/kstlaurent/git/progressive_refinement_coronagraphy/surveys/luvoir_N0500_middle_telserv3'}
+
+Telescope pupil:
+   Mirror symmetry in x: yes
+   Mirror symmetry in y: no
+
+Lyot stop #0:
+   Mirror symmetry in x: yes
+Lyot stop #0:
+   Mirror symmetry in y: yes
+
+Complete APLC:
+   Mirror symmetry in x: yes
+   Mirror symmetry in y: no
+
+Starting optimization at scale 1 with 85671 variables and 10496 constraints.
+Creating model...
+Academic license - for non-commercial use only
+Parameter Threads unchanged
+   Value: 0  Min: 0  Max: 1024  Default: 0
+Changed value of parameter Crossover to 0
+   Prev: -1  Min: -1  Max: 5  Default: -1
+Changed value of parameter Method to 2
+   Prev: -1  Min: -1  Max: 5  Default: -1
+Calculating and adding constraints...
+Wavelength 1/4; Variable 1000/85671
+Wavelength 1/4; Variable 2000/85671
+Wavelength 1/4; Variable 3000/85671
+Wavelength 1/4; Variable 4000/85671
+Wavelength 1/4; Variable 5000/85671
+Wavelength 1/4; Variable 6000/85671
+Wavelength 1/4; Variable 7000/85671
+Wavelength 1/4; Variable 8000/85671
+Wavelength 1/4; Variable 9000/85671
+Wavelength 1/4; Variable 10000/85671
+Wavelength 1/4; Variable 11000/85671
+Traceback (most recent call last):
+  File "/user/kstlaurent/git/progressive_refinement_coronagraphy/surveys/luvoir_N0500_middle_telserv3/drivers/0_LUVOIR_N500_FPM682M050_IWA0672_OWA02150_C10_BW10_Nlam4_LS_IDD0190_OD0937_no_ls_struts.py", line 127, in <module>
+    solver_method=solver_method)
+  File "/user/kstlaurent/git/progressive_refinement_coronagraphy/surveys/luvoir_N0500_middle_telserv3/drivers/por_aplc_optimizer.py", line 379, in optimize_aplc
+    lyot_copy.electric_field *= lyot_stop
+KeyboardInterrupt

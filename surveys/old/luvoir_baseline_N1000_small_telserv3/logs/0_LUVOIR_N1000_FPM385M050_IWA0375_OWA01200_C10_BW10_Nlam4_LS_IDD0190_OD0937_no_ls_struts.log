@@ -1,0 +1,1631 @@
+Optimizer called with the following parameters:
+{'focal_plane_mask': {'field_stop_radius': -1.0,
+                      'grayscale': True,
+                      'num_pix': 50,
+                      'radius': 3.85},
+ 'image': {'bandwidth': 0.1,
+           'contrast': 10,
+           'iwa': 3.75,
+           'num_wavelengths': 4,
+           'owa': 12.0,
+           'resolution': 2},
+ 'lyot_stop': {'alignment_tolerance': 0,
+               'filename': 'LUVOIR/LS_LUVOIR_ID0190_OD0937_no_struts_gy_ovsamp3_N1000.fits',
+               'num_lyot_stops': 1},
+ 'method': {'edge_width_for_prior': 2,
+            'ending_scale': 1,
+            'force_no_hermitian_symmetry': False,
+            'force_no_x_mirror_symmetry': False,
+            'force_no_y_mirror_symmetry': False,
+            'initial_throughput_estimate': 1,
+            'maximize_planet_throughput': True,
+            'num_throughput_iterations': 2,
+            'starting_scale': 1},
+ 'pupil': {'N': 1000,
+           'filename': 'LUVOIR/TelAp_LUVOIR_gap_pad01_bw_ovsamp03_N1000.fits'},
+ 'solver': {'crossover': 0,
+            'method': 2,
+            'num_threads': 0}}
+
+File organization:
+{'analysis_dir': '/user/kstlaurent/git/progressive_refinement_coronagraphy/surveys/luvoir_baseline_N1000_small_telserv3/analysis',
+ 'drivers_dir': '/user/kstlaurent/git/progressive_refinement_coronagraphy/surveys/luvoir_baseline_N1000_small_telserv3/drivers',
+ 'input_files_dir': '/user/kstlaurent/git/progressive_refinement_coronagraphy/masks',
+ 'log_dir': '/user/kstlaurent/git/progressive_refinement_coronagraphy/surveys/luvoir_baseline_N1000_small_telserv3/logs',
+ 'solution_dir': '/user/kstlaurent/git/progressive_refinement_coronagraphy/surveys/luvoir_baseline_N1000_small_telserv3/solutions',
+ 'survey_dir': '/user/kstlaurent/git/progressive_refinement_coronagraphy/surveys/luvoir_baseline_N1000_small_telserv3'}
+
+Telescope pupil:
+   Mirror symmetry in x: yes
+   Mirror symmetry in y: no
+
+Lyot stop #0:
+   Mirror symmetry in x: yes
+Lyot stop #0:
+   Mirror symmetry in y: yes
+
+Complete APLC:
+   Mirror symmetry in x: yes
+   Mirror symmetry in y: no
+
+Starting optimization at scale 1 with 342193 variables and 3264 constraints.
+Creating model...
+Academic license - for non-commercial use only
+Parameter Threads unchanged
+   Value: 0  Min: 0  Max: 1024  Default: 0
+Changed value of parameter Crossover to 0
+   Prev: -1  Min: -1  Max: 5  Default: -1
+Changed value of parameter Method to 2
+   Prev: -1  Min: -1  Max: 5  Default: -1
+Calculating and adding constraints...
+Wavelength 1/4; Variable 1000/342193
+Wavelength 1/4; Variable 2000/342193
+Wavelength 1/4; Variable 3000/342193
+Wavelength 1/4; Variable 4000/342193
+Wavelength 1/4; Variable 5000/342193
+Wavelength 1/4; Variable 6000/342193
+Wavelength 1/4; Variable 7000/342193
+Wavelength 1/4; Variable 8000/342193
+Wavelength 1/4; Variable 9000/342193
+Wavelength 1/4; Variable 10000/342193
+Wavelength 1/4; Variable 11000/342193
+Wavelength 1/4; Variable 12000/342193
+Wavelength 1/4; Variable 13000/342193
+Wavelength 1/4; Variable 14000/342193
+Wavelength 1/4; Variable 15000/342193
+Wavelength 1/4; Variable 16000/342193
+Wavelength 1/4; Variable 17000/342193
+Wavelength 1/4; Variable 18000/342193
+Wavelength 1/4; Variable 19000/342193
+Wavelength 1/4; Variable 20000/342193
+Wavelength 1/4; Variable 21000/342193
+Wavelength 1/4; Variable 22000/342193
+Wavelength 1/4; Variable 23000/342193
+Wavelength 1/4; Variable 24000/342193
+Wavelength 1/4; Variable 25000/342193
+Wavelength 1/4; Variable 26000/342193
+Wavelength 1/4; Variable 27000/342193
+Wavelength 1/4; Variable 28000/342193
+Wavelength 1/4; Variable 29000/342193
+Wavelength 1/4; Variable 30000/342193
+Wavelength 1/4; Variable 31000/342193
+Wavelength 1/4; Variable 32000/342193
+Wavelength 1/4; Variable 33000/342193
+Wavelength 1/4; Variable 34000/342193
+Wavelength 1/4; Variable 35000/342193
+Wavelength 1/4; Variable 36000/342193
+Wavelength 1/4; Variable 37000/342193
+Wavelength 1/4; Variable 38000/342193
+Wavelength 1/4; Variable 39000/342193
+Wavelength 1/4; Variable 40000/342193
+Wavelength 1/4; Variable 41000/342193
+Wavelength 1/4; Variable 42000/342193
+Wavelength 1/4; Variable 43000/342193
+Wavelength 1/4; Variable 44000/342193
+Wavelength 1/4; Variable 45000/342193
+Wavelength 1/4; Variable 46000/342193
+Wavelength 1/4; Variable 47000/342193
+Wavelength 1/4; Variable 48000/342193
+Wavelength 1/4; Variable 49000/342193
+Wavelength 1/4; Variable 50000/342193
+Wavelength 1/4; Variable 51000/342193
+Wavelength 1/4; Variable 52000/342193
+Wavelength 1/4; Variable 53000/342193
+Wavelength 1/4; Variable 54000/342193
+Wavelength 1/4; Variable 55000/342193
+Wavelength 1/4; Variable 56000/342193
+Wavelength 1/4; Variable 57000/342193
+Wavelength 1/4; Variable 58000/342193
+Wavelength 1/4; Variable 59000/342193
+Wavelength 1/4; Variable 60000/342193
+Wavelength 1/4; Variable 61000/342193
+Wavelength 1/4; Variable 62000/342193
+Wavelength 1/4; Variable 63000/342193
+Wavelength 1/4; Variable 64000/342193
+Wavelength 1/4; Variable 65000/342193
+Wavelength 1/4; Variable 66000/342193
+Wavelength 1/4; Variable 67000/342193
+Wavelength 1/4; Variable 68000/342193
+Wavelength 1/4; Variable 69000/342193
+Wavelength 1/4; Variable 70000/342193
+Wavelength 1/4; Variable 71000/342193
+Wavelength 1/4; Variable 72000/342193
+Wavelength 1/4; Variable 73000/342193
+Wavelength 1/4; Variable 74000/342193
+Wavelength 1/4; Variable 75000/342193
+Wavelength 1/4; Variable 76000/342193
+Wavelength 1/4; Variable 77000/342193
+Wavelength 1/4; Variable 78000/342193
+Wavelength 1/4; Variable 79000/342193
+Wavelength 1/4; Variable 80000/342193
+Wavelength 1/4; Variable 81000/342193
+Wavelength 1/4; Variable 82000/342193
+Wavelength 1/4; Variable 83000/342193
+Wavelength 1/4; Variable 84000/342193
+Wavelength 1/4; Variable 85000/342193
+Wavelength 1/4; Variable 86000/342193
+Wavelength 1/4; Variable 87000/342193
+Wavelength 1/4; Variable 88000/342193
+Wavelength 1/4; Variable 89000/342193
+Wavelength 1/4; Variable 90000/342193
+Wavelength 1/4; Variable 91000/342193
+Wavelength 1/4; Variable 92000/342193
+Wavelength 1/4; Variable 93000/342193
+Wavelength 1/4; Variable 94000/342193
+Wavelength 1/4; Variable 95000/342193
+Wavelength 1/4; Variable 96000/342193
+Wavelength 1/4; Variable 97000/342193
+Wavelength 1/4; Variable 98000/342193
+Wavelength 1/4; Variable 99000/342193
+Wavelength 1/4; Variable 100000/342193
+Wavelength 1/4; Variable 101000/342193
+Wavelength 1/4; Variable 102000/342193
+Wavelength 1/4; Variable 103000/342193
+Wavelength 1/4; Variable 104000/342193
+Wavelength 1/4; Variable 105000/342193
+Wavelength 1/4; Variable 106000/342193
+Wavelength 1/4; Variable 107000/342193
+Wavelength 1/4; Variable 108000/342193
+Wavelength 1/4; Variable 109000/342193
+Wavelength 1/4; Variable 110000/342193
+Wavelength 1/4; Variable 111000/342193
+Wavelength 1/4; Variable 112000/342193
+Wavelength 1/4; Variable 113000/342193
+Wavelength 1/4; Variable 114000/342193
+Wavelength 1/4; Variable 115000/342193
+Wavelength 1/4; Variable 116000/342193
+Wavelength 1/4; Variable 117000/342193
+Wavelength 1/4; Variable 118000/342193
+Wavelength 1/4; Variable 119000/342193
+Wavelength 1/4; Variable 120000/342193
+Wavelength 1/4; Variable 121000/342193
+Wavelength 1/4; Variable 122000/342193
+Wavelength 1/4; Variable 123000/342193
+Wavelength 1/4; Variable 124000/342193
+Wavelength 1/4; Variable 125000/342193
+Wavelength 1/4; Variable 126000/342193
+Wavelength 1/4; Variable 127000/342193
+Wavelength 1/4; Variable 128000/342193
+Wavelength 1/4; Variable 129000/342193
+Wavelength 1/4; Variable 130000/342193
+Wavelength 1/4; Variable 131000/342193
+Wavelength 1/4; Variable 132000/342193
+Wavelength 1/4; Variable 133000/342193
+Wavelength 1/4; Variable 134000/342193
+Wavelength 1/4; Variable 135000/342193
+Wavelength 1/4; Variable 136000/342193
+Wavelength 1/4; Variable 137000/342193
+Wavelength 1/4; Variable 138000/342193
+Wavelength 1/4; Variable 139000/342193
+Wavelength 1/4; Variable 140000/342193
+Wavelength 1/4; Variable 141000/342193
+Wavelength 1/4; Variable 142000/342193
+Wavelength 1/4; Variable 143000/342193
+Wavelength 1/4; Variable 144000/342193
+Wavelength 1/4; Variable 145000/342193
+Wavelength 1/4; Variable 146000/342193
+Wavelength 1/4; Variable 147000/342193
+Wavelength 1/4; Variable 148000/342193
+Wavelength 1/4; Variable 149000/342193
+Wavelength 1/4; Variable 150000/342193
+Wavelength 1/4; Variable 151000/342193
+Wavelength 1/4; Variable 152000/342193
+Wavelength 1/4; Variable 153000/342193
+Wavelength 1/4; Variable 154000/342193
+Wavelength 1/4; Variable 155000/342193
+Wavelength 1/4; Variable 156000/342193
+Wavelength 1/4; Variable 157000/342193
+Wavelength 1/4; Variable 158000/342193
+Wavelength 1/4; Variable 159000/342193
+Wavelength 1/4; Variable 160000/342193
+Wavelength 1/4; Variable 161000/342193
+Wavelength 1/4; Variable 162000/342193
+Wavelength 1/4; Variable 163000/342193
+Wavelength 1/4; Variable 164000/342193
+Wavelength 1/4; Variable 165000/342193
+Wavelength 1/4; Variable 166000/342193
+Wavelength 1/4; Variable 167000/342193
+Wavelength 1/4; Variable 168000/342193
+Wavelength 1/4; Variable 169000/342193
+Wavelength 1/4; Variable 170000/342193
+Wavelength 1/4; Variable 171000/342193
+Wavelength 1/4; Variable 172000/342193
+Wavelength 1/4; Variable 173000/342193
+Wavelength 1/4; Variable 174000/342193
+Wavelength 1/4; Variable 175000/342193
+Wavelength 1/4; Variable 176000/342193
+Wavelength 1/4; Variable 177000/342193
+Wavelength 1/4; Variable 178000/342193
+Wavelength 1/4; Variable 179000/342193
+Wavelength 1/4; Variable 180000/342193
+Wavelength 1/4; Variable 181000/342193
+Wavelength 1/4; Variable 182000/342193
+Wavelength 1/4; Variable 183000/342193
+Wavelength 1/4; Variable 184000/342193
+Wavelength 1/4; Variable 185000/342193
+Wavelength 1/4; Variable 186000/342193
+Wavelength 1/4; Variable 187000/342193
+Wavelength 1/4; Variable 188000/342193
+Wavelength 1/4; Variable 189000/342193
+Wavelength 1/4; Variable 190000/342193
+Wavelength 1/4; Variable 191000/342193
+Wavelength 1/4; Variable 192000/342193
+Wavelength 1/4; Variable 193000/342193
+Wavelength 1/4; Variable 194000/342193
+Wavelength 1/4; Variable 195000/342193
+Wavelength 1/4; Variable 196000/342193
+Wavelength 1/4; Variable 197000/342193
+Wavelength 1/4; Variable 198000/342193
+Wavelength 1/4; Variable 199000/342193
+Wavelength 1/4; Variable 200000/342193
+Wavelength 1/4; Variable 201000/342193
+Wavelength 1/4; Variable 202000/342193
+Wavelength 1/4; Variable 203000/342193
+Wavelength 1/4; Variable 204000/342193
+Wavelength 1/4; Variable 205000/342193
+Wavelength 1/4; Variable 206000/342193
+Wavelength 1/4; Variable 207000/342193
+Wavelength 1/4; Variable 208000/342193
+Wavelength 1/4; Variable 209000/342193
+Wavelength 1/4; Variable 210000/342193
+Wavelength 1/4; Variable 211000/342193
+Wavelength 1/4; Variable 212000/342193
+Wavelength 1/4; Variable 213000/342193
+Wavelength 1/4; Variable 214000/342193
+Wavelength 1/4; Variable 215000/342193
+Wavelength 1/4; Variable 216000/342193
+Wavelength 1/4; Variable 217000/342193
+Wavelength 1/4; Variable 218000/342193
+Wavelength 1/4; Variable 219000/342193
+Wavelength 1/4; Variable 220000/342193
+Wavelength 1/4; Variable 221000/342193
+Wavelength 1/4; Variable 222000/342193
+Wavelength 1/4; Variable 223000/342193
+Wavelength 1/4; Variable 224000/342193
+Wavelength 1/4; Variable 225000/342193
+Wavelength 1/4; Variable 226000/342193
+Wavelength 1/4; Variable 227000/342193
+Wavelength 1/4; Variable 228000/342193
+Wavelength 1/4; Variable 229000/342193
+Wavelength 1/4; Variable 230000/342193
+Wavelength 1/4; Variable 231000/342193
+Wavelength 1/4; Variable 232000/342193
+Wavelength 1/4; Variable 233000/342193
+Wavelength 1/4; Variable 234000/342193
+Wavelength 1/4; Variable 235000/342193
+Wavelength 1/4; Variable 236000/342193
+Wavelength 1/4; Variable 237000/342193
+Wavelength 1/4; Variable 238000/342193
+Wavelength 1/4; Variable 239000/342193
+Wavelength 1/4; Variable 240000/342193
+Wavelength 1/4; Variable 241000/342193
+Wavelength 1/4; Variable 242000/342193
+Wavelength 1/4; Variable 243000/342193
+Wavelength 1/4; Variable 244000/342193
+Wavelength 1/4; Variable 245000/342193
+Wavelength 1/4; Variable 246000/342193
+Wavelength 1/4; Variable 247000/342193
+Wavelength 1/4; Variable 248000/342193
+Wavelength 1/4; Variable 249000/342193
+Wavelength 1/4; Variable 250000/342193
+Wavelength 1/4; Variable 251000/342193
+Wavelength 1/4; Variable 252000/342193
+Wavelength 1/4; Variable 253000/342193
+Wavelength 1/4; Variable 254000/342193
+Wavelength 1/4; Variable 255000/342193
+Wavelength 1/4; Variable 256000/342193
+Wavelength 1/4; Variable 257000/342193
+Wavelength 1/4; Variable 258000/342193
+Wavelength 1/4; Variable 259000/342193
+Wavelength 1/4; Variable 260000/342193
+Wavelength 1/4; Variable 261000/342193
+Wavelength 1/4; Variable 262000/342193
+Wavelength 1/4; Variable 263000/342193
+Wavelength 1/4; Variable 264000/342193
+Wavelength 1/4; Variable 265000/342193
+Wavelength 1/4; Variable 266000/342193
+Wavelength 1/4; Variable 267000/342193
+Wavelength 1/4; Variable 268000/342193
+Wavelength 1/4; Variable 269000/342193
+Wavelength 1/4; Variable 270000/342193
+Wavelength 1/4; Variable 271000/342193
+Wavelength 1/4; Variable 272000/342193
+Wavelength 1/4; Variable 273000/342193
+Wavelength 1/4; Variable 274000/342193
+Wavelength 1/4; Variable 275000/342193
+Wavelength 1/4; Variable 276000/342193
+Wavelength 1/4; Variable 277000/342193
+Wavelength 1/4; Variable 278000/342193
+Wavelength 1/4; Variable 279000/342193
+Wavelength 1/4; Variable 280000/342193
+Wavelength 1/4; Variable 281000/342193
+Wavelength 1/4; Variable 282000/342193
+Wavelength 1/4; Variable 283000/342193
+Wavelength 1/4; Variable 284000/342193
+Wavelength 1/4; Variable 285000/342193
+Wavelength 1/4; Variable 286000/342193
+Wavelength 1/4; Variable 287000/342193
+Wavelength 1/4; Variable 288000/342193
+Wavelength 1/4; Variable 289000/342193
+Wavelength 1/4; Variable 290000/342193
+Wavelength 1/4; Variable 291000/342193
+Wavelength 1/4; Variable 292000/342193
+Wavelength 1/4; Variable 293000/342193
+Wavelength 1/4; Variable 294000/342193
+Wavelength 1/4; Variable 295000/342193
+Wavelength 1/4; Variable 296000/342193
+Wavelength 1/4; Variable 297000/342193
+Wavelength 1/4; Variable 298000/342193
+Wavelength 1/4; Variable 299000/342193
+Wavelength 1/4; Variable 300000/342193
+Wavelength 1/4; Variable 301000/342193
+Wavelength 1/4; Variable 302000/342193
+Wavelength 1/4; Variable 303000/342193
+Wavelength 1/4; Variable 304000/342193
+Wavelength 1/4; Variable 305000/342193
+Wavelength 1/4; Variable 306000/342193
+Wavelength 1/4; Variable 307000/342193
+Wavelength 1/4; Variable 308000/342193
+Wavelength 1/4; Variable 309000/342193
+Wavelength 1/4; Variable 310000/342193
+Wavelength 1/4; Variable 311000/342193
+Wavelength 1/4; Variable 312000/342193
+Wavelength 1/4; Variable 313000/342193
+Wavelength 1/4; Variable 314000/342193
+Wavelength 1/4; Variable 315000/342193
+Wavelength 1/4; Variable 316000/342193
+Wavelength 1/4; Variable 317000/342193
+Wavelength 1/4; Variable 318000/342193
+Wavelength 1/4; Variable 319000/342193
+Wavelength 1/4; Variable 320000/342193
+Wavelength 1/4; Variable 321000/342193
+Wavelength 1/4; Variable 322000/342193
+Wavelength 1/4; Variable 323000/342193
+Wavelength 1/4; Variable 324000/342193
+Wavelength 1/4; Variable 325000/342193
+Wavelength 1/4; Variable 326000/342193
+Wavelength 1/4; Variable 327000/342193
+Wavelength 1/4; Variable 328000/342193
+Wavelength 1/4; Variable 329000/342193
+Wavelength 1/4; Variable 330000/342193
+Wavelength 1/4; Variable 331000/342193
+Wavelength 1/4; Variable 332000/342193
+Wavelength 1/4; Variable 333000/342193
+Wavelength 1/4; Variable 334000/342193
+Wavelength 1/4; Variable 335000/342193
+Wavelength 1/4; Variable 336000/342193
+Wavelength 1/4; Variable 337000/342193
+Wavelength 1/4; Variable 338000/342193
+Wavelength 1/4; Variable 339000/342193
+Wavelength 1/4; Variable 340000/342193
+Wavelength 1/4; Variable 341000/342193
+Wavelength 1/4; Variable 342000/342193
+Warning for adding constraints: zero or small (< 1e-13) coefficients, ignored
+Wavelength 2/4; Variable 1000/342193
+Wavelength 2/4; Variable 2000/342193
+Wavelength 2/4; Variable 3000/342193
+Wavelength 2/4; Variable 4000/342193
+Wavelength 2/4; Variable 5000/342193
+Wavelength 2/4; Variable 6000/342193
+Wavelength 2/4; Variable 7000/342193
+Wavelength 2/4; Variable 8000/342193
+Wavelength 2/4; Variable 9000/342193
+Wavelength 2/4; Variable 10000/342193
+Wavelength 2/4; Variable 11000/342193
+Wavelength 2/4; Variable 12000/342193
+Wavelength 2/4; Variable 13000/342193
+Wavelength 2/4; Variable 14000/342193
+Wavelength 2/4; Variable 15000/342193
+Wavelength 2/4; Variable 16000/342193
+Wavelength 2/4; Variable 17000/342193
+Wavelength 2/4; Variable 18000/342193
+Wavelength 2/4; Variable 19000/342193
+Wavelength 2/4; Variable 20000/342193
+Wavelength 2/4; Variable 21000/342193
+Wavelength 2/4; Variable 22000/342193
+Wavelength 2/4; Variable 23000/342193
+Wavelength 2/4; Variable 24000/342193
+Wavelength 2/4; Variable 25000/342193
+Wavelength 2/4; Variable 26000/342193
+Wavelength 2/4; Variable 27000/342193
+Wavelength 2/4; Variable 28000/342193
+Wavelength 2/4; Variable 29000/342193
+Wavelength 2/4; Variable 30000/342193
+Wavelength 2/4; Variable 31000/342193
+Wavelength 2/4; Variable 32000/342193
+Wavelength 2/4; Variable 33000/342193
+Wavelength 2/4; Variable 34000/342193
+Wavelength 2/4; Variable 35000/342193
+Wavelength 2/4; Variable 36000/342193
+Wavelength 2/4; Variable 37000/342193
+Wavelength 2/4; Variable 38000/342193
+Wavelength 2/4; Variable 39000/342193
+Wavelength 2/4; Variable 40000/342193
+Wavelength 2/4; Variable 41000/342193
+Wavelength 2/4; Variable 42000/342193
+Wavelength 2/4; Variable 43000/342193
+Wavelength 2/4; Variable 44000/342193
+Wavelength 2/4; Variable 45000/342193
+Wavelength 2/4; Variable 46000/342193
+Wavelength 2/4; Variable 47000/342193
+Wavelength 2/4; Variable 48000/342193
+Wavelength 2/4; Variable 49000/342193
+Wavelength 2/4; Variable 50000/342193
+Wavelength 2/4; Variable 51000/342193
+Wavelength 2/4; Variable 52000/342193
+Wavelength 2/4; Variable 53000/342193
+Wavelength 2/4; Variable 54000/342193
+Wavelength 2/4; Variable 55000/342193
+Wavelength 2/4; Variable 56000/342193
+Wavelength 2/4; Variable 57000/342193
+Wavelength 2/4; Variable 58000/342193
+Wavelength 2/4; Variable 59000/342193
+Wavelength 2/4; Variable 60000/342193
+Wavelength 2/4; Variable 61000/342193
+Wavelength 2/4; Variable 62000/342193
+Wavelength 2/4; Variable 63000/342193
+Wavelength 2/4; Variable 64000/342193
+Wavelength 2/4; Variable 65000/342193
+Wavelength 2/4; Variable 66000/342193
+Wavelength 2/4; Variable 67000/342193
+Wavelength 2/4; Variable 68000/342193
+Wavelength 2/4; Variable 69000/342193
+Wavelength 2/4; Variable 70000/342193
+Wavelength 2/4; Variable 71000/342193
+Wavelength 2/4; Variable 72000/342193
+Wavelength 2/4; Variable 73000/342193
+Wavelength 2/4; Variable 74000/342193
+Wavelength 2/4; Variable 75000/342193
+Wavelength 2/4; Variable 76000/342193
+Wavelength 2/4; Variable 77000/342193
+Wavelength 2/4; Variable 78000/342193
+Wavelength 2/4; Variable 79000/342193
+Wavelength 2/4; Variable 80000/342193
+Wavelength 2/4; Variable 81000/342193
+Wavelength 2/4; Variable 82000/342193
+Wavelength 2/4; Variable 83000/342193
+Wavelength 2/4; Variable 84000/342193
+Wavelength 2/4; Variable 85000/342193
+Wavelength 2/4; Variable 86000/342193
+Wavelength 2/4; Variable 87000/342193
+Wavelength 2/4; Variable 88000/342193
+Wavelength 2/4; Variable 89000/342193
+Wavelength 2/4; Variable 90000/342193
+Wavelength 2/4; Variable 91000/342193
+Wavelength 2/4; Variable 92000/342193
+Wavelength 2/4; Variable 93000/342193
+Wavelength 2/4; Variable 94000/342193
+Wavelength 2/4; Variable 95000/342193
+Wavelength 2/4; Variable 96000/342193
+Wavelength 2/4; Variable 97000/342193
+Wavelength 2/4; Variable 98000/342193
+Wavelength 2/4; Variable 99000/342193
+Wavelength 2/4; Variable 100000/342193
+Wavelength 2/4; Variable 101000/342193
+Wavelength 2/4; Variable 102000/342193
+Wavelength 2/4; Variable 103000/342193
+Wavelength 2/4; Variable 104000/342193
+Wavelength 2/4; Variable 105000/342193
+Wavelength 2/4; Variable 106000/342193
+Wavelength 2/4; Variable 107000/342193
+Wavelength 2/4; Variable 108000/342193
+Wavelength 2/4; Variable 109000/342193
+Wavelength 2/4; Variable 110000/342193
+Wavelength 2/4; Variable 111000/342193
+Wavelength 2/4; Variable 112000/342193
+Wavelength 2/4; Variable 113000/342193
+Wavelength 2/4; Variable 114000/342193
+Wavelength 2/4; Variable 115000/342193
+Wavelength 2/4; Variable 116000/342193
+Wavelength 2/4; Variable 117000/342193
+Wavelength 2/4; Variable 118000/342193
+Wavelength 2/4; Variable 119000/342193
+Wavelength 2/4; Variable 120000/342193
+Wavelength 2/4; Variable 121000/342193
+Wavelength 2/4; Variable 122000/342193
+Wavelength 2/4; Variable 123000/342193
+Wavelength 2/4; Variable 124000/342193
+Wavelength 2/4; Variable 125000/342193
+Wavelength 2/4; Variable 126000/342193
+Wavelength 2/4; Variable 127000/342193
+Wavelength 2/4; Variable 128000/342193
+Wavelength 2/4; Variable 129000/342193
+Wavelength 2/4; Variable 130000/342193
+Wavelength 2/4; Variable 131000/342193
+Wavelength 2/4; Variable 132000/342193
+Wavelength 2/4; Variable 133000/342193
+Wavelength 2/4; Variable 134000/342193
+Wavelength 2/4; Variable 135000/342193
+Wavelength 2/4; Variable 136000/342193
+Wavelength 2/4; Variable 137000/342193
+Wavelength 2/4; Variable 138000/342193
+Wavelength 2/4; Variable 139000/342193
+Wavelength 2/4; Variable 140000/342193
+Wavelength 2/4; Variable 141000/342193
+Wavelength 2/4; Variable 142000/342193
+Wavelength 2/4; Variable 143000/342193
+Wavelength 2/4; Variable 144000/342193
+Wavelength 2/4; Variable 145000/342193
+Wavelength 2/4; Variable 146000/342193
+Wavelength 2/4; Variable 147000/342193
+Wavelength 2/4; Variable 148000/342193
+Wavelength 2/4; Variable 149000/342193
+Wavelength 2/4; Variable 150000/342193
+Wavelength 2/4; Variable 151000/342193
+Wavelength 2/4; Variable 152000/342193
+Wavelength 2/4; Variable 153000/342193
+Wavelength 2/4; Variable 154000/342193
+Wavelength 2/4; Variable 155000/342193
+Wavelength 2/4; Variable 156000/342193
+Wavelength 2/4; Variable 157000/342193
+Wavelength 2/4; Variable 158000/342193
+Wavelength 2/4; Variable 159000/342193
+Wavelength 2/4; Variable 160000/342193
+Wavelength 2/4; Variable 161000/342193
+Wavelength 2/4; Variable 162000/342193
+Wavelength 2/4; Variable 163000/342193
+Wavelength 2/4; Variable 164000/342193
+Wavelength 2/4; Variable 165000/342193
+Wavelength 2/4; Variable 166000/342193
+Wavelength 2/4; Variable 167000/342193
+Wavelength 2/4; Variable 168000/342193
+Wavelength 2/4; Variable 169000/342193
+Wavelength 2/4; Variable 170000/342193
+Wavelength 2/4; Variable 171000/342193
+Wavelength 2/4; Variable 172000/342193
+Wavelength 2/4; Variable 173000/342193
+Wavelength 2/4; Variable 174000/342193
+Wavelength 2/4; Variable 175000/342193
+Wavelength 2/4; Variable 176000/342193
+Wavelength 2/4; Variable 177000/342193
+Wavelength 2/4; Variable 178000/342193
+Wavelength 2/4; Variable 179000/342193
+Wavelength 2/4; Variable 180000/342193
+Wavelength 2/4; Variable 181000/342193
+Wavelength 2/4; Variable 182000/342193
+Wavelength 2/4; Variable 183000/342193
+Wavelength 2/4; Variable 184000/342193
+Wavelength 2/4; Variable 185000/342193
+Wavelength 2/4; Variable 186000/342193
+Wavelength 2/4; Variable 187000/342193
+Wavelength 2/4; Variable 188000/342193
+Wavelength 2/4; Variable 189000/342193
+Wavelength 2/4; Variable 190000/342193
+Wavelength 2/4; Variable 191000/342193
+Wavelength 2/4; Variable 192000/342193
+Wavelength 2/4; Variable 193000/342193
+Wavelength 2/4; Variable 194000/342193
+Wavelength 2/4; Variable 195000/342193
+Wavelength 2/4; Variable 196000/342193
+Wavelength 2/4; Variable 197000/342193
+Wavelength 2/4; Variable 198000/342193
+Wavelength 2/4; Variable 199000/342193
+Wavelength 2/4; Variable 200000/342193
+Wavelength 2/4; Variable 201000/342193
+Wavelength 2/4; Variable 202000/342193
+Wavelength 2/4; Variable 203000/342193
+Wavelength 2/4; Variable 204000/342193
+Wavelength 2/4; Variable 205000/342193
+Wavelength 2/4; Variable 206000/342193
+Wavelength 2/4; Variable 207000/342193
+Wavelength 2/4; Variable 208000/342193
+Wavelength 2/4; Variable 209000/342193
+Wavelength 2/4; Variable 210000/342193
+Wavelength 2/4; Variable 211000/342193
+Wavelength 2/4; Variable 212000/342193
+Wavelength 2/4; Variable 213000/342193
+Wavelength 2/4; Variable 214000/342193
+Wavelength 2/4; Variable 215000/342193
+Wavelength 2/4; Variable 216000/342193
+Wavelength 2/4; Variable 217000/342193
+Wavelength 2/4; Variable 218000/342193
+Wavelength 2/4; Variable 219000/342193
+Wavelength 2/4; Variable 220000/342193
+Wavelength 2/4; Variable 221000/342193
+Wavelength 2/4; Variable 222000/342193
+Wavelength 2/4; Variable 223000/342193
+Wavelength 2/4; Variable 224000/342193
+Wavelength 2/4; Variable 225000/342193
+Wavelength 2/4; Variable 226000/342193
+Wavelength 2/4; Variable 227000/342193
+Wavelength 2/4; Variable 228000/342193
+Wavelength 2/4; Variable 229000/342193
+Wavelength 2/4; Variable 230000/342193
+Wavelength 2/4; Variable 231000/342193
+Wavelength 2/4; Variable 232000/342193
+Wavelength 2/4; Variable 233000/342193
+Wavelength 2/4; Variable 234000/342193
+Wavelength 2/4; Variable 235000/342193
+Wavelength 2/4; Variable 236000/342193
+Wavelength 2/4; Variable 237000/342193
+Wavelength 2/4; Variable 238000/342193
+Wavelength 2/4; Variable 239000/342193
+Wavelength 2/4; Variable 240000/342193
+Wavelength 2/4; Variable 241000/342193
+Wavelength 2/4; Variable 242000/342193
+Wavelength 2/4; Variable 243000/342193
+Wavelength 2/4; Variable 244000/342193
+Wavelength 2/4; Variable 245000/342193
+Wavelength 2/4; Variable 246000/342193
+Wavelength 2/4; Variable 247000/342193
+Wavelength 2/4; Variable 248000/342193
+Wavelength 2/4; Variable 249000/342193
+Wavelength 2/4; Variable 250000/342193
+Wavelength 2/4; Variable 251000/342193
+Wavelength 2/4; Variable 252000/342193
+Wavelength 2/4; Variable 253000/342193
+Wavelength 2/4; Variable 254000/342193
+Wavelength 2/4; Variable 255000/342193
+Wavelength 2/4; Variable 256000/342193
+Wavelength 2/4; Variable 257000/342193
+Wavelength 2/4; Variable 258000/342193
+Wavelength 2/4; Variable 259000/342193
+Wavelength 2/4; Variable 260000/342193
+Wavelength 2/4; Variable 261000/342193
+Wavelength 2/4; Variable 262000/342193
+Wavelength 2/4; Variable 263000/342193
+Wavelength 2/4; Variable 264000/342193
+Wavelength 2/4; Variable 265000/342193
+Wavelength 2/4; Variable 266000/342193
+Wavelength 2/4; Variable 267000/342193
+Wavelength 2/4; Variable 268000/342193
+Wavelength 2/4; Variable 269000/342193
+Wavelength 2/4; Variable 270000/342193
+Wavelength 2/4; Variable 271000/342193
+Wavelength 2/4; Variable 272000/342193
+Wavelength 2/4; Variable 273000/342193
+Wavelength 2/4; Variable 274000/342193
+Wavelength 2/4; Variable 275000/342193
+Wavelength 2/4; Variable 276000/342193
+Wavelength 2/4; Variable 277000/342193
+Wavelength 2/4; Variable 278000/342193
+Wavelength 2/4; Variable 279000/342193
+Wavelength 2/4; Variable 280000/342193
+Wavelength 2/4; Variable 281000/342193
+Wavelength 2/4; Variable 282000/342193
+Wavelength 2/4; Variable 283000/342193
+Wavelength 2/4; Variable 284000/342193
+Wavelength 2/4; Variable 285000/342193
+Wavelength 2/4; Variable 286000/342193
+Wavelength 2/4; Variable 287000/342193
+Wavelength 2/4; Variable 288000/342193
+Wavelength 2/4; Variable 289000/342193
+Wavelength 2/4; Variable 290000/342193
+Wavelength 2/4; Variable 291000/342193
+Wavelength 2/4; Variable 292000/342193
+Wavelength 2/4; Variable 293000/342193
+Wavelength 2/4; Variable 294000/342193
+Wavelength 2/4; Variable 295000/342193
+Wavelength 2/4; Variable 296000/342193
+Wavelength 2/4; Variable 297000/342193
+Wavelength 2/4; Variable 298000/342193
+Wavelength 2/4; Variable 299000/342193
+Wavelength 2/4; Variable 300000/342193
+Wavelength 2/4; Variable 301000/342193
+Wavelength 2/4; Variable 302000/342193
+Wavelength 2/4; Variable 303000/342193
+Wavelength 2/4; Variable 304000/342193
+Wavelength 2/4; Variable 305000/342193
+Wavelength 2/4; Variable 306000/342193
+Wavelength 2/4; Variable 307000/342193
+Wavelength 2/4; Variable 308000/342193
+Wavelength 2/4; Variable 309000/342193
+Wavelength 2/4; Variable 310000/342193
+Wavelength 2/4; Variable 311000/342193
+Wavelength 2/4; Variable 312000/342193
+Wavelength 2/4; Variable 313000/342193
+Wavelength 2/4; Variable 314000/342193
+Wavelength 2/4; Variable 315000/342193
+Wavelength 2/4; Variable 316000/342193
+Wavelength 2/4; Variable 317000/342193
+Wavelength 2/4; Variable 318000/342193
+Wavelength 2/4; Variable 319000/342193
+Wavelength 2/4; Variable 320000/342193
+Wavelength 2/4; Variable 321000/342193
+Wavelength 2/4; Variable 322000/342193
+Wavelength 2/4; Variable 323000/342193
+Wavelength 2/4; Variable 324000/342193
+Wavelength 2/4; Variable 325000/342193
+Wavelength 2/4; Variable 326000/342193
+Wavelength 2/4; Variable 327000/342193
+Wavelength 2/4; Variable 328000/342193
+Wavelength 2/4; Variable 329000/342193
+Wavelength 2/4; Variable 330000/342193
+Wavelength 2/4; Variable 331000/342193
+Wavelength 2/4; Variable 332000/342193
+Wavelength 2/4; Variable 333000/342193
+Wavelength 2/4; Variable 334000/342193
+Wavelength 2/4; Variable 335000/342193
+Wavelength 2/4; Variable 336000/342193
+Wavelength 2/4; Variable 337000/342193
+Wavelength 2/4; Variable 338000/342193
+Wavelength 2/4; Variable 339000/342193
+Wavelength 2/4; Variable 340000/342193
+Wavelength 2/4; Variable 341000/342193
+Wavelength 2/4; Variable 342000/342193
+Wavelength 3/4; Variable 1000/342193
+Wavelength 3/4; Variable 2000/342193
+Wavelength 3/4; Variable 3000/342193
+Wavelength 3/4; Variable 4000/342193
+Wavelength 3/4; Variable 5000/342193
+Wavelength 3/4; Variable 6000/342193
+Wavelength 3/4; Variable 7000/342193
+Wavelength 3/4; Variable 8000/342193
+Wavelength 3/4; Variable 9000/342193
+Wavelength 3/4; Variable 10000/342193
+Wavelength 3/4; Variable 11000/342193
+Wavelength 3/4; Variable 12000/342193
+Wavelength 3/4; Variable 13000/342193
+Wavelength 3/4; Variable 14000/342193
+Wavelength 3/4; Variable 15000/342193
+Wavelength 3/4; Variable 16000/342193
+Wavelength 3/4; Variable 17000/342193
+Wavelength 3/4; Variable 18000/342193
+Wavelength 3/4; Variable 19000/342193
+Wavelength 3/4; Variable 20000/342193
+Wavelength 3/4; Variable 21000/342193
+Wavelength 3/4; Variable 22000/342193
+Wavelength 3/4; Variable 23000/342193
+Wavelength 3/4; Variable 24000/342193
+Wavelength 3/4; Variable 25000/342193
+Wavelength 3/4; Variable 26000/342193
+Wavelength 3/4; Variable 27000/342193
+Wavelength 3/4; Variable 28000/342193
+Wavelength 3/4; Variable 29000/342193
+Wavelength 3/4; Variable 30000/342193
+Wavelength 3/4; Variable 31000/342193
+Wavelength 3/4; Variable 32000/342193
+Wavelength 3/4; Variable 33000/342193
+Wavelength 3/4; Variable 34000/342193
+Wavelength 3/4; Variable 35000/342193
+Wavelength 3/4; Variable 36000/342193
+Wavelength 3/4; Variable 37000/342193
+Wavelength 3/4; Variable 38000/342193
+Wavelength 3/4; Variable 39000/342193
+Wavelength 3/4; Variable 40000/342193
+Wavelength 3/4; Variable 41000/342193
+Wavelength 3/4; Variable 42000/342193
+Wavelength 3/4; Variable 43000/342193
+Wavelength 3/4; Variable 44000/342193
+Wavelength 3/4; Variable 45000/342193
+Wavelength 3/4; Variable 46000/342193
+Wavelength 3/4; Variable 47000/342193
+Wavelength 3/4; Variable 48000/342193
+Wavelength 3/4; Variable 49000/342193
+Wavelength 3/4; Variable 50000/342193
+Wavelength 3/4; Variable 51000/342193
+Wavelength 3/4; Variable 52000/342193
+Wavelength 3/4; Variable 53000/342193
+Wavelength 3/4; Variable 54000/342193
+Wavelength 3/4; Variable 55000/342193
+Wavelength 3/4; Variable 56000/342193
+Wavelength 3/4; Variable 57000/342193
+Wavelength 3/4; Variable 58000/342193
+Wavelength 3/4; Variable 59000/342193
+Wavelength 3/4; Variable 60000/342193
+Wavelength 3/4; Variable 61000/342193
+Wavelength 3/4; Variable 62000/342193
+Wavelength 3/4; Variable 63000/342193
+Wavelength 3/4; Variable 64000/342193
+Wavelength 3/4; Variable 65000/342193
+Wavelength 3/4; Variable 66000/342193
+Wavelength 3/4; Variable 67000/342193
+Wavelength 3/4; Variable 68000/342193
+Wavelength 3/4; Variable 69000/342193
+Wavelength 3/4; Variable 70000/342193
+Wavelength 3/4; Variable 71000/342193
+Wavelength 3/4; Variable 72000/342193
+Wavelength 3/4; Variable 73000/342193
+Wavelength 3/4; Variable 74000/342193
+Wavelength 3/4; Variable 75000/342193
+Wavelength 3/4; Variable 76000/342193
+Wavelength 3/4; Variable 77000/342193
+Wavelength 3/4; Variable 78000/342193
+Wavelength 3/4; Variable 79000/342193
+Wavelength 3/4; Variable 80000/342193
+Wavelength 3/4; Variable 81000/342193
+Wavelength 3/4; Variable 82000/342193
+Wavelength 3/4; Variable 83000/342193
+Wavelength 3/4; Variable 84000/342193
+Wavelength 3/4; Variable 85000/342193
+Wavelength 3/4; Variable 86000/342193
+Wavelength 3/4; Variable 87000/342193
+Wavelength 3/4; Variable 88000/342193
+Wavelength 3/4; Variable 89000/342193
+Wavelength 3/4; Variable 90000/342193
+Wavelength 3/4; Variable 91000/342193
+Wavelength 3/4; Variable 92000/342193
+Wavelength 3/4; Variable 93000/342193
+Wavelength 3/4; Variable 94000/342193
+Wavelength 3/4; Variable 95000/342193
+Wavelength 3/4; Variable 96000/342193
+Wavelength 3/4; Variable 97000/342193
+Wavelength 3/4; Variable 98000/342193
+Wavelength 3/4; Variable 99000/342193
+Wavelength 3/4; Variable 100000/342193
+Wavelength 3/4; Variable 101000/342193
+Wavelength 3/4; Variable 102000/342193
+Wavelength 3/4; Variable 103000/342193
+Wavelength 3/4; Variable 104000/342193
+Wavelength 3/4; Variable 105000/342193
+Wavelength 3/4; Variable 106000/342193
+Wavelength 3/4; Variable 107000/342193
+Wavelength 3/4; Variable 108000/342193
+Wavelength 3/4; Variable 109000/342193
+Wavelength 3/4; Variable 110000/342193
+Wavelength 3/4; Variable 111000/342193
+Wavelength 3/4; Variable 112000/342193
+Wavelength 3/4; Variable 113000/342193
+Wavelength 3/4; Variable 114000/342193
+Wavelength 3/4; Variable 115000/342193
+Wavelength 3/4; Variable 116000/342193
+Wavelength 3/4; Variable 117000/342193
+Wavelength 3/4; Variable 118000/342193
+Wavelength 3/4; Variable 119000/342193
+Wavelength 3/4; Variable 120000/342193
+Wavelength 3/4; Variable 121000/342193
+Wavelength 3/4; Variable 122000/342193
+Wavelength 3/4; Variable 123000/342193
+Wavelength 3/4; Variable 124000/342193
+Wavelength 3/4; Variable 125000/342193
+Wavelength 3/4; Variable 126000/342193
+Wavelength 3/4; Variable 127000/342193
+Wavelength 3/4; Variable 128000/342193
+Wavelength 3/4; Variable 129000/342193
+Wavelength 3/4; Variable 130000/342193
+Wavelength 3/4; Variable 131000/342193
+Wavelength 3/4; Variable 132000/342193
+Wavelength 3/4; Variable 133000/342193
+Wavelength 3/4; Variable 134000/342193
+Wavelength 3/4; Variable 135000/342193
+Wavelength 3/4; Variable 136000/342193
+Wavelength 3/4; Variable 137000/342193
+Wavelength 3/4; Variable 138000/342193
+Wavelength 3/4; Variable 139000/342193
+Wavelength 3/4; Variable 140000/342193
+Wavelength 3/4; Variable 141000/342193
+Wavelength 3/4; Variable 142000/342193
+Wavelength 3/4; Variable 143000/342193
+Wavelength 3/4; Variable 144000/342193
+Wavelength 3/4; Variable 145000/342193
+Wavelength 3/4; Variable 146000/342193
+Wavelength 3/4; Variable 147000/342193
+Wavelength 3/4; Variable 148000/342193
+Wavelength 3/4; Variable 149000/342193
+Wavelength 3/4; Variable 150000/342193
+Wavelength 3/4; Variable 151000/342193
+Wavelength 3/4; Variable 152000/342193
+Wavelength 3/4; Variable 153000/342193
+Wavelength 3/4; Variable 154000/342193
+Wavelength 3/4; Variable 155000/342193
+Wavelength 3/4; Variable 156000/342193
+Wavelength 3/4; Variable 157000/342193
+Wavelength 3/4; Variable 158000/342193
+Wavelength 3/4; Variable 159000/342193
+Wavelength 3/4; Variable 160000/342193
+Wavelength 3/4; Variable 161000/342193
+Wavelength 3/4; Variable 162000/342193
+Wavelength 3/4; Variable 163000/342193
+Wavelength 3/4; Variable 164000/342193
+Wavelength 3/4; Variable 165000/342193
+Wavelength 3/4; Variable 166000/342193
+Wavelength 3/4; Variable 167000/342193
+Wavelength 3/4; Variable 168000/342193
+Wavelength 3/4; Variable 169000/342193
+Wavelength 3/4; Variable 170000/342193
+Wavelength 3/4; Variable 171000/342193
+Wavelength 3/4; Variable 172000/342193
+Wavelength 3/4; Variable 173000/342193
+Wavelength 3/4; Variable 174000/342193
+Wavelength 3/4; Variable 175000/342193
+Wavelength 3/4; Variable 176000/342193
+Wavelength 3/4; Variable 177000/342193
+Wavelength 3/4; Variable 178000/342193
+Wavelength 3/4; Variable 179000/342193
+Wavelength 3/4; Variable 180000/342193
+Wavelength 3/4; Variable 181000/342193
+Wavelength 3/4; Variable 182000/342193
+Wavelength 3/4; Variable 183000/342193
+Wavelength 3/4; Variable 184000/342193
+Wavelength 3/4; Variable 185000/342193
+Wavelength 3/4; Variable 186000/342193
+Wavelength 3/4; Variable 187000/342193
+Wavelength 3/4; Variable 188000/342193
+Wavelength 3/4; Variable 189000/342193
+Wavelength 3/4; Variable 190000/342193
+Wavelength 3/4; Variable 191000/342193
+Wavelength 3/4; Variable 192000/342193
+Wavelength 3/4; Variable 193000/342193
+Wavelength 3/4; Variable 194000/342193
+Wavelength 3/4; Variable 195000/342193
+Wavelength 3/4; Variable 196000/342193
+Wavelength 3/4; Variable 197000/342193
+Wavelength 3/4; Variable 198000/342193
+Wavelength 3/4; Variable 199000/342193
+Wavelength 3/4; Variable 200000/342193
+Wavelength 3/4; Variable 201000/342193
+Wavelength 3/4; Variable 202000/342193
+Wavelength 3/4; Variable 203000/342193
+Wavelength 3/4; Variable 204000/342193
+Wavelength 3/4; Variable 205000/342193
+Wavelength 3/4; Variable 206000/342193
+Wavelength 3/4; Variable 207000/342193
+Wavelength 3/4; Variable 208000/342193
+Wavelength 3/4; Variable 209000/342193
+Wavelength 3/4; Variable 210000/342193
+Wavelength 3/4; Variable 211000/342193
+Wavelength 3/4; Variable 212000/342193
+Wavelength 3/4; Variable 213000/342193
+Wavelength 3/4; Variable 214000/342193
+Wavelength 3/4; Variable 215000/342193
+Wavelength 3/4; Variable 216000/342193
+Wavelength 3/4; Variable 217000/342193
+Wavelength 3/4; Variable 218000/342193
+Wavelength 3/4; Variable 219000/342193
+Wavelength 3/4; Variable 220000/342193
+Wavelength 3/4; Variable 221000/342193
+Wavelength 3/4; Variable 222000/342193
+Wavelength 3/4; Variable 223000/342193
+Wavelength 3/4; Variable 224000/342193
+Wavelength 3/4; Variable 225000/342193
+Wavelength 3/4; Variable 226000/342193
+Wavelength 3/4; Variable 227000/342193
+Wavelength 3/4; Variable 228000/342193
+Wavelength 3/4; Variable 229000/342193
+Wavelength 3/4; Variable 230000/342193
+Wavelength 3/4; Variable 231000/342193
+Wavelength 3/4; Variable 232000/342193
+Wavelength 3/4; Variable 233000/342193
+Wavelength 3/4; Variable 234000/342193
+Wavelength 3/4; Variable 235000/342193
+Wavelength 3/4; Variable 236000/342193
+Wavelength 3/4; Variable 237000/342193
+Wavelength 3/4; Variable 238000/342193
+Wavelength 3/4; Variable 239000/342193
+Wavelength 3/4; Variable 240000/342193
+Wavelength 3/4; Variable 241000/342193
+Wavelength 3/4; Variable 242000/342193
+Wavelength 3/4; Variable 243000/342193
+Wavelength 3/4; Variable 244000/342193
+Wavelength 3/4; Variable 245000/342193
+Wavelength 3/4; Variable 246000/342193
+Wavelength 3/4; Variable 247000/342193
+Wavelength 3/4; Variable 248000/342193
+Wavelength 3/4; Variable 249000/342193
+Wavelength 3/4; Variable 250000/342193
+Wavelength 3/4; Variable 251000/342193
+Wavelength 3/4; Variable 252000/342193
+Wavelength 3/4; Variable 253000/342193
+Wavelength 3/4; Variable 254000/342193
+Wavelength 3/4; Variable 255000/342193
+Wavelength 3/4; Variable 256000/342193
+Wavelength 3/4; Variable 257000/342193
+Wavelength 3/4; Variable 258000/342193
+Wavelength 3/4; Variable 259000/342193
+Wavelength 3/4; Variable 260000/342193
+Wavelength 3/4; Variable 261000/342193
+Wavelength 3/4; Variable 262000/342193
+Wavelength 3/4; Variable 263000/342193
+Wavelength 3/4; Variable 264000/342193
+Wavelength 3/4; Variable 265000/342193
+Wavelength 3/4; Variable 266000/342193
+Wavelength 3/4; Variable 267000/342193
+Wavelength 3/4; Variable 268000/342193
+Wavelength 3/4; Variable 269000/342193
+Wavelength 3/4; Variable 270000/342193
+Wavelength 3/4; Variable 271000/342193
+Wavelength 3/4; Variable 272000/342193
+Wavelength 3/4; Variable 273000/342193
+Wavelength 3/4; Variable 274000/342193
+Wavelength 3/4; Variable 275000/342193
+Wavelength 3/4; Variable 276000/342193
+Wavelength 3/4; Variable 277000/342193
+Wavelength 3/4; Variable 278000/342193
+Wavelength 3/4; Variable 279000/342193
+Wavelength 3/4; Variable 280000/342193
+Wavelength 3/4; Variable 281000/342193
+Wavelength 3/4; Variable 282000/342193
+Wavelength 3/4; Variable 283000/342193
+Wavelength 3/4; Variable 284000/342193
+Wavelength 3/4; Variable 285000/342193
+Wavelength 3/4; Variable 286000/342193
+Wavelength 3/4; Variable 287000/342193
+Wavelength 3/4; Variable 288000/342193
+Wavelength 3/4; Variable 289000/342193
+Wavelength 3/4; Variable 290000/342193
+Wavelength 3/4; Variable 291000/342193
+Wavelength 3/4; Variable 292000/342193
+Wavelength 3/4; Variable 293000/342193
+Wavelength 3/4; Variable 294000/342193
+Wavelength 3/4; Variable 295000/342193
+Wavelength 3/4; Variable 296000/342193
+Wavelength 3/4; Variable 297000/342193
+Wavelength 3/4; Variable 298000/342193
+Wavelength 3/4; Variable 299000/342193
+Wavelength 3/4; Variable 300000/342193
+Wavelength 3/4; Variable 301000/342193
+Wavelength 3/4; Variable 302000/342193
+Wavelength 3/4; Variable 303000/342193
+Wavelength 3/4; Variable 304000/342193
+Wavelength 3/4; Variable 305000/342193
+Wavelength 3/4; Variable 306000/342193
+Wavelength 3/4; Variable 307000/342193
+Wavelength 3/4; Variable 308000/342193
+Wavelength 3/4; Variable 309000/342193
+Wavelength 3/4; Variable 310000/342193
+Wavelength 3/4; Variable 311000/342193
+Wavelength 3/4; Variable 312000/342193
+Wavelength 3/4; Variable 313000/342193
+Wavelength 3/4; Variable 314000/342193
+Wavelength 3/4; Variable 315000/342193
+Wavelength 3/4; Variable 316000/342193
+Wavelength 3/4; Variable 317000/342193
+Wavelength 3/4; Variable 318000/342193
+Wavelength 3/4; Variable 319000/342193
+Wavelength 3/4; Variable 320000/342193
+Wavelength 3/4; Variable 321000/342193
+Wavelength 3/4; Variable 322000/342193
+Wavelength 3/4; Variable 323000/342193
+Wavelength 3/4; Variable 324000/342193
+Wavelength 3/4; Variable 325000/342193
+Wavelength 3/4; Variable 326000/342193
+Wavelength 3/4; Variable 327000/342193
+Wavelength 3/4; Variable 328000/342193
+Wavelength 3/4; Variable 329000/342193
+Wavelength 3/4; Variable 330000/342193
+Wavelength 3/4; Variable 331000/342193
+Wavelength 3/4; Variable 332000/342193
+Wavelength 3/4; Variable 333000/342193
+Wavelength 3/4; Variable 334000/342193
+Wavelength 3/4; Variable 335000/342193
+Wavelength 3/4; Variable 336000/342193
+Wavelength 3/4; Variable 337000/342193
+Wavelength 3/4; Variable 338000/342193
+Wavelength 3/4; Variable 339000/342193
+Wavelength 3/4; Variable 340000/342193
+Wavelength 3/4; Variable 341000/342193
+Wavelength 3/4; Variable 342000/342193
+Wavelength 4/4; Variable 1000/342193
+Wavelength 4/4; Variable 2000/342193
+Wavelength 4/4; Variable 3000/342193
+Wavelength 4/4; Variable 4000/342193
+Wavelength 4/4; Variable 5000/342193
+Wavelength 4/4; Variable 6000/342193
+Wavelength 4/4; Variable 7000/342193
+Wavelength 4/4; Variable 8000/342193
+Wavelength 4/4; Variable 9000/342193
+Wavelength 4/4; Variable 10000/342193
+Wavelength 4/4; Variable 11000/342193
+Wavelength 4/4; Variable 12000/342193
+Wavelength 4/4; Variable 13000/342193
+Wavelength 4/4; Variable 14000/342193
+Wavelength 4/4; Variable 15000/342193
+Wavelength 4/4; Variable 16000/342193
+Wavelength 4/4; Variable 17000/342193
+Wavelength 4/4; Variable 18000/342193
+Wavelength 4/4; Variable 19000/342193
+Wavelength 4/4; Variable 20000/342193
+Wavelength 4/4; Variable 21000/342193
+Wavelength 4/4; Variable 22000/342193
+Wavelength 4/4; Variable 23000/342193
+Wavelength 4/4; Variable 24000/342193
+Wavelength 4/4; Variable 25000/342193
+Wavelength 4/4; Variable 26000/342193
+Wavelength 4/4; Variable 27000/342193
+Wavelength 4/4; Variable 28000/342193
+Wavelength 4/4; Variable 29000/342193
+Wavelength 4/4; Variable 30000/342193
+Wavelength 4/4; Variable 31000/342193
+Wavelength 4/4; Variable 32000/342193
+Wavelength 4/4; Variable 33000/342193
+Wavelength 4/4; Variable 34000/342193
+Wavelength 4/4; Variable 35000/342193
+Wavelength 4/4; Variable 36000/342193
+Wavelength 4/4; Variable 37000/342193
+Wavelength 4/4; Variable 38000/342193
+Wavelength 4/4; Variable 39000/342193
+Wavelength 4/4; Variable 40000/342193
+Wavelength 4/4; Variable 41000/342193
+Wavelength 4/4; Variable 42000/342193
+Wavelength 4/4; Variable 43000/342193
+Wavelength 4/4; Variable 44000/342193
+Wavelength 4/4; Variable 45000/342193
+Wavelength 4/4; Variable 46000/342193
+Wavelength 4/4; Variable 47000/342193
+Wavelength 4/4; Variable 48000/342193
+Wavelength 4/4; Variable 49000/342193
+Wavelength 4/4; Variable 50000/342193
+Wavelength 4/4; Variable 51000/342193
+Wavelength 4/4; Variable 52000/342193
+Wavelength 4/4; Variable 53000/342193
+Wavelength 4/4; Variable 54000/342193
+Wavelength 4/4; Variable 55000/342193
+Wavelength 4/4; Variable 56000/342193
+Wavelength 4/4; Variable 57000/342193
+Wavelength 4/4; Variable 58000/342193
+Wavelength 4/4; Variable 59000/342193
+Wavelength 4/4; Variable 60000/342193
+Wavelength 4/4; Variable 61000/342193
+Wavelength 4/4; Variable 62000/342193
+Wavelength 4/4; Variable 63000/342193
+Wavelength 4/4; Variable 64000/342193
+Wavelength 4/4; Variable 65000/342193
+Wavelength 4/4; Variable 66000/342193
+Wavelength 4/4; Variable 67000/342193
+Wavelength 4/4; Variable 68000/342193
+Wavelength 4/4; Variable 69000/342193
+Wavelength 4/4; Variable 70000/342193
+Wavelength 4/4; Variable 71000/342193
+Wavelength 4/4; Variable 72000/342193
+Wavelength 4/4; Variable 73000/342193
+Wavelength 4/4; Variable 74000/342193
+Wavelength 4/4; Variable 75000/342193
+Wavelength 4/4; Variable 76000/342193
+Wavelength 4/4; Variable 77000/342193
+Wavelength 4/4; Variable 78000/342193
+Wavelength 4/4; Variable 79000/342193
+Wavelength 4/4; Variable 80000/342193
+Wavelength 4/4; Variable 81000/342193
+Wavelength 4/4; Variable 82000/342193
+Wavelength 4/4; Variable 83000/342193
+Wavelength 4/4; Variable 84000/342193
+Wavelength 4/4; Variable 85000/342193
+Wavelength 4/4; Variable 86000/342193
+Wavelength 4/4; Variable 87000/342193
+Wavelength 4/4; Variable 88000/342193
+Wavelength 4/4; Variable 89000/342193
+Wavelength 4/4; Variable 90000/342193
+Wavelength 4/4; Variable 91000/342193
+Wavelength 4/4; Variable 92000/342193
+Wavelength 4/4; Variable 93000/342193
+Wavelength 4/4; Variable 94000/342193
+Wavelength 4/4; Variable 95000/342193
+Wavelength 4/4; Variable 96000/342193
+Wavelength 4/4; Variable 97000/342193
+Wavelength 4/4; Variable 98000/342193
+Wavelength 4/4; Variable 99000/342193
+Wavelength 4/4; Variable 100000/342193
+Wavelength 4/4; Variable 101000/342193
+Wavelength 4/4; Variable 102000/342193
+Wavelength 4/4; Variable 103000/342193
+Wavelength 4/4; Variable 104000/342193
+Wavelength 4/4; Variable 105000/342193
+Wavelength 4/4; Variable 106000/342193
+Wavelength 4/4; Variable 107000/342193
+Wavelength 4/4; Variable 108000/342193
+Wavelength 4/4; Variable 109000/342193
+Wavelength 4/4; Variable 110000/342193
+Wavelength 4/4; Variable 111000/342193
+Wavelength 4/4; Variable 112000/342193
+Wavelength 4/4; Variable 113000/342193
+Wavelength 4/4; Variable 114000/342193
+Wavelength 4/4; Variable 115000/342193
+Wavelength 4/4; Variable 116000/342193
+Wavelength 4/4; Variable 117000/342193
+Wavelength 4/4; Variable 118000/342193
+Wavelength 4/4; Variable 119000/342193
+Wavelength 4/4; Variable 120000/342193
+Wavelength 4/4; Variable 121000/342193
+Wavelength 4/4; Variable 122000/342193
+Wavelength 4/4; Variable 123000/342193
+Wavelength 4/4; Variable 124000/342193
+Wavelength 4/4; Variable 125000/342193
+Wavelength 4/4; Variable 126000/342193
+Wavelength 4/4; Variable 127000/342193
+Wavelength 4/4; Variable 128000/342193
+Wavelength 4/4; Variable 129000/342193
+Wavelength 4/4; Variable 130000/342193
+Wavelength 4/4; Variable 131000/342193
+Wavelength 4/4; Variable 132000/342193
+Wavelength 4/4; Variable 133000/342193
+Wavelength 4/4; Variable 134000/342193
+Wavelength 4/4; Variable 135000/342193
+Wavelength 4/4; Variable 136000/342193
+Wavelength 4/4; Variable 137000/342193
+Wavelength 4/4; Variable 138000/342193
+Wavelength 4/4; Variable 139000/342193
+Wavelength 4/4; Variable 140000/342193
+Wavelength 4/4; Variable 141000/342193
+Wavelength 4/4; Variable 142000/342193
+Wavelength 4/4; Variable 143000/342193
+Wavelength 4/4; Variable 144000/342193
+Wavelength 4/4; Variable 145000/342193
+Wavelength 4/4; Variable 146000/342193
+Wavelength 4/4; Variable 147000/342193
+Wavelength 4/4; Variable 148000/342193
+Wavelength 4/4; Variable 149000/342193
+Wavelength 4/4; Variable 150000/342193
+Wavelength 4/4; Variable 151000/342193
+Wavelength 4/4; Variable 152000/342193
+Wavelength 4/4; Variable 153000/342193
+Wavelength 4/4; Variable 154000/342193
+Wavelength 4/4; Variable 155000/342193
+Wavelength 4/4; Variable 156000/342193
+Wavelength 4/4; Variable 157000/342193
+Wavelength 4/4; Variable 158000/342193
+Wavelength 4/4; Variable 159000/342193
+Wavelength 4/4; Variable 160000/342193
+Wavelength 4/4; Variable 161000/342193
+Wavelength 4/4; Variable 162000/342193
+Wavelength 4/4; Variable 163000/342193
+Wavelength 4/4; Variable 164000/342193
+Wavelength 4/4; Variable 165000/342193
+Wavelength 4/4; Variable 166000/342193
+Wavelength 4/4; Variable 167000/342193
+Wavelength 4/4; Variable 168000/342193
+Wavelength 4/4; Variable 169000/342193
+Wavelength 4/4; Variable 170000/342193
+Wavelength 4/4; Variable 171000/342193
+Wavelength 4/4; Variable 172000/342193
+Wavelength 4/4; Variable 173000/342193
+Wavelength 4/4; Variable 174000/342193
+Wavelength 4/4; Variable 175000/342193
+Wavelength 4/4; Variable 176000/342193
+Wavelength 4/4; Variable 177000/342193
+Wavelength 4/4; Variable 178000/342193
+Wavelength 4/4; Variable 179000/342193
+Wavelength 4/4; Variable 180000/342193
+Wavelength 4/4; Variable 181000/342193
+Wavelength 4/4; Variable 182000/342193
+Wavelength 4/4; Variable 183000/342193
+Wavelength 4/4; Variable 184000/342193
+Wavelength 4/4; Variable 185000/342193
+Wavelength 4/4; Variable 186000/342193
+Wavelength 4/4; Variable 187000/342193
+Wavelength 4/4; Variable 188000/342193
+Wavelength 4/4; Variable 189000/342193
+Wavelength 4/4; Variable 190000/342193
+Wavelength 4/4; Variable 191000/342193
+Wavelength 4/4; Variable 192000/342193
+Wavelength 4/4; Variable 193000/342193
+Wavelength 4/4; Variable 194000/342193
+Wavelength 4/4; Variable 195000/342193
+Wavelength 4/4; Variable 196000/342193
+Wavelength 4/4; Variable 197000/342193
+Wavelength 4/4; Variable 198000/342193
+Wavelength 4/4; Variable 199000/342193
+Wavelength 4/4; Variable 200000/342193
+Wavelength 4/4; Variable 201000/342193
+Wavelength 4/4; Variable 202000/342193
+Wavelength 4/4; Variable 203000/342193
+Wavelength 4/4; Variable 204000/342193
+Wavelength 4/4; Variable 205000/342193
+Wavelength 4/4; Variable 206000/342193
+Wavelength 4/4; Variable 207000/342193
+Wavelength 4/4; Variable 208000/342193
+Wavelength 4/4; Variable 209000/342193
+Wavelength 4/4; Variable 210000/342193
+Wavelength 4/4; Variable 211000/342193
+Wavelength 4/4; Variable 212000/342193
+Wavelength 4/4; Variable 213000/342193
+Wavelength 4/4; Variable 214000/342193
+Wavelength 4/4; Variable 215000/342193
+Wavelength 4/4; Variable 216000/342193
+Wavelength 4/4; Variable 217000/342193
+Wavelength 4/4; Variable 218000/342193
+Wavelength 4/4; Variable 219000/342193
+Wavelength 4/4; Variable 220000/342193
+Wavelength 4/4; Variable 221000/342193
+Wavelength 4/4; Variable 222000/342193
+Wavelength 4/4; Variable 223000/342193
+Wavelength 4/4; Variable 224000/342193
+Wavelength 4/4; Variable 225000/342193
+Wavelength 4/4; Variable 226000/342193
+Wavelength 4/4; Variable 227000/342193
+Wavelength 4/4; Variable 228000/342193
+Wavelength 4/4; Variable 229000/342193
+Wavelength 4/4; Variable 230000/342193
+Wavelength 4/4; Variable 231000/342193
+Wavelength 4/4; Variable 232000/342193
+Wavelength 4/4; Variable 233000/342193
+Wavelength 4/4; Variable 234000/342193
+Wavelength 4/4; Variable 235000/342193
+Wavelength 4/4; Variable 236000/342193
+Wavelength 4/4; Variable 237000/342193
+Wavelength 4/4; Variable 238000/342193
+Wavelength 4/4; Variable 239000/342193
+Wavelength 4/4; Variable 240000/342193
+Wavelength 4/4; Variable 241000/342193
+Wavelength 4/4; Variable 242000/342193
+Wavelength 4/4; Variable 243000/342193
+Wavelength 4/4; Variable 244000/342193
+Wavelength 4/4; Variable 245000/342193
+Wavelength 4/4; Variable 246000/342193
+Wavelength 4/4; Variable 247000/342193
+Wavelength 4/4; Variable 248000/342193
+Wavelength 4/4; Variable 249000/342193
+Wavelength 4/4; Variable 250000/342193
+Wavelength 4/4; Variable 251000/342193
+Wavelength 4/4; Variable 252000/342193
+Wavelength 4/4; Variable 253000/342193
+Wavelength 4/4; Variable 254000/342193
+Wavelength 4/4; Variable 255000/342193
+Wavelength 4/4; Variable 256000/342193
+Wavelength 4/4; Variable 257000/342193
+Wavelength 4/4; Variable 258000/342193
+Wavelength 4/4; Variable 259000/342193
+Wavelength 4/4; Variable 260000/342193
+Wavelength 4/4; Variable 261000/342193
+Wavelength 4/4; Variable 262000/342193
+Wavelength 4/4; Variable 263000/342193
+Wavelength 4/4; Variable 264000/342193
+Wavelength 4/4; Variable 265000/342193
+Wavelength 4/4; Variable 266000/342193
+Wavelength 4/4; Variable 267000/342193
+Wavelength 4/4; Variable 268000/342193
+Wavelength 4/4; Variable 269000/342193
+Wavelength 4/4; Variable 270000/342193
+Wavelength 4/4; Variable 271000/342193
+Wavelength 4/4; Variable 272000/342193
+Wavelength 4/4; Variable 273000/342193
+Wavelength 4/4; Variable 274000/342193
+Wavelength 4/4; Variable 275000/342193
+Wavelength 4/4; Variable 276000/342193
+Wavelength 4/4; Variable 277000/342193
+Wavelength 4/4; Variable 278000/342193
+Wavelength 4/4; Variable 279000/342193
+Wavelength 4/4; Variable 280000/342193
+Wavelength 4/4; Variable 281000/342193
+Wavelength 4/4; Variable 282000/342193
+Wavelength 4/4; Variable 283000/342193
+Wavelength 4/4; Variable 284000/342193
+Wavelength 4/4; Variable 285000/342193
+Wavelength 4/4; Variable 286000/342193
+Wavelength 4/4; Variable 287000/342193
+Wavelength 4/4; Variable 288000/342193
+Wavelength 4/4; Variable 289000/342193
+Wavelength 4/4; Variable 290000/342193
+Wavelength 4/4; Variable 291000/342193
+Wavelength 4/4; Variable 292000/342193
+Wavelength 4/4; Variable 293000/342193
+Wavelength 4/4; Variable 294000/342193
+Wavelength 4/4; Variable 295000/342193
+Wavelength 4/4; Variable 296000/342193
+Wavelength 4/4; Variable 297000/342193
+Wavelength 4/4; Variable 298000/342193
+Wavelength 4/4; Variable 299000/342193
+Wavelength 4/4; Variable 300000/342193
+Wavelength 4/4; Variable 301000/342193
+Wavelength 4/4; Variable 302000/342193
+Wavelength 4/4; Variable 303000/342193
+Wavelength 4/4; Variable 304000/342193
+Wavelength 4/4; Variable 305000/342193
+Wavelength 4/4; Variable 306000/342193
+Wavelength 4/4; Variable 307000/342193
+Wavelength 4/4; Variable 308000/342193
+Wavelength 4/4; Variable 309000/342193
+Wavelength 4/4; Variable 310000/342193
+Wavelength 4/4; Variable 311000/342193
+Wavelength 4/4; Variable 312000/342193
+Wavelength 4/4; Variable 313000/342193
+Wavelength 4/4; Variable 314000/342193
+Wavelength 4/4; Variable 315000/342193
+Wavelength 4/4; Variable 316000/342193
+Wavelength 4/4; Variable 317000/342193
+Wavelength 4/4; Variable 318000/342193
+Wavelength 4/4; Variable 319000/342193
+Wavelength 4/4; Variable 320000/342193
+Wavelength 4/4; Variable 321000/342193
+Wavelength 4/4; Variable 322000/342193
+Wavelength 4/4; Variable 323000/342193
+Wavelength 4/4; Variable 324000/342193
+Wavelength 4/4; Variable 325000/342193
+Wavelength 4/4; Variable 326000/342193
+Wavelength 4/4; Variable 327000/342193
+Wavelength 4/4; Variable 328000/342193
+Wavelength 4/4; Variable 329000/342193
+Wavelength 4/4; Variable 330000/342193
+Wavelength 4/4; Variable 331000/342193
+Wavelength 4/4; Variable 332000/342193
+Wavelength 4/4; Variable 333000/342193
+Wavelength 4/4; Variable 334000/342193
+Wavelength 4/4; Variable 335000/342193
+Wavelength 4/4; Variable 336000/342193
+Wavelength 4/4; Variable 337000/342193
+Wavelength 4/4; Variable 338000/342193
+Wavelength 4/4; Variable 339000/342193
+Wavelength 4/4; Variable 340000/342193
+Wavelength 4/4; Variable 341000/342193
+Wavelength 4/4; Variable 342000/342193
+Start optimization...
+Optimize a model with 6528 rows, 342193 columns and 2233835270 nonzeros
+Coefficient statistics:
+  Matrix range     [1e-13, 7e-06]
+  Objective range  [4e-02, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e-05, 1e-05]
+Presolve removed 0 rows and 0 columns (presolve time = 67s) ...
+Presolve removed 0 rows and 0 columns (presolve time = 100s) ...
+Presolve removed 0 rows and 0 columns (presolve time = 190s) ...
+Presolve removed 0 rows and 0 columns (presolve time = 451s) ...
+Presolve removed 3264 rows and 0 columns (presolve time = 490s) ...
+Presolve removed 3264 rows and 0 columns
+Presolve time: 492.52s
+Presolved: 3264 rows, 345457 columns, 1116920899 nonzeros
+Ordering time: 0.00s
+
+Barrier statistics:
+ AA' NZ     : 5.325e+06
+ Factor NZ  : 5.328e+06 (roughly 200 MBytes of memory)
+ Factor Ops : 1.160e+10 (roughly 10 seconds per iteration)
+ Threads    : 24
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0   3.44972946e+09  7.40950159e+05  7.30e+02 1.46e-11  2.62e+04   642s
+   1   8.07977350e+05  7.40902560e+05  1.39e-01 3.49e-10  5.83e+00   671s
+   2   5.38396340e+05  6.33484164e+05  8.12e-02 1.66e-08  3.18e+00   701s
+   3   2.55884534e+05  5.00279137e+05  1.98e-02 6.47e-08  9.64e-01   732s
+   4   2.03771680e+05  4.25376835e+05  6.06e-03 6.95e-08  4.84e-01   768s
+   5   1.96154281e+05  3.26411090e+05  2.70e-03 9.60e-08  2.46e-01   800s
+   6   1.94731567e+05  2.74849210e+05  1.75e-03 1.06e-07  1.48e-01   828s
+   7   1.94060278e+05  2.52419928e+05  1.30e-03 1.15e-07  1.07e-01   854s
+   8   1.93844749e+05  2.44379148e+05  1.17e-03 1.15e-07  9.29e-02   879s
+   9   1.93413652e+05  2.35117008e+05  8.63e-04 1.19e-07  7.44e-02   905s
+  10   1.93169910e+05  2.25366705e+05  7.06e-04 1.18e-07  5.77e-02   930s
+  11   1.93074667e+05  2.17253149e+05  5.53e-04 1.39e-07  4.35e-02   960s
+  12   1.93063905e+05  2.15970107e+05  4.11e-04 1.19e-07  3.94e-02   992s
+  13   1.93059288e+05  2.11426862e+05  3.68e-04 1.26e-07  3.21e-02  1021s
+  14   1.93111973e+05  2.07165571e+05  3.04e-04 1.45e-07  2.48e-02  1046s
+  15   1.93169360e+05  2.01443092e+05  2.67e-04 1.36e-07  1.58e-02  1074s
+  16   1.93257358e+05  1.99361025e+05  2.28e-04 1.69e-07  1.21e-02  1105s
+  17   1.93414056e+05  1.98784819e+05  1.75e-04 1.45e-07  1.02e-02  1134s
+  18   1.93471874e+05  1.98124611e+05  1.60e-04 2.08e-07  8.97e-03  1159s
+  19   1.93537037e+05  1.97536303e+05  1.43e-04 1.79e-07  7.78e-03  1184s
+  20   1.93640070e+05  1.97238093e+05  1.21e-04 1.55e-07  6.89e-03  1212s
+  21   1.93730024e+05  1.96789091e+05  1.02e-04 1.75e-07  5.84e-03  1242s
+  22   1.93765351e+05  1.96670026e+05  9.50e-05 1.78e-07  5.52e-03  1271s
+  23   1.93801440e+05  1.96383327e+05  8.85e-05 1.91e-07  4.96e-03  1296s
+  24   1.93854395e+05  1.96212874e+05  7.93e-05 1.89e-07  4.50e-03  1325s
+  25   1.93902240e+05  1.96028742e+05  7.16e-05 1.80e-07  4.06e-03  1358s
+  26   1.93987089e+05  1.95871601e+05  5.77e-05 1.93e-07  3.52e-03  1386s
+  27   1.93999890e+05  1.95722262e+05  5.57e-05 2.23e-07  3.26e-03  1411s
+  28   1.94018469e+05  1.95590650e+05  5.30e-05 2.01e-07  3.00e-03  1436s
+  29   1.94068960e+05  1.95506759e+05  4.60e-05 2.23e-07  2.71e-03  1464s
+  30   1.94097361e+05  1.95439621e+05  4.21e-05 2.53e-07  2.52e-03  1495s
+  31   1.94136771e+05  1.95285057e+05  3.70e-05 2.18e-07  2.17e-03  1524s
+  32   1.94172035e+05  1.95189806e+05  3.25e-05 2.07e-07  1.92e-03  1549s
+  33   1.94218980e+05  1.95083491e+05  2.67e-05 2.15e-07  1.61e-03  1578s
+  34   1.94252167e+05  1.94970393e+05  2.29e-05 2.31e-07  1.35e-03  1611s
+  35   1.94279569e+05  1.94915769e+05  1.99e-05 2.07e-07  1.19e-03  1640s
+  36   1.94290849e+05  1.94877641e+05  1.87e-05 1.90e-07  1.10e-03  1664s
+  37   1.94305589e+05  1.94808580e+05  1.72e-05 2.55e-07  9.61e-04  1693s
+  38   1.94337033e+05  1.94729596e+05  1.41e-05 2.51e-07  7.59e-04  1724s
+  39   1.94348239e+05  1.94711530e+05  1.30e-05 2.17e-07  7.02e-04  1754s
+  40   1.94357281e+05  1.94688294e+05  1.22e-05 2.57e-07  6.44e-04  1779s
+  41   1.94371730e+05  1.94659887e+05  1.08e-05 2.38e-07  5.64e-04  1805s
+  42   1.94396963e+05  1.94646058e+05  8.51e-06 2.20e-07  4.76e-04  1832s
+  43   1.94412324e+05  1.94592831e+05  7.12e-06 2.41e-07  3.57e-04  1864s
+  44   1.94430970e+05  1.94581419e+05  5.55e-06 2.46e-07  2.93e-04  1892s
+  45   1.94439412e+05  1.94568418e+05  4.83e-06 2.79e-07  2.52e-04  1918s
+  46   1.94451681e+05  1.94549781e+05  3.79e-06 2.98e-07  1.93e-04  1947s
+  47   1.94464023e+05  1.94533885e+05  2.78e-06 2.67e-07  1.39e-04  1978s
+  48   1.94468463e+05  1.94525428e+05  2.43e-06 2.30e-07  1.15e-04  2005s
+  49   1.94473884e+05  1.94522172e+05  2.02e-06 2.24e-07  9.71e-05  2030s
+  50   1.94476626e+05  1.94517784e+05  1.81e-06 2.59e-07  8.40e-05  2055s
+  51   1.94486332e+05  1.94512949e+05  1.08e-06 2.17e-07  5.30e-05  2084s
+  52   1.94490078e+05  1.94508813e+05  7.90e-07 2.43e-07  3.78e-05  2115s
+  53   1.94493882e+05  1.94506228e+05  5.05e-07 2.46e-07  2.47e-05  2144s
+  54   1.94495493e+05  1.94504938e+05  3.85e-07 2.60e-07  1.89e-05  2170s
+  55   1.94496855e+05  1.94503804e+05  2.85e-07 2.56e-07  1.39e-05  2198s
+  56   1.94498077e+05  1.94502359e+05  1.93e-07 2.54e-07  8.80e-06  2230s
+  57   1.94499022e+05  1.94501829e+05  1.28e-07 3.43e-07  5.79e-06  2258s
+  58   1.94499916e+05  1.94501544e+05  6.82e-08 2.76e-07  3.28e-06  2282s
+  59   1.94500387e+05  1.94501240e+05  3.72e-08 2.44e-07  1.74e-06  2310s
+  60   1.94500634e+05  1.94501159e+05  2.17e-08 2.76e-07  1.05e-06  2335s
+  61   1.94500809e+05  1.94501063e+05  1.09e-08 2.45e-07  5.14e-07  2363s
+  62   1.94500942e+05  1.94501017e+05  3.00e-09 3.02e-07  1.50e-07  2394s
+  63   1.94500988e+05  1.94501002e+05  3.97e-10 5.07e-07  2.62e-08  2423s
+  64   1.94500994e+05  1.94500998e+05  1.05e-10 4.62e-07  7.96e-09  2448s
+  65   1.94500995e+05  1.94500997e+05  2.79e-11 2.97e-07  2.03e-09  2477s
+
+Barrier solved model in 65 iterations and 2476.66 seconds
+Optimal objective 1.94500995e+05
+
+Optimization finished!
+Restarting optimization for throughput iteration 1...
+Optimize a model with 6528 rows, 342193 columns and 2233835270 nonzeros
+Coefficient statistics:
+  Matrix range     [1e-13, 7e-06]
+  Objective range  [4e-02, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [7e-06, 7e-06]
+Presolve removed 0 rows and 0 columns (presolve time = 66s) ...
+Presolve removed 0 rows and 0 columns (presolve time = 100s) ...
+Presolve removed 0 rows and 0 columns (presolve time = 190s) ...
+Presolve removed 0 rows and 0 columns (presolve time = 448s) ...
+Presolve removed 3264 rows and 0 columns (presolve time = 487s) ...
+Presolve removed 3264 rows and 0 columns
+Presolve time: 489.37s
+Presolved: 3264 rows, 345457 columns, 1116920899 nonzeros
+Ordering time: 0.00s
+
+Barrier statistics:
+ AA' NZ     : 5.325e+06
+ Factor NZ  : 5.328e+06 (roughly 200 MBytes of memory)
+ Factor Ops : 1.160e+10 (roughly 8 seconds per iteration)
+ Threads    : 24
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0   3.44972946e+09  7.36662953e+05  7.30e+02 1.46e-11  2.62e+04   633s
+   1   8.95200138e+05  7.36616854e+05  1.57e-01 3.49e-10  6.49e+00   659s
+   2   6.18871957e+05  6.42261777e+05  9.83e-02 1.81e-08  3.77e+00   688s
+   3   3.48555300e+05  5.56034868e+05  4.02e-02 5.52e-08  1.66e+00   718s
+   4   1.95546763e+05  3.74821971e+05  5.09e-03 1.26e-07  3.84e-01   752s
+   5   1.92892445e+05  2.63823798e+05  2.40e-03 1.69e-07  1.46e-01   783s
+   6   1.92508262e+05  2.42928868e+05  1.84e-03 2.41e-07  1.04e-01   811s
+   7   1.92146225e+05  2.27278109e+05  1.47e-03 2.64e-07  7.38e-02   836s
+   8   1.91945398e+05  2.20071486e+05  1.30e-03 2.52e-07  6.04e-02   861s
+   9   1.91663807e+05  2.16408071e+05  9.94e-04 3.44e-07  5.06e-02   885s
+  10   1.91494743e+05  2.11830242e+05  8.19e-04 4.26e-07  4.13e-02   910s
+  11   1.91413463e+05  2.06150664e+05  7.31e-04 3.94e-07  3.16e-02   937s
+  12   1.91310405e+05  2.01692134e+05  5.56e-04 5.67e-07  2.26e-02   968s
+  13   1.91321086e+05  1.99381606e+05  4.60e-04 4.73e-07  1.79e-02   996s
+  14   1.91323958e+05  1.98659811e+05  3.97e-04 4.69e-07  1.59e-02  1020s
+  15   1.91397874e+05  1.97520370e+05  3.29e-04 4.37e-07  1.32e-02  1047s
+  16   1.91477119e+05  1.95486920e+05  2.46e-04 5.57e-07  9.03e-03  1078s
+  17   1.91497233e+05  1.94484576e+05  2.21e-04 5.01e-07  7.18e-03  1106s
+  18   1.91521680e+05  1.94113794e+05  2.02e-04 4.82e-07  6.36e-03  1131s
+  19   1.91556627e+05  1.93795461e+05  1.75e-04 4.74e-07  5.50e-03  1156s
+  20   1.91618808e+05  1.93521523e+05  1.45e-04 5.69e-07  4.61e-03  1186s
+  21   1.91673123e+05  1.93119674e+05  1.22e-04 5.86e-07  3.65e-03  1218s
+  22   1.91728531e+05  1.92894905e+05  9.81e-05 5.33e-07  2.94e-03  1246s
+  23   1.91752736e+05  1.92732374e+05  8.58e-05 5.83e-07  2.51e-03  1272s
+  24   1.91828887e+05  1.92628745e+05  5.62e-05 5.60e-07  1.87e-03  1301s
+  25   1.91856572e+05  1.92407413e+05  4.75e-05 5.94e-07  1.40e-03  1333s
+  26   1.91876766e+05  1.92343630e+05  4.20e-05 7.27e-07  1.21e-03  1361s
+  27   1.91886374e+05  1.92311825e+05  3.89e-05 5.65e-07  1.11e-03  1386s
+  28   1.91895914e+05  1.92291594e+05  3.59e-05 5.62e-07  1.03e-03  1411s
+  29   1.91907146e+05  1.92260069e+05  3.25e-05 6.37e-07  9.23e-04  1439s
+  30   1.91919470e+05  1.92204268e+05  2.89e-05 5.83e-07  7.78e-04  1467s
+  31   1.91946035e+05  1.92162410e+05  2.34e-05 5.50e-07  6.10e-04  1501s
+  32   1.91955138e+05  1.92132930e+05  2.09e-05 6.07e-07  5.22e-04  1530s
+  33   1.91977601e+05  1.92118876e+05  1.60e-05 5.22e-07  4.07e-04  1558s
+  34   1.91983642e+05  1.92100609e+05  1.44e-05 5.50e-07  3.51e-04  1583s
+  35   1.91989741e+05  1.92094799e+05  1.28e-05 5.92e-07  3.14e-04  1608s
+  36   1.92001839e+05  1.92082864e+05  1.01e-05 5.40e-07  2.45e-04  1636s
+  37   1.92005720e+05  1.92077606e+05  9.25e-06 5.46e-07  2.21e-04  1668s
+  38   1.92009461e+05  1.92072978e+05  8.46e-06 6.58e-07  1.99e-04  1697s
+  39   1.92011159e+05  1.92071007e+05  8.03e-06 5.35e-07  1.88e-04  1722s
+  40   1.92012931e+05  1.92069621e+05  7.58e-06 5.45e-07  1.78e-04  1747s
+  41   1.92015414e+05  1.92066293e+05  6.95e-06 5.54e-07  1.62e-04  1775s
+  42   1.92021883e+05  1.92062191e+05  5.78e-06 6.05e-07  1.31e-04  1806s
+  43   1.92024178e+05  1.92058996e+05  5.27e-06 5.42e-07  1.17e-04  1834s
+  44   1.92024982e+05  1.92058349e+05  5.06e-06 5.89e-07  1.12e-04  1860s
+  45   1.92026753e+05  1.92056263e+05  4.63e-06 5.25e-07  1.01e-04  1888s
+  46   1.92030945e+05  1.92054462e+05  3.75e-06 5.34e-07  8.14e-05  1920s
+  47   1.92032467e+05  1.92053159e+05  3.46e-06 6.13e-07  7.36e-05  1948s
+  48   1.92032918e+05  1.92052218e+05  3.31e-06 5.12e-07  6.98e-05  1973s
+  49   1.92033629e+05  1.92051341e+05  3.08e-06 5.20e-07  6.45e-05  1998s
+  50   1.92034736e+05  1.92051004e+05  2.81e-06 5.84e-07  5.90e-05  2026s
+  51   1.92037064e+05  1.92049470e+05  2.25e-06 4.89e-07  4.64e-05  2057s
+  52   1.92038349e+05  1.92049076e+05  1.92e-06 5.40e-07  3.98e-05  2085s
+  53   1.92038720e+05  1.92048655e+05  1.79e-06 5.63e-07  3.70e-05  2111s
+  54   1.92039276e+05  1.92047561e+05  1.59e-06 6.56e-07  3.21e-05  2140s
+  55   1.92040372e+05  1.92046817e+05  1.30e-06 5.29e-07  2.58e-05  2170s
+  56   1.92040916e+05  1.92046429e+05  1.14e-06 5.73e-07  2.24e-05  2198s
+  57   1.92041251e+05  1.92046182e+05  1.03e-06 6.70e-07  2.02e-05  2223s
+  58   1.92042217e+05  1.92045894e+05  7.84e-07 5.85e-07  1.52e-05  2253s
+  59   1.92042916e+05  1.92045443e+05  5.89e-07 6.19e-07  1.11e-05  2285s
+  60   1.92043206e+05  1.92045146e+05  4.82e-07 6.00e-07  8.89e-06  2314s
+  61   1.92043401e+05  1.92045010e+05  3.95e-07 5.63e-07  7.32e-06  2339s
+  62   1.92043503e+05  1.92044927e+05  3.51e-07 5.22e-07  6.49e-06  2364s
+  63   1.92043856e+05  1.92044817e+05  2.34e-07 5.30e-07  4.34e-06  2392s
+  64   1.92044040e+05  1.92044681e+05  1.61e-07 5.25e-07  2.96e-06  2423s
+  65   1.92044087e+05  1.92044633e+05  1.39e-07 6.44e-07  2.55e-06  2452s
+  66   1.92044174e+05  1.92044589e+05  1.02e-07 6.09e-07  1.89e-06  2478s
+  67   1.92044255e+05  1.92044522e+05  6.36e-08 5.89e-07  1.19e-06  2506s
+  68   1.92044329e+05  1.92044472e+05  3.13e-08 5.55e-07  6.02e-07  2537s
+  69   1.92044357e+05  1.92044434e+05  2.04e-08 6.97e-07  3.68e-07  2564s
+  70   1.92044387e+05  1.92044427e+05  8.55e-09 6.59e-07  1.65e-07  2589s
+  71   1.92044402e+05  1.92044423e+05  3.45e-09 6.28e-07  7.42e-08  2614s
+  72   1.92044411e+05  1.92044418e+05  1.10e-09 7.21e-07  2.44e-08  2647s
+  73   1.92044415e+05  1.92044416e+05  6.42e-11 6.96e-07  1.73e-09  2685s
+
+Barrier solved model in 73 iterations and 2685.06 seconds
+Optimal objective 1.92044415e+05
+
+Optimization finished!
+/user/kstlaurent/anaconda3/envs/coron_gur/lib/python3.6/site-packages/asdf/extension.py:211: AsdfDeprecationWarning: The module asdf.asdftypes has been deprecated and will be removed in 3.0. Use asdf.types instead. (from astropy.io.misc.asdf.extension.AstropyExtension)
+  AsdfDeprecationWarning)

@@ -1,0 +1,287 @@
+Optimizer called with the following parameters:
+{'focal_plane_mask': {'field_stop_radius': -1.0,
+                      'grayscale': True,
+                      'num_pix': 150,
+                      'radius': 3.5},
+ 'image': {'bandwidth': 0.1,
+           'contrast': 10,
+           'iwa': 3.4,
+           'num_wavelengths': 5,
+           'owa': 12.0,
+           'resolution': 2},
+ 'lyot_stop': {'alignment_tolerance': 0,
+               'filename': 'LUVOIR/LS_LUVOIR_ID0120_OD0982_no_struts_gy_ovsamp4_N0100.fits',
+               'num_lyot_stops': 1},
+ 'method': {'edge_width_for_prior': 2,
+            'ending_scale': 1,
+            'force_no_hermitian_symmetry': False,
+            'force_no_x_mirror_symmetry': False,
+            'force_no_y_mirror_symmetry': False,
+            'initial_throughput_estimate': 1,
+            'maximize_planet_throughput': True,
+            'num_throughput_iterations': 2,
+            'starting_scale': 4},
+ 'pupil': {'N': 100,
+           'filename': 'LUVOIR/TelAp_LUVOIR_gap_pad04_bw_ovsamp04_N0100.fits'},
+ 'solver': {'crossover': 0,
+            'method': 2,
+            'num_threads': 0}}
+
+File organization:
+{'analysis_dir': '/user/kstlaurent/git/progressive_refinement_coronagraphy/surveys/luvoir_N0100_progressive_test_telserv3/analysis',
+ 'drivers_dir': '/user/kstlaurent/git/progressive_refinement_coronagraphy/surveys/luvoir_N0100_progressive_test_telserv3/drivers',
+ 'input_files_dir': '/user/kstlaurent/git/progressive_refinement_coronagraphy/masks',
+ 'log_dir': '/user/kstlaurent/git/progressive_refinement_coronagraphy/surveys/luvoir_N0100_progressive_test_telserv3/logs',
+ 'solution_dir': '/user/kstlaurent/git/progressive_refinement_coronagraphy/surveys/luvoir_N0100_progressive_test_telserv3/solutions',
+ 'survey_dir': '/user/kstlaurent/git/progressive_refinement_coronagraphy/surveys/luvoir_N0100_progressive_test_telserv3'}
+
+Telescope pupil:
+   Mirror symmetry in x: yes
+   Mirror symmetry in y: no
+
+Lyot stop #0:
+   Mirror symmetry in x: yes
+Lyot stop #0:
+   Mirror symmetry in y: yes
+
+Complete APLC:
+   Mirror symmetry in x: yes
+   Mirror symmetry in y: no
+
+Starting optimization at scale 4 with 228 variables and 4140 constraints.
+Creating model...
+Academic license - for non-commercial use only
+Parameter Threads unchanged
+   Value: 0  Min: 0  Max: 1024  Default: 0
+Changed value of parameter Crossover to 0
+   Prev: -1  Min: -1  Max: 5  Default: -1
+Changed value of parameter Method to 2
+   Prev: -1  Min: -1  Max: 5  Default: -1
+Calculating and adding constraints...
+Start optimization...
+Optimize a model with 8280 rows, 228 columns and 1887840 nonzeros
+Coefficient statistics:
+  Matrix range     [1e-10, 9e-03]
+  Objective range  [2e-02, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e-05, 1e-05]
+Presolve time: 0.37s
+Presolved: 228 rows, 8508 columns, 1888068 nonzeros
+Ordering time: 0.00s
+
+Barrier statistics:
+ AA' NZ     : 2.588e+04
+ Factor NZ  : 2.611e+04 (roughly 4 MBytes of memory)
+ Factor Ops : 3.977e+06 (less than 1 second per iteration)
+ Threads    : 24
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0   4.51699104e+02  0.00000000e+00  0.00e+00 0.00e+00  2.60e-01     1s
+   1   2.51125954e+02  2.12936741e+01  0.00e+00 3.02e-02  7.39e-02     1s
+   2   1.53307633e+02  2.84024511e+01  0.00e+00 2.35e-02  5.07e-02     1s
+   3   9.32470236e+01  3.40542552e+01  0.00e+00 1.30e-02  2.81e-02     1s
+   4   4.13538450e+01  1.99418415e+01  0.00e+00 6.98e-03  1.45e-02     1s
+   5   3.27606034e+01  1.63414969e+01  0.00e+00 4.82e-03  1.01e-02     1s
+   6   2.51064537e+01  1.18856912e+01  0.00e+00 2.15e-03  4.91e-03     1s
+   7   1.98074356e+01  1.04806284e+01  0.00e+00 1.46e-03  3.12e-03     1s
+   8   1.35109623e+01  9.29424566e+00  0.00e+00 9.16e-04  1.50e-03     1s
+   9   1.03744546e+01  8.28614444e+00  0.00e+00 5.12e-04  7.00e-04     1s
+  10   8.58798407e+00  7.57460720e+00  0.00e+00 2.44e-04  3.11e-04     1s
+  11   7.32798406e+00  7.15048076e+00  0.00e+00 1.10e-04  1.01e-04     1s
+  12   7.06557885e+00  6.97350965e+00  0.00e+00 6.34e-05  5.61e-05     1s
+  13   6.86562819e+00  6.83689100e+00  0.00e+00 2.95e-05  2.46e-05     1s
+  14   6.78855876e+00  6.78472828e+00  0.00e+00 1.65e-05  1.25e-05     1s
+  15   6.73353257e+00  6.75426672e+00  0.00e+00 9.61e-06  4.67e-06     1s
+  16   6.72046171e+00  6.72963393e+00  0.00e+00 4.11e-06  1.89e-06     1s
+  17   6.71441210e+00  6.71732731e+00  0.00e+00 1.33e-06  6.17e-07     1s
+  18   6.71257001e+00  6.71313060e+00  0.00e+00 3.72e-07  2.02e-07     1s
+  19   6.71171495e+00  6.71175773e+00  0.00e+00 5.96e-08  3.81e-08     1s
+  20   6.71158694e+00  6.71155469e+00  0.00e+00 1.26e-08  1.29e-08     1s
+  21   6.71150012e+00  6.71150535e+00  6.09e-09 1.40e-09  4.22e-10     1s
+  22   6.71149932e+00  6.71149931e+00  3.10e-08 8.81e-16  1.12e-12     1s
+
+Barrier solved model in 22 iterations and 0.90 seconds
+Optimal objective 6.71149932e+00
+
+Optimization finished!
+Restarting optimization for throughput iteration 1...
+Optimize a model with 8280 rows, 228 columns and 1887840 nonzeros
+Coefficient statistics:
+  Matrix range     [1e-10, 9e-03]
+  Objective range  [2e-02, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [4e-07, 4e-07]
+Presolve time: 0.37s
+Presolved: 228 rows, 8508 columns, 1888068 nonzeros
+Ordering time: 0.00s
+
+Barrier statistics:
+ AA' NZ     : 2.588e+04
+ Factor NZ  : 2.611e+04 (roughly 4 MBytes of memory)
+ Factor Ops : 3.977e+06 (less than 1 second per iteration)
+ Threads    : 24
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0   4.36456208e+02  0.00000000e+00  0.00e+00 0.00e+00  2.56e-01     1s
+   1   2.35396109e+02  2.07602848e+01  0.00e+00 3.05e-02  7.32e-02     1s
+   2   1.38353276e+02  2.73385989e+01  0.00e+00 2.39e-02  5.09e-02     1s
+   3   6.77597542e+01  3.12107388e+01  0.00e+00 1.33e-02  2.75e-02     1s
+   4   3.29212613e+01  1.88389386e+01  0.00e+00 7.91e-03  1.69e-02     1s
+   5   2.50972609e+01  1.66283420e+01  0.00e+00 6.10e-03  1.31e-02     1s
+   6   1.40920432e+01  1.09852512e+01  0.00e+00 3.42e-03  7.48e-03     1s
+   7   9.95791850e+00  7.47812740e+00  0.00e+00 2.20e-03  4.99e-03     1s
+   8   6.67362440e+00  6.61804618e+00  0.00e+00 1.96e-03  4.15e-03     1s
+   9   2.64316075e+00  3.37595117e+00  0.00e+00 8.68e-04  1.76e-03     1s
+  10   1.79819969e+00  2.68001878e+00  0.00e+00 6.39e-04  1.29e-03     1s
+  11   1.46987713e+00  1.70660593e+00  0.00e+00 3.86e-04  7.92e-04     1s
+  12   8.52219463e-01  5.59439557e-01  0.00e+00 8.09e-05  1.84e-04     1s
+  13   7.49949428e-01  3.53883873e-01  0.00e+00 2.33e-05  8.46e-05     1s
+  14   5.55592751e-01  3.26283498e-01  0.00e+00 1.53e-05  4.65e-05     1s
+  15   3.84437248e-01  2.84947971e-01  0.00e+00 4.61e-06  1.60e-05     1s
+  16   3.13965403e-01  2.77951574e-01  0.00e+00 2.59e-06  6.34e-06     1s
+  17   2.95411530e-01  2.76280176e-01  0.00e+00 2.03e-06  3.86e-06     1s
+  18   2.86858864e-01  2.73413472e-01  0.00e+00 1.23e-06  2.53e-06     1s
+  19   2.76160317e-01  2.70694789e-01  0.00e+00 6.08e-07  1.11e-06     1s
+  20   2.71451894e-01  2.69115942e-01  0.00e+00 2.45e-07  4.62e-07     1s
+  21   2.68946330e-01  2.68371055e-01  0.00e+00 8.05e-08  1.30e-07     1s
+  22   2.68197509e-01  2.68112863e-01  0.00e+00 2.02e-08  2.57e-08     1s
+  23   2.68083688e-01  2.68061825e-01  0.00e+00 7.69e-09  8.60e-09     1s
+  24   2.68050147e-01  2.68040194e-01  0.00e+00 2.46e-09  3.09e-09     1s
+  25   2.68035711e-01  2.68032418e-01  0.00e+00 5.47e-10  8.11e-10     1s
+  26   2.68031017e-01  2.68030266e-01  2.24e-09 2.00e-11  1.02e-10     1s
+  27   2.68030189e-01  2.68030192e-01  3.57e-09 2.09e-12  7.21e-13     1s
+
+Barrier solved model in 27 iterations and 0.95 seconds
+Optimal objective 2.68030189e-01
+
+Optimization finished!
+Starting optimization at scale 2 with 515 variables and 4140 constraints.
+Creating model...
+Parameter Threads unchanged
+   Value: 0  Min: 0  Max: 1024  Default: 0
+Changed value of parameter Crossover to 0
+   Prev: -1  Min: -1  Max: 5  Default: -1
+Changed value of parameter Method to 2
+   Prev: -1  Min: -1  Max: 5  Default: -1
+Calculating and adding constraints...
+Start optimization...
+Optimize a model with 8280 rows, 515 columns and 4264200 nonzeros
+Coefficient statistics:
+  Matrix range     [8e-11, 2e-03]
+  Objective range  [5e-02, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [4e-10, 4e-05]
+Presolve time: 0.86s
+Presolved: 515 rows, 8795 columns, 4264715 nonzeros
+Ordering time: 0.00s
+
+Barrier statistics:
+ AA' NZ     : 1.324e+05
+ Factor NZ  : 1.329e+05 (roughly 5 MBytes of memory)
+ Factor Ops : 4.566e+07 (less than 1 second per iteration)
+ Threads    : 24
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0   9.40677944e+02  0.00000000e+00  0.00e+00 1.86e-02  5.10e-01     1s
+   1   4.88801072e+02  3.72237602e+01  0.00e+00 1.41e-01  2.59e-01     1s
+   2   4.35092855e+02  3.37521513e+01  0.00e+00 8.25e-02  1.68e-01     1s
+   3   1.13608673e+02  2.97201266e+01  0.00e+00 4.69e-02  8.22e-02     1s
+   4   2.55358815e+01  1.94186166e+01  0.00e+00 2.79e-02  4.57e-02     1s
+   5   9.73364805e+00  1.00296876e+01  0.00e+00 1.24e-02  2.10e-02     1s
+   6   4.65075234e+00  8.36183033e+00  0.00e+00 9.89e-03  1.70e-02     1s
+   7   3.72836248e+00  5.13562919e+00  0.00e+00 5.11e-03  8.85e-03     2s
+   8   2.97596808e+00  3.98778466e+00  0.00e+00 3.48e-03  6.04e-03     2s
+   9   1.84145075e+00  3.50808537e+00  0.00e+00 2.86e-03  4.84e-03     2s
+  10   1.45667816e+00  1.69624701e+00  0.00e+00 7.38e-04  1.31e-03     2s
+  11   1.36447451e+00  1.56121578e+00  0.00e+00 5.90e-04  1.06e-03     2s
+  12   1.21176856e+00  1.33999033e+00  0.00e+00 3.68e-04  6.68e-04     2s
+  13   1.11418764e+00  1.26972319e+00  0.00e+00 3.01e-04  5.50e-04     2s
+  14   9.52785047e-01  1.19217038e+00  0.00e+00 2.35e-04  4.18e-04     2s
+  15   8.74206729e-01  1.16036642e+00  0.00e+00 2.14e-04  3.80e-04     2s
+  16   7.60277812e-01  1.12233907e+00  0.00e+00 1.92e-04  3.44e-04     2s
+  17   6.19760606e-01  1.06996851e+00  0.00e+00 1.67e-04  3.00e-04     2s
+  18   4.77244438e-01  1.02119418e+00  0.00e+00 1.46e-04  2.64e-04     2s
+  19   4.17547445e-01  1.00942906e+00  0.00e+00 1.41e-04  2.55e-04     2s
+  20   3.24660701e-01  1.00077198e+00  0.00e+00 1.38e-04  2.49e-04     2s
+  21   7.41360083e-02  9.81698487e-01  0.00e+00 1.31e-04  2.36e-04     2s
+  22  -1.39237041e-01  9.63118291e-01  0.00e+00 1.25e-04  2.23e-04     2s
+  23  -5.87423581e-01  9.46678424e-01  0.00e+00 1.19e-04  2.13e-04     2s
+  24  -8.54490061e-01  9.41757746e-01  0.00e+00 1.18e-04  2.11e-04     2s
+  25  -2.14694771e+00  9.35663470e-01  0.00e+00 1.16e-04  2.16e-04     2s
+  26  -5.24624698e+00  9.26489816e-01  0.00e+00 1.14e-04  1.92e-04     2s
+  27   5.15180245e+05  0.00000000e+00  0.00e+00 1.86e-02  1.00e+06     2s
+  28   9.78063215e+05  8.79915580e+01  0.00e+00 4.19e-01  9.10e+02     2s
+  29   3.33452351e+05  8.25372436e+01  0.00e+00 2.56e-01  4.84e+02     3s
+  30   9.20168646e+04  5.13626387e+01  0.00e+00 9.55e-02  1.88e+02     3s
+  31   3.87144821e+04  3.36449209e+01  0.00e+00 5.95e-02  1.20e+02     3s
+  32   1.12802704e+04  1.28812180e+01  0.00e+00 2.00e-02  4.13e+01     3s
+  33   5.98241344e+03  6.47460852e+00  0.00e+00 8.40e-03  1.74e+01     3s
+  34   3.61683915e+03  5.20971106e+00  0.00e+00 6.27e-03  1.29e+01     3s
+  35   2.57465745e+03  4.36581310e+00  0.00e+00 4.95e-03  1.02e+01     3s
+  36   1.96865739e+03  3.20672925e+00  0.00e+00 3.21e-03  6.59e+00     3s
+  37   6.89144418e+02  1.70330478e+00  0.00e+00 1.08e-03  2.20e+00     3s
+  38   3.89228731e+02  1.19040899e+00  0.00e+00 3.83e-04  7.64e-01     3s
+  39   1.59292956e+02  1.12000765e+00  0.00e+00 2.98e-04  5.91e-01     3s
+  40  -2.77451768e+01  1.03962814e+00  0.00e+00 2.12e-04  4.34e-01     3s
+  41  -1.67702614e+02  9.99014245e-01  0.00e+00 1.73e-04  3.60e-01     3s
+  42  -5.65001552e+02  9.86817523e-01  0.00e+00 1.63e-04  3.47e-01     3s
+  43  -8.25790288e+02  9.57610230e-01  0.00e+00 1.41e-04  2.95e-01     3s
+  44  -9.57336745e+02  9.54370720e-01  0.00e+00 1.39e-04  2.91e-01     3s
+  45  -1.24101963e+03  9.45257269e-01  0.00e+00 1.33e-04  2.79e-01     3s
+  46  -2.47669222e+03  9.37488098e-01  0.00e+00 1.28e-04  2.81e-01     3s
+  47  -3.27137641e+03  9.27205416e-01  0.00e+00 1.24e-04  2.69e-01     3s
+  48  -4.77569499e+03  9.21641425e-01  0.00e+00 1.22e-04  2.21e-01     3s
+  49  -7.91775779e+03  9.19697460e-01  0.00e+00 1.22e-04  2.31e-01     3s
+  50  -1.43916469e+04  9.14539847e-01  0.00e+00 1.22e-04  2.31e-01     3s
+  51  -2.67880515e+04  9.14211538e-01  0.00e+00 1.24e-04  2.17e-01     4s
+  52  -3.45708621e+04  9.14246978e-01  0.00e+00 1.25e-04  1.91e-01     4s
+  53  -4.09426561e+04  9.14383766e-01  0.00e+00 1.27e-04  1.87e-01     4s
+  54  -5.23827611e+04  9.14582768e-01  0.00e+00 1.29e-04  1.83e-01     4s
+  55  -6.08746858e+04  9.14779911e-01  0.00e+00 1.30e-04  1.81e-01     4s
+  56  -6.54751608e+04  9.14835033e-01  0.00e+00 1.31e-04  1.82e-01     4s
+  57   5.15180245e+05  0.00000000e+00  0.00e+00 1.86e-02  1.00e+06     4s
+  58   3.11672895e+05  1.34646814e+02  0.00e+00 6.28e-01  1.55e+05     4s
+  59   5.68507780e+02  1.73359541e+02  0.00e+00 8.09e-01  1.12e+00     4s
+  60   1.97452282e+02  1.31608998e+02  0.00e+00 3.38e-01  3.71e-01     4s
+  61   1.11590996e+02  9.62841124e+01  0.00e+00 1.94e-01  2.20e-01     4s
+  62   4.94036863e+01  6.28317852e+01  0.00e+00 1.05e-01  1.28e-01     4s
+  63   4.04475449e+01  5.08780716e+01  0.00e+00 8.25e-02  1.03e-01     4s
+  64   3.00290146e+01  3.62032100e+01  0.00e+00 5.54e-02  7.23e-02     4s
+  65   2.72819395e+01  3.37712019e+01  0.00e+00 5.16e-02  6.83e-02     4s
+  66   1.58213374e+01  2.55403470e+01  0.00e+00 3.73e-02  5.10e-02     4s
+  67   5.28319131e+00  9.55115041e+00  0.00e+00 1.08e-02  1.30e-02     4s
+  68   3.44730625e+00  6.97948757e+00  0.00e+00 7.33e-03  9.45e-03     4s
+  69   2.99801501e+00  5.43755206e+00  0.00e+00 5.14e-03  6.64e-03     4s
+  70   2.59131553e+00  4.96660691e+00  0.00e+00 4.57e-03  6.33e-03     5s
+  71   2.22232164e+00  4.29174741e+00  0.00e+00 3.69e-03  4.73e-03     5s
+  72   1.84966522e+00  2.96985436e+00  0.00e+00 2.15e-03  2.89e-03     5s
+  73   1.70645181e+00  2.45420584e+00  0.00e+00 1.56e-03  1.95e-03     5s
+  74   1.53761593e+00  2.15576197e+00  0.00e+00 1.21e-03  1.46e-03     5s
+  75   1.28305632e+00  1.53720271e+00  0.00e+00 5.05e-04  5.52e-04     5s
+  76   1.17480066e+00  1.38251617e+00  0.00e+00 3.64e-04  4.19e-04     5s
+  77   1.04934704e+00  1.26717805e+00  0.00e+00 2.83e-04  3.86e-04     5s
+  78   9.71868644e-01  1.16767359e+00  0.00e+00 2.27e-04  4.58e-04     5s
+  79   9.22126133e-01  1.11111313e+00  0.00e+00 2.02e-04  5.55e-04     5s
+  80   8.89817529e-01  1.05838183e+00  0.00e+00 1.86e-04  7.53e-04     5s
+  81   6.76766036e-01  9.96911317e-01  0.00e+00 1.71e-04  7.32e-03     5s
+  82  -1.53797854e+00  9.88099275e-01  0.00e+00 1.70e-04  1.12e+00     5s
+  83* -2.34068697e+06  9.88083384e-01  3.86e-06 2.53e-09  3.70e-08     5s
+  84* -2.34068754e+12  9.87307259e-01  1.30e-08 2.41e-15  3.50e-14     5s
+
+Barrier performed 84 iterations in 5.34 seconds
+Unbounded model
+
+Optimization finished!
+Traceback (most recent call last):
+  File "/user/kstlaurent/git/progressive_refinement_coronagraphy/surveys/luvoir_N0100_progressive_test_telserv3/drivers/0_LUVOIR_N100_FPM350M0150_IWA0340_OWA01200_C10_BW10_Nlam5_LS_IDD0120_OD0982_no_ls_struts.py", line 127, in <module>
+    solver_method=solver_method)
+  File "/user/kstlaurent/git/progressive_refinement_coronagraphy/surveys/luvoir_N0100_progressive_test_telserv3/drivers/por_aplc_optimizer.py", line 460, in optimize_aplc
+    solution = np.array([x_vars[i].x for i in range(n)])
+  File "/user/kstlaurent/git/progressive_refinement_coronagraphy/surveys/luvoir_N0100_progressive_test_telserv3/drivers/por_aplc_optimizer.py", line 460, in <listcomp>
+    solution = np.array([x_vars[i].x for i in range(n)])
+  File "var.pxi", line 76, in gurobipy.Var.__getattr__
+  File "var.pxi", line 142, in gurobipy.Var.getAttr
+AttributeError: b"Unable to retrieve attribute 'x'"
