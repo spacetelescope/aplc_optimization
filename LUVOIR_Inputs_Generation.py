@@ -18,7 +18,8 @@ def LUVOIR_inputs_gen(input_files_dict):
 	LS_ID         = input_files_dict['lyot_stop']['LS_ID']	
 	
 	pup_filename = filepath+'TelAp_LUVOIR_gap_pad{0:02d}_bw_ovsamp{1:02d}_N{2:04d}.fits'.format(gap_padding, oversamp, N)
-	
+	pup_filename_indexed = filepath + 'TelAp_LUVOIR_gap_pad{0:02d}_bw_ovsamp{1:02d}_N{2:04d}_indexed.fits'.format(gap_padding, oversamp,N)
+
 	grid                        = make_pupil_grid(N)
 	
 	config = Path('masks/'+pup_filename)
@@ -26,7 +27,9 @@ def LUVOIR_inputs_gen(input_files_dict):
 		print('{0:s} exists'.format('masks/'+pup_filename))
 	else:
 		LUVOIR_ap, header           = make_luvoir_a_aperture(gap_padding, header = True)
+		LUVOIR_ap_indexed,_ ,segment_positions = make_luvoir_a_aperture(gap_padding, header=True, segment_transmissions=np.arange(1, 121), return_segment_positions=True)
 		pupil                       = evaluate_supersampled(LUVOIR_ap,grid,oversamp)
+		pupil_indexed = evaluate_supersampled(LUVOIR_ap_indexed, grid, 1)
 	
 		header['EFF_GAP']  = header['GAP_PAD']*header['SEG_GAP']
 	
@@ -45,8 +48,15 @@ def LUVOIR_inputs_gen(input_files_dict):
 		hdr.set('SEG_TRAN',header['SEG_TRAN'],'The transmission for each of the segments')
 		hdr.set('EDGE','bw','black and white, or grey pixels')
 		hdr.set('PROV',header['PROV'])
+
+		hdr_indexed = hdr.copy()
+		seg_xys = segment_positions.points
+		for segment in range(seg_xys.shape[0]):
+			hdr_indexed.set('seg'+str(segment+1)+'_x',segment_positions.x[segment],'x-position segment '+str(segment+1))
+			hdr_indexed.set('seg' + str(segment + 1) + '_y', segment_positions.y[segment],'y-position segment ' + str(segment + 1))
 	
 		fits.writeto('masks/'+pup_filename, pupil.shaped, hdr,overwrite=True)
+		fits.writeto('masks/' + pup_filename_indexed, pupil_indexed.shaped, hdr_indexed, overwrite=True)
 		print('{0:s} has been written to file'.format('masks/'+pup_filename))
 		
 	ls_filenames = []
