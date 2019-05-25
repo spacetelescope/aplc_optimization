@@ -414,7 +414,7 @@ def optimize_aplc(pupil, focal_plane_mask, lyot_stops, dark_zone_mask, wavelengt
 
 if __name__ == '__main__':
 	contrast = 1e-8
-	num_pix = 486
+	num_pix = 1024
 	q_sci = 2.5 # px / (lambda_0/D)
 	iwa = 3.75 # lambda_0/D
 	owa = 15 # lambda_0/D
@@ -423,12 +423,12 @@ if __name__ == '__main__':
 	spectral_bandwidth = 0.1 # fractional
 	num_wavelengths = 3
 	num_lyot_stops = 5
-	lyot_stop_shift = 1 # px
+	lyot_stop_shift = 2 # px
 	tau = 0.55 # expected planet peak intensity (relative to without focal plane mask)
 	gray_focal_plane_mask_type = True
 	gray_pupil = False
 	gray_lyot_stop = True
-	num_scalings = 1
+	num_scalings = 4
 
 	# Build filename
 	# fname = 'apodizers/HiCAT-N%04d_NFOC%04d_DZ%04d_%04d_C%03d_BW%02d_NLAM%02d_SHIFT%02d_%02dLS_ADAP%d' % (num_pix, n_foc, iwa*100, owa*100, -10*np.log10(contrast), spectral_bandwidth*100, num_wavelengths, lyot_stop_shift*10, num_lyot_stops, num_scalings)
@@ -446,8 +446,8 @@ if __name__ == '__main__':
 	#fname_pupil = 'masks/LUVOIR/TelAp_full_luvoirss100cobs1gap2_N0250.fits'
 	#fname_lyot_stop = 'masks/LUVOIR/LS_full_luvoir_ann19D94_clear_N0250.fits'
 
-	fname_pupil = 'masks/HiCAT/hicat_apodizer_mask_486_bw.fits' # for HiCAT we need a b/w aperture support becasue the apodizer defines the pupil outline as well
-	fname_lyot_stop = 'masks/HiCAT/hicat_lyot_mask_486_gy_0.fits' # this one is really gray
+	fname_pupil = 'masks/HiCAT/hicat_apodizer_mask_1024_bw.fits' # for HiCAT we need a b/w aperture support becasue the apodizer defines the pupil outline as well
+	fname_lyot_stop = 'masks/HiCAT/hicat_lyot_mask_1024_gy_0.fits' # this one is really gray
 
 	pupil_grid = make_uniform_grid((num_pix, num_pix), 1)
 
