@@ -1,0 +1,78 @@
+Optimizer called with the following parameters:
+{'focal_plane_mask': {'field_stop_radius': -1.0,
+                      'grayscale': True,
+                      'num_pix': 150,
+                      'radius': 3.5},
+ 'image': {'bandwidth': 0.1,
+           'contrast': 10,
+           'iwa': 3.4,
+           'num_wavelengths': 5,
+           'owa': 12.0,
+           'resolution': 2},
+ 'lyot_stop': {'alignment_tolerance': 0,
+               'filename': 'LUVOIR/LS_LUVOIR_ID0120_OD0982_no_struts_gy_ovsamp4_N1000.fits',
+               'num_lyot_stops': 1},
+ 'method': {'edge_width_for_prior': 2,
+            'ending_scale': 1,
+            'force_no_hermitian_symmetry': False,
+            'force_no_x_mirror_symmetry': False,
+            'force_no_y_mirror_symmetry': False,
+            'initial_throughput_estimate': 1,
+            'maximize_planet_throughput': True,
+            'num_throughput_iterations': 2,
+            'starting_scale': 1},
+ 'pupil': {'N': 1000,
+           'filename': 'LUVOIR/TelAp_LUVOIR_gap_pad01_bw_ovsamp04_N1000.fits'},
+ 'solver': {'crossover': 0,
+            'method': 2,
+            'num_threads': 0}}
+
+File organization:
+{'analysis_dir': '/user/kstlaurent/git/progressive_refinement_coronagraphy/surveys/luvoir_BW10_small_N1000_telserv3/analysis',
+ 'drivers_dir': '/user/kstlaurent/git/progressive_refinement_coronagraphy/surveys/luvoir_BW10_small_N1000_telserv3/drivers',
+ 'input_files_dir': '/user/kstlaurent/git/progressive_refinement_coronagraphy/masks',
+ 'log_dir': '/user/kstlaurent/git/progressive_refinement_coronagraphy/surveys/luvoir_BW10_small_N1000_telserv3/logs',
+ 'solution_dir': '/user/kstlaurent/git/progressive_refinement_coronagraphy/surveys/luvoir_BW10_small_N1000_telserv3/solutions',
+ 'survey_dir': '/user/kstlaurent/git/progressive_refinement_coronagraphy/surveys/luvoir_BW10_small_N1000_telserv3'}
+
+Telescope pupil:
+   Mirror symmetry in x: yes
+   Mirror symmetry in y: no
+
+Lyot stop #0:
+   Mirror symmetry in x: yes
+Lyot stop #0:
+   Mirror symmetry in y: yes
+
+Complete APLC:
+   Mirror symmetry in x: yes
+   Mirror symmetry in y: no
+
+Starting optimization at scale 1 with 342309 variables and 4140 constraints.
+Creating model...
+Academic license - for non-commercial use only
+Parameter Threads unchanged
+   Value: 0  Min: 0  Max: 1024  Default: 0
+Changed value of parameter Crossover to 0
+   Prev: -1  Min: -1  Max: 5  Default: -1
+Changed value of parameter Method to 2
+   Prev: -1  Min: -1  Max: 5  Default: -1
+Calculating and adding constraints...
+Traceback (most recent call last):
+  File "/user/kstlaurent/git/progressive_refinement_coronagraphy/surveys/luvoir_BW10_small_N1000_telserv3/drivers/LUVOIR_N1000_FPM350M0150_IWA0340_OWA01200_C10_BW10_Nlam5_LS_IDD0120_OD0982_no_ls_struts.py", line 127, in <module>
+    solver_method=solver_method)
+  File "/user/kstlaurent/git/progressive_refinement_coronagraphy/surveys/luvoir_BW10_small_N1000_telserv3/drivers/por_aplc_optimizer.py", line 370, in optimize_aplc
+    lyot = aplc(Wavefront(x, wavelength))
+  File "/Users/kstlaurent/git/hcipy/hcipy/optics/optical_element.py", line 7, in __call__
+    return self.forward(wavefront)
+  File "/Users/kstlaurent/git/hcipy/hcipy/coronagraphy/lyot.py", line 55, in forward
+    lyot = self.prop.backward(wf_foc)
+  File "/Users/kstlaurent/git/hcipy/hcipy/propagation/propagator.py", line 44, in backward
+    return self.get_monochromatic_propagator(wavefront.wavelength).backward(wavefront, *args, **kwargs)
+  File "/Users/kstlaurent/git/hcipy/hcipy/propagation/fraunhofer.py", line 29, in backward
+    U_new = self.fourier_transform.backward(wavefront.electric_field) / self.norm_factor
+  File "/Users/kstlaurent/git/hcipy/hcipy/fourier/fourier_transform.py", line 187, in inner
+    return func(self, field)
+  File "/Users/kstlaurent/git/hcipy/hcipy/fourier/matrix_fourier_transform.py", line 53, in backward
+    res = np.dot(np.dot(self.M1.conj().T, f), self.M2.conj().T).ravel()
+KeyboardInterrupt
