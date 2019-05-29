@@ -160,12 +160,8 @@ ArrayPlot[ShapedPupil, PlotRange-> All,ColorFunction ->GrayLevel]
 (*Resizing of the different pupil arrays*)
 
 
-If[ResizingFactor==1,
-SuperAperture=Aperture;
-SuperLyotStop=LyotStop;,
-SuperAperture=Ceiling[SizeIncrease[Aperture, ResizingFactor]];
+SuperAperture=SizeIncreaseAndErrorDiffusion[Aperture, ResizingFactor];
 SuperLyotStop=SizeIncrease[LyotStop, ResizingFactor];
-]
 
 
 (* ::Subsubsection:: *)
@@ -195,7 +191,7 @@ SuperShapedPupil=SizeIncreaseAndErrorDiffusion[ShapedPupil, ResizingFactor];
 (*Filenames*)
 
 
-FilenameSuperAperture = StringReplace[FilepathAperture,{"N1000" -> "N"<>PaddingForFileNames[nPupSuper, 4]<>"_Ceiling_EDF"<>PaddingForFileNames[ResizingFactor,2]}]
+FilenameSuperAperture = StringReplace[FilepathAperture,{"N1000" -> "N"<>PaddingForFileNames[nPupSuper, 4]<>"_True_EDF"<>PaddingForFileNames[ResizingFactor,2]}]
 FilenameSuperLyotStop = StringReplace[FilepathLyotStop,{"N1000" -> "N"<>PaddingForFileNames[nPupSuper, 4]<>"_EDF"<>PaddingForFileNames[ResizingFactor,2]}]
 FilenameSuperShapedPupil = StringReplace[FilepathShapedPupil,{"LUVOIR_N1000" -> "LUVOIR_N"<>PaddingForFileNames[nPupSuper, 4]<>"_EDF"<>PaddingForFileNames[ResizingFactor,2]}]
 
