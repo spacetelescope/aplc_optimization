@@ -15,8 +15,8 @@ lyot_inner = 6.8e-3
 lyot_outer = 15.9e-3
 
 
-input_files_dict = {'directory':'HiCAT/', 'N':n, 'oversamp':4,\
-					'aperture': {'ap_spid':True,'ap_gap':True}, \
+input_files_dict = {'directory':'HiCAT/', 'N':n\
+					'aperture': {'ap_spid':True,'ap_gap':True,'ap_grey':True}, \
 					'lyot_stop':{'lyot_ref_diam':pupil_diameter,'LS_ID':[lyot_inner], 'LS_OD':[lyot_outer]}}
 
 pup_filename, ls_filenames = HiCAT_inputs_gen(input_files_dict)

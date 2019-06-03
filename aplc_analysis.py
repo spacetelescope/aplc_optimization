@@ -12,19 +12,21 @@ import os
 
 def create_coronagraph(solution_filename):
 		
-	parameters = {'pupil': {'filename': 'masks/LUVOIR/TelAp_LUVOIR_gap_pad01_bw_ovsamp04_N2000_True_EDF02.fits', 'N': 2000}, 
-				  'focal_plane_mask': {'radius': 3.5, 'num_pix': 150, 'grayscale': True, 'field_stop_radius': -1.0}, 
-				  'lyot_stop': {'filename': 'masks/LUVOIR/LS_LUVOIR_ID0120_OD0982_no_struts_gy_ovsamp4_N2000_EDF02.fits', 'alignment_tolerance': 0, 'num_lyot_stops': 1}, 
-				  'image': {'contrast': 10, 'iwa': 3.4, 'owa': 12.0, 'num_wavelengths': 5, 'bandwidth': 0.1, 'resolution': 2}, 
-				  'method': {'force_no_x_mirror_symmetry': False, 'force_no_y_mirror_symmetry': False, 'force_no_hermitian_symmetry': False, 'starting_scale': 1, 'ending_scale': 1, 'edge_width_for_prior': 2, 'num_throughput_iterations': 2, 'initial_throughput_estimate': 1, 'maximize_planet_throughput': True}, 'solver': {'num_threads': 0, 'crossover': 0, 'method': 2}}
+	parameters = {'pupil': {'filename': 'hicat_test/inputs/hicat_apodizer_mask_1944_bw.fits', 'N': 1944}, 
+	'focal_plane_mask': {'radius': 8.543/2, 'num_pix': 80, 'grayscale': True, 'field_stop_radius': -1.0}, 
+	'lyot_stop': {'filename': 'hicat_test/inputs/hicat_lyot_mask_1944_gy_0.fits', 'alignment_tolerance': 6, 'num_lyot_stops': 9}, 
+	'image': {'contrast': 8, 'iwa': 3.75, 'owa': 15.0, 'num_wavelengths': 4, 'bandwidth': 0.1, 'resolution': 2}, 
+	'method': {'force_no_x_mirror_symmetry': False, 'force_no_y_mirror_symmetry': False, 'force_no_hermitian_symmetry': False, 'starting_scale': 1, 'ending_scale': 1, 'edge_width_for_prior': 2, 'num_throughput_iterations': 2, 'initial_throughput_estimate': 1, 'maximize_planet_throughput': True}, 
+	'solver': {'num_threads': 0, 'crossover': 0, 'method': 2}}
+
 
                      
-	file_organization = {'survey_dir': '/user/kstlaurent/git/progressive_refinement_coronagraphy/surveys/luvoir_BW10_small_N1000_telserv3', 
-					   'solution_dir': '/user/kstlaurent/git/progressive_refinement_coronagraphy/surveys/luvoir_BW10_small_N1000_telserv3/solutions', 
-					   'analysis_dir': '/user/kstlaurent/git/progressive_refinement_coronagraphy/surveys/luvoir_BW10_small_N1000_telserv3/analysis', 
-					   'drivers_dir': '/user/kstlaurent/git/progressive_refinement_coronagraphy/surveys/luvoir_BW10_small_N1000_telserv3/drivers', 
-					   'log_dir': '/user/kstlaurent/git/progressive_refinement_coronagraphy/surveys/luvoir_BW10_small_N1000_telserv3/logs', 
-					   'input_files_dir': '/user/kstlaurent/git/progressive_refinement_coronagraphy/masks'}
+	file_organization = {'survey_dir': 'hicat_test', 
+					   'solution_dir': 'hicat_test/solutions', 
+					   'analysis_dir': 'hicat_test/analysis', 
+					   'drivers_dir': 'hicat_test/scripts', 
+					   'log_dir': 'hicat_test/logs', 
+					   'input_files_dir': 'hicat_test/inputs'}
 
 	
 	
@@ -132,6 +134,38 @@ def analyze_contrast_monochromatic(solution_filename, pdf=None):
 		plt.close()
 	else:
 		plt.show()
+	
+	for i in range(len(lyot_stops)):
+		lyot_stop = lyot_stops[i]
+		coro = LyotCoronagraph(pupil.grid, focal_plane_mask, lyot_stop)
+		focal_grid = make_focal_grid(pupil.grid, 8, owa * 1.2)
+		prop = FraunhoferPropagator(pupil.grid, focal_grid)
+
+		wf = Wavefront(pupil * apodizer)
+		img = prop(coro(wf)).intensity
+		img_ref = prop(Wavefront(apodizer * lyot_stop)).intensity
+		
+		r, profile, std_profile, n_profile = radial_profile(img / img_ref.max(), 0.2)
+		
+		plt.title('Monochromatic normalized irradiance (radial average) per LS shift #{}'.format(i))
+		plt.plot(r, profile)
+		plt.axvline(iwa, color=colors.red)
+		plt.axvline(owa, color=colors.red)
+		plt.axvline(radius_fpm, color='k')
+		plt.axhline(10**(-contrast), xmin=0, xmax=owa*1.2, linewidth=1, color='k', linestyle='--')
+	
+		plt.yscale('log')
+		plt.xlim(0, owa*1.2)
+		plt.ylim(5e-12, 2e-5)
+		plt.ylabel('Normalized irradiance')
+		plt.xlabel(r'Angular separation ($\lambda_0/D$)')
+	
+		if pdf is not None:
+			pdf.savefig()
+			plt.close()
+		else:
+			plt.show()
+
 
 	return {'normalized_irradiance_image': img / img_ref.max(), 'normalized_irradiance_radial': (r, profile, std_profile, n_profile)}
 
@@ -226,6 +260,54 @@ def analyze_summary(solution_filename, pdf=None):
 	return {}
 
 def analyze_lyot_robustness(solution_filename, pdf=None):
+	
+	pupil, apodizer, focal_plane_mask, lyot_stops, parameters, file_organization = create_coronagraph(solution_filename)
+	
+	owa = parameters['image']['owa']
+	bandwidth = parameters['image']['bandwidth']
+	radius_fpm = parameters['focal_plane_mask']['radius']
+	contrast = parameters['image']['contrast']
+	
+	for i in range(len(lyot_stops)):
+		lyot_stop = lyot_stops[i]
+		coro = LyotCoronagraph(pupil.grid, focal_plane_mask, lyot_stop)
+		coro_without_lyot = LyotCoronagraph(pupil.grid, focal_plane_mask)
+		focal_grid = make_focal_grid(pupil.grid, 8, owa * 1.2)
+		prop = FraunhoferPropagator(pupil.grid, focal_grid)
+		wavelengths = np.linspace(-bandwidth / 2, bandwidth / 2, 11) + 1
+
+		focal_plane_mask_large = 1 - circular_aperture(2 * radius_fpm)(focal_grid)
+
+		img = 0
+		img_ref = 0
+		img_foc = 0
+		lyot = 0
+
+		for wl in wavelengths:
+			wf = Wavefront(pupil * apodizer, wl)
+			img += prop(coro(wf)).intensity
+			img_foc += prop(wf).intensity
+			img_ref += prop(Wavefront(pupil * lyot_stop)).intensity
+			lyot += coro_without_lyot(wf).intensity
+	
+		font = {'family' : 'normal', 'weight' : 'medium', 'size'   : 10}
+		matplotlib.rc('font', **font)
+	
+		#final image plane
+		im = imshow_field(np.log10(img / img_ref.max()), vmin=-contrast-1, vmax=-contrast+4, cmap='inferno')
+		plt.title('Final image plane, lyot stop shift #{}'.format(i))
+		plt.colorbar(im,fraction=0.046, pad=0.04)
+		plt.axis('off')
+	
+		if pdf is not None:
+			pdf.savefig()
+			plt.close()
+		else:
+			plt.show()
+	
+
+'''
+def analyze_lyot_robustness(solution_filename, pdf=None):
 	pupil, apodizer, focal_plane_mask, lyot_stops, parameters, file_organization = create_coronagraph(solution_filename)
 	
 	num_pix = parameters['pupil']['N'] #px
@@ -296,13 +378,13 @@ def analyze_lyot_robustness(solution_filename, pdf=None):
 		plt.show()
 	
 	return {}
-
+'''
 
 if __name__ == '__main__':
 		
-		identifier = 'LUVOIR_N2000_EDF02_FPM350M0150_IWA0340_OWA01200_C10_BW10_Nlam5_LS_IDD0120_OD0982_no_ls_struts'
+		identifier = 'HICAT_1944_LS9_6pix_telserv3'
 		
-		solution_filename = '/user/kstlaurent/git/progressive_refinement_coronagraphy/surveys/luvoir_BW10_small_N1000_telserv3/solutions/'+identifier+'.fits'
+		solution_filename = '/user/kstlaurent/git/progressive_refinement_coronagraphy/hicat_test/solutions/'+identifier+'.fits'
 		
 		pupil, apodizer, focal_plane_mask, lyot_stops, parameters, file_organization = create_coronagraph(solution_filename)
 		
@@ -319,8 +401,8 @@ if __name__ == '__main__':
 			res = analyze_summary(solution_filename, pdf)
 			metrics.update(res)
 			
-			#res = analyze_lyot_robustness(solution_filename, pdf)
-			#metrics.update(res)
+			res = analyze_lyot_robustness(solution_filename, pdf)
+			metrics.update(res)
 
 
 		# Write out metrics to a file

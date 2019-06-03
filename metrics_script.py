@@ -2,9 +2,9 @@ from astropy.io import fits
 import numpy as np
 
 
-fname_pup  = "masks/Neil_TelAp.fits"
-fname_ls   = "masks/Neil_LS.fits"
-fname_apod = "masks/Neil_Apod.fits"
+fname_pup  = "/user/kstlaurent/git/progressive_refinement_coronagraphy/masks/Neil_TelAp.fits"
+fname_ls   = "/user/kstlaurent/git/progressive_refinement_coronagraphy/masks/Neil_LS.fits"
+fname_apod = "/user/kstlaurent/git/progressive_refinement_coronagraphy/masks/Neil_Apod.fits"
 
 TelAp = fits.getdata(fname_pup)
 LS    = fits.getdata(fname_ls)
@@ -14,9 +14,9 @@ A     = fits.getdata(fname_apod)
 # Account for the ratio of the diameter of the square enclosing the aperture to the circumscribed circle
 square2circ_ratio = {'luvoir2017novAp05': 0.982, 'HiCAT':1.000}
 
-D       = 0.982
-N       = 256
-rho_out = 12.0
+D       = 1
+N       = 128
+rho_out = 10.0
 fp2res  = 50
 bw      = 0.10
 Nlam    = 4
@@ -25,7 +25,7 @@ Nlam    = 4
 
 dx = (D/2)/N
 dy = dx
-xs = np.matrix(np.linspace(-N+0.5, N-0.5, N)*dx)
+xs = np.matrix(np.linspace(-N+0.5, N-0.5, 2*N)*dx)
 ys = xs.copy()
 M_fp2 = int(np.ceil(rho_out*fp2res))
 dxi = 1./fp2res
@@ -45,9 +45,8 @@ intens_TelAp_peak_polychrom = np.zeros((Nlam, 1))
 
 for wi, wr in enumerate(wrs):
 	
+
 	Psi_D_0 = dx*dy/wr*np.dot(np.dot(np.exp(-1j*2*np.pi/wr*np.dot(xis.T, xs)), TelAp*A*LS[::-1,::-1]), np.exp(-1j*2*np.pi/wr*np.dot(xs.T, xis)))
-	
-	
 	
 	intens_D_0_polychrom[wi] = np.power(np.absolute(Psi_D_0), 2)
 	intens_D_0_peak_polychrom[wi] = (np.sum(TelAp*A*LS[::-1,::-1])*dx*dy/wr)**2
@@ -75,20 +74,16 @@ fwhm_circ_thrupt = fwhm_sum_APLC/(np.pi/4)
 p7ap_thrupt = p7ap_sum_APLC/np.sum(np.power(TelAp,2)*dx*dx)
 p7ap_circ_thrupt = p7ap_sum_APLC/(np.pi/4)
 rel_fwhm_thrupt = fwhm_sum_APLC/fwhm_sum_TelAp
-
-#think threl_p7ap thrupt is is the relevant thrpughput metric, double check SCDA survey spreadsheets and paper
 rel_p7ap_thrupt = p7ap_sum_APLC/p7ap_sum_TelAp
 fwhm_area = np.sum(fwhm_ind_APLC)*dxi*dxi
 	
 print("////////////////////////////////////////////////////////")
 print("{:s}".format(fname_apod))
 print("Incident energy on aperture (dimensionless): {:.3f}".format(inc_energy))
-print("Non-binary residuals, as a percentage of clear telescope aperture area: {:.2f}%".format(100*tot_thrupt))
-print("Band-averaged total throughput: {:.2f}%".format(100*tot_thrupt))
+print("Band-averaged total throughput: {:.5f}".format(tot_thrupt))
 print("Band-averaged half-max throughput: {:.2f}%".format(100*fwhm_thrupt))
 print("Band-averaged half-max throughput, circ. ref.: {:.2f}%".format(100*fwhm_circ_thrupt))
 print("Band-averaged r=.7 lam/D throughput: {:.2f}%".format(100*p7ap_thrupt))
 print("Band-averaged r=.7 lam/D throughput, circ. ref.: {:.2f}%".format(100*p7ap_circ_thrupt))
 print("Band-averaged relative half-max throughput: {:.2f}%".format(100*rel_fwhm_thrupt))
-print("Band-averaged relative r=0.7 lam/D throughput: {:.2f}%".format(100*rel_p7ap_thrupt))
-print("Band-averaged FWHM PSF area / (lambda0/D)^2: {:.2f}".format(fwhm_area))	
+print("Band-averaged relative r=0.7 lam/D throughput: {:.5f}".format(rel_p7ap_thrupt))	
