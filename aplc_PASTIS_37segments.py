@@ -413,13 +413,13 @@ def optimize_aplc(pupil, focal_plane_mask, lyot_stops, dark_zone_mask, wavelengt
 	return prior
 
 if __name__ == '__main__':
-	contrast = 1e-10
+	contrast = 0.5*1e-10
 	num_pix = 1000
 	q_sci = 2.5 # px / (lambda_0/D)
-	iwa = 3.9 # lambda_0/D
+	iwa = 4 # lambda_0/D
 	owa = 9 # lambda_0/D
 	n_foc = 100 # px diameter
-	foc_inner = 7.8 # lambda_0/D diameter
+	foc_inner = 9 # lambda_0/D diameter
 	spectral_bandwidth = 0.1 # fractional
 	num_wavelengths = 1
 	num_lyot_stops = 1
@@ -428,12 +428,12 @@ if __name__ == '__main__':
 	gray_focal_plane_mask_type = True
 	gray_pupil = False
 	gray_lyot_stop = False
-	num_scalings = 1
+	num_scalings = 2
 
 	# Build filename
 	# fname = 'apodizers/HiCAT-N%04d_NFOC%04d_DZ%04d_%04d_C%03d_BW%02d_NLAM%02d_SHIFT%02d_%02dLS_ADAP%d' % (num_pix, n_foc, iwa*100, owa*100, -10*np.log10(contrast), spectral_bandwidth*100, num_wavelengths, lyot_stop_shift*10, num_lyot_stops, num_scalings)
 	#fname = 'apodizers/LUVOIR_IWA=3.0_OWA=12.0_BW=0.18_nlam=08'
-	fname = 'apodizers/PASTIS_37segments'
+	fname = 'apodizers/PASTIS_37segments_fpm4.5_IWA4_OWA9_mono'
 	print('Apodizer will be saved to:')
 	print('   ' + fname + '.fits')
 	print('')
