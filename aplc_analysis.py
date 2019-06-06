@@ -28,9 +28,6 @@ def create_coronagraph(solution_filename):
 					   'log_dir': 'hicat_test/logs', 
 					   'input_files_dir': 'hicat_test/inputs'}
 
-	
-	
-	
 	pup_fname = parameters['pupil']['filename']
 	fpm_radius = parameters['focal_plane_mask']['radius']
 	fpm_num_pix = parameters['focal_plane_mask']['num_pix']
@@ -66,6 +63,7 @@ def create_coronagraph(solution_filename):
 			lyot_stop_neg_y = np.roll(lyot_stop.shaped, -ls_alignment_tolerance, 0).ravel()
 
 			lyot_stops.extend([lyot_stop_pos_x, lyot_stop_neg_x, lyot_stop_pos_y, lyot_stop_neg_y])
+			#lyot_stops.update({'lyot_stop_pos_x':lyot_stop_pos_x,'lyot_stop_neg_x':lyot_stop_neg_x,'lyot_stop_pos_y':lyot_stop_pos_y,'lyot_stop_neg_y':lyot_stop_neg_y})
 
 		if ls_num_stops in [8, 9]:
 			lyot_stop_pos_x_pos_y = np.roll(np.roll(lyot_stop.shaped, ls_alignment_tolerance, 1), ls_alignment_tolerance, 0).ravel()
@@ -74,6 +72,7 @@ def create_coronagraph(solution_filename):
 			lyot_stop_neg_x_neg_y = np.roll(np.roll(lyot_stop.shaped, -ls_alignment_tolerance, 1), -ls_alignment_tolerance, 0).ravel()
 
 			lyot_stops.extend([lyot_stop_pos_x_pos_y, lyot_stop_pos_x_neg_y, lyot_stop_neg_x_pos_y, lyot_stop_neg_x_neg_y])
+			#lyot_stops.update({'lyot_stop_pos_x_pos_y':lyot_stop_pos_x_pos_y,'lyot_stop_pos_x_neg_y':lyot_stop_pos_x_neg_y,''})
 
 	# Build focal plane mask
 	q_foc = fpm_num_pix / (fpm_radius * 2)
@@ -134,38 +133,6 @@ def analyze_contrast_monochromatic(solution_filename, pdf=None):
 		plt.close()
 	else:
 		plt.show()
-	
-	for i in range(len(lyot_stops)):
-		lyot_stop = lyot_stops[i]
-		coro = LyotCoronagraph(pupil.grid, focal_plane_mask, lyot_stop)
-		focal_grid = make_focal_grid(pupil.grid, 8, owa * 1.2)
-		prop = FraunhoferPropagator(pupil.grid, focal_grid)
-
-		wf = Wavefront(pupil * apodizer)
-		img = prop(coro(wf)).intensity
-		img_ref = prop(Wavefront(apodizer * lyot_stop)).intensity
-		
-		r, profile, std_profile, n_profile = radial_profile(img / img_ref.max(), 0.2)
-		
-		plt.title('Monochromatic normalized irradiance (radial average) per LS shift #{}'.format(i))
-		plt.plot(r, profile)
-		plt.axvline(iwa, color=colors.red)
-		plt.axvline(owa, color=colors.red)
-		plt.axvline(radius_fpm, color='k')
-		plt.axhline(10**(-contrast), xmin=0, xmax=owa*1.2, linewidth=1, color='k', linestyle='--')
-	
-		plt.yscale('log')
-		plt.xlim(0, owa*1.2)
-		plt.ylim(5e-12, 2e-5)
-		plt.ylabel('Normalized irradiance')
-		plt.xlabel(r'Angular separation ($\lambda_0/D$)')
-	
-		if pdf is not None:
-			pdf.savefig()
-			plt.close()
-		else:
-			plt.show()
-
 
 	return {'normalized_irradiance_image': img / img_ref.max(), 'normalized_irradiance_radial': (r, profile, std_profile, n_profile)}
 
@@ -207,7 +174,7 @@ def analyze_summary(solution_filename, pdf=None):
 		img_ref += prop(Wavefront(pupil * lyot_stop)).intensity
 		lyot += coro_without_lyot(wf).intensity
 	
-	font = {'family' : 'normal', 'weight' : 'medium', 'size'   : 10}
+	font = {'family' : 'DejaVu Sans', 'weight' : 'medium', 'size'   : 10}
 	matplotlib.rc('font', **font)
 	
 	#apodizer and telescope aperture
@@ -260,88 +227,28 @@ def analyze_summary(solution_filename, pdf=None):
 	return {}
 
 def analyze_lyot_robustness(solution_filename, pdf=None):
-	
-	pupil, apodizer, focal_plane_mask, lyot_stops, parameters, file_organization = create_coronagraph(solution_filename)
-	
-	owa = parameters['image']['owa']
-	bandwidth = parameters['image']['bandwidth']
-	radius_fpm = parameters['focal_plane_mask']['radius']
-	contrast = parameters['image']['contrast']
-	
-	for i in range(len(lyot_stops)):
-		lyot_stop = lyot_stops[i]
-		coro = LyotCoronagraph(pupil.grid, focal_plane_mask, lyot_stop)
-		coro_without_lyot = LyotCoronagraph(pupil.grid, focal_plane_mask)
-		focal_grid = make_focal_grid(pupil.grid, 8, owa * 1.2)
-		prop = FraunhoferPropagator(pupil.grid, focal_grid)
-		wavelengths = np.linspace(-bandwidth / 2, bandwidth / 2, 11) + 1
-
-		focal_plane_mask_large = 1 - circular_aperture(2 * radius_fpm)(focal_grid)
-
-		img = 0
-		img_ref = 0
-		img_foc = 0
-		lyot = 0
-
-		for wl in wavelengths:
-			wf = Wavefront(pupil * apodizer, wl)
-			img += prop(coro(wf)).intensity
-			img_foc += prop(wf).intensity
-			img_ref += prop(Wavefront(pupil * lyot_stop)).intensity
-			lyot += coro_without_lyot(wf).intensity
-	
-		font = {'family' : 'normal', 'weight' : 'medium', 'size'   : 10}
-		matplotlib.rc('font', **font)
-	
-		#final image plane
-		im = imshow_field(np.log10(img / img_ref.max()), vmin=-contrast-1, vmax=-contrast+4, cmap='inferno')
-		plt.title('Final image plane, lyot stop shift #{}'.format(i))
-		plt.colorbar(im,fraction=0.046, pad=0.04)
-		plt.axis('off')
-	
-		if pdf is not None:
-			pdf.savefig()
-			plt.close()
-		else:
-			plt.show()
-	
-
-'''
-def analyze_lyot_robustness(solution_filename, pdf=None):
 	pupil, apodizer, focal_plane_mask, lyot_stops, parameters, file_organization = create_coronagraph(solution_filename)
 	
 	num_pix = parameters['pupil']['N'] #px
 	iwa = parameters['image']['iwa']
 	owa = parameters['image']['owa']
-	num_pix_foc = parameters['focal_plane_mask']['num_pix']
-	foc_inner = 2*parameters['focal_plane_mask']['radius']
-	spectral_bandwidth = parameters['image']['bandwidth']
-	num_wavelengths = parameters['image']['num_wavelengths']
-
-	pupil_grid = make_uniform_grid(num_pix, [1,1])
-	focal_grid = make_focal_grid(pupil_grid, 8, owa*1.2)
-
-	prop = FraunhoferPropagator(pupil_grid, focal_grid)
+	bandwidth = parameters['image']['bandwidth']
+	radius_fpm = parameters['focal_plane_mask']['radius']
+	contrast = parameters['image']['contrast']
 	
-	aperture = read_fits(solution_filename)
-	aperture = Field(aperture.ravel(), pupil_grid)
+	ls_alignment_tolerance = parameters['lyot_stop']['alignment_tolerance']
 	
-	q_foc = num_pix_foc / foc_inner
-	x_foc = (np.arange(num_pix_foc) + 0.5 - num_pix_foc / 2.0) / q_foc
-	small_focal_grid = CartesianGrid(SeparatedCoords((x_foc, x_foc)))
-	focal_plane_mask = 1 - circular_aperture(foc_inner)(small_focal_grid)
-	focal_plane_mask2 = 1 - circular_aperture(foc_inner)(focal_grid)
+	wavelengths = np.linspace(-bandwidth / 2, bandwidth / 2, 11) + 1
+	
+	focal_grid = make_focal_grid(pupil.grid, 8, owa * 1.2)
+	prop = FraunhoferPropagator(pupil.grid, focal_grid)
 	
 	lyot_stop = lyot_stops[0]
-	lyot_stop = Field(lyot_stop.ravel(), pupil_grid)
 	
-	dark_zone = (circular_aperture(owa * 2)(focal_grid) - circular_aperture(iwa * 2)(focal_grid)).astype('bool')
-
-	coro = LyotCoronagraph(pupil_grid, focal_plane_mask, lyot_stop)
-	coro_without_lyot = LyotCoronagraph(pupil_grid, focal_plane_mask, None)
+	dxs = np.array([-10, -8, -6, -4, -2, 0, 2, 4, 6, 8, 10])
+	#dxs = np.array(range(-ls_alignment_tolerance-1,+ls_alignment_tolerance+1,2))
 	
-	dxs = np.array([-3, -2, -1, 0, 1, 2, 3])
-
+		
 	dither_grid = CartesianGrid(SeparatedCoords((dxs, dxs)))
 
 	E = []
@@ -350,23 +257,26 @@ def analyze_lyot_robustness(solution_filename, pdf=None):
 	
 	for i, (dx, dy) in enumerate(dither_grid.points):
 		shifted_lyot_stop = np.roll(np.roll(lyot_stop.shaped, dx, 1), dy, 0).ravel()
-		coro = LyotCoronagraph(pupil_grid, focal_plane_mask, shifted_lyot_stop)
-
-		img = prop(coro(Wavefront(aperture)))
-		img_ref = prop(Wavefront(aperture * lyot_stop))
+		coro = LyotCoronagraph(pupil.grid, focal_plane_mask, shifted_lyot_stop)
+		
+		img = 0
+		img_ref = 0
+		
+		for wl in wavelengths:
+			wf = Wavefront(pupil * apodizer, wl)
+			img += prop(coro(wf)).intensity
+			img_ref += prop(Wavefront(pupil * lyot_stop)).intensity
 
 		x = i % len(dxs)
 		y = i // len(dxs)
-		#print(x + (len(dxs) - y - 1) * len(dxs) + 1)
-
+	
 		plt.subplot(len(dxs), len(dxs), x + (len(dxs) - y - 1) * len(dxs) + 1)
-		imshow_field(np.log10(img.intensity / img_ref.intensity.max()), vmin=-8.5, vmax=-5, cmap='hot')
+		
+		imshow_field(np.log10(img / img_ref.max()), vmin=-contrast-1, vmax=-contrast+4, cmap='inferno')
+		
 		frame1 = plt.gca()
 		frame1.axes.xaxis.set_ticklabels([])
 		frame1.axes.yaxis.set_ticklabels([])
-
-		E.append(img.electric_field.at((4.5,0)))
-		mean_intensity.append(img.intensity[dark_zone].mean() / img_ref.intensity.max())
 
 	plt.subplots_adjust(top=0.98, bottom=0.02, left=0.02, right=0.98, wspace=0, hspace=0)
 	
@@ -378,7 +288,6 @@ def analyze_lyot_robustness(solution_filename, pdf=None):
 		plt.show()
 	
 	return {}
-'''
 
 if __name__ == '__main__':
 		
