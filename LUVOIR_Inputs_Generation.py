@@ -105,27 +105,27 @@ def LUVOIR_inputs_gen(input_files_dict):
 				LUVOIR_ls, ls_header = make_luvoir_a_lyot_stop(ls_id, ls_od, lyot_ref_diam, spid_oversize=ls_spid_ov, spiders=LS_SPID, header = True)
 				lyot_stop = evaluate_supersampled(LUVOIR_ls, grid, oversamp)
 
-				header.update(ls_header)
+				#header.update(ls_header)
 				hdr = fits.Header()
-				header['OVERSAMP'] = oversamp
-				header['EDGE']     = edge
+				ls_header['OVERSAMP'] = oversamp
+				ls_header['EDGE']     = edge
   		
-				hdr.set('TELESCOP', header['TELESCOP'])
-				hdr.set('D_CIRC', header['D_CIRC'],'m: circumscribed diameter')
-				hdr.set('D_INSC', header['D_INSC'],'m: inscribed diameter')
-				hdr.set('LS_REF_D',header['LS_REF_D'],'m: used to reference given LS id and od')
-				hdr.set('LS_ID', header['LS_ID'], 'LS inner d, fraction of LS_REF_D')
-				hdr.set('LS_OD', header['LS_OD'], 'LS outer d, fraction of LS_REF_D')
+				hdr.set('TELESCOP', ls_header['TELESCOP'])
+				hdr.set('D_CIRC', ls_header['D_CIRC'],'m: circumscribed diameter')
+				hdr.set('D_INSC', ls_header['D_INSC'],'m: inscribed diameter')
+				hdr.set('LS_REF_D',ls_header['LS_REF_D'],'m: used to reference given LS id and od')
+				hdr.set('LS_ID', ls_header['LS_ID'], 'LS inner d, fraction of LS_REF_D')
+				hdr.set('LS_OD', ls_header['LS_OD'], 'LS outer d, fraction of LS_REF_D')
 			
 				if LS_SPID:
-					hdr.set('STRUT_W',header['STRUT_W'],'m: actual support strut width')
-					hdr.set('STRUT_ST',header['STRUT_ST'],'m: lower spider starting point d from center')
-					hdr.set('STRUT_AN',header['STRUT_AN'],'deg: angle lower spiders offset from vertical')
-					hdr.set('STRUT_P',header['STRUT_P'], 'spider padding factor')
+					hdr.set('STRUT_W',ls_header['STRUT_W'],'m: actual support strut width')
+					hdr.set('STRUT_ST',ls_header['STRUT_ST'],'m: lower spider starting point d from center')
+					hdr.set('STRUT_AN',ls_header['STRUT_AN'],'deg: angle lower spiders offset from vertical')
+					hdr.set('STRUT_P',ls_header['STRUT_P'], 'spider padding factor')
    
-				hdr.set('NORM',header['NORM'],'normalization keyword, OD scaled to 1 by Dcirc')
-				hdr.set('EDGE',header['EDGE'],'black and white, or grey pixels')
-				hdr.set('OVERSAMP',header['OVERSAMP'],'oversampling factor, # grey levels')
+				hdr.set('NORM',ls_header['NORM'],'normalization keyword, OD scaled to 1 by Dcirc')
+				hdr.set('EDGE',ls_header['EDGE'],'black and white, or grey pixels')
+				hdr.set('OVERSAMP',ls_header['OVERSAMP'],'oversampling factor, # grey levels')
 
 				fits.writeto('masks/'+ls_filename, lyot_stop.shaped, hdr,overwrite=True)
 				print('{0:s} has been written to file'.format('masks/'+ls_filename))

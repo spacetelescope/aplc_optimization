@@ -1,7 +1,9 @@
-from hcipy import *
-import numpy as np
 import matplotlib as mpl
 mpl.use('Agg')
+
+from hcipy import *
+import numpy as np
+
 from matplotlib.backends.backend_pdf import PdfPages
 import matplotlib
 from mpl_toolkits.axes_grid1 import make_axes_locatable
@@ -141,6 +143,7 @@ def analyze_max_throughput(solution_filename, pdf=None):
 	lyot_stop = lyot_stops[0]
 
 	maximum_integrated_throughput = ((pupil * lyot_stop * apodizer).sum() / (pupil * lyot_stop).sum())**2
+		
 	return {'maximum_integrated_throughput': maximum_integrated_throughput}
 
 def analyze_offaxis_throughput(solution_filename, pdf=None):
@@ -311,6 +314,9 @@ if __name__ == '__main__':
 			metrics.update(res)
 			
 			res = analyze_lyot_robustness(solution_filename, pdf)
+			metrics.update(res)
+			
+			res = analyze_max_throughput(solution_filename, pdf)
 			metrics.update(res)
 
 
