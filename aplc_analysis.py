@@ -11,6 +11,7 @@ import matplotlib.pyplot as plt
 import asdf
 import os
 
+#stand alone analysis script
 
 def create_coronagraph(solution_filename):
 		

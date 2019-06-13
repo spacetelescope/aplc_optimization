@@ -211,12 +211,71 @@ def analyze_summary(solution_filename, pdf=None):
 		plt.show()
 
 	return {}
-
-'''
+	
 def analyze_lyot_robustness(solution_filename, pdf=None):
 	pupil, apodizer, focal_plane_mask, lyot_stops, parameters, file_organization = create_coronagraph(solution_filename)
 	
+	num_pix = parameters['pupil']['N'] #px
+	iwa = parameters['image']['iwa']
+	owa = parameters['image']['owa']
+	bandwidth = parameters['image']['bandwidth']
+	radius_fpm = parameters['focal_plane_mask']['radius']
+	contrast = parameters['image']['contrast']
 	
+	ls_alignment_tolerance = parameters['lyot_stop']['alignment_tolerance']
+	
+	wavelengths = np.linspace(-bandwidth / 2, bandwidth / 2, 11) + 1
+	
+	focal_grid = make_focal_grid(pupil.grid, 8, owa * 1.2)
+	prop = FraunhoferPropagator(pupil.grid, focal_grid)
+	
+	lyot_stop = lyot_stops[0]
+	
+	dxs = np.array([-10, -8, -6, -4, -2, 0, 2, 4, 6, 8, 10])
+	#dxs = np.array(range(-ls_alignment_tolerance-1,+ls_alignment_tolerance+1,2))
+	
+	dither_grid = CartesianGrid(SeparatedCoords((dxs, dxs)))
+
+	E = []
+	mean_intensity = []
+	plt.figure(figsize=(8,8))
+	
+	for i, (dx, dy) in enumerate(dither_grid.points):
+		shifted_lyot_stop = np.roll(np.roll(lyot_stop.shaped, dx, 1), dy, 0).ravel()
+		coro = LyotCoronagraph(pupil.grid, focal_plane_mask, shifted_lyot_stop)
+		
+		img = 0
+		img_ref = 0
+		
+		for wl in wavelengths:
+			wf = Wavefront(pupil * apodizer, wl)
+			img += prop(coro(wf)).intensity
+			img_ref += prop(Wavefront(pupil * lyot_stop)).intensity
+
+		x = i % len(dxs)
+		y = i // len(dxs)
+	
+		plt.subplot(len(dxs), len(dxs), x + (len(dxs) - y - 1) * len(dxs) + 1)
+		
+		imshow_field(np.log10(img / img_ref.max()), vmin=-contrast-1, vmax=-contrast+4, cmap='inferno')
+		
+		frame1 = plt.gca()
+		frame1.axes.xaxis.set_ticklabels([])
+		frame1.axes.yaxis.set_ticklabels([])
+
+	plt.subplots_adjust(top=0.98, bottom=0.02, left=0.02, right=0.98, wspace=0, hspace=0)
+	
+	
+	if pdf is not None:
+		pdf.savefig()
+		plt.close()
+	else:
+		plt.show()
+	
+	return {}
+
+'''
+TODO:#
 
 def analyze_calculate_throughput(solution_filename):
 	pupil, apodizer, focal_plane_mask, lyot_stops, parameters, file_organization = create_coronagraph(solution_filename)
