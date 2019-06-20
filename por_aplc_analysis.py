@@ -127,6 +127,7 @@ def analyze_max_throughput(solution_filename, pdf=None):
 	lyot_stop = lyot_stops[0]
 
 	maximum_integrated_throughput = ((pupil * lyot_stop * apodizer).sum() / (pupil * lyot_stop).sum())**2
+	
 	return {'maximum_integrated_throughput': maximum_integrated_throughput}
 
 def analyze_offaxis_throughput(solution_filename, pdf=None):
@@ -231,7 +232,7 @@ def analyze_lyot_robustness(solution_filename, pdf=None):
 	
 	lyot_stop = lyot_stops[0]
 	
-	dxs = np.array([-10, -8, -6, -4, -2, 0, 2, 4, 6, 8, 10])
+	dxs = np.array([ -8, -6, -4, -2, 0, 2, 4, 6, 8])
 	#dxs = np.array(range(-ls_alignment_tolerance-1,+ls_alignment_tolerance+1,2))
 	
 	dither_grid = CartesianGrid(SeparatedCoords((dxs, dxs)))
