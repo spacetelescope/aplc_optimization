@@ -47,6 +47,8 @@ pup_filename, ls_filenames = LUVOIR_inputs_gen(input_files_dict)
 #design parameters
 #for multiple design parameters as a grid, input as list
 #for multiple design parameters NOT as a grid, make multiple entries of below (as shown in commented out block)
+#resulting apodizer are packaged with their inputs in a fits cube
+
 survey_parameters = {'pupil': {'N': n,'filename': pup_filename}, \
                      'lyot_stop': {'filename': ls_filenames}, \
                      'focal_plane_mask': {'radius':3.5, 'num_pix': 150, 'grayscale': True,},
@@ -54,7 +56,7 @@ survey_parameters = {'pupil': {'N': n,'filename': pup_filename}, \
                      'method':{'starting_scale': 1}}
 
 
-luvoir = DesignParameterSurvey(PorAPLC, survey_parameters, 'surveys/luvoir_{}_small_N{:04d}_{}/'.format(survey_name,n,machine), 'masks/')
+luvoir = DesignParameterSurvey(PorAPLC, survey_parameters, 'surveys/luvoir_{}_N{:04d}_{}/'.format(survey_name,n,machine), 'masks/')
 luvoir.describe()
 
 luvoir.write_drivers(True)

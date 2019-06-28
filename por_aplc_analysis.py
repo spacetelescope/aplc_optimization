@@ -1,4 +1,5 @@
 from hcipy import *
+from astropy.io import fits
 import numpy as np
 import matplotlib as mpl
 mpl.use('Agg')
@@ -123,12 +124,68 @@ def analyze_contrast_monochromatic(solution_filename, pdf=None):
 	return {'normalized_irradiance_image': img / img_ref.max(), 'normalized_irradiance_radial': (r, profile, std_profile, n_profile)}
 
 def analyze_max_throughput(solution_filename, pdf=None):
-	pupil, apodizer, focal_plane_mask, lyot_stops, parameters, file_organization = create_coronagraph(solution_filename)
-	lyot_stop = lyot_stops[0]
-
-	maximum_integrated_throughput = ((pupil * lyot_stop * apodizer).sum() / (pupil * lyot_stop).sum())**2
+	Pupil, Apodizer, focal_plane_mask, lyot_stops, parameters, file_organization = create_coronagraph(solution_filename)
 	
-	return {'maximum_integrated_throughput': maximum_integrated_throughput}
+	fname_pup  = parameters['pupil']['filename']
+	fname_ls   = parameters['lyot_stop']['filename']
+	
+	if not os.path.isabs(fname_pup):
+		fname_pup = os.path.join(file_organization['input_files_dir'], fname_pup)
+	if not os.path.isabs(fname_ls):
+		fname_ls = os.path.join(file_organization['input_files_dir'], fname_ls)
+	
+	fname_apod = solution_filename
+	
+	TelAp = fits.getdata(fname_pup)
+	LS    = fits.getdata(fname_ls)
+	A     = fits.getdata(fname_apod)
+		
+	maximum_integrated_throughput = ((TelAp * LS * A).sum() / (TelAp * LS).sum())**2
+	
+	# Account for the ratio of the diameter of the square enclosing the aperture to the circumscribed circle
+	D       = 0.982
+	N       = parameters['pupil']['N']
+	rho_out = parameters['image']['owa']
+	fp2res  = parameters['focal_plane_mask']['num_pix']
+	bw      = parameters['image']['bandwidth']
+	Nlam    = parameters['image']['num_wavelengths']
+	
+	dx = (D/2)/N
+	dy = dx
+	xs = np.matrix(np.linspace(-N+0.5, N-0.5, N)*dx)
+	ys = xs.copy()
+	M_fp2 = int(np.ceil(rho_out*fp2res))
+	dxi = 1./fp2res
+	xis = np.matrix(np.linspace(-M_fp2+0.5, M_fp2-0.5, 2*M_fp2)*dxi)
+	etas = xis.copy()
+	wrs = np.linspace(1.00 - bw/2, 1.00 + bw/2, Nlam)
+	XXs = np.asarray(np.dot(np.matrix(np.ones(xis.shape)).T, xis))
+	YYs = np.asarray(np.dot(etas.T, np.matrix(np.ones(etas.shape))))
+	RRs = np.sqrt(XXs**2 + YYs**2)
+	p7ap_ind = np.less_equal(RRs, 0.7)
+
+	intens_D_0_polychrom = np.zeros((Nlam, 2*M_fp2, 2*M_fp2))
+	intens_D_0_peak_polychrom = np.zeros((Nlam, 1))
+	intens_TelAp_polychrom = np.zeros((Nlam, 2*M_fp2, 2*M_fp2))
+	intens_TelAp_peak_polychrom = np.zeros((Nlam, 1))
+	
+	for wi, wr in enumerate(wrs):
+		
+		
+		
+		Psi_D_0 = dx*dy/wr*np.dot(np.dot(np.exp(-1j*2*np.pi/wr*np.dot(xis.T, xs)), TelAp*A*LS[::-1,::-1]), np.exp(-1j*2*np.pi/wr*np.dot(xs.T, xis)))
+		intens_D_0_polychrom[wi] = np.power(np.absolute(Psi_D_0), 2)
+	
+	intens_D_0 = np.mean(intens_D_0_polychrom, axis=0)
+	
+	p7ap_sum_APLC = np.sum(intens_D_0[p7ap_ind])*dxi*dxi
+	p7ap_circ_thrupt = p7ap_sum_APLC/(np.pi/4)
+	
+	print(p7ap_circ_thrupt)
+	
+	fits.setval(solution_filename, 'P7APTH', value = p7ap_circ_thrupt, comment = 'Band-averaged r=.7 lam/D throughput')
+	
+	return {'P7APTH_throughput': p7ap_circ_thrupt}
 
 def analyze_offaxis_throughput(solution_filename, pdf=None):
 	pass
