@@ -8,6 +8,7 @@
 
 * `cd aplc_optimzation`
 * `conda env create --file environment.yml`
+* `source activate aplc_env`
 
 #### Obtain a license for and download Gurobi 
 
