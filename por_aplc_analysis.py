@@ -91,7 +91,7 @@ def analyze_contrast_monochromatic(solution_filename, pdf=None):
 	lyot_stop = lyot_stops[0]
 
 	coro = LyotCoronagraph(pupil.grid, focal_plane_mask, lyot_stop)
-	focal_grid = make_focal_grid(8, owa * 1.2)
+	focal_grid = make_focal_grid(8, owa * 1.2) # make_focal_grid(q, fov) - grid for a focal plane
 	prop = FraunhoferPropagator(pupil.grid, focal_grid)
 
 	wf = Wavefront(pupil * apodizer)
@@ -99,7 +99,7 @@ def analyze_contrast_monochromatic(solution_filename, pdf=None):
 	img_ref = prop(Wavefront(apodizer * lyot_stop)).intensity
 
 	plt.title('Monochromatic normalized irradiance')
-	imshow_field(np.log10(img / img_ref.max()), vmin=-contrast - 1, vmax=-contrast + 4, cmap='inferno')
+	imshow_field(np.log10(img / max(img_ref)), vmin=-contrast - 1, vmax=-contrast + 4, cmap='inferno')
 	plt.colorbar()
 	plt.axis('off')
 	if pdf is not None:
@@ -108,7 +108,7 @@ def analyze_contrast_monochromatic(solution_filename, pdf=None):
 	else:
 		plt.show()
 
-	r, profile, std_profile, n_profile = radial_profile(img / img_ref.max(), 0.2)
+	r, profile, std_profile, n_profile = radial_profile(img / max(img_ref), 0.2)
 
 	plt.title('Monochromatic normalized irradiance (radial average)')
 	plt.plot(r, profile)
@@ -128,7 +128,7 @@ def analyze_contrast_monochromatic(solution_filename, pdf=None):
 	else:
 		plt.show()
 
-	return {'normalized_irradiance_image': img / img_ref.max(),
+	return {'normalized_irradiance_image': img / max(img_ref),
 			'normalized_irradiance_radial': (r, profile, std_profile, n_profile)}
 
 
@@ -239,14 +239,14 @@ def analyze_summary(solution_filename, pdf=None):
 
 	# image plane
 	plt.subplot(2, 3, 2)
-	im = imshow_field(np.log10(img_foc / img_foc.max()), vmin=-5, vmax=0, cmap='inferno')
+	im = imshow_field(np.log10(img_foc / max(img_foc)), vmin=-5, vmax=0, cmap='inferno')
 	plt.title('Image plane')
 	plt.colorbar(im, fraction=0.046, pad=0.04)
 	plt.axis('off')
 
 	# image plane masked by focal plane mask
 	plt.subplot(2, 3, 3)
-	im = imshow_field(np.log10(img_foc / img_foc.max() * (1e-20 + focal_plane_mask_large)), vmin=-5, vmax=0,
+	im = imshow_field(np.log10(img_foc / max(img_foc) * (1e-20 + focal_plane_mask_large)), vmin=-5, vmax=0,
 					  cmap='inferno')
 	plt.title('Image plane w/FPM')
 	plt.colorbar(im, fraction=0.046, pad=0.04)
@@ -254,21 +254,21 @@ def analyze_summary(solution_filename, pdf=None):
 
 	# lyot plane
 	plt.subplot(2, 3, 4)
-	im = imshow_field(np.log10(lyot / lyot.max()), vmin=-3, vmax=0, cmap='inferno')
+	im = imshow_field(np.log10(lyot / max(lyot)), vmin=-3, vmax=0, cmap='inferno')
 	plt.title('Lyot plane')
 	plt.colorbar(im, fraction=0.046, pad=0.04)
 	plt.axis('off')
 
 	# lyot plane masked by lyot stop
 	plt.subplot(2, 3, 5)
-	im = imshow_field(np.log10(lyot / lyot.max() * (1e-20 + lyot_stop)), vmin=-3, vmax=0, cmap='inferno')
+	im = imshow_field(np.log10(lyot / max(lyot) * (1e-20 + lyot_stop)), vmin=-3, vmax=0, cmap='inferno')
 	plt.title('Lyot plane w/lyot stop')
 	plt.colorbar(im, fraction=0.046, pad=0.04)
 	plt.axis('off')
 
 	# final image plane
 	plt.subplot(2, 3, 6)
-	im = imshow_field(np.log10(img / img_ref.max()), vmin=-contrast - 1, vmax=-contrast + 4, cmap='inferno')
+	im = imshow_field(np.log10(img / max(img_ref)), vmin=-contrast - 1, vmax=-contrast + 4, cmap='inferno')
 	plt.title('Final image plane')
 	plt.colorbar(im, fraction=0.046, pad=0.04)
 	plt.axis('off')
@@ -327,7 +327,7 @@ def analyze_lyot_robustness(solution_filename, pdf=None):
 
 		plt.subplot(len(dxs), len(dxs), x + (len(dxs) - y - 1) * len(dxs) + 1)
 
-		imshow_field(np.log10(img / img_ref.max()), vmin=-contrast - 1, vmax=-contrast + 4, cmap='inferno')
+		imshow_field(np.log10(img / max(img_ref)), vmin=-contrast - 1, vmax=-contrast + 4, cmap='inferno')
 
 		frame1 = plt.gca()
 		frame1.axes.xaxis.set_ticklabels([])
