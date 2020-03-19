@@ -4,11 +4,11 @@
 
 * `git clone https://github.com/spacetelescope/aplc-optimization.git`
 
-#### Create a new conda environment and install dependencies
+#### Create a new conda environment using the environment.yml file
 
-* `cd aplc_optimzation`
+* `cd aplc_optimization`
 * `conda env create --file environment.yml`
-* `source activate aplc_env`
+* `source activate aplc-optimization`
 
 #### Obtain a license for and download Gurobi 
 

@@ -2,7 +2,7 @@
 # or
 # ``conda env create --name <myEnvName> --file environment.yml``
 
-name: aplc_env
+name: aplc-optimization
 channels:
   - defaults
   - conda-forge
