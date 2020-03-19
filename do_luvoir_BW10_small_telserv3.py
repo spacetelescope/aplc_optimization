@@ -21,7 +21,7 @@ Workflow:
 - after survey is done, move the launcher script into the survey directory
 '''
 
-n = 100  # number of pixels in input and final arrays
+n = 50  # number of pixels in input and final arrays
 survey_name = "BW10_small"  # survey name
 machine = "telserv3"  # machine the survey is run on. TODO: set this automatically
 
@@ -52,7 +52,7 @@ pup_filename, ls_filenames = LUVOIR_inputs_gen(input_files_dict)
 survey_parameters = {'pupil': {'N': n, 'filename': pup_filename}, \
                      'lyot_stop': {'filename': ls_filenames}, \
                      'focal_plane_mask': {'radius': 3.5, 'num_pix': 150, 'grayscale': True, },
-                     'image': {'contrast': 10, 'iwa': 3.4, 'owa': 12.0, 'bandwidth': 0.10, 'num_wavelengths': 5}, \
+                     'image': {'contrast': 5, 'iwa': 4, 'owa': 10.0, 'bandwidth': 0.0, 'num_wavelengths': 1}, \
                      'method': {'starting_scale': 1}}
 
 luvoir = DesignParameterSurvey(PorAPLC, survey_parameters,
