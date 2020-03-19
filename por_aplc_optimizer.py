@@ -1,8 +1,9 @@
-from hcipy import *
-import numpy as np
+import os
+
 import gurobipy as gp
+import numpy as np
+from hcipy import *
 from scipy.ndimage.morphology import grey_erosion, grey_dilation
-import time
 
 
 def calculate_pixels_to_optimize(last_optim, pupil_subsampled, edge_width_for_prior):
