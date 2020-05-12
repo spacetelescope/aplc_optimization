@@ -2,12 +2,14 @@ from hcipy import *
 from astropy.io import fits
 import numpy as np
 import matplotlib as mpl
+
 mpl.use('Agg')
 import matplotlib
 from mpl_toolkits.axes_grid1 import make_axes_locatable
 import matplotlib.pyplot as plt
 import asdf
 import os
+import re
 
 def create_coronagraph(solution_filename):
 	solution = asdf.open(solution_filename)
@@ -74,6 +76,116 @@ def create_coronagraph(solution_filename):
 
 	return pupil, apodizer, focal_plane_mask, lyot_stops, parameters, file_organization
 
+def analyze_apdf_summary(solution_filename, pdf=None):
+    pupil, apodizer, focal_plane_mask, lyot_stops, parameters, file_organization = create_coronagraph(solution_filename)
+
+    #FPM
+    fpm_radius = parameters['focal_plane_mask']['radius']
+    fpm_num_pix = parameters['focal_plane_mask']['num_pix']
+    fpm_grayscale = parameters['focal_plane_mask']['grayscale']
+    fpm_field_radius = parameters['focal_plane_mask']['field_stop_radius']
+    #Image
+    img_contrast = 10 ** (-parameters['image']['contrast'])
+    img_iwa = parameters['image']['iwa']
+    img_owa = parameters['image']['owa']
+    img_num_wavelengths = parameters['image']['num_wavelengths']
+    img_bandwidth = 100 ** parameters['image']['bandwidth']
+    img_resolution = parameters['image']['resolution']
+    #Lyot stop
+    ls_fname = parameters['lyot_stop']['filename']
+    ls_alignment_tolerance = parameters['lyot_stop']['alignment_tolerance']
+    ls_num_stops = parameters['lyot_stop']['num_lyot_stops']
+    #pupil
+    pup_fname = parameters['pupil']['filename']
+    N = parameters['pupil']['N']
+
+
+    # Extract telescope name, gap padding and oversampling info from the pupil filename
+    if "LUVOIR" in pup_fname:
+        telescope = "LUVOIR"
+    elif "HiCAT" in pup_fname:
+        telescope = "HiCAT"
+
+    regex = re.compile(r'\d+')
+    pup_vals = regex.findall(pup_fname)
+    seg_gap_pad, oversamp = int(pup_vals[0]), int(pup_vals[1])
+
+    # Extract lyot stop inner and outer diameter from lyot stop filename
+    ls_vals = regex.findall(ls_fname)
+    ls_id, ls_od = int(ls_vals[0]) / 1000, int(ls_vals[1]) / 1000
+
+
+    if fpm_grayscale is True:
+        gs = ' (grayscale)'
+    else:
+        gs = ''
+
+    fig = plt.figure(dpi=160)
+
+    col_labels = ['$\mathbf{APLC \ Analysis \ Summary}$' + ' \n \n', ' ']
+
+    ax = fig.add_subplot(1, 1, 1)
+
+    table_data = [
+        ["APLC design", "$\mathtt{" + str(img_bandwidth) + "\%}$"],
+        ["nPup", "$\mathtt{" + str(N) + " \ x \ " + str(N) + " \ pixels}$"],
+        ["Gap padding (multiplicative)", "$\mathtt{" + str(seg_gap_pad) + "}$"],
+        ["Oversampling (grey levels)", "$\mathtt{" + str(oversamp) + "}$"],
+        ["Telescope", "$\mathtt{" + str(telescope) + "}$"],
+        ["Lyot stop inner diamater (% of inscribed circle)", "$\mathtt{" + str(ls_id) + "}$"],
+        ["Lyot stop outer diameter (% of inscribed circle)", "$\mathtt{" + str(ls_od) + "}$"],
+        ["Bandpass", "$\mathtt{" + str(img_bandwidth) + "\%}$"],
+        ["# wavelengths", "$\mathtt{" + str(img_num_wavelengths) + "}$"],
+        ["FPM radius" + str(gs), "$\mathtt{" + str(fpm_radius) + ' \ \lambda/D}$'],
+        ["nFPM", "$\mathtt{" + str(fpm_num_pix) + ' \ pixels}$'],
+        ["IWA " + u"\u2014" + " OWA",
+         "$\mathtt{" + str(float(img_iwa)) + "\u2014" + str(float(img_owa)) + ' \ \lambda/D}$'],
+        ["", ""],
+        ["$\mathit{Optimizer \ called \ with \ the \ following \ parameters:}$", ""],
+        [r"       $\triangleright \ \ Pupil \ file:$         " + str(pup_fname), ""],
+        [r"       $\triangleright \ \ Lyot \ stop \ file:$ " + str(ls_fname), ""]
+
+    ]
+    table = ax.table(cellText=table_data, colLabels=col_labels, colWidths=[0.8, 0.4], cellLoc='left', edges='open',
+                     loc='center')
+    table.set_fontsize(14)
+    table.scale(1,1)
+    plt.axis('off')
+
+
+
+    #    fig = plt.figure()
+#    ax = fig.add_subplot(111)
+#    ax.set_title('Optimizer called with the following parameters:', fontsize=10)
+#    txt = ax.text(0.01, 1.0,
+#                  '\n Focal Plane Mask: \n'
+#                    '     - Field stop radius: '+ str(fpm_field_radius) +'\n'
+#                    '     - Grayscale: '+str(fpm_grayscale)+'\n'
+#                    '     - Number of pixels: ' + str(fpm_num_pix) + '\n'
+#                    '     - Radius'+gs+': '+ str(fpm_radius) +'\n'
+#                  'Image: \n'
+#                    '     - Bandpass: '+ str(img_bandwidth) +'% \n'
+#                    '     - Contrast: '+ str(img_contrast) +'\n'
+#                    '     - IWA - OWA: '+ str(img_iwa)+' - '+str(img_owa)+' '+r'$\lambda$'+'/D \n'
+#                    '     - # wavelengths: '+ str(img_num_wavelengths) +'\n'
+#                    '     - Resolution: ' + str(img_resolution) +'\n'
+#                  'Lyot stop:\n'
+#                    '     - Alignment tolerance: '+ str(ls_alignment_tolerance) +'\n'
+#                    '     - Filename: '+ str(ls_fname) +'\n'
+#                    '     - Number of Lyot stops: '+ str(ls_num_stops) +'\n'
+#                  'Pupil: \n'
+#                    '     - nPup: '+str(N)+' x '+ str(N)+'\n'
+#                    '     - Filename: '+ str(pup_fname), verticalalignment='top', horizontalalignment='left', fontsize=9, clip_on=True)
+#    ax.axis('off')
+
+    if pdf is not None:
+        pdf.savefig()
+        plt.close()
+    else:
+        plt.show()
+
+    return {}
+
 def analyze_contrast_monochromatic(solution_filename, pdf=None):
 	pupil, apodizer, focal_plane_mask, lyot_stops, parameters, file_organization = create_coronagraph(solution_filename)
 	iwa = parameters['image']['iwa']
@@ -91,37 +203,66 @@ def analyze_contrast_monochromatic(solution_filename, pdf=None):
 	img = prop(coro(wf)).intensity
 	img_ref = prop(Wavefront(apodizer * lyot_stop)).intensity
 
-	plt.title('Monochromatic normalized irradiance')
-	imshow_field(np.log10(img / img_ref.max()), vmin=-contrast-1, vmax=-contrast+4, cmap='inferno')
-	plt.colorbar()
-	plt.axis('off')
+	fig, ax = plt.subplots()
+
+	plt.title('Monochromatic Normalized Irradiance')
+	imshow_field(np.log10(img / max(img_ref)), vmin=-contrast - 1, vmax=-contrast + 4, cmap='inferno')
+	cbar = plt.colorbar()
+	cbar.setlabel('log irradiance')
+
+	#for the figure caption
+	caption = '\n \n $\mathit{\mathbf{Figure \ 1:} \ Monochromatic \ on-axis \ PSF \ in \ log \ irradiance,}$ \n ' \
+			  '$\mathit{normalized \ to \ the \ peak \ irradiance \ value.}$'
+
+	plt.xlabel('Angular coordinate ($\lambda_0/D$)' + caption, fontsize=10)
+	plt.ylabel('Angular coordinate ($\lambda_0/D$)', fontsize=10)
+	plt.tick_params(axis='both', labelsize=8)
+	plt.tight_layout()
+
 	if pdf is not None:
 		pdf.savefig()
 		plt.close()
 	else:
 		plt.show()
 
-	r, profile, std_profile, n_profile = radial_profile(img / img_ref.max(), 0.2)
+	r, profile, std_profile, n_profile = radial_profile(img / max(img_ref), 0.2)
 
-	plt.title('Monochromatic normalized irradiance (radial average)')
+	plt.figure(figsize=(6, 6))
+
+	plt.title('\n Monochromatic Normalized Irradiance (Radial Average)')
 	plt.plot(r, profile)
-	plt.axvline(iwa, color=colors.red)
-	plt.axvline(owa, color=colors.red)
-	plt.axvline(radius_fpm, color='k')
-	plt.axhline(10**(-contrast), xmin=0, xmax=owa*1.2, linewidth=1, color='k', linestyle='--')
-	
+	iwa_line = plt.axvline(iwa, color=colors.red, linestyle='-.')
+	owa_line = plt.axvline(owa, color=colors.red, linestyle='--')
+	radius_line = plt.axvline(radius_fpm, color='k')
+	plt.axhline(10 ** (-contrast), xmin=0, xmax=owa * 1.2, linewidth=1, color='k', linestyle='--')
+	plt.legend([iwa_line, owa_line, radius_line],
+			   ['IWA = ' + str(float(iwa)) + r' $\lambda_0/D$', 'OWA = ' + str(float(owa)) + r' $\lambda_0/D$',
+				'FPM radius = ' + str(float(radius_fpm)) + r' $\lambda_0/D$'])
+
+	caption_radial = '\n \n \n Figure 2: ' \
+					 '$\mathit{Monochromatic \ on-axis \ PSF \ azimuthally \ averaged \ over \ angular}$ \n $\mathit{seperations \ }$' \
+					 + str(min(r)) + '-' + str(
+		max(r)) + '$\mathit{ \ λ/D, \ normalized \ to \ the \ peak \ irradiance. \ ' \
+				  'The \ vertical,}$ \n $\mathit{solid \ black \ line \ at \ separation \ ' + str(radius_fpm) + \
+					 '\ λ/D \ marks \ the \ radius \ of \ the \ FPM \ occulting}$ \n $\mathit{spot. \ The \ vertical, \ red ' \
+					 ' lines \ at \ ' + str(float(iwa)) + ' \ and \ ' + str(float(owa)) + \
+					 ' \ λ/D \ respectively \ indicate \ the}$ \n $\mathit{radii \ of \ the \ inner \ and \ outermost \ ' \
+					 'constraints \ applied \ during \ the apodizer}$\n $\mathit{optimization.}$'
+
 	plt.yscale('log')
-	plt.xlim(0, owa*1.2)
+	plt.xlim(0, owa * 1.2)
 	plt.ylim(5e-12, 2e-5)
 	plt.ylabel('Normalized irradiance')
-	plt.xlabel(r'Angular separation ($\lambda_0/D$)')
+	plt.xlabel(r'Angular separation ($\lambda_0/D$)' + caption_radial)
+	plt.tight_layout()
+
 	if pdf is not None:
 		pdf.savefig()
 		plt.close()
 	else:
 		plt.show()
 
-	return {'normalized_irradiance_image': img / img_ref.max(), 'normalized_irradiance_radial': (r, profile, std_profile, n_profile)}
+	return {'normalized_irradiance_image': img / max(img_ref), 'normalized_irradiance_radial': (r, profile, std_profile, n_profile)}
 
 def analyze_max_throughput(solution_filename, pdf=None):
 	Pupil, Apodizer, focal_plane_mask, lyot_stops, parameters, file_organization = create_coronagraph(solution_filename)
@@ -220,47 +361,54 @@ def analyze_summary(solution_filename, pdf=None):
 	
 	font = {'family' : 'normal', 'weight' : 'medium', 'size'   : 10}
 	matplotlib.rc('font', **font)
-	
-	#apodizer and telescope aperture
-	plt.subplot(2,3,1)
+
+	# apodizer and telescope aperture
+	plt.suptitle('Analysis Summary \n \n ', fontsize=12, fontweight='bold', style='italic')
+	plt.subplot(2, 3, 1)
 	imshow_field(pupil * apodizer, cmap='Greys_r')
-	plt.title('Apodizer and Telescope Aperture')
+	plt.title('\n Apodizer & \n Telescope Aperture')
 	plt.axis('off')
-	
-	#image plane
-	plt.subplot(2,3,2)
-	im = imshow_field(np.log10(img_foc / img_foc.max()), vmin=-5, vmax=0, cmap='inferno')
-	plt.title('Image plane')
-	plt.colorbar(im,fraction=0.046, pad=0.04)
+
+	# image plane
+	plt.subplot(2, 3, 2)
+	im = imshow_field(np.log10(img_foc / max(img_foc)), vmin=-5, vmax=0, cmap='inferno')
+	plt.title('\n Image plane')
+	cb = plt.colorbar(im, fraction=0.046, pad=0.04)
+	cb.ax.tick_params(labelsize=8)
 	plt.axis('off')
-	
-	#image plane masked by focal plane mask
-	plt.subplot(2,3,3)
-	im = imshow_field(np.log10(img_foc / img_foc.max() * (1e-20 + focal_plane_mask_large)), vmin=-5, vmax=0, cmap='inferno')
-	plt.title('Image plane w/FPM')
-	plt.colorbar(im,fraction=0.046, pad=0.04)
+
+	# image plane masked by focal plane mask
+	plt.subplot(2, 3, 3)
+	im = imshow_field(np.log10(img_foc / max(img_foc) * (1e-20 + focal_plane_mask_large)), vmin=-5, vmax=0,
+					  cmap='inferno')
+	plt.title('\n Image plane \n w/FPM')
+	cb = plt.colorbar(im, fraction=0.046, pad=0.04)
+	cb.ax.tick_params(labelsize=8)
 	plt.axis('off')
 	
 	#lyot plane
 	plt.subplot(2,3,4)
-	im = imshow_field(np.log10(lyot / lyot.max()), vmin=-3, vmax=0, cmap='inferno')
+	im = imshow_field(np.log10(lyot / max(lyot)), vmin=-3, vmax=0, cmap='inferno')
 	plt.title('Lyot plane')
-	plt.colorbar(im,fraction=0.046, pad=0.04)
+	cb = plt.colorbar(im,fraction=0.046, pad=0.04, orientation='horizontal')
+	cb.ax.tick_params(labelsize=8)
 	plt.axis('off')
 	
 	#lyot plane masked by lyot stop
 	plt.subplot(2,3,5)
-	im = imshow_field(np.log10(lyot / lyot.max() * (1e-20 + lyot_stop)), vmin=-3, vmax=0, cmap='inferno')
+	im = imshow_field(np.log10(lyot / max(lyot) * (1e-20 + lyot_stop)), vmin=-3, vmax=0, cmap='inferno')
 	plt.title('Lyot plane w/lyot stop')
 	plt.colorbar(im,fraction=0.046, pad=0.04)
 	plt.axis('off')
-	
-	#final image plane
-	plt.subplot(2,3,6)
-	im = imshow_field(np.log10(img / img_ref.max()), vmin=-contrast-1, vmax=-contrast+4, cmap='inferno')
+
+	# final image plane
+	plt.subplot(2, 3, 6)
+	im = imshow_field(np.log10(img / max(img_ref)), vmin=-contrast - 1, vmax=-contrast + 4, cmap='inferno')
 	plt.title('Final image plane')
-	plt.colorbar(im,fraction=0.046, pad=0.04)
+	cb = plt.colorbar(im, fraction=0.046, pad=0.04, orientation='horizontal')
+	cb.ax.tick_params(labelsize=8)
 	plt.axis('off')
+	plt.tight_layout()
 	
 	if pdf is not None:
 		pdf.savefig()
@@ -315,7 +463,7 @@ def analyze_lyot_robustness(solution_filename, pdf=None):
 	
 		plt.subplot(len(dxs), len(dxs), x + (len(dxs) - y - 1) * len(dxs) + 1)
 		
-		imshow_field(np.log10(img / img_ref.max()), vmin=-contrast-1, vmax=-contrast+4, cmap='inferno')
+		imshow_field(np.log10(img / max(img_ref)), vmin=-contrast-1, vmax=-contrast+4, cmap='inferno')
 		
 		frame1 = plt.gca()
 		frame1.axes.xaxis.set_ticklabels([])

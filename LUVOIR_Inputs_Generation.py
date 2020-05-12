@@ -26,8 +26,8 @@ def LUVOIR_inputs_gen(input_files_dict):
 	if config.is_file():
 		print('{0:s} exists'.format('masks/'+pup_filename))
 	else:
-		LUVOIR_ap, header           = make_luvoir_a_aperture(gap_padding, header = True)
-		LUVOIR_ap_indexed,_ ,segment_positions = make_luvoir_a_aperture(gap_padding, header=True, segment_transmissions=np.arange(1, 121), return_segment_positions=True)
+		LUVOIR_ap, header           = make_luvoir_a_aperture(gap_padding, return_header = True)
+		LUVOIR_ap_indexed,_ ,segment_positions = make_luvoir_a_aperture(gap_padding, return_header=True, segment_transmissions=np.arange(1, 121), return_segments=True)
 		pupil                       = evaluate_supersampled(LUVOIR_ap,grid,oversamp)
 		pupil_indexed = evaluate_supersampled(LUVOIR_ap_indexed, grid, 1)
 	
@@ -102,7 +102,8 @@ def LUVOIR_inputs_gen(input_files_dict):
 			else:
 				
 			
-				LUVOIR_ls, ls_header = make_luvoir_a_lyot_stop(ls_id, ls_od, lyot_ref_diam, spid_oversize=ls_spid_ov, spiders=LS_SPID, header = True)
+				LUVOIR_ls, ls_header = make_luvoir_a_lyot_stop(ls_id, ls_od, lyot_ref_diam,spider_oversize=ls_spid_ov, spiders=LS_SPID, header = True)
+				# return_header=True) spiders=LS_SPID, header = True)
 				lyot_stop = evaluate_supersampled(LUVOIR_ls, grid, oversamp)
 
 				#header.update(ls_header)
