@@ -1,25 +1,16 @@
-# Installation
+# Apodized Pupil Lyot Coronagraph design optimization
 
-#### Clone aplc-optimization repository 
+The apodized pupil Lyot coronagraph (APLC) is one of several coronagraph
+design families that is being assessed as part of NASA's segmented
+aperture coronagraph design and analysis (SCDA) study. The APLC is a Lyot-style coronagraph that suppresses
+starlight through a series of amplitude operations on the on-axis field. APLCs are sensitive to several parameters, 
+including telescope aperture shape and segmentation, central obscuration, Lyot stop shape and size,
+focal plane mask size, dark hole size and bandwidth.
 
-* `git clone https://github.com/spacetelescope/aplc-optimization.git`
+`aplc-optimization` is an object-orientated software toolkit 
+to automate the exploration of APLC design parameter combinations. 
 
-#### Create a new conda environment using the environment.yml file
-
-* `cd aplc_optimization`
-* `conda env create --file environment.yml`
-* `source activate aplc-optimization`
-
-#### Obtain a license for and download Gurobi 
-
-* [Register](https://pages.gurobi.com/registration) an academic account with Gurobi.
-* Download the latest version of the [Gurobi Optimizer](https://www.gurobi.com/downloads/gurobi-optimizer-eula/).
-* Request an academic Gurobi [license](https://www.gurobi.com/downloads/end-user-license-agreement-academic/).
-* In the directory where Gurobi Optimizer is installed, run ‘`grbgetkey`’ using the argument provided (e.g. `grbgetkey ae36ac20-16e6-acd2-f242-4da6e765fa0a`).
-    * The ‘`grbgetkey`’ program will prompt you to store the license key on your machine, as well as validate your eligibility by confirming your academic domain (e.g., any ‘.edu’ address).
-
-
-
+Documentation can be found online at 
 
 
 
