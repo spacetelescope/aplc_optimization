@@ -1,0 +1,36 @@
+Requirements & Installation
+----------------------------
+
+Clone the  ``aplc-optimization`` repository::
+
+    $ git clone https://github.com/spacetelescope/aplc-optimization.git
+
+Create a new ``conda`` environment using the ``environment.yml`` file::
+
+    $ cd aplc_optimization
+    $ conda env create --file environment.yml
+    $ source activate aplc-optimization
+
+Installing Gurobi
+==================
+
+In order to download the Gurobi Optimizer you will need to register for an account.
+If you already have an account, `log in <https://www.gurobi.com/login>`_. Otherwise,
+`register <https://pages.gurobi.com/registration>`_ for a free ___Academic___ account, as an academic user.
+
+Obtaining a Gurobi License
+''''''''''''''''''''''''''''
+In order to install and use the Gurobi Optimizer, a Gurobi license is required.
+There are several ways to `obtain a Gurobi license <https://www.gurobi.com/documentation/7.5/quickstart_mac/obtaining_a_gurobi_license.html>`_, depending on your situation---assuming that
+you are an academic user, you can `obtain a free academic license <https://www.gurobi.com/downloads/end-user-license-agreement-academic/>`_ on the Gurobi website as follows:
+
+1. If you already have an account with Gurobi, `log in <https://www.gurobi.com/login>`_. Otherwise, create an account
+
+`register for an academic account <https://www.gurobi.com/downloads/end-user-license-agreement-academic/#Reg>`_.
+
+In order to install Gurobi, it is first
+    - Register an academic account with Gurobi.
+    - Download the latest version of the Gurobi Optimizer.
+    - Request an academic Gurobi license.
+    - In the directory where Gurobi Optimizer is installed, run ``grbgetkey`` using the argument provided (e.g. ``grbgetkey ae36ac20-16e6-acd2-f242-4da6e765fa0a``).
+        - The ``grbgetkey`` program will prompt you to store the license key on your machine, as well as validate your eligibility by confirming your academic domain (e.g., any ‘.edu’ address).
