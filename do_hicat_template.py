@@ -22,8 +22,9 @@ Workflow:
 '''
 
 n = 486 #number of pixels in input and final arrays
+instrument = 'hicat' #instrument name
 survey_name = "test" #survey name
-machine = "telserv3" #machine the survey is run on. TODO: set this automatically
+machine = "telserv3" #machine the survey is run on.
 
 #Physical dimenstions of focal plane masks, pupil aperture, and lyot stops
 FPM1 = 8.543/2 # lambda_0/D radius
@@ -53,7 +54,7 @@ survey_parameters = {'pupil': {'N': n,'filename': pup_filename}, \
                      'method':{'starting_scale': 1}}
 
 
-hicat = DesignParameterSurvey(PorAPLC, survey_parameters, 'surveys/hicat_{}_N{:04d}_{}/'.format(survey_name,n,machine), 'masks/')
+hicat = DesignParameterSurvey(PorAPLC, survey_parameters, 'surveys/{}_{}_N{:04d}_{}/'.format(instrument,survey_name,n,machine), 'masks/')
 hicat.describe()
 
 hicat.write_drivers(True)

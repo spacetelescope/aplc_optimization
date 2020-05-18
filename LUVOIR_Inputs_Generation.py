@@ -102,7 +102,12 @@ def LUVOIR_inputs_gen(input_files_dict):
 
             else:
 
-                LUVOIR_ls, ls_header = make_luvoir_a_lyot_stop(ls_id, ls_od, lyot_ref_diam, spider_oversize=ls_spid_ov, with_spiders=LS_SPID, return_header=True)  ### return_header, spiders=LS_SPID, spid_oversize=ls_spid_ov
+                LUVOIR_ls, ls_header = make_luvoir_a_lyot_stop(inner_diameter_fraction=ls_id,
+                                                             outer_diameter_fraction=ls_od,
+                                                             lyot_reference_diameter=lyot_ref_diam,
+                                                             spider_oversize=ls_spid_ov, with_spiders=LS_SPID,
+                                                             return_header=True)
+                ### previously make_luvour_a_lyot_stop(ls_id, ls_od, lyot_ref_diam, spid_oversize=ls_spid_ov, spiders=LS_SPID, header = True)
                 lyot_stop = evaluate_supersampled(LUVOIR_ls, grid, oversamp)
 
                 # header.update(ls_header)
@@ -136,3 +141,4 @@ def LUVOIR_inputs_gen(input_files_dict):
             ls_filenames = list(s)
 
         return pup_filename, ls_filenames
+

@@ -12,18 +12,15 @@ Workflow:
 - rename the copy to designate survey you are running and the machine name you will be 
   running it on (do_luvoir_BW10_small_telserv3.py , for example, designates the BW10 small 
   design run on telserv3)
-  
-- set survey_name the same as survey name you use in the launcher file name
-- Set the machine to be the name of the machine you're running on (need to write this to 
-  grab machine name automatically)
-  
 - run the launcher
 - after survey is done, move the launcher script into the survey directory
 '''
-
 n = 1000 #number of pixels in input and final arrays
-survey_name = "BW10_small" #survey name
-machine = "telserv3" #machine the survey is run on. TODO: set this automatically
+
+filename_info = os.path.basename(__file__)[:-3].split("_", 4) #extract info from the launcher file name
+instrument = filename_info[1] #instrument name
+survey_name = filename_info[2]+'_'+filename_info[3] #survey name (automatically set)
+machine = filename_info[4] #name of machine the survey is run on (automatically set)
 
 '''
 input array (telap and ls) parameters
@@ -37,9 +34,9 @@ n = 200,  oversamp = 4, seg_gap_pad = 4
 n = 100,  oversamp = 4, seg_gap_pad = 4
 '''
 
-input_files_dict = {'directory':'LUVOIR/', 'N':n, 'oversamp':4,\
-					'aperture': {'seg_gap_pad':1}, \
-					'lyot_stop':{'lyot_ref_diam':13.5,'ls_spid':False,'ls_spid_ov':2,'LS_ID':[0.12], 'LS_OD':[0.982]}}
+input_files_dic = {'directory':'LUVOIR/', 'N':n, 'oversamp':4, \
+                    'aperture': {'seg_gap_pad':1}, \
+                    'lyot_stop':{'lyot_ref_diam':13.5,'ls_spid':False,'ls_spid_ov':2,'LS_ID':[0.12], 'LS_OD':[0.982]}}
 
 pup_filename, ls_filenames = LUVOIR_inputs_gen(input_files_dict)
 
@@ -56,7 +53,7 @@ survey_parameters = {'pupil': {'N': n,'filename': pup_filename}, \
                      'method':{'starting_scale': 1}}
 
 
-luvoir = DesignParameterSurvey(PorAPLC, survey_parameters, 'surveys/luvoir_{}_N{:04d}_{}/'.format(survey_name,n,machine), 'masks/')
+luvoir = DesignParameterSurvey(PorAPLC, survey_parameters, 'surveys/{}_{}_N{:04d}_{}/'.format(instrument,survey_name,n,machine), 'masks/')
 luvoir.describe()
 
 luvoir.write_drivers(True)

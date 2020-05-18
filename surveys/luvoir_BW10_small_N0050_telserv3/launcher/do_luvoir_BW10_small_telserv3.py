@@ -3,7 +3,11 @@ from por_aplc import PorAPLC
 from astropy.io import fits
 from LUVOIR_Inputs_Generation import LUVOIR_inputs_gen
 
-n = 100  # number of pixels in input and final arrays
+'''
+- after survey is done, move the launcher script into the survey directory
+'''
+
+n = 50  # number of pixels in input and final arrays
 survey_name = "BW10_small"  # survey name
 machine = "telserv3"  # machine the survey is run on. TODO: set this automatically
 
@@ -12,13 +16,17 @@ input array (telap and ls) parameters
 oversamp (grey levels) and seg_gap_pad set according to n, minimizing size of gaps to be 
 as close to actual size i.e. minimizing the amount of padding needed
 
+n = 1000, oversamp = 4, seg_gap_pad = 1
+n = 500,  oversamp = 3, seg_gap_pad = 2
+n = 300,  oversamp = 4, seg_gap_pad = 4
+n = 200,  oversamp = 4, seg_gap_pad = 4
 n = 100,  oversamp = 4, seg_gap_pad = 4
 '''
 
 input_files_dict = {'directory': 'LUVOIR/', 'N': n, 'oversamp': 4, \
                     'aperture': {'seg_gap_pad': 4}, \
-                    'lyot_stop': {'lyot_ref_diam': 13.5, 'ls_spid': False, 'ls_spid_ov': 2,
-                                  'LS_ID': [0.12], 'LS_OD': [0.982]}}
+                    'lyot_stop': {'lyot_ref_diam': 13.5, 'ls_spid': False, 'ls_spid_ov': 2, 'LS_ID': [0.12],
+                                  'LS_OD': [0.982]}}
 
 pup_filename, ls_filenames = LUVOIR_inputs_gen(input_files_dict)
 
@@ -30,7 +38,7 @@ pup_filename, ls_filenames = LUVOIR_inputs_gen(input_files_dict)
 survey_parameters = {'pupil': {'N': n, 'filename': pup_filename}, \
                      'lyot_stop': {'filename': ls_filenames}, \
                      'focal_plane_mask': {'radius': 3.5, 'num_pix': 150, 'grayscale': True, },
-                     'image': {'contrast': 10, 'iwa': 3.4, 'owa': 12.0, 'bandwidth': 0.10, 'num_wavelengths': 5}, \
+                     'image': {'contrast': 5, 'iwa': 4, 'owa': 10.0, 'bandwidth': 0.0, 'num_wavelengths': 1}, \
                      'method': {'starting_scale': 1}}
 
 luvoir = DesignParameterSurvey(PorAPLC, survey_parameters,
