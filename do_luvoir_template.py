@@ -22,7 +22,7 @@ instrument = filename_info[1]                                   # instrument nam
 survey_name = filename_info[2]+'_'+filename_info[3]             # survey name;
 machine = filename_info[4]                                      # name of machine the survey is run on.
 
-# Reference values
+# Physical dimensions
 pupil_diameter = 15.0 #m: actual LUVOIR A circumscribed pupil diameter
 pupil_inscribed = 13.5 #m: actual LUVOIR A inscribed pupil diameter
 
@@ -76,9 +76,9 @@ Survey Design Parameters
 
 '''
 # FPM Parameters
-FPM = 3.5 #lam/D: focal plane mask radius
-nFPM = 150 #pixels: number of pixels in the focal plane mask
-greyscale = True #
+FPM = 3.5 # lamda_0/D radius
+nFPM = 150 # number of pixels in the focal plane mask
+greyscale = True
 
 # Final Image Parameters
 IWA = 3.4 #lam/D:
