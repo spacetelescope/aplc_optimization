@@ -22,7 +22,7 @@ instrument = filename_info[1]                                   # instrument nam
 survey_name = filename_info[2]+'_'+filename_info[3]             # survey name;
 machine = filename_info[4]                                      # name of machine the survey is run on.
 
-# Physical dimensions
+# Physical
 pupil_diameter = 15.0 #m: actual LUVOIR A circumscribed pupil diameter
 pupil_inscribed = 13.5 #m: actual LUVOIR A inscribed pupil diameter
 
@@ -39,16 +39,16 @@ configured in order to keep gap size as close to actual physical size of LUVOIR 
  - nArray = 100,  oversamp = 4, seg_gap_pad = 4
 '''
 
-# Input params
+# Input parameters
 filepath = instrument.upper()+'/'   # directory in 'masks/' where the input files are stored
 nArray = 1000    # number of pixels in input (TelAP, LS) and final (apodizer) arrays
 oversamp = 4    # oversampling factor (number of grey levels) - if set to 1 will return a bw pupil, for grey set to > 1
 
-# Aperture params
+# Aperture parameters
 gap_padding = 1 # arbitary padding of gap size to represent gaps on smaller arrays
                 # effectively makes the larger gaps larger and the segments smaller to preserve the same segment pitch
 
-# Lyot stop params
+# Lyot stop parameters
 lyot_ref_diameter = pupil_inscribed # diameter used to reference the LS inner and outer diameter against
 ls_spid = False # whether to include secondary support mirror structure in the aperture
 spid_ov = 2     # factor by which to oversize the spiders compared to the LUVOIR-A aperture spiders
@@ -56,7 +56,7 @@ ls_id = 0.12    # LS inner diameter(s) as a fraction of `lyot_ref_diameter`
 ls_od = 0.937   # LS outer diameter as a fraction of `lyot_ref_diameter`
         # Note: both ls_id and ls_od are re-normalized against circumscribed pupil diameter during LS generation
 
-# INPUT FILES PARAMS DICTIONARY
+# INPUT FILES PARAMETER DICTIONARY
 input_files_dict = {'directory': filepath, 'N': nArray, 'oversamp': oversamp, \
                     'aperture': {'seg_gap_pad': gap_padding}, \
                     'lyot_stop':{'ls_spid':ls_spid, 'ls_spid_ov': spid_ov,
@@ -80,12 +80,12 @@ FPM = 3.5 # lamda_0/D radius
 nFPM = 150 # number of pixels in the focal plane mask
 greyscale = True
 
-# Final Image Parameters
-IWA = 3.4 #lam/D:
-OWA = 12.0 #lam/D:
-Bandpass = 0.1 # %
-nLams = 5 # number of wavelengths
-contrast = 10 # Contrast acheived in dark zone
+# Coronagraphic image parameters (dark zone constraints)
+IWA = 3.4   #lam/D: effective inner working angle
+OWA = 12.0  #lam/D: effective outer working angle
+Bandpass = 0.1  #% bandpass
+nLams = 5   #number of wavelengths
+contrast = 10   #contrast constraint
 
 # SURVEY PARAMS DICTIONARY
 survey_parameters = {'pupil': {'N': nArray, 'filename': pup_filename}, \
