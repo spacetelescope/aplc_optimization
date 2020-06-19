@@ -80,12 +80,12 @@ FPM = 3.5 # lamda_0/D radius
 nFPM = 150 # number of pixels in the focal plane mask
 greyscale = True
 
-# Coronagraphic image parameters (dark zone constraints)
-IWA = 3.4   #lam/D: effective inner working angle
-OWA = 12.0  #lam/D: effective outer working angle
-Bandpass = 0.1  #% bandpass
-nLams = 5   #number of wavelengths
-contrast = 10   #contrast constraint
+# Optimization parameters (dark zone constraints)
+IWA = 3.4   #lam/D: effective inner working angle (outer perimeter of the annular dark zone in coronagraphic image)
+OWA = 12.0  #lam/D: effective outer working angle (inner perimeter of the annular dark zone in the coronagraphic image)
+bandpass = 0.1  # dark zone bandpass (fractional)
+nLams = 5   # number of wavelengths spanning bandpass
+contrast = 10   # contrast goal in the dark zone
 
 # SURVEY PARAMS DICTIONARY
 survey_parameters = {'pupil': {'N': nArray, 'filename': pup_filename}, \
