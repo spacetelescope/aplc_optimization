@@ -1,3 +1,4 @@
+import asdf
 import collections
 import copy
 import csv
@@ -5,15 +6,13 @@ import datetime
 import getpass
 import inspect
 import itertools
-import os
-import pprint
-import socket
-import warnings
-
-import asdf
 import matplotlib as mpl
 import numpy as np
+import os
+import pprint
 import six
+import socket
+import warnings
 
 mpl.use('Agg')
 from matplotlib.backends.backend_pdf import PdfPages
@@ -137,6 +136,7 @@ class DesignParameterSurvey(object):
 
             # LUVOIR/LS_LUVOIR_ID0190_OD0937_no_struts_gy_ovsamp2_N0050.fits
 
+            inst = new_parameter_set['instrument']['inst_name']
             N = new_parameter_set['pupil']['N']
             fpm = int(100 * new_parameter_set['focal_plane_mask']['radius'])
             m = new_parameter_set['focal_plane_mask']['num_pix']
@@ -159,7 +159,7 @@ class DesignParameterSurvey(object):
 
             # Create unique id
             # identifier = format_string.format(i)
-            identifier = format_string.format(i, N, fpm, m, iwa, owa, c, bw, nlam, ls_id, ls_od, ls_strut_key)
+            identifier = format_string.format(i, inst, N, fpm, m, iwa, owa, c, bw, nlam, ls_id, ls_od, ls_strut_key)
 
             # Create coronagraph
             self.coronagraphs.append(coronagraph_class(identifier, new_parameter_set, self.file_organization))

@@ -8,6 +8,9 @@ from survey import Coronagraph
 
 class PorAPLC(Coronagraph):
 	_default_parameters = {
+		'instrument': {
+			'instrument_name': 'LUVOIR'
+		},
 		'pupil': {
 			'filename': 'NoFilename',
 			'N': None
@@ -53,6 +56,11 @@ class PorAPLC(Coronagraph):
 		super(PorAPLC, self).__init__(identifier, parameters, file_organization, por_aplc_analysis)
 
 	def write_driver(self, overwrite=False):
+		'''
+		Write survey driver file using 'por_aplc_driver_template.py' and save to the survey's driver directory.
+
+		Driver file is automatically written with "parameters" and "file_organization"
+		'''
 		if self.check_driver() and not overwrite:
 			print('Driver already exists and will not be overwritten.')
 			return

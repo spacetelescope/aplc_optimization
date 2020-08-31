@@ -3,7 +3,7 @@ import numpy as np
 from astropy.io import fits
 from hcipy import *
 
-mpl.use('Agg')
+#mpl.use('Agg')
 import matplotlib
 import matplotlib.pyplot as plt
 import asdf
@@ -212,8 +212,9 @@ def analyze_contrast_monochromatic(solution_filename, pdf=None):
     img = prop(coro(wf)).intensity
     img_ref = prop(Wavefront(apodizer * lyot_stop)).intensity
 
-    fig, ax = plt.subplots()
+    plt.figure(figsize=(6, 6))
 
+    fig, ax = plt.subplots()
     plt.title('Monochromatic Normalized Irradiance')
     imshow_field(np.log10(img / max(img_ref)), vmin=-contrast - 1, vmax=-contrast + 4, cmap='inferno')
     cbar = plt.colorbar()
@@ -236,6 +237,7 @@ def analyze_contrast_monochromatic(solution_filename, pdf=None):
 
     r, profile, std_profile, n_profile = radial_profile(img / max(img_ref), 0.2)
 
+
     plt.figure(figsize=(6, 6))
 
     plt.title('\n Monochromatic Normalized Irradiance (Radial Average)')
@@ -250,8 +252,8 @@ def analyze_contrast_monochromatic(solution_filename, pdf=None):
 
 
     caption_radial ='\n \n \n Figure 2: ' \
-                    '$\mathit{Monochromatic \ on-axis \ PSF \ azimuthally \ averaged \ over \ angular}$ \n $\mathit{seperations \ }$' \
-                    +str(min(r))+'-'+str(max(r))+'$\mathit{ \ λ/D, \ normalized \ to \ the \ peak \ irradiance. \ ' \
+                    '$\mathit{Monochromatic \ on-axis \ PSF \ azimuthally \ averaged \ over \ angular}$ \n $\mathit{separations \ }$' \
+                    +str(round(min(r),4)+'-'+str(round(max(r),4))+'$\mathit{ \ λ/D, \ normalized \ to \ the \ peak \ irradiance. \ ' \
                     'The \ vertical,}$ \n $\mathit{solid \ black \ line \ at \ separation \ '+str(radius_fpm)+ \
                     '\ λ/D \ marks \ the \ radius \ of \ the \ FPM \ occulting}$ \n $\mathit{spot. \ The \ vertical, \ red ' \
                     ' lines \ at \ '+str(float(iwa))+' \ and \ '+str(float(owa))+ \
@@ -452,8 +454,10 @@ def analyze_lyot_robustness(solution_filename, pdf=None):
 
     lyot_stop = lyot_stops[0]
 
-    dxs = np.array([-8, -6, -4, -2, 0, 2, 4, 6, 8])
-    # dxs = np.array(range(-ls_alignment_tolerance-1,+ls_alignment_tolerance+1,2))
+    #dxs = np.array([-8, -6, -4, -2, 0, 2, 4, 6, 8])
+    dxs = np.array(range(-ls_alignment_tolerance-1,+ls_alignment_tolerance+1+1,2))
+
+
 
     dither_grid = CartesianGrid(SeparatedCoords((dxs, dxs)))
 
