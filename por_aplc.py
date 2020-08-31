@@ -9,7 +9,7 @@ from survey import Coronagraph
 class PorAPLC(Coronagraph):
 	_default_parameters = {
 		'instrument': {
-			'instrument_name': 'LUVOIR'
+			'inst_name': 'LUVOIR'
 		},
 		'pupil': {
 			'filename': 'NoFilename',
