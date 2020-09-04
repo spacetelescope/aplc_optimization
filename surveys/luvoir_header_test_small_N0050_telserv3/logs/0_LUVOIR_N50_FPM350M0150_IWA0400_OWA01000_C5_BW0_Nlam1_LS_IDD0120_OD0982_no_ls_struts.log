@@ -1,4 +1,0 @@
-  File "/user/kstlaurent/git/progressive_refinement_coronagraphy/surveys/luvoir_header_test_small_N0050_telserv3/drivers/0_LUVOIR_N50_FPM350M0150_IWA0400_OWA01000_C5_BW0_Nlam1_LS_IDD0120_OD0982_no_ls_struts.py", line 143
-    hdr.set('OWA',img_owa'lam/D')
-                               ^
-SyntaxError: invalid syntax
