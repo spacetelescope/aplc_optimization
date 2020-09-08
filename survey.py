@@ -303,7 +303,6 @@ class DesignParameterSurvey(object):
         for coronagraph in self.coronagraphs:
             coronagraph.run_analysis(overwrite, run_slow)
 
-
 class Coronagraph(object):
     def __init__(self, identifier, parameters, file_organization, analysis_module=None):
         self._identifier = identifier
