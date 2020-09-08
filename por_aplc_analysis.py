@@ -1,14 +1,13 @@
-import matplotlib as mpl
-import numpy as np
-from astropy.io import fits
-from hcipy import *
-
-#mpl.use('Agg')
-import matplotlib
-import matplotlib.pyplot as plt
 import asdf
+# mpl.use('Agg')
+import matplotlib
+import matplotlib as mpl
+import matplotlib.pyplot as plt
+import numpy as np
 import os
 import re
+from astropy.io import fits
+from hcipy import *
 
 
 def create_coronagraph(solution_filename):
@@ -24,8 +23,6 @@ def create_coronagraph(solution_filename):
     ls_fname = parameters['lyot_stop']['filename']
     ls_alignment_tolerance = parameters['lyot_stop']['alignment_tolerance']
     ls_num_stops = parameters['lyot_stop']['num_lyot_stops']
-
-
 
     if not os.path.isabs(pup_fname):
         pup_fname = os.path.join(file_organization['input_files_dir'], pup_fname)
@@ -87,41 +84,48 @@ def create_coronagraph(solution_filename):
 def analyze_pdf_summary(solution_filename, pdf=None):
     pupil, apodizer, focal_plane_mask, lyot_stops, parameters, file_organization = create_coronagraph(solution_filename)
 
-    #FPM
+    # FPM
     fpm_radius = parameters['focal_plane_mask']['radius']
     fpm_num_pix = parameters['focal_plane_mask']['num_pix']
     fpm_grayscale = parameters['focal_plane_mask']['grayscale']
     fpm_field_radius = parameters['focal_plane_mask']['field_stop_radius']
-    #Image
+    # Image
     img_contrast = 10 ** (-parameters['image']['contrast'])
     img_iwa = parameters['image']['iwa']
     img_owa = parameters['image']['owa']
     img_num_wavelengths = parameters['image']['num_wavelengths']
     img_bandwidth = 100 ** parameters['image']['bandwidth']
     img_resolution = parameters['image']['resolution']
-    #Lyot stop
+    # Lyot stop
     ls_fname = parameters['lyot_stop']['filename']
     ls_alignment_tolerance = parameters['lyot_stop']['alignment_tolerance']
     ls_num_stops = parameters['lyot_stop']['num_lyot_stops']
-    #pupil
+    # pupil
     pup_fname = parameters['pupil']['filename']
     N = parameters['pupil']['N']
-
 
     # Extract telescope name, gap padding and oversampling info from the pupil filename
     if "LUVOIR" in pup_fname:
         telescope = "LUVOIR"
     elif "HiCAT" in pup_fname:
         telescope = "HiCAT"
+    elif "GPI" in pup_fname:
+        telescope = "GPI"
 
     regex = re.compile(r'\d+')
     pup_vals = regex.findall(pup_fname)
-    seg_gap_pad, oversamp = int(pup_vals[0]), int(pup_vals[1])
+    if telescope is "LUVOIR":
+        seg_gap_pad, oversamp = int(pup_vals[0]), int(pup_vals[1])
+    elif telescope is "HiCAT":
+        seg_gap_pad = ""
+        oversamp = int(pup_vals[0])
+    elif telescope is "GPI":
+        seg_gap_pad = ""
+        oversamp = ""
 
     # Extract lyot stop inner and outer diameter from lyot stop filename
     ls_vals = regex.findall(ls_fname)
     ls_id, ls_od = int(ls_vals[0]) / 1000, int(ls_vals[1]) / 1000
-
 
     if fpm_grayscale is True:
         gs = ' (grayscale)'
@@ -157,34 +161,32 @@ def analyze_pdf_summary(solution_filename, pdf=None):
     table = ax.table(cellText=table_data, colLabels=col_labels, colWidths=[0.8, 0.4], cellLoc='left', edges='open',
                      loc='center')
     table.set_fontsize(14)
-    table.scale(1,1)
+    table.scale(1, 1)
     plt.axis('off')
 
-
-
     #    fig = plt.figure()
-#    ax = fig.add_subplot(111)
-#    ax.set_title('Optimizer called with the following parameters:', fontsize=10)
-#    txt = ax.text(0.01, 1.0,
-#                  '\n Focal Plane Mask: \n'
-#                    '     - Field stop radius: '+ str(fpm_field_radius) +'\n'
-#                    '     - Grayscale: '+str(fpm_grayscale)+'\n'
-#                    '     - Number of pixels: ' + str(fpm_num_pix) + '\n'
-#                    '     - Radius'+gs+': '+ str(fpm_radius) +'\n'
-#                  'Image: \n'
-#                    '     - Bandpass: '+ str(img_bandwidth) +'% \n'
-#                    '     - Contrast: '+ str(img_contrast) +'\n'
-#                    '     - IWA - OWA: '+ str(img_iwa)+' - '+str(img_owa)+' '+r'$\lambda$'+'/D \n'
-#                    '     - # wavelengths: '+ str(img_num_wavelengths) +'\n'
-#                    '     - Resolution: ' + str(img_resolution) +'\n'
-#                  'Lyot stop:\n'
-#                    '     - Alignment tolerance: '+ str(ls_alignment_tolerance) +'\n'
-#                    '     - Filename: '+ str(ls_fname) +'\n'
-#                    '     - Number of Lyot stops: '+ str(ls_num_stops) +'\n'
-#                  'Pupil: \n'
-#                    '     - nPup: '+str(N)+' x '+ str(N)+'\n'
-#                    '     - Filename: '+ str(pup_fname), verticalalignment='top', horizontalalignment='left', fontsize=9, clip_on=True)
-#    ax.axis('off')
+    #    ax = fig.add_subplot(111)
+    #    ax.set_title('Optimizer called with the following parameters:', fontsize=10)
+    #    txt = ax.text(0.01, 1.0,
+    #                  '\n Focal Plane Mask: \n'
+    #                    '     - Field stop radius: '+ str(fpm_field_radius) +'\n'
+    #                    '     - Grayscale: '+str(fpm_grayscale)+'\n'
+    #                    '     - Number of pixels: ' + str(fpm_num_pix) + '\n'
+    #                    '     - Radius'+gs+': '+ str(fpm_radius) +'\n'
+    #                  'Image: \n'
+    #                    '     - Bandpass: '+ str(img_bandwidth) +'% \n'
+    #                    '     - Contrast: '+ str(img_contrast) +'\n'
+    #                    '     - IWA - OWA: '+ str(img_iwa)+' - '+str(img_owa)+' '+r'$\lambda$'+'/D \n'
+    #                    '     - # wavelengths: '+ str(img_num_wavelengths) +'\n'
+    #                    '     - Resolution: ' + str(img_resolution) +'\n'
+    #                  'Lyot stop:\n'
+    #                    '     - Alignment tolerance: '+ str(ls_alignment_tolerance) +'\n'
+    #                    '     - Filename: '+ str(ls_fname) +'\n'
+    #                    '     - Number of Lyot stops: '+ str(ls_num_stops) +'\n'
+    #                  'Pupil: \n'
+    #                    '     - nPup: '+str(N)+' x '+ str(N)+'\n'
+    #                    '     - Filename: '+ str(pup_fname), verticalalignment='top', horizontalalignment='left', fontsize=9, clip_on=True)
+    #    ax.axis('off')
 
     if pdf is not None:
         pdf.savefig()
@@ -212,9 +214,8 @@ def analyze_contrast_monochromatic(solution_filename, pdf=None):
     img = prop(coro(wf)).intensity
     img_ref = prop(Wavefront(apodizer * lyot_stop)).intensity
 
-    plt.figure(figsize=(6, 6))
-
     fig, ax = plt.subplots()
+
     plt.title('Monochromatic Normalized Irradiance')
     imshow_field(np.log10(img / max(img_ref)), vmin=-contrast - 1, vmax=-contrast + 4, cmap='inferno')
     cbar = plt.colorbar()
@@ -224,7 +225,7 @@ def analyze_contrast_monochromatic(solution_filename, pdf=None):
     caption = '\n \n $\mathit{\mathbf{Figure \ 1:} \ Monochromatic \ on-axis \ PSF \ in \ log \ irradiance,}$ \n ' \
               '$\mathit{normalized \ to \ the \ peak \ irradiance \ value.}$'
 
-    plt.xlabel('Angular coordinate ($\lambda_0/D$)'+caption, fontsize=10)
+    plt.xlabel('Angular coordinate ($\lambda_0/D$)' + caption, fontsize=10)
     plt.ylabel('Angular coordinate ($\lambda_0/D$)', fontsize=10)
     plt.tick_params(axis='both', labelsize=8)
     plt.tight_layout()
@@ -237,36 +238,36 @@ def analyze_contrast_monochromatic(solution_filename, pdf=None):
 
     r, profile, std_profile, n_profile = radial_profile(img / max(img_ref), 0.2)
 
-
     plt.figure(figsize=(6, 6))
 
     plt.title('\n Monochromatic Normalized Irradiance (Radial Average)')
     plt.plot(r, profile)
-    iwa_line = plt.axvline(iwa, color=colors.red, linestyle = '-.')
-    owa_line = plt.axvline(owa, color=colors.red, linestyle = '--')
+    iwa_line = plt.axvline(iwa, color=colors.red, linestyle='-.')
+    owa_line = plt.axvline(owa, color=colors.red, linestyle='--')
     radius_line = plt.axvline(radius_fpm, color='k')
     plt.axhline(10 ** (-contrast), xmin=0, xmax=owa * 1.2, linewidth=1, color='k', linestyle='--')
     plt.legend([iwa_line, owa_line, radius_line],
-               [r'$\rho_o$ = '+str(float(iwa))+r' $\lambda_0/D$', r'$\rho_i$ = '+str(float(owa))+r' $\lambda_0/D$',
-                'FPM radius = '+str(float(radius_fpm))+r' $\lambda_0/D$'])
+               [r'$\rho_o$ = ' + str(float(iwa)) + r' $\lambda_0/D$',
+                r'$\rho_i$ = ' + str(float(owa)) + r' $\lambda_0/D$',
+                'FPM radius = ' + str(float(radius_fpm)) + r' $\lambda_0/D$'])
 
-
-    caption_radial ='\n \n \n Figure 2: ' \
-                    '$\mathit{Monochromatic \ on-axis \ PSF \ azimuthally \ averaged \ over \ angular}$ \n $\mathit{separations \ }$' \
-                    +str(round(min(r),4)+'-'+str(round(max(r),4))+'$\mathit{ \ λ/D, \ normalized \ to \ the \ peak \ irradiance. \ ' \
-                    'The \ vertical,}$ \n $\mathit{solid \ black \ line \ at \ separation \ '+str(radius_fpm)+ \
-                    '\ λ/D \ marks \ the \ radius \ of \ the \ FPM \ occulting}$ \n $\mathit{spot. \ The \ vertical, \ red ' \
-                    ' lines \ at \ '+str(float(iwa))+' \ and \ '+str(float(owa))+ \
-                    ' \ λ/D \ respectively \ indicate \ the}$ \n $\mathit{radii \ of \ the \ inner \ and \ outermost \ ' \
-                    'constraints \ applied \ during \ the \ apodizer}$\n $\mathit{optimization.}$'
+    caption_radial = '\n \n \n Figure 2: ' \
+                     '$\mathit{Monochromatic \ on-axis \ PSF \ azimuthally \ averaged \ over \ angular}$ \n $\mathit{seperations \ }$' \
+                     + str(round(min(r), 4)) + '-' + str(
+        round(max(r), 4)) + '$\mathit{ \ λ/D, \ normalized \ to \ the \ peak \ irradiance. \ ' \
+                            'The \ vertical,}$ \n $\mathit{solid \ black \ line \ at \ separation \ ' + str(
+        radius_fpm) + \
+                     '\ λ/D \ marks \ the \ radius \ of \ the \ FPM \ occulting}$ \n $\mathit{spot. \ The \ vertical, \ red ' \
+                     ' lines \ at \ ' + str(float(iwa)) + ' \ and \ ' + str(float(owa)) + \
+                     ' \ λ/D \ respectively \ indicate \ the}$ \n $\mathit{radii \ of \ the \ inner \ and \ outermost \ ' \
+                     'constraints \ applied \ during \ the \ apodizer}$\n $\mathit{optimization.}$'
 
     plt.yscale('log')
     plt.xlim(0, owa * 1.2)
     plt.ylim(5e-12, 2e-5)
     plt.ylabel('Normalized irradiance')
-    plt.xlabel(r'Angular separation ($\lambda_0/D$)'+caption_radial)
+    plt.xlabel(r'Angular separation ($\lambda_0/D$)' + caption_radial)
     plt.tight_layout()
-
 
     if pdf is not None:
         pdf.savefig()
@@ -454,10 +455,8 @@ def analyze_lyot_robustness(solution_filename, pdf=None):
 
     lyot_stop = lyot_stops[0]
 
-    #dxs = np.array([-8, -6, -4, -2, 0, 2, 4, 6, 8])
-    dxs = np.array(range(-ls_alignment_tolerance-1,+ls_alignment_tolerance+1+1,2))
-
-
+    # dxs = np.array([-8, -6, -4, -2, 0, 2, 4, 6, 8])
+    dxs = np.array(range(-ls_alignment_tolerance - 1, +ls_alignment_tolerance + 1 + 1, 2))
 
     dither_grid = CartesianGrid(SeparatedCoords((dxs, dxs)))
 
@@ -504,5 +503,5 @@ TODO:#
 
 def analyze_calculate_throughput(solution_filename):
 	pupil, apodizer, focal_plane_mask, lyot_stops, parameters, file_organization = create_coronagraph(solution_filename)
-	
+
 '''

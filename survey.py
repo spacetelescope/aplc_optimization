@@ -1,4 +1,3 @@
-import asdf
 import collections
 import copy
 import csv
@@ -56,10 +55,10 @@ class DesignParameterSurvey(object):
         # Set up directories
         survey_dir = os.path.abspath(survey_dir)
         self.file_organization = {'survey_dir': survey_dir}
-        self.file_organization['solution_dir']    = os.path.join(survey_dir, 'solutions')
-        self.file_organization['analysis_dir']    = os.path.join(survey_dir, 'analysis')
-        self.file_organization['drivers_dir']  	  = os.path.join(survey_dir, 'drivers')
-        self.file_organization['log_dir']         = os.path.join(survey_dir, 'logs')
+        self.file_organization['solution_dir'] = os.path.join(survey_dir, 'solutions')
+        self.file_organization['analysis_dir'] = os.path.join(survey_dir, 'analysis')
+        self.file_organization['drivers_dir'] = os.path.join(survey_dir, 'drivers')
+        self.file_organization['log_dir'] = os.path.join(survey_dir, 'logs')
         self.file_organization['input_files_dir'] = os.path.abspath(input_files_dir)
 
         # Make sure all directories exist
@@ -121,7 +120,7 @@ class DesignParameterSurvey(object):
         # format_string = '{:0' + str(len(str(num_parameter_sets))) +  'd}'
 
         format_string = '{:0' + str(len(str(
-            num_parameter_sets))) + 'd}' + '_LUVOIR_N{:}_FPM{:3d}M0{:d}_IWA{:04d}_OWA0{:04d}_C{:d}_BW{:d}_Nlam{:d}_LS_ID{:s}_OD{:s}_{:s}'
+            num_parameter_sets))) + 'd}' + '_{:s}_N{:}_FPM{:3d}M0{:d}_IWA{:04d}_OWA0{:04d}_C{:d}_BW{:d}_Nlam{:d}_LS_ID{:s}_OD{:s}_{:s}'
 
         params = list(itertools.product(*self.varied_parameters))
         if len(self.varied_parameters) == 0:

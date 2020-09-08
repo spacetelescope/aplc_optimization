@@ -16,36 +16,46 @@ print('')
 
 # Getting values from the survey launcher script (e.g. do_hicat_template.py)
 # Driver is automatically written with "parameters" and "file_organization"
-pup_fname = parameters['pupil']['filename']								# name telescope aperture FITS file (TelAP)
-fpm_radius = parameters['focal_plane_mask']['radius']					# focal plane mask radius
-fpm_num_pix = parameters['focal_plane_mask']['num_pix']					# number of pixels across focal plane mask
-fpm_grayscale = parameters['focal_plane_mask']['grayscale']				# grey or bw pixels
-ls_fname = parameters['lyot_stop']['filename']							# name of lyot stop FITS file (LS)
-ls_alignment_tolerance = parameters['lyot_stop']['alignment_tolerance']	# tolerance to Lyot stop misalignment (in pixels)
-ls_num_stops = parameters['lyot_stop']['num_lyot_stops']				# number of Lyot stops
-img_contrast = 10 ** (-parameters['image']['contrast'])					# dark zone contrast goal
-img_iwa = parameters['image']['iwa']							# effective inner working angle (lam/D)
-img_owa = parameters['image']['owa']							# effective outer working angle (lam/D)
-img_num_wavelengths = parameters['image']['num_wavelengths']	# number of wavelengths spanning assigned bandwidth
-img_bandwidth = parameters['image']['bandwidth']				# dark zone bandwidth
-img_resolution = parameters['image']['resolution']				# spatial resolution of final coronagraphic image
-method_force_no_x_mirror_symmetry = parameters['method']['force_no_x_mirror_symmetry'] 	# force algorithm to ignore any x mirror symmetry that might exist in the problem
-method_force_no_y_mirror_symmetry = parameters['method']['force_no_y_mirror_symmetry']	# force algorithm to ignore any y mirror symmetry that might exist in the problem
-method_force_no_hermitian_symmetry = parameters['method']['force_no_hermitian_symmetry']# force algorithm to ignore the (always present) Hermitian symmetry in the problem
-method_starting_scale = parameters['method']['starting_scale']	# number of pixels per unit cell for initial solution (used for adaptive algorithm)
-method_ending_scale = parameters['method']['ending_scale'] # number of pixels per unit cell for the final solution (if same as `starting_scale`, adaptive algorithm is essentially turned off)
-method_edge_width_for_prior = parameters['method']['edge_width_for_prior']	# width of optimized regions along the edges (only used for the adaptive algorithm)
-method_num_throughput_iterations = parameters['method']['num_throughput_iterations'] # number of iterations to let the throughput factor converge
-method_initial_throughput_estimate = parameters['method']['initial_throughput_estimate'] # expected relative throughput of coronagraph compared to without apodizer or FPM (but including Lyot stop).
-method_maximize_planet_throughput = parameters['method']['maximize_planet_throughput']	# maximize throughput through the apodizer times Lyot stop (otherwise maximize the throughput of just the apodizer)
-solver_num_threads = parameters['solver']['num_threads']	# number of threads that Gurobi is allowed to use
-solver_crossover = parameters['solver']['crossover']		# crossover strategy that Gurobi needs to use
-solver_method = parameters['solver']['method']				# algorithm that Gurobi needs to use
+pup_fname = parameters['pupil']['filename']  # name telescope aperture FITS file (TelAP)
+fpm_radius = parameters['focal_plane_mask']['radius']  # focal plane mask radius
+fpm_num_pix = parameters['focal_plane_mask']['num_pix']  # number of pixels across focal plane mask
+fpm_grayscale = parameters['focal_plane_mask']['grayscale']  # grey or bw pixels
+ls_fname = parameters['lyot_stop']['filename']  # name of lyot stop FITS file (LS)
+ls_alignment_tolerance = parameters['lyot_stop'][
+    'alignment_tolerance']  # tolerance to Lyot stop misalignment (in pixels)
+ls_num_stops = parameters['lyot_stop']['num_lyot_stops']  # number of Lyot stops
+img_contrast = 10 ** (-parameters['image']['contrast'])  # dark zone contrast goal
+img_iwa = parameters['image']['iwa']  # effective inner working angle (lam/D)
+img_owa = parameters['image']['owa']  # effective outer working angle (lam/D)
+img_num_wavelengths = parameters['image']['num_wavelengths']  # number of wavelengths spanning assigned bandwidth
+img_bandwidth = parameters['image']['bandwidth']  # dark zone bandwidth
+img_resolution = parameters['image']['resolution']  # spatial resolution of final coronagraphic image
+method_force_no_x_mirror_symmetry = parameters['method'][
+    'force_no_x_mirror_symmetry']  # force algorithm to ignore any x mirror symmetry that might exist in the problem
+method_force_no_y_mirror_symmetry = parameters['method'][
+    'force_no_y_mirror_symmetry']  # force algorithm to ignore any y mirror symmetry that might exist in the problem
+method_force_no_hermitian_symmetry = parameters['method'][
+    'force_no_hermitian_symmetry']  # force algorithm to ignore the (always present) Hermitian symmetry in the problem
+method_starting_scale = parameters['method'][
+    'starting_scale']  # number of pixels per unit cell for initial solution (used for adaptive algorithm)
+method_ending_scale = parameters['method'][
+    'ending_scale']  # number of pixels per unit cell for the final solution (if same as `starting_scale`, adaptive algorithm is essentially turned off)
+method_edge_width_for_prior = parameters['method'][
+    'edge_width_for_prior']  # width of optimized regions along the edges (only used for the adaptive algorithm)
+method_num_throughput_iterations = parameters['method'][
+    'num_throughput_iterations']  # number of iterations to let the throughput factor converge
+method_initial_throughput_estimate = parameters['method'][
+    'initial_throughput_estimate']  # expected relative throughput of coronagraph compared to without apodizer or FPM (but including Lyot stop).
+method_maximize_planet_throughput = parameters['method'][
+    'maximize_planet_throughput']  # maximize throughput through the apodizer times Lyot stop (otherwise maximize the throughput of just the apodizer)
+solver_num_threads = parameters['solver']['num_threads']  # number of threads that Gurobi is allowed to use
+solver_crossover = parameters['solver']['crossover']  # crossover strategy that Gurobi needs to use
+solver_method = parameters['solver']['method']  # algorithm that Gurobi needs to use
 
 if not os.path.isabs(pup_fname):
-	pup_fname = os.path.join(file_organization['input_files_dir'], pup_fname)
+    pup_fname = os.path.join(file_organization['input_files_dir'], pup_fname)
 if not os.path.isabs(ls_fname):
-	ls_fname = os.path.join(file_organization['input_files_dir'], ls_fname)
+    ls_fname = os.path.join(file_organization['input_files_dir'], ls_fname)
 
 pupil = read_fits(pup_fname)
 
@@ -53,33 +63,38 @@ num_pix = pupil.shape[0]
 pupil_grid = make_uniform_grid(num_pix, [1, 1])
 pupil = Field(pupil.ravel(), pupil_grid)
 
-#try:
+# try:
 #	lyot_stops = [Field(read_fits(ls_fname.format(i)).ravel(), pupil_grid) for i in range(ls_num_stops)]
-#except:
+# except:
 
 lyot_stop = Field(read_fits(ls_fname).ravel(), pupil_grid)
 
 # Building Lyot stops according to alignment tolerance
 if ls_num_stops in [1, 5, 9]:
-	lyot_stops = [lyot_stop]
+    lyot_stops = [lyot_stop]
 else:
-	lyot_stops = []
+    lyot_stops = []
 
 if ls_num_stops in [4, 5, 8, 9]:
-	lyot_stop_pos_x = np.roll(lyot_stop.shaped, ls_alignment_tolerance, 1).ravel()
-	lyot_stop_neg_x = np.roll(lyot_stop.shaped, -ls_alignment_tolerance, 1).ravel()
-	lyot_stop_pos_y = np.roll(lyot_stop.shaped, ls_alignment_tolerance, 0).ravel()
-	lyot_stop_neg_y = np.roll(lyot_stop.shaped, -ls_alignment_tolerance, 0).ravel()
+    lyot_stop_pos_x = np.roll(lyot_stop.shaped, ls_alignment_tolerance, 1).ravel()
+    lyot_stop_neg_x = np.roll(lyot_stop.shaped, -ls_alignment_tolerance, 1).ravel()
+    lyot_stop_pos_y = np.roll(lyot_stop.shaped, ls_alignment_tolerance, 0).ravel()
+    lyot_stop_neg_y = np.roll(lyot_stop.shaped, -ls_alignment_tolerance, 0).ravel()
 
-	lyot_stops.extend([lyot_stop_pos_x, lyot_stop_neg_x, lyot_stop_pos_y, lyot_stop_neg_y]) #todo: +x, -x, +y, -y
+    lyot_stops.extend([lyot_stop_pos_x, lyot_stop_neg_x, lyot_stop_pos_y, lyot_stop_neg_y])  # todo: +x, -x, +y, -y
 
 if ls_num_stops in [8, 9]:
-	lyot_stop_pos_x_pos_y = np.roll(np.roll(lyot_stop.shaped, ls_alignment_tolerance, 1), ls_alignment_tolerance, 0).ravel()
-	lyot_stop_pos_x_neg_y = np.roll(np.roll(lyot_stop.shaped, ls_alignment_tolerance, 1), -ls_alignment_tolerance, 0).ravel()
-	lyot_stop_neg_x_pos_y = np.roll(np.roll(lyot_stop.shaped, -ls_alignment_tolerance, 1), ls_alignment_tolerance, 0).ravel()
-	lyot_stop_neg_x_neg_y = np.roll(np.roll(lyot_stop.shaped, -ls_alignment_tolerance, 1), -ls_alignment_tolerance, 0).ravel()
+    lyot_stop_pos_x_pos_y = np.roll(np.roll(lyot_stop.shaped, ls_alignment_tolerance, 1), ls_alignment_tolerance,
+                                    0).ravel()
+    lyot_stop_pos_x_neg_y = np.roll(np.roll(lyot_stop.shaped, ls_alignment_tolerance, 1), -ls_alignment_tolerance,
+                                    0).ravel()
+    lyot_stop_neg_x_pos_y = np.roll(np.roll(lyot_stop.shaped, -ls_alignment_tolerance, 1), ls_alignment_tolerance,
+                                    0).ravel()
+    lyot_stop_neg_x_neg_y = np.roll(np.roll(lyot_stop.shaped, -ls_alignment_tolerance, 1), -ls_alignment_tolerance,
+                                    0).ravel()
 
-	lyot_stops.extend([lyot_stop_pos_x_pos_y, lyot_stop_pos_x_neg_y, lyot_stop_neg_x_pos_y, lyot_stop_neg_x_neg_y]) # todo: +x +y, +x -y, -x +y, -x -y,
+    lyot_stops.extend([lyot_stop_pos_x_pos_y, lyot_stop_pos_x_neg_y, lyot_stop_neg_x_pos_y,
+                       lyot_stop_neg_x_neg_y])  # todo: +x +y, +x -y, -x +y, -x -y,
 
 # Build science focal grid
 n_sci = int((np.ceil(img_owa) + 1) * img_resolution) * 2
@@ -94,35 +109,35 @@ x_foc = (np.arange(fpm_num_pix) + 0.5 - fpm_num_pix / 2) / q_foc
 focal_mask_grid = CartesianGrid(RegularCoords(1.0 / q_foc, [fpm_num_pix, fpm_num_pix], x_foc.min()))
 
 if fpm_grayscale:
-	focal_plane_mask = 1 - evaluate_supersampled(circular_aperture(2 * fpm_radius), focal_mask_grid, 8)
+    focal_plane_mask = 1 - evaluate_supersampled(circular_aperture(2 * fpm_radius), focal_mask_grid, 8)
 else:
-	focal_plane_mask = 1 - circular_aperture(2 * fpm_radius)(focal_mask_grid)
+    focal_plane_mask = 1 - circular_aperture(2 * fpm_radius)(focal_mask_grid)
 
 if img_num_wavelengths == 1:
-	wavelengths = [1]
+    wavelengths = [1]
 else:
-	wavelengths = np.linspace(-img_bandwidth / 2, img_bandwidth / 2, img_num_wavelengths) + 1
+    wavelengths = np.linspace(-img_bandwidth / 2, img_bandwidth / 2, img_num_wavelengths) + 1
 
 # Optimize
 apodizer = optimize_aplc(
-	pupil=pupil,
-	focal_plane_mask=focal_plane_mask,
-	lyot_stops=lyot_stops,
-	dark_zone_mask=dark_zone_mask,
-	wavelengths=wavelengths,
-	contrast=img_contrast,
-	starting_scale=method_starting_scale,
-	ending_scale=method_ending_scale,
-	force_no_x_symmetry=method_force_no_x_mirror_symmetry,
-	force_no_y_symmetry=method_force_no_y_mirror_symmetry,
-	force_no_hermitian_symmetry=method_force_no_hermitian_symmetry,
-	maximize_planet_throughput=method_maximize_planet_throughput,
-	num_throughput_iterations=method_num_throughput_iterations,
-	initial_throughput_estimate=method_initial_throughput_estimate,
-	edge_width_for_prior=method_edge_width_for_prior,
-	solver_num_threads=solver_num_threads,
-	solver_crossover=solver_crossover,
-	solver_method=solver_method)
+    pupil=pupil,
+    focal_plane_mask=focal_plane_mask,
+    lyot_stops=lyot_stops,
+    dark_zone_mask=dark_zone_mask,
+    wavelengths=wavelengths,
+    contrast=img_contrast,
+    starting_scale=method_starting_scale,
+    ending_scale=method_ending_scale,
+    force_no_x_symmetry=method_force_no_x_mirror_symmetry,
+    force_no_y_symmetry=method_force_no_y_mirror_symmetry,
+    force_no_hermitian_symmetry=method_force_no_hermitian_symmetry,
+    maximize_planet_throughput=method_maximize_planet_throughput,
+    num_throughput_iterations=method_num_throughput_iterations,
+    initial_throughput_estimate=method_initial_throughput_estimate,
+    edge_width_for_prior=method_edge_width_for_prior,
+    solver_num_threads=solver_num_threads,
+    solver_crossover=solver_crossover,
+    solver_method=solver_method)
 
 # TODO: units and descriptions for head keywords
 # build fits cube? possible to do with asdf format?
@@ -159,8 +174,7 @@ hdu_list.append(fits.ImageHDU(pupil.shaped, name='PUPIL'))
 hdu_list.append(fits.ImageHDU(lyot_stops[0].shaped, name='LYOT STOP'))
 
 tree = {'parameters': parameters, 'file_organization': file_organization, 'apodizer': hdu_list['APOD'].data,
-		'pupil': hdu_list['PUPIL'].data, 'lyot stop': hdu_list['LYOT STOP'].data}
-
+        'pupil': hdu_list['PUPIL'].data, 'lyot stop': hdu_list['LYOT STOP'].data}
 
 ff = fits_embed.AsdfInFits(hdu_list, tree)
 ff.write_to(solution_fname, overwrite=True)

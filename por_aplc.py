@@ -8,7 +8,7 @@ from survey import Coronagraph
 
 class PorAPLC(Coronagraph):
 	_default_parameters = {
-		'instrument': {
+		'instrument':{
 			'inst_name': 'LUVOIR'
 		},
 		'pupil': {
@@ -39,11 +39,11 @@ class PorAPLC(Coronagraph):
 			'force_no_y_mirror_symmetry': False,
 			'force_no_hermitian_symmetry': False,
 			'starting_scale': 1,
-			'ending_scale': 1,
+			'ending_scale': 4,
 			'edge_width_for_prior': 2,
 			'num_throughput_iterations': 2,
 			'initial_throughput_estimate': 1,
-			'maximize_planet_throughput': True
+			'maximize_planet_throughput': False
 		},
 		'solver': {
 			'num_threads': 0,
