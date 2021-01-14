@@ -6,15 +6,35 @@ from hcipy import *
 
 
 def LUVOIR_inputs_gen(input_files_dict):
-    filepath = 		input_files_dict['directory']
-    N = 			input_files_dict['N']
-    oversamp = 		input_files_dict['oversamp']
-    gap_padding = 	input_files_dict['aperture']['seg_gap_pad']
-    lyot_ref_diam = input_files_dict['lyot_stop']['lyot_ref_diam']
-    LS_SPID = 		input_files_dict['lyot_stop']['ls_spid']
-    ls_spid_ov = 	input_files_dict['lyot_stop']['ls_spid_ov']
-    LS_OD = 		input_files_dict['lyot_stop']['LS_OD']
-    LS_ID = 		input_files_dict['lyot_stop']['LS_ID']
+    """ Generate LUVOIR-A aperture and Lyot stop(s) for the APLC coronagraph.
+
+    Parameters
+    ----------
+    input_files_dict: dict
+        A dictionary of input parameters provided in `do_luvoir` launcher script.
+
+    Returns
+    -------
+    pup_filename: str
+        The name of the generated LUVOIR A aperure FITS file.
+    ls_filename: list
+        The name(s) of the generated Lyot stop FITS file(s).
+    """
+
+
+    filepath =      input_files_dict['directory']   # directory in which the constructed FITS files are stored
+    N =             input_files_dict['N']   # number of pixels in the input (aperture and lyot stop) arrays
+
+    # Aperture parameters
+    oversamp = 		input_files_dict['oversamp']    # oversampling factor in `evaluate_supersampled()` [hcipy/field/util.py].
+    gap_padding = 	input_files_dict['aperture']['seg_gap_pad'] # arbitratry padding of gap size to represent gaps on small arrays
+
+    # Lyot stop parameters
+    lyot_ref_diam = input_files_dict['lyot_stop']['lyot_ref_diam']  # diameter used to reference LS_ID and LS_OD against
+    LS_SPID = 		input_files_dict['lyot_stop']['ls_spid']    # flag for inclusion or exclusion of struts in lyot stop
+    ls_spid_ov = 	input_files_dict['lyot_stop']['ls_spid_ov'] # spider oversize scale
+    LS_OD = 		input_files_dict['lyot_stop']['LS_OD']  # Lyot stop inner diameter(s), relative to inscribed circle
+    LS_ID = 		input_files_dict['lyot_stop']['LS_ID']  # Lyot stop outer diameter(s), relative to inscribed circle
 
     pup_filename = filepath + 'TelAp_LUVOIR_gap_pad{0:02d}_bw_ovsamp{1:02d}_N{2:04d}.fits'.format(gap_padding, oversamp,
                                                                                                   N)
@@ -24,13 +44,19 @@ def LUVOIR_inputs_gen(input_files_dict):
     grid = make_pupil_grid(N)
 
     config = Path('masks/' + pup_filename)
+
+    '''
+    Checks if aperture file already exists, otherwise creates LUVOIR aperture by calling 
+    make_a_luvoir_aperture() [hcipy/aperture/realistic.py]
+    '''
     if config.is_file():
         print('{0:s} exists'.format('masks/' + pup_filename))
     else:
         LUVOIR_ap, header = make_luvoir_a_aperture(gap_padding, return_header=True)  # header = True
         LUVOIR_ap_indexed, _, segment_positions = make_luvoir_a_aperture(gap_padding, return_header=True,
                                                                          segment_transmissions=np.arange(1, 121),
-                                                                         return_segments=True)  # return_segment_positions=True, header=True
+                                                                         return_segments=True)
+                                                                        # return_segment_positions=True, header=True
         pupil = evaluate_supersampled(LUVOIR_ap, grid, oversamp)
         pupil_indexed = evaluate_supersampled(LUVOIR_ap_indexed, grid, 1)
 
@@ -102,9 +128,8 @@ def LUVOIR_inputs_gen(input_files_dict):
 
             else:
 
-                LUVOIR_ls, ls_header = make_luvoir_a_lyot_stop(inner_diameter_fraction=ls_id,
-                                                             outer_diameter_fraction=ls_od,
-                                                             lyot_reference_diameter=lyot_ref_diam,
+                LUVOIR_ls, ls_header = make_luvoir_lyot_stop(inner_diameter_fraction=ls_id,
+                                                             outer_diameter_fraction=ls_od, lyot_reference_diameter=lyot_ref_diam,
                                                              spider_oversize=ls_spid_ov, with_spiders=LS_SPID,
                                                              return_header=True)
                 ### previously make_luvour_a_lyot_stop(ls_id, ls_od, lyot_ref_diam, spid_oversize=ls_spid_ov, spiders=LS_SPID, header = True)
@@ -142,3 +167,82 @@ def LUVOIR_inputs_gen(input_files_dict):
 
         return pup_filename, ls_filenames
 
+
+def make_luvoir_lyot_stop(normalized=False, with_spiders=False, spider_oversize=1, lyot_reference_diameter=13.5, inner_diameter_fraction=0.2,
+                            outer_diameter_fraction=0.9, return_header=False):
+    '''Make a LUVOIR-A Lyot stop for the APLC coronagraph.
+
+    Parameters
+    ----------
+    normalized : boolean
+        If this is True, the pupil diameter will be scaled to 1. Otherwise, the
+        diameter of the pupil will be 15.0 meters.
+    with_spiders : boolean
+        Include the secondary mirror support structure in the aperture.
+    lyot_reference_diameter : scaler
+        The diameter used to reference LS id and od against, by default equal to the pupil inscribed diameter.
+    inner_diameter_fraction : scalar
+        The fractional size of the lyot stop inner diameter(s) as a fraction of the inscribed circle diameter.
+    outer_diameter_fraction : scalar
+        The fractional size of the lyot stop outer diameter(s) as a fraction of the inscribed circle diameter.
+    spider_oversize : scalar
+        The factor by which to oversize the spiders compared to the LUVOIR-A aperture spiders.
+    return_header : boolean
+        If this is True, a header will be returned giving all important values for the
+        created aperture for reference.
+
+    Returns
+    -------
+    lyot_stop : Field generator
+        A field generator for the Lyot stop.
+    header : dict
+        A dictionary containing all important values for the created aperture. Only returned
+        if `return_header` is True.
+    '''
+    pupil_diameter = 15.0  # m actual circumscribed diameter, used for lam/D calculations, other measurements normalized by this diameter
+    pupil_diameter_inscribed = 13.5
+    spider_width = 0.150  # m actual strut size
+    lower_spider_angle = 12.7  # deg angle at which lower spiders are offset from vertical
+    spid_start = 0.30657  # m spider starting point offset from center of aperture
+
+    outer_D = pupil_diameter * outer_diameter_fraction #re-normalize the LS OD against circumscribed pupil diameter
+    inner_D = pupil_diameter * inner_diameter_fraction #re-normalize the LS ID against circumscribed pupil diameter
+    pad_spid_width = spider_width * spider_oversize
+
+    #lyot_reference_diameter = pupil_diameter
+
+    ls_header = {'TELESCOP': 'LUVOIR A', 'D_CIRC': pupil_diameter, 'D_INSC': pupil_diameter_inscribed,
+                 'LS_ID': inner_diameter_fraction, 'LS_OD': outer_diameter_fraction,
+                 'LS_REF_D': lyot_reference_diameter, 'NORM': normalized, 'STRUT_ST': spid_start}
+
+    if with_spiders:
+        ls_header['STRUT_W'] = spider_width
+        ls_header['STRUT_AN'] = lower_spider_angle
+        ls_header['STRUT_P'] = spider_oversize
+
+    if normalized:
+        outer_D /= pupil_diameter
+        inner_D /= pupil_diameter
+        pad_spid_width /= pupil_diameter
+        spid_start /= pupil_diameter
+
+    outer_diameter = circular_aperture(outer_D)
+    central_obscuration = circular_aperture(inner_D)
+
+    if with_spiders:
+        spider1 = make_spider_infinite([0, 0], 90, pad_spid_width)
+        spider2 = make_spider_infinite([spid_start, 0], 270 - lower_spider_angle, pad_spid_width)
+        spider3 = make_spider_infinite([-spid_start, 0], 270 + lower_spider_angle, pad_spid_width)
+
+    def aper(grid):
+        result = outer_diameter(grid) - central_obscuration(grid)
+
+        if with_spiders:
+            result *= spider1(grid) * spider2(grid) * spider3(grid)
+
+        return result
+
+    if return_header:
+        return aper, ls_header
+
+    return aper

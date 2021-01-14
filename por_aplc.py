@@ -8,6 +8,9 @@ from survey import Coronagraph
 
 class PorAPLC(Coronagraph):
 	_default_parameters = {
+		'instrument':{
+			'inst_name': 'LUVOIR'
+		},
 		'pupil': {
 			'filename': 'NoFilename',
 			'N': None
@@ -36,7 +39,7 @@ class PorAPLC(Coronagraph):
 			'force_no_y_mirror_symmetry': False,
 			'force_no_hermitian_symmetry': False,
 			'starting_scale': 1,
-			'ending_scale': 1,
+			'ending_scale': 4,
 			'edge_width_for_prior': 2,
 			'num_throughput_iterations': 2,
 			'initial_throughput_estimate': 1,
@@ -53,6 +56,11 @@ class PorAPLC(Coronagraph):
 		super(PorAPLC, self).__init__(identifier, parameters, file_organization, por_aplc_analysis)
 
 	def write_driver(self, overwrite=False):
+		'''
+		Write survey driver file using 'por_aplc_driver_template.py' and save to the survey's driver directory.
+
+		Driver file is automatically written with "parameters" and "file_organization"
+		'''
 		if self.check_driver() and not overwrite:
 			print('Driver already exists and will not be overwritten.')
 			return

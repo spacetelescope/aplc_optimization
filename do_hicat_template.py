@@ -47,11 +47,11 @@ pup_filename, ls_filenames = HiCAT_inputs_gen(input_files_dict)
 #for multiple design parameters as a grid, input as list
 #for multiple design parameters NOT as a grid, make multiple entries of below (as shown in commented out block)
 #resulting apodizer are packaged with their inputs in a fits cube
-survey_parameters = {'pupil': {'N': n,'filename': pup_filename}, \
-                     'lyot_stop': {'filename': ls_filenames,'alignment_tolerance': 4, 'num_lyot_stops': 9}, \
+survey_parameters = {'instrument': {'inst_name': instrument.upper()}, 'pupil': {'N': n,'filename': pup_filename}, \
+                     'lyot_stop': {'filename': ls_filenames,'alignment_tolerance': 6, 'num_lyot_stops': 9}, \
                      'focal_plane_mask': {'radius':FPM1, 'num_pix': 80, 'grayscale': True,},
-                     'image': {'contrast':8,'iwa':3.75,'owa':15.0,'bandwidth':0.10,'num_wavelengths':4}, \
-                     'method':{'starting_scale': 1}}
+                     'image': {'contrast':8*0.55,'iwa':3.75,'owa':15.0,'bandwidth':0.10,'num_wavelengths':4}, \
+                     'method': {'starting_scale': 1, 'ending_scale': 4}}
 
 
 hicat = DesignParameterSurvey(PorAPLC, survey_parameters, 'surveys/{}_{}_N{:04d}_{}/'.format(instrument,survey_name,n,machine), 'masks/')

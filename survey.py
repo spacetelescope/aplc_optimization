@@ -10,7 +10,6 @@ import pprint
 import socket
 import warnings
 
-import asdf
 import matplotlib as mpl
 import numpy as np
 import six
@@ -122,7 +121,7 @@ class DesignParameterSurvey(object):
         # format_string = '{:0' + str(len(str(num_parameter_sets))) +  'd}'
 
         format_string = '{:0' + str(len(str(
-            num_parameter_sets))) + 'd}' + '_LUVOIR_N{:}_FPM{:3d}M0{:d}_IWA{:04d}_OWA0{:04d}_C{:d}_BW{:d}_Nlam{:d}_LS_ID{:s}_OD{:s}_{:s}'
+            num_parameter_sets))) + 'd}' + '_{:s}_N{:}_FPM{:3d}M0{:d}_IWA{:04d}_OWA0{:04d}_C{:d}_BW{:d}_Nlam{:d}_LS_ID{:s}_OD{:s}_{:s}'
 
         params = list(itertools.product(*self.varied_parameters))
         if len(self.varied_parameters) == 0:
@@ -137,6 +136,7 @@ class DesignParameterSurvey(object):
 
             # LUVOIR/LS_LUVOIR_ID0190_OD0937_no_struts_gy_ovsamp2_N0050.fits
 
+            inst = new_parameter_set['instrument']['inst_name']
             N = new_parameter_set['pupil']['N']
             fpm = int(100 * new_parameter_set['focal_plane_mask']['radius'])
             m = new_parameter_set['focal_plane_mask']['num_pix']
@@ -159,7 +159,7 @@ class DesignParameterSurvey(object):
 
             # Create unique id
             # identifier = format_string.format(i)
-            identifier = format_string.format(i, N, fpm, m, iwa, owa, c, bw, nlam, ls_id, ls_od, ls_strut_key)
+            identifier = format_string.format(i, inst, N, fpm, m, iwa, owa, c, bw, nlam, ls_id, ls_od, ls_strut_key)
 
             # Create coronagraph
             self.coronagraphs.append(coronagraph_class(identifier, new_parameter_set, self.file_organization))

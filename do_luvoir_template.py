@@ -19,8 +19,8 @@ n = 1000 #number of pixels in input and final arrays
 
 filename_info = os.path.basename(__file__)[:-3].split("_", 4) #extract info from the launcher file name
 instrument = filename_info[1] #instrument name
-survey_name = filename_info[2]+'_'+filename_info[3] #survey name (automatically set)
-machine = filename_info[4] #name of machine the survey is run on (automatically set)
+survey_name = filename_info[2]+'_'+filename_info[3] #survey name
+machine = filename_info[4] #name of machine the survey is run on
 
 '''
 input array (telap and ls) parameters

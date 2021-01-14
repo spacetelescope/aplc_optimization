@@ -3,7 +3,7 @@ import numpy as np
 from astropy.io import fits
 from hcipy import *
 
-mpl.use('Agg')
+#mpl.use('Agg')
 import matplotlib
 import matplotlib.pyplot as plt
 import asdf
@@ -71,7 +71,7 @@ def create_coronagraph(solution_filename):
             lyot_stops.extend(
                 [lyot_stop_pos_x_pos_y, lyot_stop_pos_x_neg_y, lyot_stop_neg_x_pos_y, lyot_stop_neg_x_neg_y])
 
-    # Build focal plane mask
+        # Build focal plane mask
     q_foc = fpm_num_pix / (fpm_radius * 2)
     x_foc = (np.arange(fpm_num_pix) + 0.5 - fpm_num_pix / 2) / q_foc
     focal_mask_grid = CartesianGrid(RegularCoords(1.0 / q_foc, [fpm_num_pix, fpm_num_pix], x_foc.min()))
@@ -113,10 +113,20 @@ def analyze_pdf_summary(solution_filename, pdf=None):
         telescope = "LUVOIR"
     elif "HiCAT" in pup_fname:
         telescope = "HiCAT"
+    elif "GPI" in pup_fname:
+        telescope = "GPI"
+
 
     regex = re.compile(r'\d+')
     pup_vals = regex.findall(pup_fname)
-    seg_gap_pad, oversamp = int(pup_vals[0]), int(pup_vals[1])
+    if telescope is "LUVOIR":
+        seg_gap_pad, oversamp = int(pup_vals[0]), int(pup_vals[1])
+    elif telescope is "HiCAT":
+        seg_gap_pad = ""
+        oversamp = int(pup_vals[0])
+    elif telescope is "GPI":
+        seg_gap_pad = ""
+        oversamp = ""
 
     # Extract lyot stop inner and outer diameter from lyot stop filename
     ls_vals = regex.findall(ls_fname)
@@ -251,7 +261,7 @@ def analyze_contrast_monochromatic(solution_filename, pdf=None):
 
     caption_radial ='\n \n \n Figure 2: ' \
                     '$\mathit{Monochromatic \ on-axis \ PSF \ azimuthally \ averaged \ over \ angular}$ \n $\mathit{seperations \ }$' \
-                    +str(min(r))+'-'+str(max(r))+'$\mathit{ \ λ/D, \ normalized \ to \ the \ peak \ irradiance. \ ' \
+                    +str(round(min(r),4))+'-'+str(round(max(r),4))+'$\mathit{ \ λ/D, \ normalized \ to \ the \ peak \ irradiance. \ ' \
                     'The \ vertical,}$ \n $\mathit{solid \ black \ line \ at \ separation \ '+str(radius_fpm)+ \
                     '\ λ/D \ marks \ the \ radius \ of \ the \ FPM \ occulting}$ \n $\mathit{spot. \ The \ vertical, \ red ' \
                     ' lines \ at \ '+str(float(iwa))+' \ and \ '+str(float(owa))+ \
@@ -452,8 +462,10 @@ def analyze_lyot_robustness(solution_filename, pdf=None):
 
     lyot_stop = lyot_stops[0]
 
-    dxs = np.array([-8, -6, -4, -2, 0, 2, 4, 6, 8])
-    # dxs = np.array(range(-ls_alignment_tolerance-1,+ls_alignment_tolerance+1,2))
+    #dxs = np.array([-8, -6, -4, -2, 0, 2, 4, 6, 8])
+    dxs = np.array(range(-ls_alignment_tolerance-1,+ls_alignment_tolerance+1+1,2))
+
+
 
     dither_grid = CartesianGrid(SeparatedCoords((dxs, dxs)))
 
