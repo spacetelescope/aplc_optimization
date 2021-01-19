@@ -10,7 +10,7 @@ focal plane mask size, dark hole size and bandwidth.
 `aplc-optimization` is an object-orientated software toolkit 
 to automate the exploration of APLC design parameter combinations. 
 
-Documentation can be found online at 
+Documentation can be found online at https://aplc-optimization.readthedocs.io/
 
 
 
