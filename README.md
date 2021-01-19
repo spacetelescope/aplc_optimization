@@ -1,4 +1,4 @@
-# Apodized Pupil Lyot Coronagraph design optimization
+# aplc-optimization: Apodized Pupil Lyot Coronagraph (APLC) design optimization toolkit
 
 `aplc-optimization` is an object-orientated software toolkit 
 to automate the exploration of APLC design parameter combinations. 
