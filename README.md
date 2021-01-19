@@ -3,12 +3,12 @@
 `aplc-optimization` is an object-orientated software toolkit 
 to automate the exploration of APLC design parameter combinations. 
 
-Documentation can be found online at https://aplc-optimization.readthedocs.io/
+Documentation can be found online at [https://aplc-optimization.readthedocs.io/](https://aplc-optimization.readthedocs.io/en/latest/)
 
 ## Requirements & Installation
 
 #### Prerequesits
-- Gurobi solver for Python. For licensing and installation instructions see [gurobipy](https://www.gurobi.com/documentation/9.1/quickstart_mac/cs_grbpy_the_gurobi_python.html).
+- Gurobi solver for Python. For licensing and installation instructions see [gurobipy](https://www.gurobi.com/documentation/9.1/quickstart_mac/cs_grbpy_the_gurobi_python.html), as well as the `aplc-optimization` [documentation](https://aplc-optimization.readthedocs.io/en/latest/installing.html#installing-the-optimization-solver-gurobi).
 
 #### Installing
 `aplc-optmization` has the following strong depenecies:
@@ -19,7 +19,7 @@ Documentation can be found online at https://aplc-optimization.readthedocs.io/
  - asdf
  - imageio
 
-For installation instructions, see the online [documentation](aplc-optimization.readthedocs.io) or docs/install.rst in this source distribution.
+For installation instructions, see the online [documentation](https://aplc-optimization.readthedocs.io/en/latest/installing.html) or docs/install.rst in this source distribution.
 
 ## Contributing Code, Documentation, or Feedback
 
