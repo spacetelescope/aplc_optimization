@@ -1,5 +1,6 @@
 # Requirements & Installation
 
+
 ## Installing with Conda
 
 For ease of installation, we recommend using Conda to install the ``aplc-optimization`` package as follows:
@@ -83,17 +84,17 @@ If the Gurobi shell didn't produce the desired output, there's a problem with yo
 
 See the `environment.yml` specification file for the required package dependencies.
 
-##### Required Python version: 
+#### Required Python version: 
 
 ``aplc-optimization`` requires Python 3.7 or higher.
 
-##### Conda channels:
+#### Conda channels:
 
  - AstroConda (http://ssb.stsci.edu/astroconda)
  - Gurobi (http://conda.anaconda.org/gurobi)
  - Conda-forge (https://anaconda.org/conda-forge)
 
-##### Major Python dependencies
+#### Major Python dependencies
 
  - [hcipy](https://docs.hcipy.org/0.3.1/) (for coronagraphic simulations)
  - [gurobi](https://www.gurobi.com/documentation/9.0/quickstart_mac/py_python_interface.html#section:Python) (for building and running optimization models)
@@ -104,8 +105,9 @@ See the `environment.yml` specification file for the required package dependenci
  - [imageio](https://pypi.org/project/imageio/) (for writing image data)
  - [SciPy](http://www.scipy.org/scipylib/download.html) (for advanced linear algebra)
 
+---------------------------------------------
 
-### Using the STScI Linux Servers
+## Using the STScI Linux Servers
 
 
 The Linux servers at STScI are available to optimize select high-resolution design cases, as needed. For instructions on how to
