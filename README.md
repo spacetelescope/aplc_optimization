@@ -19,11 +19,11 @@ Documentation can be found online at [https://aplc-optimization.readthedocs.io/]
  - asdf
  - imageio
 
-For installation instructions, see the online [documentation](https://aplc-optimization.readthedocs.io/en/latest/installing.html) or docs/install.rst in this source distribution.
+For installation instructions, see the online [documentation](https://aplc-optimization.readthedocs.io/en/latest/installing.html) or [docs/installation.md](https://github.com/spacetelescope/aplc-optimization/blob/develop/docs/installing.md) in this source distribution.
 
 ## Contributing Code, Documentation, or Feedback
 
-Thank you for considering contributing to `aplc-optimization`. Please read CONTRIBUTING.md for details on the process for submitting contributions and feedback.
+Thank you for considering contributing to `aplc-optimization`. Please read [CONTRIBUTING.md](https://github.com/spacetelescope/aplc-optimization/blob/develop/docs/CONTRIBUTING.md) for details on the process for submitting contributions and feedback.
 
 ### Authors
 
