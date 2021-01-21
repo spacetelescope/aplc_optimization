@@ -1,7 +1,0 @@
-Exception: STATUS_ACCESS_VIOLATION at eip=61110202
-eax=FFBE0008 ebx=FFBE0008 ecx=6118C484 edx=FFBE0000 esi=20000000 edi=000000CC
-ebp=FFBE0000 esp=01329540 program=C:\ds9\ds9.exe, pid 23824, thread main
-cs=0023 ds=002B es=002B fs=0053 gs=002B ss=002B
-Stack trace:
-Frame     Function  Args
-End of stack trace
