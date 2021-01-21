@@ -78,14 +78,14 @@ def LUVOIR_inputs_gen(input_files_dict):
         hdr.set('EDGE', 'bw', 'black and white, or grey pixels')
         hdr.set('PROV', header['PROV'])
 
-        hdr_indexed = hdr.copy()
-        seg_xys = segment_positions.points
-        for segment in range(seg_xys.shape[0]):
-            hdr_indexed.set('seg' + str(segment + 1) + '_x', segment_positions.x[segment], 'x-position segment ' + str(segment + 1))
-            hdr_indexed.set('seg' + str(segment + 1) + '_y', segment_positions.y[segment], 'y-position segment ' + str(segment + 1))
+        #hdr_indexed = hdr.copy()
+        #seg_xys = segment_positions.points
+        #for segment in range(seg_xys.shape[0]):
+        #    hdr_indexed.set('seg' + str(segment + 1) + '_x', segment_positions.x[segment], 'x-position segment ' + str(segment + 1))
+        #    hdr_indexed.set('seg' + str(segment + 1) + '_y', segment_positions.y[segment], 'y-position segment ' + str(segment + 1))
 
         fits.writeto('masks/' + pup_filename, pupil.shaped, hdr, overwrite=True)
-        fits.writeto('masks/' + pup_filename_indexed, pupil_indexed.shaped, hdr_indexed, overwrite=True)
+        #fits.writeto('masks/' + pup_filename_indexed, pupil_indexed.shaped, hdr_indexed, overwrite=True)
         print('{0:s} has been written to file'.format('masks/' + pup_filename))
 
     ls_filenames = []
@@ -128,7 +128,7 @@ def LUVOIR_inputs_gen(input_files_dict):
 
             else:
 
-                LUVOIR_ls, ls_header = make_luvoir_lyot_stop(inner_diameter_fraction=ls_id,
+                LUVOIR_ls, ls_header = make_luvoir_a_lyot_stop(inner_diameter_fraction=ls_id,
                                                              outer_diameter_fraction=ls_od, lyot_reference_diameter=lyot_ref_diam,
                                                              spider_oversize=ls_spid_ov, with_spiders=LS_SPID,
                                                              return_header=True)
@@ -205,8 +205,8 @@ def make_luvoir_lyot_stop(normalized=False, with_spiders=False, spider_oversize=
     lower_spider_angle = 12.7  # deg angle at which lower spiders are offset from vertical
     spid_start = 0.30657  # m spider starting point offset from center of aperture
 
-    outer_D = pupil_diameter * outer_diameter_fraction #re-normalize the LS OD against circumscribed pupil diameter
-    inner_D = pupil_diameter * inner_diameter_fraction #re-normalize the LS ID against circumscribed pupil diameter
+    outer_D = lyot_reference_diameter * outer_diameter_fraction #re-normalize the LS OD against circumscribed pupil diameter
+    inner_D = lyot_reference_diameter * inner_diameter_fraction #re-normalize the LS ID against circumscribed pupil diameter
     pad_spid_width = spider_width * spider_oversize
 
     #lyot_reference_diameter = pupil_diameter
