@@ -24,7 +24,7 @@ instrument = 'hicat'  # instrument name
 survey_name = "headertest"  # survey name
 machine = "telserv3"  # machine the survey is run on.
 
-nArray = 486  # number of pixels in input (TelAP, LS) and final (apodizer) arrays
+nArray = 200  # number of pixels in input (TelAP, LS) and final (apodizer) arrays
 
 # Aperture parameters
 pupil_mask_size = 19.85e-3  # m: p1 pupil mask size
@@ -71,7 +71,7 @@ FPM_grey = True  # Focal plane mask is grey, otherwise bw
 contrast = 8  # 10-<value>: contrast goal in the dark zone of the coronagraphic image
 IWA = 3.75  # lamda_0/D: inner edge of dark zone region in coronagraphic image
 OWA = 15  # lambda_0/D: outer edge of dark zone region in coronagraphic image
-spectral_bandwidth = 0.0  # fractional, dark zone bandpass
+spectral_bandwidth = 0.1  # fractional, dark zone bandpass
 nLams = 1  # number of wavelengths spanning the design bandpass
 
 # Optimization method
