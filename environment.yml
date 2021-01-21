@@ -1,28 +1,132 @@
-# ``conda env create --file environment.yml``
-# or
-# ``conda env create --name <myEnvName> --file environment.yml``
-
-name: aplc-optimization
+name: aplc-optimization_test
 channels:
   - defaults
   - conda-forge
-  - http://conda.anaconda.org/gurobi
-dependencies:
-  - astropy
   - gurobi
+  - http://ssb.stsci.edu/astroconda
+dependencies:
+  - _libgcc_mutex
+  - astropy
+  - attrs
+  - backcall
+  - blas
+  - bleach
+  - ca-certificates
+  - certifi
+  - cycler
+  - dbus
+  - decorator
+  - defusedxml
+  - entrypoints
+  - expat
+  - fontconfig
+  - freetype
+  - glib
+  - gmp
+  - gst-plugins-base
+  - gstreamer
+  - gurobi
+  - icu
   - imageio
+  - importlib_metadata
+  - intel-openmp
+  - ipykernel
+  - ipython
+  - ipython_genutils
+  - ipywidgets
+  - jedi
+  - jinja2
+  - jpeg
+  - jsonschema
   - jupyter
+  - jupyter_client
+  - jupyter_console
+  - jupyter_core
+  - kiwisolver
+  - libedit
+  - libffi
+  - libgfortran-ng
+  - libpng
+  - libsodium
+  - libtiff
+  - libuuid
+  - libxcb
+  - libxml2
+  - markupsafe
   - matplotlib
+  - matplotlib-base
   - memory_profiler
+  - mistune
+  - mkl
+  - mkl-service
+  - mkl_fft
+  - mkl_random
+  - more-itertools
+  - nbconvert
+  - nbformat
+  - ncurses
+  - notebook
   - numpy
+  - numpy-base
+  - olefile
+  - openssl
+  - packaging
   - pandas
+  - pandoc
+  - pandocfilters
+  - parso
+  - pcre
+  - pexpect
+  - pickleshare
+  - pillow
   - pip
+  - pluggy
+  - prometheus_client
+  - prompt-toolkit
+  - prompt_toolkit
+  - psutil
+  - ptyprocess
+  - py
+  - pygments
+  - pyparsing
+  - pyqt
+  - pyrsistent
   - pytest
-  - python>=3.7
+  - python
+  - python-dateutil
+  - pytz
+  - pyzmq
+  - qt
+  - qtconsole
+  - qtpy
+  - readline
   - scipy
+  - send2trash
+  - setuptools
+  - sip
+  - six
+  - sqlite
+  - terminado
+  - testpath
   - time
+  - tk
+  - tornado
+  - traitlets
+  - wcwidth
+  - webencodings
+  - wheel
+  - widgetsnbextension
+  - xz
+  - zeromq
+  - zipp
+  - zlib
+  - zstd
   - pip:
     - asdf
     - hcipy
-    - pytest
+    - numexpr
+    - poppy
+    - pyyaml
+    - semantic-version
+    - xxhash
 
