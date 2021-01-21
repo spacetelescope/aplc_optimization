@@ -1,0 +1,1 @@
+HiCAT input mask directory.

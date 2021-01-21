@@ -40,11 +40,9 @@ ls_spiders = True  # include secondary support mirror structure in the aperture
 ls_grey = True  # grey lyot stop, else b&w
 
 # INPUT FILES PARAMETER DICTIONARY
-input_files_dict = {'directory': 'HiCAT/', 'N': nArray, \
-                    'aperture': {'ap_spid': ap_spiders, 'ap_gap': ap_gaps, 'ap_grey': ap_grey,
-                                 'pup_diam': pupil_diameter}, \
-                    'lyot_stop': {'ls_spid': ls_spiders, 'ls_grey': ls_grey, 'LS_ID': [lyot_inner],
-                                  'LS_OD': [lyot_outer]}}
+input_files_dict = {'directory': 'HiCAT/', 'N': nArray,
+                    'aperture': {'ap_spid': ap_spiders, 'ap_gap': ap_gaps, 'ap_grey': ap_grey, 'pup_diam': pupil_diameter},
+                    'lyot_stop': {'ls_spid': ls_spiders, 'ls_grey': ls_grey, 'LS_ID': [lyot_inner], 'LS_OD': [lyot_outer]}}
 
 # INPUT FILE GENERATION
 pup_filename, ls_filenames = HiCAT_inputs_gen(input_files_dict)
@@ -78,18 +76,15 @@ nLams = 1  # number of wavelengths spanning the design bandpass
 ending_scale = 1
 
 # SURVEY PARAMETER DICTIONARY
-survey_parameters = {'instrument': {'inst_name': instrument.upper()}, \
-                     'pupil': {'N': nArray, 'filename': pup_filename}, \
-                     'lyot_stop': {'filename': ls_filenames, 'alignment_tolerance': ls_alignment_tolerance,
-                                   'num_lyot_stops': ls_num}, \
+survey_parameters = {'instrument': {'inst_name': instrument.upper()},
+                     'pupil': {'N': nArray, 'filename': pup_filename},
+                     'lyot_stop': {'filename': ls_filenames, 'alignment_tolerance': ls_alignment_tolerance, 'num_lyot_stops': ls_num},
                      'focal_plane_mask': {'radius': FPM1, 'num_pix': nFPM, 'grayscale': FPM_grey},
-                     'image': {'contrast': contrast, 'iwa': IWA, 'owa': OWA, 'bandwidth': spectral_bandwidth,
-                               'num_wavelengths': nLams}, \
+                     'image': {'contrast': contrast, 'iwa': IWA, 'owa': OWA, 'bandwidth': spectral_bandwidth, 'num_wavelengths': nLams},
                      'method': {'ending_scale': ending_scale}}
 
 # RUN DESIGN SURVEY
-hicat = DesignParameterSurvey(PorAPLC, survey_parameters,
-                              'surveys/{}_{}_N{:04d}_{}/'.format(instrument, survey_name, nArray, machine), 'masks/')
+hicat = DesignParameterSurvey(PorAPLC, survey_parameters, 'surveys/{}_{}_N{:04d}_{}/'.format(instrument, survey_name, nArray, machine), 'masks/')
 hicat.describe()
 
 hicat.write_drivers(True)
