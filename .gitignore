@@ -1,8 +1,6 @@
 display/*
 __pycache__/*
 *.ipynb_checkpoints/*
-.idea
 .vscode
-.project
 .pydevproject
 *.pyc
