@@ -17,7 +17,7 @@ Documentation can be found online at [https://aplc-optimization.readthedocs.io/]
  - hcipy
  - gurobipy
  - asdf
- - imageio
+ - imageioad
 
 For installation instructions, see the online [documentation](https://aplc-optimization.readthedocs.io/en/latest/installing.html) or [docs/installation.md](https://github.com/spacetelescope/aplc-optimization/blob/develop/docs/installing.md) in this source distribution.
 

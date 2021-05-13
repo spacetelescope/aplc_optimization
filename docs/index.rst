@@ -13,7 +13,7 @@ and symmetry cases.
 
    Figure 1: Analysis results from a HiCAT design study.
 
-The `aplc-optimization` toolkit was developed by the `Segmented Coronagraph Design & Analysis (SCDA) research team <https://www.stsci.edu/stsci-research/research-topics-and-programs/russell-b-makidon-optics-laboratory/meet-the-team>`_ at the Space Telescope Science Institute
+The ``aplc-optimization`` toolkit was developed by the `Segmented Coronagraph Design & Analysis (SCDA) research team <https://www.stsci.edu/stsci-research/research-topics-and-programs/russell-b-makidon-optics-laboratory/meet-the-team>`_ at the Space Telescope Science Institute
 (STScI) with the support of the `NASA Exoplanet Exploration Program (ExEP) <https://exoplanets.nasa.gov/exep/technology/SCDA/>`_ and is privately hosted at `github.com/spacetelescope/aplc-optimization <github.com/spacetelescope/aplc-optimization>`_.
 
 .. _getting_started:

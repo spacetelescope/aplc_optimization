@@ -6,7 +6,7 @@ Introduction
 
 The Apodized Pupil Lyot Coronagraph (APLC) is one of several coronagraph design families that is being assessed as part
 of NASA's Exoplanet Exploration Program `Segmented aperture coronagraph design and analysis (SCDA) study <https://exoplanets.nasa.gov/exep/technology/SCDA/>`_, to further our understanding of the ability of coronagraphs to operate with segmented/ obscured apertures.
-The APLCupil L is a Lyot-style coronagraph that suppresses starlight through a series of amplitude operations on the on-axis field.
+The APLC is a Lyot-style coronagraph that suppresses starlight through a series of amplitude operations on the on-axis field.
 A diagram of the APLC concept is shown in Figure 1. The mask architecture combines an entrance pupil apodization in plane A,
 a downstream focal plane mask (FPM) in plane B, and the Lyot stop in the relayed pupil plane C to form the coronagraphic
 image on a detector located in the re-imaged focal plane D. A perfect solution is when the transmission profile of the
