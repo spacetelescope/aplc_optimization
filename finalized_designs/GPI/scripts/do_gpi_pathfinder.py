@@ -73,7 +73,8 @@ survey_parameters = {'instrument': {'inst_name': instrument.upper()}, 'pupil': {
 
 
 # RUN DESIGN SURVEY
-gpi = DesignParameterSurvey(PorAPLC, survey_parameters, 'surveys/{}_{}_N{:04d}_{}/'.format(instrument,survey_name,nArray,machine), 'masks/')
+gpi = DesignParameterSurvey(PorAPLC, survey_parameters, 'surveys/{}_{}_N{:04d}_{}/'.format(instrument,survey_name,nArray,machine),
+                            '../../../masks/')
 gpi.describe()
 
 gpi.write_drivers(True)
