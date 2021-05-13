@@ -1,3 +1,0 @@
-LUVOIR_Inputs_generation
-##########################
-
