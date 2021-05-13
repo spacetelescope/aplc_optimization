@@ -7,7 +7,7 @@ solutions for abitrary telescope apertures. It's object-orientated approach simp
 the interface for sampling large parameter spaces, and enables flexibility for implementing various mask architectures
 and symmetry cases.
 
-.. figure:: ./HiCAT_1944_LS9_6pix_analysis.png
+.. figure:: images/HiCAT_1944_LS9_6pix_analysis.png
    :align: center
    :alt: Analysis results for HiCAT
 

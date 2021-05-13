@@ -72,7 +72,7 @@ else:
 html_theme = 'stsci_rtd_theme'
 html_theme_path = [stsci_rtd_theme.get_html_theme_path()]
 
-html_favicon = 'logo.jpg'
+html_favicon = 'images/logo.jpg'
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,

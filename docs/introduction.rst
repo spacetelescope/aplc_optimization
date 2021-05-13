@@ -12,7 +12,7 @@ a downstream focal plane mask (FPM) in plane B, and the Lyot stop in the relayed
 image on a detector located in the re-imaged focal plane D. A perfect solution is when the transmission profile of the
 apodizer in plane A is optimized so that the two scalar field components of the field in the Lyot plane approximately cancel.
 
-.. figure:: ./APLC_schematic.png
+.. figure:: images/APLC_schematic.png
    :align: center
    :width: 550
    :alt: schematic diagram for the APLC (Zimmerman 2016)
