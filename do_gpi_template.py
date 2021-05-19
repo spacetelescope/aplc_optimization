@@ -23,7 +23,7 @@ Workflow:
 
 nArray = 128  # number of pixels in input and final arrays
 instrument = "gpi"  # instrument name
-survey_name = "do_template"  # survey name
+survey_name = "template_survey"  # survey name
 machine = "telserv3"  # machine the survey is run on.
 
 #oversamp = 2 # oversampling factor for intermediate plane calculations.
@@ -56,7 +56,7 @@ FPM_radius = 3.476449131 #lambda_0/D: focal plane mask radius
 
 contrast = 8 # contrast goal in the dark zone, where 10^-{contrast}
 IWA = 3 #lamda_0/D: dark zone inner radius (rho_i) - minimum distance at which the transmission of an off-axis companion is significantly high.
-OWA = 44 #lambda_0/D: dark zone outer radius (rho_o)
+OWA = 22 #lambda_0/D: dark zone outer radius (rho_o)
 spectral_bandwidth = 0.2 # fractional: spectral bandwidth over which we want to optimize
 nLams = 1 # number of wavelengths spanning the design bandpass
 res = 2
