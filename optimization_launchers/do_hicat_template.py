@@ -1,4 +1,3 @@
-
 from aplc_optimization.survey import DesignParameterSurvey
 from aplc_optimization.aplc import APLC
 from aplc_optimization.Inputs_Generation.HiCAT_Inputs_Generation import HiCAT_inputs_gen
@@ -24,7 +23,7 @@ instrument = 'hicat'  # instrument name
 survey_name = "launcher_template"  # survey name
 machine = "telserv3"  # machine the survey is run on.
 
-nArray = 486  # number of pixels in input (TelAP, LS) and final (apodizer) arrays
+nArray = 200  # number of pixels in input (TelAP, LS) and final (apodizer) arrays
 
 # Aperture parameters
 pupil_mask_size = 19.85e-3  # m: p1 pupil mask size
@@ -84,7 +83,7 @@ survey_parameters = {'instrument': {'inst_name': instrument.upper()},
 
 # RUN DESIGN SURVEY
 hicat = DesignParameterSurvey(APLC, survey_parameters, 'surveys/{}_{}_N{:04d}_{}/'.format(instrument, survey_name, nArray, machine),
-                              '../masks/')
+                              'masks/')
 hicat.describe()
 
 hicat.write_drivers(True)
