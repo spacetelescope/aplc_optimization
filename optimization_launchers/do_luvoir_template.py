@@ -1,3 +1,6 @@
+import os
+os.chdir('..')
+
 from aplc_optimization.survey import DesignParameterSurvey
 from aplc_optimization.aplc import APLC
 from aplc_optimization.Inputs_Generation.LUVOIR_Inputs_Generation import LUVOIR_inputs_gen

@@ -1,3 +1,6 @@
+import os
+os.chdir('..')
+
 from aplc_optimization.survey import DesignParameterSurvey
 from aplc_optimization.aplc import APLC
 from aplc_optimization.Inputs_Generation.HiCAT_Inputs_Generation import HiCAT_inputs_gen

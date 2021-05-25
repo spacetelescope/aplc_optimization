@@ -1,3 +1,6 @@
+import os
+os.chdir('..')
+
 from survey import DesignParameterSurvey
 from por_aplc import PorAPLC
 from astropy.io import fits
