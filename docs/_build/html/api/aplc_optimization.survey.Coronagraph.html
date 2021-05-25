@@ -1,0 +1,305 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Coronagraph &mdash; aplc-optimization  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/stsci.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/stsci.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../_static/logo.jpg"/>
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+            <a href="../index.html" class="icon icon-home"> aplc-optimization
+            
+            <img src="../_static/stsci_pri_combo_mark_white.png" class="logo" />
+          </a>
+
+          
+            
+            
+          
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+  
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installing.html">Requirements &amp; Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../server.html">Using STScI Linux Servers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../workflow.html">Design Survey Workflow</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">aplc-optimization</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Coronagraph</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/api/aplc_optimization.survey.Coronagraph.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="coronagraph">
+<h1>Coronagraph<a class="headerlink" href="#coronagraph" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="aplc_optimization.survey.Coronagraph">
+<em class="property">class </em><code class="sig-prename descclassname">aplc_optimization.survey.</code><code class="sig-name descname">Coronagraph</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">identifier</span></em>, <em class="sig-param"><span class="n">parameters</span></em>, <em class="sig-param"><span class="n">file_organization</span></em>, <em class="sig-param"><span class="n">analysis_module</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/aplc_optimization/survey.html#Coronagraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#aplc_optimization.survey.Coronagraph" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p class="rubric">Attributes Summary</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#aplc_optimization.survey.Coronagraph.identifier" title="aplc_optimization.survey.Coronagraph.identifier"><code class="xref py py-obj docutils literal notranslate"><span class="pre">identifier</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#aplc_optimization.survey.Coronagraph.log_filename" title="aplc_optimization.survey.Coronagraph.log_filename"><code class="xref py py-obj docutils literal notranslate"><span class="pre">log_filename</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#aplc_optimization.survey.Coronagraph.solution_filename" title="aplc_optimization.survey.Coronagraph.solution_filename"><code class="xref py py-obj docutils literal notranslate"><span class="pre">solution_filename</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Methods Summary</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#aplc_optimization.survey.Coronagraph.check_driver" title="aplc_optimization.survey.Coronagraph.check_driver"><code class="xref py py-obj docutils literal notranslate"><span class="pre">check_driver</span></code></a>()</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#aplc_optimization.survey.Coronagraph.check_input_files" title="aplc_optimization.survey.Coronagraph.check_input_files"><code class="xref py py-obj docutils literal notranslate"><span class="pre">check_input_files</span></code></a>()</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#aplc_optimization.survey.Coronagraph.check_solution" title="aplc_optimization.survey.Coronagraph.check_solution"><code class="xref py py-obj docutils literal notranslate"><span class="pre">check_solution</span></code></a>()</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#aplc_optimization.survey.Coronagraph.get_driver_command" title="aplc_optimization.survey.Coronagraph.get_driver_command"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_driver_command</span></code></a>()</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#aplc_optimization.survey.Coronagraph.run_analysis" title="aplc_optimization.survey.Coronagraph.run_analysis"><code class="xref py py-obj docutils literal notranslate"><span class="pre">run_analysis</span></code></a>([overwrite, run_slow])</p></td>
+<td><p>Run analysis module on the optimized solution and write output products to file</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#aplc_optimization.survey.Coronagraph.run_optimization" title="aplc_optimization.survey.Coronagraph.run_optimization"><code class="xref py py-obj docutils literal notranslate"><span class="pre">run_optimization</span></code></a>([force_rerun])</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Attributes Documentation</p>
+<dl class="py attribute">
+<dt id="aplc_optimization.survey.Coronagraph.identifier">
+<code class="sig-name descname">identifier</code><a class="headerlink" href="#aplc_optimization.survey.Coronagraph.identifier" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="aplc_optimization.survey.Coronagraph.log_filename">
+<code class="sig-name descname">log_filename</code><a class="headerlink" href="#aplc_optimization.survey.Coronagraph.log_filename" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="aplc_optimization.survey.Coronagraph.solution_filename">
+<code class="sig-name descname">solution_filename</code><a class="headerlink" href="#aplc_optimization.survey.Coronagraph.solution_filename" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p class="rubric">Methods Documentation</p>
+<dl class="py method">
+<dt id="aplc_optimization.survey.Coronagraph.check_driver">
+<code class="sig-name descname">check_driver</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/aplc_optimization/survey.html#Coronagraph.check_driver"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#aplc_optimization.survey.Coronagraph.check_driver" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="aplc_optimization.survey.Coronagraph.check_input_files">
+<code class="sig-name descname">check_input_files</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/aplc_optimization/survey.html#Coronagraph.check_input_files"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#aplc_optimization.survey.Coronagraph.check_input_files" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="aplc_optimization.survey.Coronagraph.check_solution">
+<code class="sig-name descname">check_solution</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/aplc_optimization/survey.html#Coronagraph.check_solution"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#aplc_optimization.survey.Coronagraph.check_solution" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="aplc_optimization.survey.Coronagraph.get_driver_command">
+<code class="sig-name descname">get_driver_command</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/aplc_optimization/survey.html#Coronagraph.get_driver_command"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#aplc_optimization.survey.Coronagraph.get_driver_command" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="aplc_optimization.survey.Coronagraph.run_analysis">
+<code class="sig-name descname">run_analysis</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">overwrite</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">run_slow</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/aplc_optimization/survey.html#Coronagraph.run_analysis"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#aplc_optimization.survey.Coronagraph.run_analysis" title="Permalink to this definition">¶</a></dt>
+<dd><p>Run analysis module on the optimized solution and write output products to file</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="aplc_optimization.survey.Coronagraph.run_optimization">
+<code class="sig-name descname">run_optimization</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">force_rerun</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/aplc_optimization/survey.html#Coronagraph.run_optimization"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#aplc_optimization.survey.Coronagraph.run_optimization" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2020, Bryony Nickson.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

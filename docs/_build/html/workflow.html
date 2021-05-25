@@ -1,0 +1,276 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Design Survey Workflow &mdash; aplc-optimization  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/stsci.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="_static/stsci.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="_static/logo.jpg"/>
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Using STScI Linux Servers" href="server.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+            <a href="index.html" class="icon icon-home"> aplc-optimization
+            
+            <img src="_static/stsci_pri_combo_mark_white.png" class="logo" />
+          </a>
+
+          
+            
+            
+          
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+  
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installing.html">Requirements &amp; Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="server.html">Using STScI Linux Servers</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Design Survey Workflow</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#create-a-new-launcher-script">1. Create a new launcher script</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#define-a-set-of-design-parameters-to-survey">2. Define a set of design parameters to survey</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#run-the-launcher-script">3. Run the launcher script</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#inspect-the-products">4. Inspect the products</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#run-the-analysis-notebook">5. Run the Analysis notebook</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">aplc-optimization</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Design Survey Workflow</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/workflow.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="design-survey-workflow">
+<span id="workflow"></span><h1>Design Survey Workflow<a class="headerlink" href="#design-survey-workflow" title="Permalink to this headline">¶</a></h1>
+<p>Using the <code class="docutils literal notranslate"><span class="pre">aplc-optimization</span></code> toolkit, the workflow for producing a design survey proceeds as follows:</p>
+<div class="section" id="create-a-new-launcher-script">
+<h2>1. Create a new launcher script<a class="headerlink" href="#create-a-new-launcher-script" title="Permalink to this headline">¶</a></h2>
+<p>Within <code class="docutils literal notranslate"><span class="pre">aplc-optimization</span></code>, <em>Launcher scripts</em> are the format by which coronagraph design surveys are defined and executed. Template launcher scripts are provided
+for HiCAT-, LUVOIR- and GPI-like instruments (named <code class="xref py py-mod docutils literal notranslate"><span class="pre">do_hicat_template.py</span></code>, <code class="xref py py-mod docutils literal notranslate"><span class="pre">do_luvour_template.py</span></code> and <code class="xref py py-mod docutils literal notranslate"><span class="pre">do_gpi_template.py`</span></code>, respectively).</p>
+<p>In order to initiate a new survey, make a copy of the appropriate launcher template and re-name the file with the following naming convention:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>do_&lt;<em>instrument</em>&gt;_&lt;<em>survey</em>&gt;_&lt;<em>machine</em>&gt;.py</p></li>
+</ul>
+</div></blockquote>
+<p>where <em>&lt;instrument&gt;</em> is the name of the APLC instrument for which you are are performing the survey; ‘<em>&lt;survey&gt;</em>’ is a name
+descriptive of the survey that you intend to run; and ‘<em>&lt;machine&gt;</em>’ is the name of the machine on which the survey will be run on. For example,
+a launcher file named ‘<code class="xref py py-mod docutils literal notranslate"><span class="pre">do_luvoir_BW10_small_telserv3.py</span></code>’ designates the BW10 small design run on telserv3 for a LUVOIR-like instrument.</p>
+</div>
+<div class="section" id="define-a-set-of-design-parameters-to-survey">
+<h2>2. Define a set of design parameters to survey<a class="headerlink" href="#define-a-set-of-design-parameters-to-survey" title="Permalink to this headline">¶</a></h2>
+<p>Inside the launcher script define a set of design parameters to survey. Any unspecified parameters are set to reasonable default values.</p>
+</div>
+<div class="section" id="run-the-launcher-script">
+<h2>3. Run the launcher script<a class="headerlink" href="#run-the-launcher-script" title="Permalink to this headline">¶</a></h2>
+<p>Run the launcher script using the following command in terminal:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>(aplc-optimization) $ python do_&lt;instrument&gt;_&lt;survey&gt;_&lt;machine&gt;.py
+</pre></div>
+</div>
+<p id="output">If all goes well, this should provide you with the following output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>This survey has # design parameter combinations.
+# parameter are varied:
+
+File organization:
+{&#39;analysis_dir&#39;: &#39;../aplc-optimization/surveys/&lt;instrument&gt;_&lt;survey&gt;_&lt;machine&gt;/analysis&#39;,
+ &#39;drivers_dir&#39;: &#39;../aplc-optimization/surveys/&lt;instrument&gt;_&lt;survey&gt;_&lt;machine&gt;/drivers&#39;,
+ &#39;input_files_dir&#39;: &#39;../aplc-optimization/masks&#39;,
+ &#39;log_dir&#39;: &#39;../aplc-optimization/surveys/&lt;instrument&gt;_&lt;survey&gt;_&lt;machine&gt;/logs&#39;,
+ &#39;solution_dir&#39;: &#39;../aplc-optimization/surveys/&lt;instrument&gt;_&lt;survey&gt;_&lt;machine&gt;&#39;,
+ &#39;survey_dir&#39;: &#39;../aplc-optimization/surveys/&lt;instrument&gt;_&lt;survey&gt;_&lt;machine&gt;&#39;}
+
+
+All input files exist? False
+All drivers exist? False
+All solutions exist? False
+</pre></div>
+</div>
+</div>
+<div class="section" id="inspect-the-products">
+<span id="file-struct"></span><h2>4. Inspect the products<a class="headerlink" href="#inspect-the-products" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><strong>Input masks:</strong> Once launched, the toolkit will first run a “check” routine to verify whether the necessary static input files defining the telescope aperture and lyot stop masks are in place. If they are not, the program will call the corresponding input file generation script and write them to disk in the <code class="xref py py-mod docutils literal notranslate"><span class="pre">/aplc-optimization/masks/</span></code> directory.</p></li>
+<li><p><strong>Drivers:</strong> After checking that the necessary input files are in place, the toolkit will write a batch of driver scripts (one for each design parameter combination) and stores them in the <code class="xref py py-mod docutils literal notranslate"><span class="pre">drivers/</span></code> sub-directory, inside the survey’s base directory (<code class="xref py py-mod docutils literal notranslate"><span class="pre">/aplc-optimization/surveys/&lt;instrument&gt;_&lt;survey&gt;_&lt;machine&gt;/</span></code>). Each driver script is a re-usable python script storing the parameters and file organization defined in the launcher, which in turn calls the optimizer.</p></li>
+<li><p><strong>Logs:</strong> While the optimizer runs, an automatically produced <code class="xref py py-mod docutils literal notranslate"><span class="pre">log</span></code> file containing a record of events is written to file and stored in the <code class="xref py py-mod docutils literal notranslate"><span class="pre">logs/</span></code> sub-directory (<code class="xref py py-mod docutils literal notranslate"><span class="pre">/aplc-optimization/surveys/&lt;instrument&gt;_&lt;survey&gt;_&lt;machine&gt;/logs/</span></code>).</p></li>
+<li><p><strong>Solutions:</strong> Once each linear optimization program completes, each apodizer solution is written to file in the <code class="xref py py-mod docutils literal notranslate"><span class="pre">solutions/</span></code> sub-directory (<code class="xref py py-mod docutils literal notranslate"><span class="pre">/aplc-optimization/surveys/&lt;instrument&gt;_&lt;survey&gt;_&lt;machine&gt;/solutions</span></code>).</p></li>
+<li><p><strong>Analysis files:</strong> For each subsequent apodizer solution the toolkit calls an analysis script that produces a number of analysis products and writes them to a <code class="xref py py-mod docutils literal notranslate"><span class="pre">pdf</span></code> file in the <code class="xref py py-mod docutils literal notranslate"><span class="pre">analysis</span></code> sub-directory (<code class="xref py py-mod docutils literal notranslate"><span class="pre">/aplc-optimization/surveys/&lt;instrument&gt;_&lt;survey&gt;_&lt;machine&gt;/analysis</span></code>).</p></li>
+</ul>
+</div>
+<div class="section" id="run-the-analysis-notebook">
+<h2>5. Run the Analysis notebook<a class="headerlink" href="#run-the-analysis-notebook" title="Permalink to this headline">¶</a></h2>
+<p>In addition to the analysis <code class="xref py py-mod docutils literal notranslate"><span class="pre">pdf</span></code> file created automatically created for each design survey, the toolkit also
+provides a Python notebook interface with which more in-depth analyses can be performed for each apodizer solution.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="server.html" class="btn btn-neutral float-left" title="Using STScI Linux Servers" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2020, Bryony Nickson.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

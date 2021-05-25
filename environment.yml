@@ -1,4 +1,4 @@
-name: aplc-optimization
+name: aplc_optimization
 channels:
   - defaults
   - conda-forge

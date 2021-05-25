@@ -1,0 +1,546 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>aplc_optimization.Inputs_Generation.HiCAT_Inputs_Generation &mdash; aplc-optimization  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../_static/stsci.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/stsci.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../../../_static/logo.jpg"/>
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+            <a href="../../../index.html" class="icon icon-home"> aplc-optimization
+            
+            <img src="../../../_static/stsci_pri_combo_mark_white.png" class="logo" />
+          </a>
+
+          
+            
+            
+          
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+  
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../installing.html">Requirements &amp; Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../server.html">Using STScI Linux Servers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../workflow.html">Design Survey Workflow</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Detailed API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/aplc.html">APLC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/survey.html">Survey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/optimizer.html">Optimizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/HiCAT_Inputs_Generation.html">HiCAT Inputs Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/LUVOIR_Inputs_Generation.html">LUVOIR Inputs Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/GPI_Inputs_Generation.html">GPI Inputs Generation</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">aplc-optimization</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>aplc_optimization.Inputs_Generation.HiCAT_Inputs_Generation</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for aplc_optimization.Inputs_Generation.HiCAT_Inputs_Generation</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">hcipy</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">astropy.io</span> <span class="kn">import</span> <span class="n">fits</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+<div class="viewcode-block" id="HiCAT_inputs_gen"><a class="viewcode-back" href="../../../api/aplc_optimization.Inputs_Generation.HiCAT_Inputs_Generation.HiCAT_inputs_gen.html#aplc_optimization.Inputs_Generation.HiCAT_Inputs_Generation.HiCAT_inputs_gen">[docs]</a><span class="k">def</span> <span class="nf">HiCAT_inputs_gen</span><span class="p">(</span><span class="n">input_files_dict</span><span class="p">):</span>
+	<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Current Working Directory &quot;</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">())</span>
+
+	<span class="c1"># Contour</span>
+	<span class="n">p3_apodizer_size</span> <span class="o">=</span> <span class="mf">19.725e-3</span> <span class="c1"># m</span>
+	<span class="n">gamma_31</span> <span class="o">=</span> <span class="mf">1.008</span>
+	<span class="n">gamma_51</span> <span class="o">=</span> <span class="mf">0.979</span>
+	
+	<span class="n">filepath</span>    <span class="o">=</span> <span class="n">input_files_dict</span><span class="p">[</span><span class="s1">&#39;directory&#39;</span><span class="p">]</span>
+	<span class="n">N</span>           <span class="o">=</span> <span class="n">input_files_dict</span><span class="p">[</span><span class="s1">&#39;N&#39;</span><span class="p">]</span>
+	<span class="n">ap_spid</span>     <span class="o">=</span> <span class="n">input_files_dict</span><span class="p">[</span><span class="s1">&#39;aperture&#39;</span><span class="p">][</span><span class="s1">&#39;ap_spid&#39;</span><span class="p">]</span>
+	<span class="n">ap_gap</span>      <span class="o">=</span> <span class="n">input_files_dict</span><span class="p">[</span><span class="s1">&#39;aperture&#39;</span><span class="p">][</span><span class="s1">&#39;ap_gap&#39;</span><span class="p">]</span>
+	<span class="n">ap_grey</span>		<span class="o">=</span> <span class="n">input_files_dict</span><span class="p">[</span><span class="s1">&#39;aperture&#39;</span><span class="p">][</span><span class="s1">&#39;ap_grey&#39;</span><span class="p">]</span> 
+	<span class="n">pup_diam</span>	<span class="o">=</span> <span class="n">input_files_dict</span><span class="p">[</span><span class="s1">&#39;aperture&#39;</span><span class="p">][</span><span class="s1">&#39;pup_diam&#39;</span><span class="p">]</span>   	
+	
+	<span class="n">ls_spid</span>		<span class="o">=</span> <span class="n">input_files_dict</span><span class="p">[</span><span class="s1">&#39;lyot_stop&#39;</span><span class="p">][</span><span class="s1">&#39;ls_spid&#39;</span><span class="p">]</span> 
+	<span class="n">ls_grey</span>		<span class="o">=</span> <span class="n">input_files_dict</span><span class="p">[</span><span class="s1">&#39;lyot_stop&#39;</span><span class="p">][</span><span class="s1">&#39;ls_grey&#39;</span><span class="p">]</span> 
+	<span class="n">LS_OD</span>       <span class="o">=</span> <span class="n">input_files_dict</span><span class="p">[</span><span class="s1">&#39;lyot_stop&#39;</span><span class="p">][</span><span class="s1">&#39;LS_OD&#39;</span><span class="p">]</span>
+	<span class="n">LS_ID</span>       <span class="o">=</span> <span class="n">input_files_dict</span><span class="p">[</span><span class="s1">&#39;lyot_stop&#39;</span><span class="p">][</span><span class="s1">&#39;LS_ID&#39;</span><span class="p">]</span>	
+	
+	<span class="k">if</span> <span class="n">ap_grey</span><span class="p">:</span>
+		<span class="n">oversamp</span>    <span class="o">=</span> <span class="mi">4</span>
+	<span class="k">else</span><span class="p">:</span>
+		<span class="n">oversamp</span>    <span class="o">=</span> <span class="mi">1</span>
+	
+	<span class="n">pup_filename</span> <span class="o">=</span> <span class="n">filepath</span><span class="o">+</span><span class="s1">&#39;ApodMask_HiCAT_ovsamp</span><span class="si">{0:02d}</span><span class="s1">_N</span><span class="si">{1:04d}</span><span class="s1">_Spider</span><span class="si">{2:}</span><span class="s1">_Gap</span><span class="si">{3:}</span><span class="s1">.fits&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">oversamp</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span><span class="n">ap_spid</span><span class="p">,</span><span class="n">ap_gap</span><span class="p">)</span>
+		
+	<span class="n">grid</span>                        <span class="o">=</span> <span class="n">make_uniform_grid</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="p">[</span><span class="n">p3_apodizer_size</span><span class="p">,</span> <span class="n">p3_apodizer_size</span><span class="p">])</span>
+	
+	<span class="n">config</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s1">&#39;masks/&#39;</span><span class="o">+</span><span class="n">pup_filename</span><span class="p">)</span>
+	<span class="k">if</span> <span class="n">config</span><span class="o">.</span><span class="n">is_file</span><span class="p">():</span>
+		<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{0:s}</span><span class="s1"> exists&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;masks/&#39;</span><span class="o">+</span><span class="n">pup_filename</span><span class="p">))</span>
+	<span class="k">else</span><span class="p">:</span>
+		<span class="n">HiCAT_ap</span><span class="p">,</span> <span class="n">header</span>           <span class="o">=</span> <span class="n">make_a_hicat_aperture</span><span class="p">(</span><span class="n">with_spiders</span><span class="o">=</span><span class="n">ap_spid</span><span class="p">,</span> <span class="n">with_segment_gaps</span><span class="o">=</span><span class="n">ap_gap</span><span class="p">,</span> <span class="n">return_header</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+		
+		<span class="n">pupil</span>                      <span class="o">=</span> <span class="n">evaluate_supersampled</span><span class="p">(</span><span class="n">HiCAT_ap</span><span class="p">,</span><span class="n">grid</span><span class="p">,</span><span class="n">oversamp</span><span class="p">)</span>
+	
+		
+		<span class="n">hdr</span> <span class="o">=</span> <span class="n">fits</span><span class="o">.</span><span class="n">Header</span><span class="p">()</span>
+		<span class="n">hdr</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s1">&#39;TELESCOP&#39;</span><span class="p">,</span> <span class="n">header</span><span class="p">[</span><span class="s1">&#39;TELESCOP&#39;</span><span class="p">])</span>
+		<span class="n">hdr</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s1">&#39;P3_APOD&#39;</span><span class="p">,</span> <span class="n">header</span><span class="p">[</span><span class="s1">&#39;P3_APOD&#39;</span><span class="p">],</span><span class="s1">&#39;m: p3 apodizer size&#39;</span><span class="p">)</span>
+		<span class="n">hdr</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s1">&#39;P3_CENT_SEG&#39;</span><span class="p">,</span><span class="n">header</span><span class="p">[</span><span class="s1">&#39;P3_CENT_SEG&#39;</span><span class="p">],</span><span class="s1">&#39;m: p3 apodizer mask central segment&#39;</span><span class="p">)</span>
+		
+		<span class="k">if</span> <span class="n">ap_gap</span><span class="p">:</span>
+			<span class="n">hdr</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s1">&#39;P3_GAP&#39;</span><span class="p">,</span><span class="n">header</span><span class="p">[</span><span class="s1">&#39;P3_GAP&#39;</span><span class="p">],</span><span class="s1">&#39;m: actual gap size between segments in P3&#39;</span><span class="p">)</span>
+			<span class="n">hdr</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s1">&#39;P3_GAP_OVER&#39;</span><span class="p">,</span><span class="n">header</span><span class="p">[</span><span class="s1">&#39;P3_GAP_OVER&#39;</span><span class="p">],</span><span class="s1">&#39;apod gap oversize factor wrt irisao &#39;</span><span class="p">)</span>
+			
+		<span class="k">if</span> <span class="n">ap_spid</span><span class="p">:</span>
+			<span class="n">hdr</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s1">&#39;P3_STRUT&#39;</span><span class="p">,</span><span class="n">header</span><span class="p">[</span><span class="s1">&#39;P3_STRUT&#39;</span><span class="p">],</span><span class="s1">&#39;m: P3 apodizer mask spiders thickness&#39;</span><span class="p">)</span>
+		
+		<span class="n">hdr</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s1">&#39;PROV&#39;</span><span class="p">,</span><span class="n">header</span><span class="p">[</span><span class="s1">&#39;PROV&#39;</span><span class="p">])</span>
+	
+		<span class="n">fits</span><span class="o">.</span><span class="n">writeto</span><span class="p">(</span><span class="s1">&#39;masks/&#39;</span><span class="o">+</span><span class="n">pup_filename</span><span class="p">,</span> <span class="n">pupil</span><span class="o">.</span><span class="n">shaped</span><span class="p">,</span> <span class="n">hdr</span><span class="p">,</span><span class="n">overwrite</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+		<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{0:s}</span><span class="s1"> has been written to file&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;masks/&#39;</span><span class="o">+</span><span class="n">pup_filename</span><span class="p">))</span>
+		
+	<span class="n">ls_filenames</span> <span class="o">=</span> <span class="p">[]</span>
+	
+	<span class="k">if</span> <span class="n">ls_grey</span><span class="p">:</span>
+		<span class="n">oversamp</span>    <span class="o">=</span> <span class="mi">4</span>
+	<span class="k">else</span><span class="p">:</span>
+		<span class="n">oversamp</span>    <span class="o">=</span> <span class="mi">1</span>
+	
+	<span class="k">for</span> <span class="n">ls_od</span> <span class="ow">in</span> <span class="n">LS_OD</span><span class="p">:</span>
+		<span class="k">for</span> <span class="n">ls_id</span> <span class="ow">in</span> <span class="n">LS_ID</span><span class="p">:</span>
+
+			<span class="n">ls_filename</span>  <span class="o">=</span> <span class="n">filepath</span><span class="o">+</span><span class="s1">&#39;LS_HiCAT_ID</span><span class="si">{0:04d}</span><span class="s1">_OD</span><span class="si">{1:04d}</span><span class="s1">_Spider</span><span class="si">{2:}</span><span class="s1">_ovsamp</span><span class="si">{3:02d}</span><span class="s1">_N</span><span class="si">{4:04d}</span><span class="s1">.fits&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">int</span><span class="p">((</span><span class="n">ls_id</span><span class="p">)</span><span class="o">*</span><span class="mi">1000</span><span class="p">),</span>\
+                                                                                    								<span class="nb">int</span><span class="p">((</span><span class="n">ls_od</span><span class="p">)</span><span class="o">*</span><span class="mi">1000</span><span class="p">),</span> \
+                                                                                        							<span class="n">ls_spid</span><span class="p">,</span><span class="n">oversamp</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
+            
+			<span class="n">config</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s1">&#39;masks/&#39;</span><span class="o">+</span><span class="n">ls_filename</span><span class="p">)</span>
+			<span class="k">if</span> <span class="n">config</span><span class="o">.</span><span class="n">is_file</span><span class="p">():</span>
+				<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{0:s}</span><span class="s1"> exists&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;masks/&#39;</span><span class="o">+</span><span class="n">ls_filename</span><span class="p">))</span>
+				
+			<span class="k">else</span><span class="p">:</span>
+							
+				<span class="n">HICAT_ls</span><span class="p">,</span> <span class="n">ls_header</span> <span class="o">=</span> <span class="n">make_a_hicat_lyot_stop</span><span class="p">(</span><span class="n">lyot_inner</span><span class="o">=</span><span class="n">ls_id</span><span class="p">,</span> <span class="n">lyot_outer</span><span class="o">=</span><span class="n">ls_od</span><span class="p">,</span> <span class="n">with_spiders</span><span class="o">=</span><span class="n">ls_spid</span><span class="p">,</span> <span class="n">return_header</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+				<span class="n">lyot_stop</span> <span class="o">=</span> <span class="n">evaluate_supersampled</span><span class="p">(</span><span class="n">HICAT_ls</span><span class="p">,</span> <span class="n">grid</span><span class="o">.</span><span class="n">scaled</span><span class="p">(</span><span class="n">gamma_51</span> <span class="o">/</span> <span class="n">gamma_31</span><span class="p">),</span> <span class="n">oversamp</span><span class="p">)</span>
+				
+				<span class="n">hdr</span> <span class="o">=</span> <span class="n">fits</span><span class="o">.</span><span class="n">Header</span><span class="p">()</span>
+				<span class="n">ls_header</span><span class="p">[</span><span class="s1">&#39;OVERSAMP&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">oversamp</span>
+				  		
+				<span class="n">hdr</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s1">&#39;TELESCOP&#39;</span><span class="p">,</span> <span class="n">ls_header</span><span class="p">[</span><span class="s1">&#39;TELESCOP&#39;</span><span class="p">])</span>
+				<span class="n">hdr</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s1">&#39;P3_APOD&#39;</span><span class="p">,</span> <span class="n">ls_header</span><span class="p">[</span><span class="s1">&#39;P3_APOD&#39;</span><span class="p">],</span><span class="s1">&#39;m: p3 apodizer size&#39;</span><span class="p">)</span>
+				<span class="n">hdr</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s1">&#39;P3_CENT_SEG&#39;</span><span class="p">,</span><span class="n">ls_header</span><span class="p">[</span><span class="s1">&#39;P3_CENT_SEG&#39;</span><span class="p">],</span><span class="s1">&#39;m: p3 apodizer mask central segment&#39;</span><span class="p">)</span>
+				<span class="n">hdr</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s1">&#39;LS_CENT&#39;</span><span class="p">,</span> <span class="n">ls_header</span><span class="p">[</span><span class="s1">&#39;LS_CENT&#39;</span><span class="p">],</span> <span class="s1">&#39;m p5 ls mask central segment size&#39;</span><span class="p">)</span>
+				<span class="n">hdr</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s1">&#39;LS_SIZE&#39;</span><span class="p">,</span> <span class="n">ls_header</span><span class="p">[</span><span class="s1">&#39;LS_SIZE&#39;</span><span class="p">],</span> <span class="s1">&#39;m p5 ls size&#39;</span><span class="p">)</span>
+				
+				<span class="k">if</span> <span class="n">ls_spid</span><span class="p">:</span>
+					<span class="n">hdr</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s1">&#39;P5_STRUT&#39;</span><span class="p">,</span><span class="n">ls_header</span><span class="p">[</span><span class="s1">&#39;P5_STRUT&#39;</span><span class="p">],</span><span class="s1">&#39;m: P5 ls mask spiders thickness&#39;</span><span class="p">)</span>
+				
+				<span class="n">fits</span><span class="o">.</span><span class="n">writeto</span><span class="p">(</span><span class="s1">&#39;masks/&#39;</span><span class="o">+</span><span class="n">ls_filename</span><span class="p">,</span> <span class="n">lyot_stop</span><span class="o">.</span><span class="n">shaped</span><span class="p">,</span> <span class="n">hdr</span><span class="p">,</span><span class="n">overwrite</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+				<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{0:s}</span><span class="s1"> has been written to file&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;masks/&#39;</span><span class="o">+</span><span class="n">ls_filename</span><span class="p">))</span>
+				
+				
+			<span class="n">ls_filenames</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ls_filename</span><span class="p">)</span>
+			<span class="c1">#remove duplicates</span>
+			<span class="n">s</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">ls_filenames</span><span class="p">)</span>
+			<span class="n">ls_filenames</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+				
+	
+		<span class="k">return</span> <span class="n">pup_filename</span><span class="p">,</span> <span class="n">ls_filenames</span></div>
+
+
+<div class="viewcode-block" id="make_a_hicat_lyot_stop"><a class="viewcode-back" href="../../../api/aplc_optimization.Inputs_Generation.HiCAT_Inputs_Generation.make_a_hicat_lyot_stop.html#aplc_optimization.Inputs_Generation.HiCAT_Inputs_Generation.make_a_hicat_lyot_stop">[docs]</a><span class="k">def</span> <span class="nf">make_a_hicat_lyot_stop</span><span class="p">(</span><span class="n">normalized</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">with_spiders</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">lyot_inner</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">lyot_outer</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span>
+						 <span class="n">return_header</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+	<span class="sd">&#39;&#39;&#39;Make a HiCAT Lyot stop.</span>
+
+<span class="sd">	Parameters</span>
+<span class="sd">	----------</span>
+<span class="sd">	normalized : boolean</span>
+<span class="sd">		If this is True, the outer diameter will be scaled to 1. Otherwise, the</span>
+<span class="sd">		diameter of the pupil will be 15.0 meters.</span>
+<span class="sd">	with_spiders : boolean</span>
+<span class="sd">		Include the secondary mirror support structure in the aperture.</span>
+<span class="sd">	inner_diameter_fraction : scalar</span>
+<span class="sd">		The fractional size of the circular central obstruction as fraction of the pupil diameter.</span>
+<span class="sd">	outer_diameter_fraction : scalar</span>
+<span class="sd">		The fractional size of the circular outer edge as fraction of the pupil diameter.</span>
+<span class="sd">	return_header : boolean</span>
+<span class="sd">		If this is True, a header will be returned giving all important values for the</span>
+<span class="sd">		created aperture for reference.</span>
+
+<span class="sd">	Returns</span>
+<span class="sd">	-------</span>
+<span class="sd">	lyot_stop : Field generator</span>
+<span class="sd">		A field generator for the Lyot stop.</span>
+<span class="sd">	header : dict</span>
+<span class="sd">		A dictionary containing all important values for the created aperture. Only returned</span>
+<span class="sd">		if `return_header` is True.</span>
+<span class="sd">	&#39;&#39;&#39;</span>
+	<span class="n">gamma_21</span> <span class="o">=</span> <span class="mf">0.423</span>
+	<span class="n">gamma_31</span> <span class="o">=</span> <span class="mf">1.008</span>
+	<span class="n">gamma_51</span> <span class="o">=</span> <span class="mf">0.979</span>
+
+	<span class="n">p2_irisao_segment_size</span> <span class="o">=</span> <span class="mf">1.4e-3</span>  <span class="c1"># m (note: point to point)</span>
+	<span class="n">p2_irisao_segment_side_length</span> <span class="o">=</span> <span class="n">p2_irisao_segment_size</span> <span class="o">/</span> <span class="mi">2</span>
+	<span class="n">p2_irisao_inscribed_circle_size</span> <span class="o">=</span> <span class="mi">10</span> <span class="o">*</span> <span class="n">p2_irisao_segment_side_length</span>
+	<span class="n">p2_irisao_flat_to_flat_size</span> <span class="o">=</span> <span class="mi">14</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">p2_irisao_segment_side_length</span>
+	<span class="n">p2_irisao_circumscribed_circle_size</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">p2_irisao_flat_to_flat_size</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">p2_irisao_segment_side_length</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+
+	<span class="n">p3_apodizer_mask_central_segment_size</span> <span class="o">=</span> <span class="mf">3.950e-3</span>  <span class="c1"># m</span>
+	<span class="n">p3_apodizer_size</span> <span class="o">=</span> <span class="mf">19.725e-3</span>  <span class="c1"># m</span>
+	<span class="n">p5_apodizer_size</span> <span class="o">=</span> <span class="n">p3_apodizer_size</span> <span class="o">*</span> <span class="n">gamma_51</span> <span class="o">/</span> <span class="n">gamma_31</span>
+
+	<span class="n">p5_lyot_stop_size</span> <span class="o">=</span> <span class="n">lyot_outer</span> <span class="c1"># m</span>
+	<span class="n">p5_irisao_inscribed_circle_size</span> <span class="o">=</span> <span class="n">p2_irisao_inscribed_circle_size</span> <span class="o">*</span> <span class="n">gamma_51</span> <span class="o">/</span> <span class="n">gamma_21</span>
+	<span class="n">lyot_stop_mask_undersize_contour_wrt_inscribed_circle</span> <span class="o">=</span> <span class="n">p5_lyot_stop_size</span> <span class="o">/</span> <span class="n">p5_irisao_inscribed_circle_size</span>
+
+	<span class="n">p5_irisao_flat_to_flat_size</span> <span class="o">=</span> <span class="n">p2_irisao_flat_to_flat_size</span> <span class="o">*</span> <span class="n">gamma_51</span> <span class="o">/</span> <span class="n">gamma_21</span>
+	<span class="n">p5_irisao_circumscribed_circle_size</span> <span class="o">=</span> <span class="n">p2_irisao_circumscribed_circle_size</span> <span class="o">*</span> <span class="n">gamma_51</span> <span class="o">/</span> <span class="n">gamma_21</span>
+
+	<span class="c1"># Central segment</span>
+	<span class="n">p5_lyot_stop_mask_central_segment_size</span> <span class="o">=</span> <span class="n">lyot_inner</span>  <span class="c1"># m</span>
+	<span class="n">p5_apodizer_mask_central_segment_size</span> <span class="o">=</span> <span class="n">p3_apodizer_mask_central_segment_size</span> <span class="o">*</span> <span class="n">gamma_51</span> <span class="o">/</span> <span class="n">gamma_31</span>
+
+	<span class="n">p5_irisao_segment_size</span> <span class="o">=</span> <span class="n">p2_irisao_segment_size</span> <span class="o">*</span> <span class="n">gamma_51</span> <span class="o">/</span> <span class="n">gamma_21</span>
+	<span class="n">lyot_stop_mask_central_segment_oversize_factor_wrt_apodizer_mask</span> <span class="o">=</span> <span class="n">p5_lyot_stop_mask_central_segment_size</span> <span class="o">/</span> <span class="n">p5_apodizer_mask_central_segment_size</span>
+
+	<span class="c1"># Spiders</span>
+	<span class="n">p5_lyot_stop_mask_spiders_thickness</span> <span class="o">=</span> <span class="mf">0.700e-3</span>  <span class="c1"># m</span>
+	<span class="n">lyot_stop_mask_spiders_thickness_ratio</span> <span class="o">=</span> <span class="n">p5_lyot_stop_mask_spiders_thickness</span> <span class="o">/</span> <span class="n">p5_irisao_circumscribed_circle_size</span>
+
+	<span class="k">if</span> <span class="n">normalized</span><span class="p">:</span>
+		<span class="n">p5_lyot_stop_size</span> <span class="o">/=</span> <span class="n">p5_apodizer_size</span>
+		<span class="n">p5_lyot_stop_mask_central_segment_size</span> <span class="o">/=</span> <span class="n">p5_apodizer_size</span>
+		<span class="n">p5_lyot_stop_mask_spiders_thickness</span> <span class="o">/=</span> <span class="n">p5_apodizer_size</span>
+
+	<span class="n">central_obscuration</span> <span class="o">=</span> <span class="n">circular_aperture</span><span class="p">(</span><span class="n">p5_lyot_stop_mask_central_segment_size</span><span class="p">)</span>
+	<span class="n">outer_diameter</span> <span class="o">=</span> <span class="n">circular_aperture</span><span class="p">(</span><span class="n">p5_lyot_stop_size</span><span class="p">)</span>
+
+	<span class="n">header</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;TELESCOP&#39;</span><span class="p">:</span> <span class="s1">&#39;HiCAT&#39;</span><span class="p">,</span> <span class="s1">&#39;P3_APOD&#39;</span><span class="p">:</span> <span class="n">p3_apodizer_size</span><span class="p">,</span> <span class="s1">&#39;P3_CENT_SEG&#39;</span><span class="p">:</span> <span class="n">p3_apodizer_mask_central_segment_size</span><span class="p">,</span>
+			  <span class="s1">&#39;LS_CENT&#39;</span><span class="p">:</span> <span class="n">p5_lyot_stop_mask_central_segment_size</span><span class="p">,</span> <span class="s1">&#39;LS_SIZE&#39;</span><span class="p">:</span> <span class="n">p5_lyot_stop_size</span><span class="p">,</span>
+			  <span class="s1">&#39;P5_STRUT&#39;</span><span class="p">:</span> <span class="n">p5_lyot_stop_mask_spiders_thickness</span><span class="p">}</span>
+
+	<span class="k">if</span> <span class="n">with_spiders</span><span class="p">:</span>
+		<span class="n">spider1</span> <span class="o">=</span> <span class="n">make_spider_infinite</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="mi">60</span><span class="p">,</span> <span class="n">p5_lyot_stop_mask_spiders_thickness</span><span class="p">)</span>
+		<span class="n">spider2</span> <span class="o">=</span> <span class="n">make_spider_infinite</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="mi">120</span><span class="p">,</span> <span class="n">p5_lyot_stop_mask_spiders_thickness</span><span class="p">)</span>
+		<span class="n">spider3</span> <span class="o">=</span> <span class="n">make_spider_infinite</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="o">-</span><span class="mi">60</span><span class="p">,</span> <span class="n">p5_lyot_stop_mask_spiders_thickness</span><span class="p">)</span>
+		<span class="n">spider4</span> <span class="o">=</span> <span class="n">make_spider_infinite</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="o">-</span><span class="mi">120</span><span class="p">,</span> <span class="n">p5_lyot_stop_mask_spiders_thickness</span><span class="p">)</span>
+
+	<span class="k">def</span> <span class="nf">func</span><span class="p">(</span><span class="n">grid</span><span class="p">):</span>
+		<span class="n">res</span> <span class="o">=</span> <span class="n">outer_diameter</span><span class="p">(</span><span class="n">grid</span><span class="p">)</span> <span class="o">-</span> <span class="n">central_obscuration</span><span class="p">(</span><span class="n">grid</span><span class="p">)</span>
+
+		<span class="k">if</span> <span class="n">with_spiders</span><span class="p">:</span>
+			<span class="n">res</span> <span class="o">*=</span> <span class="n">spider1</span><span class="p">(</span><span class="n">grid</span><span class="p">)</span> <span class="o">*</span> <span class="n">spider2</span><span class="p">(</span><span class="n">grid</span><span class="p">)</span> <span class="o">*</span> <span class="n">spider3</span><span class="p">(</span><span class="n">grid</span><span class="p">)</span> <span class="o">*</span> <span class="n">spider4</span><span class="p">(</span><span class="n">grid</span><span class="p">)</span>
+
+		<span class="k">return</span> <span class="n">Field</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="n">grid</span><span class="p">)</span>
+
+	<span class="k">if</span> <span class="n">return_header</span><span class="p">:</span>
+		<span class="k">return</span> <span class="n">func</span><span class="p">,</span> <span class="n">header</span>
+	<span class="k">else</span><span class="p">:</span>
+		<span class="k">return</span> <span class="n">func</span></div>
+
+
+<div class="viewcode-block" id="make_a_hicat_aperture"><a class="viewcode-back" href="../../../api/aplc_optimization.Inputs_Generation.HiCAT_Inputs_Generation.make_a_hicat_aperture.html#aplc_optimization.Inputs_Generation.HiCAT_Inputs_Generation.make_a_hicat_aperture">[docs]</a><span class="k">def</span> <span class="nf">make_a_hicat_aperture</span><span class="p">(</span><span class="n">normalized</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">with_spiders</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">with_segment_gaps</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">return_header</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+						<span class="n">return_segments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+	<span class="sd">&#39;&#39;&#39;Make the HiCAT P3 apodizer mask</span>
+
+<span class="sd">	Parameters</span>
+<span class="sd">	----------</span>
+<span class="sd">	normalized : boolean</span>
+<span class="sd">		If this is True, the outer diameter will be scaled to 1. Otherwise, the</span>
+<span class="sd">		diameter of the pupil will be 15.0 meters.</span>
+<span class="sd">	with_spiders : boolean</span>
+<span class="sd">		Include the secondary mirror support structure in the aperture.</span>
+<span class="sd">	with_segment_gaps : boolean</span>
+<span class="sd">		Include the gaps between individual segments in the aperture.</span>
+<span class="sd">	return_header : boolean</span>
+<span class="sd">		If this is True , a header will be returned giving all important values for the</span>
+<span class="sd">		created aperture for reference.</span>
+<span class="sd">	return_segments : boolean</span>
+<span class="sd">		If this is True, the segments will also be returned as a list of Field generators.</span>
+
+<span class="sd">	Returns</span>
+<span class="sd">	-------</span>
+<span class="sd">	aperture : Field generator</span>
+<span class="sd">		The HiCAT aperture.</span>
+<span class="sd">	header : dict</span>
+<span class="sd">		A dictionary containing all important values for the created aperture. Only returned</span>
+<span class="sd">		if `return_header` is True.</span>
+<span class="sd">	segments : list of Field generators</span>
+<span class="sd">		The segments. Only returned when `return_segments` is True.</span>
+<span class="sd">	&#39;&#39;&#39;</span>
+	<span class="n">gamma_21</span> <span class="o">=</span> <span class="mf">0.423</span>
+	<span class="n">gamma_31</span> <span class="o">=</span> <span class="mf">1.008</span>
+
+	<span class="c1"># P2 - Iris AO</span>
+	<span class="n">p2_irisao_segment_size</span> <span class="o">=</span> <span class="mf">1.4e-3</span>  <span class="c1"># m (note: point to point)</span>
+	<span class="n">p2_irisao_segment_side_length</span> <span class="o">=</span> <span class="n">p2_irisao_segment_size</span> <span class="o">/</span> <span class="mi">2</span>
+	<span class="n">p2_irisao_segment_gap_size</span> <span class="o">=</span> <span class="mf">12e-6</span>  <span class="c1"># m</span>
+
+	<span class="n">p2_irisao_distance_between_segments</span> <span class="o">=</span> <span class="n">p2_irisao_segment_side_length</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+	<span class="n">p2_irisao_segment_circumdiameter</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">p2_irisao_segment_side_length</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span>
+				<span class="mi">2</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span> <span class="o">*</span> <span class="n">p2_irisao_segment_gap_size</span>
+
+	<span class="c1"># P1 - Pupil Mask</span>
+	<span class="c1"># Central segment</span>
+	<span class="n">p1_pupil_mask_central_segment_size</span> <span class="o">=</span> <span class="mf">3.600e-3</span>  <span class="c1"># m</span>
+
+	<span class="c1"># P3 - Apodizer</span>
+	<span class="c1"># Contour</span>
+	<span class="n">p3_apodizer_size</span> <span class="o">=</span> <span class="mf">19.725e-3</span>  <span class="c1"># m</span>
+	<span class="n">p2_apodizer_size</span> <span class="o">=</span> <span class="n">p3_apodizer_size</span> <span class="o">*</span> <span class="n">gamma_21</span> <span class="o">/</span> <span class="n">gamma_31</span>
+
+	<span class="c1"># Gap</span>
+	<span class="n">p3_apodizer_mask_gap_size</span> <span class="o">=</span> <span class="mf">0.090e-3</span>  <span class="c1"># m</span>
+	<span class="n">p3_irisao_segment_gap_size</span> <span class="o">=</span> <span class="n">p2_irisao_segment_gap_size</span> <span class="o">*</span> <span class="n">gamma_31</span> <span class="o">/</span> <span class="n">gamma_21</span>
+	<span class="n">apodizer_mask_gap_oversize_factor_wrt_irisao</span> <span class="o">=</span> <span class="n">p3_apodizer_mask_gap_size</span> <span class="o">/</span> <span class="n">p3_irisao_segment_gap_size</span>
+
+	<span class="c1"># Central segment</span>
+	<span class="n">p3_apodizer_mask_central_segment_size</span> <span class="o">=</span> <span class="mf">3.950e-3</span>  <span class="c1"># m</span>
+	<span class="n">p3_pupil_mask_central_segment_size</span> <span class="o">=</span> <span class="n">p1_pupil_mask_central_segment_size</span> <span class="o">*</span> <span class="n">gamma_31</span>
+	<span class="n">apodizer_mask_central_segment_oversize_factor_wrt_pupil_mask</span> <span class="o">=</span> <span class="n">p3_apodizer_mask_central_segment_size</span> <span class="o">/</span> <span class="n">p3_pupil_mask_central_segment_size</span>
+	<span class="n">p3_irisao_segment_size</span> <span class="o">=</span> <span class="n">p2_irisao_segment_size</span> <span class="o">*</span> <span class="n">gamma_31</span> <span class="o">/</span> <span class="n">gamma_21</span>
+
+	<span class="c1"># Spiders</span>
+	<span class="n">p3_apodizer_mask_spiders_thickness</span> <span class="o">=</span> <span class="mf">0.350e-3</span>  <span class="c1"># m</span>
+
+	<span class="n">header</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;TELESCOP&#39;</span><span class="p">:</span> <span class="s1">&#39;HiCAT&#39;</span><span class="p">,</span> <span class="s1">&#39;P3_APOD&#39;</span><span class="p">:</span> <span class="n">p3_apodizer_size</span><span class="p">,</span> <span class="s1">&#39;P3_CENT_SEG&#39;</span><span class="p">:</span> <span class="n">p3_apodizer_mask_central_segment_size</span><span class="p">,</span>
+			  <span class="s1">&#39;P3_GAP&#39;</span><span class="p">:</span> <span class="n">p3_apodizer_mask_gap_size</span><span class="p">,</span> <span class="s1">&#39;P3_GAP_OVER&#39;</span><span class="p">:</span> <span class="n">apodizer_mask_gap_oversize_factor_wrt_irisao</span><span class="p">,</span>
+			  <span class="s1">&#39;P3_STRUT&#39;</span><span class="p">:</span> <span class="n">p3_apodizer_mask_spiders_thickness</span><span class="p">,</span> <span class="s1">&#39;PROV&#39;</span><span class="p">:</span> <span class="s1">&#39;HiCAT spreadsheet&#39;</span><span class="p">}</span>
+
+	<span class="n">p3_irisao_segment_circumdiameter</span> <span class="o">=</span> <span class="n">p2_irisao_segment_circumdiameter</span> <span class="o">*</span> <span class="n">gamma_31</span> <span class="o">/</span> <span class="n">gamma_21</span>
+	<span class="n">p3_irisao_distance_between_segments</span> <span class="o">=</span> <span class="n">p2_irisao_distance_between_segments</span> <span class="o">*</span> <span class="n">gamma_31</span> <span class="o">/</span> <span class="n">gamma_21</span>
+	<span class="n">p3_apodizer_segment_circumdiameter</span> <span class="o">=</span> <span class="n">p3_irisao_segment_circumdiameter</span> <span class="o">+</span> <span class="p">(</span>
+				<span class="o">-</span><span class="n">p3_apodizer_mask_gap_size</span> <span class="o">+</span> <span class="n">p3_irisao_segment_gap_size</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">2</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+
+	<span class="k">if</span> <span class="n">normalized</span><span class="p">:</span>
+		<span class="n">p3_apodizer_segment_circumdiameter</span> <span class="o">/=</span> <span class="n">p3_apodizer_size</span>
+		<span class="n">p3_irisao_distance_between_segments</span> <span class="o">/=</span> <span class="n">p3_apodizer_size</span>
+		<span class="n">p3_apodizer_mask_central_segment_size</span> <span class="o">/=</span> <span class="n">p3_apodizer_size</span>
+		<span class="n">p3_apodizer_mask_spiders_thickness</span> <span class="o">/=</span> <span class="n">p3_apodizer_size</span>
+		<span class="n">p3_apodizer_size</span> <span class="o">=</span> <span class="mi">1</span>
+
+	<span class="n">segment</span> <span class="o">=</span> <span class="n">hexagonal_aperture</span><span class="p">(</span><span class="n">p3_apodizer_segment_circumdiameter</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+	<span class="n">segment_positions</span> <span class="o">=</span> <span class="n">make_hexagonal_grid</span><span class="p">(</span><span class="n">p3_irisao_distance_between_segments</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+	<span class="n">segmentation</span> <span class="o">=</span> <span class="n">make_segmented_aperture</span><span class="p">(</span><span class="n">segment</span><span class="p">,</span> <span class="n">segment_positions</span><span class="p">,</span> <span class="n">return_segments</span><span class="o">=</span><span class="n">return_segments</span><span class="p">)</span>
+
+	<span class="k">if</span> <span class="n">return_segments</span><span class="p">:</span>
+		<span class="n">segmentation</span><span class="p">,</span> <span class="n">segments</span> <span class="o">=</span> <span class="n">segmentation</span>
+
+	<span class="n">segment</span> <span class="o">=</span> <span class="n">hexagonal_aperture</span><span class="p">(</span><span class="n">p3_apodizer_size</span> <span class="o">/</span> <span class="mi">7</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">*</span> <span class="mi">2</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+	<span class="n">distance_between_segments</span> <span class="o">=</span> <span class="n">p3_apodizer_size</span> <span class="o">/</span> <span class="mi">7</span>
+	<span class="n">segment_positions</span> <span class="o">=</span> <span class="n">make_hexagonal_grid</span><span class="p">(</span><span class="n">distance_between_segments</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+	<span class="n">contour</span> <span class="o">=</span> <span class="n">make_segmented_aperture</span><span class="p">(</span><span class="n">segment</span><span class="p">,</span> <span class="n">segment_positions</span><span class="p">)</span>
+
+	<span class="n">central_segment</span> <span class="o">=</span> <span class="n">hexagonal_aperture</span><span class="p">(</span><span class="n">p3_apodizer_mask_central_segment_size</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+
+	<span class="k">if</span> <span class="n">return_segments</span><span class="p">:</span>
+		<span class="c1"># Use function to return the lambda, to avoid incorrect binding of variables</span>
+		<span class="k">def</span> <span class="nf">segment_obstructed</span><span class="p">(</span><span class="n">segment</span><span class="p">):</span>
+			<span class="k">return</span> <span class="k">lambda</span> <span class="n">grid</span><span class="p">:</span> <span class="n">segment</span><span class="p">(</span><span class="n">grid</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">contour</span><span class="p">(</span><span class="n">grid</span><span class="p">)</span> <span class="o">-</span> <span class="n">central_segment</span><span class="p">(</span><span class="n">grid</span><span class="p">))</span>
+
+		<span class="n">segments</span> <span class="o">=</span> <span class="p">[</span><span class="n">segment_obstructed</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">segments</span><span class="p">]</span>
+
+	<span class="k">if</span> <span class="n">with_spiders</span><span class="p">:</span>
+		<span class="n">spider1</span> <span class="o">=</span> <span class="n">make_spider_infinite</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="mi">60</span><span class="p">,</span> <span class="n">p3_apodizer_mask_spiders_thickness</span><span class="p">)</span>
+		<span class="n">spider2</span> <span class="o">=</span> <span class="n">make_spider_infinite</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="mi">120</span><span class="p">,</span> <span class="n">p3_apodizer_mask_spiders_thickness</span><span class="p">)</span>
+		<span class="n">spider3</span> <span class="o">=</span> <span class="n">make_spider_infinite</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="o">-</span><span class="mi">60</span><span class="p">,</span> <span class="n">p3_apodizer_mask_spiders_thickness</span><span class="p">)</span>
+		<span class="n">spider4</span> <span class="o">=</span> <span class="n">make_spider_infinite</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="o">-</span><span class="mi">120</span><span class="p">,</span> <span class="n">p3_apodizer_mask_spiders_thickness</span><span class="p">)</span>
+
+	<span class="k">if</span> <span class="n">with_spiders</span> <span class="ow">and</span> <span class="n">return_segments</span><span class="p">:</span>
+		<span class="c1"># Use function to return the lambda, to avoid incorrect binding of variables</span>
+		<span class="k">def</span> <span class="nf">segment_with_spider</span><span class="p">(</span><span class="n">segment</span><span class="p">):</span>
+			<span class="k">return</span> <span class="k">lambda</span> <span class="n">grid</span><span class="p">:</span> <span class="n">segment</span><span class="p">(</span><span class="n">grid</span><span class="p">)</span> <span class="o">*</span> <span class="n">spider1</span><span class="p">(</span><span class="n">grid</span><span class="p">)</span> <span class="o">*</span> <span class="n">spider2</span><span class="p">(</span><span class="n">grid</span><span class="p">)</span> <span class="o">*</span> <span class="n">spider3</span><span class="p">(</span><span class="n">grid</span><span class="p">)</span> <span class="o">*</span> <span class="n">spider4</span><span class="p">(</span><span class="n">grid</span><span class="p">)</span>
+
+		<span class="n">segments</span> <span class="o">=</span> <span class="p">[</span><span class="n">segment_with_spider</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">segments</span><span class="p">]</span>
+
+	<span class="k">def</span> <span class="nf">func</span><span class="p">(</span><span class="n">grid</span><span class="p">):</span>
+		<span class="n">res</span> <span class="o">=</span> <span class="n">contour</span><span class="p">(</span><span class="n">grid</span><span class="p">)</span> <span class="o">-</span> <span class="n">central_segment</span><span class="p">(</span><span class="n">grid</span><span class="p">)</span>
+
+		<span class="k">if</span> <span class="n">with_segment_gaps</span><span class="p">:</span>
+			<span class="n">res</span> <span class="o">*=</span> <span class="n">segmentation</span><span class="p">(</span><span class="n">grid</span><span class="p">)</span>
+
+		<span class="k">if</span> <span class="n">with_spiders</span><span class="p">:</span>
+			<span class="n">res</span> <span class="o">*=</span> <span class="n">spider1</span><span class="p">(</span><span class="n">grid</span><span class="p">)</span> <span class="o">*</span> <span class="n">spider2</span><span class="p">(</span><span class="n">grid</span><span class="p">)</span> <span class="o">*</span> <span class="n">spider3</span><span class="p">(</span><span class="n">grid</span><span class="p">)</span> <span class="o">*</span> <span class="n">spider4</span><span class="p">(</span><span class="n">grid</span><span class="p">)</span>
+
+		<span class="k">return</span> <span class="n">Field</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="n">grid</span><span class="p">)</span>
+
+	<span class="k">if</span> <span class="n">return_header</span><span class="p">:</span>
+		<span class="k">if</span> <span class="n">return_segments</span><span class="p">:</span>
+			<span class="k">return</span> <span class="n">func</span><span class="p">,</span> <span class="n">header</span><span class="p">,</span> <span class="n">segments</span>
+		<span class="k">else</span><span class="p">:</span>
+			<span class="k">return</span> <span class="n">func</span><span class="p">,</span> <span class="n">header</span>
+	<span class="k">elif</span> <span class="n">return_segments</span><span class="p">:</span>
+		<span class="k">return</span> <span class="n">func</span><span class="p">,</span> <span class="n">segments</span>
+	<span class="k">else</span><span class="p">:</span>
+		<span class="k">return</span> <span class="n">func</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2020, Bryony Nickson.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

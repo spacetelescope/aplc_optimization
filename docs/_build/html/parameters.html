@@ -1,0 +1,246 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>&lt;no title&gt; &mdash; aplc-optimization  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/stsci.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="_static/stsci.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="_static/logo.jpg"/>
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+            <a href="index.html" class="icon icon-home"> aplc-optimization
+            
+            <img src="_static/stsci_pri_combo_mark_white.png" class="logo" />
+          </a>
+
+          
+            
+            
+          
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+  
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installing.html">Requirements &amp; Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="server.html">Using STScI Linux Servers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="workflow.html">Design Survey Workflow</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">aplc-optimization</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>&lt;no title&gt;</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/parameters.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <p>The input file parameters (telescope aperture and Lyot stop specifications) are particular to the instrument being surveyed,
+otherwise details on each user-definable survey parameter are as follows:</p>
+<dl class="simple">
+<dt><strong>Lyot Stop parameters</strong></dt><dd><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">alignment_tolerance</span></code>: Lyot stop alignment tolerance, in pixels.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">num_lyot_stops</span></code>: number of Lyot stop translations.</p></li>
+</ul>
+</dd>
+<dt><strong>Focal Plane Mask parameters</strong></dt><dd><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">radius</span></code>: radius of the FPM of the APLC, in lambda_0/D.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">num_pix</span></code>: number of pixels in the FPM.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">grayscale`</span></code>: grayscale FPM, otherwise black &amp; white.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">field_stop_radius</span></code>: radius of the FPM stop.</p></li>
+</ul>
+</dd>
+<dt><strong>Image parameters</strong></dt><dd><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">contrast</span></code>: contrast goal in the dark zone of the coronagraphic image.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">iwa</span></code>: inner edge of dark zone region, in lambda_0/D.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">owa</span></code>: outer edge of the dark zone region, in lambda_0/D.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">bandwidth</span></code>: dark zone bandpass</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">num_wavelengths</span></code>: number of wavelengths spanning the design bandpass.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">resolution</span></code>: spatial resolution of the coronagraph in each plane.</p></li>
+</ul>
+</dd>
+<dt><strong>Optimization method parameters</strong></dt><dd><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">force_no_x_mirror_symmetry</span></code>: force the algorithm to ignore any x mirror symmetry that might exist in the problem.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">force_no_y_mirror_symmetry</span></code>: force the algorithm to ignore any y mirror symmetry that might exist in the problem.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">force_no_hermitian_symmetry</span></code>: force the algorithm to ignore the (always present) Hermitian symmetry in the problem.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">starting_scale</span></code>: number of pixels per unit cell for the initial solution, used in the adaptive algorithm. Must be a power of 2 times the <code class="docutils literal notranslate"><span class="pre">ending_scale</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ending_scale</span></code>: number of pixels per unit cell for the final solution, used in the adaptive algorithm. If this is the same as <cite>starting_scale</cite> the adaptive algorithm is essentially turned off.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">edge_width_for_prior</span></code>: width of the optimized regions along the edges.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">num_throughput_iterations</span></code>: number of iterations to let the throughput factor converge. Too few iterations and the contrast might be a fraction too high, too high and you are wasting computation time. Setting this to 1 turns iterations off.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">initial_throughput_estimate</span></code>: expected relative throughput of the coronagraph compared to without apodizer or focal-plane mask (but including Lyot stop). A good estimate (for example from a lower resolution optimization) can often eliminate the need for throughput iterations altogether.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">maximize_planet_throughput</span></code>:  maximize throughput through the apodizer times Lyot stop. Otherwise maximize the throughput of just the apodizer.</p></li>
+</ul>
+</dd>
+<dt><strong>Solver parameters</strong></dt><dd><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">num_threads</span></code>: number of threads that Gurobi is allowed to use. A value of 0 indicates that Gurobi is free to ßchoose the number.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">crossover</span></code>: crossover strategy that Gurobi needs to use. See Gurobi documentation for more information.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">method</span></code>: The algorithm that Gurobi needs to use. See Gurobi documentation for more information.</p></li>
+</ul>
+</dd>
+</dl>
+
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2020, Bryony Nickson.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

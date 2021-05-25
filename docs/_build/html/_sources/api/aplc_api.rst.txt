@@ -1,0 +1,5 @@
+Apodized Pupili Lyot Coronagraph
+---------------------------------
+
+.. automodapi:: aplc_optimization.aplc
+    :no-inheritance-diagram:

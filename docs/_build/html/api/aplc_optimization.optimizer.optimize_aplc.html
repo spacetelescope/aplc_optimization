@@ -1,0 +1,264 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>optimize_aplc &mdash; aplc-optimization  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/stsci.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/stsci.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../_static/logo.jpg"/>
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+            <a href="../index.html" class="icon icon-home"> aplc-optimization
+            
+            <img src="../_static/stsci_pri_combo_mark_white.png" class="logo" />
+          </a>
+
+          
+            
+            
+          
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+  
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installing.html">Requirements &amp; Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../server.html">Using STScI Linux Servers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../workflow.html">Design Survey Workflow</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">aplc-optimization</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>optimize_aplc</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/api/aplc_optimization.optimizer.optimize_aplc.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="optimize-aplc">
+<h1>optimize_aplc<a class="headerlink" href="#optimize-aplc" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="aplc_optimization.optimizer.optimize_aplc">
+<code class="sig-prename descclassname">aplc_optimization.optimizer.</code><code class="sig-name descname">optimize_aplc</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">pupil</span></em>, <em class="sig-param"><span class="n">focal_plane_mask</span></em>, <em class="sig-param"><span class="n">lyot_stops</span></em>, <em class="sig-param"><span class="n">dark_zone_mask</span></em>, <em class="sig-param"><span class="n">wavelengths</span></em>, <em class="sig-param"><span class="n">contrast</span></em>, <em class="sig-param"><span class="n">starting_scale</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">ending_scale</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">force_no_x_symmetry</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">force_no_y_symmetry</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">force_no_hermitian_symmetry</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">maximize_planet_throughput</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">num_throughput_iterations</span><span class="o">=</span><span class="default_value">2</span></em>, <em class="sig-param"><span class="n">initial_throughput_estimate</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">edge_width_for_prior</span><span class="o">=</span><span class="default_value">2</span></em>, <em class="sig-param"><span class="n">solver_num_threads</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">solver_crossover</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">solver_method</span><span class="o">=</span><span class="default_value">2</span></em>, <em class="sig-param"><span class="n">debug</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/aplc_optimization/optimizer.html#optimize_aplc"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#aplc_optimization.optimizer.optimize_aplc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Optimize an APLC with a (optional) iterative algorithm taking into account x and/or y mirror symemtries.</p>
+<dl class="simple">
+<dt>pupil<span class="classifier">Field</span></dt><dd><p>The telescope pupil</p>
+</dd>
+<dt>focal_plane_mask<span class="classifier">Field</span></dt><dd><p>The focal plane mask of the APLC. The grid is assumed to be in lambda_0/D.</p>
+</dd>
+<dt>lyot_stops<span class="classifier">list of Fields</span></dt><dd><p>A list of the Lyot stops used in the optimization problem.</p>
+</dd>
+<dt>dark_zone_mask<span class="classifier">Field</span></dt><dd><p>A binary field indicating which pixels belong to the dark zone.</p>
+</dd>
+<dt>wavelengths<span class="classifier">array_like</span></dt><dd><p>An array of wavelengths as fractions of lambda_0.</p>
+</dd>
+<dt>contrast<span class="classifier">scalar</span></dt><dd><p>The contrast that needs to be achieved in the dark zone.</p>
+</dd>
+<dt>starting_scale<span class="classifier">int</span></dt><dd><p>The number of pixels per unit cell for the initial solution. This is used for the
+adaptive algorithm. It must be a power of 2 times the <cite>ending_scale</cite>.</p>
+</dd>
+<dt>ending_scale<span class="classifier">int</span></dt><dd><p>The number of pixels per unit cell for the final solution. If this is the same as <cite>starting_scale</cite>,
+the adaptive algorithm is essentially turned off.</p>
+</dd>
+<dt>force_no_x_symmetry<span class="classifier">boolean</span></dt><dd><p>Force the algorithm to ignore any x mirror symmetry that might exist in the problem.</p>
+</dd>
+<dt>force_no_y_symmetry<span class="classifier">boolean</span></dt><dd><p>Force the algorithm to ignore any y mirror symmetry that might exist in the problem.</p>
+</dd>
+<dt>force_no_hermitian_symmetry<span class="classifier">boolean</span></dt><dd><p>Force the algorithm to ignore the (always present) Hermitian symmetry in the problem.</p>
+</dd>
+<dt>maximize_planet_throughput<span class="classifier">boolean</span></dt><dd><p>If this is True, the throughput through the apodizer times Lyot stop is maximized, a metric for
+planet throughput at large angular separations. Otherwise the throughput of the apodizer is
+maximized.</p>
+</dd>
+<dt>num_throughput_iterations<span class="classifier">integer</span></dt><dd><p>The number of iterations to let the throughput factor converge. Too few iterations and the contrast might be
+a fraction too high, too high and you are wasting computation time. Setting this to 1 turns iterations off.</p>
+</dd>
+<dt>initial_throughput_estimate<span class="classifier">float</span></dt><dd><p>The expected relative throughput of the coronagraph compared to without apodizer or focal-plane
+mask (but including Lyot stop). A good estimate (for example from a lower resolution optimization)
+can often eliminate the need for throughput iterations altogether.</p>
+</dd>
+<dt>edge_width_for_prior<span class="classifier">[2,4,6]</span></dt><dd><p>The width of the optimized regions along the edges. This is only used for the adaptive algorithm.</p>
+</dd>
+<dt>solver_num_threads<span class="classifier">integer</span></dt><dd><p>The number of threads that Gurobi is allowed to use. A value of 0 indicates that Gurobi is free to
+choose the number.</p>
+</dd>
+<dt>solver_crossover<span class="classifier">integer</span></dt><dd><p>The crossover strategy that Gurobi needs to use. See Gurobi documentation for more information.</p>
+</dd>
+<dt>solver_method<span class="classifier">integer</span></dt><dd><p>The algorithm that Gurobi needs to use. See Gurobi documentation for more information.</p>
+</dd>
+<dt>debug<span class="classifier">boolean</span></dt><dd><p>Output specific debugging information to a debug folder. This is mostly used to monitor the adaptive algorithm.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>Field</dt><dd><p>The optimized apodizer for the APLC. This has not been multiplied by the telescope pupil.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2020, Bryony Nickson.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

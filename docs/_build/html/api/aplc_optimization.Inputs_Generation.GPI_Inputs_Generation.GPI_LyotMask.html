@@ -1,0 +1,292 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>GPI_LyotMask &mdash; aplc-optimization  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/stsci.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/stsci.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../_static/logo.jpg"/>
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="GeminiPrimary" href="aplc_optimization.Inputs_Generation.GPI_Inputs_Generation.GeminiPrimary.html" />
+    <link rel="prev" title="GPI_inputs_gen" href="aplc_optimization.Inputs_Generation.GPI_Inputs_Generation.GPI_inputs_gen.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+            <a href="../index.html" class="icon icon-home"> aplc-optimization
+            
+            <img src="../_static/stsci_pri_combo_mark_white.png" class="logo" />
+          </a>
+
+          
+            
+            
+          
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+  
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installing.html">Requirements &amp; Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../server.html">Using STScI Linux Servers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../workflow.html">Design Survey Workflow</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Detailed API Reference</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="aplc.html">APLC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="survey.html">Survey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="optimizer.html">Optimizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="HiCAT_Inputs_Generation.html">HiCAT Inputs Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LUVOIR_Inputs_Generation.html">LUVOIR Inputs Generation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="GPI_Inputs_Generation.html">GPI Inputs Generation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="GPI_Inputs_Generation.html#functions">Functions</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="GPI_Inputs_Generation.html#classes">Classes</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">GPI_LyotMask</a></li>
+<li class="toctree-l3"><a class="reference internal" href="aplc_optimization.Inputs_Generation.GPI_Inputs_Generation.GeminiPrimary.html">GeminiPrimary</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">aplc-optimization</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="GPI_Inputs_Generation.html">GPI Inputs Generation</a> &raquo;</li>
+        
+      <li>GPI_LyotMask</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/api/aplc_optimization.Inputs_Generation.GPI_Inputs_Generation.GPI_LyotMask.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="gpi-lyotmask">
+<h1>GPI_LyotMask<a class="headerlink" href="#gpi-lyotmask" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="aplc_optimization.Inputs_Generation.GPI_Inputs_Generation.GPI_LyotMask">
+<em class="property">class </em><code class="sig-prename descclassname">aplc_optimization.Inputs_Generation.GPI_Inputs_Generation.</code><code class="sig-name descname">GPI_LyotMask</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span><span class="o">=</span><span class="default_value">'080m12_04'</span></em>, <em class="sig-param"><span class="n">tabs</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">ls_spid</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/aplc_optimization/Inputs_Generation/GPI_Inputs_Generation.html#GPI_LyotMask"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#aplc_optimization.Inputs_Generation.GPI_Inputs_Generation.GPI_LyotMask" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">poppy.optics.AnalyticOpticalElement</span></code></p>
+<p>taken from [geminiplanetimager/gpipsfs]</p>
+<p class="rubric">Attributes Summary</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#aplc_optimization.Inputs_Generation.GPI_Inputs_Generation.GPI_LyotMask.bad_actuator_tab_locations" title="aplc_optimization.Inputs_Generation.GPI_Inputs_Generation.GPI_LyotMask.bad_actuator_tab_locations"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bad_actuator_tab_locations</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#aplc_optimization.Inputs_Generation.GPI_Inputs_Generation.GPI_LyotMask.lyot_table" title="aplc_optimization.Inputs_Generation.GPI_Inputs_Generation.GPI_LyotMask.lyot_table"><code class="xref py py-obj docutils literal notranslate"><span class="pre">lyot_table</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#aplc_optimization.Inputs_Generation.GPI_Inputs_Generation.GPI_LyotMask.magnification" title="aplc_optimization.Inputs_Generation.GPI_Inputs_Generation.GPI_LyotMask.magnification"><code class="xref py py-obj docutils literal notranslate"><span class="pre">magnification</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Methods Summary</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#aplc_optimization.Inputs_Generation.GPI_Inputs_Generation.GPI_LyotMask.get_transmission" title="aplc_optimization.Inputs_Generation.GPI_Inputs_Generation.GPI_LyotMask.get_transmission"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_transmission</span></code></a>(wave)</p></td>
+<td><p>Compute the transmission inside/outside of the obscuration</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Attributes Documentation</p>
+<dl class="py attribute">
+<dt id="aplc_optimization.Inputs_Generation.GPI_Inputs_Generation.GPI_LyotMask.bad_actuator_tab_locations">
+<code class="sig-name descname">bad_actuator_tab_locations</code><em class="property"> = [(3.977, 1.932, 1), (-2.614, 3.75, 1), (2.614, -3.977, 1), (-1.932, -1.25, 2), (1.023, -1.136, 0)]</em><a class="headerlink" href="#aplc_optimization.Inputs_Generation.GPI_Inputs_Generation.GPI_LyotMask.bad_actuator_tab_locations" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="aplc_optimization.Inputs_Generation.GPI_Inputs_Generation.GPI_LyotMask.lyot_table">
+<code class="sig-name descname">lyot_table</code><em class="property"> = {'080_04': (4.786, 1.388, 0.404, 3, 0.428), '080m12_02': (4.786, 1.388, 0.204, 4, 0.328), '080m12_03': (4.786, 1.388, 0.304, 4, 0.378), '080m12_03_06': (4.786, 1.388, 0.304, 4, 0.528), '080m12_04': (4.786, 1.388, 0.404, 4, 0.428), '080m12_04_c': (4.786, 1.388, 0.604, 5, 0.378), '080m12_06': (4.786, 1.388, 0.604, 4, 0.528), '080m12_06_03': (4.786, 1.388, 0.604, 4, 0.528), '080m12_07': (4.686, 1.488, 0.604, 4, 0.528), '080m12_10': (4.377, 1.772, 1.004, 4, 0.728), 'Blank': (0, 0, 0, 0, 0), 'Open': (5.1, 0, 0, 0, 0)}</em><a class="headerlink" href="#aplc_optimization.Inputs_Generation.GPI_Inputs_Generation.GPI_LyotMask.lyot_table" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="aplc_optimization.Inputs_Generation.GPI_Inputs_Generation.GPI_LyotMask.magnification">
+<code class="sig-name descname">magnification</code><em class="property"> = 790.8498727735368</em><a class="headerlink" href="#aplc_optimization.Inputs_Generation.GPI_Inputs_Generation.GPI_LyotMask.magnification" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p class="rubric">Methods Documentation</p>
+<dl class="py method">
+<dt id="aplc_optimization.Inputs_Generation.GPI_Inputs_Generation.GPI_LyotMask.get_transmission">
+<code class="sig-name descname">get_transmission</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">wave</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/aplc_optimization/Inputs_Generation/GPI_Inputs_Generation.html#GPI_LyotMask.get_transmission"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#aplc_optimization.Inputs_Generation.GPI_Inputs_Generation.GPI_LyotMask.get_transmission" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the transmission inside/outside of the obscuration</p>
+<p>Based on poppy.AsymmetricSecondaryObscuration but with the bad actuator tabs added.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="aplc_optimization.Inputs_Generation.GPI_Inputs_Generation.GeminiPrimary.html" class="btn btn-neutral float-right" title="GeminiPrimary" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="aplc_optimization.Inputs_Generation.GPI_Inputs_Generation.GPI_inputs_gen.html" class="btn btn-neutral float-left" title="GPI_inputs_gen" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2020, Bryony Nickson.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

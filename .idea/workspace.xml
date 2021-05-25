@@ -1,0 +1,687 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="e9f8f11d-b623-415a-96cb-a3040fd1a215" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/aplc_optimization/Inputs_Generation/GPI_Inputs_Generation.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/aplc_optimization/Inputs_Generation/HiCAT_Inputs_Generation.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/aplc_optimization/Inputs_Generation/LUVOIR_Inputs_Generation.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/aplc_optimization/Inputs_Generation/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/aplc_optimization/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/aplc_optimization/analysis.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/aplc_optimization/aplc.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/aplc_optimization/driver_template.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/aplc_optimization/optimizer.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/aplc_optimization/survey.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/api/GPI_Inputs_Generation.rst" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/api/HiCAT_Inputs_Generation.rst" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/api/LUVOIR_Inputs_Generation.rst" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/api/aplc.rst" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/api/optimizer.rst" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/api/survey.rst" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/GPI/analysis/._0_GPI_N1168_FPM347M01168_IWA0300_OWA02200_C8_BW20_Nlam3_LS_ID03_gr_ODover_ls_amp04_notabs.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/GPI/analysis/._GPI_pathfinder_design_analysis_rounded.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/GPI/analysis/0_GPI_N1168_FPM347M01168_IWA0300_OWA02200_C8_BW20_Nlam3_LS_ID03_gr_ODover_ls_amp04_notabs.asdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/GPI/analysis/0_GPI_N1168_FPM347M01168_IWA0300_OWA02200_C8_BW20_Nlam3_LS_ID03_gr_ODover_ls_amp04_notabs.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/GPI/analysis/GPI_pathfinder_design_analysis.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/GPI/analysis/GPI_pathfinder_design_analysis_rounded.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/GPI/analysis/GPI_robust_analysis.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/GPI/gpi_pathfinder_N1168_telserv3/analysis/._0_GPI_N1168_FPM347M01168_IWA0300_OWA02200_C8_BW20_Nlam3_LS_ID03_gr_ODover_ls_amp04_notabs.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/GPI/gpi_pathfinder_N1168_telserv3/analysis/0_GPI_N1168_FPM347M01168_IWA0300_OWA02200_C8_BW20_Nlam3_LS_ID03_gr_ODover_ls_amp04_notabs.asdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/GPI/gpi_pathfinder_N1168_telserv3/analysis/0_GPI_N1168_FPM347M01168_IWA0300_OWA02200_C8_BW20_Nlam3_LS_ID03_gr_ODover_ls_amp04_notabs.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/GPI/gpi_pathfinder_N1168_telserv3/drivers/0_GPI_N1168_FPM347M01168_IWA0300_OWA02200_C8_BW20_Nlam3_LS_ID03_gr_ODover_ls_amp04_notabs.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/GPI/gpi_pathfinder_N1168_telserv3/drivers/optimizer.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/GPI/gpi_pathfinder_N1168_telserv3/logs/._0_GPI_N1168_FPM347M01168_IWA0300_OWA02200_C8_BW20_Nlam3_LS_ID03_gr_ODover_ls_amp04_notabs.log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/GPI/gpi_pathfinder_N1168_telserv3/logs/0_GPI_N1168_FPM347M01168_IWA0300_OWA02200_C8_BW20_Nlam3_LS_ID03_gr_ODover_ls_amp04_notabs.log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/GPI/gpi_pathfinder_N1168_telserv3/solutions/._0_GPI_N1168_FPM347M01168_IWA0300_OWA02200_C8_BW20_Nlam3_LS_ID03_gr_ODover_ls_amp04_notabs.fits" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/GPI/gpi_pathfinder_N1168_telserv3/solutions/0_GPI_N1168_FPM347M01168_IWA0300_OWA02200_C8_BW20_Nlam3_LS_ID03_gr_ODover_ls_amp04_notabs.fits" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/GPI/gpi_pathfinder_robust_N1168_telserv3/analysis/._0_GPI_N1168_FPM347M01168_IWA0300_OWA02200_C8_BW20_Nlam3_LS_ID03_gr_ODover_ls_amp04_notabs.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/GPI/gpi_pathfinder_robust_N1168_telserv3/analysis/._GPI_pathfinder_design_analysis_rounded.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/GPI/gpi_pathfinder_robust_N1168_telserv3/analysis/0_GPI_N1168_FPM347M01168_IWA0300_OWA02200_C8_BW20_Nlam3_LS_ID03_gr_ODover_ls_amp04_notabs.asdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/GPI/gpi_pathfinder_robust_N1168_telserv3/analysis/0_GPI_N1168_FPM347M01168_IWA0300_OWA02200_C8_BW20_Nlam3_LS_ID03_gr_ODover_ls_amp04_notabs.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/GPI/gpi_pathfinder_robust_N1168_telserv3/analysis/GPI_pathfinder_design_analysis.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/GPI/gpi_pathfinder_robust_N1168_telserv3/analysis/GPI_pathfinder_design_analysis_rounded.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/GPI/gpi_pathfinder_robust_N1168_telserv3/analysis/GPI_robust_analysis.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/GPI/gpi_pathfinder_robust_N1168_telserv3/drivers/._0_GPI_N1168_FPM347M01168_IWA0300_OWA02200_C8_BW20_Nlam3_LS_ID03_gr_ODover_ls_amp04_notabs.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/GPI/gpi_pathfinder_robust_N1168_telserv3/drivers/0_GPI_N1168_FPM347M01168_IWA0300_OWA02200_C8_BW20_Nlam3_LS_ID03_gr_ODover_ls_amp04_notabs.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/GPI/gpi_pathfinder_robust_N1168_telserv3/drivers/optimizer.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/GPI/gpi_pathfinder_robust_N1168_telserv3/logs/._0_GPI_N1168_FPM347M01168_IWA0300_OWA02200_C8_BW20_Nlam3_LS_ID03_gr_ODover_ls_amp04_notabs.log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/GPI/gpi_pathfinder_robust_N1168_telserv3/logs/0_GPI_N1168_FPM347M01168_IWA0300_OWA02200_C8_BW20_Nlam3_LS_ID03_gr_ODover_ls_amp04_notabs.log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/GPI/gpi_pathfinder_robust_N1168_telserv3/solutions/._0_GPI_N1168_FPM347M01168_IWA0300_OWA02200_C8_BW20_Nlam3_LS_ID03_gr_ODover_ls_amp04_notabs.fits" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/GPI/gpi_pathfinder_robust_N1168_telserv3/solutions/._0_GPI_N1168_FPM347_IWA0300_OWA02200_C8_BW20_Nlam3_rounded.fits" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/GPI/gpi_pathfinder_robust_N1168_telserv3/solutions/0_GPI_N1168_FPM347M01168_IWA0300_OWA02200_C8_BW20_Nlam3_LS_ID03_gr_ODover_ls_amp04_notabs.fits" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/GPI/gpi_pathfinder_robust_N1168_telserv3/solutions/0_GPI_N1168_FPM347_IWA0300_OWA02200_C8_BW20_Nlam3_rounded.fits" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/HiCAT/analysis/._0_LUVOIR_N1944_FPM427M080_IWA0375_OWA01500_C8_BW10_Nlam4_LS_ID006_O_OD15_S_ls_iderTrue_ovs.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/HiCAT/analysis/0_HICAT_N1944_FPM427M080_IWA0375_OWA01500_C8_BW10_Nlam4_LS_ID006_O_OD15_S_ls_iderTrue_ovs.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/HiCAT/drivers/._0_LUVOIR_N1944_FPM427M080_IWA0375_OWA01500_C8_BW10_Nlam4_LS_ID006_O_OD15_S_ls_iderTrue_ovs.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/HiCAT/drivers/._por_aplc_optimizer2.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/HiCAT/drivers/0_HICAT_N1944_FPM427M080_IWA0375_OWA01500_C8_BW10_Nlam4_LS_ID006_O_OD15_S_ls_iderTrue_ovs.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/HiCAT/drivers/optimizer.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/HiCAT/logs/._0_LUVOIR_N1944_FPM427M080_IWA0375_OWA01500_C8_BW10_Nlam4_LS_ID006_O_OD15_S_ls_iderTrue_ovs.log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/HiCAT/logs/0_HICAT_N1944_FPM427M080_IWA0375_OWA01500_C8_BW10_Nlam4_LS_ID006_O_OD15_S_ls_iderTrue_ovs.log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/HiCAT/old/analysis/._HICAT_1944_LS9_6pix_telserv3.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/HiCAT/old/analysis/._HICAT_test_1944_robust_EDF02.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/HiCAT/old/analysis/._HICAT_test_972_robust.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/HiCAT/old/analysis/HICAT_1944_LS9_6pix_telserv3.asdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/HiCAT/old/analysis/HICAT_1944_LS9_6pix_telserv3.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/HiCAT/old/analysis/HICAT_test_1944_robust_EDF02.asdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/HiCAT/old/analysis/HICAT_test_1944_robust_EDF02.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/HiCAT/old/analysis/HICAT_test_972_robust.asdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/HiCAT/old/analysis/HICAT_test_972_robust.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/HiCAT/old/inputs/LS_HiCAT_ID0006_OD0015_SpiderTrue_ovsamp04_N19442.fits" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/HiCAT/old/inputs/hicat_apodizer_mask_1944_bw.fits" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/HiCAT/old/inputs/hicat_apodizer_mask_1944_bw_EDF_02.fits" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/HiCAT/old/inputs/hicat_apodizer_mask_972_bw.fits" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/HiCAT/old/inputs/hicat_lyot_mask_1944_gy_0.fits" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/HiCAT/old/inputs/hicat_lyot_mask_1944_gy_EDF_02.fits" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/HiCAT/old/inputs/hicat_lyot_mask_972_gy_0.fits" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/HiCAT/old/logs/._aplc_hicat_test_972_mprofile_plot.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/HiCAT/old/logs/aplc_hicat_1944_LS9_6px_telserv3_gurobi.log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/HiCAT/old/logs/aplc_hicat_1944_LS9_6px_telserv3_mprofile_20190525222303.dat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/HiCAT/old/logs/aplc_hicat_test_972_mprofile_20190522165628.dat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/HiCAT/old/logs/aplc_hicat_test_972_mprofile_plot.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/HiCAT/old/scripts/._aplc_hicat_test_972.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/HiCAT/old/scripts/aplc_hicat_1944_LS9_6px_telserv3.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/HiCAT/old/scripts/aplc_hicat_test_972.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/HiCAT/old/solutions/0_LUVOIR_N972_FPM427M080_IWA0375_OWA01500_C8_BW10_Nlam4_LS_ID006_O_OD15_S_ls_iderTrue_ovs.fits" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/HiCAT/old/solutions/HICAT_1944_LS9_6pix_telserv3.fits" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/HiCAT/old/solutions/HICAT_test_1944_robust_EDF02.fits" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/HiCAT/old/solutions/HICAT_test_972_robust.fits" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/HiCAT/old/solutions/HiCAT_1944_LS9_6pix_telserv3_rounded.fits" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/HiCAT/solutions/._0_HICAT_N1944_FPM427M080_IWA0375_OWA01500_C8_BW10_Nlam4_LS_ID006_O_OD15_S_ls_iderTrue_ovs.fits" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/HiCAT/solutions/0_HICAT_N1944_FPM427M080_IWA0375_OWA01500_C8_BW10_Nlam4_LS_ID006_O_OD15_S_ls_iderTrue_ovs.fits" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/LUVOIR/old/LUVOIR_MCMC1D_BW18/inputs/LS_LUVOIR_ID0195_OD0965_no_struts_gy_ovsamp4_N1000.fits" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/LUVOIR/old/LUVOIR_MCMC1D_BW18/inputs/TelAp_LUVOIR_gap_pad01_bw_ovsamp04_N1000.fits" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/LUVOIR/old/LUVOIR_MCMC1D_BW18/large_fpm/._readme.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/LUVOIR/old/LUVOIR_MCMC1D_BW18/large_fpm/do_luvoir_AWS_BW18_large.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/LUVOIR/old/LUVOIR_MCMC1D_BW18/large_fpm/readme.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/LUVOIR/old/LUVOIR_MCMC1D_BW18/medium_fpm/analysis/LUVOIR_N1000_FPM754M0250_IWA0672_OWA02688_C10_BW18_Nlam8_LS_IDD0195_OD0965_no_ls_struts.asdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/LUVOIR/old/LUVOIR_MCMC1D_BW18/medium_fpm/analysis/LUVOIR_N1000_FPM754M0250_IWA0672_OWA02688_C10_BW18_Nlam8_LS_IDD0195_OD0965_no_ls_struts.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/LUVOIR/old/LUVOIR_MCMC1D_BW18/medium_fpm/analysis/mprof_plot_LUVOIR_N1000_FPM754M0250_IWA0672_OWA02688_C10_BW18_Nlam8_LS_IDD0195_OD0965_no_ls_struts.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/LUVOIR/old/LUVOIR_MCMC1D_BW18/medium_fpm/analysis/mprofile_20190516180514.dat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/LUVOIR/old/LUVOIR_MCMC1D_BW18/medium_fpm/analysis/mprofile_20190516180642.dat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/LUVOIR/old/LUVOIR_MCMC1D_BW18/medium_fpm/analysis/mprofile_20190516180912.dat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/LUVOIR/old/LUVOIR_MCMC1D_BW18/medium_fpm/do_luvoir_telserv3_BW18_medium.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/LUVOIR/old/LUVOIR_MCMC1D_BW18/medium_fpm/drivers/LUVOIR_N1000_FPM754M0250_IWA0672_OWA02688_C10_BW18_Nlam8_LS_IDD0195_OD0965_no_ls_struts.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/LUVOIR/old/LUVOIR_MCMC1D_BW18/medium_fpm/logs/LUVOIR_N1000_FPM754M0250_IWA0672_OWA02688_C10_BW18_Nlam8_LS_IDD0195_OD0965_no_ls_struts.log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/LUVOIR/old/LUVOIR_MCMC1D_BW18/medium_fpm/solutions/LUVOIR_N1000_FPM754M0250_IWA0672_OWA02688_C10_BW18_Nlam8_LS_IDD0195_OD0965_no_ls_struts.fits" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/LUVOIR/old/LUVOIR_MCMC1D_BW18/small_fpm/analysis/LUVOIR_N1000_FPM382M0150_IWA0300_OWA01200_C10_BW18_Nlam8_LS_IDD0195_OD0965_no_ls_struts.asdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/LUVOIR/old/LUVOIR_MCMC1D_BW18/small_fpm/analysis/LUVOIR_N1000_FPM382M0150_IWA0300_OWA01200_C10_BW18_Nlam8_LS_IDD0195_OD0965_no_ls_struts.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/LUVOIR/old/LUVOIR_MCMC1D_BW18/small_fpm/analysis/mprof_plot_LUVOIR_N1000_FPM382M0150_IWA0300_OWA01200_C10_BW18_Nlam8_LS_IDD0195_OD0965_no_ls_struts.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/LUVOIR/old/LUVOIR_MCMC1D_BW18/small_fpm/do_luvoir_obelix_BW18_small.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/LUVOIR/old/LUVOIR_MCMC1D_BW18/small_fpm/drivers/LUVOIR_N1000_FPM382M0150_IWA0300_OWA01200_C10_BW18_Nlam8_LS_IDD0195_OD0965_no_ls_struts.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/LUVOIR/old/LUVOIR_MCMC1D_BW18/small_fpm/logs/._0_LUVOIR_N1000_FPM382M0150_IWA0300_OWA01200_C10_BW18_Nlam8_LS_IDD0195_OD0965_no_ls_struts.log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/LUVOIR/old/LUVOIR_MCMC1D_BW18/small_fpm/logs/0_LUVOIR_N1000_FPM382M0150_IWA0300_OWA01200_C10_BW18_Nlam8_LS_IDD0195_OD0965_no_ls_struts.log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/LUVOIR/old/LUVOIR_MCMC1D_BW18/small_fpm/solutions/LUVOIR_N1000_FPM382M0150_IWA0300_OWA01200_C10_BW18_Nlam8_LS_IDD0195_OD0965_no_ls_struts.fits" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/LUVOIR/old/LUVOIR_STDT_baseline_BW10/inputs/LS_LUVOIR_ID0120_OD0982_no_struts_gy_ovsamp4_N1000.fits" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/LUVOIR/old/LUVOIR_STDT_baseline_BW10/inputs/TelAp_LUVOIR_gap_pad01_bw_ovsamp04_N1000.fits" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/LUVOIR/old/LUVOIR_STDT_baseline_BW10/large_fpm/do_luvoir_AWS_BW10_large.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/LUVOIR/old/LUVOIR_STDT_baseline_BW10/large_fpm/luvoir_aws_bw10_large/._gurobi.log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/LUVOIR/old/LUVOIR_STDT_baseline_BW10/large_fpm/luvoir_aws_bw10_large/._perf.log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/LUVOIR/old/LUVOIR_STDT_baseline_BW10/large_fpm/luvoir_aws_bw10_large/._perf2.log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/LUVOIR/old/LUVOIR_STDT_baseline_BW10/large_fpm/luvoir_aws_bw10_large/analysis/._.DS_Store" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/LUVOIR/old/LUVOIR_STDT_baseline_BW10/large_fpm/luvoir_aws_bw10_large/analysis/._0_LUVOIR_N1000_FPM1338M0400_IWA1328_OWA04688_C10_BW10_Nlam5_LS_IDD0120_OD0982_no_ls_struts.asdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/LUVOIR/old/LUVOIR_STDT_baseline_BW10/large_fpm/luvoir_aws_bw10_large/analysis/._0_LUVOIR_N1000_FPM1338M0400_IWA1328_OWA04688_C10_BW10_Nlam5_LS_IDD0120_OD0982_no_ls_struts.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/LUVOIR/old/LUVOIR_STDT_baseline_BW10/large_fpm/luvoir_aws_bw10_large/analysis/0_LUVOIR_N1000_FPM1338M0400_IWA1328_OWA04688_C10_BW10_Nlam5_LS_IDD0120_OD0982_no_ls_struts.asdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/LUVOIR/old/LUVOIR_STDT_baseline_BW10/large_fpm/luvoir_aws_bw10_large/analysis/0_LUVOIR_N1000_FPM1338M0400_IWA1328_OWA04688_C10_BW10_Nlam5_LS_IDD0120_OD0982_no_ls_struts.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/LUVOIR/old/LUVOIR_STDT_baseline_BW10/large_fpm/luvoir_aws_bw10_large/drivers/._.DS_Store" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/LUVOIR/old/LUVOIR_STDT_baseline_BW10/large_fpm/luvoir_aws_bw10_large/drivers/._0_LUVOIR_N1000_FPM1338M0400_IWA1328_OWA04688_C10_BW10_Nlam5_LS_IDD0120_OD0982_no_ls_struts.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/LUVOIR/old/LUVOIR_STDT_baseline_BW10/large_fpm/luvoir_aws_bw10_large/drivers/._por_aplc_optimizer.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/LUVOIR/old/LUVOIR_STDT_baseline_BW10/large_fpm/luvoir_aws_bw10_large/drivers/0_LUVOIR_N1000_FPM1338M0400_IWA1328_OWA04688_C10_BW10_Nlam5_LS_IDD0120_OD0982_no_ls_struts.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/LUVOIR/old/LUVOIR_STDT_baseline_BW10/large_fpm/luvoir_aws_bw10_large/drivers/por_aplc_optimizer.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/LUVOIR/old/LUVOIR_STDT_baseline_BW10/large_fpm/luvoir_aws_bw10_large/gurobi.log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/LUVOIR/old/LUVOIR_STDT_baseline_BW10/large_fpm/luvoir_aws_bw10_large/logs/._.DS_Store" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/LUVOIR/old/LUVOIR_STDT_baseline_BW10/large_fpm/luvoir_aws_bw10_large/logs/._0_LUVOIR_N1000_FPM1338M0400_IWA1328_OWA04688_C10_BW10_Nlam5_LS_IDD0120_OD0982_no_ls_struts.log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/LUVOIR/old/LUVOIR_STDT_baseline_BW10/large_fpm/luvoir_aws_bw10_large/logs/0_LUVOIR_N1000_FPM1338M0400_IWA1328_OWA04688_C10_BW10_Nlam5_LS_IDD0120_OD0982_no_ls_struts.log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/LUVOIR/old/LUVOIR_STDT_baseline_BW10/large_fpm/luvoir_aws_bw10_large/perf.log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/LUVOIR/old/LUVOIR_STDT_baseline_BW10/large_fpm/luvoir_aws_bw10_large/perf2.log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/LUVOIR/old/LUVOIR_STDT_baseline_BW10/large_fpm/luvoir_aws_bw10_large/solutions/._.DS_Store" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/LUVOIR/old/LUVOIR_STDT_baseline_BW10/large_fpm/luvoir_aws_bw10_large/solutions/._0_LUVOIR_N1000_FPM1338M0400_IWA1328_OWA04688_C10_BW10_Nlam5_LS_IDD0120_OD0982_no_ls_struts.fits" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/LUVOIR/old/LUVOIR_STDT_baseline_BW10/large_fpm/luvoir_aws_bw10_large/solutions/0_LUVOIR_N1000_FPM1338M0400_IWA1328_OWA04688_C10_BW10_Nlam5_LS_IDD0120_OD0982_no_ls_struts.fits" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/LUVOIR/old/LUVOIR_STDT_baseline_BW10/medium_fpm/analysis/._LUVOIR_N1000_FPM682M0250_IWA0672_OWA02372_C10_BW10_Nlam5_LS_IDD0120_OD0982_no_ls_struts.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/LUVOIR/old/LUVOIR_STDT_baseline_BW10/medium_fpm/analysis/._mprof_plot_LUVOIR_N1000_FPM682M0250_IWA0672_OWA02372_C10_BW10_Nlam5_LS_IDD0120_OD0982_no_ls_struts.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/LUVOIR/old/LUVOIR_STDT_baseline_BW10/medium_fpm/analysis/LUVOIR_N1000_FPM682M0250_IWA0672_OWA02372_C10_BW10_Nlam5_LS_IDD0120_OD0982_no_ls_struts.asdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/LUVOIR/old/LUVOIR_STDT_baseline_BW10/medium_fpm/analysis/LUVOIR_N1000_FPM682M0250_IWA0672_OWA02372_C10_BW10_Nlam5_LS_IDD0120_OD0982_no_ls_struts.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/LUVOIR/old/LUVOIR_STDT_baseline_BW10/medium_fpm/analysis/mprof_LUVOIR_N1000_FPM682M0250_IWA0672_OWA02372_C10_BW10_Nlam5_LS_IDD0120_OD0982_no_ls_struts.dat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/LUVOIR/old/LUVOIR_STDT_baseline_BW10/medium_fpm/analysis/mprof_plot_LUVOIR_N1000_FPM682M0250_IWA0672_OWA02372_C10_BW10_Nlam5_LS_IDD0120_OD0982_no_ls_struts.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/LUVOIR/old/LUVOIR_STDT_baseline_BW10/medium_fpm/do_luvoir_telserv2_BW10_medium.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/LUVOIR/old/LUVOIR_STDT_baseline_BW10/medium_fpm/drivers/0_LUVOIR_N1000_FPM682M0250_IWA0672_OWA02372_C10_BW10_Nlam5_LS_IDD0120_OD0982_no_ls_struts.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/LUVOIR/old/LUVOIR_STDT_baseline_BW10/medium_fpm/drivers/por_aplc_optimizer.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/LUVOIR/old/LUVOIR_STDT_baseline_BW10/medium_fpm/mprofile_20190515152125.dat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/LUVOIR/old/LUVOIR_STDT_baseline_BW10/medium_fpm/solutions/0_LUVOIR_N1000_FPM682M0250_IWA0672_OWA02372_C10_BW10_Nlam5_LS_IDD0120_OD0982_no_ls_struts.fits" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/LUVOIR/old/LUVOIR_STDT_baseline_BW10/small_fpm/analysis/._LUVOIR_N1000_FPM350M0150_IWA0340_OWA01200_C10_BW10_Nlam5_LS_IDD0120_OD0982_no_ls_struts.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/LUVOIR/old/LUVOIR_STDT_baseline_BW10/small_fpm/analysis/._mprof_plot_LUVOIR_N1000_FPM350M0150_IWA0340_OWA01200_C10_BW10_Nlam5_LS_IDD0120_OD0982_no_ls_struts.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/LUVOIR/old/LUVOIR_STDT_baseline_BW10/small_fpm/analysis/LUVOIR_N1000_FPM350M0150_IWA0340_OWA01200_C10_BW10_Nlam5_LS_IDD0120_OD0982_no_ls_struts.asdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/LUVOIR/old/LUVOIR_STDT_baseline_BW10/small_fpm/analysis/LUVOIR_N1000_FPM350M0150_IWA0340_OWA01200_C10_BW10_Nlam5_LS_IDD0120_OD0982_no_ls_struts.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/LUVOIR/old/LUVOIR_STDT_baseline_BW10/small_fpm/analysis/mprof_LUVOIR_N1000_FPM350M0150_IWA0340_OWA01200_C10_BW10_Nlam5_LS_IDD0120_OD0982_no_ls_struts.dat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/LUVOIR/old/LUVOIR_STDT_baseline_BW10/small_fpm/analysis/mprof_plot_LUVOIR_N1000_FPM350M0150_IWA0340_OWA01200_C10_BW10_Nlam5_LS_IDD0120_OD0982_no_ls_struts.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/LUVOIR/old/LUVOIR_STDT_baseline_BW10/small_fpm/do_luvoir_telserv3_BW10_small.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/LUVOIR/old/LUVOIR_STDT_baseline_BW10/small_fpm/drivers/LUVOIR_N1000_FPM350M0150_IWA0340_OWA01200_C10_BW10_Nlam5_LS_IDD0120_OD0982_no_ls_struts.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/LUVOIR/old/LUVOIR_STDT_baseline_BW10/small_fpm/drivers/por_aplc_optimizer.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/LUVOIR/old/LUVOIR_STDT_baseline_BW10/small_fpm/solutions/0_LUVOIR_N1000_FPM350M0150_IWA0340_OWA01200_C10_BW10_Nlam5_LS_IDD0120_OD0982_no_ls_struts.fits" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/LUVOIR/old/luvoir_BW10_small_N1000_telserv3_with_EDF/analysis/._LUVOIR_N1000_FPM350M0150_IWA0340_OWA01200_C10_BW10_Nlam5_LS_IDD0120_OD0982_no_ls_struts.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/LUVOIR/old/luvoir_BW10_small_N1000_telserv3_with_EDF/analysis/._LUVOIR_N2000_EDF02_FPM350M0150_IWA0340_OWA01200_C10_BW10_Nlam5_LS_IDD0120_OD0982_no_ls_struts.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/LUVOIR/old/luvoir_BW10_small_N1000_telserv3_with_EDF/analysis/._LUVOIR_N2000_Inputs_Floor_SizeIncrease_EDF02_FPM350M0150_IWA0340_OWA01200_C10_BW10_Nlam5_LS_IDD0120_OD0982_no_ls_struts.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/LUVOIR/old/luvoir_BW10_small_N1000_telserv3_with_EDF/analysis/HICAT_1944_LS9_6pix_telserv3.asdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/LUVOIR/old/luvoir_BW10_small_N1000_telserv3_with_EDF/analysis/HICAT_1944_LS9_6pix_telserv3.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/LUVOIR/old/luvoir_BW10_small_N1000_telserv3_with_EDF/analysis/LUVOIR_N1000_FPM350M0150_IWA0340_OWA01200_C10_BW10_Nlam5_LS_IDD0120_OD0982_no_ls_struts.asdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/LUVOIR/old/luvoir_BW10_small_N1000_telserv3_with_EDF/analysis/LUVOIR_N1000_FPM350M0150_IWA0340_OWA01200_C10_BW10_Nlam5_LS_IDD0120_OD0982_no_ls_struts.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/LUVOIR/old/luvoir_BW10_small_N1000_telserv3_with_EDF/analysis/LUVOIR_N2000_EDF02_FPM350M0150_IWA0340_OWA01200_C10_BW10_Nlam5_LS_IDD0120_OD0982_no_ls_struts.asdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/LUVOIR/old/luvoir_BW10_small_N1000_telserv3_with_EDF/analysis/LUVOIR_N2000_EDF02_FPM350M0150_IWA0340_OWA01200_C10_BW10_Nlam5_LS_IDD0120_OD0982_no_ls_struts.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/LUVOIR/old/luvoir_BW10_small_N1000_telserv3_with_EDF/analysis/LUVOIR_N2000_Inputs_Floor_SizeIncrease_EDF02_FPM350M0150_IWA0340_OWA01200_C10_BW10_Nlam5_LS_IDD0120_OD0982_no_ls_struts.asdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/LUVOIR/old/luvoir_BW10_small_N1000_telserv3_with_EDF/analysis/LUVOIR_N2000_Inputs_Floor_SizeIncrease_EDF02_FPM350M0150_IWA0340_OWA01200_C10_BW10_Nlam5_LS_IDD0120_OD0982_no_ls_struts.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/LUVOIR/old/luvoir_BW10_small_N1000_telserv3_with_EDF/drivers/LUVOIR_N1000_FPM350M0150_IWA0340_OWA01200_C10_BW10_Nlam5_LS_IDD0120_OD0982_no_ls_struts.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/LUVOIR/old/luvoir_BW10_small_N1000_telserv3_with_EDF/drivers/por_aplc_optimizer.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/LUVOIR/old/luvoir_BW10_small_N1000_telserv3_with_EDF/inputs/LS_LUVOIR_ID0120_OD0982_no_struts_gy_ovsamp4_N1000.fits" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/LUVOIR/old/luvoir_BW10_small_N1000_telserv3_with_EDF/inputs/LS_LUVOIR_ID0120_OD0982_no_struts_gy_ovsamp4_N2000_EDF02.fits" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/LUVOIR/old/luvoir_BW10_small_N1000_telserv3_with_EDF/inputs/LS_LUVOIR_ID0120_OD0982_no_struts_gy_ovsamp4_N2000_Floor_SizeIncrease02.fits" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/LUVOIR/old/luvoir_BW10_small_N1000_telserv3_with_EDF/inputs/TelAp_LUVOIR_gap_pad01_bw_ovsamp04_N1000.fits" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/LUVOIR/old/luvoir_BW10_small_N1000_telserv3_with_EDF/inputs/TelAp_LUVOIR_gap_pad01_bw_ovsamp4_N2000_EDF02.fits" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/LUVOIR/old/luvoir_BW10_small_N1000_telserv3_with_EDF/inputs/TelAp_LUVOIR_gap_pad01_bw_ovsamp4_N2000_Floor_SizeIncrease02.fits" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/LUVOIR/old/luvoir_BW10_small_N1000_telserv3_with_EDF/logs/LUVOIR_N1000_FPM350M0150_IWA0340_OWA01200_C10_BW10_Nlam5_LS_IDD0120_OD0982_no_ls_struts.log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/LUVOIR/old/luvoir_BW10_small_N1000_telserv3_with_EDF/solutions/LUVOIR_N1000_FPM350M0150_IWA0340_OWA01200_C10_BW10_Nlam5_LS_IDD0120_OD0982_no_ls_struts.fits" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/LUVOIR/old/luvoir_BW10_small_N1000_telserv3_with_EDF/solutions/LUVOIR_N2000_EDF02_FPM350M0150_IWA0340_OWA01200_C10_BW10_Nlam5_LS_IDD0120_OD0982_no_ls_struts.fits" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalized_designs/LUVOIR/old/luvoir_BW10_small_N1000_telserv3_with_EDF/solutions/LUVOIR_N2000_Inputs_Floor_SizeIncrease_EDF02_FPM350M0150_IWA0340_OWA01200_C10_BW10_Nlam5_LS_IDD0120_OD0982_no_ls_struts.fits" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/masks/aplc-optimization/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/optimization_launchers/do_gpi_pathfinder.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/optimization_launchers/do_gpi_template.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/optimization_launchers/do_hicat_LS9_6px_N1944_telserv3.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/optimization_launchers/do_hicat_template.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/optimization_launchers/do_luvoir_BW10_small_N1000_telserv3.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/optimization_launchers/do_luvoir_template.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/setup.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GPI_Inputs_Generation.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/HiCAT_Inputs_Generation.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LUVOIR_Inputs_Generation.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/do_gpi_template.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/do_hicat_template.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/do_luvoir_template.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/api.rst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/conf.py" beforeDir="false" afterPath="$PROJECT_DIR$/docs/conf.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index.rst" beforeDir="false" afterPath="$PROJECT_DIR$/docs/index.rst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/environment.yml" beforeDir="false" afterPath="$PROJECT_DIR$/environment.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/finalized_designs/GPI/scripts/do_gpi_pathfinder.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finalized_designs/HiCAT/analysis/._HICAT_1944_LS9_6pix_telserv3.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finalized_designs/HiCAT/analysis/._HICAT_test_1944_robust_EDF02.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finalized_designs/HiCAT/analysis/._HICAT_test_972_robust.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finalized_designs/HiCAT/analysis/HICAT_1944_LS9_6pix_telserv3.asdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finalized_designs/HiCAT/analysis/HICAT_1944_LS9_6pix_telserv3.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finalized_designs/HiCAT/analysis/HICAT_test_1944_robust_EDF02.asdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finalized_designs/HiCAT/analysis/HICAT_test_1944_robust_EDF02.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finalized_designs/HiCAT/analysis/HICAT_test_972_robust.asdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finalized_designs/HiCAT/analysis/HICAT_test_972_robust.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finalized_designs/HiCAT/inputs/hicat_apodizer_mask_1944_bw.fits" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finalized_designs/HiCAT/inputs/hicat_apodizer_mask_1944_bw_EDF_02.fits" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finalized_designs/HiCAT/inputs/hicat_apodizer_mask_972_bw.fits" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finalized_designs/HiCAT/inputs/hicat_lyot_mask_1944_gy_0.fits" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finalized_designs/HiCAT/inputs/hicat_lyot_mask_1944_gy_EDF_02.fits" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finalized_designs/HiCAT/inputs/hicat_lyot_mask_972_gy_0.fits" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finalized_designs/HiCAT/logs/._aplc_hicat_test_972_mprofile_plot.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finalized_designs/HiCAT/logs/aplc_hicat_1944_LS9_6px_telserv3_gurobi.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finalized_designs/HiCAT/logs/aplc_hicat_1944_LS9_6px_telserv3_mprofile_20190525222303.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finalized_designs/HiCAT/logs/aplc_hicat_test_972_mprofile_20190522165628.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finalized_designs/HiCAT/logs/aplc_hicat_test_972_mprofile_plot.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finalized_designs/HiCAT/scripts/._aplc_hicat_test_972.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finalized_designs/HiCAT/scripts/aplc_hicat_1944_LS9_6px_telserv3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finalized_designs/HiCAT/scripts/aplc_hicat_test_972.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finalized_designs/HiCAT/solutions/HICAT_1944_LS9_6pix_telserv3.fits" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finalized_designs/HiCAT/solutions/HICAT_test_1944_robust_EDF02.fits" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finalized_designs/HiCAT/solutions/HICAT_test_972_robust.fits" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finalized_designs/HiCAT/solutions/HiCAT_1944_LS9_6pix_telserv3_rounded.fits" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finalized_designs/LUVOIR/LUVOIR_MCMC1D_BW18/inputs/LS_LUVOIR_ID0195_OD0965_no_struts_gy_ovsamp4_N1000.fits" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finalized_designs/LUVOIR/LUVOIR_MCMC1D_BW18/inputs/TelAp_LUVOIR_gap_pad01_bw_ovsamp04_N1000.fits" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finalized_designs/LUVOIR/LUVOIR_MCMC1D_BW18/large_fpm/._readme.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finalized_designs/LUVOIR/LUVOIR_MCMC1D_BW18/large_fpm/do_luvoir_AWS_BW18_large.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finalized_designs/LUVOIR/LUVOIR_MCMC1D_BW18/large_fpm/readme.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finalized_designs/LUVOIR/LUVOIR_MCMC1D_BW18/medium_fpm/analysis/LUVOIR_N1000_FPM754M0250_IWA0672_OWA02688_C10_BW18_Nlam8_LS_IDD0195_OD0965_no_ls_struts.asdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finalized_designs/LUVOIR/LUVOIR_MCMC1D_BW18/medium_fpm/analysis/LUVOIR_N1000_FPM754M0250_IWA0672_OWA02688_C10_BW18_Nlam8_LS_IDD0195_OD0965_no_ls_struts.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finalized_designs/LUVOIR/LUVOIR_MCMC1D_BW18/medium_fpm/analysis/mprof_plot_LUVOIR_N1000_FPM754M0250_IWA0672_OWA02688_C10_BW18_Nlam8_LS_IDD0195_OD0965_no_ls_struts.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finalized_designs/LUVOIR/LUVOIR_MCMC1D_BW18/medium_fpm/analysis/mprofile_20190516180514.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finalized_designs/LUVOIR/LUVOIR_MCMC1D_BW18/medium_fpm/analysis/mprofile_20190516180642.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finalized_designs/LUVOIR/LUVOIR_MCMC1D_BW18/medium_fpm/analysis/mprofile_20190516180912.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finalized_designs/LUVOIR/LUVOIR_MCMC1D_BW18/medium_fpm/do_luvoir_telserv3_BW18_medium.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finalized_designs/LUVOIR/LUVOIR_MCMC1D_BW18/medium_fpm/drivers/LUVOIR_N1000_FPM754M0250_IWA0672_OWA02688_C10_BW18_Nlam8_LS_IDD0195_OD0965_no_ls_struts.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finalized_designs/LUVOIR/LUVOIR_MCMC1D_BW18/medium_fpm/logs/LUVOIR_N1000_FPM754M0250_IWA0672_OWA02688_C10_BW18_Nlam8_LS_IDD0195_OD0965_no_ls_struts.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finalized_designs/LUVOIR/LUVOIR_MCMC1D_BW18/medium_fpm/solutions/LUVOIR_N1000_FPM754M0250_IWA0672_OWA02688_C10_BW18_Nlam8_LS_IDD0195_OD0965_no_ls_struts.fits" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finalized_designs/LUVOIR/LUVOIR_MCMC1D_BW18/small_fpm/analysis/LUVOIR_N1000_FPM382M0150_IWA0300_OWA01200_C10_BW18_Nlam8_LS_IDD0195_OD0965_no_ls_struts.asdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finalized_designs/LUVOIR/LUVOIR_MCMC1D_BW18/small_fpm/analysis/LUVOIR_N1000_FPM382M0150_IWA0300_OWA01200_C10_BW18_Nlam8_LS_IDD0195_OD0965_no_ls_struts.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finalized_designs/LUVOIR/LUVOIR_MCMC1D_BW18/small_fpm/analysis/mprof_plot_LUVOIR_N1000_FPM382M0150_IWA0300_OWA01200_C10_BW18_Nlam8_LS_IDD0195_OD0965_no_ls_struts.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finalized_designs/LUVOIR/LUVOIR_MCMC1D_BW18/small_fpm/do_luvoir_obelix_BW18_small.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finalized_designs/LUVOIR/LUVOIR_MCMC1D_BW18/small_fpm/drivers/LUVOIR_N1000_FPM382M0150_IWA0300_OWA01200_C10_BW18_Nlam8_LS_IDD0195_OD0965_no_ls_struts.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finalized_designs/LUVOIR/LUVOIR_MCMC1D_BW18/small_fpm/logs/._0_LUVOIR_N1000_FPM382M0150_IWA0300_OWA01200_C10_BW18_Nlam8_LS_IDD0195_OD0965_no_ls_struts.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finalized_designs/LUVOIR/LUVOIR_MCMC1D_BW18/small_fpm/logs/0_LUVOIR_N1000_FPM382M0150_IWA0300_OWA01200_C10_BW18_Nlam8_LS_IDD0195_OD0965_no_ls_struts.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finalized_designs/LUVOIR/LUVOIR_MCMC1D_BW18/small_fpm/solutions/LUVOIR_N1000_FPM382M0150_IWA0300_OWA01200_C10_BW18_Nlam8_LS_IDD0195_OD0965_no_ls_struts.fits" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finalized_designs/LUVOIR/LUVOIR_STDT_baseline_BW10/inputs/LS_LUVOIR_ID0120_OD0982_no_struts_gy_ovsamp4_N1000.fits" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finalized_designs/LUVOIR/LUVOIR_STDT_baseline_BW10/inputs/TelAp_LUVOIR_gap_pad01_bw_ovsamp04_N1000.fits" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finalized_designs/LUVOIR/LUVOIR_STDT_baseline_BW10/large_fpm/do_luvoir_AWS_BW10_large.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finalized_designs/LUVOIR/LUVOIR_STDT_baseline_BW10/large_fpm/luvoir_aws_bw10_large/._gurobi.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finalized_designs/LUVOIR/LUVOIR_STDT_baseline_BW10/large_fpm/luvoir_aws_bw10_large/._perf.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finalized_designs/LUVOIR/LUVOIR_STDT_baseline_BW10/large_fpm/luvoir_aws_bw10_large/._perf2.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finalized_designs/LUVOIR/LUVOIR_STDT_baseline_BW10/large_fpm/luvoir_aws_bw10_large/analysis/._.DS_Store" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finalized_designs/LUVOIR/LUVOIR_STDT_baseline_BW10/large_fpm/luvoir_aws_bw10_large/analysis/._0_LUVOIR_N1000_FPM1338M0400_IWA1328_OWA04688_C10_BW10_Nlam5_LS_IDD0120_OD0982_no_ls_struts.asdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finalized_designs/LUVOIR/LUVOIR_STDT_baseline_BW10/large_fpm/luvoir_aws_bw10_large/analysis/._0_LUVOIR_N1000_FPM1338M0400_IWA1328_OWA04688_C10_BW10_Nlam5_LS_IDD0120_OD0982_no_ls_struts.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finalized_designs/LUVOIR/LUVOIR_STDT_baseline_BW10/large_fpm/luvoir_aws_bw10_large/analysis/0_LUVOIR_N1000_FPM1338M0400_IWA1328_OWA04688_C10_BW10_Nlam5_LS_IDD0120_OD0982_no_ls_struts.asdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finalized_designs/LUVOIR/LUVOIR_STDT_baseline_BW10/large_fpm/luvoir_aws_bw10_large/analysis/0_LUVOIR_N1000_FPM1338M0400_IWA1328_OWA04688_C10_BW10_Nlam5_LS_IDD0120_OD0982_no_ls_struts.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finalized_designs/LUVOIR/LUVOIR_STDT_baseline_BW10/large_fpm/luvoir_aws_bw10_large/drivers/._.DS_Store" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finalized_designs/LUVOIR/LUVOIR_STDT_baseline_BW10/large_fpm/luvoir_aws_bw10_large/drivers/._0_LUVOIR_N1000_FPM1338M0400_IWA1328_OWA04688_C10_BW10_Nlam5_LS_IDD0120_OD0982_no_ls_struts.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finalized_designs/LUVOIR/LUVOIR_STDT_baseline_BW10/large_fpm/luvoir_aws_bw10_large/drivers/._por_aplc_optimizer.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finalized_designs/LUVOIR/LUVOIR_STDT_baseline_BW10/large_fpm/luvoir_aws_bw10_large/drivers/0_LUVOIR_N1000_FPM1338M0400_IWA1328_OWA04688_C10_BW10_Nlam5_LS_IDD0120_OD0982_no_ls_struts.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finalized_designs/LUVOIR/LUVOIR_STDT_baseline_BW10/large_fpm/luvoir_aws_bw10_large/drivers/por_aplc_optimizer.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finalized_designs/LUVOIR/LUVOIR_STDT_baseline_BW10/large_fpm/luvoir_aws_bw10_large/gurobi.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finalized_designs/LUVOIR/LUVOIR_STDT_baseline_BW10/large_fpm/luvoir_aws_bw10_large/logs/._.DS_Store" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finalized_designs/LUVOIR/LUVOIR_STDT_baseline_BW10/large_fpm/luvoir_aws_bw10_large/logs/._0_LUVOIR_N1000_FPM1338M0400_IWA1328_OWA04688_C10_BW10_Nlam5_LS_IDD0120_OD0982_no_ls_struts.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finalized_designs/LUVOIR/LUVOIR_STDT_baseline_BW10/large_fpm/luvoir_aws_bw10_large/logs/0_LUVOIR_N1000_FPM1338M0400_IWA1328_OWA04688_C10_BW10_Nlam5_LS_IDD0120_OD0982_no_ls_struts.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finalized_designs/LUVOIR/LUVOIR_STDT_baseline_BW10/large_fpm/luvoir_aws_bw10_large/perf.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finalized_designs/LUVOIR/LUVOIR_STDT_baseline_BW10/large_fpm/luvoir_aws_bw10_large/perf2.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finalized_designs/LUVOIR/LUVOIR_STDT_baseline_BW10/large_fpm/luvoir_aws_bw10_large/solutions/._.DS_Store" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finalized_designs/LUVOIR/LUVOIR_STDT_baseline_BW10/large_fpm/luvoir_aws_bw10_large/solutions/._0_LUVOIR_N1000_FPM1338M0400_IWA1328_OWA04688_C10_BW10_Nlam5_LS_IDD0120_OD0982_no_ls_struts.fits" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finalized_designs/LUVOIR/LUVOIR_STDT_baseline_BW10/large_fpm/luvoir_aws_bw10_large/solutions/0_LUVOIR_N1000_FPM1338M0400_IWA1328_OWA04688_C10_BW10_Nlam5_LS_IDD0120_OD0982_no_ls_struts.fits" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finalized_designs/LUVOIR/LUVOIR_STDT_baseline_BW10/medium_fpm/analysis/._LUVOIR_N1000_FPM682M0250_IWA0672_OWA02372_C10_BW10_Nlam5_LS_IDD0120_OD0982_no_ls_struts.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finalized_designs/LUVOIR/LUVOIR_STDT_baseline_BW10/medium_fpm/analysis/._mprof_plot_LUVOIR_N1000_FPM682M0250_IWA0672_OWA02372_C10_BW10_Nlam5_LS_IDD0120_OD0982_no_ls_struts.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finalized_designs/LUVOIR/LUVOIR_STDT_baseline_BW10/medium_fpm/analysis/LUVOIR_N1000_FPM682M0250_IWA0672_OWA02372_C10_BW10_Nlam5_LS_IDD0120_OD0982_no_ls_struts.asdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finalized_designs/LUVOIR/LUVOIR_STDT_baseline_BW10/medium_fpm/analysis/LUVOIR_N1000_FPM682M0250_IWA0672_OWA02372_C10_BW10_Nlam5_LS_IDD0120_OD0982_no_ls_struts.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finalized_designs/LUVOIR/LUVOIR_STDT_baseline_BW10/medium_fpm/analysis/mprof_LUVOIR_N1000_FPM682M0250_IWA0672_OWA02372_C10_BW10_Nlam5_LS_IDD0120_OD0982_no_ls_struts.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finalized_designs/LUVOIR/LUVOIR_STDT_baseline_BW10/medium_fpm/analysis/mprof_plot_LUVOIR_N1000_FPM682M0250_IWA0672_OWA02372_C10_BW10_Nlam5_LS_IDD0120_OD0982_no_ls_struts.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finalized_designs/LUVOIR/LUVOIR_STDT_baseline_BW10/medium_fpm/do_luvoir_telserv2_BW10_medium.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finalized_designs/LUVOIR/LUVOIR_STDT_baseline_BW10/medium_fpm/drivers/0_LUVOIR_N1000_FPM682M0250_IWA0672_OWA02372_C10_BW10_Nlam5_LS_IDD0120_OD0982_no_ls_struts.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finalized_designs/LUVOIR/LUVOIR_STDT_baseline_BW10/medium_fpm/drivers/por_aplc_optimizer.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finalized_designs/LUVOIR/LUVOIR_STDT_baseline_BW10/medium_fpm/mprofile_20190515152125.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finalized_designs/LUVOIR/LUVOIR_STDT_baseline_BW10/medium_fpm/solutions/0_LUVOIR_N1000_FPM682M0250_IWA0672_OWA02372_C10_BW10_Nlam5_LS_IDD0120_OD0982_no_ls_struts.fits" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finalized_designs/LUVOIR/LUVOIR_STDT_baseline_BW10/small_fpm/analysis/._LUVOIR_N1000_FPM350M0150_IWA0340_OWA01200_C10_BW10_Nlam5_LS_IDD0120_OD0982_no_ls_struts.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finalized_designs/LUVOIR/LUVOIR_STDT_baseline_BW10/small_fpm/analysis/._mprof_plot_LUVOIR_N1000_FPM350M0150_IWA0340_OWA01200_C10_BW10_Nlam5_LS_IDD0120_OD0982_no_ls_struts.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finalized_designs/LUVOIR/LUVOIR_STDT_baseline_BW10/small_fpm/analysis/LUVOIR_N1000_FPM350M0150_IWA0340_OWA01200_C10_BW10_Nlam5_LS_IDD0120_OD0982_no_ls_struts.asdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finalized_designs/LUVOIR/LUVOIR_STDT_baseline_BW10/small_fpm/analysis/LUVOIR_N1000_FPM350M0150_IWA0340_OWA01200_C10_BW10_Nlam5_LS_IDD0120_OD0982_no_ls_struts.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finalized_designs/LUVOIR/LUVOIR_STDT_baseline_BW10/small_fpm/analysis/mprof_LUVOIR_N1000_FPM350M0150_IWA0340_OWA01200_C10_BW10_Nlam5_LS_IDD0120_OD0982_no_ls_struts.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finalized_designs/LUVOIR/LUVOIR_STDT_baseline_BW10/small_fpm/analysis/mprof_plot_LUVOIR_N1000_FPM350M0150_IWA0340_OWA01200_C10_BW10_Nlam5_LS_IDD0120_OD0982_no_ls_struts.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finalized_designs/LUVOIR/LUVOIR_STDT_baseline_BW10/small_fpm/do_luvoir_telserv3_BW10_small.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finalized_designs/LUVOIR/LUVOIR_STDT_baseline_BW10/small_fpm/drivers/LUVOIR_N1000_FPM350M0150_IWA0340_OWA01200_C10_BW10_Nlam5_LS_IDD0120_OD0982_no_ls_struts.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finalized_designs/LUVOIR/LUVOIR_STDT_baseline_BW10/small_fpm/drivers/por_aplc_optimizer.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finalized_designs/LUVOIR/LUVOIR_STDT_baseline_BW10/small_fpm/solutions/0_LUVOIR_N1000_FPM350M0150_IWA0340_OWA01200_C10_BW10_Nlam5_LS_IDD0120_OD0982_no_ls_struts.fits" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finalized_designs/LUVOIR/luvoir_BW10_small_N1000_telserv3_with_EDF/analysis/._LUVOIR_N1000_FPM350M0150_IWA0340_OWA01200_C10_BW10_Nlam5_LS_IDD0120_OD0982_no_ls_struts.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finalized_designs/LUVOIR/luvoir_BW10_small_N1000_telserv3_with_EDF/analysis/._LUVOIR_N2000_EDF02_FPM350M0150_IWA0340_OWA01200_C10_BW10_Nlam5_LS_IDD0120_OD0982_no_ls_struts.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finalized_designs/LUVOIR/luvoir_BW10_small_N1000_telserv3_with_EDF/analysis/._LUVOIR_N2000_Inputs_Floor_SizeIncrease_EDF02_FPM350M0150_IWA0340_OWA01200_C10_BW10_Nlam5_LS_IDD0120_OD0982_no_ls_struts.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finalized_designs/LUVOIR/luvoir_BW10_small_N1000_telserv3_with_EDF/analysis/HICAT_1944_LS9_6pix_telserv3.asdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finalized_designs/LUVOIR/luvoir_BW10_small_N1000_telserv3_with_EDF/analysis/HICAT_1944_LS9_6pix_telserv3.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finalized_designs/LUVOIR/luvoir_BW10_small_N1000_telserv3_with_EDF/analysis/LUVOIR_N1000_FPM350M0150_IWA0340_OWA01200_C10_BW10_Nlam5_LS_IDD0120_OD0982_no_ls_struts.asdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finalized_designs/LUVOIR/luvoir_BW10_small_N1000_telserv3_with_EDF/analysis/LUVOIR_N1000_FPM350M0150_IWA0340_OWA01200_C10_BW10_Nlam5_LS_IDD0120_OD0982_no_ls_struts.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finalized_designs/LUVOIR/luvoir_BW10_small_N1000_telserv3_with_EDF/analysis/LUVOIR_N2000_EDF02_FPM350M0150_IWA0340_OWA01200_C10_BW10_Nlam5_LS_IDD0120_OD0982_no_ls_struts.asdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finalized_designs/LUVOIR/luvoir_BW10_small_N1000_telserv3_with_EDF/analysis/LUVOIR_N2000_EDF02_FPM350M0150_IWA0340_OWA01200_C10_BW10_Nlam5_LS_IDD0120_OD0982_no_ls_struts.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finalized_designs/LUVOIR/luvoir_BW10_small_N1000_telserv3_with_EDF/analysis/LUVOIR_N2000_Inputs_Floor_SizeIncrease_EDF02_FPM350M0150_IWA0340_OWA01200_C10_BW10_Nlam5_LS_IDD0120_OD0982_no_ls_struts.asdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finalized_designs/LUVOIR/luvoir_BW10_small_N1000_telserv3_with_EDF/analysis/LUVOIR_N2000_Inputs_Floor_SizeIncrease_EDF02_FPM350M0150_IWA0340_OWA01200_C10_BW10_Nlam5_LS_IDD0120_OD0982_no_ls_struts.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finalized_designs/LUVOIR/luvoir_BW10_small_N1000_telserv3_with_EDF/drivers/LUVOIR_N1000_FPM350M0150_IWA0340_OWA01200_C10_BW10_Nlam5_LS_IDD0120_OD0982_no_ls_struts.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finalized_designs/LUVOIR/luvoir_BW10_small_N1000_telserv3_with_EDF/drivers/por_aplc_optimizer.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finalized_designs/LUVOIR/luvoir_BW10_small_N1000_telserv3_with_EDF/inputs/LS_LUVOIR_ID0120_OD0982_no_struts_gy_ovsamp4_N1000.fits" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finalized_designs/LUVOIR/luvoir_BW10_small_N1000_telserv3_with_EDF/inputs/LS_LUVOIR_ID0120_OD0982_no_struts_gy_ovsamp4_N2000_EDF02.fits" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finalized_designs/LUVOIR/luvoir_BW10_small_N1000_telserv3_with_EDF/inputs/LS_LUVOIR_ID0120_OD0982_no_struts_gy_ovsamp4_N2000_Floor_SizeIncrease02.fits" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finalized_designs/LUVOIR/luvoir_BW10_small_N1000_telserv3_with_EDF/inputs/TelAp_LUVOIR_gap_pad01_bw_ovsamp04_N1000.fits" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finalized_designs/LUVOIR/luvoir_BW10_small_N1000_telserv3_with_EDF/inputs/TelAp_LUVOIR_gap_pad01_bw_ovsamp4_N2000_EDF02.fits" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finalized_designs/LUVOIR/luvoir_BW10_small_N1000_telserv3_with_EDF/inputs/TelAp_LUVOIR_gap_pad01_bw_ovsamp4_N2000_Floor_SizeIncrease02.fits" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finalized_designs/LUVOIR/luvoir_BW10_small_N1000_telserv3_with_EDF/logs/LUVOIR_N1000_FPM350M0150_IWA0340_OWA01200_C10_BW10_Nlam5_LS_IDD0120_OD0982_no_ls_struts.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finalized_designs/LUVOIR/luvoir_BW10_small_N1000_telserv3_with_EDF/solutions/LUVOIR_N1000_FPM350M0150_IWA0340_OWA01200_C10_BW10_Nlam5_LS_IDD0120_OD0982_no_ls_struts.fits" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finalized_designs/LUVOIR/luvoir_BW10_small_N1000_telserv3_with_EDF/solutions/LUVOIR_N2000_EDF02_FPM350M0150_IWA0340_OWA01200_C10_BW10_Nlam5_LS_IDD0120_OD0982_no_ls_struts.fits" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finalized_designs/LUVOIR/luvoir_BW10_small_N1000_telserv3_with_EDF/solutions/LUVOIR_N2000_Inputs_Floor_SizeIncrease_EDF02_FPM350M0150_IWA0340_OWA01200_C10_BW10_Nlam5_LS_IDD0120_OD0982_no_ls_struts.fits" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/masks/HiCAT/ApodMask_HiCAT_ovsamp01_N0200_SpiderTrue_GapTrue.fits" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/masks/HiCAT/LS_HiCAT_ID0006_OD0015_SpiderTrue_ovsamp04_N0200.fits" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/notebooks/Analysis_for_GPI_2_Coronagraph_Designs.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/Analysis_for_GPI_2_Coronagraph_Designs.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/notebooks/HicatApertureGenerationPython.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/HicatApertureGenerationPython.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/notebooks/LUVOIRApertureGenerationPython.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/LUVOIRApertureGenerationPython.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/notebooks/PASTISApertureGeneration.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/PASTISApertureGeneration.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/por_aplc.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/por_aplc_analysis.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/por_aplc_driver_template.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/por_aplc_optimizer.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/survey.py" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IgnoredFileRootStore">
+    <option name="generatedRoots">
+      <set>
+        <option value="$PROJECT_DIR$/.idea" />
+      </set>
+    </option>
+  </component>
+  <component name="ProjectId" id="1nGtyGELvGlM1Ap335m0k2xbUDM" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/optimization_launchers" />
+    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PythonContentEntriesConfigurable" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/optimization_launchers" />
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/optimization_launchers/optimization_launchers" />
+      <recent name="$PROJECT_DIR$/finalized_designs/GPI/analysis" />
+      <recent name="$PROJECT_DIR$/finalized_designs/GPI" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/optimization_launchers" />
+      <recent name="$PROJECT_DIR$/finalized_designs/GPI" />
+      <recent name="$PROJECT_DIR$/surveys/hicat_headertest_N0243_telserv3/drivers" />
+      <recent name="$PROJECT_DIR$/finalized_designs/HiCAT/old/inputs" />
+      <recent name="$PROJECT_DIR$/finalized_designs/HiCAT/old/solutions" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Python.do_luvoir_template">
+    <configuration name="do_gpi_pathfinder" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="aplc-optimization" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/optimization_launchers" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/optimization_launchers/do_gpi_pathfinder.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="do_gpi_template (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="aplc-optimization" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/optimization_launchers" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/optimization_launchers/do_gpi_template.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="do_gpi_template" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="aplc-optimization" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/optimization_launchers" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/optimization_launchers/optimization_launchers/do_gpi_template.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="do_hicat_template" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="aplc-optimization" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/optimization_launchers" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/optimization_launchers/do_hicat_template.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="do_hicat_template" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="aplc-optimization" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../optimization_launchers/do_hicat_template.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="do_hicat_template" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="aplc-optimization" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/optimization_launchers" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/do_hicat_template.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="do_luvoir_template" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="aplc-optimization" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/optimization_launchers" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/optimization_launchers/do_luvoir_template.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.do_luvoir_template" />
+        <item itemvalue="Python.do_hicat_template" />
+        <item itemvalue="Python.do_gpi_template (1)" />
+        <item itemvalue="Python.do_gpi_pathfinder" />
+        <item itemvalue="Python.do_gpi_template" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="e9f8f11d-b623-415a-96cb-a3040fd1a215" name="Default Changelist" comment="" />
+      <created>1611028507800</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1611028507800</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="1">
+          <value>
+            <State>
+              <option name="SHOW_ONLY_AFFECTED_CHANGES" value="true" />
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="HEAD" />
+                      </list>
+                    </value>
+                  </entry>
+                  <entry key="roots">
+                    <value>
+                      <list>
+                        <option value="$PROJECT_DIR$" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="OPEN_TABS">
+      <set>
+        <option value="1" />
+      </set>
+    </option>
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="1059" y="356" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1621448608767">
+      <screen x="0" y="23" width="2560" height="1417" />
+    </state>
+    <state x="1059" y="356" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.23.2560.1417@0.23.2560.1417" timestamp="1621448608767" />
+    <state x="989" y="591" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1620922001178">
+      <screen x="0" y="23" width="2560" height="1417" />
+    </state>
+    <state x="989" y="591" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.23.2560.1417@0.23.2560.1417" timestamp="1620922001178" />
+    <state x="303" y="306" width="2101" height="1058" key="DiffContextDialog" timestamp="1621915031431">
+      <screen x="0" y="23" width="2560" height="1417" />
+    </state>
+    <state x="303" y="306" width="2101" height="1058" key="DiffContextDialog/0.23.2560.1417@0.23.2560.1417" timestamp="1621915031431" />
+    <state x="845" y="782" key="FileChooserDialogImpl" timestamp="1621967691634">
+      <screen x="0" y="23" width="2560" height="1417" />
+    </state>
+    <state x="845" y="782" key="FileChooserDialogImpl/0.23.2560.1417@0.23.2560.1417" timestamp="1621967691634" />
+    <state width="1514" height="189" key="GridCell.Tab.0.bottom" timestamp="1621968333178">
+      <screen x="0" y="23" width="2560" height="1417" />
+    </state>
+    <state width="1514" height="281" key="GridCell.Tab.0.bottom/0.23.1680.1027/-2560.23.2560.1417@0.23.1680.1027" timestamp="1621954931156" />
+    <state width="1514" height="189" key="GridCell.Tab.0.bottom/0.23.2560.1417@0.23.2560.1417" timestamp="1621968333178" />
+    <state width="1514" height="189" key="GridCell.Tab.0.center" timestamp="1621968333177">
+      <screen x="0" y="23" width="2560" height="1417" />
+    </state>
+    <state width="1514" height="281" key="GridCell.Tab.0.center/0.23.1680.1027/-2560.23.2560.1417@0.23.1680.1027" timestamp="1621954931155" />
+    <state width="1514" height="189" key="GridCell.Tab.0.center/0.23.2560.1417@0.23.2560.1417" timestamp="1621968333177" />
+    <state width="1514" height="189" key="GridCell.Tab.0.left" timestamp="1621968333177">
+      <screen x="0" y="23" width="2560" height="1417" />
+    </state>
+    <state width="1514" height="281" key="GridCell.Tab.0.left/0.23.1680.1027/-2560.23.2560.1417@0.23.1680.1027" timestamp="1621954931154" />
+    <state width="1514" height="189" key="GridCell.Tab.0.left/0.23.2560.1417@0.23.2560.1417" timestamp="1621968333177" />
+    <state width="1514" height="189" key="GridCell.Tab.0.right" timestamp="1621968333177">
+      <screen x="0" y="23" width="2560" height="1417" />
+    </state>
+    <state width="1514" height="281" key="GridCell.Tab.0.right/0.23.1680.1027/-2560.23.2560.1417@0.23.1680.1027" timestamp="1621954931156" />
+    <state width="1514" height="189" key="GridCell.Tab.0.right/0.23.2560.1417@0.23.2560.1417" timestamp="1621968333177" />
+    <state width="2519" height="501" key="GridCell.Tab.1.bottom" timestamp="1621965480296">
+      <screen x="0" y="23" width="2560" height="1417" />
+    </state>
+    <state width="2519" height="501" key="GridCell.Tab.1.bottom/0.23.2560.1417@0.23.2560.1417" timestamp="1621965480296" />
+    <state width="2519" height="501" key="GridCell.Tab.1.center" timestamp="1621965480295">
+      <screen x="0" y="23" width="2560" height="1417" />
+    </state>
+    <state width="2519" height="501" key="GridCell.Tab.1.center/0.23.2560.1417@0.23.2560.1417" timestamp="1621965480295" />
+    <state width="2519" height="501" key="GridCell.Tab.1.left" timestamp="1621965480295">
+      <screen x="0" y="23" width="2560" height="1417" />
+    </state>
+    <state width="2519" height="501" key="GridCell.Tab.1.left/0.23.2560.1417@0.23.2560.1417" timestamp="1621965480295" />
+    <state width="2519" height="501" key="GridCell.Tab.1.right" timestamp="1621965480295">
+      <screen x="0" y="23" width="2560" height="1417" />
+    </state>
+    <state width="2519" height="501" key="GridCell.Tab.1.right/0.23.2560.1417@0.23.2560.1417" timestamp="1621965480295" />
+    <state x="639" y="418" key="SettingsEditor" timestamp="1621967747392">
+      <screen x="0" y="23" width="2560" height="1417" />
+    </state>
+    <state x="639" y="418" key="SettingsEditor/0.23.2560.1417@0.23.2560.1417" timestamp="1621967747392" />
+    <state x="429" y="759" key="com.intellij.ide.util.TipDialog" timestamp="1621967035729">
+      <screen x="0" y="23" width="2560" height="1417" />
+    </state>
+    <state x="429" y="369" key="com.intellij.ide.util.TipDialog/-2560.-199.2560.1417/0.23.1680.1027@0.23.1680.1027" timestamp="1613672147151" />
+    <state x="429" y="759" key="com.intellij.ide.util.TipDialog/0.23.2560.1417@0.23.2560.1417" timestamp="1621967035729" />
+    <state x="1595" y="123" width="964" height="1007" key="dock-window-1" timestamp="1621967064472">
+      <screen x="0" y="23" width="2560" height="1417" />
+    </state>
+    <state x="715" y="23" width="964" height="1007" key="dock-window-1/0.23.1680.1027/-2560.23.2560.1417@0.23.1680.1027" timestamp="1621950040535" />
+    <state x="1595" y="123" width="964" height="1007" key="dock-window-1/0.23.2560.1417@0.23.2560.1417" timestamp="1621967064472" />
+    <state x="1149" y="23" width="964" height="698" key="dock-window-2" timestamp="1621967064472">
+      <screen x="0" y="23" width="2560" height="1417" />
+    </state>
+    <state x="-1411" y="23" width="964" height="698" key="dock-window-2/0.0.1680.1050/0.23.2560.1417@0.0.1680.1050" timestamp="1621955305813" />
+    <state x="-1411" y="23" width="964" height="698" key="dock-window-2/0.23.1680.1027/-2560.23.2560.1417@0.23.1680.1027" timestamp="1621953528796" />
+    <state x="1149" y="23" width="964" height="698" key="dock-window-2/0.23.2560.1417@0.23.2560.1417" timestamp="1621967064472" />
+    <state x="1205" y="467" width="796" height="729" key="find.popup" timestamp="1621967443929">
+      <screen x="0" y="23" width="2560" height="1417" />
+    </state>
+    <state x="1205" y="467" width="796" height="729" key="find.popup/0.23.2560.1417@0.23.2560.1417" timestamp="1621967443929" />
+    <state x="1043" y="745" key="git4idea.ui.GitStashDialog" timestamp="1620921309056">
+      <screen x="0" y="23" width="2560" height="1417" />
+    </state>
+    <state x="1043" y="745" key="git4idea.ui.GitStashDialog/0.23.2560.1417@0.23.2560.1417" timestamp="1620921309056" />
+    <state x="918" y="431" width="670" height="676" key="search.everywhere.popup" timestamp="1621911870489">
+      <screen x="0" y="23" width="2560" height="1417" />
+    </state>
+    <state x="918" y="431" width="670" height="676" key="search.everywhere.popup/0.23.2560.1417@0.23.2560.1417" timestamp="1621911870489" />
+  </component>
+</project>
