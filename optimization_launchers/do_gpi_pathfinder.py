@@ -1,10 +1,10 @@
 import os
 os.chdir('..')
 
-from survey import DesignParameterSurvey
-from por_aplc import PorAPLC
+from aplc_optimization.survey import DesignParameterSurvey
+from aplc_optimization.aplc import APLC
 from astropy.io import fits
-from GPI_Inputs_Generation import GPI_inputs_gen
+from aplc_optimization.Inputs_Generation.GPI_Inputs_Generation import GPI_inputs_gen
 
 '''
 DO NOT RUN THIS SCRIPT - It is the launcher template. 
@@ -45,9 +45,9 @@ input_files_dict = {'directory': 'GPI/', 'N': nArray,
                     'lyot_stop': {'lyot_mask':lyot_mask, 'ls_tabs': ls_tabs, 'ls_spid': ls_spid}}
 
 # GENERATE INPUT FILES
-#pup_filename, ls_filename = GPI_inputs_gen(input_files_dict)
-pup_filename = 'GPI/Primary_GPI_grey_oversamp04_symmetric_N1168.fits'
-ls_filename = 'GPI/LS_GPI_080m12_03_grey_oversamp04_notabs_N1168.fits'
+pup_filename, ls_filename = GPI_inputs_gen(input_files_dict)
+#pup_filename = 'GPI/Primary_GPI_grey_oversamp04_symmetric_N1168.fits'
+#ls_filename = 'GPI/LS_GPI_080m12_03_grey_oversamp04_notabs_N1168.fits'
 
 # Focal plane mask parameters
 nFPM = 80 # number of pixels across the focal plane mask
@@ -73,9 +73,9 @@ survey_parameters = {'instrument': {'inst_name': instrument.upper()}, 'pupil': {
 
 
 # RUN DESIGN SURVEY
-gpi = DesignParameterSurvey(PorAPLC, survey_parameters, 'surveys/{}_{}_N{:04d}_{}/'.format(instrument,survey_name,nArray,machine), 'masks/')
+gpi = DesignParameterSurvey(APLC, survey_parameters, 'surveys/{}_{}_N{:04d}_{}/'.format(instrument,survey_name,nArray,machine), 'masks/')
 gpi.describe()
 
-#gpi.write_drivers(True)
-#gpi.run_optimizations(True)
+gpi.write_drivers(True)
+gpi.run_optimizations(True)
 gpi.run_analyses(True)
