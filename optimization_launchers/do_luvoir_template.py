@@ -1,31 +1,27 @@
-import os
-os.chdir('..')
+'''
+DO NOT RUN THIS SCRIPT - this is the launcher template for LUVOIR design surveys.
 
+Workflow:
+- Make a copy of this script.
+- rename the copy under the following naming schema: 'do_luvoir_<survey_name>_<machine>.py', designating the survey you
+    are running and the name of the machine you will be running it on.
+    (e.g. 'do_luvoir_BW10_small_telserv3.py' designates a BW small design run on telserv3.)
+- Edit input file parameters and survey parameters, as desired.
+- Run the script on the designated machine.
+'''
+
+import os
+
+os.chdir('..')
 from aplc_optimization.survey import DesignParameterSurvey
 from aplc_optimization.aplc import APLC
 from aplc_optimization.Inputs_Generation.LUVOIR_Inputs_Generation import LUVOIR_inputs_gen
 
-'''
-DO NOT RUN THIS SCRIPT - this is the launcher template for LUVOIR. 
-Default parameters for 1000 pix BW10 small design
-
-Workflow: 
-- Make a copy
-- rename the copy under the following naming schema: 'do_luvoir_<survey_name>_<machine>.py', designating the survey you 
-    are running and the name of the machine you will be running it on. 
-    (e.g. 'do_luvoir_BW10_small_telserv3.py' designates a BW small design run on telserv3.)
-- Edit input file parameters and survey parameters, as desired. 
-- Once the survey is complete, move the launcher script to the 'survey/' directory..
-'''
-
 # Survey information
-instrument = 'luvoir'                                   # instrument name;
-survey_name = 'template'             # survey name;
-machine = 'local'                                     # name of machine the survey is run on.
-
-# Physical
-pupil_diameter = 15.0 #m: actual LUVOIR A circumscribed pupil diameter
-pupil_inscribed = 13.5 #m: actual LUVOIR A inscribed pupil diameter
+instrument = 'luvoir'  # instrument name
+survey_name = 'template'  # survey name
+machine = 'local'  # name of machine the survey is run on
+N = 200  # number of pixels in input (TelAP, LS) and final (apodizer) arrays
 
 '''
 Input (aperture and Lyot stop) Array Parameters
@@ -33,67 +29,105 @@ Input (aperture and Lyot stop) Array Parameters
 Gap padding (seg_gap_pad) and grey levels (oversamp) are set according to number of input array pixels (nArray),  
 configured in order to keep gap size as close to actual physical size of LUVOIR A, as possible. 
 
- - nArray = 1000, oversamp = 4, seg_gap_pad = 1
- - nArray = 500,  oversamp = 3, seg_gap_pad = 2
- - nArray = 300,  oversamp = 4, seg_gap_pad = 4
- - nArray = 200,  oversamp = 4, seg_gap_pad = 4
- - nArray = 100,  oversamp = 4, seg_gap_pad = 4
+ - N = 1000, oversamp = 4, seg_gap_pad = 1
+ - N = 500,  oversamp = 3, seg_gap_pad = 2
+ - N = 300,  oversamp = 4, seg_gap_pad = 4
+ - N = 200,  oversamp = 4, seg_gap_pad = 4
+ - N = 100,  oversamp = 4, seg_gap_pad = 4
+
+
+N: int
+    The number of pixels in input (TelAP, LS) and final (apodizer) arrays
+oversamp: int
+    The oversampling factor (number of grey levels) - if set to 1 will return a bw pupil, for grey set to > 1.
+gap_padding: int
+    An arbitary padding of gap size to represent gaps on smaller arrays. This effectively makes the larger gaps larger 
+    and the segments smaller to preserve the same segment pitch.
+lyot_ref_diam: float 
+    The diameter used to reference the LS inner and outer diameter against.
+ls_spid: bool 
+    Whether to include secondary support mirror structure in the aperture.
+ls_spid_ov: int
+    The factor by which to oversize the spiders compared to the LUVOIR-A aperture spiders.
+LS_ID: float
+    The Lyot stop inner diameter(s) relative to the `lyot_ref_diameter` (inscribed circle). This is re-normalized 
+    against the circumscribed pupil in the `LUVOIR_inputs_gen` function.
+LS_OD: float
+    The Lyot stop outer diameter(s) relative to the `lyot_ref_diameter` (inscribed circle). This is re-normalized 
+    against the circumscribed pupil in the `LUVOIR_inputs_gen` function.
 '''
 
-# Input parameters
-filepath = instrument.upper()+'/'   # directory in 'masks/' where the input files are stored
-nArray = 100    # number of pixels in input (TelAP, LS) and final (apodizer) arrays
-oversamp = 4    # oversampling factor (number of grey levels) - if set to 1 will return a bw pupil, for grey set to > 1
-
 # Aperture parameters
-gap_padding = 4 # arbitary padding of gap size to represent gaps on smaller arrays
-                # effectively makes the larger gaps larger and the segments smaller to preserve the same segment pitch
+pupil_diameter = 15.0  # m: actual LUVOIR A circumscribed pupil diameter
+pupil_inscribed = 13.5  # m: actual LUVOIR A inscribed pupil diameter
+oversamp = 4
+gap_padding = 1
 
 # Lyot stop parameters
-lyot_ref_diameter = pupil_inscribed # diameter used to reference the LS inner and outer diameter against
-ls_spid = False# whether to include secondary support mirror structure in the aperture
-spid_ov = 2     # factor by which to oversize the spiders compared to the LUVOIR-A aperture spiders
-ls_id = 0.12    # LS inner diameter(s) as a fraction of `lyot_ref_diameter`
-ls_od = 0.937   # LS outer diameter as a fraction of `lyot_ref_diameter`
-        # Note: both ls_id and ls_od are re-normalized against circumscribed pupil diameter during LS generation
+lyot_ref_diam = pupil_inscribed
+ls_spid = False
+ls_spid_ov = 2
+LS_ID= 0.12
+LS_OD = 0.982
 
 # INPUT FILES PARAMETER DICTIONARY
-input_files_dict = {'directory': 'LUVOIR/', 'N': nArray, 'oversamp': oversamp,
+input_files_dict = {'directory': 'LUVOIR/', 'N': N, 'oversamp': oversamp,
                     'aperture': {'seg_gap_pad': gap_padding},
-                    'lyot_stop':{'ls_spid':ls_spid, 'ls_spid_ov': spid_ov, 'lyot_ref_diam': lyot_ref_diameter, 'LS_ID':[ls_id], 'LS_OD':[ls_od]}}
+                    'lyot_stop': {'lyot_ref_diam': lyot_ref_diam,  'ls_spid': ls_spid, 'ls_spid_ov': ls_spid_ov,
+                                  'LS_ID': [LS_ID], 'LS_OD': [LS_OD]}}
 
 # INPUT FILE GENERATION
 pup_filename, ls_filenames = LUVOIR_inputs_gen(input_files_dict)
-
 
 '''
 Survey Design Parameters
 ------------------------
 - for multiple design parameters as a grid, input as list
-- for multiple design parameters NOT as a grid, create multiple entries of below 
-  (as shown in the commented block, at bottom of this script)
+- for multiple design parameters NOT as a grid, create multiple `survey_parameters` dictionaries
+  (as shown in the commented block, at bottom of this script).
 
+Parameters
+----------  
+radius: float  
+    The radius of the FPM in lamda_0/D.
+num_pix: float
+    The number of pixels in the focal plane mask.
+greyscale: bool
+    Whether to model a grayscale focal plane mask, else black and white.
+iwa: float
+    The effective inner working angle (outer perimeter of the annular dark zone in coronagraphic image) in lam/D.
+owa: float
+    The effective outer working angle (inner perimeter of the annular dark zone in the coronagraphic image) in lam/D.
+bandwidth: float
+    The spectral bandwidth over which to optimize (fractional).
+num_wavelengths: int
+    The number of wavelengths spanning the bandpass.
+contrast: int
+    The contrast goal in the dark zone (exponent of 10). 
 '''
+
 # FPM Parameters
-FPM_radius = 3.5 # lamda_0/D radius
-nFPM = 150 # number of pixels in the focal plane mask
-greyscale = True
+radius = 3.5
+num_pix = 150
+grayscale = True
 
 # Optimization parameters (dark zone constraints)
-IWA = 3.4   #lam/D: effective inner working angle (outer perimeter of the annular dark zone in coronagraphic image)
-OWA = 12.0  #lam/D: effective outer working angle (inner perimeter of the annular dark zone in the coronagraphic image)
-bandpass = 0.1  # dark zone bandpass (fractional)
-nLams = 1   # number of wavelengths spanning bandpass
-contrast = 10   # contrast goal in the dark zone
+iwa = 3.4
+owa = 12.0
+bandwidth = 0.1
+num_wavelengths = 1
+contrast = 10
 
 # SURVEY PARAMS DICTIONARY
-survey_parameters = {'pupil': {'N': nArray, 'filename': pup_filename},
+survey_parameters = {'pupil': {'N': N, 'filename': pup_filename},
                      'lyot_stop': {'filename': ls_filenames},
-                     'focal_plane_mask': {'radius':FPM_radius, 'num_pix': nFPM, 'grayscale': greyscale},
-                     'image': {'contrast': contrast,'iwa': IWA,'owa': OWA,'bandwidth': bandpass,'num_wavelengths':nLams}}
+                     'focal_plane_mask': {'radius': radius, 'num_pix': num_pix, 'grayscale': grayscale},
+                     'image': {'contrast': contrast, 'iwa': iwa, 'owa': owa, 'bandwidth': bandwidth,
+                               'num_wavelengths': num_wavelengths}}
 
 # RUN DESIGN SURVEY
-luvoir = DesignParameterSurvey(APLC, survey_parameters, 'surveys/{}_{}_N{:04d}_{}/'.format(instrument, survey_name, nArray, machine),
+luvoir = DesignParameterSurvey(APLC, survey_parameters,
+                               'surveys/{}_{}_N{:04d}_{}/'.format(instrument, survey_name, N, machine),
                                'masks/')
 luvoir.describe()
 

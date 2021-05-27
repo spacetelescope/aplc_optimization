@@ -163,29 +163,29 @@
            <div itemprop="articleBody">
             
   <h1>Source code for aplc_optimization.Inputs_Generation.LUVOIR_Inputs_Generation</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
-
+<span></span><span class="kn">from</span> <span class="nn">hcipy</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">astropy.io</span> <span class="kn">import</span> <span class="n">fits</span>
-<span class="kn">from</span> <span class="nn">hcipy</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="kn">import</span> <span class="nn">os</span>
 
 
 <div class="viewcode-block" id="LUVOIR_inputs_gen"><a class="viewcode-back" href="../../../api/aplc_optimization.Inputs_Generation.LUVOIR_Inputs_Generation.LUVOIR_inputs_gen.html#aplc_optimization.Inputs_Generation.LUVOIR_Inputs_Generation.LUVOIR_inputs_gen">[docs]</a><span class="k">def</span> <span class="nf">LUVOIR_inputs_gen</span><span class="p">(</span><span class="n">input_files_dict</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Generate LUVOIR-A aperture and Lyot stop(s) for the APLC coronagraph.</span>
+    <span class="sd">&quot;&quot;&quot;Generate LUVOIR-A aperture and Lyot stop(s) input mask files for the APLC coronagraph.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    input_files_dict: dict</span>
-<span class="sd">        A dictionary of input parameters provided in `do_luvoir` launcher script.</span>
+<span class="sd">        A dictionary of input mask parameters.</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    pup_filename: str</span>
-<span class="sd">        The name of the generated LUVOIR A aperure FITS file.</span>
+<span class="sd">        The name of the generated telescope aperture FITS file.</span>
 <span class="sd">    ls_filename: list</span>
 <span class="sd">        The name(s) of the generated Lyot stop FITS file(s).</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-
 
     <span class="n">filepath</span> <span class="o">=</span>      <span class="n">input_files_dict</span><span class="p">[</span><span class="s1">&#39;directory&#39;</span><span class="p">]</span>   <span class="c1"># directory in which the constructed FITS files are stored</span>
     <span class="n">N</span> <span class="o">=</span>             <span class="n">input_files_dict</span><span class="p">[</span><span class="s1">&#39;N&#39;</span><span class="p">]</span>   <span class="c1"># number of pixels in the input (aperture and lyot stop) arrays</span>
@@ -210,10 +210,9 @@
 
     <span class="n">config</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s1">&#39;masks/&#39;</span> <span class="o">+</span> <span class="n">pup_filename</span><span class="p">)</span>
 
-    <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    Checks if aperture file already exists, otherwise creates LUVOIR aperture by calling </span>
-<span class="sd">    make_a_luvoir_aperture() [hcipy/aperture/realistic.py]</span>
-<span class="sd">    &#39;&#39;&#39;</span>
+
+    <span class="c1">#Check if aperture file already exists, otherwise creates LUVOIR aperture by calling make_a_luvoir_aperture() [hcipy/aperture/realistic.py]</span>
+
     <span class="k">if</span> <span class="n">config</span><span class="o">.</span><span class="n">is_file</span><span class="p">():</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{0:s}</span><span class="s1"> exists&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;masks/&#39;</span> <span class="o">+</span> <span class="n">pup_filename</span><span class="p">))</span>
     <span class="k">else</span><span class="p">:</span>
@@ -293,7 +292,7 @@
 
             <span class="k">else</span><span class="p">:</span>
 
-                <span class="n">LUVOIR_ls</span><span class="p">,</span> <span class="n">ls_header</span> <span class="o">=</span> <span class="n">make_luvoir_a_lyot_stop</span><span class="p">(</span><span class="n">inner_diameter_fraction</span><span class="o">=</span><span class="n">ls_id</span><span class="p">,</span>
+                <span class="n">LUVOIR_ls</span><span class="p">,</span> <span class="n">ls_header</span> <span class="o">=</span> <span class="n">make_luvoir_lyot_stop</span><span class="p">(</span><span class="n">inner_diameter_fraction</span><span class="o">=</span><span class="n">ls_id</span><span class="p">,</span>
                                                              <span class="n">outer_diameter_fraction</span><span class="o">=</span><span class="n">ls_od</span><span class="p">,</span> <span class="n">lyot_reference_diameter</span><span class="o">=</span><span class="n">lyot_ref_diam</span><span class="p">,</span>
                                                              <span class="n">spider_oversize</span><span class="o">=</span><span class="n">ls_spid_ov</span><span class="p">,</span> <span class="n">with_spiders</span><span class="o">=</span><span class="n">LS_SPID</span><span class="p">,</span>
                                                              <span class="n">return_header</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -335,7 +334,7 @@
 
 <div class="viewcode-block" id="make_luvoir_lyot_stop"><a class="viewcode-back" href="../../../api/aplc_optimization.Inputs_Generation.LUVOIR_Inputs_Generation.make_luvoir_lyot_stop.html#aplc_optimization.Inputs_Generation.LUVOIR_Inputs_Generation.make_luvoir_lyot_stop">[docs]</a><span class="k">def</span> <span class="nf">make_luvoir_lyot_stop</span><span class="p">(</span><span class="n">normalized</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">with_spiders</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">spider_oversize</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">lyot_reference_diameter</span><span class="o">=</span><span class="mf">13.5</span><span class="p">,</span> <span class="n">inner_diameter_fraction</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span>
                             <span class="n">outer_diameter_fraction</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span> <span class="n">return_header</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;Make a LUVOIR-A Lyot stop for the APLC coronagraph.</span>
+    <span class="sd">&quot;&quot;&quot;Make a LUVOIR-A Lyot stop for the APLC coronagraph.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -363,7 +362,7 @@
 <span class="sd">    header : dict</span>
 <span class="sd">        A dictionary containing all important values for the created aperture. Only returned</span>
 <span class="sd">        if `return_header` is True.</span>
-<span class="sd">    &#39;&#39;&#39;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">pupil_diameter</span> <span class="o">=</span> <span class="mf">15.0</span>  <span class="c1"># m actual circumscribed diameter, used for lam/D calculations, other measurements normalized by this diameter</span>
     <span class="n">pupil_diameter_inscribed</span> <span class="o">=</span> <span class="mf">13.5</span>
     <span class="n">spider_width</span> <span class="o">=</span> <span class="mf">0.150</span>  <span class="c1"># m actual strut size</span>

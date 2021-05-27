@@ -163,33 +163,35 @@
            <div itemprop="articleBody">
             
   <h1>Source code for aplc_optimization.Inputs_Generation.GPI_Inputs_Generation</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span></span><span class="kn">from</span> <span class="nn">hcipy</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 <span class="kn">from</span> <span class="nn">astropy.io</span> <span class="kn">import</span> <span class="n">fits</span>
 <span class="c1">#import gpipsfs</span>
 <span class="kn">import</span> <span class="nn">poppy</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">astropy.units</span> <span class="k">as</span> <span class="nn">u</span>
+<span class="kn">import</span> <span class="nn">os</span>
 
 <span class="c1">#_grayscale_pixels=4</span>
 <span class="n">_default_pupil_array_size</span> <span class="o">=</span> <span class="mi">8</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">m</span>
 
 
 <div class="viewcode-block" id="GPI_inputs_gen"><a class="viewcode-back" href="../../../api/aplc_optimization.Inputs_Generation.GPI_Inputs_Generation.GPI_inputs_gen.html#aplc_optimization.Inputs_Generation.GPI_Inputs_Generation.GPI_inputs_gen">[docs]</a><span class="k">def</span> <span class="nf">GPI_inputs_gen</span><span class="p">(</span><span class="n">input_files_dict</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Generate GPI Primary and Lyot stop(s) for the APLC coronagraph.</span>
+    <span class="sd">&quot;&quot;&quot;Generate GPI Primary and Lyot stop(s) for the APLC coronagraph and write to file.</span>
 <span class="sd">        </span>
-<span class="sd">        Parameters</span>
-<span class="sd">        ----------</span>
-<span class="sd">        input_files_dict: dict</span>
-<span class="sd">        A dictionary of input parameters provided in `do_gpi...` launcher script.</span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    input_files_dict: dict</span>
+<span class="sd">        A dictionary of input mask parameters.</span>
 <span class="sd">        </span>
-<span class="sd">        Returns</span>
-<span class="sd">        -------</span>
-<span class="sd">        pup_filename: str</span>
-<span class="sd">        The name of the generated GPI aperure FITS file.</span>
-<span class="sd">        ls_filename: list</span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    pup_filename: str</span>
+<span class="sd">        The name of the generated telescope aperture FITS file.</span>
+<span class="sd">    ls_filename: list</span>
 <span class="sd">        The name(s) of the generated Lyot stop FITS file(s).</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-    
+<span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="n">filepath</span> <span class="o">=</span> <span class="n">input_files_dict</span><span class="p">[</span><span class="s1">&#39;directory&#39;</span><span class="p">]</span>
     <span class="n">N</span> <span class="o">=</span> <span class="n">input_files_dict</span><span class="p">[</span><span class="s1">&#39;N&#39;</span><span class="p">]</span>
     <span class="n">lyot_mask</span> <span class="o">=</span> <span class="n">input_files_dict</span><span class="p">[</span><span class="s1">&#39;lyot_stop&#39;</span><span class="p">][</span><span class="s1">&#39;lyot_mask&#39;</span><span class="p">]</span>
@@ -214,8 +216,9 @@
     <span class="k">else</span><span class="p">:</span>
         <span class="n">ls_filename</span> <span class="o">=</span> <span class="n">filepath</span> <span class="o">+</span> <span class="s1">&#39;LS_GPI_</span><span class="si">{0:s}</span><span class="s1">_ovsamp01_</span><span class="si">{1:s}</span><span class="s1">_no_tabs_N</span><span class="si">{2:04d}</span><span class="s1">.fits&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">lyot_mask</span><span class="p">,</span> <span class="n">strut_key</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
 
-    
+
     <span class="n">config</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s1">&#39;masks/&#39;</span> <span class="o">+</span> <span class="n">pup_filename</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
     <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Checks if aperture file already exists, otherwise creates GPI aperture by calling</span>
 <span class="sd">        GeminiPrimary() </span>
@@ -235,7 +238,7 @@
         <span class="c1">#hdr.set(&#39;STRUT_ST&#39;, -0.2179, &#39;m: angle lower spiders offset from y&#39;)</span>
         <span class="c1">#hdr.set(&#39;STRUT_AN&#39;, 226.9, &#39;deg: angle lower spiders offset from vertical&#39;)</span>
 
-        <span class="n">fits</span><span class="o">.</span><span class="n">writeto</span><span class="p">(</span><span class="s1">&#39;masks/&#39;</span><span class="o">+</span><span class="n">pup_filename</span><span class="p">,</span> <span class="n">GPI_primary</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="n">hdr</span><span class="p">)</span>
+        <span class="n">fits</span><span class="o">.</span><span class="n">writeto</span><span class="p">(</span><span class="s1">&#39;masks/&#39;</span><span class="o">+</span><span class="n">pup_filename</span><span class="p">,</span> <span class="n">GPI_primary</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="n">hdr</span><span class="p">,</span> <span class="n">overwrite</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{0:s}</span><span class="s1"> has been written to file&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;masks/&#39;</span> <span class="o">+</span> <span class="n">pup_filename</span><span class="p">))</span>
 
     <span class="n">config</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s1">&#39;masks/&#39;</span> <span class="o">+</span> <span class="n">ls_filename</span><span class="p">)</span>
@@ -269,7 +272,7 @@
 
 
 <div class="viewcode-block" id="GeminiPrimary"><a class="viewcode-back" href="../../../api/aplc_optimization.Inputs_Generation.GPI_Inputs_Generation.GeminiPrimary.html#aplc_optimization.Inputs_Generation.GPI_Inputs_Generation.GeminiPrimary">[docs]</a><span class="k">class</span> <span class="nc">GeminiPrimary</span><span class="p">(</span><span class="n">poppy</span><span class="o">.</span><span class="n">CompoundAnalyticOptic</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39; taken from [geminiplanetimager/gpipsfs] &#39;&#39;&#39;</span>
+    <span class="sd">&#39;&#39;&#39;The Gemini primary, adapted from of [geminiplanetimager/gpipsfs]&#39;&#39;&#39;</span>
 
     <span class="n">primary_diameter</span> <span class="o">=</span> <span class="mf">7.701</span>  <span class="c1"># projected diameter of baffle on M2</span>
     <span class="n">obscuration_diameter</span> <span class="o">=</span> <span class="mf">1.2968</span>  <span class="c1"># projected diameter of M2 inner oversized hole</span>
@@ -279,10 +282,17 @@
     <span class="n">_default_display_size</span> <span class="o">=</span> <span class="n">_default_pupil_array_size</span>  <span class="c1"># choose reasonable size for display and sampling.</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Gemini South Primary&#39;</span><span class="p">,</span> <span class="n">undersized</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">force_symmetric</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Gemini Primary</span>
+        <span class="sd">&quot;&quot;&quot;The GPI Primary.</span>
 
-<span class="sd">            :param symmetric: if True, treat all 4 struts as identical. If False, model the fact that</span>
-<span class="sd">            one of the struts is slightly thicker due to the laser AO beam transfer optics.</span>
+<span class="sd">            Parameters</span>
+<span class="sd">            ----------</span>
+<span class="sd">            name: string</span>
+<span class="sd">                The name of the instrument</span>
+<span class="sd">            force_symmetric: bool</span>
+<span class="sd">                Whether to model the primary as precisely symmetric by treating all 4 struts as the same thickness.</span>
+<span class="sd">                Forcing the primary to be symmetric will reduce the size of the optimization problem and hence</span>
+<span class="sd">                computation time and memory usage during the optimization phase. If False, model the fact that</span>
+<span class="sd">                one of the struts is slightly thicker due to the laser AO beam transfer optics.</span>
 <span class="sd">            &quot;&quot;&quot;</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">force_symmetric</span> <span class="o">=</span> <span class="n">force_symmetric</span>
@@ -310,7 +320,9 @@
 
 
 <div class="viewcode-block" id="GPI_LyotMask"><a class="viewcode-back" href="../../../api/aplc_optimization.Inputs_Generation.GPI_Inputs_Generation.GPI_LyotMask.html#aplc_optimization.Inputs_Generation.GPI_Inputs_Generation.GPI_LyotMask">[docs]</a><span class="k">class</span> <span class="nc">GPI_LyotMask</span><span class="p">(</span><span class="n">poppy</span><span class="o">.</span><span class="n">AnalyticOpticalElement</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39; taken from [geminiplanetimager/gpipsfs] &#39;&#39;&#39;</span>
+    <span class="sd">&#39;&#39;&#39;Model the GPI Lyot stop mask.</span>
+
+<span class="sd">     Based on gpipsfs.GPI_LyotMask&#39;&#39;&#39;</span>
 
     <span class="n">magnification</span> <span class="o">=</span> <span class="mf">7.7701</span><span class="o">/.</span><span class="mi">009825</span>   <span class="c1"># meters at primary/meters at Lyot</span>
 
@@ -371,9 +383,18 @@
         <span class="c1">#self.wavefront_display_vmax_hint = 3e-9  # Hacky to hard code this, but this value works OK with H_coron sims.</span>
 
 <div class="viewcode-block" id="GPI_LyotMask.get_transmission"><a class="viewcode-back" href="../../../api/aplc_optimization.Inputs_Generation.GPI_Inputs_Generation.GPI_LyotMask.html#aplc_optimization.Inputs_Generation.GPI_Inputs_Generation.GPI_LyotMask.get_transmission">[docs]</a>    <span class="k">def</span> <span class="nf">get_transmission</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">wave</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Compute the transmission inside/outside of the obscuration</span>
+        <span class="sd">&quot;&quot;&quot;Compute the transmission inside/outside of the obscuration.</span>
 
-<span class="sd">        Based on poppy.AsymmetricSecondaryObscuration but with the bad actuator tabs added.</span>
+<span class="sd">        From gpipsfs.GPI_LyotMask, based on poppy.AsymmetricSecondaryObscuration but with the bad actuator tabs added.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        wave: poppy.Wavefront</span>
+<span class="sd">            A wavefront to define the desired sampling pixel size and number.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">wave</span><span class="p">,</span> <span class="n">poppy</span><span class="o">.</span><span class="n">Wavefront</span><span class="p">):</span>  <span class="c1"># pragma: no cover</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;getPhasor must be called with a Wavefront to define the spacing&quot;</span><span class="p">)</span>

@@ -42,7 +42,9 @@
 
     
     <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" /> 
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Survey" href="survey.html" />
+    <link rel="prev" title="APLC" href="aplc.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -88,6 +90,21 @@
 <li class="toctree-l1"><a class="reference internal" href="../installing.html">Requirements &amp; Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../server.html">Using STScI Linux Servers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../workflow.html">Design Survey Workflow</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Detailed API Reference</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="aplc.html">APLC</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="aplc.html#classes">Classes</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">APLC</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="survey.html">Survey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="optimizer.html">Optimizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="HiCAT_Inputs_Generation.html">HiCAT Inputs Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LUVOIR_Inputs_Generation.html">LUVOIR Inputs Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GPI_Inputs_Generation.html">GPI Inputs Generation</a></li>
 </ul>
 
             
@@ -136,6 +153,8 @@
     
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
         
+          <li><a href="aplc.html">APLC</a> &raquo;</li>
+        
       <li>APLC</li>
     
     
@@ -160,8 +179,16 @@
 <dl class="py class">
 <dt id="aplc_optimization.aplc.APLC">
 <em class="property">class </em><code class="sig-prename descclassname">aplc_optimization.aplc.</code><code class="sig-name descname">APLC</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">identifier</span></em>, <em class="sig-param"><span class="n">parameters</span></em>, <em class="sig-param"><span class="n">file_organization</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/aplc_optimization/aplc.html#APLC"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#aplc_optimization.aplc.APLC" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">aplc_optimization.survey.Coronagraph</span></code></p>
-<p>Apodized Pupil Lyot coronagraph class</p>
+<dd><p>Bases: <a class="reference internal" href="aplc_optimization.survey.Coronagraph.html#aplc_optimization.survey.Coronagraph" title="aplc_optimization.survey.Coronagraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">aplc_optimization.survey.Coronagraph</span></code></a></p>
+<p>A class for the Apodized Pupil Lyot Coronagraph design.</p>
+<dl class="simple">
+<dt>identifier: str</dt><dd><p>The APLC design identifier.</p>
+</dd>
+<dt>parameters: dict</dt><dd><p>The design parameters of the APLC design.</p>
+</dd>
+<dt>file_organization: dict</dt><dd><p>The file organization structure of the APLC design.</p>
+</dd>
+</dl>
 <p class="rubric">Methods Summary</p>
 <table class="longtable docutils align-default">
 <colgroup>
@@ -170,16 +197,16 @@
 </colgroup>
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="#aplc_optimization.aplc.APLC.check_driver" title="aplc_optimization.aplc.APLC.check_driver"><code class="xref py py-obj docutils literal notranslate"><span class="pre">check_driver</span></code></a>()</p></td>
-<td><p>Checks whether the corresponding driver file already exists</p></td>
+<td><p>Check whether the driver script already exists.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#aplc_optimization.aplc.APLC.check_input_files" title="aplc_optimization.aplc.APLC.check_input_files"><code class="xref py py-obj docutils literal notranslate"><span class="pre">check_input_files</span></code></a>()</p></td>
-<td><p>Checks whether the expected input telescope aperture and lyot stop mask files exist</p></td>
+<td><p>Check whether all of the necessary input files exist.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#aplc_optimization.aplc.APLC.get_driver_command" title="aplc_optimization.aplc.APLC.get_driver_command"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_driver_command</span></code></a>()</p></td>
-<td><p></p></td>
+<td><p>Get the bash command to run the driver script.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#aplc_optimization.aplc.APLC.write_driver" title="aplc_optimization.aplc.APLC.write_driver"><code class="xref py py-obj docutils literal notranslate"><span class="pre">write_driver</span></code></a>([overwrite])</p></td>
-<td><p>Write survey driver file using ‘driver_template.py’ and save to the survey’s driver directory.</p></td>
+<td><p>Write a driver script using the template (‘driver_template.py’) script and write to the survey’s driver directory.</p></td>
 </tr>
 </tbody>
 </table>
@@ -187,25 +214,31 @@
 <dl class="py method">
 <dt id="aplc_optimization.aplc.APLC.check_driver">
 <code class="sig-name descname">check_driver</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/aplc_optimization/aplc.html#APLC.check_driver"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#aplc_optimization.aplc.APLC.check_driver" title="Permalink to this definition">¶</a></dt>
-<dd><p>Checks whether the corresponding driver file already exists</p>
+<dd><p>Check whether the driver script already exists.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="aplc_optimization.aplc.APLC.check_input_files">
 <code class="sig-name descname">check_input_files</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/aplc_optimization/aplc.html#APLC.check_input_files"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#aplc_optimization.aplc.APLC.check_input_files" title="Permalink to this definition">¶</a></dt>
-<dd><p>Checks whether the expected input telescope aperture and lyot stop mask files exist</p>
+<dd><p>Check whether all of the necessary input files exist.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="aplc_optimization.aplc.APLC.get_driver_command">
 <code class="sig-name descname">get_driver_command</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/aplc_optimization/aplc.html#APLC.get_driver_command"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#aplc_optimization.aplc.APLC.get_driver_command" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Get the bash command to run the driver script.</p>
+</dd></dl>
 
 <dl class="py method">
 <dt id="aplc_optimization.aplc.APLC.write_driver">
 <code class="sig-name descname">write_driver</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">overwrite</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/aplc_optimization/aplc.html#APLC.write_driver"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#aplc_optimization.aplc.APLC.write_driver" title="Permalink to this definition">¶</a></dt>
-<dd><p>Write survey driver file using ‘driver_template.py’ and save to the survey’s driver directory.</p>
-<p>Driver file is automatically written with “parameters” and “file_organization”</p>
+<dd><p>Write a driver script using the template (‘driver_template.py’) script and write to the survey’s driver
+directory.</p>
+<p>Driver file is automatically written with “parameters” and “file_organization”.</p>
+<dl class="simple">
+<dt>overwrite: bool</dt><dd><p>Whether to overwrite the driver file if it already exists.</p>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>
@@ -217,6 +250,10 @@
            
           </div>
           <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="survey.html" class="btn btn-neutral float-right" title="Survey" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="aplc.html" class="btn btn-neutral float-left" title="APLC" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
 
   <hr/>
 

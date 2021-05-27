@@ -203,7 +203,7 @@
         <span class="k">return</span> <span class="kc">False</span></div>
 
 
-<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">File organization structure:</span>
 <span class="sd">- survey_dir: The base directory for which all files related to this survey are written.</span>
 <span class="sd">- solution_dir: The subdirectory where all solutions will be written.</span>
@@ -211,12 +211,37 @@
 <span class="sd">- drivers_dir: The subdirectory where all Python scripts will be written.</span>
 <span class="sd">- log_dir: The subdirectory where all log files will be written.</span>
 <span class="sd">- input_files_dir: The directory where all input files for the optimization are located.</span>
-<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">&quot;&quot;&quot;</span>
 
 
 <div class="viewcode-block" id="DesignParameterSurvey"><a class="viewcode-back" href="../../api/aplc_optimization.survey.DesignParameterSurvey.html#aplc_optimization.survey.DesignParameterSurvey">[docs]</a><span class="k">class</span> <span class="nc">DesignParameterSurvey</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;Design Parameter survey class&#39;&#39;&#39;</span>
+    <span class="sd">&quot;&quot;&quot;Class for the design parameter survey.</span>
+
+<span class="sd">    Attributes</span>
+<span class="sd">    -----------</span>
+<span class="sd">    coronagraph_class: dict</span>
+<span class="sd">        The Coronagraph class.</span>
+<span class="sd">    parameter_sets: dict</span>
+<span class="sd">        The sets of design parameters to survey.</span>
+<span class="sd">    survey_dir: str</span>
+<span class="sd">        The location of the base directory, where all files related to the survey will be written.</span>
+<span class="sd">    input_files_dir: str</span>
+<span class="sd">        The location of directory where all the necessary input files for the optimization are located.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">coronagraph_class</span><span class="p">,</span> <span class="n">parameter_sets</span><span class="p">,</span> <span class="n">survey_dir</span><span class="p">,</span> <span class="n">input_files_dir</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Constructs all the necessary attributes for the design parameter survey.</span>
+
+<span class="sd">        Parameter</span>
+<span class="sd">        ----------</span>
+<span class="sd">        coronagraph_class: dict</span>
+<span class="sd">            The coronagraph class.</span>
+<span class="sd">        parameter_sets: dict</span>
+<span class="sd">            The sets of design parameters to survey.</span>
+<span class="sd">        survey_dir: str</span>
+<span class="sd">            The location of the base directory where all the output products related to the survey will be written.</span>
+<span class="sd">        input_files_dir</span>
+<span class="sd">            The location of the diretory where all the necessary input files for the survey are located.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">coronagraph_class</span> <span class="o">=</span> <span class="n">coronagraph_class</span>
 
         <span class="c1"># Set up directories</span>
@@ -300,8 +325,6 @@
                 <span class="nb">print</span><span class="p">(</span><span class="n">category</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
                 <span class="n">new_parameter_set</span><span class="p">[</span><span class="n">category</span><span class="p">][</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
 
-            <span class="c1"># LUVOIR/LS_LUVOIR_ID0190_OD0937_no_struts_gy_ovsamp2_N0050.fits</span>
-
             <span class="n">inst</span> <span class="o">=</span> <span class="n">new_parameter_set</span><span class="p">[</span><span class="s1">&#39;instrument&#39;</span><span class="p">][</span><span class="s1">&#39;inst_name&#39;</span><span class="p">]</span>
             <span class="n">N</span> <span class="o">=</span> <span class="n">new_parameter_set</span><span class="p">[</span><span class="s1">&#39;pupil&#39;</span><span class="p">][</span><span class="s1">&#39;N&#39;</span><span class="p">]</span>
             <span class="n">fpm</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mi">100</span> <span class="o">*</span> <span class="n">new_parameter_set</span><span class="p">[</span><span class="s1">&#39;focal_plane_mask&#39;</span><span class="p">][</span><span class="s1">&#39;radius&#39;</span><span class="p">])</span>
@@ -313,7 +336,6 @@
             <span class="n">nlam</span> <span class="o">=</span> <span class="n">new_parameter_set</span><span class="p">[</span><span class="s1">&#39;image&#39;</span><span class="p">][</span><span class="s1">&#39;num_wavelengths&#39;</span><span class="p">]</span>
             <span class="n">ls_id</span> <span class="o">=</span> <span class="n">new_parameter_set</span><span class="p">[</span><span class="s1">&#39;lyot_stop&#39;</span><span class="p">][</span><span class="s1">&#39;filename&#39;</span><span class="p">][</span><span class="mi">18</span><span class="p">:</span><span class="mi">23</span><span class="p">]</span>
             <span class="n">ls_od</span> <span class="o">=</span> <span class="n">new_parameter_set</span><span class="p">[</span><span class="s1">&#39;lyot_stop&#39;</span><span class="p">][</span><span class="s1">&#39;filename&#39;</span><span class="p">][</span><span class="mi">26</span><span class="p">:</span><span class="mi">30</span><span class="p">]</span>
-
             <span class="n">ls_strut_check</span> <span class="o">=</span> <span class="n">new_parameter_set</span><span class="p">[</span><span class="s1">&#39;lyot_stop&#39;</span><span class="p">][</span><span class="s1">&#39;filename&#39;</span><span class="p">][</span><span class="mi">31</span><span class="p">]</span>
 
             <span class="k">if</span> <span class="n">ls_strut_check</span> <span class="o">==</span> <span class="s1">&#39;n&#39;</span><span class="p">:</span>
@@ -335,6 +357,7 @@
         <span class="k">pass</span></div>
 
 <div class="viewcode-block" id="DesignParameterSurvey.describe"><a class="viewcode-back" href="../../api/aplc_optimization.survey.DesignParameterSurvey.html#aplc_optimization.survey.DesignParameterSurvey.describe">[docs]</a>    <span class="k">def</span> <span class="nf">describe</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Describe the design parameter survey.&quot;&quot;&quot;</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;This survey has </span><span class="si">{:d}</span><span class="s1"> design parameter combinations.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parameter_sets</span><span class="p">)))</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{:d}</span><span class="s1"> parameter are varied:&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">varied_parameters</span><span class="p">)))</span>
         <span class="k">for</span> <span class="n">values</span><span class="p">,</span> <span class="p">(</span><span class="n">category</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">varied_parameters</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">varied_parameters_indices</span><span class="p">):</span>
@@ -348,7 +371,7 @@
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;All solutions exist? </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">check_solutions</span><span class="p">()))</span></div>
 
 <div class="viewcode-block" id="DesignParameterSurvey.check_input_files"><a class="viewcode-back" href="../../api/aplc_optimization.survey.DesignParameterSurvey.html#aplc_optimization.survey.DesignParameterSurvey.check_input_files">[docs]</a>    <span class="k">def</span> <span class="nf">check_input_files</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;check all input files exist in the &quot;input_files_dir&quot;&#39;&#39;&#39;</span>
+        <span class="sd">&quot;&quot;&quot;Check that all the necessary input files for the design parameter survey exist.&quot;&quot;&quot;</span>
         <span class="n">num_incomplete</span> <span class="o">=</span> <span class="mi">0</span>
 
         <span class="k">for</span> <span class="n">cor</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">coronagraphs</span><span class="p">:</span>
@@ -358,7 +381,7 @@
         <span class="k">return</span> <span class="n">num_incomplete</span> <span class="o">==</span> <span class="mi">0</span></div>
 
 <div class="viewcode-block" id="DesignParameterSurvey.check_drivers"><a class="viewcode-back" href="../../api/aplc_optimization.survey.DesignParameterSurvey.html#aplc_optimization.survey.DesignParameterSurvey.check_drivers">[docs]</a>    <span class="k">def</span> <span class="nf">check_drivers</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;Check all driver files exist in the &quot;drivers_dir&quot;&#39;&#39;&#39;</span>
+        <span class="sd">&quot;&quot;&quot;Check whether the driver files for the design parameter survey already exist.&quot;&quot;&quot;</span>
         <span class="n">num_incomplete</span> <span class="o">=</span> <span class="mi">0</span>
 
         <span class="k">for</span> <span class="n">cor</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">coronagraphs</span><span class="p">:</span>
@@ -368,7 +391,7 @@
         <span class="k">return</span> <span class="n">num_incomplete</span> <span class="o">==</span> <span class="mi">0</span></div>
 
 <div class="viewcode-block" id="DesignParameterSurvey.check_solutions"><a class="viewcode-back" href="../../api/aplc_optimization.survey.DesignParameterSurvey.html#aplc_optimization.survey.DesignParameterSurvey.check_solutions">[docs]</a>    <span class="k">def</span> <span class="nf">check_solutions</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;Check all solution files exist in the &quot;solutions_dir&quot;&#39;&#39;&#39;</span>
+        <span class="sd">&quot;&quot;&quot;Check whether the solution files for the design parameter survey already exist.&quot;&quot;&quot;</span>
         <span class="n">num_incomplete</span> <span class="o">=</span> <span class="mi">0</span>
 
         <span class="k">for</span> <span class="n">cor</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">coronagraphs</span><span class="p">:</span>
@@ -378,11 +401,24 @@
         <span class="k">return</span> <span class="n">num_incomplete</span> <span class="o">==</span> <span class="mi">0</span></div>
 
 <div class="viewcode-block" id="DesignParameterSurvey.write_drivers"><a class="viewcode-back" href="../../api/aplc_optimization.survey.DesignParameterSurvey.html#aplc_optimization.survey.DesignParameterSurvey.write_drivers">[docs]</a>    <span class="k">def</span> <span class="nf">write_drivers</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">overwrite</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;write driver files to the &quot;drivers_dir&quot;&#39;&#39;&#39;</span>
+        <span class="sd">&quot;&quot;&quot;Write the survey driver files.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        overwrite: bool</span>
+<span class="sd">            Whether to overwrite driver files if they already exist.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">for</span> <span class="n">cor</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">coronagraphs</span><span class="p">:</span>
             <span class="n">cor</span><span class="o">.</span><span class="n">write_driver</span><span class="p">(</span><span class="n">overwrite</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="DesignParameterSurvey.write_serial_bash_script"><a class="viewcode-back" href="../../api/aplc_optimization.survey.DesignParameterSurvey.html#aplc_optimization.survey.DesignParameterSurvey.write_serial_bash_script">[docs]</a>    <span class="k">def</span> <span class="nf">write_serial_bash_script</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">overwrite</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Write a serial bash script.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        overwrite: bool</span>
+<span class="sd">            Whether to overwrite the serial bash script if it already exists.&quot;&quot;&quot;</span>
+
         <span class="n">fname</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">file_organization</span><span class="p">[</span><span class="s1">&#39;drivers_dir&#39;</span><span class="p">],</span> <span class="s1">&#39;run.sh&#39;</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">overwrite</span><span class="p">:</span>
@@ -476,7 +512,32 @@
 
 
 <div class="viewcode-block" id="Coronagraph"><a class="viewcode-back" href="../../api/aplc_optimization.survey.Coronagraph.html#aplc_optimization.survey.Coronagraph">[docs]</a><span class="k">class</span> <span class="nc">Coronagraph</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Class for the Coronagraph.</span>
+
+<span class="sd">    Attributes</span>
+<span class="sd">    -----------</span>
+<span class="sd">    identifier: str</span>
+<span class="sd">        The identifier for the Coronagraph object.</span>
+<span class="sd">    parameters: dict</span>
+<span class="sd">        The survey design parameters.</span>
+<span class="sd">    file_organization: dict</span>
+<span class="sd">        The file organization structure of the survey.</span>
+<span class="sd">    analysis_module: bool</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">identifier</span><span class="p">,</span> <span class="n">parameters</span><span class="p">,</span> <span class="n">file_organization</span><span class="p">,</span> <span class="n">analysis_module</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;The constructor for the Coronagraph Class.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        identifier: str</span>
+<span class="sd">            Coronagraph object identifier.</span>
+<span class="sd">        parameters: dict</span>
+<span class="sd">            The survey design parameters.</span>
+<span class="sd">        file_organization: dict</span>
+<span class="sd">            The file organization structure of the survey.</span>
+<span class="sd">        analysis_module: bool</span>
+<span class="sd">            The analysis module.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_identifier</span> <span class="o">=</span> <span class="n">identifier</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span> <span class="o">=</span> <span class="n">parameters</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">file_organization</span> <span class="o">=</span> <span class="n">file_organization</span>
@@ -485,15 +546,19 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">identifier</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Identifier for the coronagraph.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_identifier</span>
 
 <div class="viewcode-block" id="Coronagraph.check_input_files"><a class="viewcode-back" href="../../api/aplc_optimization.survey.Coronagraph.html#aplc_optimization.survey.Coronagraph.check_input_files">[docs]</a>    <span class="k">def</span> <span class="nf">check_input_files</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Check necessary input files exist.&quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="Coronagraph.check_driver"><a class="viewcode-back" href="../../api/aplc_optimization.survey.Coronagraph.html#aplc_optimization.survey.Coronagraph.check_driver">[docs]</a>    <span class="k">def</span> <span class="nf">check_driver</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Check whether driver script exists.&quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="Coronagraph.check_solution"><a class="viewcode-back" href="../../api/aplc_optimization.survey.Coronagraph.html#aplc_optimization.survey.Coronagraph.check_solution">[docs]</a>    <span class="k">def</span> <span class="nf">check_solution</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Check whether solution already exists.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">solution_filename</span><span class="p">)</span></div>
 
     <span class="nd">@property</span>
@@ -508,6 +573,13 @@
         <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="Coronagraph.run_optimization"><a class="viewcode-back" href="../../api/aplc_optimization.survey.Coronagraph.html#aplc_optimization.survey.Coronagraph.run_optimization">[docs]</a>    <span class="k">def</span> <span class="nf">run_optimization</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">force_rerun</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Run the optimizer.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        force_rerun: bool</span>
+<span class="sd">            Whether to force the optimizer to re-run if a solution already exists.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
         <span class="k">if</span> <span class="p">(</span><span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_driver</span><span class="p">())</span> <span class="ow">or</span> <span class="p">(</span><span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_input_files</span><span class="p">()):</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Not all driver or input files are written.&#39;</span><span class="p">)</span>
             <span class="k">return</span>
@@ -519,7 +591,15 @@
         <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_driver_command</span><span class="p">())</span></div>
 
 <div class="viewcode-block" id="Coronagraph.run_analysis"><a class="viewcode-back" href="../../api/aplc_optimization.survey.Coronagraph.html#aplc_optimization.survey.Coronagraph.run_analysis">[docs]</a>    <span class="k">def</span> <span class="nf">run_analysis</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">overwrite</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">run_slow</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;Run analysis module on the optimized solution and write output products to file&#39;&#39;&#39;</span>
+        <span class="sd">&#39;&#39;&#39;Run analysis module on the solution file.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        overwrite: bool</span>
+<span class="sd">            Whether to overwrite an existing analysis file.</span>
+<span class="sd">        run_slow: bool</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">analysis_module</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;No analysis module was provided. No analysis will be performed.&#39;</span><span class="p">)</span>
             <span class="k">return</span>

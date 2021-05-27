@@ -126,11 +126,7 @@ def LUVOIR_inputs_gen(input_files_dict):
                 print('{0:s} exists'.format('masks/' + ls_filename))
 
             else:
-
-                LUVOIR_ls, ls_header = make_luvoir_lyot_stop(inner_diameter_fraction=ls_id,
-                                                             outer_diameter_fraction=ls_od, lyot_reference_diameter=lyot_ref_diam,
-                                                             spider_oversize=ls_spid_ov, with_spiders=LS_SPID,
-                                                             return_header=True)
+                LUVOIR_ls, ls_header = make_luvoir_a_lyot_stop(normalized=True, with_spiders=LS_SPID,  spider_oversize=ls_spid_ov, inner_diameter_fraction=ls_id, outer_diameter_fraction=ls_od, return_header=True)
                 ### previously make_luvour_a_lyot_stop(ls_id, ls_od, lyot_ref_diam, spid_oversize=ls_spid_ov, spiders=LS_SPID, header = True)
                 lyot_stop = evaluate_supersampled(LUVOIR_ls, grid, oversamp)
 
@@ -167,7 +163,7 @@ def LUVOIR_inputs_gen(input_files_dict):
         return pup_filename, ls_filenames
 
 
-def make_luvoir_lyot_stop(normalized=False, with_spiders=False, spider_oversize=1, lyot_reference_diameter=13.5, inner_diameter_fraction=0.2,
+def make_luvoir_lyot_stop(normalized=True, with_spiders=False, spider_oversize=1, lyot_reference_diameter=13.5, inner_diameter_fraction=0.2,
                             outer_diameter_fraction=0.9, return_header=False):
     """Make a LUVOIR-A Lyot stop for the APLC coronagraph.
 
@@ -208,7 +204,7 @@ def make_luvoir_lyot_stop(normalized=False, with_spiders=False, spider_oversize=
     inner_D = lyot_reference_diameter * inner_diameter_fraction #re-normalize the LS ID against circumscribed pupil diameter
     pad_spid_width = spider_width * spider_oversize
 
-    #lyot_reference_diameter = pupil_diameter
+    lyot_reference_diameter = pupil_diameter
 
     ls_header = {'TELESCOP': 'LUVOIR A', 'D_CIRC': pupil_diameter, 'D_INSC': pupil_diameter_inscribed,
                  'LS_ID': inner_diameter_fraction, 'LS_OD': outer_diameter_fraction,

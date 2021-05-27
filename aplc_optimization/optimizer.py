@@ -60,7 +60,7 @@ def optimize_aplc(pupil, focal_plane_mask, lyot_stops, dark_zone_mask, wavelengt
         The focal plane mask of the APLC. The grid is assumed to be in lambda_0/D.
     lyot_stops : list of Fields
         A list of the Lyot stops used in the optimization problem.
-    dark_zone_mask : Field
+    dark_zone_mask : Fiel
         A binary field indicating which pixels belong to the dark zone.
     wavelengths : array_like
         An array of wavelengths as fractions of lambda_0.
