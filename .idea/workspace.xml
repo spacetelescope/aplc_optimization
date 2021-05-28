@@ -5,6 +5,7 @@
       <change beforePath="$PROJECT_DIR$/.idea/aplc-optimization.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/aplc-optimization.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.project" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/aplc_optimization.egg-info/PKG-INFO" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/aplc_optimization.egg-info/SOURCES.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/aplc_optimization.egg-info/dependency_links.txt" beforeDir="false" />
@@ -81,7 +82,7 @@
       <recent name="$PROJECT_DIR$/finalized_designs/HiCAT/old/inputs" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.do_luvoir_template">
+  <component name="RunManager" selected="Python.do_gpi_template">
     <configuration name="do_gpi_template" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="aplc-optimization" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -231,9 +232,9 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.do_luvoir_template" />
-        <item itemvalue="Python.do_hicat_template" />
         <item itemvalue="Python.do_gpi_template" />
+        <item itemvalue="Python.do_hicat_template" />
+        <item itemvalue="Python.do_luvoir_template" />
         <item itemvalue="Python.do_luvoir_BW18_medium" />
         <item itemvalue="Python.do_luvoir_BW10_medium" />
       </list>
@@ -317,30 +318,30 @@
       <screen x="0" y="23" width="2560" height="1417" />
     </state>
     <state x="845" y="782" key="FileChooserDialogImpl/0.23.2560.1417@0.23.2560.1417" timestamp="1621967691634" />
-    <state width="1514" height="133" key="GridCell.Tab.0.bottom" timestamp="1622245215789">
+    <state width="1514" height="133" key="GridCell.Tab.0.bottom" timestamp="1622245400792">
       <screen x="0" y="23" width="2560" height="1417" />
     </state>
     <state width="1514" height="281" key="GridCell.Tab.0.bottom/0.23.1680.1027/-2560.23.2560.1417@0.23.1680.1027" timestamp="1621954931156" />
     <state width="1514" height="133" key="GridCell.Tab.0.bottom/0.23.1680.1027@0.23.1680.1027" timestamp="1622221112299" />
-    <state width="1514" height="133" key="GridCell.Tab.0.bottom/0.23.2560.1417@0.23.2560.1417" timestamp="1622245215789" />
-    <state width="1514" height="133" key="GridCell.Tab.0.center" timestamp="1622245215789">
+    <state width="1514" height="133" key="GridCell.Tab.0.bottom/0.23.2560.1417@0.23.2560.1417" timestamp="1622245400792" />
+    <state width="1514" height="133" key="GridCell.Tab.0.center" timestamp="1622245400791">
       <screen x="0" y="23" width="2560" height="1417" />
     </state>
     <state width="1514" height="281" key="GridCell.Tab.0.center/0.23.1680.1027/-2560.23.2560.1417@0.23.1680.1027" timestamp="1621954931155" />
     <state width="1514" height="133" key="GridCell.Tab.0.center/0.23.1680.1027@0.23.1680.1027" timestamp="1622221112298" />
-    <state width="1514" height="133" key="GridCell.Tab.0.center/0.23.2560.1417@0.23.2560.1417" timestamp="1622245215789" />
-    <state width="1514" height="133" key="GridCell.Tab.0.left" timestamp="1622245215789">
+    <state width="1514" height="133" key="GridCell.Tab.0.center/0.23.2560.1417@0.23.2560.1417" timestamp="1622245400791" />
+    <state width="1514" height="133" key="GridCell.Tab.0.left" timestamp="1622245400791">
       <screen x="0" y="23" width="2560" height="1417" />
     </state>
     <state width="1514" height="281" key="GridCell.Tab.0.left/0.23.1680.1027/-2560.23.2560.1417@0.23.1680.1027" timestamp="1621954931154" />
     <state width="1514" height="133" key="GridCell.Tab.0.left/0.23.1680.1027@0.23.1680.1027" timestamp="1622221112296" />
-    <state width="1514" height="133" key="GridCell.Tab.0.left/0.23.2560.1417@0.23.2560.1417" timestamp="1622245215789" />
-    <state width="1514" height="133" key="GridCell.Tab.0.right" timestamp="1622245215789">
+    <state width="1514" height="133" key="GridCell.Tab.0.left/0.23.2560.1417@0.23.2560.1417" timestamp="1622245400791" />
+    <state width="1514" height="133" key="GridCell.Tab.0.right" timestamp="1622245400792">
       <screen x="0" y="23" width="2560" height="1417" />
     </state>
     <state width="1514" height="281" key="GridCell.Tab.0.right/0.23.1680.1027/-2560.23.2560.1417@0.23.1680.1027" timestamp="1621954931156" />
     <state width="1514" height="133" key="GridCell.Tab.0.right/0.23.1680.1027@0.23.1680.1027" timestamp="1622221112298" />
-    <state width="1514" height="133" key="GridCell.Tab.0.right/0.23.2560.1417@0.23.2560.1417" timestamp="1622245215789" />
+    <state width="1514" height="133" key="GridCell.Tab.0.right/0.23.2560.1417@0.23.2560.1417" timestamp="1622245400792" />
     <state width="1514" height="344" key="GridCell.Tab.1.bottom" timestamp="1622244341143">
       <screen x="0" y="23" width="2560" height="1417" />
     </state>
