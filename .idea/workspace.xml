@@ -2,22 +2,31 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e9f8f11d-b623-415a-96cb-a3040fd1a215" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/aplc-optimization.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/aplc-optimization.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/notebooks/Analysis_for_GPI_2_Coronagraph_Designs.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/GPI/Analysis_for_GPI_2_Coronagraph_Designs.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/notebooks/Analysis_for_GPI_2_Coronagraph_Designs_Meiji.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/notebooks/HicatApertureGenerationPython.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/HiCAT/HicatApertureGenerationPython.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/notebooks/LUVOIRApertureGenerationPython.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/LUVOIR/LUVOIRApertureGenerationPython.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/notebooks/PASTISApertureGeneration.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/PASTIS/PASTISApertureGeneration.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/optimization_launchers/do_gpi_pathfinder.py" beforeDir="false" afterPath="$PROJECT_DIR$/optimization_launchers/GPI/do_gpi_pathfinder.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/optimization_launchers/do_gpi_template.py" beforeDir="false" afterPath="$PROJECT_DIR$/optimization_launchers/GPI/do_gpi_template.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/optimization_launchers/do_hicat_LS9_6px_telserv3.py" beforeDir="false" afterPath="$PROJECT_DIR$/optimization_launchers/HiCAT/do_hicat_LS9_6px.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/optimization_launchers/do_hicat_template.py" beforeDir="false" afterPath="$PROJECT_DIR$/optimization_launchers/HiCAT/do_hicat_template.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/optimization_launchers/do_luvoir_BW10_large_AWS.py" beforeDir="false" afterPath="$PROJECT_DIR$/optimization_launchers/LUVOIR/do_luvoir_BW10_large.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/optimization_launchers/do_luvoir_BW10_medium_telserv2.py" beforeDir="false" afterPath="$PROJECT_DIR$/optimization_launchers/LUVOIR/do_luvoir_BW10_medium.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/optimization_launchers/do_luvoir_BW10_small_telserv3.py" beforeDir="false" afterPath="$PROJECT_DIR$/optimization_launchers/LUVOIR/do_luvoir_BW10_small.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/optimization_launchers/do_luvoir_BW18_medium_telserv3.py" beforeDir="false" afterPath="$PROJECT_DIR$/optimization_launchers/LUVOIR/do_luvoir_BW18_medium.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/optimization_launchers/do_luvoir_BW18_small_obelix.py" beforeDir="false" afterPath="$PROJECT_DIR$/optimization_launchers/LUVOIR/do_luvoir_BW18_small.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/optimization_launchers/do_luvoir_template.py" beforeDir="false" afterPath="$PROJECT_DIR$/optimization_launchers/LUVOIR/do_luvoir_template.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aplc_optimization.egg-info/PKG-INFO" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/aplc_optimization.egg-info/SOURCES.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/aplc_optimization.egg-info/dependency_links.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/aplc_optimization.egg-info/top_level.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/aplc_optimization/Inputs_Generation/GPI_Inputs_Generation.py" beforeDir="false" afterPath="$PROJECT_DIR$/aplc_optimization/Inputs_Generation/GPI_Inputs_Generation.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aplc_optimization/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/aplc_optimization/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aplc_optimization/analysis.py" beforeDir="false" afterPath="$PROJECT_DIR$/aplc_optimization/analysis.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aplc_optimization/aplc.py" beforeDir="false" afterPath="$PROJECT_DIR$/aplc_optimization/aplc.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aplc_optimization/survey.py" beforeDir="false" afterPath="$PROJECT_DIR$/aplc_optimization/survey.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/aplc_optimization/Inputs_Generation/GPI_Inputs_Generation.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/aplc_optimization/Inputs_Generation/HiCAT_Inputs_Generation.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/aplc_optimization/Inputs_Generation/LUVOIR_Inputs_Generation.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/aplc_optimization/Inputs_Generation/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/aplc_optimization/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/aplc_optimization/analysis.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/aplc_optimization/aplc.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/aplc_optimization/driver_template.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/aplc_optimization/optimizer.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/aplc_optimization/survey.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/aplc_optimization-0.0-py3.7.egg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/setup.py" beforeDir="false" afterPath="$PROJECT_DIR$/setup.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,16 +63,9 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/notebooks" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PythonContentEntriesConfigurable" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/notebooks" />
-      <recent name="$PROJECT_DIR$/optimization_launchers" />
-      <recent name="$PROJECT_DIR$/finalized_designs/GPI" />
-      <recent name="$PROJECT_DIR$/surveys/hicat_headertest_N0243_telserv3/drivers" />
-      <recent name="$PROJECT_DIR$/finalized_designs/HiCAT/old/inputs" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/optimization_launchers/LUVOIR" />
       <recent name="$PROJECT_DIR$/optimization_launchers/HiCAT" />
@@ -71,9 +73,16 @@
       <recent name="$PROJECT_DIR$/notebooks/PASTIS" />
       <recent name="$PROJECT_DIR$/notebooks/LUVOIR" />
     </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/notebooks" />
+      <recent name="$PROJECT_DIR$/optimization_launchers" />
+      <recent name="$PROJECT_DIR$/finalized_designs/GPI" />
+      <recent name="$PROJECT_DIR$/surveys/hicat_headertest_N0243_telserv3/drivers" />
+      <recent name="$PROJECT_DIR$/finalized_designs/HiCAT/old/inputs" />
+    </key>
   </component>
-  <component name="RunManager" selected="Python.do_luvoir_BW18_small">
-    <configuration name="do_gpi_pathfinder" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Python.do_luvoir_template">
+    <configuration name="do_gpi_template" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="aplc-optimization" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -81,11 +90,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/optimization_launchers" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/optimization_launchers/GPI" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/optimization_launchers/GPI/do_gpi_pathfinder.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/optimization_launchers/GPI/do_gpi_template.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -157,28 +166,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="do_luvoir_BW10_large" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="aplc-optimization" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/optimization_launchers" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/optimization_launchers/LUVOIR/do_luvoir_BW10_large.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="do_luvoir_BW18_small" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="do_luvoir_BW10_medium" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="aplc-optimization" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -190,7 +178,28 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/optimization_launchers/LUVOIR/do_luvoir_BW18_small.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/optimization_launchers/LUVOIR/do_luvoir_BW10_medium.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="do_luvoir_BW18_medium" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="aplc-optimization" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/optimization_launchers/LUVOIR" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/optimization_launchers/LUVOIR/do_luvoir_BW18_medium.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -222,11 +231,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.do_luvoir_BW18_small" />
-        <item itemvalue="Python.do_luvoir_BW10_large_local" />
-        <item itemvalue="Python.do_hicat_template" />
         <item itemvalue="Python.do_luvoir_template" />
-        <item itemvalue="Python.do_gpi_pathfinder" />
+        <item itemvalue="Python.do_hicat_template" />
+        <item itemvalue="Python.do_gpi_template" />
+        <item itemvalue="Python.do_luvoir_BW18_medium" />
+        <item itemvalue="Python.do_luvoir_BW10_medium" />
       </list>
     </recent_temporary>
   </component>
@@ -308,64 +317,67 @@
       <screen x="0" y="23" width="2560" height="1417" />
     </state>
     <state x="845" y="782" key="FileChooserDialogImpl/0.23.2560.1417@0.23.2560.1417" timestamp="1621967691634" />
-    <state width="2058" height="188" key="GridCell.Tab.0.bottom" timestamp="1622147173508">
+    <state width="1514" height="133" key="GridCell.Tab.0.bottom" timestamp="1622245215789">
       <screen x="0" y="23" width="2560" height="1417" />
     </state>
     <state width="1514" height="281" key="GridCell.Tab.0.bottom/0.23.1680.1027/-2560.23.2560.1417@0.23.1680.1027" timestamp="1621954931156" />
-    <state width="1659" height="189" key="GridCell.Tab.0.bottom/0.23.1680.1027@0.23.1680.1027" timestamp="1622062884421" />
-    <state width="2058" height="188" key="GridCell.Tab.0.bottom/0.23.2560.1417@0.23.2560.1417" timestamp="1622147173508" />
-    <state width="2058" height="188" key="GridCell.Tab.0.center" timestamp="1622147173506">
+    <state width="1514" height="133" key="GridCell.Tab.0.bottom/0.23.1680.1027@0.23.1680.1027" timestamp="1622221112299" />
+    <state width="1514" height="133" key="GridCell.Tab.0.bottom/0.23.2560.1417@0.23.2560.1417" timestamp="1622245215789" />
+    <state width="1514" height="133" key="GridCell.Tab.0.center" timestamp="1622245215789">
       <screen x="0" y="23" width="2560" height="1417" />
     </state>
     <state width="1514" height="281" key="GridCell.Tab.0.center/0.23.1680.1027/-2560.23.2560.1417@0.23.1680.1027" timestamp="1621954931155" />
-    <state width="1659" height="189" key="GridCell.Tab.0.center/0.23.1680.1027@0.23.1680.1027" timestamp="1622062884421" />
-    <state width="2058" height="188" key="GridCell.Tab.0.center/0.23.2560.1417@0.23.2560.1417" timestamp="1622147173506" />
-    <state width="2058" height="188" key="GridCell.Tab.0.left" timestamp="1622147173504">
+    <state width="1514" height="133" key="GridCell.Tab.0.center/0.23.1680.1027@0.23.1680.1027" timestamp="1622221112298" />
+    <state width="1514" height="133" key="GridCell.Tab.0.center/0.23.2560.1417@0.23.2560.1417" timestamp="1622245215789" />
+    <state width="1514" height="133" key="GridCell.Tab.0.left" timestamp="1622245215789">
       <screen x="0" y="23" width="2560" height="1417" />
     </state>
     <state width="1514" height="281" key="GridCell.Tab.0.left/0.23.1680.1027/-2560.23.2560.1417@0.23.1680.1027" timestamp="1621954931154" />
-    <state width="1659" height="189" key="GridCell.Tab.0.left/0.23.1680.1027@0.23.1680.1027" timestamp="1622062884420" />
-    <state width="2058" height="188" key="GridCell.Tab.0.left/0.23.2560.1417@0.23.2560.1417" timestamp="1622147173504" />
-    <state width="2058" height="188" key="GridCell.Tab.0.right" timestamp="1622147173507">
+    <state width="1514" height="133" key="GridCell.Tab.0.left/0.23.1680.1027@0.23.1680.1027" timestamp="1622221112296" />
+    <state width="1514" height="133" key="GridCell.Tab.0.left/0.23.2560.1417@0.23.2560.1417" timestamp="1622245215789" />
+    <state width="1514" height="133" key="GridCell.Tab.0.right" timestamp="1622245215789">
       <screen x="0" y="23" width="2560" height="1417" />
     </state>
     <state width="1514" height="281" key="GridCell.Tab.0.right/0.23.1680.1027/-2560.23.2560.1417@0.23.1680.1027" timestamp="1621954931156" />
-    <state width="1659" height="189" key="GridCell.Tab.0.right/0.23.1680.1027@0.23.1680.1027" timestamp="1622062884421" />
-    <state width="2058" height="188" key="GridCell.Tab.0.right/0.23.2560.1417@0.23.2560.1417" timestamp="1622147173507" />
-    <state width="2233" height="472" key="GridCell.Tab.1.bottom" timestamp="1622099221203">
+    <state width="1514" height="133" key="GridCell.Tab.0.right/0.23.1680.1027@0.23.1680.1027" timestamp="1622221112298" />
+    <state width="1514" height="133" key="GridCell.Tab.0.right/0.23.2560.1417@0.23.2560.1417" timestamp="1622245215789" />
+    <state width="1514" height="344" key="GridCell.Tab.1.bottom" timestamp="1622244341143">
       <screen x="0" y="23" width="2560" height="1417" />
     </state>
-    <state width="2233" height="472" key="GridCell.Tab.1.bottom/0.23.2560.1417@0.23.2560.1417" timestamp="1622099221203" />
-    <state width="2233" height="472" key="GridCell.Tab.1.center" timestamp="1622099221202">
+    <state width="1514" height="344" key="GridCell.Tab.1.bottom/0.23.2560.1417@0.23.2560.1417" timestamp="1622244341143" />
+    <state width="1514" height="344" key="GridCell.Tab.1.center" timestamp="1622244341141">
       <screen x="0" y="23" width="2560" height="1417" />
     </state>
-    <state width="2233" height="472" key="GridCell.Tab.1.center/0.23.2560.1417@0.23.2560.1417" timestamp="1622099221202" />
-    <state width="2233" height="472" key="GridCell.Tab.1.left" timestamp="1622099221202">
+    <state width="1514" height="344" key="GridCell.Tab.1.center/0.23.2560.1417@0.23.2560.1417" timestamp="1622244341141" />
+    <state width="1514" height="344" key="GridCell.Tab.1.left" timestamp="1622244341141">
       <screen x="0" y="23" width="2560" height="1417" />
     </state>
-    <state width="2233" height="472" key="GridCell.Tab.1.left/0.23.2560.1417@0.23.2560.1417" timestamp="1622099221202" />
-    <state width="2233" height="472" key="GridCell.Tab.1.right" timestamp="1622099221203">
+    <state width="1514" height="344" key="GridCell.Tab.1.left/0.23.2560.1417@0.23.2560.1417" timestamp="1622244341141" />
+    <state width="1514" height="344" key="GridCell.Tab.1.right" timestamp="1622244341142">
       <screen x="0" y="23" width="2560" height="1417" />
     </state>
-    <state width="2233" height="472" key="GridCell.Tab.1.right/0.23.2560.1417@0.23.2560.1417" timestamp="1622099221203" />
-    <state x="639" y="418" key="SettingsEditor" timestamp="1621967747392">
+    <state width="1514" height="344" key="GridCell.Tab.1.right/0.23.2560.1417@0.23.2560.1417" timestamp="1622244341142" />
+    <state x="639" y="418" key="SettingsEditor" timestamp="1622244515841">
       <screen x="0" y="23" width="2560" height="1417" />
     </state>
-    <state x="639" y="418" key="SettingsEditor/0.23.2560.1417@0.23.2560.1417" timestamp="1621967747392" />
-    <state x="429" y="759" key="com.intellij.ide.util.TipDialog" timestamp="1621967035729">
-      <screen x="0" y="23" width="2560" height="1417" />
+    <state x="419" y="309" key="SettingsEditor/0.23.1680.1027@0.23.1680.1027" timestamp="1622220676500" />
+    <state x="639" y="418" key="SettingsEditor/0.23.2560.1417@0.23.2560.1417" timestamp="1622244515841" />
+    <state x="282" y="556" key="com.intellij.ide.util.TipDialog" timestamp="1622219787224">
+      <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state x="429" y="369" key="com.intellij.ide.util.TipDialog/-2560.-199.2560.1417/0.23.1680.1027@0.23.1680.1027" timestamp="1613672147151" />
+    <state x="282" y="556" key="com.intellij.ide.util.TipDialog/0.23.1680.1027@0.23.1680.1027" timestamp="1622219787224" />
     <state x="429" y="759" key="com.intellij.ide.util.TipDialog/0.23.2560.1417@0.23.2560.1417" timestamp="1621967035729" />
     <state x="1192" y="509" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1621978826536">
       <screen x="0" y="23" width="2560" height="1417" />
     </state>
     <state x="1192" y="509" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.23.2560.1417@0.23.2560.1417" timestamp="1621978826536" />
-    <state x="1407" y="61" width="1589" height="1110" key="dock-window-1" timestamp="1622095696303">
+    <state x="637" y="441" width="1043" height="805" key="dock-window-1" timestamp="1622232617325">
       <screen x="0" y="23" width="2560" height="1417" />
     </state>
     <state x="715" y="23" width="964" height="1007" key="dock-window-1/0.23.1680.1027/-2560.23.2560.1417@0.23.1680.1027" timestamp="1621950040535" />
-    <state x="1407" y="61" width="1589" height="1110" key="dock-window-1/0.23.2560.1417@0.23.2560.1417" timestamp="1622095696303" />
+    <state x="637" y="51" width="1043" height="805" key="dock-window-1/0.23.1680.1027@0.23.1680.1027" timestamp="1622219797926" />
+    <state x="637" y="441" width="1043" height="805" key="dock-window-1/0.23.2560.1417@0.23.2560.1417" timestamp="1622232617325" />
     <state x="1149" y="23" width="964" height="698" key="dock-window-2" timestamp="1621967064472">
       <screen x="0" y="23" width="2560" height="1417" />
     </state>
@@ -380,9 +392,9 @@
       <screen x="0" y="23" width="2560" height="1417" />
     </state>
     <state x="1043" y="745" key="git4idea.ui.GitStashDialog/0.23.2560.1417@0.23.2560.1417" timestamp="1620921309056" />
-    <state x="918" y="431" width="670" height="676" key="search.everywhere.popup" timestamp="1622141242215">
+    <state x="918" y="431" width="670" height="676" key="search.everywhere.popup" timestamp="1622234415759">
       <screen x="0" y="23" width="2560" height="1417" />
     </state>
-    <state x="918" y="431" width="670" height="676" key="search.everywhere.popup/0.23.2560.1417@0.23.2560.1417" timestamp="1622141242215" />
+    <state x="918" y="431" width="670" height="676" key="search.everywhere.popup/0.23.2560.1417@0.23.2560.1417" timestamp="1622234415759" />
   </component>
 </project>

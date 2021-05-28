@@ -74,8 +74,8 @@ class DesignParameterSurvey(object):
             The sets of design parameters to survey.
         survey_dir: str
             The location of the base directory where all the output products related to the survey will be written.
-        input_files_dir
-            The location of the diretory where all the necessary input files for the survey are located.
+        input_files_dir: str
+            The location of the directory where all the necessary input files for the survey are located.
         """
         self.coronagraph_class = coronagraph_class
 
@@ -206,7 +206,12 @@ class DesignParameterSurvey(object):
         print('All solutions exist? {}'.format(self.check_solutions()))
 
     def check_input_files(self):
-        """Check that all the necessary input files for the design parameter survey exist."""
+        """Check that all the necessary input files for the design survey exist.
+
+        Returns
+        -------
+        True if all exit, False if not.
+        """
         num_incomplete = 0
 
         for cor in self.coronagraphs:
@@ -216,7 +221,12 @@ class DesignParameterSurvey(object):
         return num_incomplete == 0
 
     def check_drivers(self):
-        """Check whether the driver files for the design parameter survey already exist."""
+        """Check whether all of the driver files for the design survey exist.
+
+        Returns
+        -------
+        True if all exist, False if not.
+        """
         num_incomplete = 0
 
         for cor in self.coronagraphs:
@@ -226,7 +236,12 @@ class DesignParameterSurvey(object):
         return num_incomplete == 0
 
     def check_solutions(self):
-        """Check whether the solution files for the design parameter survey already exist."""
+        """Check whether all of the solution files for the design survey exist.
+
+        Returns
+        -------
+        True if all exist, False if not.
+        """
         num_incomplete = 0
 
         for cor in self.coronagraphs:
@@ -236,7 +251,7 @@ class DesignParameterSurvey(object):
         return num_incomplete == 0
 
     def write_drivers(self, overwrite=False):
-        """Write the survey driver files.
+        """Write the driver files for each design in the survey.
 
         Parameters
         ----------
@@ -252,8 +267,8 @@ class DesignParameterSurvey(object):
         Parameters
         ----------
         overwrite: bool
-            Whether to overwrite the serial bash script if it already exists."""
-
+            Whether to overwrite the serial bash script if it already exists.
+        """
         fname = os.path.join(self.file_organization['drivers_dir'], 'run.sh')
 
         if os.path.exists(fname) and not overwrite:
@@ -265,6 +280,17 @@ class DesignParameterSurvey(object):
                 f.write(coronagraph.get_driver_command() + '\n')
 
     def run_optimizations(self, force_rerun=False):
+        """Run the optimizations for each design in the survey.
+        
+        Parameters
+        ----------
+        force_rerun: bool
+            Whether to re-run the design optimization if a solution file already exists.
+            
+        Returns
+        -------
+        True if all solutions exist, False if not.
+        """
         for cor in self.coronagraphs:
             cor.run_optimization(force_rerun)
 
@@ -347,14 +373,14 @@ class DesignParameterSurvey(object):
 
 
 class Coronagraph(object):
-    """Class for the Coronagraph.
+    """Class for the Coronagraph design.
 
     Attributes
     -----------
     identifier: str
         The identifier for the Coronagraph object.
     parameters: dict
-        The survey design parameters.
+        The design parameters.
     file_organization: dict
         The file organization structure of the survey.
     analysis_module: bool
@@ -365,9 +391,9 @@ class Coronagraph(object):
         Parameters
         ----------
         identifier: str
-            Coronagraph object identifier.
+            The identifier for the Coronagraph object.
         parameters: dict
-            The survey design parameters.
+            The design parameters.
         file_organization: dict
             The file organization structure of the survey.
         analysis_module: bool
@@ -381,7 +407,7 @@ class Coronagraph(object):
 
     @property
     def identifier(self):
-        """Identifier for the coronagraph."""
+        """Identifier for the coronagraph design."""
         return self._identifier
 
     def check_input_files(self):
@@ -408,7 +434,7 @@ class Coronagraph(object):
         raise NotImplementedError()
 
     def run_optimization(self, force_rerun=False):
-        '''Run the optimizer.
+        '''Run the design optimization.
 
         Parameters
         ----------

@@ -7,7 +7,7 @@ from aplc_optimization.survey import Coronagraph
 
 
 class APLC(Coronagraph):
-	"""A class for the Apodized Pupil Lyot Coronagraph design.
+	"""The class for the Apodized Pupil Lyot Coronagraph design.
 
 	Attributes
 	----------
@@ -67,10 +67,10 @@ class APLC(Coronagraph):
 		super(APLC, self).__init__(identifier, parameters, file_organization, analysis)
 
 	def write_driver(self, overwrite=False):
-		"""Write a driver script using the template ('driver_template.py') script and write to the survey's driver
-		directory.
+		"""Write a driver script for the design using the template ('driver_template.py') script and write to the
+		survey's driver directory.
 
-		Driver file is automatically written with "parameters" and "file_organization".
+		Driver script is automatically written with "parameters" and "file_organization".
 
 		Parameters
 		----------
@@ -98,7 +98,7 @@ class APLC(Coronagraph):
 			shutil.copy('aplc_optimization/optimizer.py', fname_optimizer)
 
 	def check_input_files(self):
-		"""Check whether all of the necessary input files exist."""
+		"""Check whether all of the necessary input files for the design exist."""
 		pup_fname = self.parameters['pupil']['filename']
 		ls_fname = self.parameters['lyot_stop']['filename']
 
@@ -110,7 +110,7 @@ class APLC(Coronagraph):
 		return os.path.exists(pup_fname) and os.path.exists(ls_fname)
 
 	def check_driver(self):
-		"""Check whether the driver script already exists."""
+		"""Check whether the driver script for the design already exists."""
 		fname_driver = os.path.join(self.file_organization['drivers_dir'], self.identifier + '.py')
 		fname_optimizer = os.path.join(self.file_organization['drivers_dir'], 'optimizer.py')
 

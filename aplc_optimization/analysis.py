@@ -153,12 +153,12 @@ def analyze_pdf_summary(solution_filename, pdf=None):
 
     regex = re.compile(r'\d+')
     pup_vals = regex.findall(pup_fname)
-    if telescope is 'LUVOIR':
+    if telescope == 'LUVOIR':
         seg_gap_pad, oversamp = int(pup_vals[0]), int(pup_vals[1])
-    elif telescope is 'HiCAT':
+    elif telescope == 'HiCAT':
         seg_gap_pad = ''
         oversamp = int(pup_vals[0])
-    elif telescope is 'GPI':
+    elif telescope == 'GPI':
         seg_gap_pad = ''
         oversamp = ''
 

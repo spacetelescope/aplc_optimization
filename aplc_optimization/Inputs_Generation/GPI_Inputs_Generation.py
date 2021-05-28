@@ -155,9 +155,9 @@ class GeminiPrimary(poppy.CompoundAnalyticOptic):
 
 
 class GPI_LyotMask(poppy.AnalyticOpticalElement):
-    '''Model the GPI Lyot stop mask.
+    """Model the GPI Lyot stop mask.
 
-     Based on gpipsfs.GPI_LyotMask'''
+     Based on gpipsfs.GPI_LyotMask"""
 
     magnification = 7.7701/.009825   # meters at primary/meters at Lyot
 
@@ -229,7 +229,8 @@ class GPI_LyotMask(poppy.AnalyticOpticalElement):
 
         Returns
         -------
-
+        transmission: nd.array
+            The Lyot stop transmission.
         """
         if not isinstance(wave, poppy.Wavefront):  # pragma: no cover
             raise ValueError("getPhasor must be called with a Wavefront to define the spacing")

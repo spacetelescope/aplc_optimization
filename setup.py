@@ -7,7 +7,7 @@ here = pathlib.Path(__file__).parent.resolve()
 long_description = (here / 'README.md').read_text(encoding='utf-8')
 
 setup(name='aplc_optimization',
-      version='0.0',
+      version='1.0',
       description='An Apodized Pupil Lyot Coronagraph design survey toolkit.',
       long_description=long_description,
       long_description_content_type='text/markdown',
