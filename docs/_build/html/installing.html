@@ -1,46 +1,45 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
-  <meta charset="utf-8" />
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="utf-8">
+  <meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
   <title>Requirements &amp; Installation &mdash; aplc-optimization  documentation</title>
   
 
   
-  <link rel="stylesheet" href="_static/stsci.css" type="text/css" />
-  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
-  <link rel="stylesheet" href="_static/stsci.css" type="text/css" />
-
-  
   
     <link rel="shortcut icon" href="_static/logo.jpg"/>
   
-
   
   
 
   
-
-  
-  <!--[if lt IE 9]>
-    <script src="_static/js/html5shiv.min.js"></script>
-  <![endif]-->
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
         <script src="_static/doctools.js"></script>
-        <script src="_static/language_data.js"></script>
     
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
     
+
+  
+  <link rel="stylesheet" href="_static/stsci.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/stsci.css" type="text/css" />
+  <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="_static/stsci.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Using STScI Linux Servers" href="server.html" />
@@ -76,7 +75,6 @@
   
         </div>
 
-        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -103,11 +101,19 @@
 <li class="toctree-l1"><a class="reference internal" href="server.html">Using STScI Linux Servers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="workflow.html">Design Survey Workflow</a></li>
 </ul>
+<p class="caption"><span class="caption-text">Detailed API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api/aplc.html"><code class="docutils literal notranslate"><span class="pre">aplc_optimization.aplc</span></code> Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/survey.html"><code class="docutils literal notranslate"><span class="pre">survey</span></code> Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/optimizer.html"><code class="docutils literal notranslate"><span class="pre">optimizer</span></code> Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/HiCAT_Inputs_Generation.html"><code class="docutils literal notranslate"><span class="pre">Inputs_Generation.GPI_Inputs_Generation</span></code> Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/LUVOIR_Inputs_Generation.html"><code class="docutils literal notranslate"><span class="pre">Inputs_Generation.GPI_Inputs_Generation</span></code> Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/GPI_Inputs_Generation.html"><code class="docutils literal notranslate"><span class="pre">aplc_optimizer.Inputs_Generation.GPI_Inputs_Generation</span></code> Module</a></li>
+</ul>
 
             
           
         </div>
-        
       </div>
     </nav>
 
@@ -142,20 +148,18 @@
 
 
 
-
-
 <div role="navigation" aria-label="breadcrumbs navigation">
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li><a href="index.html">Docs</a> &raquo;</li>
         
       <li>Requirements &amp; Installation</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
-          
+            
             <a href="_sources/installing.rst.txt" rel="nofollow"> View page source</a>
           
         
@@ -169,13 +173,13 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="requirements-installation">
+  <section id="requirements-installation">
 <span id="installation"></span><h1>Requirements &amp; Installation<a class="headerlink" href="#requirements-installation" title="Permalink to this headline">¶</a></h1>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>Pardon our dust, this space is under construction.</p>
 </div>
-<div class="section" id="installing-with-conda">
+<section id="installing-with-conda">
 <span id="id1"></span><h2>Installing with Conda<a class="headerlink" href="#installing-with-conda" title="Permalink to this headline">¶</a></h2>
 <p>For ease of installation, we recommend using Conda to install the <code class="docutils literal notranslate"><span class="pre">aplc-optimization</span></code> package as follows:</p>
 <ol class="arabic">
@@ -192,31 +196,31 @@ $ source activate aplc-optimization
 </div>
 </li>
 </ol>
-</div>
-<div class="section" id="installing-gurobi">
+</section>
+<section id="installing-gurobi">
 <span id="id2"></span><h2>Installing Gurobi<a class="headerlink" href="#installing-gurobi" title="Permalink to this headline">¶</a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">aplc-optimization</span></code> toolkit relies on the <cite>Gurobi solver &lt;https://www.gurobi.com/&gt;</cite>, which it calls directly from Python using the <code class="docutils literal notranslate"><span class="pre">gurobipy</span></code> package.</p>
-<div class="section" id="register-for-an-academic-account">
+<section id="register-for-an-academic-account">
 <h3>Register for an academic account<a class="headerlink" href="#register-for-an-academic-account" title="Permalink to this headline">¶</a></h3>
 <p>In order to download the Gurobi Optimizer you will need to first register for an account.
 If you already have an account, <a class="reference external" href="https://www.gurobi.com/login">Log In</a>. Otherwise,
 <a class="reference external" href="https://pages.gurobi.com/registration">Register</a> for a free <em>Academic</em> account.</p>
-</div>
-<div class="section" id="download-the-gurobi-optimizer">
+</section>
+<section id="download-the-gurobi-optimizer">
 <span id="download-gurobi"></span><h3>Download the Gurobi optimizer<a class="headerlink" href="#download-the-gurobi-optimizer" title="Permalink to this headline">¶</a></h3>
 <p>After registering and logging in, go to the <a class="reference external" href="https://www.gurobi.com/downloads/gurobi-software/">Gurobi software download page</a>. Find your platform
 (we’ll assume Mac OS X in this document) and choose the corresponding file to download. Once downloaded, double-click on the appropriate Gurobi installer
 (e.g., <code class="docutils literal notranslate"><span class="pre">gurobi9.1.1_mac64.pkg</span></code> for Gurobi 9.1.1) and follow the prompts. By default, the installer will place the Gurobi files
 in /Library/gurobi911/mac64 (note that this is the system /Library directory, not your personal ~/Library directory).</p>
-</div>
-<div class="section" id="obtain-a-gurobi-license">
+</section>
+<section id="obtain-a-gurobi-license">
 <span id="get-gurobi-license"></span><h3>Obtain a Gurobi license<a class="headerlink" href="#obtain-a-gurobi-license" title="Permalink to this headline">¶</a></h3>
 <p>In order to use the Gurobi Optimizer, a Gurobi license is required. Once you have downloaded the Gurobi Optimizer, as above,
 visit the the <a class="reference external" href="https://www.gurobi.com/downloads/end-user-license-agreement-academic/">Academic License page</a> to
 request a free license (note: you will first need to read and agree to the End User License Agreement and the Conditions for academic use;
 once you have done so, click on “Request License”). Your new license will be visible immediately on the
 <a class="reference external" href="https://www.gurobi.com/downloads/licenses/">Current Gurobi Licenses page</a> and you can create as many academic licenses as you like.</p>
-<div class="section" id="install-the-gurobi-license">
+<section id="install-the-gurobi-license">
 <h4>Install the Gurobi license<a class="headerlink" href="#install-the-gurobi-license" title="Permalink to this headline">¶</a></h4>
 <p>Your next step is to install this Gurobi license on your machine. Once your license is visible on the
 <a class="reference external" href="https://www.gurobi.com/downloads/licenses/">Current page</a> of the Gurobi website, click on the <em>License ID</em>
@@ -230,9 +234,9 @@ the default location by hitting Enter. Setting up a non-default location is erro
 <p class="admonition-title">Note</p>
 <p>If you would like to store your <code class="docutils literal notranslate"><span class="pre">gurobi.key</span></code> license file in a non-default location, you can do so by setting the <strong>GRB_LICENSE_FILE</strong> environment variable to point to the license key file location.</p>
 </div>
-</div>
-</div>
-<div class="section" id="test-the-gurobi-license">
+</section>
+</section>
+<section id="test-the-gurobi-license">
 <h3>Test the Gurobi license<a class="headerlink" href="#test-the-gurobi-license" title="Permalink to this headline">¶</a></h3>
 <p>Once you have obtained a license key for your machine, you are ready to test your license using the Gurobi Interactive Shell.
 To do this, type <code class="docutils literal notranslate"><span class="pre">gurobi.sh</span></code> in a Terminal window. The shell should produce the following output:</p>
@@ -248,10 +252,10 @@ To do this, type <code class="docutils literal notranslate"><span class="pre">gu
 </div>
 <p>If the Gurobi shell didn’t produce the desired output, there’s a problem with your license (see the Gurobi
 <a class="reference external" href="https://www.gurobi.com/documentation/9.1/quickstart_mac/testing_your_license.html#subsection:testlicense">documentation</a> for more information).</p>
-</div>
-</div>
+</section>
+</section>
 <hr class="docutils" />
-<div class="section" id="software-requirements">
+<section id="software-requirements">
 <h2>Software Requirements<a class="headerlink" href="#software-requirements" title="Permalink to this headline">¶</a></h2>
 <p>See <a class="reference external" href="https://github.com/spacetelescope/aplc-optimization/blob/scda_21/environment.yml">the environment.yml specification file</a> for the required package dependencies.</p>
 <p><strong>Required Python version</strong>: <code class="docutils literal notranslate"><span class="pre">aplc-optimization</span></code> requires Python 3.7 or higher.</p>
@@ -276,42 +280,42 @@ To do this, type <code class="docutils literal notranslate"><span class="pre">gu
 <li><p><a class="reference external" href="http://www.scipy.org/scipylib/download.html">SciPy</a> (for advanced linear algebra)</p></li>
 </ul>
 </div></blockquote>
-</div>
-<div class="section" id="using-the-stsci-linux-servers">
+</section>
+<section id="using-the-stsci-linux-servers">
 <h2>Using the STScI Linux Servers<a class="headerlink" href="#using-the-stsci-linux-servers" title="Permalink to this headline">¶</a></h2>
 <p>The Linux servers at STScI are available to optimize select high-resolution design cases, as needed. For instructions on how to
 install and use <code class="docutils literal notranslate"><span class="pre">aplc-optimization</span></code> on one of these servers, see <a class="reference internal" href="server.html#servers"><span class="std std-ref">Using STScI Linux Servers</span></a>.</p>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>
            
           </div>
           <footer>
+  
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="server.html" class="btn btn-neutral float-right" title="Using STScI Linux Servers" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="introduction.html" class="btn btn-neutral float-left" title="Introduction" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+      
+        <a href="server.html" class="btn btn-neutral float-right" title="Using STScI Linux Servers" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="introduction.html" class="btn btn-neutral float-left" title="Introduction" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
     </div>
+  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        &#169; Copyright 2020, Bryony Nickson.
+        &copy; Copyright 2020, Bryony Nickson
 
     </p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
+
         </div>
       </div>
 
@@ -319,6 +323,7 @@ install and use <code class="docutils literal notranslate"><span class="pre">apl
 
   </div>
   
+
 
   <script type="text/javascript">
       jQuery(function () {

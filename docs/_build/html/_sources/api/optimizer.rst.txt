@@ -1,7 +1,6 @@
-Optimizer
----------------------------------
+``optimizer`` Module
+----------------
 
 .. automodapi:: aplc_optimization.optimizer
-    :no-inheritance-diagram:
+    :no-inheritence-diagram:
     :no-heading:
-

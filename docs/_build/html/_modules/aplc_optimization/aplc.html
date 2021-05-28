@@ -1,46 +1,44 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8">
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
   <title>aplc_optimization.aplc &mdash; aplc-optimization  documentation</title>
   
 
   
-  <link rel="stylesheet" href="../../_static/stsci.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/stsci.css" type="text/css" />
-
-  
   
     <link rel="shortcut icon" href="../../_static/logo.jpg"/>
   
-
   
   
 
   
-
-  
-  <!--[if lt IE 9]>
-    <script src="../../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
         <script src="../../_static/jquery.js"></script>
         <script src="../../_static/underscore.js"></script>
         <script src="../../_static/doctools.js"></script>
-        <script src="../../_static/language_data.js"></script>
     
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
     
+
+  
+  <link rel="stylesheet" href="../../_static/stsci.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/stsci.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/stsci.css" type="text/css" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" /> 
 </head>
@@ -74,7 +72,6 @@
   
         </div>
 
-        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -91,18 +88,18 @@
 </ul>
 <p class="caption"><span class="caption-text">Detailed API Reference</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../api/aplc.html">APLC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/aplc.html"><code class="docutils literal notranslate"><span class="pre">aplc_optimization.aplc</span></code> Module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../api/survey.html">Survey</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../api/optimizer.html">Optimizer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../api/HiCAT_Inputs_Generation.html">HiCAT Inputs Generation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../api/LUVOIR_Inputs_Generation.html">LUVOIR Inputs Generation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../api/GPI_Inputs_Generation.html">GPI Inputs Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/GPI_Inputs_Generation.html">Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/GPI_Inputs_Generation.html#classes">Classes</a></li>
 </ul>
 
             
           
         </div>
-        
       </div>
     </nav>
 
@@ -137,13 +134,11 @@
 
 
 
-
-
 <div role="navigation" aria-label="breadcrumbs navigation">
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
         
           <li><a href="../index.html">Module code</a> &raquo;</li>
         
@@ -215,7 +210,7 @@
 			<span class="s1">&#39;force_no_y_mirror_symmetry&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
 			<span class="s1">&#39;force_no_hermitian_symmetry&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
 			<span class="s1">&#39;starting_scale&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-			<span class="s1">&#39;ending_scale&#39;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+			<span class="s1">&#39;ending_scale&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
 			<span class="s1">&#39;edge_width_for_prior&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
 			<span class="s1">&#39;num_throughput_iterations&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
 			<span class="s1">&#39;initial_throughput_estimate&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
@@ -292,25 +287,20 @@
            
           </div>
           <footer>
+  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        &#169; Copyright 2020, Bryony Nickson.
+        &copy; Copyright 2020, Bryony Nickson
 
     </p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
+
         </div>
       </div>
 
@@ -318,6 +308,7 @@
 
   </div>
   
+
 
   <script type="text/javascript">
       jQuery(function () {

@@ -1,46 +1,45 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
-  <meta charset="utf-8" />
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="utf-8">
+  <meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
   <title>Introduction &mdash; aplc-optimization  documentation</title>
   
 
   
-  <link rel="stylesheet" href="_static/stsci.css" type="text/css" />
-  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
-  <link rel="stylesheet" href="_static/stsci.css" type="text/css" />
-
-  
   
     <link rel="shortcut icon" href="_static/logo.jpg"/>
   
-
   
   
 
   
-
-  
-  <!--[if lt IE 9]>
-    <script src="_static/js/html5shiv.min.js"></script>
-  <![endif]-->
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
         <script src="_static/doctools.js"></script>
-        <script src="_static/language_data.js"></script>
     
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
     
+
+  
+  <link rel="stylesheet" href="_static/stsci.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/stsci.css" type="text/css" />
+  <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="_static/stsci.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Requirements &amp; Installation" href="installing.html" />
@@ -76,7 +75,6 @@
   
         </div>
 
-        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -96,11 +94,19 @@
 <li class="toctree-l1"><a class="reference internal" href="server.html">Using STScI Linux Servers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="workflow.html">Design Survey Workflow</a></li>
 </ul>
+<p class="caption"><span class="caption-text">Detailed API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api/aplc.html"><code class="docutils literal notranslate"><span class="pre">aplc_optimization.aplc</span></code> Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/survey.html"><code class="docutils literal notranslate"><span class="pre">survey</span></code> Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/optimizer.html"><code class="docutils literal notranslate"><span class="pre">optimizer</span></code> Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/HiCAT_Inputs_Generation.html"><code class="docutils literal notranslate"><span class="pre">Inputs_Generation.GPI_Inputs_Generation</span></code> Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/LUVOIR_Inputs_Generation.html"><code class="docutils literal notranslate"><span class="pre">Inputs_Generation.GPI_Inputs_Generation</span></code> Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/GPI_Inputs_Generation.html"><code class="docutils literal notranslate"><span class="pre">aplc_optimizer.Inputs_Generation.GPI_Inputs_Generation</span></code> Module</a></li>
+</ul>
 
             
           
         </div>
-        
       </div>
     </nav>
 
@@ -135,20 +141,18 @@
 
 
 
-
-
 <div role="navigation" aria-label="breadcrumbs navigation">
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li><a href="index.html">Docs</a> &raquo;</li>
         
       <li>Introduction</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
-          
+            
             <a href="_sources/introduction.rst.txt" rel="nofollow"> View page source</a>
           
         
@@ -162,7 +166,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="introduction">
+  <section id="introduction">
 <span id="id1"></span><h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
 <p>The Apodized Pupil Lyot Coronagraph (APLC) is one of several coronagraph design families that is being assessed as part
 of NASA’s Exoplanet Exploration Program <a class="reference external" href="https://exoplanets.nasa.gov/exep/technology/SCDA/">Segmented aperture coronagraph design and analysis (SCDA) study</a>, to further our understanding of the ability of coronagraphs to operate with segmented/ obscured apertures.
@@ -171,12 +175,14 @@ A diagram of the APLC concept is shown in Figure 1. The mask architecture combin
 a downstream focal plane mask (FPM) in plane B, and the Lyot stop in the relayed pupil plane C to form the coronagraphic
 image on a detector located in the re-imaged focal plane D. A perfect solution is when the transmission profile of the
 apodizer in plane A is optimized so that the two scalar field components of the field in the Lyot plane approximately cancel.</p>
-<div class="figure align-center" id="id2">
+<figure class="align-center" id="id2">
 <a class="reference internal image-reference" href="_images/APLC_schematic.png"><img alt="schematic diagram for the APLC (Zimmerman 2016)" src="_images/APLC_schematic.png" style="width: 550px;" /></a>
-<p class="caption"><span class="caption-text"><strong>Figure 1</strong>: The schematic layout of the APLC with an example for light propagation through the coronagraph. Label B-
+<figcaption>
+<p><span class="caption-text"><strong>Figure 1</strong>: The schematic layout of the APLC with an example for light propagation through the coronagraph. Label B-
 means just before plane B, and B+ means just after plane B. All images are on logarithmic scales.</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
-</div>
-<div class="section" id="design-survey-strategy">
+</figcaption>
+</figure>
+<section id="design-survey-strategy">
 <h2>Design Survey Strategy<a class="headerlink" href="#design-survey-strategy" title="Permalink to this headline">¶</a></h2>
 <p>APLCs are sensitive to several design parameters: telescope aperture shape and segmentation, central obscuration,
 lyot stop shape and size, focal plane mask size, dark hole size, and bandwidth. In order to explore
@@ -188,45 +194,45 @@ off-axis transmission for a given set of design constraints (namely the raw cont
 mask, IWA, OWA, and Lyot stop profile). Details about the apodizer optimization method,
 including discrete algebraic models for the on-axis field propagation and definitions of the linear program objectives
 and constraints, are given in the appendix of <a class="reference external" href="https://www.spiedigitallibrary.org/conference-proceedings-of-spie/9904/1/Lyot-coronagraph-design-study-for-large-segmented-space-telescope-apertures/10.1117/12.2233205.full#c26">Zimmerman et al. 2016</a>.</p>
-</div>
-<div class="section" id="getting-aplc-optimization">
+</section>
+<section id="getting-aplc-optimization">
 <h2>Getting aplc-optimization<a class="headerlink" href="#getting-aplc-optimization" title="Permalink to this headline">¶</a></h2>
 <p>For instructions on how to install the <code class="docutils literal notranslate"><span class="pre">aplc-optimization</span></code> toolkit, please see <a class="reference internal" href="installing.html#installation"><span class="std std-ref">Requirements &amp; Installation</span></a>.</p>
-</div>
-<div class="section" id="running-a-design-survey">
+</section>
+<section id="running-a-design-survey">
 <h2>Running a design survey<a class="headerlink" href="#running-a-design-survey" title="Permalink to this headline">¶</a></h2>
 <p>For instructions on how to run a design survey, please see <a class="reference internal" href="workflow.html#workflow"><span class="std std-ref">Design Survey Workflow</span></a>.</p>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>
            
           </div>
           <footer>
+  
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="installing.html" class="btn btn-neutral float-right" title="Requirements &amp; Installation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="index.html" class="btn btn-neutral float-left" title="aplc-optimization: an apodized pupil Lyot coronagraph design survey toolkit" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+      
+        <a href="installing.html" class="btn btn-neutral float-right" title="Requirements &amp; Installation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral float-left" title="aplc-optimization: an apodized pupil Lyot coronagraph design survey toolkit" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
     </div>
+  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        &#169; Copyright 2020, Bryony Nickson.
+        &copy; Copyright 2020, Bryony Nickson
 
     </p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
+
         </div>
       </div>
 
@@ -234,6 +240,7 @@ and constraints, are given in the appendix of <a class="reference external" href
 
   </div>
   
+
 
   <script type="text/javascript">
       jQuery(function () {

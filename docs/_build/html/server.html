@@ -1,46 +1,45 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
-  <meta charset="utf-8" />
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="utf-8">
+  <meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
   <title>Using STScI Linux Servers &mdash; aplc-optimization  documentation</title>
   
 
   
-  <link rel="stylesheet" href="_static/stsci.css" type="text/css" />
-  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
-  <link rel="stylesheet" href="_static/stsci.css" type="text/css" />
-
-  
   
     <link rel="shortcut icon" href="_static/logo.jpg"/>
   
-
   
   
 
   
-
-  
-  <!--[if lt IE 9]>
-    <script src="_static/js/html5shiv.min.js"></script>
-  <![endif]-->
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
         <script src="_static/doctools.js"></script>
-        <script src="_static/language_data.js"></script>
     
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
     
+
+  
+  <link rel="stylesheet" href="_static/stsci.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/stsci.css" type="text/css" />
+  <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="_static/stsci.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Design Survey Workflow" href="workflow.html" />
@@ -76,7 +75,6 @@
   
         </div>
 
-        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -104,11 +102,19 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="workflow.html">Design Survey Workflow</a></li>
 </ul>
+<p class="caption"><span class="caption-text">Detailed API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api/aplc.html"><code class="docutils literal notranslate"><span class="pre">aplc_optimization.aplc</span></code> Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/survey.html"><code class="docutils literal notranslate"><span class="pre">survey</span></code> Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/optimizer.html"><code class="docutils literal notranslate"><span class="pre">optimizer</span></code> Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/HiCAT_Inputs_Generation.html"><code class="docutils literal notranslate"><span class="pre">Inputs_Generation.GPI_Inputs_Generation</span></code> Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/LUVOIR_Inputs_Generation.html"><code class="docutils literal notranslate"><span class="pre">Inputs_Generation.GPI_Inputs_Generation</span></code> Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/GPI_Inputs_Generation.html"><code class="docutils literal notranslate"><span class="pre">aplc_optimizer.Inputs_Generation.GPI_Inputs_Generation</span></code> Module</a></li>
+</ul>
 
             
           
         </div>
-        
       </div>
     </nav>
 
@@ -143,20 +149,18 @@
 
 
 
-
-
 <div role="navigation" aria-label="breadcrumbs navigation">
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li><a href="index.html">Docs</a> &raquo;</li>
         
       <li>Using STScI Linux Servers</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
-          
+            
             <a href="_sources/server.rst.txt" rel="nofollow"> View page source</a>
           
         
@@ -170,7 +174,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="using-stsci-linux-servers">
+  <section id="using-stsci-linux-servers">
 <span id="servers"></span><h1>Using STScI Linux Servers<a class="headerlink" href="#using-stsci-linux-servers" title="Permalink to this headline">¶</a></h1>
 <p>Due to the wide parameter space open to the SCDA study, apodizer optimization jobs are often computationally expensive, with some high-resolution design cases requiring
 several days to complete. In order to scale up the feasible volume of optimization trails, we utilize back room Linux compute servers at STScI.
@@ -179,9 +183,9 @@ They are physical machines, not virtual machines, and run the Linux operating sy
 <p>The Linux virtual workstations can be accessed from any STScI Macintosh or Windows system, on-site or through VPN and
 are available to anyone with an Active Directory account. Information on the Telescopes shared computers can be found in
 the following STScI <a class="reference external" href="https://innerspace.stsci.edu/display/INSTEL/Telescopes+Shared+Computers">Innerspace page</a>.</p>
-<div class="section" id="getting-started">
+<section id="getting-started">
 <h2>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="verifying-network-mounts">
+<section id="verifying-network-mounts">
 <h3>Verifying network mounts<a class="headerlink" href="#verifying-network-mounts" title="Permalink to this headline">¶</a></h3>
 <p>In order to access both Central Storage, and the Linux servers, you must be on the STScI internal network
 (either physically or wirelessly connected, or via VPN). Before proceeding, it may be useful to verify your
@@ -196,8 +200,8 @@ ls: /user: No such file or directory
 </pre></div>
 </div>
 <p>… then you will need to talk to ITSD.</p>
-</div>
-<div class="section" id="logging-into-a-server">
+</section>
+<section id="logging-into-a-server">
 <span id="login"></span><h3>Logging into a server<a class="headerlink" href="#logging-into-a-server" title="Permalink to this headline">¶</a></h3>
 <p>The command to remotely connect to a given server is <code class="docutils literal notranslate"><span class="pre">ssh</span> <span class="pre">&lt;SERVERNAME&gt;</span></code> (where <code class="docutils literal notranslate"><span class="pre">&lt;SERVERNAME&gt;</span></code> is the server hostname,
 e.g. <code class="docutils literal notranslate"><span class="pre">ssh</span> <span class="pre">telserv3</span></code>). To enable X forwarding, you can use the <code class="docutils literal notranslate"><span class="pre">-XY</span></code> option (e.g. <code class="docutils literal notranslate"><span class="pre">ssh</span> <span class="pre">-XY</span> <span class="pre">science1</span></code>). This allows
@@ -210,9 +214,9 @@ for displays that use X (Linux’s default backend) to be forwarded to your moni
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ bash
 </pre></div>
 </div>
-</div>
-</div>
-<div class="section" id="software-installation">
+</section>
+</section>
+<section id="software-installation">
 <h2>Software Installation<a class="headerlink" href="#software-installation" title="Permalink to this headline">¶</a></h2>
 <p>When logged into a server (see <a class="reference internal" href="#login"><span class="std std-ref">below</span></a>), any commands run in that SSH session will be executed on the server, not on your personal machine.
 Thus, files and directories on your local machine will not be accessible when running the servers. Instead, all of the
@@ -234,7 +238,7 @@ of the differences in the operating system among the machines.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ls /user/myname
 </pre></div>
 </div>
-<div class="section" id="installing-conda">
+<section id="installing-conda">
 <h3>Installing Conda<a class="headerlink" href="#installing-conda" title="Permalink to this headline">¶</a></h3>
 <p>It is recommended that the <code class="docutils literal notranslate"><span class="pre">aplc-optimization</span></code> package be installed using Conda (see <span class="xref std std-ref">installing</span>). While you may
 have a version of Conda installed to your local machine, this version will not be accessible to programs running on
@@ -287,8 +291,8 @@ bash$
 </pre></div>
 </div>
 <p>Now that you have the conda command available, we can install <code class="docutils literal notranslate"><span class="pre">aplc-optimization</span></code> on the server.</p>
-</div>
-<div class="section" id="installing-aplc-optimization">
+</section>
+<section id="installing-aplc-optimization">
 <h3>Installing <code class="docutils literal notranslate"><span class="pre">aplc-optimization</span></code><a class="headerlink" href="#installing-aplc-optimization" title="Permalink to this headline">¶</a></h3>
 <p>Because of the storage limitations associated with the Linux home diretory (see <a class="reference internal" href="#storage"><span class="std std-ref">above</span></a>), we recommend
 intalling <code class="docutils literal notranslate"><span class="pre">aplc-optimization</span></code> in your Central Store directory. If you haven’t already, <code class="docutils literal notranslate"><span class="pre">ssh</span></code> into the server and open a
@@ -310,8 +314,8 @@ bash$ source activate aplc-optimization
 (aplc-optimization) bash$
 </pre></div>
 </div>
-</div>
-<div class="section" id="installing-gurobi">
+</section>
+<section id="installing-gurobi">
 <h3>Installing Gurobi<a class="headerlink" href="#installing-gurobi" title="Permalink to this headline">¶</a></h3>
 <p>Go back into your Central Store directory and download the latest 64-bit Linux version of the Gurobi optimizer, using <code class="docutils literal notranslate"><span class="pre">curl</span></code>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>(aplc-optimization) bash$ cd /user/bnickson
@@ -322,7 +326,7 @@ bash$ source activate aplc-optimization
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>(aplc-optimization) bash$ tar xvzf gurobi9.0.2_linux64.tar.gz
 </pre></div>
 </div>
-<div class="section" id="obtain-a-new-gurobi-license">
+<section id="obtain-a-new-gurobi-license">
 <h4>Obtain a new Gurobi license<a class="headerlink" href="#obtain-a-new-gurobi-license" title="Permalink to this headline">¶</a></h4>
 <p>Academic users are able to install and license Gurobi for their own use on more than one machine, however each
 individual academic license can only be installed on a single physical machine. Consequently, in order to use the optimizer
@@ -333,8 +337,8 @@ and request a new free license. Once obtained, this new license will be visible 
 <a class="reference external" href="https://www.gurobi.com/downloads/licenses/">Current Gurobi Licenses</a> library.</p>
 <p>Go to your <a class="reference external" href="https://www.gurobi.com/downloads/licenses/">Current Gurobi Licenses</a> library and open
 the newly created license by clicking on the <strong>Licence ID</strong> number.</p>
-</div>
-<div class="section" id="retrieve-and-set-up-the-gurobi-license-on-the-server">
+</section>
+<section id="retrieve-and-set-up-the-gurobi-license-on-the-server">
 <h4>Retrieve and set up the Gurobi license on the server<a class="headerlink" href="#retrieve-and-set-up-the-gurobi-license-on-the-server" title="Permalink to this headline">¶</a></h4>
 <p>The next step is to install the new Gurobi license on the Linux machine. First, log in to the server
 and go to the <code class="docutils literal notranslate"><span class="pre">/user</span></code> directory:</p>
@@ -353,8 +357,8 @@ it is important that the Gurobi license only be installed whilst connected to th
 license key registered to that particular machine. As such, if the <code class="docutils literal notranslate"><span class="pre">grbgetkey</span></code> command is run whilst not connected to the server,
 the corresponding license will be registered to your personal machine and will be invalid for use while connected to the server.</p>
 </div>
-</div>
-<div class="section" id="test-the-license-on-the-server">
+</section>
+<section id="test-the-license-on-the-server">
 <h4>Test the license on the server<a class="headerlink" href="#test-the-license-on-the-server" title="Permalink to this headline">¶</a></h4>
 <p>Once you have obtained a license key for the Linux machines, you can test the license using the Gurobi interactive shell.
 Log out and back in to the server and run the <code class="docutils literal notranslate"><span class="pre">gurobi.sh</span></code> command:</p>
@@ -379,39 +383,39 @@ gurobi&gt;
 <a class="reference external" href="https://www.gurobi.com/documentation/9.0/quickstart_mac/testing_your_license.html#subsection:testlicense">Gurobi website</a>
 for troubleshooting tips.</p>
 </div>
-</div>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
+</section>
 
 
            </div>
            
           </div>
           <footer>
+  
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="workflow.html" class="btn btn-neutral float-right" title="Design Survey Workflow" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="installing.html" class="btn btn-neutral float-left" title="Requirements &amp; Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+      
+        <a href="workflow.html" class="btn btn-neutral float-right" title="Design Survey Workflow" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="installing.html" class="btn btn-neutral float-left" title="Requirements &amp; Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
     </div>
+  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        &#169; Copyright 2020, Bryony Nickson.
+        &copy; Copyright 2020, Bryony Nickson
 
     </p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
+
         </div>
       </div>
 
@@ -419,6 +423,7 @@ for troubleshooting tips.</p>
 
   </div>
   
+
 
   <script type="text/javascript">
       jQuery(function () {

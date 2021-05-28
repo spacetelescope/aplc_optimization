@@ -61,7 +61,7 @@ import stsci_rtd_theme
 
 
 def setup(app):
-    app.add_stylesheet("stsci.css")
+    app.add_css_file("stsci.css")
 
 # the below is not strictly necessary but helps with extensions you may use across versions
 from distutils.version import LooseVersion
