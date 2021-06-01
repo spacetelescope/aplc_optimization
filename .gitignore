@@ -1,6 +1,13 @@
 display/*
 __pycache__/*
-*.ipynb_checkpoints/*
+.ipynb_checkpoints/
+.aplc_optimization.egg-info/
+build/
+dist/
+notebooks/Untitled.ipynb
 .vscode
 .pydevproject
 *.pyc
+.idea/
+.DS_Store
+._readme.txt

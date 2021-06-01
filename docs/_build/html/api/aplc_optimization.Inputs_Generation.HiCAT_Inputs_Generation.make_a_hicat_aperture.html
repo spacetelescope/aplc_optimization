@@ -1,0 +1,256 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>make_a_hicat_aperture &mdash; aplc_optimization  documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/logo.jpg"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/stsci.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/stsci.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/stsci.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="make_a_hicat_lyot_stop" href="aplc_optimization.Inputs_Generation.HiCAT_Inputs_Generation.make_a_hicat_lyot_stop.html" />
+    <link rel="prev" title="HiCAT_inputs_gen" href="aplc_optimization.Inputs_Generation.HiCAT_Inputs_Generation.HiCAT_inputs_gen.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+            <a href="../index.html" class="icon icon-home"> aplc_optimization
+            
+            <img src="../_static/stsci_pri_combo_mark_white.png" class="logo" />
+          </a>
+
+          
+            
+            
+          
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+  
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installing.html">Requirements &amp; Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../server.html">Using STScI Linux Servers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../workflow.html">Design Survey Workflow</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Detailed API Reference</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="aplc.html"><code class="docutils literal notranslate"><span class="pre">aplc</span></code> Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="survey.html"><code class="docutils literal notranslate"><span class="pre">survey</span></code> Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="optimizer.html"><code class="docutils literal notranslate"><span class="pre">optimizer</span></code> Module</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="HiCAT_Inputs_Generation.html"><code class="docutils literal notranslate"><span class="pre">Inputs_Generation.GPI_Inputs_Generation</span></code> Module</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="HiCAT_Inputs_Generation.html#functions">Functions</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="aplc_optimization.Inputs_Generation.HiCAT_Inputs_Generation.HiCAT_inputs_gen.html">HiCAT_inputs_gen</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">make_a_hicat_aperture</a></li>
+<li class="toctree-l3"><a class="reference internal" href="aplc_optimization.Inputs_Generation.HiCAT_Inputs_Generation.make_a_hicat_lyot_stop.html">make_a_hicat_lyot_stop</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="LUVOIR_Inputs_Generation.html"><code class="docutils literal notranslate"><span class="pre">Inputs_Generation.GPI_Inputs_Generation</span></code> Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GPI_Inputs_Generation.html"><code class="docutils literal notranslate"><span class="pre">Inputs_Generation.GPI_Inputs_Generation</span></code> Module</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">aplc_optimization</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="HiCAT_Inputs_Generation.html"><code class="docutils literal notranslate"><span class="pre">Inputs_Generation.GPI_Inputs_Generation</span></code> Module</a> &raquo;</li>
+        
+      <li>make_a_hicat_aperture</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/api/aplc_optimization.Inputs_Generation.HiCAT_Inputs_Generation.make_a_hicat_aperture.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <section id="make-a-hicat-aperture">
+<h1>make_a_hicat_aperture<a class="headerlink" href="#make-a-hicat-aperture" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="aplc_optimization.Inputs_Generation.HiCAT_Inputs_Generation.make_a_hicat_aperture">
+<span class="sig-prename descclassname"><span class="pre">aplc_optimization.Inputs_Generation.HiCAT_Inputs_Generation.</span></span><span class="sig-name descname"><span class="pre">make_a_hicat_aperture</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">normalized</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_spiders</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_segment_gaps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_header</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_segments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/aplc_optimization/Inputs_Generation/HiCAT_Inputs_Generation.html#make_a_hicat_aperture"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aplc_optimization.Inputs_Generation.HiCAT_Inputs_Generation.make_a_hicat_aperture" title="Permalink to this definition">¶</a></dt>
+<dd><p>Make the HiCAT P3 apodizer mask</p>
+<dl class="simple">
+<dt>normalized<span class="classifier">boolean</span></dt><dd><p>If this is True, the outer diameter will be scaled to 1. Otherwise, the
+diameter of the pupil will be 15.0 meters.</p>
+</dd>
+<dt>with_spiders<span class="classifier">boolean</span></dt><dd><p>Include the secondary mirror support structure in the aperture.</p>
+</dd>
+<dt>with_segment_gaps<span class="classifier">boolean</span></dt><dd><p>Include the gaps between individual segments in the aperture.</p>
+</dd>
+<dt>return_header<span class="classifier">boolean</span></dt><dd><p>If this is True , a header will be returned giving all important values for the
+created aperture for reference.</p>
+</dd>
+<dt>return_segments<span class="classifier">boolean</span></dt><dd><p>If this is True, the segments will also be returned as a list of Field generators.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>aperture<span class="classifier">Field generator</span></dt><dd><p>The HiCAT aperture.</p>
+</dd>
+<dt>header<span class="classifier">dict</span></dt><dd><p>A dictionary containing all important values for the created aperture. Only returned
+if <cite>return_header</cite> is True.</p>
+</dd>
+<dt>segments<span class="classifier">list of Field generators</span></dt><dd><p>The segments. Only returned when <cite>return_segments</cite> is True.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="aplc_optimization.Inputs_Generation.HiCAT_Inputs_Generation.make_a_hicat_lyot_stop.html" class="btn btn-neutral float-right" title="make_a_hicat_lyot_stop" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="aplc_optimization.Inputs_Generation.HiCAT_Inputs_Generation.HiCAT_inputs_gen.html" class="btn btn-neutral float-left" title="HiCAT_inputs_gen" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Bryony Nickson
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

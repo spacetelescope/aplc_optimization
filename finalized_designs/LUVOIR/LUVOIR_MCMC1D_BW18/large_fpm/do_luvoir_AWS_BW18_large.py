@@ -1,7 +1,6 @@
-from survey import DesignParameterSurvey
-from por_aplc import PorAPLC
-from astropy.io import fits
-from LUVOIR_Inputs_Generation import LUVOIR_inputs_gen
+from aplc_optimization.survey import DesignParameterSurvey
+from aplc_optimization.aplc import APLC
+from aplc_optimization.Inputs_Generation.LUVOIR_Inputs_Generation import LUVOIR_inputs_gen
 
 
 n = 1000
@@ -19,7 +18,7 @@ survey_parameters = {'pupil': {'N': n,'filename': pup_filename}, \
                      'method':{'starting_scale': 4}}
 
 
-luvoir = DesignParameterSurvey(PorAPLC, survey_parameters, 'surveys/luvoir_BW18_large_N{:04d}_AWS/'.format(n), 'masks/')
+luvoir = DesignParameterSurvey(APLC, survey_parameters, 'surveys/luvoir_BW18_large_N{:04d}_AWS/'.format(n), 'masks/')
 luvoir.describe()
 
 luvoir.write_drivers(True)

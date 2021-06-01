@@ -1,0 +1,99 @@
+Optimizer called with the following parameters:
+{'focal_plane_mask': {'field_stop_radius': -1.0,
+                      'grayscale': True,
+                      'num_pix': 80,
+                      'radius': 4.2715},
+ 'image': {'bandwidth': 0.1,
+           'contrast': 8,
+           'iwa': 3.75,
+           'num_wavelengths': 4,
+           'owa': 15.0,
+           'resolution': 2.5},
+ 'instrument': {'inst_name': 'LUVOIR'},
+ 'lyot_stop': {'alignment_tolerance': 6,
+               'filename': 'HiCAT/LS_HiCAT_ID0006_OD0015_SpiderTrue_ovsamp04_N1944.fits',
+               'num_lyot_stops': 9},
+ 'method': {'edge_width_for_prior': 2,
+            'ending_scale': 4,
+            'force_no_hermitian_symmetry': False,
+            'force_no_x_mirror_symmetry': False,
+            'force_no_y_mirror_symmetry': False,
+            'initial_throughput_estimate': 1,
+            'maximize_planet_throughput': False,
+            'num_throughput_iterations': 2,
+            'starting_scale': 1},
+ 'pupil': {'N': 1944,
+           'filename': 'HiCAT/ApodMask_HiCAT_ovsamp04_N1944_SpiderTrue_GapTrue.fits'},
+ 'solver': {'crossover': 0,
+            'method': 2,
+            'num_threads': 0}}
+
+File organization:
+{'analysis_dir': '/System/Volumes/Data/user/bnickson/aplc-optimization/surveys/hicat_final_N1944_telserv3/analysis',
+ 'drivers_dir': '/System/Volumes/Data/user/bnickson/aplc-optimization/surveys/hicat_final_N1944_telserv3/drivers',
+ 'input_files_dir': '/System/Volumes/Data/user/bnickson/aplc-optimization/masks',
+ 'log_dir': '/System/Volumes/Data/user/bnickson/aplc-optimization/surveys/hicat_final_N1944_telserv3/logs',
+ 'solution_dir': '/System/Volumes/Data/user/bnickson/aplc-optimization/surveys/hicat_final_N1944_telserv3/solutions',
+ 'survey_dir': '/System/Volumes/Data/user/bnickson/aplc-optimization/surveys/hicat_final_N1944_telserv3'}
+
+Telescope pupil:
+   Mirror symmetry in x: yes
+   Mirror symmetry in y: yes
+
+Lyot stop #0:
+   Mirror symmetry in x: yes
+Lyot stop #1:
+   Mirror symmetry in x: no
+   Searching for mirror symmetric Lyot stops in x...
+      Found Lyot stop #2 to fit.
+Lyot stop #2:
+   Will be ignored due to symmetries with Lyot stops #[1]
+Lyot stop #3:
+   Mirror symmetry in x: yes
+Lyot stop #4:
+   Mirror symmetry in x: yes
+Lyot stop #5:
+   Mirror symmetry in x: no
+   Searching for mirror symmetric Lyot stops in x...
+      Found Lyot stop #7 to fit.
+Lyot stop #6:
+   Mirror symmetry in x: no
+   Searching for mirror symmetric Lyot stops in x...
+      Found Lyot stop #8 to fit.
+Lyot stop #7:
+   Will be ignored due to symmetries with Lyot stops #[5]
+Lyot stop #8:
+   Will be ignored due to symmetries with Lyot stops #[6]
+Lyot stop #0:
+   Mirror symmetry in y: yes
+Lyot stop #1:
+   Mirror symmetry in y: yes
+Lyot stop #2:
+   Will be ignored due to symmetries with Lyot stops #[1]
+Lyot stop #3:
+   Mirror symmetry in y: no
+   Searching for mirror symmetric Lyot stops in y...
+      Found Lyot stop #4 to fit.
+Lyot stop #4:
+   Will be ignored due to symmetries with Lyot stops #[3]
+Lyot stop #5:
+   Mirror symmetry in y: no
+   Searching for mirror symmetric Lyot stops in y...
+      Found Lyot stop #6 to fit.
+Lyot stop #6:
+   Will be ignored due to symmetries with Lyot stops #[5]
+Lyot stop #7:
+   Will be ignored due to symmetries with Lyot stops #[5]
+Lyot stop #8:
+   Will be ignored due to symmetries with Lyot stops #[6]
+
+Complete APLC:
+   Mirror symmetry in x: yes
+   Mirror symmetry in y: yes
+
+Traceback (most recent call last):
+  File "/System/Volumes/Data/user/bnickson/aplc-optimization/surveys/hicat_final_N1944_telserv3/drivers/0_LUVOIR_N1944_FPM427M080_IWA0375_OWA01500_C8_BW10_Nlam4_LS_ID006_O_OD15_S_ls_iderTrue_ovs.py", line 127, in <module>
+    solver_method=solver_method)
+  File "/System/Volumes/Data/user/bnickson/aplc-optimization/surveys/hicat_final_N1944_telserv3/drivers/por_aplc_optimizer.py", line 499, in optimize_aplc
+    return prior * (pupil > 0)
+TypeError: unsupported operand type(s) for *: 'NoneType' and 'bool'

@@ -8,7 +8,7 @@ import asdf
 from astropy.io import fits
 import os
 import pprint
-from por_aplc_optimizer import optimize_aplc
+from aplc_optimization.optimizer import optimize_aplc
 
 print('Optimizer called with the following parameters:')
 pprint.pprint(parameters, width=1)

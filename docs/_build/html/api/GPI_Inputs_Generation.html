@@ -1,0 +1,940 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Inputs_Generation.GPI_Inputs_Generation Module &mdash; aplc_optimization  documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/logo.jpg"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/stsci.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/stsci.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/stsci.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="GPI_inputs_gen" href="aplc_optimization.Inputs_Generation.GPI_Inputs_Generation.GPI_inputs_gen.html" />
+    <link rel="prev" title="make_luvoir_lyot_stop" href="aplc_optimization.Inputs_Generation.LUVOIR_Inputs_Generation.make_luvoir_lyot_stop.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+            <a href="../index.html" class="icon icon-home"> aplc_optimization
+            
+            <img src="../_static/stsci_pri_combo_mark_white.png" class="logo" />
+          </a>
+
+          
+            
+            
+          
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+  
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installing.html">Requirements &amp; Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../server.html">Using STScI Linux Servers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../workflow.html">Design Survey Workflow</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Detailed API Reference</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="aplc.html"><code class="docutils literal notranslate"><span class="pre">aplc</span></code> Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="survey.html"><code class="docutils literal notranslate"><span class="pre">survey</span></code> Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="optimizer.html"><code class="docutils literal notranslate"><span class="pre">optimizer</span></code> Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="HiCAT_Inputs_Generation.html"><code class="docutils literal notranslate"><span class="pre">Inputs_Generation.GPI_Inputs_Generation</span></code> Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LUVOIR_Inputs_Generation.html"><code class="docutils literal notranslate"><span class="pre">Inputs_Generation.GPI_Inputs_Generation</span></code> Module</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">Inputs_Generation.GPI_Inputs_Generation</span></code> Module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#functions">Functions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="aplc_optimization.Inputs_Generation.GPI_Inputs_Generation.GPI_inputs_gen.html">GPI_inputs_gen</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#classes">Classes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="aplc_optimization.Inputs_Generation.GPI_Inputs_Generation.GPI_LyotMask.html">GPI_LyotMask</a></li>
+<li class="toctree-l3"><a class="reference internal" href="aplc_optimization.Inputs_Generation.GPI_Inputs_Generation.GeminiPrimary.html">GeminiPrimary</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">aplc_optimization</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li><code class="docutils literal notranslate"><span class="pre">Inputs_Generation.GPI_Inputs_Generation</span></code> Module</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/api/GPI_Inputs_Generation.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <section id="module-aplc_optimization.Inputs_Generation.GPI_Inputs_Generation">
+<span id="inputs-generation-gpi-inputs-generation-module"></span><h1><code class="docutils literal notranslate"><span class="pre">Inputs_Generation.GPI_Inputs_Generation</span></code> Module<a class="headerlink" href="#module-aplc_optimization.Inputs_Generation.GPI_Inputs_Generation" title="Permalink to this headline">¶</a></h1>
+<section id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">Cn_squared_from_fried_parameter</span></code>(r0[, wavelength])</p></td>
+<td><p>Calculate the integrated Cn^2 for a certain Fried parameter.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="aplc_optimization.Inputs_Generation.GPI_Inputs_Generation.GPI_inputs_gen.html#aplc_optimization.Inputs_Generation.GPI_Inputs_Generation.GPI_inputs_gen" title="aplc_optimization.Inputs_Generation.GPI_Inputs_Generation.GPI_inputs_gen"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GPI_inputs_gen</span></code></a>(input_files_dict)</p></td>
+<td><p>Generate GPI Primary and Lyot stop(s) for the APLC coronagraph and write to file.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">ansi_to_zernike</span></code>(i)</p></td>
+<td><p>Get the Zernike index from an ANSI index.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">azimutal_profile</span></code>(image, num_bins[, statistic])</p></td>
+<td><p>Create an azimuthal profile of the image around its center.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">binned_profile</span></code>(y, x[, bins, statistic])</p></td>
+<td><p>Create a profile of y(x) in the specified bins.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">circular_aperture</span></code>(diameter[, center])</p></td>
+<td><p>Makes a Field generator for a circular aperture.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">closest_points</span></code>(point_grid, evaluated_grid)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">complex_field_to_rgb</span></code>(field[, theme, rmin, …])</p></td>
+<td><p>Convert a complex field to an RGB field.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">conical_surface_sag</span></code>(radius_of_curvature[, …])</p></td>
+<td><p>Makes a Field generator for the surface sag of a conical surface.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">contour_field</span></code>(field[, grid, ax, grid_units])</p></td>
+<td><p>Plot contours of a field.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">contourf_field</span></code>(field[, grid, ax, grid_units])</p></td>
+<td><p>Plot filled contours of a field.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">disk_harmonic</span></code>(n, m[, D, bc, grid])</p></td>
+<td><p>Create a disk harmonic.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">disk_harmonic_energy</span></code>(n, m[, bc])</p></td>
+<td><p>Get the energy of a disk harmonic function.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">elliptical_aperture</span></code>(diameters[, center])</p></td>
+<td><p>Makes a Field generator for an elliptical aperture.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">errorfill</span></code>(x, y, y_err_pos[, y_err_neg, …])</p></td>
+<td><p>Plot a line with filled errorbars.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">evaluate_supersampled</span></code>(field_generator, grid, …)</p></td>
+<td><p>Evaluate a Field generator on <cite>grid</cite>, with an oversampling.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">even_aspheric_surface_sag</span></code>(radius_of_curvature)</p></td>
+<td><p>Makes a Field generator for the surface sag of an even aspherical surface.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">field_adjoint</span></code>(a)</p></td>
+<td><p>Calculates the adjoint of a tensor field.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">field_conjugate_transpose</span></code>(a)</p></td>
+<td><p>Performs the conjugate transpose of a rank 2 tensor field or two dimensional array.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">field_cross</span></code>(a, b)</p></td>
+<td><p>Calculates the cross product of two vector fields.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">field_determinant</span></code>(a)</p></td>
+<td><p>Calculates the determinant of a tensor field.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">field_dot</span></code>(a, b[, out])</p></td>
+<td><p>Perform a dot product of <cite>a</cite> and <cite>b</cite> multiplexed over the field dimension.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">field_einsum</span></code>(subscripts, *operands, **kwargs)</p></td>
+<td><p>Evaluates the Einstein summation convention on the operand fields.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">field_inv</span></code>(f)</p></td>
+<td><p>Compute the (multiplicative) inverse of a tensor field of order 2.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">field_inverse_tikhonov</span></code>(f[, rcond])</p></td>
+<td><p>Invert a tensor field of order 2 using Tikhonov regularization.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">field_inverse_truncated</span></code>(f[, rcond])</p></td>
+<td><p>Invert a tensor field of order 2 using mode truncation.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">field_inverse_truncated_modal</span></code>(f, num_modes)</p></td>
+<td><p>Invert a tensor field of order 2 using mode truncation.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">field_kron</span></code>(a, b)</p></td>
+<td><p>Calculate the Kronecker product of two fields.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">field_svd</span></code>(f[, full_matrices, compute_uv])</p></td>
+<td><p>Calculate the singular value decomposition for a tensor field of order 2.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">field_trace</span></code>(a[, out])</p></td>
+<td><p>Take the trace of a tensor field.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">field_transpose</span></code>(a)</p></td>
+<td><p>Performs the transpose of a rank 2 tensor field or two dimensional array.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">fried_parameter_from_Cn_squared</span></code>(Cn_squared)</p></td>
+<td><p>Calculate the Fried parameter from the integrated Cn^2.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">fried_parameter_to_seeing</span></code>(r0[, wavelength])</p></td>
+<td><p>Calculate the FWHM of the seeing from the Fried parameter.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">gaussian_hermite</span></code>(n, m[, …])</p></td>
+<td><p>Creates a Gaussian-Hermite mode.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">gaussian_hermite_index</span></code>(i[, …])</p></td>
+<td><p>Creates a Gaussian-Hermite mode.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">gaussian_laguerre</span></code>(p, l[, …])</p></td>
+<td><p>Creates a Gaussian-Laguerre mode.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">generate_app_keller</span></code>(wavefront, propagator, …)</p></td>
+<td><p>Accelerated Gerchberg-Saxton-like algorithm for APP design by Christoph Keller <span id="id1">[Keller2016]</span> and based on Douglas-Rachford operator splitting.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">generate_app_por</span></code>(wavefront, propagator, …)</p></td>
+<td><p>Optimize a one-sided APP using a globally optimal algorithm.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_glasses_in_catalogue</span></code>()</p></td>
+<td><p>Get the names of all the glasses in the glass catalogue.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_mean_intensity_in_roi</span></code>(img, mask)</p></td>
+<td><p>Get the mean intensity in a masked region of interest.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_mean_raw_contrast</span></code>(img, mask, ref_img)</p></td>
+<td><p>Get the mean raw contrast in a masked region of interest.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_ravc_planet_transmission</span></code>(…[, charge])</p></td>
+<td><p>Get the planet transmission for a ring-apodized vortex coronagraph.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_refractive_index</span></code>(glass_name)</p></td>
+<td><p>Get the refractive index for one of the glasses in the catalogue.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_strehl_from_focal</span></code>(img, ref_img)</p></td>
+<td><p>Get the Strehl ratio from a focal-plane image.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_strehl_from_pupil</span></code>(aperture, ref_aperture)</p></td>
+<td><p>Get the Strehl ratio from a pupil-plane electric field.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">hexagonal_aperture</span></code>(circum_diameter[, angle, …])</p></td>
+<td><p>Makes a Field generator for a hexagon aperture.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">imsave_field</span></code>(filename, field[, grid, vmin, …])</p></td>
+<td><p>Save a two-dimensional field as an image.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">imshow_field</span></code>(field[, grid, ax, vmin, vmax, …])</p></td>
+<td><p>Display a two-dimensional image on a matplotlib figure.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">imshow_psf</span></code>(psf[, grid, vmin, vmax, scale, …])</p></td>
+<td><p>Display a PSF in a nice, consistent format.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">imshow_pupil_phase</span></code>(pupil_phase[, grid, …])</p></td>
+<td><p>Display a pupil phase pattern in a nice, consistent format.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">index_to_hermite</span></code>(i)</p></td>
+<td><p>Converts a one-dimensional mode index to the two-dimensional mode index.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">inverse_tikhonov</span></code>(M[, rcond, svd])</p></td>
+<td><p>Invert <cite>M</cite> using Tikhonov regularization.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">inverse_truncated</span></code>(M[, rcond, svd])</p></td>
+<td><p>Invert <cite>M</cite> truncating the number of modes.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">inverse_truncated_modal</span></code>(M, num_modes[, svd])</p></td>
+<td><p>Invert <cite>M</cite> with <cite>num_modes</cite> modes.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">jones_to_mueller</span></code>(jones_matrix)</p></td>
+<td><p>Convert a Jones matrix to a Mueller matrix.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">label_actuator_centroid_positions</span></code>(…[, …])</p></td>
+<td><p>Display centroid positions for a set of influence functions.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">large_poisson</span></code>(lam[, thresh])</p></td>
+<td><p>Draw samples from a Poisson distribution, taking care of large values of <cite>lam</cite>.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_LP_modes</span></code>(grid, V_number, core_radius[, …])</p></td>
+<td><p>Make a ModeBasis out of the guided modes that are supported by a step-index fiber.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_actuator_positions</span></code>(…[, x_tilt, …])</p></td>
+<td><p>Make actuator positions using the BMC convention.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_agnostic_backward</span></code>(backward)</p></td>
+<td><p>A decorator for a backward function on an AgnosticOpticalElement.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_agnostic_forward</span></code>(forward)</p></td>
+<td><p>A decorator for a forward function on an AgnosticOpticalElement.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_agnostic_optical_element</span></code>([…])</p></td>
+<td><p>Create an optical element that is agnostic to input_grid or wavelength from one that is not.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_cauchy_glass</span></code>(coefficients)</p></td>
+<td><p>The Cauchy equation for the dispersion of the refractive index of materials.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_chebyshev_grid</span></code>(dims[, minimum, maximum])</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_complex_fourier_basis</span></code>(grid, fourier_grid)</p></td>
+<td><p>Make a complex Fourier basis.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_cosine_basis</span></code>(grid, fourier_grid[, …])</p></td>
+<td><p>Make a cosine basis.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_disk_harmonic_basis</span></code>(grid, num_modes[, …])</p></td>
+<td><p>Create a disk harmonic mode basis.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_fft_grid</span></code>(input_grid[, q, fov])</p></td>
+<td><p>Calculate the grid returned by a Fast Fourier Transform.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_field_operation</span></code>(op)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_focal_grid</span></code>(q, num_airy[, …])</p></td>
+<td><p>Make a grid for a focal plane.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_focal_grid_from_pupil_grid</span></code>(pupil_grid)</p></td>
+<td><p>Make a grid for a focal plane from a pupil grid.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_fourier_basis</span></code>(grid, fourier_grid[, …])</p></td>
+<td><p>Make a Fourier basis.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_fourier_transform</span></code>(input_grid[, …])</p></td>
+<td><p>Construct a FourierTransform object.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_gaussian_hermite_basis</span></code>(grid, num_modes, …)</p></td>
+<td><p>Creates a Gaussian-Hermite mode basis.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_gaussian_influence_functions</span></code>(…[, …])</p></td>
+<td><p>Create influence functions with a Gaussian profile.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_gaussian_laguerre_basis</span></code>(grid, pmax, …)</p></td>
+<td><p>Creates a Gaussian-Laguerre mode basis.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_gaussian_pokes</span></code>(grid, mu, sigma[, cutoff])</p></td>
+<td><p>Make a basis of Gaussians.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_hexagonal_grid</span></code>(circum_diameter, n_rings)</p></td>
+<td><p>Make a regular hexagonal grid.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_hexagonal_segmented_aperture</span></code>(num_rings, …)</p></td>
+<td><p>Create a hexagonal segmented aperture.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_hicat_aperture</span></code>([normalized, …])</p></td>
+<td><p>Make the HiCAT P3 apodizer mask</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_hicat_lyot_stop</span></code>([normalized, …])</p></td>
+<td><p>Make the HiCAT Lyot stop.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_linear_interpolator</span></code>(field[, grid, …])</p></td>
+<td><p>Make a linear interpolator for any type of grid.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_linear_interpolator_separated</span></code>(field[, …])</p></td>
+<td><p>Make a linear interpolators for a separated grid.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_linear_interpolator_unstructured</span></code>(field)</p></td>
+<td><p>Make a linear interpolator for an unstructured grid.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_luvoir_a_aperture</span></code>([normalized, …])</p></td>
+<td><p>This aperture changes frequently.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_luvoir_a_lyot_stop</span></code>([normalized, …])</p></td>
+<td><p>Make a LUVOIR-A Lyot stop for the APLC coronagraph.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_magellan_aperture</span></code>([normalized, …])</p></td>
+<td><p>Make the Magellan aperture.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_nearest_interpolator</span></code>(field[, grid])</p></td>
+<td><p>Make a nearest interpolator for any type of grid.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_nearest_interpolator_separated</span></code>(field[, …])</p></td>
+<td><p>Make a nearest interpolator for a field on a separated grid.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_nearest_interpolator_unstructured</span></code>(field)</p></td>
+<td><p>Make a nearest interpolator for an unstructured grid.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_obstructed_circular_aperture</span></code>(…[, …])</p></td>
+<td><p>Make a simple circular aperture with central obscuration and support structure.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_obstruction</span></code>(aperture)</p></td>
+<td><p>Create an obstruction of <cite>aperture</cite>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_odwfs_amplitude_filter</span></code>(beta)</p></td>
+<td><p>The OD-wfs amplitude filter following <span id="id2">[Haffert2016]</span>.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_polarization_odwfs_amplitude_filter</span></code>(beta)</p></td>
+<td><p>The OD-wfs amplitude filter based on polarization optics following <span id="id3">[Haffert2016]</span>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_power_law_error</span></code>(pupil_grid, ptv, diameter)</p></td>
+<td><p>Create an error surface from a power-law power spectral density.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_pupil_grid</span></code>(dims[, diameter])</p></td>
+<td><p>Makes a new <code class="xref py py-class docutils literal notranslate"><span class="pre">Grid</span></code>, meant for descretisation of a pupil-plane wavefront.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_ravc_masks</span></code>(central_obscuration[, …])</p></td>
+<td><p>Make field generators for the pupil and Lyot-stop masks for a ring apodized vortex coronagraph.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_rotated_aperture</span></code>(aperture, angle)</p></td>
+<td><p>Create a rotated version of <cite>aperture</cite>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_segmented_aperture</span></code>(segment_shape, …)</p></td>
+<td><p>Create a segmented aperture.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_sellmeier_glass</span></code>(A, K, L)</p></td>
+<td><p>The Sellmeier equation for the dispersion of the refractive index of materials.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_sine_basis</span></code>(grid, fourier_grid[, …])</p></td>
+<td><p>Make a sine basis.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_spider</span></code>(p1, p2, spider_width)</p></td>
+<td><p>Make a rectangular obstruction from <cite>p1</cite> to <cite>p2</cite>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_spider_infinite</span></code>(p, angle, spider_width)</p></td>
+<td><p>Make an infinite spider starting at <cite>p</cite> and extending at an angle <cite>angle</cite>.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_standard_atmospheric_layers</span></code>(input_grid)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_subsampled_grid</span></code>(grid, undersampling)</p></td>
+<td><p>Make a new grid that undersamples by a factor <cite>undersampling</cite>.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_supersampled_grid</span></code>(grid, oversampling)</p></td>
+<td><p>Make a new grid that oversamples by a factor <cite>oversampling</cite>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_uniform_grid</span></code>(dims, extent[, center, …])</p></td>
+<td><p>Create a uniformly-spaced <code class="xref py py-class docutils literal notranslate"><span class="pre">Grid</span></code> of a certain shape and size.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_uniform_vector_field</span></code>(field, jones_vector)</p></td>
+<td><p>Make an uniform vector field from a scalar field and a jones vector.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_uniform_vector_field_generator</span></code>(…)</p></td>
+<td><p>Make an uniform vector field generator from a scalar field generator and a jones vector.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_vlt_aperture</span></code>([normalized, telescope, …])</p></td>
+<td><p>Make the VLT aperture.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_xinetics_influence_functions</span></code>(…[, …])</p></td>
+<td><p>Create influence functions for a Xinetics deformable mirror.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_zernike_basis</span></code>(num_modes, D, grid[, …])</p></td>
+<td><p>Make a ModeBasis of Zernike polynomials.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">noll_to_zernike</span></code>(i)</p></td>
+<td><p>Get the Zernike index from a Noll index.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">optical_differentiation_surface</span></code>(filter_size, …)</p></td>
+<td><p>A generator function for the complex multiplexed surface of the ODWFS.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">parabolic_surface_sag</span></code>(radius_of_curvature)</p></td>
+<td><p>Makes a Field generator for the surface sag of an even aspherical surface.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">phase_covariance_von_karman</span></code>(r0, L0)</p></td>
+<td><p>Return a Field generator for the phase covariance function for Von Karman turbulence.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">phase_structure_function_von_karman</span></code>(r0, L0)</p></td>
+<td><p>Return a Field generator for the phase structure function for Von Karman turbulence.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">power_spectral_density_von_karman</span></code>(r0, L0)</p></td>
+<td><p>Return a Field generator for the power spectral density function for Von Karman turbulence.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">radial_profile</span></code>(image, bin_size[, statistic])</p></td>
+<td><p>Create a radial profile of the image around its center.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">read_field</span></code>(filename[, fmt])</p></td>
+<td><p>Read a field from a file.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">read_fits</span></code>(filename)</p></td>
+<td><p>Read an array from a fits file.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">read_grid</span></code>(filename[, fmt])</p></td>
+<td><p>Read a grid from a file.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">read_mode_basis</span></code>(filename[, fmt])</p></td>
+<td><p>Read a mode basis from a file.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">rectangular_aperture</span></code>(size[, center])</p></td>
+<td><p>Makes a Field generator for a rectangular aperture.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">regular_polygon_aperture</span></code>(num_sides, …[, …])</p></td>
+<td><p>Makes a Field generator for a regular-polygon-shaped aperture.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">seeing_to_fried_parameter</span></code>(seeing[, wavelength])</p></td>
+<td><p>Calculate the Fried parameter from the seeing FWHM.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_color_scheme</span></code>([dark, …])</p></td>
+<td><p>Apply a color scheme to all matplotlib figures.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">spherical_surface_sag</span></code>(radius_of_curvature)</p></td>
+<td><p>Makes a Field generator for the surface sag of an even aspherical surface.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">subsample_field</span></code>(field, subsampling[, …])</p></td>
+<td><p>Average the field over subsampling pixels in each dimension.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">write_field</span></code>(field, filename[, fmt, overwrite])</p></td>
+<td><p>Write a field to a file.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">write_fits</span></code>(data, filename[, shape, overwrite])</p></td>
+<td><p>Write the data to a fits-file.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">write_grid</span></code>(grid, filename[, fmt, overwrite])</p></td>
+<td><p>Write a grid to a file.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">write_mode_basis</span></code>(mode_basis, filename[, …])</p></td>
+<td><p>Write a mode basis to a file.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">zernike</span></code>(n, m[, D, grid, radial_cutoff, cache])</p></td>
+<td><p>Evaluate the Zernike polynomial on a grid.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">zernike_to_ansi</span></code>(n, m)</p></td>
+<td><p>Get the ANSI index for a pair of Zernike indices.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">zernike_to_noll</span></code>(n, m)</p></td>
+<td><p>Get the Noll index for a pair of Zernike indices.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="classes">
+<h2>Classes<a class="headerlink" href="#classes" title="Permalink to this headline">¶</a></h2>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">AgnosticOpticalElement</span></code>([grid_dependent, …])</p></td>
+<td><p>Base class for optical elements that require additional processing/caching for supporting different grids or wavelengths.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">AngularSpectrumPropagator</span></code>(input_grid, distance)</p></td>
+<td><p>The monochromatic angular spectrum propagator for scalar fields.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">Apodizer</span></code>(apodization)</p></td>
+<td><p>A thin apodizer.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">AtmosphericLayer</span></code>(input_grid[, Cn_squared, …])</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">CartesianGrid</span></code>(coords[, weights])</p></td>
+<td><p>A grid representing a N-dimensional Cartesian coordinate system.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">CircularPolarizingBeamSplitter</span></code>([wavelength])</p></td>
+<td><p>A circular polarizing beam splitter that accepts one wavefront and returns two linearly polarized wavefronts.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">CircularRetarder</span></code>(phase_retardation)</p></td>
+<td><p>A general circular retarder.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">ComplexSurfaceApodizer</span></code>(amplitude, surface, …)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">Configuration</span></code>()</p></td>
+<td><p>A configuration object that describes the current configuration status of the package.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">DeformableMirror</span></code>(influence_functions)</p></td>
+<td><p>A deformable mirror using influence functions.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">Detector</span></code>(detector_grid[, subsamping])</p></td>
+<td><p>Base class for a detector.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">DynamicOpticalSystem</span></code>()</p></td>
+<td><p>A dynamically varying optical system.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">EmptyOpticalElement</span></code>()</p></td>
+<td><p>An empty optical element.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">EvenAsphereMicroLensArray</span></code>(input_grid, …[, …])</p></td>
+<td><p>An even asphere micro-lens array.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">FFMpegWriter</span></code>(filename[, codec, framerate, …])</p></td>
+<td><p>A writer of video files from Matplotlib figures.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">FastFourierTransform</span></code>(input_grid[, q, fov, …])</p></td>
+<td><p>A Fast Fourier Transform (FFT) object.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">Field</span></code>(arr, grid)</p></td>
+<td><p>The value of some physical quantity for each point in some coordinate system.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">FiniteAtmosphericLayer</span></code>(input_grid[, …])</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">FourierFilter</span></code>(input_grid, transfer_function)</p></td>
+<td><p>A filter in the Fourier domain.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">FourierTransform</span></code>()</p></td>
+<td><p>The base class for all Fourier transform implementations.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">FraunhoferPropagator</span></code>(input_grid, output_grid)</p></td>
+<td><p>A monochromatic perfect lens propagator.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">FresnelPropagator</span></code>(input_grid, distance[, …])</p></td>
+<td><p>The monochromatic Fresnel propagator for scalar fields.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="aplc_optimization.Inputs_Generation.GPI_Inputs_Generation.GPI_LyotMask.html#aplc_optimization.Inputs_Generation.GPI_Inputs_Generation.GPI_LyotMask" title="aplc_optimization.Inputs_Generation.GPI_Inputs_Generation.GPI_LyotMask"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GPI_LyotMask</span></code></a>([name, tabs, ls_spid])</p></td>
+<td><p>Model the GPI Lyot stop mask.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">GaussianBeam</span></code>(w0, z, wavelength)</p></td>
+<td><p>An analytical description of a light beam with a Gaussian profile.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="aplc_optimization.Inputs_Generation.GPI_Inputs_Generation.GeminiPrimary.html#aplc_optimization.Inputs_Generation.GPI_Inputs_Generation.GeminiPrimary" title="aplc_optimization.Inputs_Generation.GPI_Inputs_Generation.GeminiPrimary"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GeminiPrimary</span></code></a>([name, undersized, …])</p></td>
+<td><p>The Gemini primary, adapted from of [geminiplanetimager/gpipsfs]</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">GeometricPhaseElement</span></code>(phase_pattern[, …])</p></td>
+<td><p>A general geometric phase element.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">GifWriter</span></code>(filename[, framerate, cleanup])</p></td>
+<td><p>A writer of gif files from Matplotlib figures.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">Grid</span></code>(coords[, weights])</p></td>
+<td><p>A set of points on some coordinate system.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">HalfWavePlate</span></code>(fast_axis_orientation)</p></td>
+<td><p>A half-wave plate.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">InfiniteAtmosphericLayer</span></code>(input_grid[, …])</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">JonesMatrixOpticalElement</span></code>(jones_matrix)</p></td>
+<td><p>A general Jones Matrix.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">KnifeEdgeLyotCoronagraph</span></code>(input_grid[, q, …])</p></td>
+<td><p>A Lyot-style coronagraph with a centered, knife-edge focal-plane mask.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">LinearPolarizer</span></code>(polarization_angle)</p></td>
+<td><p>A linear polarizer.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">LinearPolarizingBeamSplitter</span></code>(polarization_angle)</p></td>
+<td><p>A linear polarizing beam splitter that accepts one wavefront and returns two orthogonally linearly polarized wavefronts.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">LinearRetarder</span></code>(phase_retardation, …)</p></td>
+<td><p>A general linear retarder.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">LyotCoronagraph</span></code>(input_grid, focal_plane_mask)</p></td>
+<td><p>A Lyot coronagraph with a small focal-plane mask.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">Magnifier</span></code>(magnification)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">MatrixFourierTransform</span></code>(input_grid, output_grid)</p></td>
+<td><p>A Matrix Fourier Transform (MFT) object.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">MicroLensArray</span></code>(input_grid, lenslet_grid, …)</p></td>
+<td><p>A parabolic micro-lens array.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">ModalAdaptiveOpticsLayer</span></code>(layer, …)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">ModeBasis</span></code>(transformation_matrix[, grid])</p></td>
+<td><p>A linear basis of modes.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">ModulatedPyramidWavefrontSensorOptics</span></code>(…[, …])</p></td>
+<td><p>The optical elements for a modulated pyramid wavefront sensor.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">MultiLayerAtmosphere</span></code>(layers[, …])</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">MultiplexedComplexSurfaceApodizer</span></code>(amplitude, …)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">NaiveFourierTransform</span></code>(input_grid, output_grid)</p></td>
+<td><p>The naive Fourier transform (NFT).</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">NoiselessDetector</span></code>(detector_grid[, subsamping])</p></td>
+<td><p>A detector without noise.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">NoisyDetector</span></code>(detector_grid[, …])</p></td>
+<td><p>A detector class that has some basic noise properties.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">OccultedLyotCoronagraph</span></code>(input_grid, …)</p></td>
+<td><p>A Lyot coronagraph with a focal-plane mask.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">OpticalDifferentiationWavefrontSensorEstimator</span></code>(…)</p></td>
+<td><p>Estimates the wavefront slopes from pyramid wavefront sensor images.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">OpticalDifferentiationWavefrontSensorOptics</span></code>(…)</p></td>
+<td><p>The optical elements for a optical-differentiation wavefront sensor.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">OpticalElement</span></code>()</p></td>
+<td><p>Base class for all optical elements.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">OpticalSystem</span></code>(optical_elements)</p></td>
+<td><p>An linear path of optical elements.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">Path</span></code>(*args, **kwargs)</p></td>
+<td><p>PurePath subclass that can make system calls.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">PerfectCoronagraph</span></code>(aperture[, order, coeffs])</p></td>
+<td><p>A perfect coronagraph for a certain aperture and order.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">PeriodicOpticalElement</span></code>(input_grid, pitch, …)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">PhaseApodizer</span></code>(phase)</p></td>
+<td><p>A phase-only thin apodizer.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">PhaseRetarder</span></code>(phase_retardation, …)</p></td>
+<td><p>A general phase retarder.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">PolarGrid</span></code>(coords[, weights])</p></td>
+<td><p>A grid representing a two-dimensional Polar coordinate system.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">Propagator</span></code>()</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">PyramidWavefrontSensorEstimator</span></code>(aperture)</p></td>
+<td><p>Estimates the wavefront slopes from pyramid wavefront sensor images.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">PyramidWavefrontSensorOptics</span></code>(input_grid[, …])</p></td>
+<td><p>The optical elements for a pyramid wavefront sensor.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">QuarterWavePlate</span></code>(fast_axis_orientation)</p></td>
+<td><p>A quarter-wave plate.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">RegularCoords</span></code>(delta, dims[, zero])</p></td>
+<td><p>A list of points that have a regular spacing in all dimensions.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">SVD</span></code>(M[, num_modes])</p></td>
+<td><p>The Singular Value Decomposition for the provided matrix.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">SegmentedDeformableMirror</span></code>(segments)</p></td>
+<td><p>A segmented deformable mirror.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">SeparatedCoords</span></code>(separated_coords)</p></td>
+<td><p>A list of points that are separable along each dimension.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">ShackHartmannWavefrontSensorEstimator</span></code>(…[, …])</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">ShackHartmannWavefrontSensorOptics</span></code>(…)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">SimpleVibration</span></code>(mode, amplitude, frequency)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">SingleModeFiber</span></code>(input_grid, mode_field_diameter)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">SingleModeFiberArray</span></code>(input_grid, fiber_grid, …)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">SpectralNoise</span></code>()</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">SpectralNoiseFFT</span></code>(factory, C)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">SpectralNoiseFactory</span></code>(psd, output_grid[, …])</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">SpectralNoiseFactoryFFT</span></code>(psd, output_grid[, …])</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">SpectralNoiseFactoryMultiscale</span></code>(psd, …[, …])</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">SpectralNoiseMultiscale</span></code>(factory, C_1, C_2)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">SphericalMicroLensArray</span></code>(input_grid, …[, …])</p></td>
+<td><p>An even asphere micro-lens array.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">SquareShackHartmannWavefrontSensorOptics</span></code>(…)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">StepIndexFiber</span></code>(core_radius, NA, fiber_length)</p></td>
+<td><p>A step-index fiber.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">SurfaceAberration</span></code>(pupil_grid, ptv, diameter)</p></td>
+<td><p>A surface aberration with a specific power law.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">SurfaceAberrationAtDistance</span></code>(…)</p></td>
+<td><p>A surface at a certain distance from the current plane.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">SurfaceApodizer</span></code>(surface_sag, refractive_index)</p></td>
+<td><p>A transmissive sagged surface optic.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">TipTiltMirror</span></code>(input_grid)</p></td>
+<td><p>A tip-tilt mirror.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">UnstructuredCoords</span></code>(coords)</p></td>
+<td><p>An unstructured list of points.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">VectorApodizingPhasePlate</span></code>(phase_pattern[, …])</p></td>
+<td><p>The vector-Apodizing Phase Plate (vAPP).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">VectorVortexCoronagraph</span></code>(charge[, lyot_stop, …])</p></td>
+<td><p>An vector vortex coronagraph.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">VectorZernikeWavefrontSensorOptics</span></code>(input_grid)</p></td>
+<td><p>The optical elements for a vector-Zernike wavefront sensor.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">VortexCoronagraph</span></code>(input_grid, charge[, …])</p></td>
+<td><p>An optical vortex coronagraph.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">Wavefront</span></code>(electric_field[, wavelength, …])</p></td>
+<td><p>A physical wavefront in an optical system.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">WavefrontSensorEstimator</span></code>()</p></td>
+<td><p>The estimator for a wavefront sensor.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">WavefrontSensorOptics</span></code>(optical_elements)</p></td>
+<td><p>The optics for a wavefront sensor.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">ZernikeWavefrontSensorEstimator</span></code>(aperture, …)</p></td>
+<td><p>Estimates the wavefront slopes from pyramid wavefront sensor images.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">ZernikeWavefrontSensorOptics</span></code>(input_grid[, …])</p></td>
+<td><p>The optical elements for a Zernike wavefront sensor.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="aplc_optimization.Inputs_Generation.GPI_Inputs_Generation.GPI_inputs_gen.html" class="btn btn-neutral float-right" title="GPI_inputs_gen" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="aplc_optimization.Inputs_Generation.LUVOIR_Inputs_Generation.make_luvoir_lyot_stop.html" class="btn btn-neutral float-left" title="make_luvoir_lyot_stop" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Bryony Nickson
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

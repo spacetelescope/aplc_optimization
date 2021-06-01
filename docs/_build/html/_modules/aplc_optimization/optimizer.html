@@ -1,0 +1,700 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>aplc_optimization.optimizer &mdash; aplc_optimization  documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/logo.jpg"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/stsci.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/stsci.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/stsci.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+            <a href="../../index.html" class="icon icon-home"> aplc_optimization
+            
+            <img src="../../_static/stsci_pri_combo_mark_white.png" class="logo" />
+          </a>
+
+          
+            
+            
+          
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+  
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installing.html">Requirements &amp; Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../server.html">Using STScI Linux Servers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../workflow.html">Design Survey Workflow</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Detailed API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../api/aplc.html"><code class="docutils literal notranslate"><span class="pre">aplc</span></code> Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/survey.html"><code class="docutils literal notranslate"><span class="pre">survey</span></code> Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/optimizer.html"><code class="docutils literal notranslate"><span class="pre">optimizer</span></code> Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/HiCAT_Inputs_Generation.html"><code class="docutils literal notranslate"><span class="pre">Inputs_Generation.GPI_Inputs_Generation</span></code> Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/LUVOIR_Inputs_Generation.html"><code class="docutils literal notranslate"><span class="pre">Inputs_Generation.GPI_Inputs_Generation</span></code> Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/GPI_Inputs_Generation.html"><code class="docutils literal notranslate"><span class="pre">Inputs_Generation.GPI_Inputs_Generation</span></code> Module</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">aplc_optimization</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+      <li>aplc_optimization.optimizer</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for aplc_optimization.optimizer</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">os</span>
+
+<span class="kn">import</span> <span class="nn">gurobipy</span> <span class="k">as</span> <span class="nn">gp</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">hcipy</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">scipy.ndimage.morphology</span> <span class="kn">import</span> <span class="n">grey_erosion</span><span class="p">,</span> <span class="n">grey_dilation</span>
+
+
+<div class="viewcode-block" id="calculate_pixels_to_optimize"><a class="viewcode-back" href="../../api/aplc_optimization.optimizer.calculate_pixels_to_optimize.html#aplc_optimization.optimizer.calculate_pixels_to_optimize">[docs]</a><span class="k">def</span> <span class="nf">calculate_pixels_to_optimize</span><span class="p">(</span><span class="n">last_optim</span><span class="p">,</span> <span class="n">pupil_subsampled</span><span class="p">,</span> <span class="n">edge_width_for_prior</span><span class="p">):</span>
+	<span class="sd">&quot;&quot;&quot;Calculate the pixels to be used for the optimization for the adaptive algorithm.</span>
+<span class="sd">    The exact selection of the pixels to be taken into account depends on future research.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    last_optim : Field</span>
+<span class="sd">        The previously-optimized apodizer.</span>
+<span class="sd">    pupil_subsampled : Field</span>
+<span class="sd">        The telescope pupil subsampled to the same resolution as `last_optim`.</span>
+<span class="sd">    edge_pixels_for_prior : int</span>
+<span class="sd">        The number of pixels along an edge.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    Field</span>
+<span class="sd">        A boolean mask to indicate which pixels to take into account.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+	<span class="k">if</span> <span class="n">last_optim</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+		<span class="k">return</span> <span class="n">pupil_subsampled</span> <span class="o">&gt;</span> <span class="mi">0</span>
+
+	<span class="k">if</span> <span class="n">edge_width_for_prior</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+		<span class="n">structure</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]])</span>
+	<span class="k">elif</span> <span class="n">edge_width_for_prior</span> <span class="o">==</span> <span class="mi">4</span><span class="p">:</span>
+		<span class="n">structure</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]])</span>
+	<span class="k">elif</span> <span class="n">edge_width_for_prior</span> <span class="o">==</span> <span class="mi">6</span><span class="p">:</span>
+		<span class="n">structure</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]])</span>
+	<span class="k">else</span><span class="p">:</span>
+		<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The number of edge pixels for prior is not allowed. It needs to be in [2, 4, 6].&#39;</span><span class="p">)</span>
+		<span class="n">exit</span><span class="p">()</span>
+
+	<span class="n">a</span> <span class="o">=</span> <span class="p">(</span><span class="n">grey_dilation</span><span class="p">(</span><span class="n">last_optim</span><span class="o">.</span><span class="n">shaped</span><span class="p">,</span> <span class="n">structure</span><span class="o">=</span><span class="n">structure</span><span class="p">)</span> <span class="o">-</span> <span class="n">grey_erosion</span><span class="p">(</span><span class="n">last_optim</span><span class="o">.</span><span class="n">shaped</span><span class="p">,</span> <span class="n">structure</span><span class="o">=</span><span class="n">structure</span><span class="p">))</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span> <span class="o">-</span> <span class="mi">2</span>
+	<span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mf">1e-3</span>
+	<span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">logical_and</span><span class="p">(</span><span class="n">last_optim</span> <span class="o">&lt;</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="mf">1e-3</span><span class="p">),</span> <span class="n">last_optim</span> <span class="o">&gt;</span> <span class="mf">1e-3</span><span class="p">)</span>
+	<span class="n">c</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">logical_or</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+
+	<span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">logical_and</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">pupil_subsampled</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="optimize_aplc"><a class="viewcode-back" href="../../api/aplc_optimization.optimizer.optimize_aplc.html#aplc_optimization.optimizer.optimize_aplc">[docs]</a><span class="k">def</span> <span class="nf">optimize_aplc</span><span class="p">(</span><span class="n">pupil</span><span class="p">,</span> <span class="n">focal_plane_mask</span><span class="p">,</span> <span class="n">lyot_stops</span><span class="p">,</span> <span class="n">dark_zone_mask</span><span class="p">,</span> <span class="n">wavelengths</span><span class="p">,</span> <span class="n">contrast</span><span class="p">,</span>
+				  <span class="n">starting_scale</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ending_scale</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">force_no_x_symmetry</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">force_no_y_symmetry</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+				  <span class="n">force_no_hermitian_symmetry</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">maximize_planet_throughput</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">num_throughput_iterations</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+				  <span class="n">initial_throughput_estimate</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">edge_width_for_prior</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">solver_num_threads</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">solver_crossover</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+				  <span class="n">solver_method</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+	<span class="sd">&quot;&quot;&quot;Optimize an APLC with a (optional) iterative algorithm taking into account x and/or y mirror symemtries.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    pupil : Field</span>
+<span class="sd">        The telescope pupil</span>
+<span class="sd">    focal_plane_mask : Field</span>
+<span class="sd">        The focal plane mask of the APLC. The grid is assumed to be in lambda_0/D.</span>
+<span class="sd">    lyot_stops : list of Fields</span>
+<span class="sd">        A list of the Lyot stops used in the optimization problem.</span>
+<span class="sd">    dark_zone_mask : Fiel</span>
+<span class="sd">        A binary field indicating which pixels belong to the dark zone.</span>
+<span class="sd">    wavelengths : array_like</span>
+<span class="sd">        An array of wavelengths as fractions of lambda_0.</span>
+<span class="sd">    contrast : scalar</span>
+<span class="sd">        The contrast that needs to be achieved in the dark zone.</span>
+<span class="sd">    starting_scale : int</span>
+<span class="sd">        The number of pixels per unit cell for the initial solution. This is used for the</span>
+<span class="sd">        adaptive algorithm. It must be a power of 2 times the `ending_scale`.</span>
+<span class="sd">    ending_scale : int</span>
+<span class="sd">        The number of pixels per unit cell for the final solution. If this is the same as `starting_scale`,</span>
+<span class="sd">        the adaptive algorithm is essentially turned off.</span>
+<span class="sd">    force_no_x_symmetry : boolean</span>
+<span class="sd">        Force the algorithm to ignore any x mirror symmetry that might exist in the problem.</span>
+<span class="sd">    force_no_y_symmetry : boolean</span>
+<span class="sd">        Force the algorithm to ignore any y mirror symmetry that might exist in the problem.</span>
+<span class="sd">    force_no_hermitian_symmetry : boolean</span>
+<span class="sd">        Force the algorithm to ignore the (always present) Hermitian symmetry in the problem.</span>
+<span class="sd">    maximize_planet_throughput : boolean</span>
+<span class="sd">        If this is True, the throughput through the apodizer times Lyot stop is maximized, a metric for</span>
+<span class="sd">        planet throughput at large angular separations. Otherwise the throughput of the apodizer is</span>
+<span class="sd">        maximized.</span>
+<span class="sd">    num_throughput_iterations : integer</span>
+<span class="sd">        The number of iterations to let the throughput factor converge. Too few iterations and the contrast might be</span>
+<span class="sd">        a fraction too high, too high and you are wasting computation time. Setting this to 1 turns iterations off.</span>
+<span class="sd">    initial_throughput_estimate : float</span>
+<span class="sd">        The expected relative throughput of the coronagraph compared to without apodizer or focal-plane</span>
+<span class="sd">        mask (but including Lyot stop). A good estimate (for example from a lower resolution optimization)</span>
+<span class="sd">        can often eliminate the need for throughput iterations altogether.</span>
+<span class="sd">    edge_width_for_prior : [2,4,6]</span>
+<span class="sd">        The width of the optimized regions along the edges. This is only used for the adaptive algorithm.</span>
+<span class="sd">    solver_num_threads : integer</span>
+<span class="sd">        The number of threads that Gurobi is allowed to use. A value of 0 indicates that Gurobi is free to</span>
+<span class="sd">        choose the number.</span>
+<span class="sd">    solver_crossover : integer</span>
+<span class="sd">        The crossover strategy that Gurobi needs to use. See Gurobi documentation for more information.</span>
+<span class="sd">    solver_method : integer</span>
+<span class="sd">        The algorithm that Gurobi needs to use. See Gurobi documentation for more information.</span>
+<span class="sd">    debug : boolean</span>
+<span class="sd">        Output specific debugging information to a debug folder. This is mostly used to monitor the adaptive algorithm.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    Field</span>
+<span class="sd">        The optimized apodizer for the APLC. This has not been multiplied by the telescope pupil.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+	<span class="k">if</span> <span class="n">debug</span><span class="p">:</span>
+		<span class="n">debug_dir</span> <span class="o">=</span> <span class="s1">&#39;./debug/&#39;</span>
+		<span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">debug_dir</span><span class="p">)</span>
+
+		<span class="kn">import</span> <span class="nn">matplotlib</span> <span class="k">as</span> <span class="nn">mpl</span>
+		<span class="n">mpl</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;Agg&#39;</span><span class="p">)</span>
+		<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+	<span class="n">pupil_grid</span> <span class="o">=</span> <span class="n">pupil</span><span class="o">.</span><span class="n">grid</span>
+	<span class="n">focal_grid</span> <span class="o">=</span> <span class="n">dark_zone_mask</span><span class="o">.</span><span class="n">grid</span>
+	<span class="c1"># Create Lyot coronagraph</span>
+	<span class="n">aplc</span> <span class="o">=</span> <span class="n">LyotCoronagraph</span><span class="p">(</span><span class="n">pupil_grid</span><span class="p">,</span> <span class="n">focal_plane_mask</span><span class="p">)</span>
+	<span class="n">focal_grid_0</span> <span class="o">=</span> <span class="n">CartesianGrid</span><span class="p">(</span><span class="n">UnstructuredCoords</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.0</span><span class="p">]),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.0</span><span class="p">])]),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.0</span><span class="p">]))</span>
+	<span class="c1"># Propogate wavefront</span>
+	<span class="n">prop_0</span> <span class="o">=</span> <span class="n">FraunhoferPropagator</span><span class="p">(</span><span class="n">pupil_grid</span><span class="p">,</span> <span class="n">focal_grid_0</span><span class="p">)</span>
+
+	<span class="n">prior</span> <span class="o">=</span> <span class="kc">None</span>
+
+	<span class="c1"># Calculate subsamplings</span>
+	<span class="n">num_subsamplings</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log2</span><span class="p">(</span><span class="n">starting_scale</span> <span class="o">/</span> <span class="n">ending_scale</span><span class="p">)))</span> <span class="o">+</span> <span class="mi">1</span>
+	<span class="n">subsamplings</span> <span class="o">=</span> <span class="n">ending_scale</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">**</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">num_subsamplings</span><span class="p">)[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+	<span class="c1"># Determine pupil symmetries</span>
+	<span class="n">x_symm_pupil</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">pupil</span><span class="o">.</span><span class="n">shaped</span><span class="p">[:,</span> <span class="p">::</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">pupil</span><span class="o">.</span><span class="n">shaped</span><span class="p">)</span>
+	<span class="n">y_symm_pupil</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">pupil</span><span class="o">.</span><span class="n">shaped</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:],</span> <span class="n">pupil</span><span class="o">.</span><span class="n">shaped</span><span class="p">)</span>
+
+	<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Telescope pupil:&#39;</span><span class="p">)</span>
+	<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;   Mirror symmetry in x: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="s1">&#39;yes&#39;</span> <span class="k">if</span> <span class="n">x_symm_pupil</span> <span class="k">else</span> <span class="s1">&#39;no&#39;</span><span class="p">))</span>
+	<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;   Mirror symmetry in y: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="s1">&#39;yes&#39;</span> <span class="k">if</span> <span class="n">y_symm_pupil</span> <span class="k">else</span> <span class="s1">&#39;no&#39;</span><span class="p">))</span>
+	<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+
+	<span class="c1"># Determine lyot stop symmetries</span>
+	<span class="n">x_symm_lyot_stops</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">lyot_stop</span><span class="o">.</span><span class="n">shaped</span><span class="p">[:,</span> <span class="p">::</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">lyot_stop</span><span class="o">.</span><span class="n">shaped</span><span class="p">)</span> <span class="k">for</span> <span class="n">lyot_stop</span> <span class="ow">in</span> <span class="n">lyot_stops</span><span class="p">]</span>
+	<span class="n">y_symm_lyot_stops</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">lyot_stop</span><span class="o">.</span><span class="n">shaped</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:],</span> <span class="n">lyot_stop</span><span class="o">.</span><span class="n">shaped</span><span class="p">)</span> <span class="k">for</span> <span class="n">lyot_stop</span> <span class="ow">in</span> <span class="n">lyot_stops</span><span class="p">]</span>
+
+	<span class="n">lyot_stop_duplication</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">lyot_stops</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;bool&#39;</span><span class="p">)</span>
+	<span class="n">lyot_stop_duplication_reason</span> <span class="o">=</span> <span class="p">[[]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">lyot_stops</span><span class="p">))]</span>
+
+	<span class="n">x_symm</span> <span class="o">=</span> <span class="n">x_symm_pupil</span>
+	<span class="n">y_symm</span> <span class="o">=</span> <span class="n">y_symm_pupil</span>
+
+	<span class="c1"># X mirror symmetry for Lyot stops</span>
+	<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">lyot_stops</span><span class="p">):</span>
+		<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Lyot stop #</span><span class="si">%d</span><span class="s1">:&#39;</span> <span class="o">%</span> <span class="n">i</span><span class="p">)</span>
+
+		<span class="k">if</span> <span class="n">lyot_stop_duplication</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+			<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;   Will be ignored due to symmetries with Lyot stops #&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">lyot_stop_duplication_reason</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
+			<span class="k">continue</span>
+
+		<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;   Mirror symmetry in x: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="s1">&#39;yes&#39;</span> <span class="k">if</span> <span class="n">x_symm_lyot_stops</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">else</span> <span class="s1">&#39;no&#39;</span><span class="p">))</span>
+
+		<span class="k">if</span> <span class="n">x_symm_pupil</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">x_symm_lyot_stops</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+			<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;   Searching for mirror symmetric Lyot stops in x...&#39;</span><span class="p">)</span>
+			<span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">lyot_stops</span><span class="p">):</span>
+				<span class="k">if</span> <span class="n">j</span> <span class="o">&lt;=</span> <span class="n">i</span><span class="p">:</span>
+					<span class="k">continue</span>
+
+				<span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">shaped</span><span class="p">[:,</span> <span class="p">::</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">b</span><span class="o">.</span><span class="n">shaped</span><span class="p">):</span>
+					<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;      Found Lyot stop #</span><span class="si">%d</span><span class="s1"> to fit.&#39;</span> <span class="o">%</span> <span class="n">j</span><span class="p">)</span>
+					<span class="n">lyot_stop_duplication</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+					<span class="n">lyot_stop_duplication_reason</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+					<span class="n">x_symm</span> <span class="o">=</span> <span class="kc">True</span>
+					<span class="k">break</span>
+			<span class="k">else</span><span class="p">:</span>
+				<span class="nb">print</span><span class="p">(</span>
+					<span class="s1">&#39;      No Lyot stop found with this symmetry. This breaks the mirror symmetry in x of the optimization.&#39;</span><span class="p">)</span>
+				<span class="n">x_symm</span> <span class="o">=</span> <span class="kc">False</span>
+
+	<span class="c1"># Y mirror symmetry for Lyot stops</span>
+	<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">lyot_stops</span><span class="p">):</span>
+		<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Lyot stop #</span><span class="si">%d</span><span class="s1">:&#39;</span> <span class="o">%</span> <span class="n">i</span><span class="p">)</span>
+
+		<span class="k">if</span> <span class="n">lyot_stop_duplication</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+			<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;   Will be ignored due to symmetries with Lyot stops #&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">lyot_stop_duplication_reason</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
+			<span class="k">continue</span>
+
+		<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;   Mirror symmetry in y: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="s1">&#39;yes&#39;</span> <span class="k">if</span> <span class="n">y_symm_lyot_stops</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">else</span> <span class="s1">&#39;no&#39;</span><span class="p">))</span>
+
+		<span class="k">if</span> <span class="n">y_symm_pupil</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">y_symm_lyot_stops</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+			<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;   Searching for mirror symmetric Lyot stops in y...&#39;</span><span class="p">)</span>
+			<span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">lyot_stops</span><span class="p">):</span>
+				<span class="k">if</span> <span class="n">j</span> <span class="o">&lt;=</span> <span class="n">i</span><span class="p">:</span>
+					<span class="k">continue</span>
+
+				<span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">shaped</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:],</span> <span class="n">b</span><span class="o">.</span><span class="n">shaped</span><span class="p">):</span>
+					<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;      Found Lyot stop #</span><span class="si">%d</span><span class="s1"> to fit.&#39;</span> <span class="o">%</span> <span class="n">j</span><span class="p">)</span>
+					<span class="n">lyot_stop_duplication</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+					<span class="n">lyot_stop_duplication_reason</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+					<span class="n">y_symm</span> <span class="o">=</span> <span class="kc">True</span>
+					<span class="k">break</span>
+			<span class="k">else</span><span class="p">:</span>
+				<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;      No Lyot stop found with this symmetry. This breaks the mirror symmetry in y of the optimization.&#39;</span><span class="p">)</span>
+				<span class="n">y_symm</span> <span class="o">=</span> <span class="kc">False</span>
+	<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+	<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Complete APLC:&#39;</span><span class="p">)</span>
+	<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;   Mirror symmetry in x: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="s1">&#39;yes&#39;</span> <span class="k">if</span> <span class="n">x_symm</span> <span class="k">else</span> <span class="s1">&#39;no&#39;</span><span class="p">))</span>
+	<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;   Mirror symmetry in y: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="s1">&#39;yes&#39;</span> <span class="k">if</span> <span class="n">y_symm</span> <span class="k">else</span> <span class="s1">&#39;no&#39;</span><span class="p">))</span>
+
+	<span class="k">if</span> <span class="n">force_no_x_symmetry</span><span class="p">:</span>
+		<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;   The user forced me to ignore mirror-symmetries in x.&#39;</span><span class="p">)</span>
+		<span class="n">x_symm</span> <span class="o">=</span> <span class="kc">False</span>
+	<span class="k">if</span> <span class="n">force_no_y_symmetry</span><span class="p">:</span>
+		<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;   The user forced me to ignore mirror-symmetries in y.&#39;</span><span class="p">)</span>
+		<span class="n">y_symm</span> <span class="o">=</span> <span class="kc">False</span>
+	<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+
+	<span class="c1"># Find number of constraints per focal-plane point</span>
+	<span class="n">num_constraints_per_focal_point</span> <span class="o">=</span> <span class="p">[]</span>
+	<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">lyot_stop</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">lyot_stops</span><span class="p">):</span>
+		<span class="k">if</span> <span class="n">lyot_stop_duplication</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+			<span class="c1"># Lyot stop already taken into account due to symmetries</span>
+			<span class="n">num_constraints_per_focal_point</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+		<span class="k">elif</span> <span class="p">(</span><span class="n">x_symm</span> <span class="ow">and</span> <span class="n">x_symm_lyot_stops</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="ow">and</span> <span class="p">(</span><span class="n">y_symm</span> <span class="ow">and</span> <span class="n">y_symm_lyot_stops</span><span class="p">[</span><span class="n">i</span><span class="p">]):</span>
+			<span class="c1"># Only constrain real part</span>
+			<span class="n">num_constraints_per_focal_point</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+		<span class="k">else</span><span class="p">:</span>
+			<span class="c1"># Constrain both real and imag part</span>
+			<span class="n">num_constraints_per_focal_point</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+	<span class="n">num_constraints_per_focal_point</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">num_constraints_per_focal_point</span><span class="p">)</span>
+
+	<span class="c1"># Calculate dark zone masks, and propagators for each Lyot stops.</span>
+	<span class="c1"># These can be different due to the symmetry properties of each Lyot stop,</span>
+	<span class="c1"># and thus need to be calculated separately.</span>
+	<span class="n">dark_zone_masks</span> <span class="o">=</span> <span class="p">[]</span>
+	<span class="n">dark_zone_masks_full</span> <span class="o">=</span> <span class="p">[]</span>
+	<span class="n">propagators</span> <span class="o">=</span> <span class="p">[]</span>
+	<span class="n">num_focal_points</span> <span class="o">=</span> <span class="p">[]</span>
+	<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">lyot_stop</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">lyot_stops</span><span class="p">):</span>
+		<span class="k">if</span> <span class="n">lyot_stop_duplication</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+			<span class="c1"># Lyot stop was removed due to symmetries</span>
+			<span class="n">dark_zone_masks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+			<span class="n">dark_zone_masks_full</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">focal_grid</span><span class="o">.</span><span class="n">size</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;bool&#39;</span><span class="p">))</span>
+			<span class="n">propagators</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+			<span class="n">num_focal_points</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+			<span class="k">continue</span>
+
+		<span class="c1"># Separated coords for sub focal grid</span>
+		<span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">focal_grid</span><span class="o">.</span><span class="n">separated_coords</span>
+
+		<span class="c1"># Hermitian symmetry (all planes are real)</span>
+		<span class="k">if</span> <span class="ow">not</span> <span class="n">force_no_hermitian_symmetry</span><span class="p">:</span>
+			<span class="n">m</span> <span class="o">=</span> <span class="n">focal_grid</span><span class="o">.</span><span class="n">x</span> <span class="o">&gt;</span> <span class="mi">0</span>
+			<span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">x</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]</span>
+
+		<span class="c1"># Only optimize quarter of roi is mirror symmetric in one or two axes</span>
+		<span class="k">if</span> <span class="p">(</span><span class="n">x_symm</span> <span class="ow">and</span> <span class="n">x_symm_lyot_stops</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="ow">or</span> <span class="p">(</span><span class="n">y_symm</span> <span class="ow">and</span> <span class="n">y_symm_lyot_stops</span><span class="p">[</span><span class="n">i</span><span class="p">]):</span>
+			<span class="n">m</span> <span class="o">*=</span> <span class="n">focal_grid</span><span class="o">.</span><span class="n">y</span> <span class="o">&gt;</span> <span class="mi">0</span>
+			<span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="n">y</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]</span>
+
+		<span class="c1"># Make grid with subset of focal grid</span>
+		<span class="n">focal_grid_sub</span> <span class="o">=</span> <span class="n">CartesianGrid</span><span class="p">(</span><span class="n">SeparatedCoords</span><span class="p">((</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)))</span>
+		<span class="c1"># focal_grid_sub = focal_grid</span>
+
+		<span class="c1"># Make propagator for this Lyot stop</span>
+		<span class="n">propagators</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">FraunhoferPropagator</span><span class="p">(</span><span class="n">pupil_grid</span><span class="p">,</span> <span class="n">focal_grid_sub</span><span class="p">))</span>
+
+		<span class="c1"># Recalculate dark zone mask for the sub focal grid</span>
+		<span class="n">dark_zone_masks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Field</span><span class="p">(</span><span class="n">dark_zone_mask</span><span class="p">[</span><span class="n">m</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">],</span> <span class="n">focal_grid_sub</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;bool&#39;</span><span class="p">))</span>
+		<span class="n">dark_zone_masks_full</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">dark_zone_mask</span> <span class="o">*</span> <span class="n">m</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;bool&#39;</span><span class="p">))</span>
+		<span class="c1"># dark_zone_masks.append((dark_zone_mask * m).astype(&#39;bool&#39;))</span>
+
+		<span class="c1"># Calculating number of focal points</span>
+		<span class="n">num_focal_points</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">dark_zone_masks</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])))</span>
+
+	<span class="n">num_focal_points</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">num_focal_points</span><span class="p">)</span>
+
+	<span class="c1"># Calculate number of constraints per wavelength</span>
+	<span class="n">m</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">num_constraints_per_focal_point</span> <span class="o">*</span> <span class="n">num_focal_points</span><span class="p">))</span>
+	<span class="n">cum_mms</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(([</span><span class="mi">0</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">num_constraints_per_focal_point</span> <span class="o">*</span> <span class="n">num_focal_points</span><span class="p">)))</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;int&#39;</span><span class="p">)</span>
+
+	<span class="n">throughput_estimate</span> <span class="o">=</span> <span class="n">initial_throughput_estimate</span>
+
+	<span class="c1"># Iterate from lowest to highest resolution (=highest to lowest subsampling)</span>
+	<span class="k">for</span> <span class="n">subsampling_index</span><span class="p">,</span> <span class="n">subsampling</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">subsamplings</span><span class="p">):</span>
+		<span class="c1"># Calculated subsampled pupil and lyot stops</span>
+		<span class="n">pupil_subsampled</span> <span class="o">=</span> <span class="n">subsample_field</span><span class="p">(</span><span class="n">pupil</span><span class="p">,</span> <span class="n">subsampling</span><span class="p">)</span>
+		<span class="n">lyot_stops_subsampled</span> <span class="o">=</span> <span class="p">[</span><span class="n">subsample_field</span><span class="p">(</span><span class="n">lyot_stop</span><span class="p">,</span> <span class="n">subsampling</span><span class="p">)</span> <span class="k">for</span> <span class="n">lyot_stop</span> <span class="ow">in</span> <span class="n">lyot_stops</span><span class="p">]</span>
+		<span class="n">pupil_grid_subsampled</span> <span class="o">=</span> <span class="n">pupil_subsampled</span><span class="o">.</span><span class="n">grid</span>
+
+		<span class="c1"># Calculate which pixels belong to which superpixel</span>
+		<span class="n">inds</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">pupil_grid</span><span class="o">.</span><span class="n">size</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span>
+			<span class="p">(</span><span class="n">pupil_grid</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">//</span> <span class="n">subsampling</span><span class="p">,</span> <span class="n">subsampling</span><span class="p">,</span> <span class="n">pupil_grid</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">//</span> <span class="n">subsampling</span><span class="p">,</span> <span class="n">subsampling</span><span class="p">))</span>
+		<span class="n">inds</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">swapaxes</span><span class="p">(</span><span class="n">inds</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="n">pupil_grid_subsampled</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">pupil_grid_subsampled</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+												<span class="o">-</span><span class="mi">1</span><span class="p">))</span>  <span class="c1"># .reshape((pupil_grid.size//(subsampling**2), -1))</span>
+
+		<span class="c1"># Apply x,y-mirror-symmetries</span>
+		<span class="n">symmetry_mask</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">pupil_grid_subsampled</span><span class="o">.</span><span class="n">size</span><span class="p">),</span> <span class="n">pupil_grid_subsampled</span><span class="p">)</span>
+		<span class="k">if</span> <span class="n">x_symm</span><span class="p">:</span>
+			<span class="n">inds</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">inds</span><span class="p">,</span> <span class="n">inds</span><span class="p">[:,</span> <span class="p">::</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:]),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+			<span class="n">symmetry_mask</span> <span class="o">*=</span> <span class="n">pupil_grid_subsampled</span><span class="o">.</span><span class="n">x</span> <span class="o">&lt;</span> <span class="mi">0</span>
+		<span class="k">if</span> <span class="n">y_symm</span><span class="p">:</span>
+			<span class="n">inds</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">inds</span><span class="p">,</span> <span class="n">inds</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+			<span class="n">symmetry_mask</span> <span class="o">*=</span> <span class="n">pupil_grid_subsampled</span><span class="o">.</span><span class="n">y</span> <span class="o">&lt;</span> <span class="mi">0</span>
+
+		<span class="n">symmetry_mask</span> <span class="o">=</span> <span class="n">symmetry_mask</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;bool&#39;</span><span class="p">)</span>
+		<span class="n">inds</span> <span class="o">=</span> <span class="n">inds</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="n">pupil_grid_subsampled</span><span class="o">.</span><span class="n">size</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+
+		<span class="c1"># Upscale last optim to current resolution</span>
+		<span class="n">blind</span> <span class="o">=</span> <span class="n">prior</span> <span class="ow">is</span> <span class="kc">None</span>
+		<span class="k">if</span> <span class="n">blind</span><span class="p">:</span>
+			<span class="c1"># No prior information; assume totally dark apodizer</span>
+			<span class="n">last_optim</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">pupil_grid_subsampled</span><span class="o">.</span><span class="n">size</span><span class="p">),</span> <span class="n">pupil_grid_subsampled</span><span class="p">)</span>
+			<span class="n">prior</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">pupil_grid</span><span class="o">.</span><span class="n">size</span><span class="p">),</span> <span class="n">pupil_grid</span><span class="p">)</span>
+		<span class="k">else</span><span class="p">:</span>
+			<span class="c1"># Upscale prior information by factor 2</span>
+			<span class="n">last_optim</span> <span class="o">=</span> <span class="n">subsample_field</span><span class="p">(</span><span class="n">prior</span><span class="p">,</span> <span class="n">subsampling</span><span class="p">)</span>
+
+		<span class="c1"># Write prior to file</span>
+		<span class="k">if</span> <span class="n">debug</span><span class="p">:</span>
+			<span class="n">write_fits</span><span class="p">(</span><span class="n">prior</span> <span class="o">*</span> <span class="n">pupil</span><span class="p">,</span> <span class="n">debug_dir</span> <span class="o">+</span> <span class="s1">&#39;prior</span><span class="si">%d</span><span class="s1">.fits&#39;</span> <span class="o">%</span> <span class="n">subsampling</span><span class="p">)</span>
+			<span class="n">write_fits</span><span class="p">(</span><span class="n">last_optim</span> <span class="o">*</span> <span class="n">pupil_subsampled</span><span class="p">,</span> <span class="n">debug_dir</span> <span class="o">+</span> <span class="s1">&#39;last_optim</span><span class="si">%d</span><span class="s1">.fits&#39;</span> <span class="o">%</span> <span class="n">subsampling</span><span class="p">)</span>
+
+		<span class="c1"># Get pixels to optimize</span>
+		<span class="n">optimize_mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">logical_and</span><span class="p">(</span><span class="n">calculate_pixels_to_optimize</span><span class="p">(</span><span class="n">last_optim</span><span class="p">,</span> <span class="n">pupil_subsampled</span><span class="p">,</span> <span class="n">edge_width_for_prior</span><span class="p">),</span>
+									   <span class="n">symmetry_mask</span><span class="p">)</span>
+		<span class="k">if</span> <span class="n">blind</span><span class="p">:</span>
+			<span class="n">optimize_mask</span><span class="p">[:]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">logical_and</span><span class="p">(</span><span class="n">pupil_subsampled</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="n">symmetry_mask</span><span class="p">)</span>
+		<span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">optimize_mask</span> <span class="o">*</span> <span class="n">symmetry_mask</span><span class="p">))</span>
+
+		<span class="c1"># Write optimize mask to file</span>
+		<span class="k">if</span> <span class="n">debug</span><span class="p">:</span>
+			<span class="n">write_fits</span><span class="p">(</span><span class="n">optimize_mask</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;int&#39;</span><span class="p">),</span> <span class="n">debug_dir</span> <span class="o">+</span> <span class="s1">&#39;optimize_mask</span><span class="si">%d</span><span class="s1">.fits&#39;</span> <span class="o">%</span> <span class="n">subsampling</span><span class="p">)</span>
+
+		<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Starting optimization at scale </span><span class="si">%d</span><span class="s1"> with </span><span class="si">%d</span><span class="s1"> variables and </span><span class="si">%d</span><span class="s1"> constraints.&#39;</span> <span class="o">%</span> <span class="p">(</span>
+			<span class="n">subsampling</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">m</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">wavelengths</span><span class="p">)))</span>
+		<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Creating model...&#39;</span><span class="p">)</span>
+
+		<span class="c1"># Create Gurobi model</span>
+		<span class="n">model</span> <span class="o">=</span> <span class="n">gp</span><span class="o">.</span><span class="n">Model</span><span class="p">(</span><span class="s1">&#39;lp&#39;</span><span class="p">)</span>
+		<span class="n">model</span><span class="o">.</span><span class="n">Params</span><span class="o">.</span><span class="n">Threads</span> <span class="o">=</span> <span class="n">solver_num_threads</span>
+		<span class="n">model</span><span class="o">.</span><span class="n">Params</span><span class="o">.</span><span class="n">Crossover</span> <span class="o">=</span> <span class="n">solver_crossover</span>
+		<span class="n">model</span><span class="o">.</span><span class="n">Params</span><span class="o">.</span><span class="n">Method</span> <span class="o">=</span> <span class="n">solver_method</span>
+		<span class="n">x_vars</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">addVars</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">lb</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ub</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+		<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Calculating and adding constraints...&#39;</span><span class="p">)</span>
+
+		<span class="c1"># Create problem matrix for one wavelength but for all Lyot stops</span>
+		<span class="n">M</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
+		<span class="n">base_electric_fields</span> <span class="o">=</span> <span class="p">[]</span>
+		<span class="n">contrast_requirements</span> <span class="o">=</span> <span class="p">[]</span>
+		<span class="n">constraints</span> <span class="o">=</span> <span class="p">[]</span>
+
+		<span class="c1"># Add constraints for each wavelength</span>
+		<span class="k">for</span> <span class="n">wl_i</span><span class="p">,</span> <span class="n">wavelength</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">wavelengths</span><span class="p">):</span>
+			<span class="n">j</span> <span class="o">=</span> <span class="mi">0</span>
+			<span class="n">x0</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">pupil_grid</span><span class="o">.</span><span class="n">size</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;complex&#39;</span><span class="p">),</span> <span class="n">pupil_grid</span><span class="p">)</span>
+			<span class="n">x</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">pupil_grid</span><span class="o">.</span><span class="n">size</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;complex&#39;</span><span class="p">),</span> <span class="n">pupil_grid</span><span class="p">)</span>
+
+			<span class="c1"># Calculate norm electric field for each Lyot stop</span>
+			<span class="n">norms</span> <span class="o">=</span> <span class="p">[]</span>
+			<span class="k">for</span> <span class="n">lyot_stop</span> <span class="ow">in</span> <span class="n">lyot_stops</span><span class="p">:</span>
+				<span class="n">norms</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">prop_0</span><span class="p">(</span><span class="n">Wavefront</span><span class="p">(</span><span class="n">pupil</span> <span class="o">*</span> <span class="n">lyot_stop</span><span class="p">,</span> <span class="n">wavelength</span><span class="p">))</span><span class="o">.</span><span class="n">electric_field</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+			<span class="k">for</span> <span class="n">ind</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">to_optimize</span><span class="p">,</span> <span class="n">masked_by_symmetry</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">inds</span><span class="p">,</span> <span class="n">last_optim</span><span class="p">,</span> <span class="n">optimize_mask</span><span class="p">,</span> <span class="n">symmetry_mask</span><span class="p">):</span>
+				<span class="k">if</span> <span class="ow">not</span> <span class="n">to_optimize</span><span class="p">:</span>
+					<span class="c1"># Do not optimize this pixel</span>
+					<span class="c1"># Add to accumulator pupil-plane wavefront</span>
+					<span class="k">if</span> <span class="n">masked_by_symmetry</span><span class="p">:</span>
+						<span class="n">x0</span><span class="p">[</span><span class="n">ind</span><span class="p">]</span> <span class="o">+=</span> <span class="n">pupil</span><span class="p">[</span><span class="n">ind</span><span class="p">]</span> <span class="o">*</span> <span class="n">amp</span>
+				<span class="k">else</span><span class="p">:</span>
+					<span class="n">x</span><span class="p">[:]</span> <span class="o">=</span> <span class="mi">0</span>
+					<span class="n">x</span><span class="p">[</span><span class="n">ind</span><span class="p">]</span> <span class="o">=</span> <span class="n">pupil</span><span class="p">[</span><span class="n">ind</span><span class="p">]</span>
+
+					<span class="c1"># Calculate field before the Lyot stop</span>
+					<span class="n">lyot</span> <span class="o">=</span> <span class="n">aplc</span><span class="p">(</span><span class="n">Wavefront</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">wavelength</span><span class="p">))</span>
+
+					<span class="n">k</span> <span class="o">=</span> <span class="mi">0</span>
+					<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">lyot_stop</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">lyot_stops</span><span class="p">):</span>
+						<span class="k">if</span> <span class="n">num_constraints_per_focal_point</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+							<span class="k">continue</span>
+
+						<span class="c1"># Apply the Lyot stop and get focal-plane electric field</span>
+						<span class="n">lyot_copy</span> <span class="o">=</span> <span class="n">lyot</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+						<span class="n">lyot_copy</span><span class="o">.</span><span class="n">electric_field</span> <span class="o">*=</span> <span class="n">lyot_stop</span>
+						<span class="n">E</span> <span class="o">=</span> <span class="n">propagators</span><span class="p">[</span><span class="n">i</span><span class="p">](</span><span class="n">lyot_copy</span><span class="p">)</span><span class="o">.</span><span class="n">electric_field</span><span class="p">[</span><span class="n">dark_zone_masks</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span>
+						<span class="n">E</span> <span class="o">/=</span> <span class="n">norms</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+
+						<span class="c1"># Add only imaginary or both imaginary and real constraints depending on symmetry</span>
+						<span class="k">if</span> <span class="n">num_constraints_per_focal_point</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+							<span class="n">M</span><span class="p">[</span><span class="n">cum_mms</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span><span class="n">cum_mms</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">],</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">E</span><span class="o">.</span><span class="n">real</span>
+						<span class="k">if</span> <span class="n">num_constraints_per_focal_point</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+							<span class="n">M</span><span class="p">[</span><span class="n">cum_mms</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span><span class="n">cum_mms</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">num_focal_points</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">E</span><span class="o">.</span><span class="n">real</span> <span class="o">+</span> <span class="n">E</span><span class="o">.</span><span class="n">imag</span>
+							<span class="n">M</span><span class="p">[</span><span class="n">cum_mms</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">num_focal_points</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span><span class="n">cum_mms</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">],</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">E</span><span class="o">.</span><span class="n">real</span> <span class="o">-</span> <span class="n">E</span><span class="o">.</span><span class="n">imag</span>
+
+						<span class="n">k</span> <span class="o">+=</span> <span class="n">num_constraints_per_focal_point</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+					<span class="n">j</span> <span class="o">+=</span> <span class="mi">1</span>
+
+					<span class="k">if</span> <span class="n">j</span> <span class="o">%</span> <span class="mi">1000</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+						<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Wavelength </span><span class="si">%d</span><span class="s1">/</span><span class="si">%d</span><span class="s1">; Variable </span><span class="si">%d</span><span class="s1">/</span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">wl_i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">wavelengths</span><span class="p">),</span> <span class="n">j</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
+
+			<span class="c1"># Display x0</span>
+			<span class="k">if</span> <span class="n">debug</span><span class="p">:</span>
+				<span class="n">imshow_field</span><span class="p">(</span><span class="n">x0</span><span class="o">.</span><span class="n">real</span><span class="p">)</span>
+				<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
+				<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">debug_dir</span> <span class="o">+</span> <span class="s1">&#39;base_aperture</span><span class="si">%d</span><span class="s1">.pdf&#39;</span> <span class="o">%</span> <span class="n">subsampling</span><span class="p">)</span>
+				<span class="n">plt</span><span class="o">.</span><span class="n">clf</span><span class="p">()</span>
+
+			<span class="c1"># Calculate base electric field</span>
+			<span class="n">base_electric_field</span> <span class="o">=</span> <span class="p">[]</span>
+			<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">lyot_stop</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">lyot_stops</span><span class="p">):</span>
+				<span class="k">if</span> <span class="n">num_constraints_per_focal_point</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+					<span class="k">continue</span>
+
+				<span class="n">wf</span> <span class="o">=</span> <span class="n">aplc</span><span class="p">(</span><span class="n">Wavefront</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span> <span class="n">wavelength</span><span class="p">))</span>
+				<span class="n">wf</span><span class="o">.</span><span class="n">electric_field</span> <span class="o">*=</span> <span class="n">lyot_stop</span>
+				<span class="n">E</span> <span class="o">=</span> <span class="n">propagators</span><span class="p">[</span><span class="n">i</span><span class="p">](</span><span class="n">wf</span><span class="p">)</span><span class="o">.</span><span class="n">electric_field</span><span class="p">[</span><span class="n">dark_zone_masks</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span>
+				<span class="n">E</span> <span class="o">/=</span> <span class="n">norms</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+
+				<span class="k">if</span> <span class="n">num_constraints_per_focal_point</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+					<span class="n">base_electric_field</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">E</span><span class="o">.</span><span class="n">real</span><span class="p">)</span>
+				<span class="k">if</span> <span class="n">num_constraints_per_focal_point</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+					<span class="n">base_electric_field</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">E</span><span class="o">.</span><span class="n">real</span> <span class="o">+</span> <span class="n">E</span><span class="o">.</span><span class="n">imag</span><span class="p">)</span>
+					<span class="n">base_electric_field</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">E</span><span class="o">.</span><span class="n">real</span> <span class="o">-</span> <span class="n">E</span><span class="o">.</span><span class="n">imag</span><span class="p">)</span>
+			<span class="n">base_electric_field</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span><span class="n">base_electric_field</span><span class="p">)</span>
+			<span class="n">base_electric_fields</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">base_electric_field</span><span class="p">)</span>
+
+			<span class="c1"># Calculate contrast requirement</span>
+			<span class="n">contrast_requirement</span> <span class="o">=</span> <span class="p">[]</span>
+			<span class="k">for</span> <span class="n">p</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">num_focal_points</span><span class="p">,</span> <span class="n">num_constraints_per_focal_point</span><span class="p">,</span> <span class="n">dark_zone_masks_full</span><span class="p">):</span>
+				<span class="n">temp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">focal_grid</span><span class="o">.</span><span class="n">size</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">contrast</span><span class="p">))[</span><span class="n">r</span><span class="p">],</span> <span class="n">q</span><span class="p">)</span>
+				<span class="n">contrast_requirement</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">temp</span><span class="p">)</span>
+			<span class="n">contrast_requirement</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span><span class="n">contrast_requirement</span><span class="p">)</span>
+			<span class="n">contrast_requirements</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">contrast_requirement</span><span class="o">.</span><span class="n">copy</span><span class="p">())</span>
+
+			<span class="n">contrast_requirement</span> <span class="o">*=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">throughput_estimate</span><span class="p">)</span>
+
+			<span class="c1"># Add constraints</span>
+			<span class="k">for</span> <span class="n">ee</span><span class="p">,</span> <span class="n">e0</span><span class="p">,</span> <span class="n">c0</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">base_electric_field</span><span class="p">,</span> <span class="n">contrast_requirement</span><span class="p">):</span>
+				<span class="n">e</span> <span class="o">=</span> <span class="n">gp</span><span class="o">.</span><span class="n">LinExpr</span><span class="p">(</span><span class="n">ee</span><span class="p">,</span> <span class="n">x_vars</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+				<span class="n">c1</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">addConstr</span><span class="p">(</span><span class="n">e</span> <span class="o">&lt;=</span> <span class="p">(</span><span class="n">c0</span> <span class="o">-</span> <span class="n">e0</span><span class="p">))</span>
+				<span class="n">c2</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">addConstr</span><span class="p">(</span><span class="n">e</span> <span class="o">&gt;=</span> <span class="p">(</span><span class="o">-</span><span class="n">c0</span> <span class="o">-</span> <span class="n">e0</span><span class="p">))</span>
+
+				<span class="n">constraints</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="n">c1</span><span class="p">,</span> <span class="n">c2</span><span class="p">])</span>
+
+		<span class="n">base_electric_fields</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span><span class="n">base_electric_fields</span><span class="p">)</span>
+		<span class="n">contrast_requirements</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span><span class="n">contrast_requirements</span><span class="p">)</span>
+
+		<span class="k">del</span> <span class="n">M</span>
+
+		<span class="c1"># Use central Lyot stop for throughput metric (assume that this is the unshifted Lyot stop)</span>
+		<span class="k">if</span> <span class="n">maximize_planet_throughput</span><span class="p">:</span>
+			<span class="n">M_max</span> <span class="o">=</span> <span class="p">(</span><span class="n">pupil_subsampled</span> <span class="o">*</span> <span class="n">lyot_stops_subsampled</span><span class="p">[</span><span class="mi">0</span><span class="p">])[</span><span class="n">optimize_mask</span><span class="p">]</span>
+		<span class="k">else</span><span class="p">:</span>
+			<span class="n">M_max</span> <span class="o">=</span> <span class="n">pupil_subsampled</span><span class="p">[</span><span class="n">optimize_mask</span><span class="p">]</span>
+		<span class="n">obj</span> <span class="o">=</span> <span class="n">gp</span><span class="o">.</span><span class="n">LinExpr</span><span class="p">(</span><span class="n">M_max</span><span class="p">,</span> <span class="n">x_vars</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+		<span class="n">model</span><span class="o">.</span><span class="n">setObjective</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">gp</span><span class="o">.</span><span class="n">GRB</span><span class="o">.</span><span class="n">MAXIMIZE</span><span class="p">)</span>
+
+		<span class="c1"># Optimize model</span>
+		<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Start optimization...&#39;</span><span class="p">)</span>
+		<span class="n">model</span><span class="o">.</span><span class="n">optimize</span><span class="p">()</span>
+		<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Optimization finished!&#39;</span><span class="p">)</span>
+
+		<span class="k">for</span> <span class="n">throughput_iter</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_throughput_iterations</span><span class="p">):</span>
+			<span class="c1"># Extract solution from Gurobi</span>
+			<span class="n">solution</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">x_vars</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">x</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)])</span>
+
+			<span class="c1"># Integrate solution into upsampled old solution</span>
+			<span class="n">sol</span> <span class="o">=</span> <span class="n">prior</span>
+			<span class="n">j</span> <span class="o">=</span> <span class="mi">0</span>
+			<span class="k">for</span> <span class="n">ind</span><span class="p">,</span> <span class="n">to_optimize</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">inds</span><span class="p">,</span> <span class="n">optimize_mask</span><span class="p">):</span>
+				<span class="k">if</span> <span class="n">to_optimize</span><span class="p">:</span>
+					<span class="n">sol</span><span class="p">[</span><span class="n">ind</span><span class="p">]</span> <span class="o">=</span> <span class="n">solution</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+					<span class="n">j</span> <span class="o">+=</span> <span class="mi">1</span>
+			<span class="n">sol</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">sol</span><span class="p">,</span> <span class="n">pupil_grid</span><span class="p">)</span>
+			<span class="n">prior</span> <span class="o">=</span> <span class="n">sol</span>
+
+			<span class="n">throughput_estimate</span> <span class="o">=</span> <span class="p">((</span><span class="n">pupil</span> <span class="o">*</span> <span class="n">prior</span> <span class="o">*</span> <span class="n">lyot_stop</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">/</span> <span class="p">(</span><span class="n">pupil</span> <span class="o">*</span> <span class="n">lyot_stop</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span> <span class="o">**</span> <span class="mi">2</span>
+
+			<span class="c1"># Only do throughput iterations on the first iteration for the adaptive algorithm.</span>
+			<span class="c1"># Doing it on later iterations might make the model infeasible.</span>
+			<span class="c1"># TODO: This might be overkill, but this is to be investigated.</span>
+			<span class="c1"># Also, only modify and reoptimize if this is not the last iteration (mimicing do-while loop).</span>
+			<span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">throughput_iter</span> <span class="o">==</span> <span class="n">num_throughput_iterations</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="ow">and</span> <span class="n">subsampling_index</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+				<span class="c1"># Update throughput estimate and rerun</span>
+				<span class="n">rhs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">base_electric_fields</span><span class="o">.</span><span class="n">size</span> <span class="o">*</span> <span class="mi">2</span><span class="p">)</span>
+				<span class="n">rhs</span><span class="p">[::</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">contrast_requirements</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">throughput_estimate</span><span class="p">)</span> <span class="o">-</span> <span class="n">base_electric_fields</span>
+				<span class="n">rhs</span><span class="p">[</span><span class="mi">1</span><span class="p">::</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="n">contrast_requirements</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">throughput_estimate</span><span class="p">)</span> <span class="o">-</span> <span class="n">base_electric_fields</span>
+				<span class="k">for</span> <span class="n">constr</span><span class="p">,</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">constraints</span><span class="p">,</span> <span class="n">rhs</span><span class="p">):</span>
+					<span class="n">constr</span><span class="o">.</span><span class="n">RHS</span> <span class="o">=</span> <span class="n">r</span>
+
+				<span class="c1"># Rerun optimizer</span>
+				<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Restarting optimization for throughput iteration </span><span class="si">%d</span><span class="s1">...&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">throughput_iter</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+				<span class="n">model</span><span class="o">.</span><span class="n">optimize</span><span class="p">()</span>
+				<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Optimization finished!&#39;</span><span class="p">)</span>
+
+		<span class="c1"># Write result to display</span>
+		<span class="k">if</span> <span class="n">debug</span><span class="p">:</span>
+			<span class="n">write_fits</span><span class="p">(</span><span class="n">prior</span> <span class="o">*</span> <span class="p">(</span><span class="n">pupil</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">),</span> <span class="n">debug_dir</span> <span class="o">+</span> <span class="s1">&#39;result</span><span class="si">%d</span><span class="s1">.fits&#39;</span> <span class="o">%</span> <span class="n">subsampling</span><span class="p">)</span>
+
+	<span class="k">return</span> <span class="n">prior</span> <span class="o">*</span> <span class="p">(</span><span class="n">pupil</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Bryony Nickson
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
