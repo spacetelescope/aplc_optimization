@@ -25,7 +25,7 @@ Design Survey Strategy
 =======================
 APLCs are sensitive to several design parameters: telescope aperture shape and segmentation, central obscuration,
 lyot stop shape and size, focal plane mask size, dark hole size, and bandwidth. In order to explore
-this multi-dimensional parameter space, the ``aplc-optimization`` toolkit has been developed to simplify the organization,
+this multi-dimensional parameter space, the ``aplc_optimization`` toolkit has been developed to simplify the organization,
 execution and evaluation of large APLC design surveys.
 
 For a given design survey, the toolkit generates a batch of linear programs to be executed on a computing cluster.
@@ -36,9 +36,9 @@ including discrete algebraic models for the on-axis field propagation and defini
 and constraints, are given in the appendix of `Zimmerman et al. 2016 <https://www.spiedigitallibrary.org/conference-proceedings-of-spie/9904/1/Lyot-coronagraph-design-study-for-large-segmented-space-telescope-apertures/10.1117/12.2233205.full#c26>`_.
 
 
-Getting aplc-optimization
+Getting aplc_optimization
 =========================
-For instructions on how to install the ``aplc-optimization`` toolkit, please see :ref:`installation`.
+For instructions on how to install the ``aplc_optimization`` toolkit, please see :ref:`installation`.
 
 Running a design survey
 ========================

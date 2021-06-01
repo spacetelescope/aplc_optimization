@@ -12,17 +12,17 @@ Requirements & Installation
 Installing with Conda
 ----------------------
 
-For ease of installation, we recommend using Conda to install the ``aplc-optimization`` package as follows:
+For ease of installation, we recommend using Conda to install the ``aplc_optimization`` package as follows:
 
-1. Clone the  ``aplc-optimization`` repository (we recommend cloning the ``develop`` branch, specifically)::
+1. Clone the  ``aplc_optimization`` repository (we recommend cloning the ``develop`` branch, specifically)::
 
-    $  git clone -b develop https://github.com/spacetelescope/aplc-optimization.git
+    $  git clone -b develop https://github.com/spacetelescope/aplc_optimization.git
 
 2. Create a new ``conda`` environment using the ``environment.yml`` file::
 
     $ cd aplc_optimization
     $ conda env create --file environment.yml
-    $ source activate aplc-optimization
+    $ source activate aplc_optimization
 
 
 .. _installing-gurobi:
@@ -30,7 +30,7 @@ For ease of installation, we recommend using Conda to install the ``aplc-optimiz
 Installing Gurobi
 -------------------
 
-The ``aplc-optimization`` toolkit relies on the `Gurobi solver <https://www.gurobi.com/>`, which it calls directly from Python using the ``gurobipy`` package.
+The ``aplc_optimization`` toolkit relies on the `Gurobi solver <https://www.gurobi.com/>`, which it calls directly from Python using the ``gurobipy`` package.
 
 Register for an academic account
 '''''''''''''''''''''''''''''''''
@@ -95,9 +95,9 @@ If the Gurobi shell didn't produce the desired output, there's a problem with yo
 Software Requirements
 ----------------------
 
-See `the environment.yml specification file <https://github.com/spacetelescope/aplc-optimization/blob/scda_21/environment.yml>`_ for the required package dependencies.
+See `the environment.yml specification file <https://github.com/spacetelescope/aplc_optimization/blob/scda_21/environment.yml>`_ for the required package dependencies.
 
-**Required Python version**: ``aplc-optimization`` requires Python 3.7 or higher.
+**Required Python version**: ``aplc_optimization`` requires Python 3.7 or higher.
 
 **Conda channels:**
 
@@ -121,4 +121,4 @@ Using the STScI Linux Servers
 ------------------------------
 
 The Linux servers at STScI are available to optimize select high-resolution design cases, as needed. For instructions on how to
-install and use ``aplc-optimization`` on one of these servers, see :ref:`servers`.
+install and use ``aplc_optimization`` on one of these servers, see :ref:`servers`.

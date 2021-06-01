@@ -18,7 +18,7 @@ sys.path.insert(0, os.path.abspath('..'))
 
 # -- Project information -----------------------------------------------------
 
-project = 'aplc-optimization'
+project = 'aplc_optimization'
 copyright = '2020, Bryony Nickson'
 author = 'Bryony Nickson'
 

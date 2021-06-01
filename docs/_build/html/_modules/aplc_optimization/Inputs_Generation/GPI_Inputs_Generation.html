@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>aplc_optimization.Inputs_Generation.GPI_Inputs_Generation &mdash; aplc-optimization  documentation</title>
+  <title>aplc_optimization.Inputs_Generation.GPI_Inputs_Generation &mdash; aplc_optimization  documentation</title>
   
 
   
@@ -52,7 +52,7 @@
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
           
-            <a href="../../../index.html" class="icon icon-home"> aplc-optimization
+            <a href="../../../index.html" class="icon icon-home"> aplc_optimization
             
             <img src="../../../_static/stsci_pri_combo_mark_white.png" class="logo" />
           </a>
@@ -88,13 +88,12 @@
 </ul>
 <p class="caption"><span class="caption-text">Detailed API Reference</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../api/aplc.html"><code class="docutils literal notranslate"><span class="pre">aplc_optimization.aplc</span></code> Module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../api/survey.html">Survey</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../api/optimizer.html">Optimizer</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../api/HiCAT_Inputs_Generation.html">HiCAT Inputs Generation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../api/LUVOIR_Inputs_Generation.html">LUVOIR Inputs Generation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../api/GPI_Inputs_Generation.html">Functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../api/GPI_Inputs_Generation.html#classes">Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/aplc.html"><code class="docutils literal notranslate"><span class="pre">aplc</span></code> Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/survey.html"><code class="docutils literal notranslate"><span class="pre">survey</span></code> Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/optimizer.html"><code class="docutils literal notranslate"><span class="pre">optimizer</span></code> Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/HiCAT_Inputs_Generation.html"><code class="docutils literal notranslate"><span class="pre">Inputs_Generation.GPI_Inputs_Generation</span></code> Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/LUVOIR_Inputs_Generation.html"><code class="docutils literal notranslate"><span class="pre">Inputs_Generation.GPI_Inputs_Generation</span></code> Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/GPI_Inputs_Generation.html"><code class="docutils literal notranslate"><span class="pre">Inputs_Generation.GPI_Inputs_Generation</span></code> Module</a></li>
 </ul>
 
             
@@ -109,7 +108,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../../../index.html">aplc-optimization</a>
+          <a href="../../../index.html">aplc_optimization</a>
         
       </nav>
 
@@ -315,9 +314,9 @@
 
 
 <div class="viewcode-block" id="GPI_LyotMask"><a class="viewcode-back" href="../../../api/aplc_optimization.Inputs_Generation.GPI_Inputs_Generation.GPI_LyotMask.html#aplc_optimization.Inputs_Generation.GPI_Inputs_Generation.GPI_LyotMask">[docs]</a><span class="k">class</span> <span class="nc">GPI_LyotMask</span><span class="p">(</span><span class="n">poppy</span><span class="o">.</span><span class="n">AnalyticOpticalElement</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;Model the GPI Lyot stop mask.</span>
+    <span class="sd">&quot;&quot;&quot;Model the GPI Lyot stop mask.</span>
 
-<span class="sd">     Based on gpipsfs.GPI_LyotMask&#39;&#39;&#39;</span>
+<span class="sd">     Based on gpipsfs.GPI_LyotMask&quot;&quot;&quot;</span>
 
     <span class="n">magnification</span> <span class="o">=</span> <span class="mf">7.7701</span><span class="o">/.</span><span class="mi">009825</span>   <span class="c1"># meters at primary/meters at Lyot</span>
 
@@ -389,7 +388,8 @@
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
-
+<span class="sd">        transmission: nd.array</span>
+<span class="sd">            The Lyot stop transmission.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">wave</span><span class="p">,</span> <span class="n">poppy</span><span class="o">.</span><span class="n">Wavefront</span><span class="p">):</span>  <span class="c1"># pragma: no cover</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;getPhasor must be called with a Wavefront to define the spacing&quot;</span><span class="p">)</span>

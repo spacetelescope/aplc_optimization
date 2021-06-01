@@ -5,11 +5,11 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
+  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Using STScI Linux Servers &mdash; aplc-optimization  documentation</title>
+  <title>Using STScI Linux Servers &mdash; aplc_optimization  documentation</title>
   
 
   
@@ -55,7 +55,7 @@
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
           
-            <a href="index.html" class="icon icon-home"> aplc-optimization
+            <a href="index.html" class="icon icon-home"> aplc_optimization
             
             <img src="_static/stsci_pri_combo_mark_white.png" class="logo" />
           </a>
@@ -94,7 +94,7 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#software-installation">Software Installation</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#installing-conda">Installing Conda</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#installing-aplc-optimization">Installing <code class="docutils literal notranslate"><span class="pre">aplc-optimization</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#installing-aplc-optimization">Installing <code class="docutils literal notranslate"><span class="pre">aplc_optimization</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#installing-gurobi">Installing Gurobi</a></li>
 </ul>
 </li>
@@ -104,12 +104,12 @@
 </ul>
 <p class="caption"><span class="caption-text">Detailed API Reference</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="api/aplc.html"><code class="docutils literal notranslate"><span class="pre">aplc_optimization.aplc</span></code> Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/aplc.html"><code class="docutils literal notranslate"><span class="pre">aplc</span></code> Module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api/survey.html"><code class="docutils literal notranslate"><span class="pre">survey</span></code> Module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api/optimizer.html"><code class="docutils literal notranslate"><span class="pre">optimizer</span></code> Module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api/HiCAT_Inputs_Generation.html"><code class="docutils literal notranslate"><span class="pre">Inputs_Generation.GPI_Inputs_Generation</span></code> Module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api/LUVOIR_Inputs_Generation.html"><code class="docutils literal notranslate"><span class="pre">Inputs_Generation.GPI_Inputs_Generation</span></code> Module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="api/GPI_Inputs_Generation.html"><code class="docutils literal notranslate"><span class="pre">aplc_optimizer.Inputs_Generation.GPI_Inputs_Generation</span></code> Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/GPI_Inputs_Generation.html"><code class="docutils literal notranslate"><span class="pre">Inputs_Generation.GPI_Inputs_Generation</span></code> Module</a></li>
 </ul>
 
             
@@ -124,7 +124,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="index.html">aplc-optimization</a>
+          <a href="index.html">aplc_optimization</a>
         
       </nav>
 
@@ -240,9 +240,9 @@ of the differences in the operating system among the machines.</p>
 </div>
 <section id="installing-conda">
 <h3>Installing Conda<a class="headerlink" href="#installing-conda" title="Permalink to this headline">¶</a></h3>
-<p>It is recommended that the <code class="docutils literal notranslate"><span class="pre">aplc-optimization</span></code> package be installed using Conda (see <span class="xref std std-ref">installing</span>). While you may
+<p>It is recommended that the <code class="docutils literal notranslate"><span class="pre">aplc_optimization</span></code> package be installed using Conda (see <span class="xref std std-ref">installing</span>). While you may
 have a version of Conda installed to your local machine, this version will not be accessible to programs running on
-the servers at STScI (see <a class="reference internal" href="#storage"><span class="std std-ref">above</span></a>). Therefore, in order to install <code class="docutils literal notranslate"><span class="pre">aplc-optimization</span></code> on the servers,
+the servers at STScI (see <a class="reference internal" href="#storage"><span class="std std-ref">above</span></a>). Therefore, in order to install <code class="docutils literal notranslate"><span class="pre">aplc_optimization</span></code> on the servers,
 we will first need set up Conda on one of the servers. (Fortunately, you only have to go through the process on <em>one</em>
 Linux server to make conda available on <em>all</em> of the Linux servers.)</p>
 <p>Because of the storage limitations associated with the Linux home diretory (see <a class="reference internal" href="#storage"><span class="std std-ref">above</span></a>),
@@ -290,40 +290,40 @@ bash$
 /user/myname/miniconda3/bin/conda
 </pre></div>
 </div>
-<p>Now that you have the conda command available, we can install <code class="docutils literal notranslate"><span class="pre">aplc-optimization</span></code> on the server.</p>
+<p>Now that you have the conda command available, we can install <code class="docutils literal notranslate"><span class="pre">aplc_optimization</span></code> on the server.</p>
 </section>
 <section id="installing-aplc-optimization">
-<h3>Installing <code class="docutils literal notranslate"><span class="pre">aplc-optimization</span></code><a class="headerlink" href="#installing-aplc-optimization" title="Permalink to this headline">¶</a></h3>
+<h3>Installing <code class="docutils literal notranslate"><span class="pre">aplc_optimization</span></code><a class="headerlink" href="#installing-aplc-optimization" title="Permalink to this headline">¶</a></h3>
 <p>Because of the storage limitations associated with the Linux home diretory (see <a class="reference internal" href="#storage"><span class="std std-ref">above</span></a>), we recommend
-intalling <code class="docutils literal notranslate"><span class="pre">aplc-optimization</span></code> in your Central Store directory. If you haven’t already, <code class="docutils literal notranslate"><span class="pre">ssh</span></code> into the server and open a
+intalling <code class="docutils literal notranslate"><span class="pre">aplc_optimization</span></code> in your Central Store directory. If you haven’t already, <code class="docutils literal notranslate"><span class="pre">ssh</span></code> into the server and open a
 <code class="docutils literal notranslate"><span class="pre">bash</span></code> shell:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>ssh telserv3
 telserv3&gt; bash
 bash$
 </pre></div>
 </div>
-<p>Go to your user directory on Central Store and clone the <code class="docutils literal notranslate"><span class="pre">aplc-optimization</span></code> repository:</p>
+<p>Go to your user directory on Central Store and clone the <code class="docutils literal notranslate"><span class="pre">_optimization</span></code> repository:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>bash$ cd /user/$(logname)/
-bash$ git clone https://github.com/spacetelescope/aplc-optimization.git
+bash$ git clone https://github.com/spacetelescope/aplc_optimization.git
 </pre></div>
 </div>
 <p>Create a new Conda environment on the Server using the <code class="docutils literal notranslate"><span class="pre">environment.yml</span></code> file:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>bash$ cd aplc_optimization
 bash$ conda env create --file environment.yml
-bash$ source activate aplc-optimization
-(aplc-optimization) bash$
+bash$ source activate aplc_optimization
+(aplc_optimization) bash$
 </pre></div>
 </div>
 </section>
 <section id="installing-gurobi">
 <h3>Installing Gurobi<a class="headerlink" href="#installing-gurobi" title="Permalink to this headline">¶</a></h3>
 <p>Go back into your Central Store directory and download the latest 64-bit Linux version of the Gurobi optimizer, using <code class="docutils literal notranslate"><span class="pre">curl</span></code>:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>(aplc-optimization) bash$ cd /user/bnickson
-(aplc-optimization) bash$ curl -OL https://packages.gurobi.com/9.0/gurobi9.0.2_linux64.tar.gz
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>(aplc_optimization) bash$ cd /user/bnickson
+(aplc_optimization) bash$ curl -OL https://packages.gurobi.com/9.0/gurobi9.0.2_linux64.tar.gz
 </pre></div>
 </div>
 <p>Open and extract the <code class="docutils literal notranslate"><span class="pre">.tar.gz</span></code> file:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>(aplc-optimization) bash$ tar xvzf gurobi9.0.2_linux64.tar.gz
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>(aplc_optimization) bash$ tar xvzf gurobi9.0.2_linux64.tar.gz
 </pre></div>
 </div>
 <section id="obtain-a-new-gurobi-license">

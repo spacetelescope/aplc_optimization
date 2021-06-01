@@ -5,11 +5,11 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
+  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Introduction &mdash; aplc-optimization  documentation</title>
+  <title>Introduction &mdash; aplc_optimization  documentation</title>
   
 
   
@@ -43,7 +43,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Requirements &amp; Installation" href="installing.html" />
-    <link rel="prev" title="aplc-optimization: an apodized pupil Lyot coronagraph design survey toolkit" href="index.html" /> 
+    <link rel="prev" title="aplc_optimization: an apodized pupil Lyot coronagraph design survey toolkit" href="index.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -55,7 +55,7 @@
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
           
-            <a href="index.html" class="icon icon-home"> aplc-optimization
+            <a href="index.html" class="icon icon-home"> aplc_optimization
             
             <img src="_static/stsci_pri_combo_mark_white.png" class="logo" />
           </a>
@@ -86,7 +86,7 @@
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Introduction</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#design-survey-strategy">Design Survey Strategy</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#getting-aplc-optimization">Getting aplc-optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#getting-aplc-optimization">Getting aplc_optimization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#running-a-design-survey">Running a design survey</a></li>
 </ul>
 </li>
@@ -96,12 +96,12 @@
 </ul>
 <p class="caption"><span class="caption-text">Detailed API Reference</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="api/aplc.html"><code class="docutils literal notranslate"><span class="pre">aplc_optimization.aplc</span></code> Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/aplc.html"><code class="docutils literal notranslate"><span class="pre">aplc</span></code> Module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api/survey.html"><code class="docutils literal notranslate"><span class="pre">survey</span></code> Module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api/optimizer.html"><code class="docutils literal notranslate"><span class="pre">optimizer</span></code> Module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api/HiCAT_Inputs_Generation.html"><code class="docutils literal notranslate"><span class="pre">Inputs_Generation.GPI_Inputs_Generation</span></code> Module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api/LUVOIR_Inputs_Generation.html"><code class="docutils literal notranslate"><span class="pre">Inputs_Generation.GPI_Inputs_Generation</span></code> Module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="api/GPI_Inputs_Generation.html"><code class="docutils literal notranslate"><span class="pre">aplc_optimizer.Inputs_Generation.GPI_Inputs_Generation</span></code> Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/GPI_Inputs_Generation.html"><code class="docutils literal notranslate"><span class="pre">Inputs_Generation.GPI_Inputs_Generation</span></code> Module</a></li>
 </ul>
 
             
@@ -116,7 +116,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="index.html">aplc-optimization</a>
+          <a href="index.html">aplc_optimization</a>
         
       </nav>
 
@@ -186,7 +186,7 @@ means just before plane B, and B+ means just after plane B. All images are on lo
 <h2>Design Survey Strategy<a class="headerlink" href="#design-survey-strategy" title="Permalink to this headline">¶</a></h2>
 <p>APLCs are sensitive to several design parameters: telescope aperture shape and segmentation, central obscuration,
 lyot stop shape and size, focal plane mask size, dark hole size, and bandwidth. In order to explore
-this multi-dimensional parameter space, the <code class="docutils literal notranslate"><span class="pre">aplc-optimization</span></code> toolkit has been developed to simplify the organization,
+this multi-dimensional parameter space, the <code class="docutils literal notranslate"><span class="pre">aplc_optimization</span></code> toolkit has been developed to simplify the organization,
 execution and evaluation of large APLC design surveys.</p>
 <p>For a given design survey, the toolkit generates a batch of linear programs to be executed on a computing cluster.
 These linear programs rely on the third-party solver <a class="reference external" href="Gurobi.com">Gurobi</a> to determine the apodizer mask solution with maximum
@@ -196,8 +196,8 @@ including discrete algebraic models for the on-axis field propagation and defini
 and constraints, are given in the appendix of <a class="reference external" href="https://www.spiedigitallibrary.org/conference-proceedings-of-spie/9904/1/Lyot-coronagraph-design-study-for-large-segmented-space-telescope-apertures/10.1117/12.2233205.full#c26">Zimmerman et al. 2016</a>.</p>
 </section>
 <section id="getting-aplc-optimization">
-<h2>Getting aplc-optimization<a class="headerlink" href="#getting-aplc-optimization" title="Permalink to this headline">¶</a></h2>
-<p>For instructions on how to install the <code class="docutils literal notranslate"><span class="pre">aplc-optimization</span></code> toolkit, please see <a class="reference internal" href="installing.html#installation"><span class="std std-ref">Requirements &amp; Installation</span></a>.</p>
+<h2>Getting aplc_optimization<a class="headerlink" href="#getting-aplc-optimization" title="Permalink to this headline">¶</a></h2>
+<p>For instructions on how to install the <code class="docutils literal notranslate"><span class="pre">aplc_optimization</span></code> toolkit, please see <a class="reference internal" href="installing.html#installation"><span class="std std-ref">Requirements &amp; Installation</span></a>.</p>
 </section>
 <section id="running-a-design-survey">
 <h2>Running a design survey<a class="headerlink" href="#running-a-design-survey" title="Permalink to this headline">¶</a></h2>
@@ -216,7 +216,7 @@ and constraints, are given in the appendix of <a class="reference external" href
         <a href="installing.html" class="btn btn-neutral float-right" title="Requirements &amp; Installation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="index.html" class="btn btn-neutral float-left" title="aplc-optimization: an apodized pupil Lyot coronagraph design survey toolkit" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="index.html" class="btn btn-neutral float-left" title="aplc_optimization: an apodized pupil Lyot coronagraph design survey toolkit" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

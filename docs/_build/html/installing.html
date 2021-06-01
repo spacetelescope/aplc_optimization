@@ -5,11 +5,11 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
+  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Requirements &amp; Installation &mdash; aplc-optimization  documentation</title>
+  <title>Requirements &amp; Installation &mdash; aplc_optimization  documentation</title>
   
 
   
@@ -55,7 +55,7 @@
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
           
-            <a href="index.html" class="icon icon-home"> aplc-optimization
+            <a href="index.html" class="icon icon-home"> aplc_optimization
             
             <img src="_static/stsci_pri_combo_mark_white.png" class="logo" />
           </a>
@@ -103,12 +103,12 @@
 </ul>
 <p class="caption"><span class="caption-text">Detailed API Reference</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="api/aplc.html"><code class="docutils literal notranslate"><span class="pre">aplc_optimization.aplc</span></code> Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/aplc.html"><code class="docutils literal notranslate"><span class="pre">aplc</span></code> Module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api/survey.html"><code class="docutils literal notranslate"><span class="pre">survey</span></code> Module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api/optimizer.html"><code class="docutils literal notranslate"><span class="pre">optimizer</span></code> Module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api/HiCAT_Inputs_Generation.html"><code class="docutils literal notranslate"><span class="pre">Inputs_Generation.GPI_Inputs_Generation</span></code> Module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api/LUVOIR_Inputs_Generation.html"><code class="docutils literal notranslate"><span class="pre">Inputs_Generation.GPI_Inputs_Generation</span></code> Module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="api/GPI_Inputs_Generation.html"><code class="docutils literal notranslate"><span class="pre">aplc_optimizer.Inputs_Generation.GPI_Inputs_Generation</span></code> Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/GPI_Inputs_Generation.html"><code class="docutils literal notranslate"><span class="pre">Inputs_Generation.GPI_Inputs_Generation</span></code> Module</a></li>
 </ul>
 
             
@@ -123,7 +123,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="index.html">aplc-optimization</a>
+          <a href="index.html">aplc_optimization</a>
         
       </nav>
 
@@ -181,17 +181,17 @@
 </div>
 <section id="installing-with-conda">
 <span id="id1"></span><h2>Installing with Conda<a class="headerlink" href="#installing-with-conda" title="Permalink to this headline">¶</a></h2>
-<p>For ease of installation, we recommend using Conda to install the <code class="docutils literal notranslate"><span class="pre">aplc-optimization</span></code> package as follows:</p>
+<p>For ease of installation, we recommend using Conda to install the <code class="docutils literal notranslate"><span class="pre">aplc_optimization</span></code> package as follows:</p>
 <ol class="arabic">
-<li><p>Clone the  <code class="docutils literal notranslate"><span class="pre">aplc-optimization</span></code> repository (we recommend cloning the <code class="docutils literal notranslate"><span class="pre">develop</span></code> branch, specifically):</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$  git clone -b develop https://github.com/spacetelescope/aplc-optimization.git
+<li><p>Clone the  <code class="docutils literal notranslate"><span class="pre">aplc_optimization</span></code> repository (we recommend cloning the <code class="docutils literal notranslate"><span class="pre">develop</span></code> branch, specifically):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$  git clone -b develop https://github.com/spacetelescope/aplc_optimization.git
 </pre></div>
 </div>
 </li>
 <li><p>Create a new <code class="docutils literal notranslate"><span class="pre">conda</span></code> environment using the <code class="docutils literal notranslate"><span class="pre">environment.yml</span></code> file:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cd aplc_optimization
 $ conda env create --file environment.yml
-$ source activate aplc-optimization
+$ source activate aplc_optimization
 </pre></div>
 </div>
 </li>
@@ -199,7 +199,7 @@ $ source activate aplc-optimization
 </section>
 <section id="installing-gurobi">
 <span id="id2"></span><h2>Installing Gurobi<a class="headerlink" href="#installing-gurobi" title="Permalink to this headline">¶</a></h2>
-<p>The <code class="docutils literal notranslate"><span class="pre">aplc-optimization</span></code> toolkit relies on the <cite>Gurobi solver &lt;https://www.gurobi.com/&gt;</cite>, which it calls directly from Python using the <code class="docutils literal notranslate"><span class="pre">gurobipy</span></code> package.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">aplc_optimization</span></code> toolkit relies on the <cite>Gurobi solver &lt;https://www.gurobi.com/&gt;</cite>, which it calls directly from Python using the <code class="docutils literal notranslate"><span class="pre">gurobipy</span></code> package.</p>
 <section id="register-for-an-academic-account">
 <h3>Register for an academic account<a class="headerlink" href="#register-for-an-academic-account" title="Permalink to this headline">¶</a></h3>
 <p>In order to download the Gurobi Optimizer you will need to first register for an account.
@@ -257,8 +257,8 @@ To do this, type <code class="docutils literal notranslate"><span class="pre">gu
 <hr class="docutils" />
 <section id="software-requirements">
 <h2>Software Requirements<a class="headerlink" href="#software-requirements" title="Permalink to this headline">¶</a></h2>
-<p>See <a class="reference external" href="https://github.com/spacetelescope/aplc-optimization/blob/scda_21/environment.yml">the environment.yml specification file</a> for the required package dependencies.</p>
-<p><strong>Required Python version</strong>: <code class="docutils literal notranslate"><span class="pre">aplc-optimization</span></code> requires Python 3.7 or higher.</p>
+<p>See <a class="reference external" href="https://github.com/spacetelescope/aplc_optimization/blob/scda_21/environment.yml">the environment.yml specification file</a> for the required package dependencies.</p>
+<p><strong>Required Python version</strong>: <code class="docutils literal notranslate"><span class="pre">aplc_optimization</span></code> requires Python 3.7 or higher.</p>
 <p><strong>Conda channels:</strong></p>
 <blockquote>
 <div><ul class="simple">
@@ -284,7 +284,7 @@ To do this, type <code class="docutils literal notranslate"><span class="pre">gu
 <section id="using-the-stsci-linux-servers">
 <h2>Using the STScI Linux Servers<a class="headerlink" href="#using-the-stsci-linux-servers" title="Permalink to this headline">¶</a></h2>
 <p>The Linux servers at STScI are available to optimize select high-resolution design cases, as needed. For instructions on how to
-install and use <code class="docutils literal notranslate"><span class="pre">aplc-optimization</span></code> on one of these servers, see <a class="reference internal" href="server.html#servers"><span class="std std-ref">Using STScI Linux Servers</span></a>.</p>
+install and use <code class="docutils literal notranslate"><span class="pre">aplc_optimization</span></code> on one of these servers, see <a class="reference internal" href="server.html#servers"><span class="std std-ref">Using STScI Linux Servers</span></a>.</p>
 </section>
 </section>
 

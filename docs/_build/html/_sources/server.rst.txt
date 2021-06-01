@@ -93,9 +93,9 @@ Within a SSH session (see :ref:`Logging into a server <Login>`), verify that you
 Installing Conda
 -----------------
 
-It is recommended that the ``aplc-optimization`` package be installed using Conda (see :ref:`installing`). While you may
+It is recommended that the ``aplc_optimization`` package be installed using Conda (see :ref:`installing`). While you may
 have a version of Conda installed to your local machine, this version will not be accessible to programs running on
-the servers at STScI (see :ref:`above <Storage>`). Therefore, in order to install ``aplc-optimization`` on the servers,
+the servers at STScI (see :ref:`above <Storage>`). Therefore, in order to install ``aplc_optimization`` on the servers,
 we will first need set up Conda on one of the servers. (Fortunately, you only have to go through the process on *one*
 Linux server to make conda available on *all* of the Linux servers.)
 
@@ -145,30 +145,30 @@ Now check that the ``conda`` command is available::
     bash$ which conda
     /user/myname/miniconda3/bin/conda
 
-Now that you have the conda command available, we can install ``aplc-optimization`` on the server.
+Now that you have the conda command available, we can install ``aplc_optimization`` on the server.
 
-Installing ``aplc-optimization``
+Installing ``aplc_optimization``
 ---------------------------------
 
 Because of the storage limitations associated with the Linux home diretory (see :ref:`above <Storage>`), we recommend
-intalling ``aplc-optimization`` in your Central Store directory. If you haven't already, ``ssh`` into the server and open a
+intalling ``aplc_optimization`` in your Central Store directory. If you haven't already, ``ssh`` into the server and open a
 ``bash`` shell::
 
     ssh telserv3
     telserv3> bash
     bash$
 
-Go to your user directory on Central Store and clone the ``aplc-optimization`` repository::
+Go to your user directory on Central Store and clone the ``_optimization`` repository::
 
     bash$ cd /user/$(logname)/
-    bash$ git clone https://github.com/spacetelescope/aplc-optimization.git
+    bash$ git clone https://github.com/spacetelescope/aplc_optimization.git
 
 Create a new Conda environment on the Server using the ``environment.yml`` file::
 
     bash$ cd aplc_optimization
     bash$ conda env create --file environment.yml
-    bash$ source activate aplc-optimization
-    (aplc-optimization) bash$
+    bash$ source activate aplc_optimization
+    (aplc_optimization) bash$
 
 
 Installing Gurobi
@@ -176,12 +176,12 @@ Installing Gurobi
 
 Go back into your Central Store directory and download the latest 64-bit Linux version of the Gurobi optimizer, using ``curl``::
 
-    (aplc-optimization) bash$ cd /user/bnickson
-    (aplc-optimization) bash$ curl -OL https://packages.gurobi.com/9.0/gurobi9.0.2_linux64.tar.gz
+    (aplc_optimization) bash$ cd /user/bnickson
+    (aplc_optimization) bash$ curl -OL https://packages.gurobi.com/9.0/gurobi9.0.2_linux64.tar.gz
 
 Open and extract the ``.tar.gz`` file::
 
-    (aplc-optimization) bash$ tar xvzf gurobi9.0.2_linux64.tar.gz
+    (aplc_optimization) bash$ tar xvzf gurobi9.0.2_linux64.tar.gz
 
 
 Obtain a new Gurobi license

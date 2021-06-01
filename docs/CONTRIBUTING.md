@@ -1,25 +1,25 @@
-Contributing to ``aplc-optimization``
+Contributing to ``aplc_optimization``
 ===================
 
-Thank you for considering contributing to ``aplc-optimization``
+Thank you for considering contributing to ``aplc_optimization``
 
 How to contribute
 -----------------
 
 The preferred workflow for contributing to Coronagraphs is to fork the
-[main repository](https://github.com/spacetelescope/aplc-optimization/) on
+[main repository](https://github.com/spacetelescope/aplc_optimization/) on
 GitHub, clone, and develop on a branch. Steps:
 
-1. Fork the [project repository](https://github.com/spacetelescope/aplc-optimization/)
+1. Fork the [project repository](https://github.com/spacetelescope/aplc_optimization/)
    by clicking on the 'Fork' button near the top right of the page. This creates
    a copy of the code under your GitHub user account. For more details on
    how to fork a repository see [this guide](https://help.github.com/articles/fork-a-repo/).
 
-2. Clone your fork of the ``aplc-optimization`` repo from your GitHub account to your local disk:
+2. Clone your fork of the ``aplc_optimization`` repo from your GitHub account to your local disk:
 
    ```bash
-   $ git clone git@github.com:YourLogin/aplc-optimization.git
-   $ cd aplc-optimization
+   $ git clone git@github.com:YourLogin/aplc_optimization.git
+   $ cd aplc_optimization
    ```
 
 3. Create a ``feature`` branch to hold your development changes:
@@ -86,7 +86,7 @@ following rules before you submit a pull request:
    example script in the ``examples/`` folder. Have a look at other
    examples for reference. Examples should demonstrate why the new
    functionality is useful in practice and, if possible, compare it
-   to other methods available in ``aplc-optimization``.
+   to other methods available in ``aplc_optimization``.
 
 -  Documentation and high-coverage tests are necessary for enhancements to be
    accepted. Bug-fixes or new features should be provided with 
@@ -166,8 +166,8 @@ following rules before submitting:
 New contributor tips
 --------------------
 
-A great way to start contributing to ``aplc-optimization`` is to pick an item
-from the list of [issues](https://github.com/spacetelescope/aplc-optimization/issues)
+A great way to start contributing to ``aplc_optimization`` is to pick an item
+from the list of [issues](https://github.com/spacetelescope/aplc_optimization/issues)
 in the issue tracker. Resolving these issues allow you to start
 contributing to the project without much prior knowledge. Your
 assistance in this area will be greatly appreciated by the more
