@@ -1,29 +1,39 @@
 '''
-DO NOT RUN THIS SCRIPT - It is the launcher template for GPI design surveys.
+DO NOT RUN THIS SCRIPT - this is the launcher template for GPI design surveys.
 
 Workflow:
 - Make a copy of this script.
-- rename the copy under the following naming schema: 'do_luvoir_<survey_name>_<machine>.py', designating the survey you
+- rename the copy under the following naming schema: 'do_gpi_<survey_name>_<machine>.py', designating the survey you
   are running and the name of the machine you will be running it on.
-- run the launcher on the designated machine.
+- Define the Survey Information, Input File and Survey Design parameters, as desired.
+- Run the launcher script on the designated machine.
 '''
 
 import os
 
 os.chdir('../..')
+instrument = 'gpi'  # do not edit
 from aplc_optimization.survey import DesignParameterSurvey
 from aplc_optimization.aplc import APLC
 from aplc_optimization.Inputs_Generation.GPI_Inputs_Generation import GPI_inputs_gen
 
-# Survey information
-N = 128  # number of pixels in input and final arrays
-instrument = "gpi"  # instrument name
-survey_name = "template_survey"  # survey name
-machine = "telserv3"  # machine the survey is run on.
+"""
+Survey information
+------------------
+survey_name: str
+    The designated name of the design survey.
+machine: str
+    The name of the machine on which to run the design survey.
+N: int
+    The number of pixels in the input (Primary, LS) and final (apodizer) arrays.
+"""
+survey_name = "template_survey"
+machine = "telserv3"
+N = 128
 
 '''
-Input (primary and Lyot stop) Mask Parameters
------------------------------------------------
+Input File Parameters
+----------------------
 N: int
     The number of pixels in input (primary and lyot stop) arrays.
 ap_spid: bool
@@ -40,7 +50,6 @@ lyot_mask: string
 ls_spid: string
     Whether to include the secondary supports in the Lyot stop mask.
 '''
-
 # Aperture parameters
 ap_spid = True
 ap_sym = True
@@ -98,36 +107,29 @@ ending_scale: int
     The number of pixels per unit cell for the final solution. If this is the same as `starting_scale`,
     the adaptive algorithm is essentially turned off.
 '''
-
 # Focal plane mask parameters
 nFPM = 80
-FPM_name = 'K1'
-radius = 3.476449131
+radius = 3.476449131  # K1 FPM
 
 # Optimization constraints
 contrast = 8
 IWA = 3
 OWA = 22
 bandwidth = 0.2
-num_wavelengths = 1
-resolution = 2
-
-# Optimization method
-starting_scale = 4
-ending_scale = 1
+num_wavelengths = 4
 
 # Robustness parameters
 alignment_tolerance = 1
 num_lyot_stops = 1
 
+# SURVEY PARAMETER DICTIONARY
 survey_parameters = {'instrument': {'inst_name': instrument.upper()},
                      'pupil': {'N': N, 'filename': pup_filename},
-                     'lyot_stop': {'filename': ls_filename, 'ls_tabs': True, 'alignment_tolerance': alignment_tolerance,
+                     'lyot_stop': {'filename': ls_filename, 'alignment_tolerance': alignment_tolerance,
                                    'num_lyot_stops': num_lyot_stops},
-                     'focal_plane_mask': {'FPM_name': FPM_name, 'radius': radius, 'num_pix': N},
+                     'focal_plane_mask': {'radius': radius, 'num_pix': N},
                      'image': {'contrast': contrast, 'iwa': IWA, 'owa': OWA, 'bandwidth': bandwidth,
-                               'num_wavelengths': num_wavelengths, 'resolution': resolution},
-                     'method': {'starting_scale': starting_scale, 'ending_scale': ending_scale}}
+                               'num_wavelengths': num_wavelengths}}
 
 # RUN DESIGN SURVEY
 gpi = DesignParameterSurvey(APLC, survey_parameters,

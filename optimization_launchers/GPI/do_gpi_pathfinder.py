@@ -1,19 +1,28 @@
 import os
 
 os.chdir('../..')
+instrument = "gpi"  # do not edit
 from aplc_optimization.survey import DesignParameterSurvey
 from aplc_optimization.aplc import APLC
 from aplc_optimization.Inputs_Generation.GPI_Inputs_Generation import GPI_inputs_gen
 
-# Survey Information
-N = 1168  # with 10µm pixels (so we have 11.68mm instead of 11.67mm diameter)
-instrument = "gpi"  # instrument name
+"""
+Survey information
+------------------
+survey_name: str
+    The designated name of the design survey.
+machine: str
+    The name of the machine on which to run the design survey.
+N: int
+    The number of pixels in the input (Primary, LS) and final (apodizer) arrays.
+"""
 survey_name = "pathfinder_robust"  # survey name
 machine = "telserv3"  # machine the survey is run on.
+N = 1168  # with 10µm pixels (so we have 11.68mm instead of 11.67mm diameter)
 
-'''
-Input (primary and Lyot stop) Mask Parameters
------------------------------------------------
+"""
+Input File Parameters
+---------------------
 N: int
     The number of pixels in input (primary and lyot stop) arrays.
 ap_spid: bool
@@ -29,8 +38,7 @@ lyot_mask: string
     '080m12_06', '080m12_06_03', '080mgit 12_07', '080m12_10', 'Open' and 'Blank'.
 ls_spid: string
     Whether to include the secondary supports in the Lyot stop mask.
-'''
-
+"""
 # Aperture parameters
 ap_spid = True  # the secondary supports are masked out in the Lyot planes regardless
 ap_sym = True  # symmetric supports
@@ -50,13 +58,9 @@ input_files_dict = {'directory': 'GPI/', 'N': N,
 # GENERATE INPUT FILES
 pup_filename, ls_filename = GPI_inputs_gen(input_files_dict)
 
-'''
+"""
 Survey Design Parameters
 ------------------------
-- for multiple design parameters as a grid, input as list
-- for multiple design parameters NOT as a grid, create multiple entries of below 
-  (as shown in the commented block, at bottom of this script)
-
 N: int
     The number of pixels in input (TelAP, LS) and final (apodizer) arrays.
 alignment_tolerance: int
@@ -87,12 +91,11 @@ starting_scale: int
 ending_scale: int
     The number of pixels per unit cell for the final solution. If this is the same as `starting_scale`,
     the adaptive algorithm is essentially turned off.
-'''
-
+"""
 # Focal plane mask parameters
-num_pix = 80  # number of pixels across the focal plane mask
-FPM_name = 'K1'  # name of FPM. Available FPMs are: 'Y', 'J', 'H' or 'K1'
-radius = 3.476449131  # lambda_0/D: focal plane mask radius
+num_pix = 80
+FPM_name = 'K1'
+radius = 3.476449131  # K1 FPM
 
 # Optimization parameters
 contrast = 8
@@ -112,9 +115,9 @@ num_lyot_stops = 9
 
 survey_parameters = {'instrument': {'inst_name': instrument.upper()},
                      'pupil': {'N': N, 'filename': pup_filename},
-                     'lyot_stop': {'filename': ls_filename, 'ls_tabs': True, 'alignment_tolerance': alignment_tolerance,
+                     'lyot_stop': {'filename': ls_filename, 'alignment_tolerance': alignment_tolerance,
                                    'num_lyot_stops': num_lyot_stops},
-                     'focal_plane_mask': {'FPM_name': FPM_name, 'radius': radius, 'num_pix': N},
+                     'focal_plane_mask': {'radius': radius, 'num_pix': N},
                      'image': {'contrast': contrast, 'iwa': IWA, 'owa': OWA, 'bandwidth': bandwidth,
                                'num_wavelengths': num_wavelengths, 'resolution': resolution},
                      'method': {'starting_scale': starting_scale, 'ending_scale': ending_scale}}

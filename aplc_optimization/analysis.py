@@ -9,7 +9,7 @@ import matplotlib.pyplot as plt
 import asdf
 import os
 import re
-
+import time
 
 def create_coronagraph(solution_filename):
     """Create APLC object from solution file.
@@ -104,8 +104,8 @@ def create_coronagraph(solution_filename):
     return pupil, apodizer, focal_plane_mask, lyot_stops, parameters, file_organization
 
 
-def analyze_pdf_summary(solution_filename, pdf=None):
-    """Generate a summary table of the design parameter survey.
+def analyze_aplc_design_summary(solution_filename, pdf=None):
+    """Generate a summary table for the APLC design.
 
     Parameters
     ----------
@@ -141,26 +141,28 @@ def analyze_pdf_summary(solution_filename, pdf=None):
     pup_fname = parameters['pupil']['filename']
     N = parameters['pupil']['N']
 
+    # Extract solution filename without pathing
+    sol_fname = solution_filename[solution_filename.find('solutions/') + 10:]
 
-    # Extract telescope name, gap padding and oversampling info from the pupil filename
+    # Extract instrument name, gap padding and oversampling info from the pupil filename
     if 'LUVOIR' in pup_fname:
-        telescope = 'LUVOIR'
+        instrument = 'LUVOIR'
     elif 'HiCAT' in pup_fname:
-        telescope = 'HiCAT'
+        instrument = 'HiCAT'
     elif 'GPI' in pup_fname:
-        telescope = 'GPI'
+        instrument = 'GPI'
 
 
     regex = re.compile(r'\d+')
     pup_vals = regex.findall(pup_fname)
-    if telescope == 'LUVOIR':
+    if instrument == 'LUVOIR':
         seg_gap_pad, oversamp = int(pup_vals[0]), int(pup_vals[1])
-    elif telescope == 'HiCAT':
-        seg_gap_pad = ''
+    elif instrument == 'HiCAT':
+        seg_gap_pad = 'n/a'
         oversamp = int(pup_vals[0])
-    elif telescope == 'GPI':
-        seg_gap_pad = ''
-        oversamp = ''
+    elif instrument == 'GPI':
+        seg_gap_pad = 'n/a'
+        oversamp = 'n/a'
 
     # Extract lyot stop inner and outer diameter from lyot stop filename
     ls_vals = regex.findall(ls_fname)
@@ -174,16 +176,15 @@ def analyze_pdf_summary(solution_filename, pdf=None):
 
     fig = plt.figure(dpi=160)
 
-    col_labels = ['$\mathbf{APLC \ Analysis \ Summary}$' + ' \n \n', ' ']
+    col_labels = ['$\mathbf{APLC \ Design \ Summary}$ \n\n', '']
 
     ax = fig.add_subplot(1, 1, 1)
 
     table_data = [
-        ['APLC design', '$\mathtt{' + str(img_bandwidth) + '\%}$'],
+        ['Instrument', '$\mathtt{' + str(instrument) + '}$'],
         ['nPup', '$\mathtt{' + str(N) + ' \ x \ ' + str(N) + ' \ pixels}$'],
         ['Gap padding (multiplicative)', '$\mathtt{' + str(seg_gap_pad) + '}$'],
         ['Oversampling (grey levels)', '$\mathtt{' + str(oversamp) + '}$'],
-        ['Telescope', '$\mathtt{' + str(telescope) + '}$'],
         ['Lyot stop inner diamater (% of inscribed circle)', '$\mathtt{' + str(ls_id) + '}$'],
         ['Lyot stop outer diameter (% of inscribed circle)', '$\mathtt{' + str(ls_od) + '}$'],
         ['Bandpass', '$\mathtt{' + str(img_bandwidth) + '\%}$'],
@@ -192,16 +193,16 @@ def analyze_pdf_summary(solution_filename, pdf=None):
         ['nFPM', '$\mathtt{' + str(fpm_num_pix) + ' \ pixels}$'],
         ['IWA ' + u'\u2014' + ' OWA',
          '$\mathtt{' + str(float(img_iwa)) + '\u2014' + str(float(img_owa)) + ' \ \lambda/D}$'],
-        ['', ''],
-        ['$\mathit{Optimizer \ called \ with \ the \ following \ parameters:}$', ''],
+        ['$\mathit{Input \ Files:}$', ''],
         [r'       $\triangleright \ \ Pupil \ file:$         ' + str(pup_fname), ''],
-        [r'       $\triangleright \ \ Lyot \ stop \ file:$ ' + str(ls_fname), '']
+        [r'       $\triangleright \ \ Lyot \ stop \ file:$ ' + str(ls_fname), ''],
+        ['$\mathit{Solution \ File:}$', ''],
+        [r'$\triangleright$ '+sol_fname, time.ctime(os.path.getmtime(solution_filename))]] # Last modified, date & time
 
-    ]
-    table = ax.table(cellText=table_data, colLabels=col_labels, colWidths=[0.8, 0.4], cellLoc='left', edges='open',
+    table = ax.table(cellText=table_data, colLabels=col_labels, colWidths=[0.8, 0.3], cellLoc='left', edges='open',
                      loc='center')
-    table.set_fontsize(14)
-    table.scale(1,1)
+    table.set_fontsize(20)
+    table.scale(1.2, 1.5)
     plt.axis('off')
 
     if pdf is not None:
@@ -246,7 +247,7 @@ def analyze_contrast_monochromatic(solution_filename, pdf=None):
     fig, ax = plt.subplots()
 
     plt.title('Monochromatic Normalized Irradiance')
-    imshow_field(np.log10(img / max(img_ref)), vmin=-contrast - 1, vmax=-contrast + 4, cmap='inferno')
+    imshow_field(np.log10(img / img_ref.max()), vmin=-contrast - 1, vmax=-contrast + 4, cmap='inferno')
     cbar = plt.colorbar()
     cbar.set_label('log irradiance')
 
@@ -265,7 +266,7 @@ def analyze_contrast_monochromatic(solution_filename, pdf=None):
     else:
         plt.show()
 
-    r, profile, std_profile, n_profile = radial_profile(img / max(img_ref), 0.2)
+    r, profile, std_profile, n_profile = radial_profile(img / img_ref.max(), 0.2)
 
     plt.figure(figsize=(6, 6))
 
@@ -303,7 +304,7 @@ def analyze_contrast_monochromatic(solution_filename, pdf=None):
     else:
         plt.show()
 
-    return {'normalized_irradiance_image': img / max(img_ref),
+    return {'normalized_irradiance_image': img / img_ref.max(),
             'normalized_irradiance_radial': (r, profile, std_profile, n_profile)}
 
 
@@ -429,7 +430,7 @@ def analyze_summary(solution_filename, pdf=None):
         img_ref += prop(Wavefront(pupil * lyot_stop)).intensity
         lyot += coro_without_lyot(wf).intensity
 
-    font = {'family': 'normal', 'weight': 'medium', 'size': 9}
+    font = {'family': 'DejaVu Sans', 'weight': 'medium', 'size': 9}
     matplotlib.rc('font', **font)
 
     # apodizer and telescope aperture
@@ -441,7 +442,7 @@ def analyze_summary(solution_filename, pdf=None):
 
     # image plane
     plt.subplot(2, 3, 2)
-    im = imshow_field(np.log10(img_foc / max(img_foc)), vmin=-5, vmax=0, cmap='inferno')
+    im = imshow_field(np.log10(img_foc / img_foc.max()), vmin=-5, vmax=0, cmap='inferno')
     plt.title('\n Image plane')
     cb = plt.colorbar(im, fraction=0.046, pad=0.04)
     cb.ax.tick_params(labelsize=8)
@@ -449,7 +450,7 @@ def analyze_summary(solution_filename, pdf=None):
 
     # image plane masked by focal plane mask
     plt.subplot(2, 3, 3)
-    im = imshow_field(np.log10(img_foc / max(img_foc) * (1e-20 + focal_plane_mask_large)), vmin=-5, vmax=0,
+    im = imshow_field(np.log10(img_foc / img_foc.max() * (1e-20 + focal_plane_mask_large)), vmin=-5, vmax=0,
                       cmap='inferno')
     plt.title('\n Image plane \n w/FPM')
     cb = plt.colorbar(im, fraction=0.046, pad=0.04)
@@ -458,7 +459,7 @@ def analyze_summary(solution_filename, pdf=None):
 
     # lyot plane
     plt.subplot(2, 3, 4)
-    im = imshow_field(np.log10(lyot / max(lyot)), vmin=-3, vmax=0, cmap='inferno')
+    im = imshow_field(np.log10(lyot / lyot.max()), vmin=-3, vmax=0, cmap='inferno')
     plt.title('Lyot plane')
     cb = plt.colorbar(im, fraction=0.046, pad=0.04, orientation='horizontal')
     cb.ax.tick_params(labelsize=8)
@@ -466,7 +467,7 @@ def analyze_summary(solution_filename, pdf=None):
 
     # lyot plane masked by lyot stop
     plt.subplot(2, 3, 5)
-    im = imshow_field(np.log10(lyot / max(lyot) * (1e-20 + lyot_stop)), vmin=-3, vmax=0, cmap='inferno')
+    im = imshow_field(np.log10(lyot / lyot.max() * (1e-20 + lyot_stop)), vmin=-3, vmax=0, cmap='inferno')
     plt.title('Lyot plane \n w/lyot stop')
     cb = plt.colorbar(im, fraction=0.046, pad=0.04, orientation='horizontal')
     cb.ax.tick_params(labelsize=8)
@@ -474,7 +475,7 @@ def analyze_summary(solution_filename, pdf=None):
 
     # final image plane
     plt.subplot(2, 3, 6)
-    im = imshow_field(np.log10(img / max(img_ref)), vmin=-contrast - 1, vmax=-contrast + 4, cmap='inferno')
+    im = imshow_field(np.log10(img / img_ref.max()), vmin=-contrast - 1, vmax=-contrast + 4, cmap='inferno')
     plt.title('Final image plane')
     cb = plt.colorbar(im, fraction=0.046, pad=0.04, orientation='horizontal')
     cb.ax.tick_params(labelsize=8)
@@ -548,7 +549,7 @@ def analyze_lyot_robustness(solution_filename, pdf=None):
 
         plt.subplot(len(dxs), len(dxs), x + (len(dxs) - y - 1) * len(dxs) + 1)
 
-        imshow_field(np.log10(img / max(img_ref)), vmin=-contrast - 1, vmax=-contrast + 4, cmap='inferno')
+        imshow_field(np.log10(img / img_ref.max()), vmin=-contrast - 1, vmax=-contrast + 4, cmap='inferno')
 
         frame1 = plt.gca()
         frame1.axes.xaxis.set_ticklabels([])

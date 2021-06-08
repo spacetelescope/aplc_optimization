@@ -4,28 +4,36 @@ DO NOT RUN THIS SCRIPT - this is the launcher template for LUVOIR design surveys
 Workflow:
 - Make a copy of this script.
 - rename the copy under the following naming schema: 'do_luvoir_<survey_name>_<machine>.py', designating the survey you
-    are running and the name of the machine you will be running it on.
-    (e.g. 'do_luvoir_BW10_small.py' designates a BW small design run on telserv3.)
-- Edit input file parameters and survey parameters, as desired.
+  are running and the name of the machine you will be running it on.
+- Define the Survey Information, Input File and Design Survey Parameters, as desired.
 - Run the script on the designated machine.
 '''
 
 import os
 
 os.chdir('../..')
+instrument = 'luvoir'  # do not edit
 from aplc_optimization.survey import DesignParameterSurvey
 from aplc_optimization.aplc import APLC
 from aplc_optimization.Inputs_Generation.LUVOIR_Inputs_Generation import LUVOIR_inputs_gen
 
-# Survey information
-instrument = 'luvoir'  # instrument name
-survey_name = 'template'  # survey name
-machine = 'local'  # name of machine the survey is run on
-N = 200  # number of pixels in input (TelAP, LS) and final (apodizer) arrays
+'''
+Survey Information
+------------------
+survey_name: str
+    The designated name of the design survey.
+machine: str
+    The name of the machine on which to run the design survey.
+N: int
+    The number of pixels in the input (TelAP, LS) and final (apodizer) arrays.
+'''
+survey_name = 'launcher_template'
+machine = 'local'
+N = 200
 
 '''
-Input (aperture and Lyot stop) Array Parameters
------------------------------------------------
+Input File Parameters
+----------------------
 Gap padding (seg_gap_pad) and grey levels (oversamp) are set according to number of input array pixels (nArray),  
 configured in order to keep gap size as close to actual physical size of LUVOIR A, as possible. 
 
@@ -34,7 +42,6 @@ configured in order to keep gap size as close to actual physical size of LUVOIR 
  - N = 300,  oversamp = 4, seg_gap_pad = 4
  - N = 200,  oversamp = 4, seg_gap_pad = 4
  - N = 100,  oversamp = 4, seg_gap_pad = 4
-
 
 N: int
     The number of pixels in input (TelAP, LS) and final (apodizer) arrays
@@ -56,7 +63,6 @@ LS_OD: float
     The Lyot stop outer diameter(s) relative to the `lyot_ref_diameter` (inscribed circle). This is re-normalized 
     against the circumscribed pupil in the `LUVOIR_inputs_gen` function.
 '''
-
 # Aperture parameters
 pupil_diameter = 15.0  # m: actual LUVOIR A circumscribed pupil diameter
 pupil_inscribed = 13.5  # m: actual LUVOIR A inscribed pupil diameter
@@ -67,13 +73,13 @@ gap_padding = 1
 lyot_ref_diam = pupil_inscribed
 ls_spid = False
 ls_spid_ov = 2
-LS_ID= 0.12
+LS_ID = 0.12
 LS_OD = 0.982
 
 # INPUT FILES PARAMETER DICTIONARY
 input_files_dict = {'directory': 'LUVOIR/', 'N': N, 'oversamp': oversamp,
                     'aperture': {'seg_gap_pad': gap_padding},
-                    'lyot_stop': {'lyot_ref_diam': lyot_ref_diam,  'ls_spid': ls_spid, 'ls_spid_ov': ls_spid_ov,
+                    'lyot_stop': {'lyot_ref_diam': lyot_ref_diam, 'ls_spid': ls_spid, 'ls_spid_ov': ls_spid_ov,
                                   'LS_ID': [LS_ID], 'LS_OD': [LS_OD]}}
 
 # INPUT FILE GENERATION
@@ -105,7 +111,6 @@ num_wavelengths: int
 contrast: int
     The contrast goal in the dark zone (exponent of 10). 
 '''
-
 # FPM Parameters
 radius = 3.5
 num_pix = 150
@@ -127,14 +132,12 @@ survey_parameters = {'pupil': {'N': N, 'filename': pup_filename},
 
 # RUN DESIGN SURVEY
 luvoir = DesignParameterSurvey(APLC, survey_parameters,
-                               'surveys/{}_{}_N{:04d}_{}/'.format(instrument, survey_name, N, machine),
-                               'masks/')
+                               'surveys/{}_{}_N{:04d}_{}/'.format(instrument, survey_name, N, machine), 'masks/')
 luvoir.describe()
 
 luvoir.write_drivers(True)
 luvoir.run_optimizations(True)
 luvoir.run_analyses(True)
-
 
 '''
 Example for multiple design parameters NOT as a grid

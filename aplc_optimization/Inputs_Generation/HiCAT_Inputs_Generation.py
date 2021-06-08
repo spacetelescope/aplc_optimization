@@ -48,7 +48,6 @@ def HiCAT_inputs_gen(input_files_dict):
 		
 	grid                        = make_uniform_grid(N, [p3_apodizer_size, p3_apodizer_size])
 
-	print("test statement")
 	print(Path().parent.resolve())
 	config = Path('masks/'+pup_filename)
 	if config.is_file():

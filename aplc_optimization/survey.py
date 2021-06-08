@@ -251,7 +251,7 @@ class DesignParameterSurvey(object):
         return num_incomplete == 0
 
     def write_drivers(self, overwrite=False):
-        """Write the driver files for each design in the survey.
+        """Write a driver script for each design in the survey.
 
         Parameters
         ----------
@@ -262,7 +262,7 @@ class DesignParameterSurvey(object):
             cor.write_driver(overwrite)
 
     def write_serial_bash_script(self, overwrite=False):
-        """Write a serial bash script.
+        """Write a bash script that will run each driver script in the survey.
 
         Parameters
         ----------
@@ -368,6 +368,12 @@ class DesignParameterSurvey(object):
         os.chmod(fname, 644)
 
     def run_analyses(self, overwrite=False, run_slow=True):
+        """Run the analysis module on each apodizer solution in the survey.
+
+        Parameters
+        ----------
+        overwrite: bool
+            Whether to overwrite the analysis files if they already exist."""
         for coronagraph in self.coronagraphs:
             coronagraph.run_analysis(overwrite, run_slow)
 
@@ -452,12 +458,12 @@ class Coronagraph(object):
         os.system(self.get_driver_command())
 
     def run_analysis(self, overwrite=False, run_slow=True):
-        '''Run analysis module on the solution file.
+        '''Run the analysis module on the solution file.
 
         Parameters
         ----------
         overwrite: bool
-            Whether to overwrite an existing analysis file.
+            Whether to overwrite the analysis files if they already exist.
         run_slow: bool
         '''
 
