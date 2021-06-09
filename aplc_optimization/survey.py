@@ -171,7 +171,8 @@ class DesignParameterSurvey(object):
             nlam = new_parameter_set['image']['num_wavelengths']
             ls_id = new_parameter_set['lyot_stop']['filename'][18:23]
             ls_od = new_parameter_set['lyot_stop']['filename'][26:30]
-            ls_strut_check = new_parameter_set['lyot_stop']['filename'][31]
+            #ls_strut_check = new_parameter_set['lyot_stop']['filename'][31]
+            ls_strut_check = 'n'
 
             if ls_strut_check == 'n':
                 ls_strut_key = 'no_ls_struts'
