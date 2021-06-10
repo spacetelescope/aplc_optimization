@@ -214,7 +214,7 @@ def analyze_aplc_design_summary(solution_filename, pdf=None):
     return {}
 
 
-def analyze_contrast_monochromatic(solution_filename, pdf=None):
+def analyze_contrast(solution_filename, pdf=None):
     """Monochromatic PSF evaluation for the APLC design.
 
     Parameters
@@ -233,28 +233,50 @@ def analyze_contrast_monochromatic(solution_filename, pdf=None):
     owa = parameters['image']['owa']
     contrast = parameters['image']['contrast']
     radius_fpm = parameters['focal_plane_mask']['radius']
-
+    num_wavelengths = parameters['image']['num_wavelengths']
+    bandwidth = parameters['image']['bandwidth']
     lyot_stop = lyot_stops[0]
 
     coro = LyotCoronagraph(pupil.grid, focal_plane_mask, lyot_stop)
     focal_grid = make_focal_grid(8, owa * 1.2)  # make_focal_grid(q, fov) - grid for a focal plane
     prop = FraunhoferPropagator(pupil.grid, focal_grid)
 
-    wf = Wavefront(pupil * apodizer)
-    img = prop(coro(wf)).intensity
-    img_ref = prop(Wavefront(apodizer * lyot_stop)).intensity
+    if num_wavelengths == 1:
+        monochromatic = True
+    else:
+        monochromatic = False
 
     fig, ax = plt.subplots()
+    if monochromatic:
+        wf = Wavefront(pupil * apodizer)
+        img = prop(coro(wf)).intensity
+        img_ref = prop(Wavefront(apodizer * lyot_stop)).intensity
 
-    plt.title('Monochromatic Normalized Irradiance')
+        # For the first subplot
+        plt.title('Monochromatic Normalized Irradiance')
+        caption = '\n \n $\mathit{\mathbf{Figure \ 1:} \ Monochromatic \ on-axis \ PSF \ in \ log \ irradiance,}$ \n ' \
+                  '$\mathit{normalized \ to \ the \ peak \ irradiance \ value.}$'
+    else:
+        wavelengths = np.linspace(-bandwidth / 2, bandwidth / 2, 11) + 1
+        img = 0
+        img_ref = 0
+        img_foc = 0
+        lyot = 0
+
+        for wl in wavelengths:
+            wf = Wavefront(pupil * apodizer, wl)
+            img += prop(coro(wf)).intensity
+            img_ref += prop(Wavefront(pupil * lyot_stop)).intensity
+
+        # For the first subplot
+        plt.title('Normalized Irradiance')
+        caption = '\n \n $\mathit{\mathbf{Figure \ 1:} \ On-axis \ PSF \ in \ log \ irradiance,}$ \n ' \
+                  '$\mathit{normalized \ to \ the \ peak \ irradiance \ value.}$'
+
+
     imshow_field(np.log10(img / img_ref.max()), vmin=-contrast - 1, vmax=-contrast + 4, cmap='inferno')
     cbar = plt.colorbar()
     cbar.set_label('log irradiance')
-
-    # For the figure caption
-    caption = '\n \n $\mathit{\mathbf{Figure \ 1:} \ Monochromatic \ on-axis \ PSF \ in \ log \ irradiance,}$ \n ' \
-              '$\mathit{normalized \ to \ the \ peak \ irradiance \ value.}$'
-
     plt.xlabel('Angular coordinate ($\lambda_0/D$)'+caption, fontsize=10)
     plt.ylabel('Angular coordinate ($\lambda_0/D$)', fontsize=10)
     plt.tick_params(axis='both', labelsize=8)
@@ -269,9 +291,28 @@ def analyze_contrast_monochromatic(solution_filename, pdf=None):
     r, profile, std_profile, n_profile = radial_profile(img / img_ref.max(), 0.2)
 
     plt.figure(figsize=(6, 6))
-
-    plt.title('\n Monochromatic Normalized Irradiance (Radial Average)')
     plt.plot(r, profile)
+    if monochromatic:
+        plt.title('\n Monochromatic Normalized Irradiance (Radial Average)')
+        caption_radial = '\n \n \n Figure 2: ' \
+                         '$\mathit{Monochromatic \ on-axis \ PSF \ azimuthally \ averaged \ over \ angular}$ \n $\mathit{seperations \ }$' \
+                         + str(round(min(r), 4)) + '-' + str(round(max(r), 4)) + '$\mathit{ \ λ/D, \ normalized \ to \ the \ peak \ irradiance. \ ' \
+                         'The \ vertical,}$ \n $\mathit{solid \ black \ line \ at \ separation \ ' + str(radius_fpm) + \
+                         '\ λ/D \ marks \ the \ radius \ of \ the \ FPM \ occulting}$ \n $\mathit{spot. \ The \ vertical, \ red ' \
+                         ' lines \ at \ ' + str(float(iwa)) + ' \ and \ ' + str(float(owa)) + \
+                         ' \ λ/D \ respectively \ indicate \ the}$ \n $\mathit{radii \ of \ the \ inner \ and \ outermost \ ' \
+                         'constraints \ applied \ during \ the \ apodizer}$\n $\mathit{optimization.}$'
+    else:
+        plt.title('\n Normalized Irradiance (Radial Average)')
+        caption_radial = '\n \n \n Figure 2: ' \
+                         '$\mathit{On-axis \ PSF \ azimuthally \ averaged \ over \ angular}$ \n $\mathit{seperations \ }$' \
+                         + str(round(min(r), 4)) + '-' + str(round(max(r), 4)) + '$\mathit{ \ λ/D, \ normalized \ to \ the \ peak \ irradiance. \ ' \
+                         'The \ vertical,}$ \n $\mathit{solid \ black \ line \ at \ separation \ ' + str(radius_fpm) + \
+                         '\ λ/D \ marks \ the \ radius \ of \ the \ FPM \ occulting}$ \n $\mathit{spot. \ The \ vertical, \ red ' \
+                         ' lines \ at \ ' + str(float(iwa)) + ' \ and \ ' + str(float(owa)) + \
+                         ' \ λ/D \ respectively \ indicate \ the}$ \n $\mathit{radii \ of \ the \ inner \ and \ outermost \ ' \
+                         'constraints \ applied \ during \ the \ apodizer}$\n $\mathit{optimization.}$'
+
     iwa_line = plt.axvline(iwa, color=colors.red, linestyle = '-.')
     owa_line = plt.axvline(owa, color=colors.red, linestyle = '--')
     radius_line = plt.axvline(radius_fpm, color='k')
@@ -279,24 +320,12 @@ def analyze_contrast_monochromatic(solution_filename, pdf=None):
     plt.legend([iwa_line, owa_line, radius_line],
                [r'$\rho_o$ = '+str(float(iwa))+r' $\lambda_0/D$', r'$\rho_i$ = '+str(float(owa))+r' $\lambda_0/D$',
                 'FPM radius = '+str(float(radius_fpm))+r' $\lambda_0/D$'])
-
-
-    caption_radial ='\n \n \n Figure 2: ' \
-                    '$\mathit{Monochromatic \ on-axis \ PSF \ azimuthally \ averaged \ over \ angular}$ \n $\mathit{seperations \ }$' \
-                    +str(round(min(r),4))+'-'+str(round(max(r),4))+'$\mathit{ \ λ/D, \ normalized \ to \ the \ peak \ irradiance. \ ' \
-                    'The \ vertical,}$ \n $\mathit{solid \ black \ line \ at \ separation \ '+str(radius_fpm)+ \
-                    '\ λ/D \ marks \ the \ radius \ of \ the \ FPM \ occulting}$ \n $\mathit{spot. \ The \ vertical, \ red ' \
-                    ' lines \ at \ '+str(float(iwa))+' \ and \ '+str(float(owa))+ \
-                    ' \ λ/D \ respectively \ indicate \ the}$ \n $\mathit{radii \ of \ the \ inner \ and \ outermost \ ' \
-                    'constraints \ applied \ during \ the \ apodizer}$\n $\mathit{optimization.}$'
-
     plt.yscale('log')
     plt.xlim(0, owa * 1.2)
     plt.ylim(5e-12, 2e-5)
     plt.ylabel('Normalized irradiance')
     plt.xlabel(r'Angular separation ($\lambda_0/D$)'+caption_radial)
     plt.tight_layout()
-
 
     if pdf is not None:
         pdf.savefig()
@@ -409,7 +438,12 @@ def analyze_summary(solution_filename, pdf=None):
     bandwidth = parameters['image']['bandwidth']
     radius_fpm = parameters['focal_plane_mask']['radius']
     contrast = parameters['image']['contrast']
+    num_wavelengths = parameters['image']['num_wavelengths']
 
+    if num_wavelengths == 1:
+        monochromatic = True
+    else:
+        monochromatic = False
     coro = LyotCoronagraph(pupil.grid, focal_plane_mask, lyot_stop)
     coro_without_lyot = LyotCoronagraph(pupil.grid, focal_plane_mask)
     focal_grid = make_focal_grid(8, owa * 1.2)
@@ -418,17 +452,25 @@ def analyze_summary(solution_filename, pdf=None):
 
     focal_plane_mask_large = 1 - circular_aperture(2 * radius_fpm)(focal_grid)
 
-    img = 0
-    img_ref = 0
-    img_foc = 0
-    lyot = 0
+    if monochromatic:
+        wf = Wavefront(pupil * apodizer)
+        img = prop(coro(wf)).intensity
+        img_foc = prop(wf).intensity
+        img_ref = prop(Wavefront(pupil * lyot_stop)).intensity
+        lyot = coro_without_lyot(wf).intensity
 
-    for wl in wavelengths:
-        wf = Wavefront(pupil * apodizer, wl)
-        img += prop(coro(wf)).intensity
-        img_foc += prop(wf).intensity
-        img_ref += prop(Wavefront(pupil * lyot_stop)).intensity
-        lyot += coro_without_lyot(wf).intensity
+    else:
+        img = 0
+        img_ref = 0
+        img_foc = 0
+        lyot = 0
+
+        for wl in wavelengths:
+            wf = Wavefront(pupil * apodizer, wl)
+            img += prop(coro(wf)).intensity
+            img_foc += prop(wf).intensity
+            img_ref += prop(Wavefront(pupil * lyot_stop)).intensity
+            lyot += coro_without_lyot(wf).intensity
 
     font = {'family': 'DejaVu Sans', 'weight': 'medium', 'size': 9}
     matplotlib.rc('font', **font)
@@ -506,22 +548,23 @@ def analyze_lyot_robustness(solution_filename, pdf=None):
     An empty dictionary.
     """
     pupil, apodizer, focal_plane_mask, lyot_stops, parameters, file_organization = create_coronagraph(solution_filename)
-
     num_pix = parameters['pupil']['N']  # px
     iwa = parameters['image']['iwa']
     owa = parameters['image']['owa']
     bandwidth = parameters['image']['bandwidth']
     radius_fpm = parameters['focal_plane_mask']['radius']
     contrast = parameters['image']['contrast']
-
+    num_wavelengths = parameters['image']['num_wavelengths']
     ls_alignment_tolerance = parameters['lyot_stop']['alignment_tolerance']
-
-    wavelengths = np.linspace(-bandwidth / 2, bandwidth / 2, 11) + 1
 
     focal_grid = make_focal_grid(8, owa * 1.2)
     prop = FraunhoferPropagator(pupil.grid, focal_grid)
-
     lyot_stop = lyot_stops[0]
+
+    if num_wavelengths == 1:
+        monochromatic = True
+    else:
+        monochromatic = False
 
     #dxs = np.array([-8, -6, -4, -2, 0, 2, 4, 6, 8])
     dxs = np.array(range(-ls_alignment_tolerance-1,+ls_alignment_tolerance+1+1,1))
@@ -536,13 +579,19 @@ def analyze_lyot_robustness(solution_filename, pdf=None):
         shifted_lyot_stop = np.roll(np.roll(lyot_stop.shaped, dx, 1), dy, 0).ravel()
         coro = LyotCoronagraph(pupil.grid, focal_plane_mask, shifted_lyot_stop)
 
-        img = 0
-        img_ref = 0
+        if monochromatic:
+            wf = Wavefront(pupil * apodizer)
+            img = prop(coro(wf)).intensity
+            img_ref = prop(Wavefront(apodizer * lyot_stop)).intensity
+        else:
+            img = 0
+            img_ref = 0
+            wavelengths = np.linspace(-bandwidth / 2, bandwidth / 2, 11) + 1
 
-        for wl in wavelengths:
-            wf = Wavefront(pupil * apodizer, wl)
-            img += prop(coro(wf)).intensity
-            img_ref += prop(Wavefront(pupil * lyot_stop)).intensity
+            for wl in wavelengths:
+                wf = Wavefront(pupil * apodizer, wl)
+                img += prop(coro(wf)).intensity
+                img_ref += prop(Wavefront(pupil * lyot_stop)).intensity
 
         x = i % len(dxs)
         y = i // len(dxs)
