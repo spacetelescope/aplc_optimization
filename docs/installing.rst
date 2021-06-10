@@ -1,7 +1,7 @@
 .. _installation:
-
+############################
 Requirements & Installation
-===========================
+############################
 
 .. warning::
 
@@ -9,20 +9,73 @@ Requirements & Installation
 
 .. _installing-with-conda:
 
-Installing with Conda
-----------------------
+Installation for Users
+======================
 
-For ease of installation, we recommend using Conda to install the ``aplc_optimization`` package as follows:
+Prerequisites
+--------------
+It is highly suggested that contributors have a working installation of anaconda or miniconda for Python 3.7. Downloads
+and installation instructions are available here:
 
-1. Clone the  ``aplc_optimization`` repository (we recommend cloning the ``develop`` branch, specifically)::
+ - `Miniconda <https://conda.io/miniconda.html>`_
+ - `Anaconda <https://www.continuum.io/downloads>`_
+
+Requirements for contributing to the ``aplc_optimization``package will be included in the aplc_optimization conda
+environment, which is included in our installation instructions below.
+
+Clone the ``aplc_optimization`` repository
+------------------------------------------
+You first need to clone the current version of ``aplc_optimization``. The simplest way to do this is to go to the
+directory you want your copy of the repository to be located and clone the repository there.
+Once you are in the directory you can do the following::
 
     $  git clone -b develop https://github.com/spacetelescope/aplc_optimization.git
-
-2. Create a new ``conda`` environment using the ``environment.yml`` file::
-
     $ cd aplc_optimization
+
+Environment Installation
+-------------------------
+Following the download of the ``aplc_optimization`` repository, install the aplc_optimization conda environment via
+the environment yaml file, which contains all of the dependencies for the project::
+
     $ conda env create --file environment.yml
     $ source activate aplc_optimization
+
+Package Installation
+--------------------
+Next, you need to install the ``aplc_optimization`` package. This can be accomplished using ``pip`` or by
+running the ``setup.py`` script::
+
+    $ pip install .
+
+or::
+
+    $ python setup.py install
+
+You can check if HCIPy is installed correctly by importing it in Python::
+
+    >>> import aplc_optimization
+
+Installation for Contributors
+==============================
+To install ``aplc-optimization`` in development mode (i.e. to make edits to the source files in the aplc_optimization
+directory), use ``pip install`` with the ``-e`` option::
+
+    pip install -e .
+
+This allows for easy updates by simply pulling the git repository::
+
+    git pull
+    git setup.py egg_info
+
+
+
+
+
+
+
+
+
+
 
 
 .. _installing-gurobi:

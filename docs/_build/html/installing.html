@@ -86,16 +86,19 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Requirements &amp; Installation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#installing-with-conda">Installing with Conda</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#installing-gurobi">Installing Gurobi</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#register-for-an-academic-account">Register for an academic account</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#download-the-gurobi-optimizer">Download the Gurobi optimizer</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#obtain-a-gurobi-license">Obtain a Gurobi license</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#test-the-gurobi-license">Test the Gurobi license</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#installation-for-users">Installation for Users</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#clone-the-aplc-optimization-repository">Clone the <code class="docutils literal notranslate"><span class="pre">aplc_optimization</span></code> repository</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#environment-installation">Environment Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#package-installation">Package Installation</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#software-requirements">Software Requirements</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#using-the-stsci-linux-servers">Using the STScI Linux Servers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#installation-for-contributors">Installation for Contributors</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#installing-gurobi">Installing Gurobi</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#software-requirements">Software Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#using-the-stsci-linux-servers">Using the STScI Linux Servers</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="server.html">Using STScI Linux Servers</a></li>
@@ -174,54 +177,99 @@
            <div itemprop="articleBody">
             
   <section id="requirements-installation">
-<span id="installation"></span><h1>Requirements &amp; Installation<a class="headerlink" href="#requirements-installation" title="Permalink to this headline">¶</a></h1>
+<h1>Requirements &amp; Installation<a class="headerlink" href="#requirements-installation" title="Permalink to this headline">¶</a></h1>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>Pardon our dust, this space is under construction.</p>
 </div>
-<section id="installing-with-conda">
-<span id="id1"></span><h2>Installing with Conda<a class="headerlink" href="#installing-with-conda" title="Permalink to this headline">¶</a></h2>
-<p>For ease of installation, we recommend using Conda to install the <code class="docutils literal notranslate"><span class="pre">aplc_optimization</span></code> package as follows:</p>
-<ol class="arabic">
-<li><p>Clone the  <code class="docutils literal notranslate"><span class="pre">aplc_optimization</span></code> repository (we recommend cloning the <code class="docutils literal notranslate"><span class="pre">develop</span></code> branch, specifically):</p>
+<section id="installation-for-users">
+<span id="installing-with-conda"></span><h2>Installation for Users<a class="headerlink" href="#installation-for-users" title="Permalink to this headline">¶</a></h2>
+<section id="prerequisites">
+<h3>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h3>
+<p>It is highly suggested that contributors have a working installation of anaconda or miniconda for Python 3.7. Downloads
+and installation instructions are available here:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><a class="reference external" href="https://conda.io/miniconda.html">Miniconda</a></p></li>
+<li><p><a class="reference external" href="https://www.continuum.io/downloads">Anaconda</a></p></li>
+</ul>
+</div></blockquote>
+<p>Requirements for contributing to the <a href="#id1"><span class="problematic" id="id2">``</span></a>aplc_optimization``package will be included in the aplc_optimization conda
+environment, which is included in our installation instructions below.</p>
+</section>
+<section id="clone-the-aplc-optimization-repository">
+<h3>Clone the <code class="docutils literal notranslate"><span class="pre">aplc_optimization</span></code> repository<a class="headerlink" href="#clone-the-aplc-optimization-repository" title="Permalink to this headline">¶</a></h3>
+<p>You first need to clone the current version of <code class="docutils literal notranslate"><span class="pre">aplc_optimization</span></code>. The simplest way to do this is to go to the
+directory you want your copy of the repository to be located and clone the repository there.
+Once you are in the directory you can do the following:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$  git clone -b develop https://github.com/spacetelescope/aplc_optimization.git
+$ cd aplc_optimization
 </pre></div>
 </div>
-</li>
-<li><p>Create a new <code class="docutils literal notranslate"><span class="pre">conda</span></code> environment using the <code class="docutils literal notranslate"><span class="pre">environment.yml</span></code> file:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cd aplc_optimization
-$ conda env create --file environment.yml
+</section>
+<section id="environment-installation">
+<h3>Environment Installation<a class="headerlink" href="#environment-installation" title="Permalink to this headline">¶</a></h3>
+<p>Following the download of the <code class="docutils literal notranslate"><span class="pre">aplc_optimization</span></code> repository, install the aplc_optimization conda environment via
+the environment yaml file, which contains all of the dependencies for the project:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ conda env create --file environment.yml
 $ source activate aplc_optimization
 </pre></div>
 </div>
-</li>
-</ol>
 </section>
+<section id="package-installation">
+<h3>Package Installation<a class="headerlink" href="#package-installation" title="Permalink to this headline">¶</a></h3>
+<p>Next, you need to install the <code class="docutils literal notranslate"><span class="pre">aplc_optimization</span></code> package. This can be accomplished using <code class="docutils literal notranslate"><span class="pre">pip</span></code> or by
+running the <code class="docutils literal notranslate"><span class="pre">setup.py</span></code> script:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ pip install .
+</pre></div>
+</div>
+<p>or:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ python setup.py install
+</pre></div>
+</div>
+<p>You can check if HCIPy is installed correctly by importing it in Python:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">aplc_optimization</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="installation-for-contributors">
+<h2>Installation for Contributors<a class="headerlink" href="#installation-for-contributors" title="Permalink to this headline">¶</a></h2>
+<p>To install <code class="docutils literal notranslate"><span class="pre">aplc-optimization</span></code> in development mode (i.e. to make edits to the source files in the aplc_optimization
+directory), use <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span></code> with the <code class="docutils literal notranslate"><span class="pre">-e</span></code> option:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">e</span> <span class="o">.</span>
+</pre></div>
+</div>
+<p>This allows for easy updates by simply pulling the git repository:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">pull</span>
+<span class="n">git</span> <span class="n">setup</span><span class="o">.</span><span class="n">py</span> <span class="n">egg_info</span>
+</pre></div>
+</div>
 <section id="installing-gurobi">
-<span id="id2"></span><h2>Installing Gurobi<a class="headerlink" href="#installing-gurobi" title="Permalink to this headline">¶</a></h2>
+<span id="id3"></span><h3>Installing Gurobi<a class="headerlink" href="#installing-gurobi" title="Permalink to this headline">¶</a></h3>
 <p>The <code class="docutils literal notranslate"><span class="pre">aplc_optimization</span></code> toolkit relies on the <cite>Gurobi solver &lt;https://www.gurobi.com/&gt;</cite>, which it calls directly from Python using the <code class="docutils literal notranslate"><span class="pre">gurobipy</span></code> package.</p>
 <section id="register-for-an-academic-account">
-<h3>Register for an academic account<a class="headerlink" href="#register-for-an-academic-account" title="Permalink to this headline">¶</a></h3>
+<h4>Register for an academic account<a class="headerlink" href="#register-for-an-academic-account" title="Permalink to this headline">¶</a></h4>
 <p>In order to download the Gurobi Optimizer you will need to first register for an account.
 If you already have an account, <a class="reference external" href="https://www.gurobi.com/login">Log In</a>. Otherwise,
 <a class="reference external" href="https://pages.gurobi.com/registration">Register</a> for a free <em>Academic</em> account.</p>
 </section>
 <section id="download-the-gurobi-optimizer">
-<span id="download-gurobi"></span><h3>Download the Gurobi optimizer<a class="headerlink" href="#download-the-gurobi-optimizer" title="Permalink to this headline">¶</a></h3>
+<span id="download-gurobi"></span><h4>Download the Gurobi optimizer<a class="headerlink" href="#download-the-gurobi-optimizer" title="Permalink to this headline">¶</a></h4>
 <p>After registering and logging in, go to the <a class="reference external" href="https://www.gurobi.com/downloads/gurobi-software/">Gurobi software download page</a>. Find your platform
 (we’ll assume Mac OS X in this document) and choose the corresponding file to download. Once downloaded, double-click on the appropriate Gurobi installer
 (e.g., <code class="docutils literal notranslate"><span class="pre">gurobi9.1.1_mac64.pkg</span></code> for Gurobi 9.1.1) and follow the prompts. By default, the installer will place the Gurobi files
 in /Library/gurobi911/mac64 (note that this is the system /Library directory, not your personal ~/Library directory).</p>
 </section>
 <section id="obtain-a-gurobi-license">
-<span id="get-gurobi-license"></span><h3>Obtain a Gurobi license<a class="headerlink" href="#obtain-a-gurobi-license" title="Permalink to this headline">¶</a></h3>
+<span id="get-gurobi-license"></span><h4>Obtain a Gurobi license<a class="headerlink" href="#obtain-a-gurobi-license" title="Permalink to this headline">¶</a></h4>
 <p>In order to use the Gurobi Optimizer, a Gurobi license is required. Once you have downloaded the Gurobi Optimizer, as above,
 visit the the <a class="reference external" href="https://www.gurobi.com/downloads/end-user-license-agreement-academic/">Academic License page</a> to
 request a free license (note: you will first need to read and agree to the End User License Agreement and the Conditions for academic use;
 once you have done so, click on “Request License”). Your new license will be visible immediately on the
 <a class="reference external" href="https://www.gurobi.com/downloads/licenses/">Current Gurobi Licenses page</a> and you can create as many academic licenses as you like.</p>
 <section id="install-the-gurobi-license">
-<h4>Install the Gurobi license<a class="headerlink" href="#install-the-gurobi-license" title="Permalink to this headline">¶</a></h4>
+<h5>Install the Gurobi license<a class="headerlink" href="#install-the-gurobi-license" title="Permalink to this headline">¶</a></h5>
 <p>Your next step is to install this Gurobi license on your machine. Once your license is visible on the
 <a class="reference external" href="https://www.gurobi.com/downloads/licenses/">Current page</a> of the Gurobi website, click on the <em>License ID</em>
 to view the License Detail page.</p>
@@ -237,7 +285,7 @@ the default location by hitting Enter. Setting up a non-default location is erro
 </section>
 </section>
 <section id="test-the-gurobi-license">
-<h3>Test the Gurobi license<a class="headerlink" href="#test-the-gurobi-license" title="Permalink to this headline">¶</a></h3>
+<h4>Test the Gurobi license<a class="headerlink" href="#test-the-gurobi-license" title="Permalink to this headline">¶</a></h4>
 <p>Once you have obtained a license key for your machine, you are ready to test your license using the Gurobi Interactive Shell.
 To do this, type <code class="docutils literal notranslate"><span class="pre">gurobi.sh</span></code> in a Terminal window. The shell should produce the following output:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Using</span> <span class="n">license</span> <span class="n">file</span> <span class="o">/</span><span class="n">Library</span><span class="o">/</span><span class="n">gurobi</span><span class="o">/</span><span class="n">gurobi</span><span class="o">.</span><span class="n">lic</span>
@@ -256,7 +304,7 @@ To do this, type <code class="docutils literal notranslate"><span class="pre">gu
 </section>
 <hr class="docutils" />
 <section id="software-requirements">
-<h2>Software Requirements<a class="headerlink" href="#software-requirements" title="Permalink to this headline">¶</a></h2>
+<h3>Software Requirements<a class="headerlink" href="#software-requirements" title="Permalink to this headline">¶</a></h3>
 <p>See <a class="reference external" href="https://github.com/spacetelescope/aplc_optimization/blob/scda_21/environment.yml">the environment.yml specification file</a> for the required package dependencies.</p>
 <p><strong>Required Python version</strong>: <code class="docutils literal notranslate"><span class="pre">aplc_optimization</span></code> requires Python 3.7 or higher.</p>
 <p><strong>Conda channels:</strong></p>
@@ -272,7 +320,7 @@ To do this, type <code class="docutils literal notranslate"><span class="pre">gu
 <div><ul class="simple">
 <li><p><a class="reference external" href="https://docs.hcipy.org/0.3.1/">hcipy</a> (for coronagraphic simulations)</p></li>
 <li><p><a class="reference external" href="https://www.gurobi.com/documentation/9.0/quickstart_mac/py_python_interface.html#section:Python">gurobi</a> (for building and running optimization models)</p></li>
-<li><p><a href="#id3"><span class="problematic" id="id4">`numpy &lt;&gt;`_</span></a> (for all numerical calculations)</p></li>
+<li><p><a href="#id4"><span class="problematic" id="id5">`numpy &lt;&gt;`_</span></a> (for all numerical calculations)</p></li>
 <li><p><a class="reference external" href="http://matplotlib.org">matplotlib</a> (for visualizations)</p></li>
 <li><p><a class="reference external" href="http://astropy.org">Astropy</a> (for fits file reading and writing)</p></li>
 <li><p><a class="reference external" href="https://pypi.org/project/asdf/">asdf</a> (for reading and writing of HCIpy objects)</p></li>
@@ -282,9 +330,10 @@ To do this, type <code class="docutils literal notranslate"><span class="pre">gu
 </div></blockquote>
 </section>
 <section id="using-the-stsci-linux-servers">
-<h2>Using the STScI Linux Servers<a class="headerlink" href="#using-the-stsci-linux-servers" title="Permalink to this headline">¶</a></h2>
+<h3>Using the STScI Linux Servers<a class="headerlink" href="#using-the-stsci-linux-servers" title="Permalink to this headline">¶</a></h3>
 <p>The Linux servers at STScI are available to optimize select high-resolution design cases, as needed. For instructions on how to
 install and use <code class="docutils literal notranslate"><span class="pre">aplc_optimization</span></code> on one of these servers, see <a class="reference internal" href="server.html#servers"><span class="std std-ref">Using STScI Linux Servers</span></a>.</p>
+</section>
 </section>
 </section>
 
