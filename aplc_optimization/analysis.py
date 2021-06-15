@@ -213,7 +213,6 @@ def analyze_aplc_design_summary(solution_filename, pdf=None):
 
     return {}
 
-
 def analyze_contrast(solution_filename, pdf=None):
     """Monochromatic PSF evaluation for the APLC design.
 

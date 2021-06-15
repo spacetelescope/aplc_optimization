@@ -109,8 +109,11 @@ def GPI_inputs_gen(input_files_dict):
 class GeminiPrimary(poppy.CompoundAnalyticOptic):
     '''The Gemini primary, adapted from of [geminiplanetimager/gpipsfs]'''
 
-    primary_diameter = 7.701  # projected diameter of baffle on M2
-    obscuration_diameter = 1.2968  # projected diameter of M2 inner oversized hole
+    #primary_diameter = 7.701  # projected diameter of baffle on M2
+    primary_diameter = 7.690  # projected diameter of baffle on M2, less 1% undersizing for alignment
+    #obscuration_diameter = 1.2968  # projected diameter of M2 inner oversized hole
+    obscuration_diameter = 1.310  # projected diameter of M2 inner hold, plus 1% oversizing for alignment
+
     support_angles = [90 - 43.10, 90 + 43.10, 270 - 43.10, 270 + 43.10]
     support_widths = [0.014, 0.01, 0.01, 0.01]  # laser vane is slightly thicker
     support_offset_y = [0.2179, -0.2179, -0.2179, 0.2179]
