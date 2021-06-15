@@ -32,6 +32,7 @@ def GPI_inputs_gen(input_files_dict):
     lyot_mask = input_files_dict['lyot_stop']['lyot_mask']
     ls_tabs = input_files_dict['lyot_stop']['ls_tabs']
     ls_spid = input_files_dict['lyot_stop']['ls_spid']
+    ls_sym = input_files_dict['lyot_stop']['ls_sym']
     ap_spid = input_files_dict['aperture']['ap_spid']
     ap_sym = input_files_dict['aperture']['ap_sym']
 
@@ -47,9 +48,14 @@ def GPI_inputs_gen(input_files_dict):
         strut_key = 'no_struts'
 
     if ls_tabs:
-        ls_filename = filepath +'LS_GPI_{0:s}_ovsamp01_{1:s}_tabs_N{2:04d}.fits'.format(lyot_mask, strut_key, N)
+        tabs_key = 'tabs'
     else:
-        ls_filename = filepath + 'LS_GPI_{0:s}_ovsamp01_{1:s}_no_tabs_N{2:04d}.fits'.format(lyot_mask, strut_key, N)
+        tabs_key = 'no_tabs'
+
+    if ls_sym:
+        ls_filename = filepath + 'LS_GPI_{0:s}_Symmetric_{1:s}_{2:s}_N{3:04d}.fits'.format(lyot_mask, strut_key, tabs_key, N)
+    else:
+        ls_filename = filepath + 'LS_GPI_{0:s}_{1:s}_{2:s}_N{3:04d}.fits'.format(lyot_mask, strut_key, tabs_key, N)
 
 
     config = Path('masks/' + pup_filename)
@@ -96,11 +102,19 @@ def GPI_inputs_gen(input_files_dict):
         hdr.set('NTABS', ls_atr.ntabs, "Number of bad actuator tabs")
         if ls_tabs:
             hdr.set('TAB_DIAM', ls_atr.tabradius * 2, "Tab diameter")
+        if ls_sym:
+            hdr.set('SYM_LS', 'Symmetric')
         hdr.set('', ls_atr.support_width, 'm: spider size')
         hdr.set('PUP_DIAM', 9.825e-3, 'm: Gemini pupil size in Lyot plane (without undersizing)')
-        hdr.set('MAG', 7.7701 / 0.009825, 'm: magnification between primary & lyot')
-        
-        fits.writeto('masks/'+ls_filename, Lyot_mask, header=hdr, overwrite=True)
+        hdr.set('MAG', 7.690 / 0.009825, 'm: magnification between primary & lyot')
+
+        if ls_sym:
+            Lyot_mask_symmetric = (Lyot_mask + Lyot_mask[::-1]) > 1.99999
+            Lyot_mask_symmetric = Lyot_mask_symmetric.astype(int)
+            fits.writeto('masks/' + ls_filename, Lyot_mask_symmetric, header=hdr, overwrite=True)
+        else:
+            fits.writeto('masks/'+ls_filename, Lyot_mask, header=hdr, overwrite=True)
+
         print('{0:s} has been written to file'.format('masks/' + ls_filename))
 
     return pup_filename, ls_filename
@@ -162,7 +176,9 @@ class GPI_LyotMask(poppy.AnalyticOpticalElement):
 
      Based on gpipsfs.GPI_LyotMask"""
 
-    magnification = 7.7701/.009825   # meters at primary/meters at Lyot
+    #magnification = 7.7701/.009825   # meters at primary/meters at Lyot
+    magnification = 7.690/.009825
+
 
     # Locations of bad actuator tabs:
     #   tab locations in millimeters on the physical Lyot mask offset from center

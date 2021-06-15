@@ -50,10 +50,11 @@ lyot_mask = '080m12_03'  # name of Lyot mask. - selected '080m12_03' because it 
 # available lyot masks are: '080m12_02', '080m12_03', '080m12_04', '080m12_04_c',
 # '080m12_06', '080m12_06_03', '080m12_07', '080m12_10', 'Open' and 'Blank'.
 ls_spid = True
+ls_sym = True
 
 input_files_dict = {'directory': 'GPI/', 'N': N,
                     'aperture': {'ap_spid': True, 'ap_sym': True},
-                    'lyot_stop': {'lyot_mask': lyot_mask, 'ls_tabs': ls_tabs, 'ls_spid': ls_spid}}
+                    'lyot_stop': {'lyot_mask': lyot_mask, 'ls_tabs': ls_tabs, 'ls_spid': ls_spid, 'ls_sym': ls_sym}}
 
 # GENERATE INPUT FILES
 pup_filename, ls_filename = GPI_inputs_gen(input_files_dict)
@@ -100,7 +101,7 @@ radius = 3.476449131  # K1 FPM
 # Optimization parameters
 contrast = 7
 IWA = 3
-OWA = 22
+OWA = 12
 bandwidth = 0.2
 num_wavelengths = 3
 resolution = 2
