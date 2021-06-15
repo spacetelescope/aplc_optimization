@@ -106,7 +106,7 @@ def GPI_inputs_gen(input_files_dict):
             hdr.set('SYM_LS', 'Symmetric')
         hdr.set('', ls_atr.support_width, 'm: spider size')
         hdr.set('PUP_DIAM', 9.825e-3, 'm: Gemini pupil size in Lyot plane (without undersizing)')
-        hdr.set('MAG', 7.690 / 0.009825, 'm: magnification between primary & lyot')
+        hdr.set('MAG', 7.7701 / 0.009825, 'm: magnification between primary & lyot')
 
         if ls_sym:
             Lyot_mask_symmetric = (Lyot_mask + Lyot_mask[::-1]) > 1.99999
