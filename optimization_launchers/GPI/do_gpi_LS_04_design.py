@@ -16,7 +16,7 @@ machine: str
 N: int
     The number of pixels in the input (Primary, LS) and final (apodizer) arrays.
 """
-survey_name = "LS_04_design"  # survey name
+survey_name = "LS_04_owa12_designs"  # survey name
 machine = "telserv3"  # machine the survey is run on.
 N = 500  # with 10µm pixels (so we have 11.68mm instead of 11.67mm diameter)
 
@@ -99,8 +99,8 @@ radius = 3.476449131  # K1 FPM
 
 # Optimization parameters
 contrast = 7
-IWA = 3
-OWA = 22
+IWA = 3, 3.4, 4
+OWA = 12
 bandwidth = 0.2
 num_wavelengths = 3
 resolution = 2
