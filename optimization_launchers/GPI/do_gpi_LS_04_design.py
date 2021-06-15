@@ -100,7 +100,7 @@ radius = 3.476449131  # K1 FPM
 # Optimization parameters
 contrast = 7
 IWA = 3, 3.4, 4
-OWA = 12
+OWA = 12, 22
 bandwidth = 0.2
 num_wavelengths = 3
 resolution = 2
