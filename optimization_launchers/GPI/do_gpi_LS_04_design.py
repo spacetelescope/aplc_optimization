@@ -16,7 +16,7 @@ machine: str
 N: int
     The number of pixels in the input (Primary, LS) and final (apodizer) arrays.
 """
-survey_name = "LS_04_owa12_designs"  # survey name
+survey_name = "LS_04_designs"  # survey name
 machine = "telserv3"  # machine the survey is run on.
 N = 500  # with 10µm pixels (so we have 11.68mm instead of 11.67mm diameter)
 
