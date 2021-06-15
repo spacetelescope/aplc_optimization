@@ -176,9 +176,7 @@ class GPI_LyotMask(poppy.AnalyticOpticalElement):
 
      Based on gpipsfs.GPI_LyotMask"""
 
-    #magnification = 7.7701/.009825   # meters at primary/meters at Lyot
-    magnification = 7.690/.009825
-
+    magnification = 7.7701/.009825   # meters at primary/meters at Lyot
 
     # Locations of bad actuator tabs:
     #   tab locations in millimeters on the physical Lyot mask offset from center
