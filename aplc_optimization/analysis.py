@@ -1,15 +1,16 @@
+import os
+import re
+import time
+
+import asdf
+# mpl.use('Agg')
+import matplotlib
 import matplotlib as mpl
+import matplotlib.pyplot as plt
 import numpy as np
 from astropy.io import fits
 from hcipy import *
 
-#mpl.use('Agg')
-import matplotlib
-import matplotlib.pyplot as plt
-import asdf
-import os
-import re
-import time
 
 def create_coronagraph(solution_filename):
     """Create APLC object from solution file.
@@ -121,23 +122,23 @@ def analyze_aplc_design_summary(solution_filename, pdf=None):
 
     pupil, apodizer, focal_plane_mask, lyot_stops, parameters, file_organization = create_coronagraph(solution_filename)
 
-    #FPM
+    # FPM
     fpm_radius = parameters['focal_plane_mask']['radius']
     fpm_num_pix = parameters['focal_plane_mask']['num_pix']
     fpm_grayscale = parameters['focal_plane_mask']['grayscale']
     fpm_field_radius = parameters['focal_plane_mask']['field_stop_radius']
-    #Image
+    # Image
     img_contrast = 10 ** (-parameters['image']['contrast'])
     img_iwa = parameters['image']['iwa']
     img_owa = parameters['image']['owa']
     img_num_wavelengths = parameters['image']['num_wavelengths']
     img_bandwidth = 100 ** parameters['image']['bandwidth']
     img_resolution = parameters['image']['resolution']
-    #Lyot stop
+    # Lyot stop
     ls_fname = parameters['lyot_stop']['filename']
     ls_alignment_tolerance = parameters['lyot_stop']['alignment_tolerance']
     ls_num_stops = parameters['lyot_stop']['num_lyot_stops']
-    #pupil
+    # pupil
     pup_fname = parameters['pupil']['filename']
     N = parameters['pupil']['N']
 
@@ -151,7 +152,6 @@ def analyze_aplc_design_summary(solution_filename, pdf=None):
         instrument = 'HiCAT'
     elif 'GPI' in pup_fname:
         instrument = 'GPI'
-
 
     regex = re.compile(r'\d+')
     pup_vals = regex.findall(pup_fname)
@@ -168,13 +168,12 @@ def analyze_aplc_design_summary(solution_filename, pdf=None):
     ls_vals = regex.findall(ls_fname)
     ls_id, ls_od = int(ls_vals[0]) / 1000, int(ls_vals[1]) / 1000
 
-
     if fpm_grayscale is True:
         gs = ' (grayscale)'
     else:
         gs = ''
 
-    fig = plt.figure(dpi=160)
+    fig = plt.figure(dpi=100)
 
     col_labels = ['$\mathbf{APLC \ Design \ Summary}$ \n\n', '']
 
@@ -197,7 +196,8 @@ def analyze_aplc_design_summary(solution_filename, pdf=None):
         [r'       $\triangleright \ \ Pupil \ file:$         ' + str(pup_fname), ''],
         [r'       $\triangleright \ \ Lyot \ stop \ file:$ ' + str(ls_fname), ''],
         ['$\mathit{Solution \ File:}$', ''],
-        [r'$\triangleright$ '+sol_fname, time.ctime(os.path.getmtime(solution_filename))]] # Last modified, date & time
+        [r'$\triangleright$ ' + sol_fname,
+         time.ctime(os.path.getmtime(solution_filename))]]  # Last modified, date & time
 
     table = ax.table(cellText=table_data, colLabels=col_labels, colWidths=[0.8, 0.3], cellLoc='left', edges='open',
                      loc='center')
@@ -212,6 +212,7 @@ def analyze_aplc_design_summary(solution_filename, pdf=None):
         plt.show()
 
     return {}
+
 
 def analyze_contrast(solution_filename, pdf=None):
     """Monochromatic PSF evaluation for the APLC design.
@@ -249,34 +250,41 @@ def analyze_contrast(solution_filename, pdf=None):
     if monochromatic:
         wf = Wavefront(pupil * apodizer)
         img = prop(coro(wf)).intensity
-        img_ref = prop(Wavefront(apodizer * lyot_stop)).intensity
+        img_ref = prop(Wavefront(apodizer * pupil * lyot_stop)).intensity
 
         # For the first subplot
         plt.title('Monochromatic Normalized Irradiance')
         caption = '\n \n $\mathit{\mathbf{Figure \ 1:} \ Monochromatic \ on-axis \ PSF \ in \ log \ irradiance,}$ \n ' \
                   '$\mathit{normalized \ to \ the \ peak \ irradiance \ value.}$'
     else:
-        wavelengths = np.linspace(-bandwidth / 2, bandwidth / 2, 11) + 1
         img = 0
         img_ref = 0
-        img_foc = 0
-        lyot = 0
+        imgs = []
+        wavelengths = np.linspace(1 - bandwidth / 2, 1 + bandwidth / 2, 11)
 
         for wl in wavelengths:
-            wf = Wavefront(pupil * apodizer, wl)
-            img += prop(coro(wf)).intensity
-            img_ref += prop(Wavefront(pupil * lyot_stop)).intensity
+            wf = Wavefront(apodizer * pupil, wl)
+            psf = prop(coro(wf)).power
+            psf_ref = prop(Wavefront(apodizer * pupil * lyot_stop, wl)).power
+
+            img += psf
+            img_ref += psf_ref
+
+            imgs.append(psf / psf_ref.max())
+
+        img /= 11
+        img_ref /= 11
 
         # For the first subplot
         plt.title('Normalized Irradiance')
         caption = '\n \n $\mathit{\mathbf{Figure \ 1:} \ On-axis \ PSF \ in \ log \ irradiance,}$ \n ' \
                   '$\mathit{normalized \ to \ the \ peak \ irradiance \ value.}$'
 
-
-    imshow_field(np.log10(img / img_ref.max()), vmin=-contrast - 1, vmax=-contrast + 4, cmap='inferno')
+    plt.figure(dpi=100)
+    imshow_field(np.log10(img / img_ref.max()), vmin=-contrast - 0.5, vmax=-contrast + 3.5, cmap='inferno')
     cbar = plt.colorbar()
     cbar.set_label('log irradiance')
-    plt.xlabel('Angular coordinate ($\lambda_0/D$)'+caption, fontsize=10)
+    plt.xlabel('Angular coordinate ($\lambda_0/D$)' + caption, fontsize=10)
     plt.ylabel('Angular coordinate ($\lambda_0/D$)', fontsize=10)
     plt.tick_params(axis='both', labelsize=8)
     plt.tight_layout()
@@ -287,43 +295,58 @@ def analyze_contrast(solution_filename, pdf=None):
     else:
         plt.show()
 
-    r, profile, std_profile, n_profile = radial_profile(img / img_ref.max(), 0.2)
+    plt.figure(figsize=(10, 8), dpi=100)
 
-    plt.figure(figsize=(6, 6))
-    plt.plot(r, profile)
     if monochromatic:
         plt.title('\n Monochromatic Normalized Irradiance (Radial Average)')
         caption_radial = '\n \n \n Figure 2: ' \
                          '$\mathit{Monochromatic \ on-axis \ PSF \ azimuthally \ averaged \ over \ angular}$ \n $\mathit{seperations \ }$' \
-                         + str(round(min(r), 4)) + '-' + str(round(max(r), 4)) + '$\mathit{ \ λ/D, \ normalized \ to \ the \ peak \ irradiance. \ ' \
-                         'The \ vertical,}$ \n $\mathit{solid \ black \ line \ at \ separation \ ' + str(radius_fpm) + \
+                         + str(round(min(r), 4)) + '-' + str(
+            round(max(r), 4)) + '$\mathit{ \ λ/D, \ normalized \ to \ the \ peak \ irradiance. \ ' \
+                                'The \ vertical,}$ \n $\mathit{solid \ black \ line \ at \ separation \ ' + str(
+            radius_fpm) + \
                          '\ λ/D \ marks \ the \ radius \ of \ the \ FPM \ occulting}$ \n $\mathit{spot. \ The \ vertical, \ red ' \
                          ' lines \ at \ ' + str(float(iwa)) + ' \ and \ ' + str(float(owa)) + \
                          ' \ λ/D \ respectively \ indicate \ the}$ \n $\mathit{radii \ of \ the \ inner \ and \ outermost \ ' \
                          'constraints \ applied \ during \ the \ apodizer}$\n $\mathit{optimization.}$'
     else:
-        plt.title('\n Normalized Irradiance (Radial Average)')
-        caption_radial = '\n \n \n Figure 2: ' \
-                         '$\mathit{On-axis \ PSF \ azimuthally \ averaged \ over \ angular}$ \n $\mathit{seperations \ }$' \
-                         + str(round(min(r), 4)) + '-' + str(round(max(r), 4)) + '$\mathit{ \ λ/D, \ normalized \ to \ the \ peak \ irradiance. \ ' \
-                         'The \ vertical,}$ \n $\mathit{solid \ black \ line \ at \ separation \ ' + str(radius_fpm) + \
-                         '\ λ/D \ marks \ the \ radius \ of \ the \ FPM \ occulting}$ \n $\mathit{spot. \ The \ vertical, \ red ' \
-                         ' lines \ at \ ' + str(float(iwa)) + ' \ and \ ' + str(float(owa)) + \
-                         ' \ λ/D \ respectively \ indicate \ the}$ \n $\mathit{radii \ of \ the \ inner \ and \ outermost \ ' \
-                         'constraints \ applied \ during \ the \ apodizer}$\n $\mathit{optimization.}$'
 
-    iwa_line = plt.axvline(iwa, color=colors.red, linestyle = '-.')
-    owa_line = plt.axvline(owa, color=colors.red, linestyle = '--')
+        cmap = mpl.cm.get_cmap('Spectral_r')
+        cols = cmap(np.linspace(0, 1, 11))
+        norm = mpl.colors.Normalize(vmin=1 - bandwidth / 2, vmax=1 + bandwidth / 2)
+
+        for contrast_at_wl, col in zip(imgs, cols):
+            r, y, _, _ = radial_profile(contrast_at_wl, 0.1)
+            plt.plot(r, y, c=col)
+
+        plt.colorbar(mpl.cm.ScalarMappable(norm, cmap)).set_label('Relative wavelength')
+
+        plt.title('\n Normalized Irradiance (Radial Average)')
+        caption_radial = '\n \n $\mathit{\mathbf{Figure \ 3}}: $' + 'Radial intensity profile for the broadband APLC design at 11 simulated wavelengths centered \n' \
+                                                                    'around $\lambda_0/D$ and equally spatially sampled over the ' + str(
+            bandwidth * 100) + '% bandpass. ' + \
+                         'The black curve shows the average \n intensity across the 11 wavelength samples. The dashed red vertical lines delimit' \
+                         'the high-contrast dark\n zone (between ' + str(iwa) + ' and ' + str(owa) + ' $\lambda_0/D$).' \
+                                                                                                     ' The blue dotted line delimits the FPM radius, set to ' + str(
+            round(radius_fpm, 2)) + ' $\lambda_0/D$. '
+
+    r, profile, std_profile, n_profile = radial_profile(img / img_ref.max(), 0.2)
+    plt.plot(r, profile, c='k', lw=2)
+    plt.ylabel('Normalized intensity in log scale')
+    plt.xlabel(r'Angular separation ($\lambda_0/D$)' + caption)
+    plt.title('')
+    plt.tight_layout()
+
+    iwa_line = plt.axvline(iwa, color=colors.red, linestyle='-.')
+    owa_line = plt.axvline(owa, color=colors.red, linestyle='--')
     radius_line = plt.axvline(radius_fpm, color='k')
     plt.axhline(10 ** (-contrast), xmin=0, xmax=owa * 1.2, linewidth=1, color='k', linestyle='--')
-    plt.legend([iwa_line, owa_line, radius_line],
-               [r'$\rho_o$ = '+str(float(iwa))+r' $\lambda_0/D$', r'$\rho_i$ = '+str(float(owa))+r' $\lambda_0/D$',
-                'FPM radius = '+str(float(radius_fpm))+r' $\lambda_0/D$'])
+    # plt.legend(loc='upper center', bbox_to_anchor=(0.5, 1.0), ncol=3, fancybox=True, shadow=True)
     plt.yscale('log')
     plt.xlim(0, owa * 1.2)
-    plt.ylim(5e-12, 2e-5)
+    plt.ylim(5e-10, 2e-5)
     plt.ylabel('Normalized irradiance')
-    plt.xlabel(r'Angular separation ($\lambda_0/D$)'+caption_radial)
+    plt.xlabel(r'Angular separation ($\lambda_0/D$)' + caption_radial)
     plt.tight_layout()
 
     if pdf is not None:
@@ -331,6 +354,59 @@ def analyze_contrast(solution_filename, pdf=None):
         plt.close()
     else:
         plt.show()
+
+    if not monochromatic:
+        wavelengths = np.linspace(0.5, 1.5, 151)
+
+        contrasts = []
+        for wl in wavelengths:
+            psf = prop(coro(Wavefront(apodizer * pupil, wl))).power
+            psf_ref = prop(Wavefront(apodizer * pupil * lyot_stop, wl)).power
+
+            r, y, _, _ = radial_profile(psf / psf_ref.max(), 0.1)
+            contrasts.append(y)
+
+        grid = CartesianGrid(SeparatedCoords([r, wavelengths]))
+        contrasts = Field(np.array(contrasts).ravel(), grid)
+
+        fig, (ax, cax) = plt.subplots(ncols=2, figsize=(10, 8), dpi=100,
+                                      gridspec_kw={"width_ratios": [1, 0.05]})
+        imshow_field(np.log10(contrasts), aspect='auto', vmin=-contrast - 0.5, vmax=-contrast + 3.5, cmap='inferno',
+                     interpolation='bilinear',
+                     ax=ax)
+        cs = contour_field(np.log10(contrasts), levels=[-7, -6, -5, -4], colors='w', linestyles='-', ax=ax)
+        ax.axhline(1 - bandwidth / 2, c='w', ls=':')
+        ax.axhline(1 + bandwidth / 2, c='w', ls=':')
+        ax.axvline(radius_fpm, c='w', ls=':')
+        ax.clabel(cs, fmt='1e%d')
+        plt.colorbar(cax=cax).set_label('log10(normalized irradiance)')
+        ax.set_xlabel('Angular separation [$\lambda_0/D$]')
+        ax.set_ylabel('Wavelength [$\lambda/\lambda_0$]')
+        ax.set_xlim(0, 20)
+
+        def ang_sep_to_arcsec(x):
+            return x * (1.593e-6 / 8) * 206265 * 1000
+
+        def arcsec_to_ang_sep(x):
+            return x / 206265 / (1.593e-6 / 8) / 1000
+
+        ax2 = ax.secondary_xaxis('top', functions=(ang_sep_to_arcsec, arcsec_to_ang_sep))
+        ax2.set_xlabel('Angular separation [mas]')
+
+        def frac_wl_to_wl(x):
+            return x * 1.593
+
+        def wl_to_frac_wl(x):
+            return x / 1.593
+
+        ax3 = ax.secondary_yaxis('right', functions=(frac_wl_to_wl, wl_to_frac_wl))
+        ax3.set_ylabel('Wavelength [um]')
+
+        if pdf is not None:
+            pdf.savefig()
+            plt.close()
+        else:
+            plt.show()
 
     return {'normalized_irradiance_image': img / img_ref.max(),
             'normalized_irradiance_radial': (r, profile, std_profile, n_profile)}
@@ -406,9 +482,9 @@ def analyze_max_throughput(solution_filename, pdf=None):
     p7ap_sum_APLC = np.sum(intens_D_0[p7ap_ind]) * dxi * dxi
     p7ap_circ_thrupt = p7ap_sum_APLC / (np.pi / 4)
 
-    print(p7ap_circ_thrupt)
+    print("\n max integrated throughput: {}".format(maximum_integrated_throughput))
 
-    fits.setval(solution_filename, 'P7APTH', value=p7ap_circ_thrupt, comment='Band-averaged r=.7 lam/D throughput')
+    fits.setval(solution_filename, 'MAX_THR', value=maximum_integrated_throughput, comment='Maximum integrated throughput')
 
     return {'P7APTH_throughput': p7ap_circ_thrupt}
 
@@ -455,7 +531,7 @@ def analyze_summary(solution_filename, pdf=None):
         wf = Wavefront(pupil * apodizer)
         img = prop(coro(wf)).intensity
         img_foc = prop(wf).intensity
-        img_ref = prop(Wavefront(pupil * lyot_stop)).intensity
+        img_ref = prop(Wavefront(apodizer * pupil * lyot_stop)).intensity
         lyot = coro_without_lyot(wf).intensity
 
     else:
@@ -468,12 +544,17 @@ def analyze_summary(solution_filename, pdf=None):
             wf = Wavefront(pupil * apodizer, wl)
             img += prop(coro(wf)).intensity
             img_foc += prop(wf).intensity
-            img_ref += prop(Wavefront(pupil * lyot_stop)).intensity
+            img_ref += prop(Wavefront(pupil * apodizer * lyot_stop)).intensity
             lyot += coro_without_lyot(wf).intensity
+
+        img /= 11
+        img_ref /= 11
+        img_foc /= 11
+        lyot /= 11
 
     font = {'family': 'DejaVu Sans', 'weight': 'medium', 'size': 9}
     matplotlib.rc('font', **font)
-
+    plt.figure(dpi=100)
     # apodizer and telescope aperture
     plt.suptitle('Analysis Summary \n \n ', fontsize=12, fontweight='bold', style='italic')
     plt.subplot(2, 3, 1)
@@ -516,7 +597,7 @@ def analyze_summary(solution_filename, pdf=None):
 
     # final image plane
     plt.subplot(2, 3, 6)
-    im = imshow_field(np.log10(img / img_ref.max()), vmin=-contrast - 1, vmax=-contrast + 4, cmap='inferno')
+    im = imshow_field(np.log10(img / img_ref.max()), vmin=-contrast - 0.5, vmax=-contrast + 3.5, cmap='inferno')
     plt.title('Final image plane')
     cb = plt.colorbar(im, fraction=0.046, pad=0.04, orientation='horizontal')
     cb.ax.tick_params(labelsize=8)
@@ -558,21 +639,32 @@ def analyze_lyot_robustness(solution_filename, pdf=None):
 
     focal_grid = make_focal_grid(8, owa * 1.2)
     prop = FraunhoferPropagator(pupil.grid, focal_grid)
+    coro_no_lyot = LyotCoronagraph(pupil.grid, focal_plane_mask)
     lyot_stop = lyot_stops[0]
+
+    def get_image(coronagraphic=True, lyot_dx=0, lyot_dy=0):
+        lyot_stop_shifted = np.roll(lyot_stop.shaped, (lyot_dy, lyot_dx), (1, 0)).ravel()
+
+        img = 0
+        for wl in np.linspace(1 - bandwidth / 2, 1 + bandwidth / 2, 11):
+            wf = Wavefront(apodizer * pupil, wl)
+            if coronagraphic:
+                wf = coro_no_lyot(wf)
+            wf.electric_field *= lyot_stop_shifted
+            img += prop(wf).power
+        return img
 
     if num_wavelengths == 1:
         monochromatic = True
     else:
         monochromatic = False
 
-    #dxs = np.array([-8, -6, -4, -2, 0, 2, 4, 6, 8])
-    dxs = np.array(range(-ls_alignment_tolerance-1,+ls_alignment_tolerance+1+1,1))
+    # dxs = np.array([-8, -6, -4, -2, 0, 2, 4, 6, 8])
+    dxs = np.array(range(-ls_alignment_tolerance - 1, +ls_alignment_tolerance + 1 + 1, 1))
 
     dither_grid = CartesianGrid(SeparatedCoords((dxs, dxs)))
 
-    E = []
-    mean_intensity = []
-    plt.figure(figsize=(8, 8))
+    plt.figure(figsize=(8, 8), dpi=100)
 
     for i, (dx, dy) in enumerate(dither_grid.points):
         shifted_lyot_stop = np.roll(np.roll(lyot_stop.shaped, dx, 1), dy, 0).ravel()
@@ -582,26 +674,34 @@ def analyze_lyot_robustness(solution_filename, pdf=None):
             wf = Wavefront(pupil * apodizer)
             img = prop(coro(wf)).intensity
             img_ref = prop(Wavefront(apodizer * lyot_stop)).intensity
-        else:
-            img = 0
-            img_ref = 0
-            wavelengths = np.linspace(-bandwidth / 2, bandwidth / 2, 11) + 1
 
-            for wl in wavelengths:
-                wf = Wavefront(pupil * apodizer, wl)
-                img += prop(coro(wf)).intensity
-                img_ref += prop(Wavefront(pupil * lyot_stop)).intensity
+        else:
+            img = get_image(lyot_dx=dx, lyot_dy=dy)
+            img_ref = get_image(coronagraphic=False, lyot_dx=dx, lyot_dy=dy)
 
         x = i % len(dxs)
         y = i // len(dxs)
 
         plt.subplot(len(dxs), len(dxs), x + (len(dxs) - y - 1) * len(dxs) + 1)
 
-        imshow_field(np.log10(img / img_ref.max()), vmin=-contrast - 1, vmax=-contrast + 4, cmap='inferno')
+        imshow_field(np.log10(img / img_ref.max()), vmin=-contrast - 0.5, vmax=-contrast + 3.5, cmap='inferno')
 
         frame1 = plt.gca()
         frame1.axes.xaxis.set_ticklabels([])
         frame1.axes.yaxis.set_ticklabels([])
+
+        #frame1.spines['bottom'].set_color('w')
+        #frame1.spines['top'].set_color('w')
+        #frame1.spines['right'].set_color('w')
+        #frame1.spines['left'].set_color('w')
+        #frame1.tick_params(axis='x', colors='w')
+        #frame1.tick_params(axis='y', colors='w')
+
+        if dx == dxs.min():
+            plt.ylabel('%.1f%%' % (dy / pupil.grid.shape[1] * 100), fontsize=8)
+
+        if dy == dxs.min():
+            plt.xlabel('%.1f%%' % (dx / pupil.grid.shape[0] * 100), fontsize=8)
 
     plt.subplots_adjust(top=0.98, bottom=0.02, left=0.02, right=0.98, wspace=0, hspace=0)
 
@@ -614,10 +714,122 @@ def analyze_lyot_robustness(solution_filename, pdf=None):
     return {}
 
 
-'''
-TODO:#
+def analyze_throughput(solution_filename, pdf=None):
+    pupil, apodizer, focal_plane_mask, lyot_stops, parameters, file_organization = create_coronagraph(solution_filename)
+    bandwidth = parameters['image']['bandwidth']
+    fpm_radius = parameters['focal_plane_mask']['radius']
 
-def analyze_calculate_throughput(solution_filename):
-	pupil, apodizer, focal_plane_mask, lyot_stops, parameters, file_organization = create_coronagraph(solution_filename)
-	
-'''
+    lyot_stop = lyot_stops[0]
+    coro = LyotCoronagraph(pupil.grid, focal_plane_mask, lyot_stop)
+
+    focal_grid_hires = make_focal_grid(64, 2)
+    prop_hires = FraunhoferPropagator(pupil.grid, focal_grid_hires)
+
+    wf_pup = Wavefront(pupil)
+
+    mask = circular_aperture(1.4)(focal_grid_hires)
+
+    tips = np.linspace(0, 10, 51)
+    core_throughputs = []
+
+    def get_image_offaxis(tip):
+        img = 0
+
+        for wl in np.linspace(1 - bandwidth / 2, 1 + bandwidth / 2, 11):
+            wf = Wavefront(apodizer * pupil * np.exp(2j * np.pi * tip / wl * pupil.grid.x), wl)
+            wf.total_power /= wf_pup.total_power
+
+            wf_post_lyot = coro(wf)
+            wf_post_lyot.electric_field *= np.exp(-2j * np.pi * tip / wl * pupil.grid.x)
+            img += prop_hires(wf_post_lyot).power
+
+        return img / 11
+
+    imgs = []
+    for tt in tips:
+        img = get_image_offaxis(tt)
+        imgs.append(img)
+
+        core_throughput = (img * mask).sum()
+        core_throughputs.append(core_throughput)
+
+    # Calculate limits monochromatically
+    wf = Wavefront(pupil)
+    wf.total_power = 1
+    img = prop_hires(wf).power
+    core_throughput_pupil = (img * mask).sum()
+
+    wf.electric_field *= lyot_stop
+    img = prop_hires(wf).power
+    core_throughput_lyot = (img * mask).sum()
+
+    wf = Wavefront(apodizer * pupil * lyot_stop)
+    wf.total_power /= wf_pup.total_power
+    img = prop_hires(wf).power
+    core_throughput_max = (img * mask).sum()
+
+    core_throughputs = np.array(core_throughputs)
+
+    half_throughput = 0.5 * core_throughput_max
+    iwa_throughput = np.interp(half_throughput, core_throughputs, tips)
+
+    plt.figure(figsize=(8, 6), dpi=100)
+    plt.axhline(core_throughput_pupil, label='Limit given by the telescope pupil', c='k', ls='--')
+    plt.axhline(core_throughput_lyot, label='Limit given by the Lyot stop', c=colors.orange, ls='--')
+    plt.plot(tips, core_throughputs, label='Core throughput of the coronagraph', c=colors.blue, lw=2)
+    plt.axhline(core_throughput_max, c=colors.blue, ls='--')
+    plt.plot([0, iwa_throughput, iwa_throughput], [half_throughput, half_throughput, 0], ls=':', c=colors.blue)
+    plt.plot([iwa_throughput], [half_throughput], 'o', c=colors.blue)
+    plt.axvline(fpm_radius, ls='--', c='k')
+    plt.xlabel('Angular separation [$\lambda/D$]')
+    plt.ylabel('Core throughput')
+    plt.xlim(0, 10)
+    plt.ylim(0, core_throughput_pupil * 1.05)
+    plt.legend(loc='lower right')
+    plt.grid(ls=':', c='0.7')
+
+    table_data = [['Pupil core throughput: ', str(core_throughput_pupil)],
+                  ['Lyot stop core throughput: ', str(core_throughput_lyot)],
+                  ['Maximum core throughput: ', str(core_throughput_max)],
+                  ['Maximum core throughput w.r.t. pupil core throughput: ',
+                   str(core_throughput_max / core_throughput_pupil)],
+                  ['Maximum core throughput w.r.t. Lyot stop core throughput: ',
+                   str(core_throughput_max / core_throughput_lyot)],
+                  ['Inner working angle: ', str(iwa_throughput) + r' $\lambda_0/D$']]
+
+    table = plt.table(cellText=table_data, colWidths=[0.7, 0.3], cellLoc='right', edges='open',
+                      bbox=[0.0, -0.45, 1, .3])
+    plt.subplots_adjust(bottom=0.3)
+
+
+    if pdf is not None:
+        pdf.savefig()
+        plt.close()
+    else:
+        plt.show()
+
+    seps = np.arange(200) * 0.25
+    index = np.argmin(np.abs(seps - iwa_throughput))
+    seps = seps[index - 4:index + 4]
+
+    img_max = get_image_offaxis(10).max()
+
+    plt.figure(dpi=100)
+    for i, sep in enumerate(seps):
+        img = get_image_offaxis(sep)
+        img.grid = img.grid.shifted([sep, 0])
+
+        plt.subplot(2, 4, i + 1)
+        plt.title('%0.2f $\lambda_0/D$' % sep)
+        imshow_field(img / img_max, cmap='inferno', vmax=1)
+
+        circle = plt.Circle((0, 0), fpm_radius, edgecolor='w', linestyle='--', fill=False)
+        plt.gca().add_patch(circle)
+
+    if pdf is not None:
+        pdf.savefig()
+        plt.close()
+    else:
+        plt.show()
+
+    return {}
