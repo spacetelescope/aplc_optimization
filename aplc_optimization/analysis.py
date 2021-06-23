@@ -121,7 +121,7 @@ def analyze_aplc_design_summary(solution_filename, pdf=None):
     """
 
     pupil, apodizer, focal_plane_mask, lyot_stops, parameters, file_organization = create_coronagraph(solution_filename)
-
+    core_throughput = analyze_throughput(solution_filename, pdf=None)
     # FPM
     fpm_radius = parameters['focal_plane_mask']['radius']
     fpm_num_pix = parameters['focal_plane_mask']['num_pix']
@@ -132,7 +132,7 @@ def analyze_aplc_design_summary(solution_filename, pdf=None):
     img_iwa = parameters['image']['iwa']
     img_owa = parameters['image']['owa']
     img_num_wavelengths = parameters['image']['num_wavelengths']
-    img_bandwidth = 100 ** parameters['image']['bandwidth']
+    img_bandwidth = parameters['image']['bandwidth'] * 100
     img_resolution = parameters['image']['resolution']
     # Lyot stop
     ls_fname = parameters['lyot_stop']['filename']
@@ -173,6 +173,21 @@ def analyze_aplc_design_summary(solution_filename, pdf=None):
     else:
         gs = ''
 
+    fname_pup = parameters['pupil']['filename']
+    fname_ls = parameters['lyot_stop']['filename']
+
+    if not os.path.isabs(fname_pup):
+        fname_pup = os.path.join(file_organization['input_files_dir'], fname_pup)
+    if not os.path.isabs(fname_ls):
+        fname_ls = os.path.join(file_organization['input_files_dir'], fname_ls)
+    fname_apod = solution_filename
+
+    TelAp = fits.getdata(fname_pup)
+    LS = fits.getdata(fname_ls)
+    A = fits.getdata(fname_apod)
+
+    maximum_integrated_throughput = ((TelAp * LS * A).sum() / (TelAp * LS).sum()) ** 2
+
     fig = plt.figure(dpi=100)
 
     col_labels = ['$\mathbf{APLC \ Design \ Summary}$ \n\n', '']
@@ -182,13 +197,15 @@ def analyze_aplc_design_summary(solution_filename, pdf=None):
     table_data = [
         ['Instrument', '$\mathtt{' + str(instrument) + '}$'],
         ['nPup', '$\mathtt{' + str(N) + ' \ x \ ' + str(N) + ' \ pixels}$'],
+        ['Coronagraphic throughput (transmitted energy)', '$\mathtt{' +str(round(float(maximum_integrated_throughput),4)) + '}$'],
+        ['Core throughput (encircled energy)', '$\mathtt{' +str(round(float(core_throughput),4)) + '}$'],
         ['Gap padding (multiplicative)', '$\mathtt{' + str(seg_gap_pad) + '}$'],
         ['Oversampling (grey levels)', '$\mathtt{' + str(oversamp) + '}$'],
         ['Lyot stop inner diamater (% of inscribed circle)', '$\mathtt{' + str(ls_id) + '}$'],
         ['Lyot stop outer diameter (% of inscribed circle)', '$\mathtt{' + str(ls_od) + '}$'],
         ['Bandpass', '$\mathtt{' + str(img_bandwidth) + '\%}$'],
         ['# wavelengths', '$\mathtt{' + str(img_num_wavelengths) + '}$'],
-        ['FPM radius' + str(gs), '$\mathtt{' + str(fpm_radius) + ' \ \lambda/D}$'],
+        ['FPM radius' + str(gs), '$\mathtt{' + str(round(fpm_radius,4)) + ' \ \lambda/D}$'],
         ['nFPM', '$\mathtt{' + str(fpm_num_pix) + ' \ pixels}$'],
         ['IWA ' + u'\u2014' + ' OWA',
          '$\mathtt{' + str(float(img_iwa)) + '\u2014' + str(float(img_owa)) + ' \ \lambda/D}$'],
@@ -254,7 +271,7 @@ def analyze_contrast(solution_filename, pdf=None):
 
         # For the first subplot
         plt.title('Monochromatic Normalized Irradiance')
-        caption = '\n \n $\mathit{\mathbf{Figure \ 1:} \ Monochromatic \ on-axis \ PSF \ in \ log \ irradiance,}$ \n ' \
+        caption = '\n \n $\mathit{ Monochromatic \ on-axis \ PSF \ in \ log \ irradiance,}$ \n ' \
                   '$\mathit{normalized \ to \ the \ peak \ irradiance \ value.}$'
     else:
         img = 0
@@ -277,7 +294,7 @@ def analyze_contrast(solution_filename, pdf=None):
 
         # For the first subplot
         plt.title('Normalized Irradiance')
-        caption = '\n \n $\mathit{\mathbf{Figure \ 1:} \ On-axis \ PSF \ in \ log \ irradiance,}$ \n ' \
+        caption = '\n \n $\mathit{ On-axis \ PSF \ in \ log \ irradiance,}$ \n ' \
                   '$\mathit{normalized \ to \ the \ peak \ irradiance \ value.}$'
 
     plt.figure(dpi=100)
@@ -299,8 +316,7 @@ def analyze_contrast(solution_filename, pdf=None):
 
     if monochromatic:
         plt.title('\n Monochromatic Normalized Irradiance (Radial Average)')
-        caption_radial = '\n \n \n Figure 2: ' \
-                         '$\mathit{Monochromatic \ on-axis \ PSF \ azimuthally \ averaged \ over \ angular}$ \n $\mathit{seperations \ }$' \
+        caption_radial = '\n \n \n $\mathit{Monochromatic \ on-axis \ PSF \ azimuthally \ averaged \ over \ angular}$ \n $\mathit{seperations \ }$' \
                          + str(round(min(r), 4)) + '-' + str(
             round(max(r), 4)) + '$\mathit{ \ λ/D, \ normalized \ to \ the \ peak \ irradiance. \ ' \
                                 'The \ vertical,}$ \n $\mathit{solid \ black \ line \ at \ separation \ ' + str(
@@ -322,7 +338,7 @@ def analyze_contrast(solution_filename, pdf=None):
         plt.colorbar(mpl.cm.ScalarMappable(norm, cmap)).set_label('Relative wavelength')
 
         plt.title('\n Normalized Irradiance (Radial Average)')
-        caption_radial = '\n \n $\mathit{\mathbf{Figure \ 3}}: $' + 'Radial intensity profile for the broadband APLC design at 11 simulated wavelengths centered \n' \
+        caption_radial = '\n \n Radial intensity profile for the broadband APLC design at 11 simulated wavelengths centered \n' \
                                                                     'around $\lambda_0/D$ and equally spatially sampled over the ' + str(
             bandwidth * 100) + '% bandpass. ' + \
                          'The black curve shows the average \n intensity across the 11 wavelength samples. The dashed red vertical lines delimit' \
@@ -445,7 +461,7 @@ def analyze_max_throughput(solution_filename, pdf=None):
     maximum_integrated_throughput = ((TelAp * LS * A).sum() / (TelAp * LS).sum()) ** 2
 
     # Account for the ratio of the diameter of the square enclosing the aperture to the circumscribed circle
-    D = 0.982
+    D = 0.982 #for gpi
     N = parameters['pupil']['N']
     rho_out = parameters['image']['owa']
     fp2res = parameters['focal_plane_mask']['num_pix']
@@ -456,7 +472,7 @@ def analyze_max_throughput(solution_filename, pdf=None):
     dy = dx
     xs = np.matrix(np.linspace(-N + 0.5, N - 0.5, N) * dx)
     ys = xs.copy()
-    M_fp2 = int(np.ceil(rho_out * fp2res))
+    M_fp2 = int(np.ceil(rho_out * fp2res))  # rounded to next intiger (owa * fpm_num_pix)
     dxi = 1. / fp2res
     xis = np.matrix(np.linspace(-M_fp2 + 0.5, M_fp2 - 0.5, 2 * M_fp2) * dxi)
     etas = xis.copy()
@@ -832,4 +848,93 @@ def analyze_throughput(solution_filename, pdf=None):
     else:
         plt.show()
 
-    return {}
+    return core_throughput_max / core_throughput_pupil
+
+def analyze_tt_jitter(solution_filename, pdf=None):
+    pupil, apodizer, focal_plane_mask, lyot_stops, parameters, file_organization = create_coronagraph(solution_filename)
+    iwa = parameters['image']['iwa']
+    owa = parameters['image']['owa']
+    bandwidth = parameters['image']['bandwidth']
+    fpm_radius = parameters['focal_plane_mask']['radius']
+    img_contrast = parameters['image']['contrast']
+    pupil_grid = pupil.grid
+    lyot_stop = lyot_stops[0]
+
+    focal_grid = make_focal_grid(8, owa * 1.2)
+
+    coro = LyotCoronagraph(pupil.grid, focal_plane_mask, lyot_stop)
+    prop = FraunhoferPropagator(pupil.grid, focal_grid)
+
+    imgs_tt = []
+
+    tt_rmss = [0.01, 0.03, 0.1, 0.3]
+    N = 100
+
+    plt.figure(figsize=(10, 8), dpi=100)
+    for i, tt_rms in enumerate(tt_rmss):
+        tips = np.random.randn(N) * tt_rms / np.sqrt(2)
+        tilts = np.random.randn(N) * tt_rms / np.sqrt(2)
+        wls = np.random.uniform(1 - bandwidth / 2, 1 + bandwidth / 2, N)
+
+        img = 0
+        img_ref = 0
+
+        for j in range(N):
+            wf = Wavefront(apodizer * pupil, wls[j])
+            wf.electric_field *= np.exp(2j * np.pi * (tips[j] * pupil_grid.x + tilts[j] * pupil_grid.y))
+
+            wf_post_lyot = coro(wf)
+            img += prop(wf_post_lyot).power
+
+            wf_nocoro = wf.copy()
+            wf_nocoro.electric_field *= lyot_stop
+            img_ref += prop(wf_nocoro).power
+
+        img /= N
+        img_ref /= N
+
+        contrast = img / img_ref.max()
+        imgs_tt.append(contrast)
+
+        plt.subplot(2, 2, i + 1)
+        plt.title('$\sigma$_rms = %.2f $\lambda/D$' % tt_rms)
+        imshow_field(np.log10(contrast), vmin=-img_contrast - 0.5, vmax=-img_contrast+ 3.5, cmap='inferno')
+        plt.suptitle(
+            '\n\n Broadband normalized irradiance for four representative levels of residual pointing jitter.',
+            fontsize=10)
+        plt.colorbar()
+
+    if pdf is not None:
+        pdf.savefig()
+        plt.close()
+    else:
+        plt.show()
+
+    plt.figure(figsize=(8, 6), dpi=100)
+    for i, img in enumerate(imgs_tt):
+        r, y, _, _ = radial_profile(img, 0.1)
+
+        plt.plot(r, y, label='$\sigma$_rms = %.2f $\lambda/D$' % tt_rmss[i])
+
+    plt.yscale('log')
+    plt.xlim(0, owa * 1.2)
+    plt.ylim(5e-10, 2e-5)
+    plt.legend(loc='upper right')
+
+    caption = '\n\n Azimuthally averaged raw contrast for four representative levels of rms residual pointing jitter.'
+
+    plt.xlabel('Angular separation [$\lambda/D$]' + caption)
+    plt.ylabel('Normalized irradiance')
+    plt.grid(ls=':', c='0.7')
+    plt.axvline(fpm_radius, ls='--', c='k')
+    iwa_line = plt.axvline(iwa, color=colors.red, linestyle='-.')
+    owa_line = plt.axvline(owa, color=colors.red, linestyle='--')
+    plt.axhline(10 ** (-7), xmin=0, xmax=owa * 1.2, linewidth=1, color='k', linestyle='--')
+    plt.axvline()
+    plt.tight_layout()
+
+    if pdf is not None:
+        pdf.savefig()
+        plt.close()
+    else:
+        plt.show()
