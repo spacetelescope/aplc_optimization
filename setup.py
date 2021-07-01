@@ -21,4 +21,5 @@ setup(name='aplc_optimization',
             'Source': 'https://github.com/spacetelescope/aplc_optimization',
             'Tracker': 'https://github.com/spacetelescope/aplc_optimization/issues'
       },
-      packages=find_packages())
+      packages=find_packages(), install_requires=['gurobipy', 'hcipy', 'scipy', 'numpy', 'astropy', 'poppy', 'asdf',
+                                                  'matplotlib', 'six'])
