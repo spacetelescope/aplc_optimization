@@ -311,6 +311,7 @@ def analyze_contrast(solution_filename, pdf=None):
 
     plt.figure(figsize=(10, 8), dpi=100)
     r, profile, std_profile, n_profile = radial_profile(img / img_ref.max(), 0.2)
+    plt.plot(r, profile, c='k', lw=2)
 
     if monochromatic:
         plt.title('\n Monochromatic Normalized Irradiance (Radial Average)')
@@ -343,7 +344,6 @@ def analyze_contrast(solution_filename, pdf=None):
                    ' The blue dotted line delimits the FPM radius, set to ' + str(round(radius_fpm, 2)) + \
                          ' $\lambda_0/D$. '
 
-    plt.plot(r, profile, c='k', lw=2)
     plt.ylabel('Normalized intensity in log scale')
     plt.xlabel(r'Angular separation ($\lambda_0/D$)' + caption)
     plt.title('')
