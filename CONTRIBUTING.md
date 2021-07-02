@@ -1,10 +1,8 @@
-Contributing to ``aplc_optimization``
-===================
+# Contributing to ``aplc_optimization``
 
 Thank you for considering contributing to ``aplc_optimization``
 
-How to contribute
------------------
+## How to contribute
 
 The preferred workflow for contributing to Coronagraphs is to fork the
 [main repository](https://github.com/spacetelescope/aplc_optimization/) on
@@ -52,8 +50,7 @@ to create a pull request from your fork. This will send an email to the committe
 For more information please see the [Git documentation](https://git-scm.com/documentation) 
 or ask another contributor for help.
 
-Pull Request Checklist
-----------------------
+## Pull Request Checklist
 
 We recommended that your contribution complies with the
 following rules before you submit a pull request:
@@ -130,8 +127,8 @@ Bonus points for contributions that include a performance analysis with
 a benchmark script and profiling output (please report on the mailing
 list or on the GitHub issue).
 
-Filing bugs
------------
+## Filing bugs
+
 We use Github issues to track all bugs and feature requests; feel free to
 open an issue if you have found a bug or wish to see a feature implemented.
 
@@ -163,8 +160,7 @@ following rules before submitting:
    or link to a [gist](https://gist.github.com). If an exception is raised,
    please provide the traceback.
 
-New contributor tips
---------------------
+## New contributor tips
 
 A great way to start contributing to ``aplc_optimization`` is to pick an item
 from the list of [issues](https://github.com/spacetelescope/aplc_optimization/issues)
@@ -174,8 +170,7 @@ assistance in this area will be greatly appreciated by the more
 experienced developers as it helps free up their time to concentrate on
 other issues.
 
-Documentation
--------------
+## Documentation
 
 We are glad to accept any sort of documentation: function docstrings,
 reStructuredText documents (like this one), tutorials, etc.
