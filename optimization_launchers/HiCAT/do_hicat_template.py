@@ -1,37 +1,28 @@
 '''
-DO NOT RUN THIS SCRIPT - this is the launcher template for HiCAT design surveys.
+DO NOT RUN THIS SCRIPT - It is the launcher template for HiCAT design surveys.
 
 Workflow:
 - Make a copy of this script.
 - Rename the copy with the following naming schema: 'do_hicat_<survey_name>_<machine>.py', designating the name of the
   survey you are running and the machine you will be running it on.
-- Define the Survey Information, Input File and Survey Design parameters, as desired.
-- Run the launcher script on the designated machine.
+- Run the launcher on the designated machine.
 '''
 
 import os
 
 os.chdir('../..')
-instrument = 'hicat'  # do not edit
 from aplc_optimization.survey import DesignParameterSurvey
 from aplc_optimization.aplc import APLC
 from aplc_optimization.Inputs_Generation.HiCAT_Inputs_Generation import HiCAT_inputs_gen
 
-"""
-Survey information
-------------------
-survey_name: str
-    The designated name of the design survey.
-machine: str
-    The name of the machine on which to run the design survey.
-N: int
-    The number of pixels in the input (ApodMask, LS) and final (apodizer) arrays.
-"""
-survey_name = 'launcher_template'
-machine = 'local'
-N = 100
+# Survey information
+instrument = 'hicat'  # instrument name
+survey_name = 'launcher_template'  # survey name
+machine = 'local'  # machine the survey is run on.
 
-"""
+N = 486  # number of pixels in input (TelAP, LS) and final (apodizer) arrays
+
+'''
 Input (aperture and Lyot stop) Array Parameters
 -----------------------------------------------
 N: int
@@ -52,11 +43,12 @@ ls_spid: bool
     Whether to include secondary support mirror structure in the aperture.
 ls_grey: bool
     Whether to model a grey lyot stop, else black and white.
-"""
+'''
+
 # Aperture parameters
 pupil_mask_size = 19.85e-3  # m: p1 pupil mask size
 pup_diam = 19.725e-3  # m: p3 apodizer size
-ap_spid = True
+ap_spid = False
 ap_gap = True
 ap_grey = False
 
@@ -69,7 +61,8 @@ ls_grey = False
 # INPUT FILES PARAMETER DICTIONARY
 input_files_dict = {'directory': 'HiCAT/', 'N': N,
                     'aperture': {'ap_spid': ap_spid, 'ap_gap': ap_gap, 'ap_grey': ap_grey, 'pup_diam': pup_diam},
-                    'lyot_stop': {'ls_spid': ls_spid, 'ls_grey': ls_grey, 'LS_ID': [LS_ID], 'LS_OD': [LS_OD]}}
+                    'lyot_stop': {'ls_spid': ls_spid, 'ls_grey': ls_grey, 'LS_ID': [LS_ID],
+                                  'LS_OD': [LS_OD]}}
 
 # INPUT FILE GENERATION
 pup_filename, ls_filenames = HiCAT_inputs_gen(input_files_dict)
@@ -112,6 +105,7 @@ ending_scale: int
     The number of pixels per unit cell for the final solution. If this is the same as `starting_scale`,
     the adaptive algorithm is essentially turned off.
 '''
+
 # Lyot stop parameters
 alignment_tolerance = 1  # pixels
 num_lyot_stops = 1
@@ -128,7 +122,7 @@ contrast = 8  # 10-<value>
 iwa = 3.75  # lamda_0/D
 owa = 15  # lambda_0/D
 bandwidth = 0.1
-num_wavelengths = 3
+num_wavelengths = 1
 resolution = 2.5
 
 # Optimization method

@@ -59,11 +59,12 @@ satspots = False
 ls_tabs = False
 lyot_mask = '080m12_04'
 ls_spid = True
+ls_sym = True
 
 # INPUT FILES PARAMETER DICTIONARY
 input_files_dict = {'directory': 'GPI/', 'N': N,
                     'aperture': {'ap_spid': True, 'ap_sym': True},
-                    'lyot_stop': {'lyot_mask': lyot_mask, 'ls_tabs': ls_tabs, 'ls_spid': ls_spid}}
+                    'lyot_stop': {'lyot_mask': lyot_mask, 'ls_tabs': ls_tabs, 'ls_spid': ls_spid, 'ls_sym': ls_sym}}
 
 # INPUT FILE GENERATION
 pup_filename, ls_filename = GPI_inputs_gen(
