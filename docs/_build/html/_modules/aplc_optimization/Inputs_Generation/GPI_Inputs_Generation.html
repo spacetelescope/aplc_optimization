@@ -1,25 +1,37 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>aplc_optimization.Inputs_Generation.GPI_Inputs_Generation &mdash; aplc_optimization  documentation</title>
   
 
   
+  <link rel="stylesheet" href="../../../_static/stsci.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/stsci.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/stsci.css" type="text/css" />
+
+  
   
     <link rel="shortcut icon" href="../../../_static/logo.jpg"/>
   
+
   
   
 
   
-  <script type="text/javascript" src="../../../_static/js/modernizr.min.js"></script>
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
@@ -31,14 +43,6 @@
     <script type="text/javascript" src="../../../_static/js/theme.js"></script>
 
     
-
-  
-  <link rel="stylesheet" href="../../../_static/stsci.css" type="text/css" />
-  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../../../_static/stsci.css" type="text/css" />
-  <link rel="stylesheet" href="../../../_static/graphviz.css" type="text/css" />
-  <link rel="stylesheet" href="../../../_static/stsci.css" type="text/css" />
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" /> 
 </head>
@@ -72,6 +76,7 @@
   
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -83,7 +88,6 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../introduction.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../installing.html">Requirements &amp; Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../server.html">Using STScI Linux Servers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../workflow.html">Design Survey Workflow</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Detailed API Reference</span></p>
@@ -99,6 +103,7 @@
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -133,11 +138,13 @@
 
 
 
+
+
 <div role="navigation" aria-label="breadcrumbs navigation">
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
         
           <li><a href="../../index.html">Module code</a> &raquo;</li>
         
@@ -157,21 +164,18 @@
            <div itemprop="articleBody">
             
   <h1>Source code for aplc_optimization.Inputs_Generation.GPI_Inputs_Generation</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">hcipy</span> <span class="kn">import</span> <span class="o">*</span>
-<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
-<span class="kn">from</span> <span class="nn">astropy.io</span> <span class="kn">import</span> <span class="n">fits</span>
-<span class="c1">#import gpipsfs</span>
-<span class="kn">import</span> <span class="nn">poppy</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">astropy.units</span> <span class="k">as</span> <span class="nn">u</span>
-<span class="kn">import</span> <span class="nn">os</span>
+<span></span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 
-<span class="c1">#_grayscale_pixels=4</span>
-<span class="n">_default_pupil_array_size</span> <span class="o">=</span> <span class="mi">8</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">m</span>
+<span class="kn">import</span> <span class="nn">astropy.units</span> <span class="k">as</span> <span class="nn">u</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">poppy</span>
+<span class="kn">from</span> <span class="nn">astropy.io</span> <span class="kn">import</span> <span class="n">fits</span>
+
+<span class="n">_default_pupil_array_size</span> <span class="o">=</span> <span class="mi">8</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">m</span>
 
 
 <div class="viewcode-block" id="GPI_inputs_gen"><a class="viewcode-back" href="../../../api/aplc_optimization.Inputs_Generation.GPI_Inputs_Generation.GPI_inputs_gen.html#aplc_optimization.Inputs_Generation.GPI_Inputs_Generation.GPI_inputs_gen">[docs]</a><span class="k">def</span> <span class="nf">GPI_inputs_gen</span><span class="p">(</span><span class="n">input_files_dict</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Generate GPI Primary and Lyot stop(s) for the APLC coronagraph and write to file.</span>
+    <span class="sd">&quot;&quot;&quot;Generate the GPI Primary and Lyot stop(s) for the APLC coronagraph and write to file.</span>
 <span class="sd">        </span>
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -191,9 +195,9 @@
     <span class="n">lyot_mask</span> <span class="o">=</span> <span class="n">input_files_dict</span><span class="p">[</span><span class="s1">&#39;lyot_stop&#39;</span><span class="p">][</span><span class="s1">&#39;lyot_mask&#39;</span><span class="p">]</span>
     <span class="n">ls_tabs</span> <span class="o">=</span> <span class="n">input_files_dict</span><span class="p">[</span><span class="s1">&#39;lyot_stop&#39;</span><span class="p">][</span><span class="s1">&#39;ls_tabs&#39;</span><span class="p">]</span>
     <span class="n">ls_spid</span> <span class="o">=</span> <span class="n">input_files_dict</span><span class="p">[</span><span class="s1">&#39;lyot_stop&#39;</span><span class="p">][</span><span class="s1">&#39;ls_spid&#39;</span><span class="p">]</span>
+    <span class="n">ls_sym</span> <span class="o">=</span> <span class="n">input_files_dict</span><span class="p">[</span><span class="s1">&#39;lyot_stop&#39;</span><span class="p">][</span><span class="s1">&#39;ls_sym&#39;</span><span class="p">]</span>
     <span class="n">ap_spid</span> <span class="o">=</span> <span class="n">input_files_dict</span><span class="p">[</span><span class="s1">&#39;aperture&#39;</span><span class="p">][</span><span class="s1">&#39;ap_spid&#39;</span><span class="p">]</span>
     <span class="n">ap_sym</span> <span class="o">=</span> <span class="n">input_files_dict</span><span class="p">[</span><span class="s1">&#39;aperture&#39;</span><span class="p">][</span><span class="s1">&#39;ap_sym&#39;</span><span class="p">]</span>
-
 
     <span class="k">if</span> <span class="n">ap_sym</span><span class="p">:</span>
         <span class="n">pup_filename</span> <span class="o">=</span> <span class="n">filepath</span> <span class="o">+</span> <span class="s1">&#39;Primary_GPI_Symmetric_Spid</span><span class="si">{0:}</span><span class="s1">_N</span><span class="si">{1:04d}</span><span class="s1">.fits&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ap_spid</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
@@ -206,18 +210,19 @@
         <span class="n">strut_key</span> <span class="o">=</span> <span class="s1">&#39;no_struts&#39;</span>
 
     <span class="k">if</span> <span class="n">ls_tabs</span><span class="p">:</span>
-        <span class="n">ls_filename</span> <span class="o">=</span> <span class="n">filepath</span> <span class="o">+</span><span class="s1">&#39;LS_GPI_</span><span class="si">{0:s}</span><span class="s1">_ovsamp01_</span><span class="si">{1:s}</span><span class="s1">_tabs_N</span><span class="si">{2:04d}</span><span class="s1">.fits&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">lyot_mask</span><span class="p">,</span> <span class="n">strut_key</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
+        <span class="n">tabs_key</span> <span class="o">=</span> <span class="s1">&#39;tabs&#39;</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">ls_filename</span> <span class="o">=</span> <span class="n">filepath</span> <span class="o">+</span> <span class="s1">&#39;LS_GPI_</span><span class="si">{0:s}</span><span class="s1">_ovsamp01_</span><span class="si">{1:s}</span><span class="s1">_no_tabs_N</span><span class="si">{2:04d}</span><span class="s1">.fits&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">lyot_mask</span><span class="p">,</span> <span class="n">strut_key</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
+        <span class="n">tabs_key</span> <span class="o">=</span> <span class="s1">&#39;no_tabs&#39;</span>
 
+    <span class="k">if</span> <span class="n">ls_sym</span><span class="p">:</span>
+        <span class="n">ls_filename</span> <span class="o">=</span> <span class="n">filepath</span> <span class="o">+</span> <span class="s1">&#39;LS_GPI_</span><span class="si">{0:s}</span><span class="s1">_Symmetric_</span><span class="si">{1:s}</span><span class="s1">_</span><span class="si">{2:s}</span><span class="s1">_N</span><span class="si">{3:04d}</span><span class="s1">.fits&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">lyot_mask</span><span class="p">,</span> <span class="n">strut_key</span><span class="p">,</span>
+                                                                                           <span class="n">tabs_key</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">ls_filename</span> <span class="o">=</span> <span class="n">filepath</span> <span class="o">+</span> <span class="s1">&#39;LS_GPI_</span><span class="si">{0:s}</span><span class="s1">_</span><span class="si">{1:s}</span><span class="s1">_</span><span class="si">{2:s}</span><span class="s1">_N</span><span class="si">{3:04d}</span><span class="s1">.fits&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">lyot_mask</span><span class="p">,</span> <span class="n">strut_key</span><span class="p">,</span> <span class="n">tabs_key</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
 
     <span class="n">config</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s1">&#39;masks/&#39;</span> <span class="o">+</span> <span class="n">pup_filename</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
-    <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">        Checks if aperture file already exists, otherwise creates GPI aperture by calling</span>
-<span class="sd">        GeminiPrimary() </span>
-<span class="sd">        &#39;&#39;&#39;</span>
 
+    <span class="c1"># Check if primary file already exists, otherwise create GPI primary file</span>
     <span class="k">if</span> <span class="n">config</span><span class="o">.</span><span class="n">is_file</span><span class="p">():</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{0:s}</span><span class="s1"> exists&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;masks/&#39;</span> <span class="o">+</span> <span class="n">pup_filename</span><span class="p">))</span>
     <span class="k">else</span><span class="p">:</span>
@@ -228,24 +233,21 @@
         <span class="n">hdr</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s1">&#39;NAME&#39;</span><span class="p">,</span> <span class="s1">&#39;GEMINI SOUTH PRIMARY&#39;</span><span class="p">)</span>
         <span class="n">hdr</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s1">&#39;D_CIRC&#39;</span><span class="p">,</span> <span class="mf">7.701</span><span class="p">,</span> <span class="s1">&#39;m: projected diameter of baffle on M2&#39;</span><span class="p">)</span>
         <span class="n">hdr</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s1">&#39;D_INSC&#39;</span><span class="p">,</span> <span class="mf">1.2968</span><span class="p">,</span> <span class="s1">&#39;m: projected diameter of M2 inner oversized hole&#39;</span><span class="p">)</span>
-        <span class="c1">#hdr.set(&#39;STRUT_W&#39;, &#39;0.01, 0.014&#39;, &#39;m: actual support strut widths (laser vane is slightly thicker)&#39;)</span>
-        <span class="c1">#hdr.set(&#39;STRUT_ST&#39;, -0.2179, &#39;m: angle lower spiders offset from y&#39;)</span>
-        <span class="c1">#hdr.set(&#39;STRUT_AN&#39;, 226.9, &#39;deg: angle lower spiders offset from vertical&#39;)</span>
+        <span class="c1"># hdr.set(&#39;STRUT_W&#39;, &#39;0.01, 0.014&#39;, &#39;m: actual support strut widths (laser vane is slightly thicker)&#39;)</span>
+        <span class="c1"># hdr.set(&#39;STRUT_ST&#39;, -0.2179, &#39;m: angle lower spiders offset from y&#39;)</span>
+        <span class="c1"># hdr.set(&#39;STRUT_AN&#39;, 226.9, &#39;deg: angle lower spiders offset from vertical&#39;)</span>
 
-        <span class="n">fits</span><span class="o">.</span><span class="n">writeto</span><span class="p">(</span><span class="s1">&#39;masks/&#39;</span><span class="o">+</span><span class="n">pup_filename</span><span class="p">,</span> <span class="n">GPI_primary</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="n">hdr</span><span class="p">,</span> <span class="n">overwrite</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">fits</span><span class="o">.</span><span class="n">writeto</span><span class="p">(</span><span class="s1">&#39;masks/&#39;</span> <span class="o">+</span> <span class="n">pup_filename</span><span class="p">,</span> <span class="n">GPI_primary</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="n">hdr</span><span class="p">,</span> <span class="n">overwrite</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{0:s}</span><span class="s1"> has been written to file&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;masks/&#39;</span> <span class="o">+</span> <span class="n">pup_filename</span><span class="p">))</span>
 
     <span class="n">config</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s1">&#39;masks/&#39;</span> <span class="o">+</span> <span class="n">ls_filename</span><span class="p">)</span>
-    <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">        Checks if lyot stop file already exists, otherwise creates GPI aperture by calling</span>
-<span class="sd">        GPI_LyotMask() [gpipsfs/gpipsfs/main.py]</span>
-<span class="sd">        &#39;&#39;&#39;</span>
 
+    <span class="c1"># Check if lyot stop file already exists, otherwise create GPI Lyot mask file</span>
     <span class="k">if</span> <span class="n">config</span><span class="o">.</span><span class="n">is_file</span><span class="p">():</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{0:s}</span><span class="s1"> exists&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;masks/&#39;</span> <span class="o">+</span> <span class="n">ls_filename</span><span class="p">))</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">Lyot_mask</span> <span class="o">=</span> <span class="n">GPI_LyotMask</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">lyot_mask</span><span class="p">,</span> <span class="n">tabs</span><span class="o">=</span><span class="n">ls_tabs</span><span class="p">)</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">npix</span><span class="o">=</span><span class="n">N</span><span class="p">,</span> <span class="n">grid_size</span><span class="o">=</span><span class="mf">8.0</span><span class="p">)</span>
-        
+
         <span class="n">ls_atr</span> <span class="o">=</span> <span class="n">GPI_LyotMask</span><span class="p">(</span><span class="n">lyot_mask</span><span class="p">)</span>
         <span class="n">hdr</span> <span class="o">=</span> <span class="n">fits</span><span class="o">.</span><span class="n">Header</span><span class="p">()</span>
         <span class="n">hdr</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s1">&#39;TELESCOP&#39;</span><span class="p">,</span> <span class="s1">&#39;GPI&#39;</span><span class="p">)</span>
@@ -255,33 +257,44 @@
         <span class="n">hdr</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s1">&#39;NTABS&#39;</span><span class="p">,</span> <span class="n">ls_atr</span><span class="o">.</span><span class="n">ntabs</span><span class="p">,</span> <span class="s2">&quot;Number of bad actuator tabs&quot;</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">ls_tabs</span><span class="p">:</span>
             <span class="n">hdr</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s1">&#39;TAB_DIAM&#39;</span><span class="p">,</span> <span class="n">ls_atr</span><span class="o">.</span><span class="n">tabradius</span> <span class="o">*</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;Tab diameter&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">ls_sym</span><span class="p">:</span>
+            <span class="n">hdr</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s1">&#39;SYM_LS&#39;</span><span class="p">,</span> <span class="s1">&#39;Symmetric&#39;</span><span class="p">)</span>
         <span class="n">hdr</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">ls_atr</span><span class="o">.</span><span class="n">support_width</span><span class="p">,</span> <span class="s1">&#39;m: spider size&#39;</span><span class="p">)</span>
         <span class="n">hdr</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s1">&#39;PUP_DIAM&#39;</span><span class="p">,</span> <span class="mf">9.825e-3</span><span class="p">,</span> <span class="s1">&#39;m: Gemini pupil size in Lyot plane (without undersizing)&#39;</span><span class="p">)</span>
         <span class="n">hdr</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s1">&#39;MAG&#39;</span><span class="p">,</span> <span class="mf">7.7701</span> <span class="o">/</span> <span class="mf">0.009825</span><span class="p">,</span> <span class="s1">&#39;m: magnification between primary &amp; lyot&#39;</span><span class="p">)</span>
-        
-        <span class="n">fits</span><span class="o">.</span><span class="n">writeto</span><span class="p">(</span><span class="s1">&#39;masks/&#39;</span><span class="o">+</span><span class="n">ls_filename</span><span class="p">,</span> <span class="n">Lyot_mask</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="n">hdr</span><span class="p">,</span> <span class="n">overwrite</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">ls_sym</span><span class="p">:</span>
+            <span class="n">Lyot_mask_symmetric</span> <span class="o">=</span> <span class="p">(</span><span class="n">Lyot_mask</span> <span class="o">+</span> <span class="n">Lyot_mask</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">&gt;</span> <span class="mf">1.99999</span>
+            <span class="n">Lyot_mask_symmetric</span> <span class="o">=</span> <span class="n">Lyot_mask_symmetric</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+            <span class="n">fits</span><span class="o">.</span><span class="n">writeto</span><span class="p">(</span><span class="s1">&#39;masks/&#39;</span> <span class="o">+</span> <span class="n">ls_filename</span><span class="p">,</span> <span class="n">Lyot_mask_symmetric</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="n">hdr</span><span class="p">,</span> <span class="n">overwrite</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">fits</span><span class="o">.</span><span class="n">writeto</span><span class="p">(</span><span class="s1">&#39;masks/&#39;</span> <span class="o">+</span> <span class="n">ls_filename</span><span class="p">,</span> <span class="n">Lyot_mask</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="n">hdr</span><span class="p">,</span> <span class="n">overwrite</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{0:s}</span><span class="s1"> has been written to file&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;masks/&#39;</span> <span class="o">+</span> <span class="n">ls_filename</span><span class="p">))</span>
 
     <span class="k">return</span> <span class="n">pup_filename</span><span class="p">,</span> <span class="n">ls_filename</span></div>
 
 
 <div class="viewcode-block" id="GeminiPrimary"><a class="viewcode-back" href="../../../api/aplc_optimization.Inputs_Generation.GPI_Inputs_Generation.GeminiPrimary.html#aplc_optimization.Inputs_Generation.GPI_Inputs_Generation.GeminiPrimary">[docs]</a><span class="k">class</span> <span class="nc">GeminiPrimary</span><span class="p">(</span><span class="n">poppy</span><span class="o">.</span><span class="n">CompoundAnalyticOptic</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;The Gemini primary, adapted from of [geminiplanetimager/gpipsfs]&#39;&#39;&#39;</span>
+    <span class="sd">&quot;&quot;&quot;Adapted from [geminiplanetimager/gpipsfs/main]&quot;&quot;&quot;</span>
 
-    <span class="n">primary_diameter</span> <span class="o">=</span> <span class="mf">7.701</span>  <span class="c1"># projected diameter of baffle on M2</span>
-    <span class="n">obscuration_diameter</span> <span class="o">=</span> <span class="mf">1.2968</span>  <span class="c1"># projected diameter of M2 inner oversized hole</span>
+    <span class="c1"># primary_diameter = 7.701  # projected diameter of baffle on M2</span>
+    <span class="n">primary_diameter</span> <span class="o">=</span> <span class="mf">7.690</span>  <span class="c1"># projected diameter of baffle on M2, less 1% undersizing for alignment</span>
+    <span class="c1"># obscuration_diameter = 1.2968  # projected diameter of M2 inner oversized hole</span>
+    <span class="n">obscuration_diameter</span> <span class="o">=</span> <span class="mf">1.310</span>  <span class="c1"># projected diameter of M2 inner hold, plus 1% oversizing for alignment</span>
+
     <span class="n">support_angles</span> <span class="o">=</span> <span class="p">[</span><span class="mi">90</span> <span class="o">-</span> <span class="mf">43.10</span><span class="p">,</span> <span class="mi">90</span> <span class="o">+</span> <span class="mf">43.10</span><span class="p">,</span> <span class="mi">270</span> <span class="o">-</span> <span class="mf">43.10</span><span class="p">,</span> <span class="mi">270</span> <span class="o">+</span> <span class="mf">43.10</span><span class="p">]</span>
     <span class="n">support_widths</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.014</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">]</span>  <span class="c1"># laser vane is slightly thicker</span>
     <span class="n">support_offset_y</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.2179</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.2179</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.2179</span><span class="p">,</span> <span class="mf">0.2179</span><span class="p">]</span>
     <span class="n">_default_display_size</span> <span class="o">=</span> <span class="n">_default_pupil_array_size</span>  <span class="c1"># choose reasonable size for display and sampling.</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Gemini South Primary&#39;</span><span class="p">,</span> <span class="n">undersized</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">force_symmetric</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;The GPI Primary.</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Gemini South Primary&#39;</span><span class="p">,</span> <span class="n">force_symmetric</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Make the Gemini South Primary.</span>
 
 <span class="sd">            Parameters</span>
 <span class="sd">            ----------</span>
 <span class="sd">            name: string</span>
-<span class="sd">                The name of the instrument</span>
+<span class="sd">                The name of the instrument.</span>
 <span class="sd">            force_symmetric: bool</span>
 <span class="sd">                Whether to model the primary as precisely symmetric by treating all 4 struts as the same thickness.</span>
 <span class="sd">                Forcing the primary to be symmetric will reduce the size of the optimization problem and hence</span>
@@ -298,8 +311,6 @@
         <span class="c1"># Secondary obscuration from pupil diagram provided by Gemini</span>
 
         <span class="n">sr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">obscuration_diameter</span> <span class="o">/</span> <span class="mi">2</span>
-        <span class="k">if</span> <span class="n">undersized</span><span class="p">:</span>
-            <span class="n">sr</span> <span class="o">=</span> <span class="mf">1.02375</span> <span class="o">/</span> <span class="mi">2</span>  <span class="c1"># SM outer diameter (vs inner hole projected diameter)</span>
 
         <span class="n">support_width</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">support_widths</span><span class="p">)</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">force_symmetric</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">support_widths</span>
 
@@ -314,67 +325,77 @@
 
 
 <div class="viewcode-block" id="GPI_LyotMask"><a class="viewcode-back" href="../../../api/aplc_optimization.Inputs_Generation.GPI_Inputs_Generation.GPI_LyotMask.html#aplc_optimization.Inputs_Generation.GPI_Inputs_Generation.GPI_LyotMask">[docs]</a><span class="k">class</span> <span class="nc">GPI_LyotMask</span><span class="p">(</span><span class="n">poppy</span><span class="o">.</span><span class="n">AnalyticOpticalElement</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Model the GPI Lyot stop mask.</span>
+    <span class="sd">&quot;&quot;&quot;Adapted from [geminiplanetimager/gpipsfs/main]&quot;&quot;&quot;</span>
 
-<span class="sd">     Based on gpipsfs.GPI_LyotMask&quot;&quot;&quot;</span>
-
-    <span class="n">magnification</span> <span class="o">=</span> <span class="mf">7.7701</span><span class="o">/.</span><span class="mi">009825</span>   <span class="c1"># meters at primary/meters at Lyot</span>
+    <span class="n">magnification</span> <span class="o">=</span> <span class="mf">7.7701</span> <span class="o">/</span> <span class="o">.</span><span class="mi">009825</span>  <span class="c1"># meters at primary/meters at Lyot</span>
 
     <span class="c1"># Locations of bad actuator tabs:</span>
     <span class="c1">#   tab locations in millimeters on the physical Lyot mask offset from center</span>
     <span class="c1">#   3rd coordinate defines type of linear extension 1:radial, 2:to spider, 0: none</span>
     <span class="c1">#  REFERENCE:  CAD drawings and &#39;mask design notes 2012.pptx&#39; in [GPIMAIN/Instrument docs/coronagraph masks]</span>
-    <span class="n">bad_actuator_tab_locations</span> <span class="o">=</span> <span class="p">[</span> <span class="p">(</span><span class="mf">3.977</span><span class="p">,</span> <span class="mf">1.932</span><span class="p">,</span>  <span class="mi">1</span><span class="p">),</span>
-                                   <span class="p">(</span><span class="o">-</span><span class="mf">2.614</span><span class="p">,</span> <span class="mf">3.750</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
-                                   <span class="p">(</span><span class="mf">2.614</span><span class="p">,</span> <span class="o">-</span><span class="mf">3.977</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
-                                   <span class="p">(</span><span class="o">-</span><span class="mf">1.932</span><span class="p">,</span><span class="o">-</span><span class="mf">1.250</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
-                                   <span class="p">(</span><span class="mf">1.023</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.136</span><span class="p">,</span> <span class="mi">0</span><span class="p">)]</span>  <span class="c1"># coupled to its neighbor, not fully broken</span>
-            <span class="c1">#Name           R_out  R_in   spider_width  ntabs</span>
+    <span class="n">bad_actuator_tab_locations</span> <span class="o">=</span> <span class="p">[(</span><span class="mf">3.977</span><span class="p">,</span> <span class="mf">1.932</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+                                  <span class="p">(</span><span class="o">-</span><span class="mf">2.614</span><span class="p">,</span> <span class="mf">3.750</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+                                  <span class="p">(</span><span class="mf">2.614</span><span class="p">,</span> <span class="o">-</span><span class="mf">3.977</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+                                  <span class="p">(</span><span class="o">-</span><span class="mf">1.932</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.250</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
+                                  <span class="p">(</span><span class="mf">1.023</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.136</span><span class="p">,</span> <span class="mi">0</span><span class="p">)]</span>  <span class="c1"># coupled to its neighbor, not fully broken</span>
+    <span class="c1"># Name           R_out  R_in   spider_width  ntabs</span>
     <span class="n">lyot_table</span> <span class="o">=</span> <span class="p">{</span>
-            <span class="s1">&#39;Blank&#39;</span><span class="p">:</span>       <span class="p">(</span><span class="mi">0</span><span class="p">,</span>     <span class="mi">0</span><span class="p">,</span>     <span class="mi">0</span><span class="p">,</span>     <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span> <span class="p">),</span>
-            <span class="s1">&#39;Open&#39;</span><span class="p">:</span>        <span class="p">(</span><span class="mf">5.1</span><span class="p">,</span>   <span class="mi">0</span><span class="p">,</span>     <span class="mi">0</span><span class="p">,</span>     <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span> <span class="p">),</span>
-            <span class="s1">&#39;080m12_02&#39;</span><span class="p">:</span>   <span class="p">(</span><span class="mf">4.786</span><span class="p">,</span> <span class="mf">1.388</span><span class="p">,</span> <span class="mf">0.204</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mf">0.328</span><span class="p">),</span>     <span class="c1"># **not installed in GPI**</span>
-            <span class="s1">&#39;080m12_03&#39;</span><span class="p">:</span>   <span class="p">(</span><span class="mf">4.786</span><span class="p">,</span> <span class="mf">1.388</span><span class="p">,</span> <span class="mf">0.304</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mf">0.378</span><span class="p">),</span>     <span class="c1"># used with Y</span>
-            <span class="s1">&#39;080m12_03_06&#39;</span><span class="p">:(</span><span class="mf">4.786</span><span class="p">,</span> <span class="mf">1.388</span><span class="p">,</span> <span class="mf">0.304</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mf">0.528</span><span class="p">),</span>     <span class="c1"># **not installed in GPI**</span>
-            <span class="s1">&#39;080_04&#39;</span><span class="p">:</span>      <span class="p">(</span><span class="mf">4.786</span><span class="p">,</span> <span class="mf">1.388</span><span class="p">,</span> <span class="mf">0.404</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mf">0.428</span><span class="p">),</span>     <span class="c1"># Older generation, does not have 4th tab</span>
-            <span class="s1">&#39;080m12_04&#39;</span><span class="p">:</span>   <span class="p">(</span><span class="mf">4.786</span><span class="p">,</span> <span class="mf">1.388</span><span class="p">,</span> <span class="mf">0.404</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mf">0.428</span><span class="p">),</span>     <span class="c1"># used with J and H</span>
-            <span class="s1">&#39;080m12_04_c&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mf">4.786</span><span class="p">,</span> <span class="mf">1.388</span><span class="p">,</span> <span class="mf">0.604</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mf">0.378</span><span class="p">),</span>     <span class="c1"># extra 5th tab</span>
-            <span class="s1">&#39;080m12_06&#39;</span><span class="p">:</span>   <span class="p">(</span><span class="mf">4.786</span><span class="p">,</span> <span class="mf">1.388</span><span class="p">,</span> <span class="mf">0.604</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mf">0.528</span><span class="p">),</span>     <span class="c1">#</span>
-            <span class="s1">&#39;080m12_06_03&#39;</span><span class="p">:(</span><span class="mf">4.786</span><span class="p">,</span> <span class="mf">1.388</span><span class="p">,</span> <span class="mf">0.604</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mf">0.528</span><span class="p">),</span>     <span class="c1"># exact duplicate of above mask?</span>
-            <span class="s1">&#39;080m12_07&#39;</span><span class="p">:</span>   <span class="p">(</span><span class="mf">4.686</span><span class="p">,</span> <span class="mf">1.488</span><span class="p">,</span> <span class="mf">0.604</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mf">0.528</span><span class="p">),</span>     <span class="c1">#</span>
-            <span class="s1">&#39;080m12_10&#39;</span><span class="p">:</span>   <span class="p">(</span><span class="mf">4.377</span><span class="p">,</span> <span class="mf">1.772</span><span class="p">,</span> <span class="mf">1.004</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mf">0.728</span><span class="p">)</span> <span class="p">}</span>
+        <span class="s1">&#39;Blank&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+        <span class="s1">&#39;Open&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mf">5.1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+        <span class="s1">&#39;080m12_02&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mf">4.786</span><span class="p">,</span> <span class="mf">1.388</span><span class="p">,</span> <span class="mf">0.204</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mf">0.328</span><span class="p">),</span>  <span class="c1"># **not installed in GPI**</span>
+        <span class="s1">&#39;080m12_03&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mf">4.786</span><span class="p">,</span> <span class="mf">1.388</span><span class="p">,</span> <span class="mf">0.304</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mf">0.378</span><span class="p">),</span>  <span class="c1"># used with Y</span>
+        <span class="s1">&#39;080m12_03_06&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mf">4.786</span><span class="p">,</span> <span class="mf">1.388</span><span class="p">,</span> <span class="mf">0.304</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mf">0.528</span><span class="p">),</span>  <span class="c1"># **not installed in GPI**</span>
+        <span class="s1">&#39;080_04&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mf">4.786</span><span class="p">,</span> <span class="mf">1.388</span><span class="p">,</span> <span class="mf">0.404</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mf">0.428</span><span class="p">),</span>  <span class="c1"># Older generation, does not have 4th tab</span>
+        <span class="s1">&#39;080m12_04&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mf">4.786</span><span class="p">,</span> <span class="mf">1.388</span><span class="p">,</span> <span class="mf">0.404</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mf">0.428</span><span class="p">),</span>  <span class="c1"># used with J and H</span>
+        <span class="s1">&#39;080m12_04_c&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mf">4.786</span><span class="p">,</span> <span class="mf">1.388</span><span class="p">,</span> <span class="mf">0.604</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mf">0.378</span><span class="p">),</span>  <span class="c1"># extra 5th tab</span>
+        <span class="s1">&#39;080m12_06&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mf">4.786</span><span class="p">,</span> <span class="mf">1.388</span><span class="p">,</span> <span class="mf">0.604</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mf">0.528</span><span class="p">),</span>  <span class="c1">#</span>
+        <span class="s1">&#39;080m12_06_03&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mf">4.786</span><span class="p">,</span> <span class="mf">1.388</span><span class="p">,</span> <span class="mf">0.604</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mf">0.528</span><span class="p">),</span>  <span class="c1"># exact duplicate of above mask?</span>
+        <span class="s1">&#39;080m12_07&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mf">4.686</span><span class="p">,</span> <span class="mf">1.488</span><span class="p">,</span> <span class="mf">0.604</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mf">0.528</span><span class="p">),</span>  <span class="c1">#</span>
+        <span class="s1">&#39;080m12_10&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mf">4.377</span><span class="p">,</span> <span class="mf">1.772</span><span class="p">,</span> <span class="mf">1.004</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mf">0.728</span><span class="p">)}</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;080m12_04&#39;</span><span class="p">,</span> <span class="n">tabs</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">ls_spid</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Make a GPI Lyot mask</span>
 
-        <span class="nb">super</span><span class="p">(</span><span class="n">GPI_LyotMask</span><span class="p">,</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">planetype</span><span class="o">=</span><span class="n">poppy</span><span class="o">.</span><span class="n">poppy_core</span><span class="o">.</span><span class="n">_PUPIL</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;GPI Lyot &#39;</span><span class="o">+</span><span class="n">name</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">pupil_diam</span><span class="o">=</span><span class="mf">8.0</span> <span class="c1"># default size for display</span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        name: str</span>
+<span class="sd">            Name of the GPI Lyot mask.</span>
+<span class="sd">        tabs</span>
+<span class="sd">            Whether to block out the bad actuators with tabs in the Lyot mask.</span>
+<span class="sd">        ls_spid</span>
+<span class="sd">            Whether to model the spiders in the Lyot Mask.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">GPI_LyotMask</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">planetype</span><span class="o">=</span><span class="n">poppy</span><span class="o">.</span><span class="n">poppy_core</span><span class="o">.</span><span class="n">_PUPIL</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;GPI Lyot &#39;</span> <span class="o">+</span> <span class="n">name</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pupil_diam</span> <span class="o">=</span> <span class="mf">8.0</span>  <span class="c1"># default size for display</span>
         <span class="c1"># Read in some geometry info from the primary mirror class</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">support_angles</span><span class="o">=</span><span class="n">GeminiPrimary</span><span class="o">.</span><span class="n">support_angles</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">support_angles</span> <span class="o">=</span> <span class="n">GeminiPrimary</span><span class="o">.</span><span class="n">support_angles</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">support_offset_y</span> <span class="o">=</span> <span class="n">GeminiPrimary</span><span class="o">.</span><span class="n">support_offset_y</span>
 
-        <span class="c1">#&#39;name&#39;: (primary radius,  secondary radius,  spiderwidth, ntabs, tabwidth)</span>
+        <span class="c1"># &#39;name&#39;: (primary radius,  secondary radius,  spiderwidth, ntabs, tabwidth)</span>
         <span class="c1"># All sizes are in mm on the physical parts; needs to be converted by</span>
         <span class="c1"># magnification to get the size reimaged onto the primary</span>
         <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">lyot_table</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
-            <span class="k">if</span> <span class="n">k</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span><span class="o">==</span><span class="n">name</span><span class="o">.</span><span class="n">upper</span><span class="p">():</span>
-                <span class="n">cname</span><span class="o">=</span><span class="n">k</span>
+            <span class="k">if</span> <span class="n">k</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="o">==</span> <span class="n">name</span><span class="o">.</span><span class="n">upper</span><span class="p">():</span>
+                <span class="n">cname</span> <span class="o">=</span> <span class="n">k</span>
                 <span class="k">break</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown Lyot stop name: &#39;</span><span class="o">+</span><span class="n">name</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown Lyot stop name: &#39;</span> <span class="o">+</span> <span class="n">name</span><span class="p">)</span>
         <span class="n">params</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lyot_table</span><span class="p">[</span><span class="n">cname</span><span class="p">]</span>
 
         <span class="c1"># convert params from mm to meters, then magnify onto the primary</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">outer_radius</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="mf">1e-3</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">magnification</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">inner_radius</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="mf">1e-3</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">magnification</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">support_width</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">*</span><span class="mf">1e-3</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">magnification</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">ntabs</span><span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">tabradius</span><span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="o">*</span><span class="mf">1e-3</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">magnification</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">outer_radius</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="mf">1e-3</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">magnification</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">inner_radius</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="mf">1e-3</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">magnification</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">support_width</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">*</span> <span class="mf">1e-3</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">magnification</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ntabs</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tabradius</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">*</span> <span class="mf">1e-3</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">magnification</span>
 
-        <span class="k">if</span> <span class="n">ls_spid</span><span class="o">==</span><span class="kc">False</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">support_width</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="k">if</span> <span class="n">tabs</span><span class="o">==</span><span class="kc">False</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">ntabs</span><span class="o">=</span><span class="mi">0</span>  <span class="c1"># allow user to turn tabs off if desired</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">ls_spid</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">support_width</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">tabs</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">ntabs</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># allow user to turn tabs off if desired</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">wavefront_display_hint</span> <span class="o">=</span> <span class="s1">&#39;intensity&#39;</span> <span class="c1"># preferred display for wavefronts at this plane</span>
-        <span class="c1">#self.wavefront_display_vmax_hint = 3e-9  # Hacky to hard code this, but this value works OK with H_coron sims.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">wavefront_display_hint</span> <span class="o">=</span> <span class="s1">&#39;intensity&#39;</span>  <span class="c1"># preferred display for wavefronts at this plane</span>
+        <span class="c1"># self.wavefront_display_vmax_hint = 3e-9  # hacky to hard code this, but this value works OK with H_coron sims.</span>
 
 <div class="viewcode-block" id="GPI_LyotMask.get_transmission"><a class="viewcode-back" href="../../../api/aplc_optimization.Inputs_Generation.GPI_Inputs_Generation.GPI_LyotMask.html#aplc_optimization.Inputs_Generation.GPI_Inputs_Generation.GPI_LyotMask.get_transmission">[docs]</a>    <span class="k">def</span> <span class="nf">get_transmission</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">wave</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Compute the transmission inside/outside of the obscuration.</span>
@@ -399,22 +420,22 @@
 
         <span class="n">y</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_coordinates</span><span class="p">(</span><span class="n">wave</span><span class="p">)</span>
 
-        <span class="n">y</span> <span class="o">*=</span> <span class="o">-</span><span class="mi">1</span> <span class="c1"># Flip Y coordinate convention to match</span>
-                <span class="c1"># Lyot bad actuator tabs to AOWFS display bad actuators</span>
-        <span class="n">r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">x</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">y</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>  <span class="c1">#* wave.pixelscale</span>
+        <span class="n">y</span> <span class="o">*=</span> <span class="o">-</span><span class="mi">1</span>  <span class="c1"># Flip Y coordinate convention to match</span>
+        <span class="c1"># Lyot bad actuator tabs to AOWFS display bad actuators</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">x</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">y</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>  <span class="c1"># * wave.pixelscale</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">transmission</span><span class="p">[</span><span class="n">r</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">inner_radius</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">transmission</span><span class="p">[</span><span class="n">r</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">outer_radius</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
 
         <span class="k">for</span> <span class="n">angle_deg</span><span class="p">,</span> <span class="n">offset_y</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">support_angles</span><span class="p">,</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">support_offset_y</span><span class="p">):</span>
+                                       <span class="bp">self</span><span class="o">.</span><span class="n">support_offset_y</span><span class="p">):</span>
             <span class="n">angle</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">deg2rad</span><span class="p">(</span><span class="n">angle_deg</span> <span class="o">+</span> <span class="mi">90</span><span class="p">)</span>  <span class="c1"># 90 deg offset is to start from the +Y direction</span>
             <span class="n">width</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">support_width</span>
 
             <span class="c1"># calculate rotated x&#39; and y&#39; coordinates after rotation by that angle.</span>
             <span class="c1"># and application of offset</span>
-            <span class="n">xp</span> <span class="o">=</span>  <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">angle</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">angle</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">y</span><span class="o">-</span><span class="n">offset_y</span><span class="p">)</span>
-            <span class="n">yp</span> <span class="o">=</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">angle</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">angle</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">y</span><span class="o">-</span><span class="n">offset_y</span><span class="p">)</span>
+            <span class="n">xp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">angle</span><span class="p">)</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">angle</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">y</span> <span class="o">-</span> <span class="n">offset_y</span><span class="p">)</span>
+            <span class="n">yp</span> <span class="o">=</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">angle</span><span class="p">)</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">angle</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">y</span> <span class="o">-</span> <span class="n">offset_y</span><span class="p">)</span>
 
             <span class="bp">self</span><span class="o">.</span><span class="n">transmission</span><span class="p">[(</span><span class="n">xp</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">yp</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">width</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)]</span> <span class="o">=</span> <span class="mi">0</span>
             <span class="c1"># TODO check here for if there are no pixels marked because the spider is too thin.</span>
@@ -422,29 +443,29 @@
 
         <span class="k">for</span> <span class="n">itab</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ntabs</span><span class="p">):</span>
 
-            <span class="n">offset_x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">bad_actuator_tab_locations</span><span class="p">[</span><span class="n">itab</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="mf">1e-3</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">magnification</span>
-            <span class="n">offset_y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">bad_actuator_tab_locations</span><span class="p">[</span><span class="n">itab</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="mf">1e-3</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">magnification</span>
-            <span class="c1">#print (offset_x, offset_y)</span>
+            <span class="n">offset_x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">bad_actuator_tab_locations</span><span class="p">[</span><span class="n">itab</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="mf">1e-3</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">magnification</span>
+            <span class="n">offset_y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">bad_actuator_tab_locations</span><span class="p">[</span><span class="n">itab</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="mf">1e-3</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">magnification</span>
+            <span class="c1"># print (offset_x, offset_y)</span>
 
-            <span class="n">xo</span> <span class="o">=</span> <span class="n">x</span><span class="o">-</span><span class="n">offset_x</span>
-            <span class="n">yo</span> <span class="o">=</span> <span class="n">y</span><span class="o">-</span><span class="n">offset_y</span>
-            <span class="n">r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span> <span class="n">xo</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="n">yo</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+            <span class="n">xo</span> <span class="o">=</span> <span class="n">x</span> <span class="o">-</span> <span class="n">offset_x</span>
+            <span class="n">yo</span> <span class="o">=</span> <span class="n">y</span> <span class="o">-</span> <span class="n">offset_y</span>
+            <span class="n">r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">xo</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">yo</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">transmission</span><span class="p">[</span><span class="n">r</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">tabradius</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
 
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">bad_actuator_tab_locations</span><span class="p">[</span><span class="n">itab</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
                 <span class="c1"># Extend tab radially outwards</span>
-                <span class="n">angle</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arctan2</span><span class="p">(</span><span class="n">offset_y</span><span class="p">,</span> <span class="n">offset_x</span><span class="p">)</span> <span class="c1">#-(np.pi/2)</span>
-                <span class="n">xp</span> <span class="o">=</span>  <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">angle</span><span class="p">)</span> <span class="o">*</span> <span class="n">xo</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">angle</span><span class="p">)</span> <span class="o">*</span> <span class="n">yo</span>
+                <span class="n">angle</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arctan2</span><span class="p">(</span><span class="n">offset_y</span><span class="p">,</span> <span class="n">offset_x</span><span class="p">)</span>  <span class="c1"># -(np.pi/2)</span>
+                <span class="n">xp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">angle</span><span class="p">)</span> <span class="o">*</span> <span class="n">xo</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">angle</span><span class="p">)</span> <span class="o">*</span> <span class="n">yo</span>
                 <span class="n">yp</span> <span class="o">=</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">angle</span><span class="p">)</span> <span class="o">*</span> <span class="n">xo</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">angle</span><span class="p">)</span> <span class="o">*</span> <span class="n">yo</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">transmission</span><span class="p">[(</span><span class="n">xp</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">yp</span><span class="p">)</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">tabradius</span> <span class="p">)]</span> <span class="o">=</span> <span class="mi">0</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">transmission</span><span class="p">[(</span><span class="n">xp</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">yp</span><span class="p">)</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">tabradius</span><span class="p">)]</span> <span class="o">=</span> <span class="mi">0</span>
             <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">bad_actuator_tab_locations</span><span class="p">[</span><span class="n">itab</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
                 <span class="c1"># special case the one that hangs off the secondary support</span>
 
-                <span class="n">angle</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">deg2rad</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">support_angles</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="mi">90</span><span class="p">)</span>
-                <span class="n">angle</span> <span class="o">+=</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span>
-                <span class="n">xp</span> <span class="o">=</span>  <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">angle</span><span class="p">)</span> <span class="o">*</span> <span class="n">xo</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">angle</span><span class="p">)</span> <span class="o">*</span> <span class="n">yo</span>
+                <span class="n">angle</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">deg2rad</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">support_angles</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">90</span><span class="p">)</span>
+                <span class="n">angle</span> <span class="o">+=</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span>
+                <span class="n">xp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">angle</span><span class="p">)</span> <span class="o">*</span> <span class="n">xo</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">angle</span><span class="p">)</span> <span class="o">*</span> <span class="n">yo</span>
                 <span class="n">yp</span> <span class="o">=</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">angle</span><span class="p">)</span> <span class="o">*</span> <span class="n">xo</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">angle</span><span class="p">)</span> <span class="o">*</span> <span class="n">yo</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">transmission</span><span class="p">[(</span><span class="n">xp</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">xp</span> <span class="o">&lt;</span> <span class="mf">0.5</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">yp</span><span class="p">)</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">tabradius</span> <span class="p">)]</span> <span class="o">=</span> <span class="mi">0</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">transmission</span><span class="p">[(</span><span class="n">xp</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">xp</span> <span class="o">&lt;</span> <span class="mf">0.5</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">yp</span><span class="p">)</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">tabradius</span><span class="p">)]</span> <span class="o">=</span> <span class="mi">0</span>
 
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">transmission</span></div></div>
 </pre></div>
@@ -453,20 +474,25 @@
            
           </div>
           <footer>
-  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2020, Bryony Nickson
+        &#169; Copyright 2020, Bryony Nickson.
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
-
         </div>
       </div>
 
@@ -474,7 +500,6 @@
 
   </div>
   
-
 
   <script type="text/javascript">
       jQuery(function () {
