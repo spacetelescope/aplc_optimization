@@ -329,7 +329,7 @@ def analyze_contrast(solution_filename, pdf=None):
         norm = mpl.colors.Normalize(vmin=1 - bandwidth / 2, vmax=1 + bandwidth / 2)
 
         for contrast_at_wl, col in zip(imgs, cols):
-            r, y, _, _ = radial_profile(contrast_at_wl, 0.1)
+            r, y, _, _ = radial_profile(contrast_at_wl, 0.2)
             plt.plot(r, y, c=col)
 
         plt.colorbar(mpl.cm.ScalarMappable(norm, cmap)).set_label('Relative wavelength')
@@ -375,7 +375,7 @@ def analyze_contrast(solution_filename, pdf=None):
             psf = prop(coro(Wavefront(apodizer * pupil, wl))).power
             psf_ref = prop(Wavefront(apodizer * pupil * lyot_stop, wl)).power
 
-            r, y, _, _ = radial_profile(psf / psf_ref.max(), 0.1)
+            r, y, _, _ = radial_profile(psf / psf_ref.max(), 0.2)
             contrasts.append(y)
 
         grid = CartesianGrid(SeparatedCoords([r, wavelengths]))
@@ -970,7 +970,7 @@ def analyze_tt_jitter(solution_filename, pdf=None):
 
     plt.figure(figsize=(8, 6), dpi=100)
     for i, img in enumerate(imgs_tt):
-        r, y, _, _ = radial_profile(img, 0.1)
+        r, y, _, _ = radial_profile(img, 0.2)
 
         plt.plot(r, y, label='$\sigma$_rms = %.2f $\lambda/D$' % tt_rmss[i])
 
