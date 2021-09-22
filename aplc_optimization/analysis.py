@@ -7,6 +7,7 @@ import matplotlib
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 import numpy as np
+from scipy.ndimage import zoom
 from astropy.io import fits
 from hcipy import *
 
@@ -830,7 +831,7 @@ def analyze_lyot_robustness(solution_filename, pdf=None):
     npix = int(np.sqrt(pupil.shape[0]))
 
     plt.figure()
-    f, ax = plt.subplots(1, 3, figsize=(10, 5), dpi=110)
+    f, ax = plt.subplots(1, 3, figsize=(10, 5), sharey=True, dpi=110)
     
     for i, mag in enumerate(np.linspace(.95, 1.05, 11)):
         pupil_mag = pupil.copy().reshape(npix,npix)
