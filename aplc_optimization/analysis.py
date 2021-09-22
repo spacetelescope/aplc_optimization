@@ -641,6 +641,7 @@ def analyze_lyot_robustness(solution_filename, pdf=None):
     An empty dictionary.
     """
     pupil, apodizer, focal_plane_mask, lyot_stops, parameters, file_organization = create_coronagraph(solution_filename)
+    iwa = parameters['image']['iwa']
     owa = parameters['image']['owa']
     bandwidth = parameters['image']['bandwidth']
     contrast = parameters['image']['contrast']
@@ -656,7 +657,7 @@ def analyze_lyot_robustness(solution_filename, pdf=None):
         lyot_stop_shifted = np.roll(lyot_stop.shaped, (lyot_dy, lyot_dx), (1, 0)).ravel()
 
         img = 0
-        for wl in np.linspace(1 - bandwidth / 2, 1 + bandwidth / 2, 11):
+        for wl in np.linspace(1 - bandwidth / 2, 1 + bandwidth / 2, num_wavelengths):
             wf = Wavefront(apodizer * pupil, wl)
             if coronagraphic:
                 wf = coro_no_lyot(wf)
@@ -767,6 +768,202 @@ def analyze_lyot_robustness(solution_filename, pdf=None):
         plt.close()
     else:
         plt.show()
+
+
+    # magnification robustness
+    def clipped_zoom(img, zoom_factor, **kwargs):
+        h, w = img.shape
+
+        # Zooming out
+        if zoom_factor < 1:
+
+            # Bounding box of the zoomed-out image within the output array
+            zh = int(np.round(h * zoom_factor))
+            zw = int(np.round(w * zoom_factor))
+            bottom = (h - zh) // 2
+            left = (w - zw) // 2
+
+            # Zero-padding
+            out = np.zeros(img.shape)
+            out[bottom:bottom+zh, left:left+zw] = zoom(img, zoom_factor, **kwargs)
+
+        # Zooming in
+        elif zoom_factor > 1:
+
+            # Bounding box of the zoomed-in region within the input array
+            zh = int(np.round(h / zoom_factor))
+            zw = int(np.round(w / zoom_factor))
+            bottom = (h - zh) // 2
+            left = (w - zw) // 2
+
+            out = zoom(img[bottom:bottom+zh, left:left+zw], zoom_factor, **kwargs)
+
+            # `out` might still be slightly larger than `img` due to rounding, so
+            # trim off any extra pixels at the edges
+            trim_bottom = ((out.shape[0] - h) // 2)
+            trim_left = ((out.shape[1] - w) // 2)
+            out = out[trim_bottom:trim_bottom+h, trim_left:trim_left+w]
+
+        # If zoom_factor == 1, just return the input array
+        else:
+            out = img
+        return out
+
+
+    def get_image_mag(pup_mag, ap_mag, ls_mag, coronagraphic=True):
+
+        pup_mag = pup_mag.ravel()
+        ap_mag = ap_mag.ravel()
+        ls_mag = ls_mag.ravel()
+
+        img = 0
+        for wl in np.linspace(1 - bandwidth / 2, 1 + bandwidth / 2, num_wavelengths):
+            wf = Wavefront(ap_mag * pup_mag, wl)
+            if coronagraphic:
+                wf = coro_no_lyot(wf)
+            wf.electric_field *= ls_mag
+            img += prop(wf).power
+
+        return img
+
+
+    npix = int(np.sqrt(pupil.shape[0]))
+
+    plt.figure()
+    f, ax = plt.subplots(1, 3, figsize=(10, 5), dpi=110)
+    
+    for i, mag in enumerate(np.linspace(.95, 1.05, 11)):
+        pupil_mag = pupil.copy().reshape(npix,npix)
+        apodizer_mag = apodizer.copy().reshape(npix,npix)
+        lyot_stop_mag = lyot_stop.copy().reshape(npix,npix)
+
+        pupil_mag = clipped_zoom(pupil_mag, mag)
+        apodizer_mag = clipped_zoom(apodizer_mag, mag)
+        lyot_stop_mag = clipped_zoom(lyot_stop_mag, mag)
+
+        img_pup_mag = get_image_mag(pupil_mag, apodizer, lyot_stop)
+        img_ref_pup_mag = get_image_mag(pupil_mag, apodizer, lyot_stop, coronagraphic=False)
+        r_pup_mag, profile_pup_mag, _, _ = radial_profile(img_pup_mag / img_ref_pup_mag.max(), 0.2)
+        r = r_pup_mag[np.where((r_pup_mag>=iwa)&(r_pup_mag<=owa))]
+        profile = profile_pup_mag[np.where((r_pup_mag>=iwa)&(r_pup_mag<=owa))]
+        if mag==1.0:
+            ax[0].plot(r, profile, color='k', label='Mag = {:.2f}'.format(mag))
+        else:
+            ax[0].plot(r, profile, color=(.1*i, 0, 1-.1*i, 1), label='Mag = {:.2f}'.format(mag))
+
+        img_ap_mag = get_image_mag(pupil, apodizer_mag, lyot_stop)
+        img_ref_ap_mag = get_image_mag(pupil, apodizer_mag, lyot_stop, coronagraphic=False)
+        r_ap_mag, profile_ap_mag, _, _ = radial_profile(img_ap_mag / img_ref_ap_mag.max(), 0.2)
+        r = r_ap_mag[np.where((r_ap_mag>=iwa)&(r_ap_mag<=owa))]
+        profile = profile_ap_mag[np.where((r_ap_mag>=iwa)&(r_ap_mag<=owa))]
+        if mag==1.0:
+            ax[1].plot(r, profile, color='k', label='Mag = {:.2f}'.format(mag))
+        else:
+            ax[1].plot(r, profile, color=(.1*i, 0, 1-.1*i, 1), label='Mag = {:.2f}'.format(mag))
+
+        img_ls_mag = get_image_mag(pupil, apodizer, lyot_stop_mag)
+        img_ref_ls_mag = get_image_mag(pupil, apodizer, lyot_stop_mag, coronagraphic=False)
+        r_ls_mag, profile_ls_mag, _, _ = radial_profile(img_ls_mag / img_ref_ls_mag.max(), 0.2)
+        r = r_ls_mag[np.where((r_ls_mag>=iwa)&(r_ls_mag<=owa))]
+        profile = profile_ls_mag[np.where((r_ls_mag>=iwa)&(r_ls_mag<=owa))]
+        if mag==1.0:
+            ax[2].plot(r, profile, color='k', label='Mag = {:.2f}'.format(mag))
+        else:
+            ax[2].plot(r, profile, color=(.1*i, 0, 1-.1*i, 1), label='Mag = {:.2f}'.format(mag))
+
+        for k in range(3):
+            ax[k].set_title('Robustness to {} Magnification'.format(['Pupil', 'Apodizer', 'Lyot Stop'][k]))
+            ax[k].legend()
+            ax[k].axvline(iwa, color='gray', ls='--')
+            ax[k].axvline(owa, color='gray', ls='--')
+            ax[k].set_yscale('log')
+            ax[k].set_ylabel('Raw contrast')
+            ax[k].set_xlabel('Separation ($\lambda$/D)')
+            ax[k].set_ylim(1e-8, 1e-3)
+            ax[k].set_xlim(iwa-3, owa+3)
+            ax[k].xaxis.set_minor_locator(MultipleLocator(1))
+            ax[k].xaxis.set_major_locator(MultipleLocator(5))
+
+    if pdf is not None:
+        pdf.savefig()
+        plt.close()
+    else:
+        plt.show()
+
+
+    #rotational robustness
+    def get_image_rot(pup_rot, ap_rot, ls_rot, coronagraphic=True):
+
+        pup_rot = pup_rot.ravel()
+        ap_rot = ap_rot.ravel()
+        ls_rot = ls_rot.ravel()
+
+        img = 0
+        for wl in np.linspace(1 - bandwidth / 2, 1 + bandwidth / 2, num_wavelengths):
+            wf = Wavefront(ap_rot * pup_rot, wl)
+            if coronagraphic:
+                wf = coro_no_lyot(wf)
+            wf.electric_field *= ls_rot
+            img += prop(wf).power
+
+        return img
+
+    plt.figure()
+    f, ax = plt.subplots(1, 1, figsize=(8,6), dpi=110)
+
+    for ap_rot_value in np.linspace(0, 1, 11):
+            
+        ls_rot_value = ap_rot_value
+
+        pupil_rot = pupil.copy().reshape(npix,npix)
+        apodizer_rot = apodizer.copy().reshape(npix,npix)
+        lyot_stop_rot = lyot_stop.copy().reshape(npix,npix)
+        rot_rad_ap = ap_rot_value*np.pi/180
+        rot_rad_ls = ls_rot_value*np.pi/180
+
+        # Use map coordinates to rotate
+        x, y = np.meshgrid(np.arange(npix, dtype=np.float64), np.arange(npix, dtype=np.float64))
+        centx, centy = npix//2 - 1, npix//2 - 1
+
+        xp_ap = (x-centx)*np.cos(rot_rad_ap) + (y-centy)*np.sin(rot_rad_ap) + centx
+        yp_ap = -(x-centx)*np.sin(rot_rad_ap) + (y-centy)*np.cos(rot_rad_ap) + centy
+
+        xp_ls = (x-centx)*np.cos(rot_rad_ls) + (y-centy)*np.sin(rot_rad_ls) + centx
+        yp_ls = -(x-centx)*np.sin(rot_rad_ls) + (y-centy)*np.cos(rot_rad_ls) + centy
+
+        apodizer_rot = map_coordinates(apodizer_rot, (yp_ap, xp_ap), cval=0)
+        lyot_stop_rot = map_coordinates(lyot_stop_rot, (yp_ls, xp_ls), cval=0)
+
+        img_rot = get_image_rot(pupil_rot, apodizer_rot, lyot_stop_rot)
+        img_ref_rot = get_image_rot(pupil_rot, apodizer_rot, lyot_stop_rot, coronagraphic=False)
+
+        r_rot, profile_rot, _, _ = radial_profile(img_rot / img_ref_rot.max(), 0.2)
+
+        r = r_rot[np.where((r_rot>=iwa)&(r_rot<=owa))]
+        profile = profile_rot[np.where((r_rot>=iwa)&(r_rot<=owa))]
+
+        if ap_rot_value==0:
+            plt.plot(r, profile, color='k', label=r'Ap+LS $\Delta \theta$ = 0.0$^\circ$')
+        else:
+            plt.plot(r, profile, color=(1-.05*i, 0, 0, 1-.07*i), label=r'Ap+LS $\Delta \theta$ = $\pm${:.1f}$^\circ$'.format(ap_rot_value))
+
+    ax.legend()
+    ax.axvline(iwa, color='gray', ls='--')
+    ax.axvline(owa, color='gray', ls='--')
+    ax.set_yscale('log')
+    ax.set_ylabel('Raw contrast')
+    ax.set_xlabel('Separation ($\lambda$/D)')
+    ax.set_ylim(1e-8, 1e-3)
+    ax.set_xlim(iwa-3, owa+3)
+    ax.xaxis.set_minor_locator(MultipleLocator(1))
+    ax.xaxis.set_major_locator(MultipleLocator(5))
+
+    if pdf is not None:
+        pdf.savefig()
+        plt.close()
+    else:
+        plt.show()
+
 
     return {}
 
