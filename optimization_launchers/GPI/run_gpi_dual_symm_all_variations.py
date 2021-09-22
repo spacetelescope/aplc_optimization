@@ -138,6 +138,6 @@ for tol in [10, 0, 5, 15]:
                                         'surveys/{}_{}_N{:04d}_{}/'.format(instrument, survey_name, N, machine), 'masks/')
             gpi.describe()
 
-            gpi.write_drivers(True)
-            gpi.run_optimizations(True)
-            #gpi.run_analyses(True)
+            gpi.write_drivers(False)
+            gpi.run_optimizations(False)
+            gpi.run_analyses(True)
