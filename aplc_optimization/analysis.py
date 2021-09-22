@@ -8,6 +8,8 @@ import matplotlib as mpl
 import matplotlib.pyplot as plt
 import numpy as np
 from scipy.ndimage import zoom
+from scipy.ndimage import map_coordinates
+from matplotlib.ticker import MultipleLocator
 from astropy.io import fits
 from hcipy import *
 
@@ -831,9 +833,9 @@ def analyze_lyot_robustness(solution_filename, pdf=None):
     npix = int(np.sqrt(pupil.shape[0]))
 
     plt.figure()
-    f, ax = plt.subplots(1, 3, figsize=(10, 5), sharey=True, dpi=110)
+    f, ax = plt.subplots(3, 1, figsize=(7, 11), sharex=True, dpi=110)
     
-    for i, mag in enumerate(np.linspace(.95, 1.05, 11)):
+    for i, mag in enumerate(np.linspace(.98, 1.02, 9)):
         pupil_mag = pupil.copy().reshape(npix,npix)
         apodizer_mag = apodizer.copy().reshape(npix,npix)
         lyot_stop_mag = lyot_stop.copy().reshape(npix,npix)
@@ -848,9 +850,9 @@ def analyze_lyot_robustness(solution_filename, pdf=None):
         r = r_pup_mag[np.where((r_pup_mag>=iwa)&(r_pup_mag<=owa))]
         profile = profile_pup_mag[np.where((r_pup_mag>=iwa)&(r_pup_mag<=owa))]
         if mag==1.0:
-            ax[0].plot(r, profile, color='k', label='Mag = {:.2f}'.format(mag))
+            ax[0].plot(r, profile, color='k', label='Mag = {:.3f}'.format(mag))
         else:
-            ax[0].plot(r, profile, color=(.1*i, 0, 1-.1*i, 1), label='Mag = {:.2f}'.format(mag))
+            ax[0].plot(r, profile, color=(.1*i, 0, 1-.1*i, 1), label='Mag = {:.3f}'.format(mag))
 
         img_ap_mag = get_image_mag(pupil, apodizer_mag, lyot_stop)
         img_ref_ap_mag = get_image_mag(pupil, apodizer_mag, lyot_stop, coronagraphic=False)
@@ -858,9 +860,9 @@ def analyze_lyot_robustness(solution_filename, pdf=None):
         r = r_ap_mag[np.where((r_ap_mag>=iwa)&(r_ap_mag<=owa))]
         profile = profile_ap_mag[np.where((r_ap_mag>=iwa)&(r_ap_mag<=owa))]
         if mag==1.0:
-            ax[1].plot(r, profile, color='k', label='Mag = {:.2f}'.format(mag))
+            ax[1].plot(r, profile, color='k', label='Mag = {:.3f}'.format(mag))
         else:
-            ax[1].plot(r, profile, color=(.1*i, 0, 1-.1*i, 1), label='Mag = {:.2f}'.format(mag))
+            ax[1].plot(r, profile, color=(.1*i, 0, 1-.1*i, 1), label='Mag = {:.3f}'.format(mag))
 
         img_ls_mag = get_image_mag(pupil, apodizer, lyot_stop_mag)
         img_ref_ls_mag = get_image_mag(pupil, apodizer, lyot_stop_mag, coronagraphic=False)
@@ -868,22 +870,22 @@ def analyze_lyot_robustness(solution_filename, pdf=None):
         r = r_ls_mag[np.where((r_ls_mag>=iwa)&(r_ls_mag<=owa))]
         profile = profile_ls_mag[np.where((r_ls_mag>=iwa)&(r_ls_mag<=owa))]
         if mag==1.0:
-            ax[2].plot(r, profile, color='k', label='Mag = {:.2f}'.format(mag))
+            ax[2].plot(r, profile, color='k', label='Mag = {:.3f}'.format(mag))
         else:
-            ax[2].plot(r, profile, color=(.1*i, 0, 1-.1*i, 1), label='Mag = {:.2f}'.format(mag))
+            ax[2].plot(r, profile, color=(.1*i, 0, 1-.1*i, 1), label='Mag = {:.3f}'.format(mag))
 
-        for k in range(3):
-            ax[k].set_title('Robustness to {} Magnification'.format(['Pupil', 'Apodizer', 'Lyot Stop'][k]))
-            ax[k].legend()
-            ax[k].axvline(iwa, color='gray', ls='--')
-            ax[k].axvline(owa, color='gray', ls='--')
-            ax[k].set_yscale('log')
-            ax[k].set_ylabel('Raw contrast')
-            ax[k].set_xlabel('Separation ($\lambda$/D)')
-            ax[k].set_ylim(1e-8, 1e-3)
-            ax[k].set_xlim(iwa-3, owa+3)
-            ax[k].xaxis.set_minor_locator(MultipleLocator(1))
-            ax[k].xaxis.set_major_locator(MultipleLocator(5))
+    ax[2].set_xlabel('Separation ($\lambda$/D)')
+    for k in range(3):
+        ax[k].set_title('Robustness to {} Mag'.format(['Pupil', 'Apodizer', 'Lyot Stop'][k]))
+        ax[k].legend(bbox_to_anchor=(1,1), fontsize=10)
+        ax[k].axvline(iwa, color='gray', ls='--')
+        ax[k].axvline(owa, color='gray', ls='--')
+        ax[k].set_yscale('log')
+        ax[k].set_ylabel('Raw contrast')
+        ax[k].set_ylim(1e-8, 1e-3)
+        ax[k].set_xlim(iwa-3, owa+3)
+        ax[k].xaxis.set_minor_locator(MultipleLocator(1))
+        ax[k].xaxis.set_major_locator(MultipleLocator(5))
 
     if pdf is not None:
         pdf.savefig()
@@ -912,7 +914,7 @@ def analyze_lyot_robustness(solution_filename, pdf=None):
     plt.figure()
     f, ax = plt.subplots(1, 1, figsize=(8,6), dpi=110)
 
-    for ap_rot_value in np.linspace(0, 1, 11):
+    for i, ap_rot_value in enumerate(np.linspace(0, 1, 11)):
             
         ls_rot_value = ap_rot_value
 
@@ -949,6 +951,7 @@ def analyze_lyot_robustness(solution_filename, pdf=None):
             plt.plot(r, profile, color=(1-.05*i, 0, 0, 1-.07*i), label=r'Ap+LS $\Delta \theta$ = $\pm${:.1f}$^\circ$'.format(ap_rot_value))
 
     ax.legend()
+    ax.set_title('Rotational robustness')
     ax.axvline(iwa, color='gray', ls='--')
     ax.axvline(owa, color='gray', ls='--')
     ax.set_yscale('log')
