@@ -20,7 +20,7 @@ def create_coronagraph(solution_filename):
     Parameters
     ----------
     solution_filename: string
-        The file path to the solution file.
+        The location of the solution file.
 
     Returns
     -------
@@ -37,7 +37,6 @@ def create_coronagraph(solution_filename):
     file_organization: dict
         A dictionary of the file organization structure of the survey.
     """
-
     # Open the solution as ASDF file and read the tree of data
     solution = asdf.open(solution_filename)
     parameters = solution.tree['parameters']
@@ -165,7 +164,7 @@ def analyze_aplc_design_summary(solution_filename, pdf=None):
 
     # Extract lyot stop inner and outer diameter from lyot stop filename
     ls_vals = regex.findall(ls_fname)
-    ls_id, ls_od = int(ls_vals[0]) / 1000, int(ls_vals[1]) / 1000
+#    ls_id, ls_od = int(ls_vals[0]) / 1000, int(ls_vals[1]) / 1000
 
     if fpm_grayscale is True:
         gs = ' (grayscale)'
@@ -199,8 +198,8 @@ def analyze_aplc_design_summary(solution_filename, pdf=None):
         ['Coronagraphic throughput (transmitted energy)',
          '$\mathtt{' + str(round(float(maximum_integrated_throughput), 4)) + '}$'],
         ['Core throughput (encircled energy)', '$\mathtt{' + str(round(float(core_throughput), 4)) + '}$'],
-        ['Lyot stop inner diamater (% of inscribed circle)', '$\mathtt{' + str(ls_id) + '}$'],
-        ['Lyot stop outer diameter (% of inscribed circle)', '$\mathtt{' + str(ls_od) + '}$'],
+#        ['Lyot stop inner diamater (% of inscribed circle)', '$\mathtt{' + str(ls_id) + '}$'],
+#        ['Lyot stop outer diameter (% of inscribed circle)', '$\mathtt{' + str(ls_od) + '}$'],
         ['Bandpass', '$\mathtt{' + str(img_bandwidth) + '\%}$'],
         ['# wavelengths', '$\mathtt{' + str(img_num_wavelengths) + '}$'],
         ['FPM radius' + str(gs), '$\mathtt{' + str(round(fpm_radius, 4)) + ' \ \lambda/D}$'],
@@ -314,7 +313,6 @@ def analyze_contrast(solution_filename, pdf=None):
 
     plt.figure(figsize=(10, 8), dpi=100)
     r, profile, std_profile, n_profile = radial_profile(img / img_ref.max(), 0.2)
-    plt.plot(r, profile, c='k', lw=2)
 
     if monochromatic:
         plt.title('\n Monochromatic Normalized Irradiance (Radial Average)')
@@ -347,6 +345,7 @@ def analyze_contrast(solution_filename, pdf=None):
                    ' The blue dotted line delimits the FPM radius, set to ' + str(round(radius_fpm, 2)) + \
                          ' $\lambda_0/D$. '
 
+    plt.plot(r, profile, c='k', lw=2)
     plt.ylabel('Normalized intensity in log scale')
     plt.xlabel(r'Angular separation ($\lambda_0/D$)' + caption)
     plt.title('')
@@ -644,7 +643,6 @@ def analyze_lyot_robustness(solution_filename, pdf=None):
     An empty dictionary.
     """
     pupil, apodizer, focal_plane_mask, lyot_stops, parameters, file_organization = create_coronagraph(solution_filename)
-    iwa = parameters['image']['iwa']
     owa = parameters['image']['owa']
     bandwidth = parameters['image']['bandwidth']
     contrast = parameters['image']['contrast']
@@ -660,7 +658,7 @@ def analyze_lyot_robustness(solution_filename, pdf=None):
         lyot_stop_shifted = np.roll(lyot_stop.shaped, (lyot_dy, lyot_dx), (1, 0)).ravel()
 
         img = 0
-        for wl in np.linspace(1 - bandwidth / 2, 1 + bandwidth / 2, num_wavelengths):
+        for wl in np.linspace(1 - bandwidth / 2, 1 + bandwidth / 2, 11):
             wf = Wavefront(apodizer * pupil, wl)
             if coronagraphic:
                 wf = coro_no_lyot(wf)
@@ -772,120 +770,131 @@ def analyze_lyot_robustness(solution_filename, pdf=None):
     else:
         plt.show()
 
+    return {}
 
-    # magnification robustness
-    def clipped_zoom(img, zoom_factor, **kwargs):
-        h, w = img.shape
+
+def analyze_magnification_robustness(solution_filename, pdf=None):
+    """Generate plots for the robustness to pupil, Lyot stop and apodizer magnification.
+
+    Parameters
+    ----------
+    solution_filename:
+        The location of the apodizer solution file.
+    pdf: bool
+        Whether to save the table to file or display on screen.
+
+    Returns
+    -------
+    An empty dictionary.
+    """
+    pupil, apodizer, focal_plane_mask, lyot_stops, parameters, file_organization = create_coronagraph(
+        solution_filename)
+    npix = parameters['pupil']['N']
+    iwa = parameters['image']['iwa']
+    owa = parameters['image']['owa']
+    bandwidth = parameters['image']['bandwidth']
+    num_wavelengths = parameters['image']['num_wavelengths']
+    contrast = parameters['image']['contrast']
+
+    focal_grid = make_focal_grid(8, owa * 1.2)
+    prop = FraunhoferPropagator(pupil.grid, focal_grid)
+    coro_no_lyot = LyotCoronagraph(pupil.grid, focal_plane_mask)
+    lyot_stop = lyot_stops[0]
+
+    def clipped_zoom(mag_img, zoom_factor, **kwargs):
+        img = mag_img.shaped
 
         # Zooming out
         if zoom_factor < 1:
 
             # Bounding box of the zoomed-out image within the output array
-            zh = int(np.round(h * zoom_factor))
-            zw = int(np.round(w * zoom_factor))
-            bottom = (h - zh) // 2
-            left = (w - zw) // 2
+            mag_npix = int(np.round(npix * zoom_factor))
+            dx = (npix - mag_npix) // 2
 
             # Zero-padding
             out = np.zeros(img.shape)
-            out[bottom:bottom+zh, left:left+zw] = zoom(img, zoom_factor, **kwargs)
+            out[dx:dx + mag_npix, dx:dx + mag_npix] = zoom(img, zoom_factor, **kwargs)
 
-        # Zooming in
+            # Zooming in
         elif zoom_factor > 1:
 
             # Bounding box of the zoomed-in region within the input array
-            zh = int(np.round(h / zoom_factor))
-            zw = int(np.round(w / zoom_factor))
-            bottom = (h - zh) // 2
-            left = (w - zw) // 2
+            mag_npix = int(np.round(npix / zoom_factor))
+            dx = (npix - mag_npix) // 2
 
-            out = zoom(img[bottom:bottom+zh, left:left+zw], zoom_factor, **kwargs)
+            out = zoom(img[dx:dx + mag_npix, dx:dx + mag_npix], zoom_factor, **kwargs)
 
             # `out` might still be slightly larger than `img` due to rounding, so
             # trim off any extra pixels at the edges
-            trim_bottom = ((out.shape[0] - h) // 2)
-            trim_left = ((out.shape[1] - w) // 2)
-            out = out[trim_bottom:trim_bottom+h, trim_left:trim_left+w]
+            trim_dx = ((out.shape[0] - npix) // 2)
+            out = out[trim_dx:trim_dx + npix, trim_dx:trim_dx + npix]
 
-        # If zoom_factor == 1, just return the input array
         else:
+            # If zoom_factor == 1, just return the input array
             out = img
         return out
 
-
-    def get_image_mag(pup_mag, ap_mag, ls_mag, coronagraphic=True):
-
-        pup_mag = pup_mag.ravel()
-        ap_mag = ap_mag.ravel()
-        ls_mag = ls_mag.ravel()
+    def get_image_mag(pup, ap, ls, coronagraphic=True):
+        pupil = pup.ravel()
+        apodizer = ap.ravel()
+        lyot_stop = ls.ravel()
 
         img = 0
         for wl in np.linspace(1 - bandwidth / 2, 1 + bandwidth / 2, num_wavelengths):
-            wf = Wavefront(ap_mag * pup_mag, wl)
+            wf = Wavefront(apodizer * pupil, wl)
             if coronagraphic:
                 wf = coro_no_lyot(wf)
-            wf.electric_field *= ls_mag
+                wf.electric_field *= lyot_stop
             img += prop(wf).power
 
         return img
 
-
-    npix = int(np.sqrt(pupil.shape[0]))
-
     plt.figure()
     f, ax = plt.subplots(3, 1, figsize=(7, 11), sharex=True, dpi=110)
-    
-    for i, mag in enumerate(np.linspace(.98, 1.02, 9)):
-        pupil_mag = pupil.copy().reshape(npix,npix)
-        apodizer_mag = apodizer.copy().reshape(npix,npix)
-        lyot_stop_mag = lyot_stop.copy().reshape(npix,npix)
 
-        pupil_mag = clipped_zoom(pupil_mag, mag)
-        apodizer_mag = clipped_zoom(apodizer_mag, mag)
-        lyot_stop_mag = clipped_zoom(lyot_stop_mag, mag)
+    for i, mag in enumerate(np.linspace(.98, 1.02, 9)):
+
+        pupil_mag = clipped_zoom(pupil, mag)
+        apodizer_mag = clipped_zoom(apodizer, mag)
+        lyot_stop_mag = clipped_zoom(lyot_stop, mag)
 
         img_pup_mag = get_image_mag(pupil_mag, apodizer, lyot_stop)
         img_ref_pup_mag = get_image_mag(pupil_mag, apodizer, lyot_stop, coronagraphic=False)
-        r_pup_mag, profile_pup_mag, _, _ = radial_profile(img_pup_mag / img_ref_pup_mag.max(), 0.2)
-        r = r_pup_mag[np.where((r_pup_mag>=iwa)&(r_pup_mag<=owa))]
-        profile = profile_pup_mag[np.where((r_pup_mag>=iwa)&(r_pup_mag<=owa))]
-        if mag==1.0:
+        r, profile, _, _ = radial_profile(img_pup_mag / img_ref_pup_mag.max(), 0.2)
+        if mag == 1.0:
             ax[0].plot(r, profile, color='k', label='Mag = {:.3f}'.format(mag))
         else:
-            ax[0].plot(r, profile, color=(.1*i, 0, 1-.1*i, 1), label='Mag = {:.3f}'.format(mag))
+            ax[0].plot(r, profile, color=(.1 * i, 0, 1 - .1 * i, 1), label='Mag = {:.3f}'.format(mag))
 
         img_ap_mag = get_image_mag(pupil, apodizer_mag, lyot_stop)
         img_ref_ap_mag = get_image_mag(pupil, apodizer_mag, lyot_stop, coronagraphic=False)
-        r_ap_mag, profile_ap_mag, _, _ = radial_profile(img_ap_mag / img_ref_ap_mag.max(), 0.2)
-        r = r_ap_mag[np.where((r_ap_mag>=iwa)&(r_ap_mag<=owa))]
-        profile = profile_ap_mag[np.where((r_ap_mag>=iwa)&(r_ap_mag<=owa))]
-        if mag==1.0:
+        r, profile, _, _ = radial_profile(img_ap_mag / img_ref_ap_mag.max(), 0.2)
+        if mag == 1.0:
             ax[1].plot(r, profile, color='k', label='Mag = {:.3f}'.format(mag))
         else:
-            ax[1].plot(r, profile, color=(.1*i, 0, 1-.1*i, 1), label='Mag = {:.3f}'.format(mag))
+            ax[1].plot(r, profile, color=(.1 * i, 0, 1 - .1 * i, 1), label='Mag = {:.3f}'.format(mag))
 
         img_ls_mag = get_image_mag(pupil, apodizer, lyot_stop_mag)
         img_ref_ls_mag = get_image_mag(pupil, apodizer, lyot_stop_mag, coronagraphic=False)
-        r_ls_mag, profile_ls_mag, _, _ = radial_profile(img_ls_mag / img_ref_ls_mag.max(), 0.2)
-        r = r_ls_mag[np.where((r_ls_mag>=iwa)&(r_ls_mag<=owa))]
-        profile = profile_ls_mag[np.where((r_ls_mag>=iwa)&(r_ls_mag<=owa))]
-        if mag==1.0:
+        r, profile, _, _ = radial_profile(img_ls_mag / img_ref_ls_mag.max(), 0.2)
+        if mag == 1.0:
             ax[2].plot(r, profile, color='k', label='Mag = {:.3f}'.format(mag))
         else:
-            ax[2].plot(r, profile, color=(.1*i, 0, 1-.1*i, 1), label='Mag = {:.3f}'.format(mag))
+            ax[2].plot(r, profile, color=(.1 * i, 0, 1 - .1 * i, 1), label='Mag = {:.3f}'.format(mag))
 
     ax[2].set_xlabel('Separation ($\lambda$/D)')
     for k in range(3):
-        ax[k].set_title('Robustness to {} Mag'.format(['Pupil', 'Apodizer', 'Lyot Stop'][k]))
-        ax[k].legend(bbox_to_anchor=(1,1), fontsize=10)
+        ax[k].set_title('Robustness to {} Magnification'.format(['Pupil', 'Apodizer', 'Lyot Stop'][k]))
+        ax[k].legend(loc='center right')
         ax[k].axvline(iwa, color='gray', ls='--')
         ax[k].axvline(owa, color='gray', ls='--')
         ax[k].set_yscale('log')
         ax[k].set_ylabel('Raw contrast')
-        ax[k].set_ylim(1e-8, 1e-3)
-        ax[k].set_xlim(iwa-3, owa+3)
+        ax[k].set_ylim(10**-(contrast+2), 10**-(contrast-4))
+        ax[k].set_xlim(iwa - 1, owa + 8)
         ax[k].xaxis.set_minor_locator(MultipleLocator(1))
         ax[k].xaxis.set_major_locator(MultipleLocator(5))
+
 
     if pdf is not None:
         pdf.savefig()
@@ -893,17 +902,48 @@ def analyze_lyot_robustness(solution_filename, pdf=None):
     else:
         plt.show()
 
+    return {}
 
-    #rotational robustness
-    def get_image_rot(pup_rot, ap_rot, ls_rot, coronagraphic=True):
 
-        pup_rot = pup_rot.ravel()
-        ap_rot = ap_rot.ravel()
-        ls_rot = ls_rot.ravel()
+
+def analyze_rotational_robustness(solution_filename, pdf=None):
+    """Analyze the rotational robustness of Lyot stop + apodizer w.r.t pupil.
+    Produces a radial contrast plot and image grid.
+
+    Parameters
+    ----------
+    solution_filename:
+        The location of the apodizer solution file.
+    pdf: bool
+        Whether to save the table to file or display on screen.
+
+    Returns
+    -------
+    An empty dictionary.
+    """
+    pupil, apodizer, focal_plane_mask, lyot_stops, parameters, file_organization = create_coronagraph(
+        solution_filename)
+    npix = parameters['pupil']['N']
+    iwa = parameters['image']['iwa']
+    owa = parameters['image']['owa']
+    contrast = parameters['image']['contrast']
+    bandwidth = parameters['image']['bandwidth']
+    num_wavelengths = parameters['image']['num_wavelengths']
+    lyot_stop = lyot_stops[0]
+
+    focal_grid = make_focal_grid(8, owa * 1.2)
+    prop = FraunhoferPropagator(pupil.grid, focal_grid)
+    coro_no_lyot = LyotCoronagraph(pupil.grid, focal_plane_mask)
+
+    def get_image_rot(coronagraphic=True, x_rot=0, y_rot=0):
+
+        # Rotate apodizer and lyot stop
+        ap_rot = map_coordinates(apodizer.shaped, (yp_rot, xp_rot), cval=0).ravel()
+        ls_rot = map_coordinates(lyot_stop.shaped, (yp_rot, xp_rot), cval=0).ravel()
 
         img = 0
         for wl in np.linspace(1 - bandwidth / 2, 1 + bandwidth / 2, num_wavelengths):
-            wf = Wavefront(ap_rot * pup_rot, wl)
+            wf = Wavefront(ap_rot * pupil, wl)
             if coronagraphic:
                 wf = coro_no_lyot(wf)
             wf.electric_field *= ls_rot
@@ -911,56 +951,47 @@ def analyze_lyot_robustness(solution_filename, pdf=None):
 
         return img
 
-    plt.figure()
-    f, ax = plt.subplots(1, 1, figsize=(8,6), dpi=110)
+    # Radial profile plots
+    f, ax = plt.subplots(1, 1, figsize=(8, 6), dpi=110)
 
-    for i, ap_rot_value in enumerate(np.linspace(0, 1, 11)):
-            
-        ls_rot_value = ap_rot_value
+    imgs_rot = []
+    imgs_ref_rot = []
 
-        pupil_rot = pupil.copy().reshape(npix,npix)
-        apodizer_rot = apodizer.copy().reshape(npix,npix)
-        lyot_stop_rot = lyot_stop.copy().reshape(npix,npix)
-        rot_rad_ap = ap_rot_value*np.pi/180
-        rot_rad_ls = ls_rot_value*np.pi/180
+    for i, rotation in enumerate(np.linspace(0, 1, 11)):
+
+        rad_rotation = rotation * np.pi / 180  # rotation value in radians
 
         # Use map coordinates to rotate
         x, y = np.meshgrid(np.arange(npix, dtype=np.float64), np.arange(npix, dtype=np.float64))
-        centx, centy = npix//2 - 1, npix//2 - 1
+        centx, centy = npix // 2 - 1, npix // 2 - 1
+        xp_rot = (x - centx) * np.cos(rad_rotation) + (y - centy) * np.sin(rad_rotation) + centx
+        yp_rot = -(x - centx) * np.sin(rad_rotation) + (y - centy) * np.cos(rad_rotation) + centy
 
-        xp_ap = (x-centx)*np.cos(rot_rad_ap) + (y-centy)*np.sin(rot_rad_ap) + centx
-        yp_ap = -(x-centx)*np.sin(rot_rad_ap) + (y-centy)*np.cos(rot_rad_ap) + centy
-
-        xp_ls = (x-centx)*np.cos(rot_rad_ls) + (y-centy)*np.sin(rot_rad_ls) + centx
-        yp_ls = -(x-centx)*np.sin(rot_rad_ls) + (y-centy)*np.cos(rot_rad_ls) + centy
-
-        apodizer_rot = map_coordinates(apodizer_rot, (yp_ap, xp_ap), cval=0)
-        lyot_stop_rot = map_coordinates(lyot_stop_rot, (yp_ls, xp_ls), cval=0)
-
-        img_rot = get_image_rot(pupil_rot, apodizer_rot, lyot_stop_rot)
-        img_ref_rot = get_image_rot(pupil_rot, apodizer_rot, lyot_stop_rot, coronagraphic=False)
+        img_rot = get_image_rot(x_rot=xp_rot, y_rot=yp_rot)
+        img_ref_rot = get_image_rot(coronagraphic=False, x_rot=xp_rot, y_rot=yp_rot)
 
         r_rot, profile_rot, _, _ = radial_profile(img_rot / img_ref_rot.max(), 0.2)
 
-        r = r_rot[np.where((r_rot>=iwa)&(r_rot<=owa))]
-        profile = profile_rot[np.where((r_rot>=iwa)&(r_rot<=owa))]
-
-        if ap_rot_value==0:
-            plt.plot(r, profile, color='k', label=r'Ap+LS $\Delta \theta$ = 0.0$^\circ$')
+        if rotation == 0:
+            plt.plot(r_rot, profile_rot, color='k', label=r'Ap+LS $\Delta \theta$ = 0.0$^\circ$')
         else:
-            plt.plot(r, profile, color=(1-.05*i, 0, 0, 1-.07*i), label=r'Ap+LS $\Delta \theta$ = $\pm${:.1f}$^\circ$'.format(ap_rot_value))
+            plt.plot(r_rot, profile_rot, color=(1 - .05 * i, 0, 0, 1 - .07 * i),
+                     label=r'Ap+LS $\Delta \theta$ = $\pm${:.1f}$^\circ$'.format(rotation))
 
-    ax.legend()
-    ax.set_title('Rotational robustness')
-    ax.axvline(iwa, color='gray', ls='--')
-    ax.axvline(owa, color='gray', ls='--')
-    ax.set_yscale('log')
-    ax.set_ylabel('Raw contrast')
-    ax.set_xlabel('Separation ($\lambda$/D)')
-    ax.set_ylim(1e-8, 1e-3)
-    ax.set_xlim(iwa-3, owa+3)
-    ax.xaxis.set_minor_locator(MultipleLocator(1))
-    ax.xaxis.set_major_locator(MultipleLocator(5))
+        ax.legend()
+        ax.set_title('Rotational Robustness (1/2)')
+        ax.axvline(iwa, color='gray', ls='--')
+        ax.axvline(owa, color='gray', ls='--')
+        ax.set_yscale('log')
+        ax.set_ylabel('Raw contrast')
+        ax.set_xlabel('Separation ($\lambda$/D)')
+        ax.set_ylim(10 ** -(contrast + 2), 10 ** -(contrast - 3))
+        ax.set_xlim(iwa - 3, owa + 3)
+        ax.xaxis.set_minor_locator(MultipleLocator(1))
+        ax.xaxis.set_major_locator(MultipleLocator(5))
+
+        imgs_rot.append(img_rot)
+        imgs_ref_rot.append(img_ref_rot)
 
     if pdf is not None:
         pdf.savefig()
@@ -968,6 +999,33 @@ def analyze_lyot_robustness(solution_filename, pdf=None):
     else:
         plt.show()
 
+    # Image Grid
+    plt.subplots(figsize=(8, 6), dpi=110)
+    plt.suptitle('Rotational Robustness (2/2)', y=1.01)
+
+    for i, rotation in enumerate(np.linspace(0, 1, 11)):
+        plt.subplot(3, 4, i + 1)
+        imshow_field(np.log10(imgs_rot[i] / imgs_ref_rot[i].max()),
+                     vmin=-contrast - 0.5, vmax=-contrast + 3.5, cmap='inferno')
+        plt.title(r'$\pm${:.1f}$^\circ$'.format(rotation), x=0.15, y=0.85, fontsize=11)
+
+        plt.subplots_adjust(top=0.98, bottom=0.02, left=0.02, right=0.98, wspace=0, hspace=0)
+
+        frame1 = plt.gca()
+        frame1.axes.xaxis.set_ticklabels([])
+        frame1.axes.yaxis.set_ticklabels([])
+        frame1.spines['bottom'].set_color('w')
+        frame1.spines['top'].set_color('w')
+        frame1.spines['right'].set_color('w')
+        frame1.spines['left'].set_color('w')
+        frame1.tick_params(axis='x', colors='w')
+        frame1.tick_params(axis='y', colors='w')
+
+    if pdf is not None:
+        pdf.savefig()
+        plt.close()
+    else:
+        plt.show()
 
     return {}
 
