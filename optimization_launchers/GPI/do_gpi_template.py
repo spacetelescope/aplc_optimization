@@ -28,7 +28,7 @@ N: int
     The number of pixels in the input (Primary, LS) and final (apodizer) arrays.
 """
 survey_name = "template_survey"
-machine = "telserv3"
+machine = "local"
 N = 128
 
 '''
@@ -117,7 +117,7 @@ contrast = 8
 IWA = 3
 OWA = 22
 bandwidth = 0.2
-num_wavelengths = 4
+num_wavelengths = 1
 
 # Robustness parameters
 alignment_tolerance = 1

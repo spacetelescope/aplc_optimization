@@ -3,62 +3,69 @@
 Requirements & Installation
 ############################
 
-.. warning::
 
-   Pardon our dust, this space is under construction.
+Installation for Users
+#########################
+
+Getting ``aplc-optimization`` up and running on your own computer requires four steps, detailed below:
+
+ 1. Cloning the GitHub repository.
+ 2. Installing the ``conda`` environment.
+ 3. Installing and licensing Gurobi.
+ 4. Installing the python package.
 
 .. _installing-with-conda:
 
-Installation for Users
-======================
-
 Prerequisites
---------------
-It is highly suggested that contributors have a working installation of anaconda or miniconda for Python 3.7. Downloads
-and installation instructions are available here:
+=============
+For ease of installation, it is highly recommended that users have a working
+installation of either Anaconda or Miniconda for Python 3.7.
+Download and installation instructions can be found here:
 
  - `Miniconda <https://conda.io/miniconda.html>`_
  - `Anaconda <https://www.continuum.io/downloads>`_
 
-Requirements for contributing to the ``aplc_optimization``package will be included in the aplc_optimization conda
-environment, which is included in our installation instructions below.
-
 Clone the ``aplc_optimization`` repository
-------------------------------------------
-You first need to clone the current version of ``aplc_optimization``. The simplest way to do this is to go to the
-directory you want your copy of the repository to be located and clone the repository there.
-Once you are in the directory you can do the following::
+==========================================
+First, you will need to clone the current version of ``aplc_optimization``. The simplest way to do this is to go to the
+directory you want your copy of the repository to be located and clone the repository there. Currently, we specifically
+recommend installing the ``develop`` branch using the following command::
 
     $  git clone -b develop https://github.com/spacetelescope/aplc_optimization.git
     $ cd aplc_optimization
 
 Environment Installation
--------------------------
-Following the download of the ``aplc_optimization`` repository, install the aplc_optimization conda environment via
+========================
+The next step is to install the ``aplc_optimization`` conda environment via
 the environment yaml file, which contains all of the dependencies for the project::
 
     $ conda env create --file environment.yml
+
+and then activate the environment::
+
     $ source activate aplc_optimization
 
 Package Installation
---------------------
-Next, you need to install the ``aplc_optimization`` package. This can be accomplished using ``pip`` or by
-running the ``setup.py`` script::
+====================
+Next, you need to install the ``aplc_optimization`` package. This can be accomplished using ``pip``::
 
     $ pip install .
 
-or::
+or by running the ``setup.py`` script::
 
     $ python setup.py install
 
-You can check if HCIPy is installed correctly by importing it in Python::
+You can check if ``aplc_optimization`` is installed correctly by importing it in Python::
 
     >>> import aplc_optimization
 
+--------------------------------------------------
+
 Installation for Contributors
-==============================
-To install ``aplc-optimization`` in development mode (i.e. to make edits to the source files in the aplc_optimization
-directory), use ``pip install`` with the ``-e`` option::
+#############################
+To instead install ``aplc_optimization`` in development mode (i.e. so that edits made to the source files in the
+``aplc_optimization/`` directory will change the library), use ``pip install`` with the ``-e`` option when
+installing the package::
 
     pip install -e .
 
@@ -69,52 +76,50 @@ This allows for easy updates by simply pulling the git repository::
 
 
 
-
-
-
-
-
-
-
-
-
 .. _installing-gurobi:
 
+----------------------------------------
+
 Installing Gurobi
--------------------
+#################
 
-The ``aplc_optimization`` toolkit relies on the `Gurobi solver <https://www.gurobi.com/>`, which it calls directly from Python using the ``gurobipy`` package.
+The ``aplc_optimization`` toolkit relies on the `Gurobi solver <https://www.gurobi.com/>`_, which it calls directly from
+Python using the ``gurobipy`` package.
 
-Register for an academic account
-'''''''''''''''''''''''''''''''''
+
+Register for an Academic account
+================================
+
 In order to download the Gurobi Optimizer you will need to first register for an account.
-If you already have an account, `Log In <https://www.gurobi.com/login>`_. Otherwise,
-`Register <https://pages.gurobi.com/registration>`_ for a free *Academic* account.
+If you already have an account, `Log In <https://www.gurobi.com/login>`_; otherwise,
+`register <https://pages.gurobi.com/registration>`_ for a free *Academic* account.
 
 .. _download-gurobi:
 
 Download the Gurobi optimizer
-'''''''''''''''''''''''''''''''
-After registering and logging in, go to the `Gurobi software download page <https://www.gurobi.com/downloads/gurobi-software/>`_. Find your platform
-(we'll assume Mac OS X in this document) and choose the corresponding file to download. Once downloaded, double-click on the appropriate Gurobi installer
-(e.g., ``gurobi9.1.1_mac64.pkg`` for Gurobi 9.1.1) and follow the prompts. By default, the installer will place the Gurobi files
-in /Library/gurobi911/mac64 (note that this is the system /Library directory, not your personal ~/Library directory).
+=============================
+
+After registering and logging in to your Gurobi account, go to the
+`Gurobi software download page <https://www.gurobi.com/downloads/gurobi-software/>`_. Find your platform
+(we'll assume Mac OS X in this document) and choose the corresponding file to download. Once downloaded, double-click
+on the appropriate Gurobi installer (e.g., ``gurobi9.1.2_mac64.pkg`` for Gurobi 9.1.2) and follow the prompts.
+By default, the installer will place the Gurobi files in ``/Library/gurobi911/mac64`` (note that this is the system
+``/Library`` directory, not your personal ``~/Library`` directory).
 
 .. _get-gurobi-license:
 
 Obtain a Gurobi license
-''''''''''''''''''''''''''''
-In order to use the Gurobi Optimizer, a Gurobi license is required. Once you have downloaded the Gurobi Optimizer, as above,
-visit the the `Academic License page <https://www.gurobi.com/downloads/end-user-license-agreement-academic/>`_ to
-request a free license (note: you will first need to read and agree to the End User License Agreement and the Conditions for academic use;
-once you have done so, click on "Request License"). Your new license will be visible immediately on the
-`Current Gurobi Licenses page <https://www.gurobi.com/downloads/licenses/>`_ and you can create as many academic licenses as you like.
+=======================
+In order to use the Gurobi Optimizer you will require a Gurobi license. Once you have downloaded the Gurobi Optimizer,
+as above, visit the the `Academic License page <https://www.gurobi.com/downloads/end-user-license-agreement-academic/>`_ to
+request a free license (note: you will first need to read and agree to the End User License Agreement and the
+Conditions for academic use; once you have done so, click on "Request License").
 
 Install the Gurobi license
-```````````````````````````
+--------------------------
 Your next step is to install this Gurobi license on your machine. Once your license is visible on the
-`Current page <https://www.gurobi.com/downloads/licenses/>`_ of the Gurobi website, click on the *License ID*
-to view the License Detail page.
+`Current Gurobi Licenses page <https://www.gurobi.com/downloads/licenses/>`_, click on the *License ID*
+to view the *License Detail* page.
 
 To obtain a Gurobi license key you'll need to run the ``grbgetkey`` command on your machine. The exact ``grbgetkey`` command
 to run for a specific license is indicated at the bottom of the License Detail page (e.g., ``grbgetkey 253e22f3-...``).
@@ -127,7 +132,7 @@ the default location by hitting Enter. Setting up a non-default location is erro
     If you would like to store your ``gurobi.key`` license file in a non-default location, you can do so by setting the **GRB_LICENSE_FILE** environment variable to point to the license key file location.
 
 Test the Gurobi license
-''''''''''''''''''''''''
+-----------------------
 Once you have obtained a license key for your machine, you are ready to test your license using the Gurobi Interactive Shell.
 To do this, type ``gurobi.sh`` in a Terminal window. The shell should produce the following output::
 
@@ -146,7 +151,7 @@ If the Gurobi shell didn't produce the desired output, there's a problem with yo
 ------------------------------------------------------------
 
 Software Requirements
-----------------------
+#####################
 
 See `the environment.yml specification file <https://github.com/spacetelescope/aplc_optimization/blob/scda_21/environment.yml>`_ for the required package dependencies.
 
@@ -170,8 +175,3 @@ See `the environment.yml specification file <https://github.com/spacetelescope/a
  - `SciPy <http://www.scipy.org/scipylib/download.html>`_ (for advanced linear algebra)
 
 
-Using the STScI Linux Servers
-------------------------------
-
-The Linux servers at STScI are available to optimize select high-resolution design cases, as needed. For instructions on how to
-install and use ``aplc_optimization`` on one of these servers, see :ref:`servers`.
