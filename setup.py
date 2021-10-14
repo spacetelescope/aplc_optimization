@@ -12,13 +12,14 @@ setup(name='aplc_optimization',
       long_description=long_description,
       long_description_content_type='text/markdown',
       license="BSD 3-Clause License",
-      url='https://github.com/spacetelescope/aplc-optimization',
+      url='https://github.com/spacetelescope/aplc_optimization',
       author='Space Telescope Science Institute, Segmented Coronagraph Design and Analysis team',
       author_email='help@stsci.edu',
       project_urls={
-            'Documentation': 'aplc-optimization.readthedocs.io',
+            'Documentation': 'aplc_optimization.readthedocs.io',
             'Funding': 'https://exoplanets.nasa.gov/exep/technology/SCDA/',
-            'Source': 'https://github.com/spacetelescope/aplc-optimization',
-            'Tracker': 'https://github.com/spacetelescope/aplc-optimization/issues'
+            'Source': 'https://github.com/spacetelescope/aplc_optimization',
+            'Tracker': 'https://github.com/spacetelescope/aplc_optimization/issues'
       },
-      packages=find_packages())
+      packages=find_packages(), install_requires=['gurobipy', 'hcipy', 'scipy', 'numpy', 'astropy', 'poppy', 'asdf',
+                                                  'matplotlib', 'six'])

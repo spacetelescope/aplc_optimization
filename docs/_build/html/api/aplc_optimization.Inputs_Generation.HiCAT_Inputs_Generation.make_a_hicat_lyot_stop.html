@@ -86,7 +86,6 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../installing.html">Requirements &amp; Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../server.html">Using STScI Linux Servers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../workflow.html">Design Survey Workflow</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Detailed API Reference</span></p>
@@ -178,23 +177,23 @@
 <span class="sig-prename descclassname"><span class="pre">aplc_optimization.Inputs_Generation.HiCAT_Inputs_Generation.</span></span><span class="sig-name descname"><span class="pre">make_a_hicat_lyot_stop</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">normalized</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_spiders</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lyot_inner</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lyot_outer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.9</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_header</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/aplc_optimization/Inputs_Generation/HiCAT_Inputs_Generation.html#make_a_hicat_lyot_stop"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aplc_optimization.Inputs_Generation.HiCAT_Inputs_Generation.make_a_hicat_lyot_stop" title="Permalink to this definition">¶</a></dt>
 <dd><p>Make a HiCAT Lyot stop.</p>
 <dl class="simple">
-<dt>normalized<span class="classifier">boolean</span></dt><dd><p>If this is True, the outer diameter will be scaled to 1. Otherwise, the
+<dt>normalized: boolean</dt><dd><p>If this is True, the outer diameter will be scaled to 1. Otherwise, the
 diameter of the pupil will be 15.0 meters.</p>
 </dd>
-<dt>with_spiders<span class="classifier">boolean</span></dt><dd><p>Include the secondary mirror support structure in the aperture.</p>
+<dt>with_spiders: boolean</dt><dd><p>Include the secondary mirror support structure in the aperture.</p>
 </dd>
-<dt>inner_diameter_fraction<span class="classifier">scalar</span></dt><dd><p>The fractional size of the circular central obstruction as fraction of the pupil diameter.</p>
+<dt>lyot_inner: float</dt><dd><p>The P5 lyot stop mask central segment size in meters.</p>
 </dd>
-<dt>outer_diameter_fraction<span class="classifier">scalar</span></dt><dd><p>The fractional size of the circular outer edge as fraction of the pupil diameter.</p>
+<dt>lyot_outer: float</dt><dd><p>The P5 lyot stop size in meters.</p>
 </dd>
-<dt>return_header<span class="classifier">boolean</span></dt><dd><p>If this is True, a header will be returned giving all important values for the
+<dt>return_header: boolean</dt><dd><p>If this is True, a header will be returned giving all important values for the
 created aperture for reference.</p>
 </dd>
 </dl>
 <dl class="simple">
-<dt>lyot_stop<span class="classifier">Field generator</span></dt><dd><p>A field generator for the Lyot stop.</p>
+<dt>lyot_stop: Field generator</dt><dd><p>A field generator for the Lyot stop.</p>
 </dd>
-<dt>header<span class="classifier">dict</span></dt><dd><p>A dictionary containing all important values for the created aperture. Only returned
+<dt>header: dict</dt><dd><p>A dictionary containing all important values for the created aperture. Only returned
 if <cite>return_header</cite> is True.</p>
 </dd>
 </dl>

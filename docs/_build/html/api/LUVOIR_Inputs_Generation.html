@@ -86,7 +86,6 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../installing.html">Requirements &amp; Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../server.html">Using STScI Linux Servers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../workflow.html">Design Survey Workflow</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Detailed API Reference</span></p>
@@ -178,7 +177,7 @@
 <col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">Cn_squared_from_fried_parameter</span></code>(r0[, wavelength])</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">Cn_squared_from_fried_parameter</span></code>(r0, wavelength)</p></td>
 <td><p>Calculate the integrated Cn^2 for a certain Fried parameter.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="aplc_optimization.Inputs_Generation.LUVOIR_Inputs_Generation.LUVOIR_inputs_gen.html#aplc_optimization.Inputs_Generation.LUVOIR_Inputs_Generation.LUVOIR_inputs_gen" title="aplc_optimization.Inputs_Generation.LUVOIR_Inputs_Generation.LUVOIR_inputs_gen"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LUVOIR_inputs_gen</span></code></a>(input_files_dict)</p></td>
@@ -187,10 +186,10 @@
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">ansi_to_zernike</span></code>(i)</p></td>
 <td><p>Get the Zernike index from an ANSI index.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">azimutal_profile</span></code>(image, num_bins[, statistic])</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">azimutal_profile</span></code>(image, num_bins)</p></td>
 <td><p>Create an azimuthal profile of the image around its center.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">binned_profile</span></code>(y, x[, bins, statistic])</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">binned_profile</span></code>(y, x[, bins])</p></td>
 <td><p>Create a profile of y(x) in the specified bins.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">circular_aperture</span></code>(diameter[, center])</p></td>
@@ -271,10 +270,10 @@
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">field_transpose</span></code>(a)</p></td>
 <td><p>Performs the transpose of a rank 2 tensor field or two dimensional array.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">fried_parameter_from_Cn_squared</span></code>(Cn_squared)</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">fried_parameter_from_Cn_squared</span></code>(Cn_squared, …)</p></td>
 <td><p>Calculate the Fried parameter from the integrated Cn^2.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">fried_parameter_to_seeing</span></code>(r0[, wavelength])</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">fried_parameter_to_seeing</span></code>(r0, wavelength)</p></td>
 <td><p>Calculate the FWHM of the seeing from the Fried parameter.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">gaussian_hermite</span></code>(n, m[, …])</p></td>
@@ -380,7 +379,7 @@
 <td><p>Create a disk harmonic mode basis.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_fft_grid</span></code>(input_grid[, q, fov])</p></td>
-<td><p>Calculate the grid returned by a Fast Fourier Transform.</p></td>
+<td><p></p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_field_operation</span></code>(op)</p></td>
 <td><p></p></td>
@@ -412,56 +411,44 @@
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_hexagonal_grid</span></code>(circum_diameter, n_rings)</p></td>
 <td><p>Make a regular hexagonal grid.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_hexagonal_segmented_aperture</span></code>(num_rings, …)</p></td>
-<td><p>Create a hexagonal segmented aperture.</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_hicat_aperture</span></code>([normalized, …])</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_hicat_aperture</span></code>([normalized, …])</p></td>
 <td><p>Make the HiCAT P3 apodizer mask</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_hicat_lyot_stop</span></code>([normalized, …])</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_hicat_lyot_stop</span></code>([normalized, …])</p></td>
 <td><p>Make the HiCAT Lyot stop.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_linear_interpolator</span></code>(field[, grid, …])</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_linear_interpolator</span></code>(field[, grid, …])</p></td>
 <td><p>Make a linear interpolator for any type of grid.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_linear_interpolator_separated</span></code>(field[, …])</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_linear_interpolator_separated</span></code>(field[, …])</p></td>
 <td><p>Make a linear interpolators for a separated grid.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_linear_interpolator_unstructured</span></code>(field)</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_linear_interpolator_unstructured</span></code>(field)</p></td>
 <td><p>Make a linear interpolator for an unstructured grid.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_luvoir_a_aperture</span></code>([normalized, …])</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_luvoir_a_aperture</span></code>([normalized, …])</p></td>
 <td><p>This aperture changes frequently.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_luvoir_a_lyot_stop</span></code>([normalized, …])</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_luvoir_a_lyot_stop</span></code>([normalized, …])</p></td>
 <td><p>Make a LUVOIR-A Lyot stop for the APLC coronagraph.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="aplc_optimization.Inputs_Generation.LUVOIR_Inputs_Generation.make_luvoir_lyot_stop.html#aplc_optimization.Inputs_Generation.LUVOIR_Inputs_Generation.make_luvoir_lyot_stop" title="aplc_optimization.Inputs_Generation.LUVOIR_Inputs_Generation.make_luvoir_lyot_stop"><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_luvoir_lyot_stop</span></code></a>([normalized, …])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="aplc_optimization.Inputs_Generation.LUVOIR_Inputs_Generation.make_luvoir_lyot_stop.html#aplc_optimization.Inputs_Generation.LUVOIR_Inputs_Generation.make_luvoir_lyot_stop" title="aplc_optimization.Inputs_Generation.LUVOIR_Inputs_Generation.make_luvoir_lyot_stop"><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_luvoir_lyot_stop</span></code></a>([normalized, …])</p></td>
 <td><p>Make a LUVOIR-A Lyot stop for the APLC coronagraph.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_magellan_aperture</span></code>([normalized, …])</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_magellan_aperture</span></code>([normalized, …])</p></td>
 <td><p>Make the Magellan aperture.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_nearest_interpolator</span></code>(field[, grid])</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_nearest_interpolator</span></code>(field[, grid])</p></td>
 <td><p>Make a nearest interpolator for any type of grid.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_nearest_interpolator_separated</span></code>(field[, …])</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_nearest_interpolator_separated</span></code>(field[, …])</p></td>
 <td><p>Make a nearest interpolator for a field on a separated grid.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_nearest_interpolator_unstructured</span></code>(field)</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_nearest_interpolator_unstructured</span></code>(field)</p></td>
 <td><p>Make a nearest interpolator for an unstructured grid.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_obstructed_circular_aperture</span></code>(…[, …])</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_obstructed_circular_aperture</span></code>(…[, …])</p></td>
 <td><p>Make a simple circular aperture with central obscuration and support structure.</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_obstruction</span></code>(aperture)</p></td>
-<td><p>Create an obstruction of <cite>aperture</cite>.</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_odwfs_amplitude_filter</span></code>(beta)</p></td>
-<td><p>The OD-wfs amplitude filter following <span id="id2">[Haffert2016]</span>.</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_polarization_odwfs_amplitude_filter</span></code>(beta)</p></td>
-<td><p>The OD-wfs amplitude filter based on polarization optics following <span id="id3">[Haffert2016]</span>.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_power_law_error</span></code>(pupil_grid, ptv, diameter)</p></td>
 <td><p>Create an error surface from a power-law power spectral density.</p></td>
@@ -472,44 +459,38 @@
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_ravc_masks</span></code>(central_obscuration[, …])</p></td>
 <td><p>Make field generators for the pupil and Lyot-stop masks for a ring apodized vortex coronagraph.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_rotated_aperture</span></code>(aperture, angle)</p></td>
-<td><p>Create a rotated version of <cite>aperture</cite>.</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_segmented_aperture</span></code>(segment_shape, …)</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_segmented_aperture</span></code>(segment_shape, …)</p></td>
 <td><p>Create a segmented aperture.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_sellmeier_glass</span></code>(A, K, L)</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_sellmeier_glass</span></code>(A, K, L)</p></td>
 <td><p>The Sellmeier equation for the dispersion of the refractive index of materials.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_sine_basis</span></code>(grid, fourier_grid[, …])</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_sine_basis</span></code>(grid, fourier_grid[, …])</p></td>
 <td><p>Make a sine basis.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_spider</span></code>(p1, p2, spider_width)</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_spider</span></code>(p1, p2, spider_width)</p></td>
 <td><p>Make a rectangular obstruction from <cite>p1</cite> to <cite>p2</cite>.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_spider_infinite</span></code>(p, angle, spider_width)</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_spider_infinite</span></code>(p, angle, spider_width)</p></td>
 <td><p>Make an infinite spider starting at <cite>p</cite> and extending at an angle <cite>angle</cite>.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_standard_atmospheric_layers</span></code>(input_grid)</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_standard_atmospheric_layers</span></code>(input_grid)</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_subsampled_grid</span></code>(grid, undersampling)</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_subsampled_grid</span></code>(grid, undersampling)</p></td>
 <td><p>Make a new grid that undersamples by a factor <cite>undersampling</cite>.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_supersampled_grid</span></code>(grid, oversampling)</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_supersampled_grid</span></code>(grid, oversampling)</p></td>
 <td><p>Make a new grid that oversamples by a factor <cite>oversampling</cite>.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_uniform_grid</span></code>(dims, extent[, center, …])</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_uniform_grid</span></code>(dims, extent[, center, …])</p></td>
 <td><p>Create a uniformly-spaced <code class="xref py py-class docutils literal notranslate"><span class="pre">Grid</span></code> of a certain shape and size.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_uniform_vector_field</span></code>(field, jones_vector)</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_uniform_vector_field</span></code>(field, jones_vector)</p></td>
 <td><p>Make an uniform vector field from a scalar field and a jones vector.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_uniform_vector_field_generator</span></code>(…)</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_uniform_vector_field_generator</span></code>(…)</p></td>
 <td><p>Make an uniform vector field generator from a scalar field generator and a jones vector.</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_vlt_aperture</span></code>([normalized, telescope, …])</p></td>
-<td><p>Make the VLT aperture.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_xinetics_influence_functions</span></code>(…[, …])</p></td>
 <td><p>Create influence functions for a Xinetics deformable mirror.</p></td>
@@ -521,7 +502,7 @@
 <td><p>Get the Zernike index from a Noll index.</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">optical_differentiation_surface</span></code>(filter_size, …)</p></td>
-<td><p>A generator function for the complex multiplexed surface of the ODWFS.</p></td>
+<td><p>Creates a function which can create the complex multiplexed surface for the ODWFS on a grid.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">parabolic_surface_sag</span></code>(radius_of_curvature)</p></td>
 <td><p>Makes a Field generator for the surface sag of an even aspherical surface.</p></td>
@@ -535,7 +516,7 @@
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">power_spectral_density_von_karman</span></code>(r0, L0)</p></td>
 <td><p>Return a Field generator for the power spectral density function for Von Karman turbulence.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">radial_profile</span></code>(image, bin_size[, statistic])</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">radial_profile</span></code>(image, bin_size)</p></td>
 <td><p>Create a radial profile of the image around its center.</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">read_field</span></code>(filename[, fmt])</p></td>
@@ -556,7 +537,7 @@
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">regular_polygon_aperture</span></code>(num_sides, …[, …])</p></td>
 <td><p>Makes a Field generator for a regular-polygon-shaped aperture.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">seeing_to_fried_parameter</span></code>(seeing[, wavelength])</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">seeing_to_fried_parameter</span></code>(seeing, wavelength)</p></td>
 <td><p>Calculate the Fried parameter from the seeing FWHM.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_color_scheme</span></code>([dark, …])</p></td>

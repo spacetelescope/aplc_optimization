@@ -1,20 +1,28 @@
 import os
 
 os.chdir('../..')
+instrument = 'luvoir'  # do not edit
 from aplc_optimization.survey import DesignParameterSurvey
 from aplc_optimization.aplc import APLC
 from aplc_optimization.Inputs_Generation.LUVOIR_Inputs_Generation import LUVOIR_inputs_gen
 
-# Survey information
-instrument = 'luvoir'  # instrument name
-survey_name = 'BW10_medium'  # survey name
-machine = 'local'  # name of machine the survey is run on.
+"""
+Survey Information
+------------------
+survey_name: str
+    The designated name of the design survey.
+machine: str
+    The name of the machine on which to run the design survey.
+N: int
+    The number of pixels in the input (TelAP, LS) and final (apodizer) arrays.
+"""
+survey_name = 'BW10_medium'
+machine = 'local'
+N = 1000
 
-N = 1000  # number of pixels in input (TelAP, LS) and final (apodizer) arrays
-
-'''
-Input (aperture and Lyot stop) Array Parameters
------------------------------------------------
+"""
+Input File Parameters
+---------------------
 N: int
     The number of pixels in input (TelAP, LS) and final (apodizer) arrays
 oversamp: int
@@ -32,21 +40,7 @@ LS_ID: float
     The Lyot stop inner diameter(s) as a fraction of `lyot_ref_diameter`
 LS_OD: float
     The Lyot stop outer diameter as a fraction of `lyot_ref_diameter`.
-'''
-
-# Aperture parameters
-pupil_diameter = 15.0  # m: actual LUVOIR A circumscribed pupil diameter
-pupil_inscribed = 13.5  # m: actual LUVOIR A inscribed pupil diameter
-oversamp = 4
-gap_padding = 1
-
-# Lyot stop parameters
-lyot_ref_diameter = pupil_inscribed
-ls_spid = False
-ls_spid_ov = 2
-LS_ID = 0.12
-LS_OD = 0.982
-
+"""
 input_files_dict = {'directory': 'LUVOIR/', 'N': N, 'oversamp': 4,
                     'aperture': {'seg_gap_pad': 1},
                     'lyot_stop': {'lyot_ref_diam': 13.5, 'ls_spid': False, 'ls_spid_ov': 2, 'LS_ID': [0.12],
@@ -54,15 +48,9 @@ input_files_dict = {'directory': 'LUVOIR/', 'N': N, 'oversamp': 4,
 
 pup_filename, ls_filenames = LUVOIR_inputs_gen(input_files_dict)
 
-'''
+"""
 Survey Design Parameters
 ------------------------
-- for multiple design parameters as a grid, input as list
-- for multiple design parameters NOT as a grid, create multiple entries of below 
-  (as shown in the commented block, at bottom of this script)
-
-Parameters
-----------
 N: int
     The number of pixels in input (TelAP, LS) and final (apodizer) arrays.
 alignment_tolerance: int
@@ -93,16 +81,15 @@ starting_scale: int
 ending_scale: int
     The number of pixels per unit cell for the final solution. If this is the same as `starting_scale`,
     the adaptive algorithm is essentially turned off.
-'''
-
+"""
 survey_parameters = {'pupil': {'N': N, 'filename': pup_filename},
                      'lyot_stop': {'filename': ls_filenames},
                      'focal_plane_mask': {'radius': 6.82, 'num_pix': 250, 'grayscale': True, },
                      'image': {'contrast': 10, 'iwa': 6.72, 'owa': 23.72, 'bandwidth': 0.10, 'num_wavelengths': 5},
                      'method': {'starting_scale': 4}}
 
-luvoir = DesignParameterSurvey(APLC, survey_parameters, 'surveys/{}_{}_N{:04d}_{}/'.format(instrument, survey_name, N, machine),
-                               'masks/')
+luvoir = DesignParameterSurvey(APLC, survey_parameters,
+                               'surveys/{}_{}_N{:04d}_{}/'.format(instrument, survey_name, N, machine), 'masks/')
 luvoir.describe()
 
 luvoir.write_drivers(True)

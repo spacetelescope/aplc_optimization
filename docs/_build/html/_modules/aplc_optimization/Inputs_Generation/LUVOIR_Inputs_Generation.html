@@ -1,25 +1,37 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>aplc_optimization.Inputs_Generation.LUVOIR_Inputs_Generation &mdash; aplc_optimization  documentation</title>
   
 
   
+  <link rel="stylesheet" href="../../../_static/stsci.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/stsci.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/stsci.css" type="text/css" />
+
+  
   
     <link rel="shortcut icon" href="../../../_static/logo.jpg"/>
   
+
   
   
 
   
-  <script type="text/javascript" src="../../../_static/js/modernizr.min.js"></script>
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
@@ -31,14 +43,6 @@
     <script type="text/javascript" src="../../../_static/js/theme.js"></script>
 
     
-
-  
-  <link rel="stylesheet" href="../../../_static/stsci.css" type="text/css" />
-  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../../../_static/stsci.css" type="text/css" />
-  <link rel="stylesheet" href="../../../_static/graphviz.css" type="text/css" />
-  <link rel="stylesheet" href="../../../_static/stsci.css" type="text/css" />
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" /> 
 </head>
@@ -72,6 +76,7 @@
   
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -83,7 +88,6 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../introduction.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../installing.html">Requirements &amp; Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../server.html">Using STScI Linux Servers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../workflow.html">Design Survey Workflow</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Detailed API Reference</span></p>
@@ -99,6 +103,7 @@
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -133,11 +138,13 @@
 
 
 
+
+
 <div role="navigation" aria-label="breadcrumbs navigation">
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
         
           <li><a href="../../index.html">Module code</a> &raquo;</li>
         
@@ -157,12 +164,11 @@
            <div itemprop="articleBody">
             
   <h1>Source code for aplc_optimization.Inputs_Generation.LUVOIR_Inputs_Generation</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">hcipy</span> <span class="kn">import</span> <span class="o">*</span>
-<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span></span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">astropy.io</span> <span class="kn">import</span> <span class="n">fits</span>
-
-<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">hcipy</span> <span class="kn">import</span> <span class="o">*</span>
 
 
 <div class="viewcode-block" id="LUVOIR_inputs_gen"><a class="viewcode-back" href="../../../api/aplc_optimization.Inputs_Generation.LUVOIR_Inputs_Generation.LUVOIR_inputs_gen.html#aplc_optimization.Inputs_Generation.LUVOIR_Inputs_Generation.LUVOIR_inputs_gen">[docs]</a><span class="k">def</span> <span class="nf">LUVOIR_inputs_gen</span><span class="p">(</span><span class="n">input_files_dict</span><span class="p">):</span>
@@ -181,19 +187,20 @@
 <span class="sd">        The name(s) of the generated Lyot stop FITS file(s).</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="n">filepath</span> <span class="o">=</span>      <span class="n">input_files_dict</span><span class="p">[</span><span class="s1">&#39;directory&#39;</span><span class="p">]</span>   <span class="c1"># directory in which the constructed FITS files are stored</span>
-    <span class="n">N</span> <span class="o">=</span>             <span class="n">input_files_dict</span><span class="p">[</span><span class="s1">&#39;N&#39;</span><span class="p">]</span>   <span class="c1"># number of pixels in the input (aperture and lyot stop) arrays</span>
+    <span class="n">filepath</span> <span class="o">=</span> <span class="n">input_files_dict</span><span class="p">[</span><span class="s1">&#39;directory&#39;</span><span class="p">]</span>  <span class="c1"># directory in which the constructed FITS files are stored</span>
+    <span class="n">N</span> <span class="o">=</span> <span class="n">input_files_dict</span><span class="p">[</span><span class="s1">&#39;N&#39;</span><span class="p">]</span>  <span class="c1"># number of pixels in the input (aperture and lyot stop) arrays</span>
 
     <span class="c1"># Aperture parameters</span>
-    <span class="n">oversamp</span> <span class="o">=</span> 		<span class="n">input_files_dict</span><span class="p">[</span><span class="s1">&#39;oversamp&#39;</span><span class="p">]</span>    <span class="c1"># oversampling factor in `evaluate_supersampled()` [hcipy/field/util.py].</span>
-    <span class="n">gap_padding</span> <span class="o">=</span> 	<span class="n">input_files_dict</span><span class="p">[</span><span class="s1">&#39;aperture&#39;</span><span class="p">][</span><span class="s1">&#39;seg_gap_pad&#39;</span><span class="p">]</span> <span class="c1"># arbitratry padding of gap size to represent gaps on small arrays</span>
+    <span class="n">oversamp</span> <span class="o">=</span> <span class="n">input_files_dict</span><span class="p">[</span><span class="s1">&#39;oversamp&#39;</span><span class="p">]</span>  <span class="c1"># oversampling factor in `evaluate_supersampled()` [hcipy/field/util.py].</span>
+    <span class="n">gap_padding</span> <span class="o">=</span> <span class="n">input_files_dict</span><span class="p">[</span><span class="s1">&#39;aperture&#39;</span><span class="p">][</span>
+        <span class="s1">&#39;seg_gap_pad&#39;</span><span class="p">]</span>  <span class="c1"># arbitrary padding of gap size to represent gaps on small arrays</span>
 
     <span class="c1"># Lyot stop parameters</span>
     <span class="n">lyot_ref_diam</span> <span class="o">=</span> <span class="n">input_files_dict</span><span class="p">[</span><span class="s1">&#39;lyot_stop&#39;</span><span class="p">][</span><span class="s1">&#39;lyot_ref_diam&#39;</span><span class="p">]</span>  <span class="c1"># diameter used to reference LS_ID and LS_OD against</span>
-    <span class="n">LS_SPID</span> <span class="o">=</span> 		<span class="n">input_files_dict</span><span class="p">[</span><span class="s1">&#39;lyot_stop&#39;</span><span class="p">][</span><span class="s1">&#39;ls_spid&#39;</span><span class="p">]</span>    <span class="c1"># flag for inclusion or exclusion of struts in lyot stop</span>
-    <span class="n">ls_spid_ov</span> <span class="o">=</span> 	<span class="n">input_files_dict</span><span class="p">[</span><span class="s1">&#39;lyot_stop&#39;</span><span class="p">][</span><span class="s1">&#39;ls_spid_ov&#39;</span><span class="p">]</span> <span class="c1"># spider oversize scale</span>
-    <span class="n">LS_OD</span> <span class="o">=</span> 		<span class="n">input_files_dict</span><span class="p">[</span><span class="s1">&#39;lyot_stop&#39;</span><span class="p">][</span><span class="s1">&#39;LS_OD&#39;</span><span class="p">]</span>  <span class="c1"># Lyot stop inner diameter(s), relative to inscribed circle</span>
-    <span class="n">LS_ID</span> <span class="o">=</span> 		<span class="n">input_files_dict</span><span class="p">[</span><span class="s1">&#39;lyot_stop&#39;</span><span class="p">][</span><span class="s1">&#39;LS_ID&#39;</span><span class="p">]</span>  <span class="c1"># Lyot stop outer diameter(s), relative to inscribed circle</span>
+    <span class="n">LS_SPID</span> <span class="o">=</span> <span class="n">input_files_dict</span><span class="p">[</span><span class="s1">&#39;lyot_stop&#39;</span><span class="p">][</span><span class="s1">&#39;ls_spid&#39;</span><span class="p">]</span>  <span class="c1"># flag for inclusion or exclusion of struts in lyot stop</span>
+    <span class="n">ls_spid_ov</span> <span class="o">=</span> <span class="n">input_files_dict</span><span class="p">[</span><span class="s1">&#39;lyot_stop&#39;</span><span class="p">][</span><span class="s1">&#39;ls_spid_ov&#39;</span><span class="p">]</span>  <span class="c1"># spider oversize scale</span>
+    <span class="n">LS_OD</span> <span class="o">=</span> <span class="n">input_files_dict</span><span class="p">[</span><span class="s1">&#39;lyot_stop&#39;</span><span class="p">][</span><span class="s1">&#39;LS_OD&#39;</span><span class="p">]</span>  <span class="c1"># Lyot stop inner diameter(s), relative to inscribed circle</span>
+    <span class="n">LS_ID</span> <span class="o">=</span> <span class="n">input_files_dict</span><span class="p">[</span><span class="s1">&#39;lyot_stop&#39;</span><span class="p">][</span><span class="s1">&#39;LS_ID&#39;</span><span class="p">]</span>  <span class="c1"># Lyot stop outer diameter(s), relative to inscribed circle</span>
 
     <span class="n">pup_filename</span> <span class="o">=</span> <span class="n">filepath</span> <span class="o">+</span> <span class="s1">&#39;TelAp_LUVOIR_gap_pad</span><span class="si">{0:02d}</span><span class="s1">_bw_ovsamp</span><span class="si">{1:02d}</span><span class="s1">_N</span><span class="si">{2:04d}</span><span class="s1">.fits&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">gap_padding</span><span class="p">,</span> <span class="n">oversamp</span><span class="p">,</span>
                                                                                                   <span class="n">N</span><span class="p">)</span>
@@ -204,9 +211,7 @@
 
     <span class="n">config</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s1">&#39;masks/&#39;</span> <span class="o">+</span> <span class="n">pup_filename</span><span class="p">)</span>
 
-
-    <span class="c1">#Check if aperture file already exists, otherwise creates LUVOIR aperture by calling make_a_luvoir_aperture() [hcipy/aperture/realistic.py]</span>
-
+    <span class="c1"># Check if aperture file already exists, otherwise create LUVOIR aperture</span>
     <span class="k">if</span> <span class="n">config</span><span class="o">.</span><span class="n">is_file</span><span class="p">():</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{0:s}</span><span class="s1"> exists&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;masks/&#39;</span> <span class="o">+</span> <span class="n">pup_filename</span><span class="p">))</span>
     <span class="k">else</span><span class="p">:</span>
@@ -214,7 +219,7 @@
         <span class="n">LUVOIR_ap_indexed</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">segment_positions</span> <span class="o">=</span> <span class="n">make_luvoir_a_aperture</span><span class="p">(</span><span class="n">gap_padding</span><span class="p">,</span> <span class="n">return_header</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                                                                          <span class="n">segment_transmissions</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">121</span><span class="p">),</span>
                                                                          <span class="n">return_segments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-                                                                        <span class="c1"># return_segment_positions=True, header=True</span>
+        <span class="c1"># return_segment_positions=True, header=True</span>
         <span class="n">pupil</span> <span class="o">=</span> <span class="n">evaluate_supersampled</span><span class="p">(</span><span class="n">LUVOIR_ap</span><span class="p">,</span> <span class="n">grid</span><span class="p">,</span> <span class="n">oversamp</span><span class="p">)</span>
         <span class="n">pupil_indexed</span> <span class="o">=</span> <span class="n">evaluate_supersampled</span><span class="p">(</span><span class="n">LUVOIR_ap_indexed</span><span class="p">,</span> <span class="n">grid</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 
@@ -236,14 +241,14 @@
         <span class="n">hdr</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s1">&#39;EDGE&#39;</span><span class="p">,</span> <span class="s1">&#39;bw&#39;</span><span class="p">,</span> <span class="s1">&#39;black and white, or grey pixels&#39;</span><span class="p">)</span>
         <span class="n">hdr</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s1">&#39;PROV&#39;</span><span class="p">,</span> <span class="n">header</span><span class="p">[</span><span class="s1">&#39;PROV&#39;</span><span class="p">])</span>
 
-        <span class="c1">#hdr_indexed = hdr.copy()</span>
-        <span class="c1">#seg_xys = segment_positions.points</span>
-        <span class="c1">#for segment in range(seg_xys.shape[0]):</span>
+        <span class="c1"># hdr_indexed = hdr.copy()</span>
+        <span class="c1"># seg_xys = segment_positions.points</span>
+        <span class="c1"># for segment in range(seg_xys.shape[0]):</span>
         <span class="c1">#    hdr_indexed.set(&#39;seg&#39; + str(segment + 1) + &#39;_x&#39;, segment_positions.x[segment], &#39;x-position segment &#39; + str(segment + 1))</span>
         <span class="c1">#    hdr_indexed.set(&#39;seg&#39; + str(segment + 1) + &#39;_y&#39;, segment_positions.y[segment], &#39;y-position segment &#39; + str(segment + 1))</span>
 
         <span class="n">fits</span><span class="o">.</span><span class="n">writeto</span><span class="p">(</span><span class="s1">&#39;masks/&#39;</span> <span class="o">+</span> <span class="n">pup_filename</span><span class="p">,</span> <span class="n">pupil</span><span class="o">.</span><span class="n">shaped</span><span class="p">,</span> <span class="n">hdr</span><span class="p">,</span> <span class="n">overwrite</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-        <span class="c1">#fits.writeto(&#39;masks/&#39; + pup_filename_indexed, pupil_indexed.shaped, hdr_indexed, overwrite=True)</span>
+        <span class="c1"># fits.writeto(&#39;masks/&#39; + pup_filename_indexed, pupil_indexed.shaped, hdr_indexed, overwrite=True)</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{0:s}</span><span class="s1"> has been written to file&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;masks/&#39;</span> <span class="o">+</span> <span class="n">pup_filename</span><span class="p">))</span>
 
     <span class="n">ls_filenames</span> <span class="o">=</span> <span class="p">[]</span>
@@ -269,15 +274,15 @@
 
             <span class="k">if</span> <span class="n">LS_SPID</span><span class="p">:</span>
                 <span class="n">ls_filename</span> <span class="o">=</span> <span class="n">filepath</span> <span class="o">+</span> <span class="s1">&#39;LS_LUVOIR_ID</span><span class="si">{0:04d}</span><span class="s1">_OD</span><span class="si">{1:04d}</span><span class="s1">_</span><span class="si">{2:s}</span><span class="s1">_pad</span><span class="si">{3:02d}</span><span class="s1">_</span><span class="si">{4:s}</span><span class="s1">_ovsamp</span><span class="si">{5:d}</span><span class="s1">_N</span><span class="si">{6:04d}</span><span class="s1">.fits&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                    <span class="nb">int</span><span class="p">(</span><span class="n">ls_id</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">),</span> \
-                    <span class="nb">int</span><span class="p">(</span><span class="n">ls_od</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">),</span> \
-                    <span class="n">strut_key</span><span class="p">,</span> <span class="n">ls_spid_ov</span><span class="p">,</span> \
+                    <span class="nb">int</span><span class="p">(</span><span class="n">ls_id</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">),</span>
+                    <span class="nb">int</span><span class="p">(</span><span class="n">ls_od</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">),</span>
+                    <span class="n">strut_key</span><span class="p">,</span> <span class="n">ls_spid_ov</span><span class="p">,</span>
                     <span class="n">edge</span><span class="p">,</span> <span class="n">oversamp</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">ls_filename</span> <span class="o">=</span> <span class="n">filepath</span> <span class="o">+</span> <span class="s1">&#39;LS_LUVOIR_ID</span><span class="si">{0:04d}</span><span class="s1">_OD</span><span class="si">{1:04d}</span><span class="s1">_</span><span class="si">{2:s}</span><span class="s1">_</span><span class="si">{3:s}</span><span class="s1">_ovsamp</span><span class="si">{4:d}</span><span class="s1">_N</span><span class="si">{5:04d}</span><span class="s1">.fits&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                    <span class="nb">int</span><span class="p">(</span><span class="n">ls_id</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">),</span> \
-                    <span class="nb">int</span><span class="p">(</span><span class="n">ls_od</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">),</span> \
-                    <span class="n">strut_key</span><span class="p">,</span> <span class="n">edge</span><span class="p">,</span> \
+                    <span class="nb">int</span><span class="p">(</span><span class="n">ls_id</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">),</span>
+                    <span class="nb">int</span><span class="p">(</span><span class="n">ls_od</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">),</span>
+                    <span class="n">strut_key</span><span class="p">,</span> <span class="n">edge</span><span class="p">,</span>
                     <span class="n">oversamp</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
 
             <span class="n">config</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s1">&#39;masks/&#39;</span> <span class="o">+</span> <span class="n">ls_filename</span><span class="p">)</span>
@@ -285,8 +290,11 @@
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{0:s}</span><span class="s1"> exists&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;masks/&#39;</span> <span class="o">+</span> <span class="n">ls_filename</span><span class="p">))</span>
 
             <span class="k">else</span><span class="p">:</span>
-                <span class="n">LUVOIR_ls</span><span class="p">,</span> <span class="n">ls_header</span> <span class="o">=</span> <span class="n">make_luvoir_a_lyot_stop</span><span class="p">(</span><span class="n">normalized</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">with_spiders</span><span class="o">=</span><span class="n">LS_SPID</span><span class="p">,</span>  <span class="n">spider_oversize</span><span class="o">=</span><span class="n">ls_spid_ov</span><span class="p">,</span> <span class="n">inner_diameter_fraction</span><span class="o">=</span><span class="n">ls_id</span><span class="p">,</span> <span class="n">outer_diameter_fraction</span><span class="o">=</span><span class="n">ls_od</span><span class="p">,</span> <span class="n">return_header</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-                <span class="c1">### previously make_luvour_a_lyot_stop(ls_id, ls_od, lyot_ref_diam, spid_oversize=ls_spid_ov, spiders=LS_SPID, header = True)</span>
+                <span class="n">LUVOIR_ls</span><span class="p">,</span> <span class="n">ls_header</span> <span class="o">=</span> <span class="n">make_luvoir_a_lyot_stop</span><span class="p">(</span><span class="n">normalized</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">with_spiders</span><span class="o">=</span><span class="n">LS_SPID</span><span class="p">,</span>
+                                                               <span class="n">spider_oversize</span><span class="o">=</span><span class="n">ls_spid_ov</span><span class="p">,</span>
+                                                               <span class="n">inner_diameter_fraction</span><span class="o">=</span><span class="n">ls_id</span><span class="p">,</span>
+                                                               <span class="n">outer_diameter_fraction</span><span class="o">=</span><span class="n">ls_od</span><span class="p">,</span> <span class="n">return_header</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                <span class="c1"># previously make_luvour_a_lyot_stop(ls_id, ls_od, lyot_ref_diam, spid_oversize=ls_spid_ov, spiders=LS_SPID, header = True)</span>
                 <span class="n">lyot_stop</span> <span class="o">=</span> <span class="n">evaluate_supersampled</span><span class="p">(</span><span class="n">LUVOIR_ls</span><span class="p">,</span> <span class="n">grid</span><span class="p">,</span> <span class="n">oversamp</span><span class="p">)</span>
 
                 <span class="c1"># header.update(ls_header)</span>
@@ -322,8 +330,9 @@
         <span class="k">return</span> <span class="n">pup_filename</span><span class="p">,</span> <span class="n">ls_filenames</span></div>
 
 
-<div class="viewcode-block" id="make_luvoir_lyot_stop"><a class="viewcode-back" href="../../../api/aplc_optimization.Inputs_Generation.LUVOIR_Inputs_Generation.make_luvoir_lyot_stop.html#aplc_optimization.Inputs_Generation.LUVOIR_Inputs_Generation.make_luvoir_lyot_stop">[docs]</a><span class="k">def</span> <span class="nf">make_luvoir_lyot_stop</span><span class="p">(</span><span class="n">normalized</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">with_spiders</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">spider_oversize</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">lyot_reference_diameter</span><span class="o">=</span><span class="mf">13.5</span><span class="p">,</span> <span class="n">inner_diameter_fraction</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span>
-                            <span class="n">outer_diameter_fraction</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span> <span class="n">return_header</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="make_luvoir_lyot_stop"><a class="viewcode-back" href="../../../api/aplc_optimization.Inputs_Generation.LUVOIR_Inputs_Generation.make_luvoir_lyot_stop.html#aplc_optimization.Inputs_Generation.LUVOIR_Inputs_Generation.make_luvoir_lyot_stop">[docs]</a><span class="k">def</span> <span class="nf">make_luvoir_lyot_stop</span><span class="p">(</span><span class="n">normalized</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">with_spiders</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">spider_oversize</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">lyot_reference_diameter</span><span class="o">=</span><span class="mf">13.5</span><span class="p">,</span>
+                          <span class="n">inner_diameter_fraction</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span>
+                          <span class="n">outer_diameter_fraction</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span> <span class="n">return_header</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Make a LUVOIR-A Lyot stop for the APLC coronagraph.</span>
 
 <span class="sd">    Parameters</span>
@@ -333,7 +342,7 @@
 <span class="sd">        diameter of the pupil will be 15.0 meters.</span>
 <span class="sd">    with_spiders : boolean</span>
 <span class="sd">        Include the secondary mirror support structure in the aperture.</span>
-<span class="sd">    lyot_reference_diameter : scaler</span>
+<span class="sd">    lyot_reference_diameter : scalar</span>
 <span class="sd">        The diameter used to reference LS id and od against, by default equal to the pupil inscribed diameter.</span>
 <span class="sd">    inner_diameter_fraction : scalar</span>
 <span class="sd">        The fractional size of the lyot stop inner diameter(s) as a fraction of the inscribed circle diameter.</span>
@@ -353,14 +362,15 @@
 <span class="sd">        A dictionary containing all important values for the created aperture. Only returned</span>
 <span class="sd">        if `return_header` is True.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">pupil_diameter</span> <span class="o">=</span> <span class="mf">15.0</span>  <span class="c1"># m actual circumscribed diameter, used for lam/D calculations, other measurements normalized by this diameter</span>
+    <span class="n">pupil_diameter</span> <span class="o">=</span> <span class="mf">15.0</span>  <span class="c1"># m actual circumscribed diameter, used for lam/D calculations, other measurements</span>
+    <span class="c1"># normalized by this diameter</span>
     <span class="n">pupil_diameter_inscribed</span> <span class="o">=</span> <span class="mf">13.5</span>
     <span class="n">spider_width</span> <span class="o">=</span> <span class="mf">0.150</span>  <span class="c1"># m actual strut size</span>
     <span class="n">lower_spider_angle</span> <span class="o">=</span> <span class="mf">12.7</span>  <span class="c1"># deg angle at which lower spiders are offset from vertical</span>
     <span class="n">spid_start</span> <span class="o">=</span> <span class="mf">0.30657</span>  <span class="c1"># m spider starting point offset from center of aperture</span>
 
-    <span class="n">outer_D</span> <span class="o">=</span> <span class="n">lyot_reference_diameter</span> <span class="o">*</span> <span class="n">outer_diameter_fraction</span> <span class="c1">#re-normalize the LS OD against circumscribed pupil diameter</span>
-    <span class="n">inner_D</span> <span class="o">=</span> <span class="n">lyot_reference_diameter</span> <span class="o">*</span> <span class="n">inner_diameter_fraction</span> <span class="c1">#re-normalize the LS ID against circumscribed pupil diameter</span>
+    <span class="n">outer_D</span> <span class="o">=</span> <span class="n">lyot_reference_diameter</span> <span class="o">*</span> <span class="n">outer_diameter_fraction</span>  <span class="c1"># re-normalize the LS OD against circumscribed pupil diameter</span>
+    <span class="n">inner_D</span> <span class="o">=</span> <span class="n">lyot_reference_diameter</span> <span class="o">*</span> <span class="n">inner_diameter_fraction</span>  <span class="c1"># re-normalize the LS ID against circumscribed pupil diameter</span>
     <span class="n">pad_spid_width</span> <span class="o">=</span> <span class="n">spider_width</span> <span class="o">*</span> <span class="n">spider_oversize</span>
 
     <span class="n">lyot_reference_diameter</span> <span class="o">=</span> <span class="n">pupil_diameter</span>
@@ -406,20 +416,25 @@
            
           </div>
           <footer>
-  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2020, Bryony Nickson
+        &#169; Copyright 2020, Bryony Nickson.
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
-
         </div>
       </div>
 
@@ -427,7 +442,6 @@
 
   </div>
   
-
 
   <script type="text/javascript">
       jQuery(function () {

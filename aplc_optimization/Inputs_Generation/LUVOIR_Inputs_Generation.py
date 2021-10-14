@@ -1,9 +1,8 @@
-from hcipy import *
 from pathlib import Path
+
 import numpy as np
 from astropy.io import fits
-
-import os
+from hcipy import *
 
 
 def LUVOIR_inputs_gen(input_files_dict):
@@ -22,19 +21,20 @@ def LUVOIR_inputs_gen(input_files_dict):
         The name(s) of the generated Lyot stop FITS file(s).
     """
 
-    filepath =      input_files_dict['directory']   # directory in which the constructed FITS files are stored
-    N =             input_files_dict['N']   # number of pixels in the input (aperture and lyot stop) arrays
+    filepath = input_files_dict['directory']  # directory in which the constructed FITS files are stored
+    N = input_files_dict['N']  # number of pixels in the input (aperture and lyot stop) arrays
 
     # Aperture parameters
-    oversamp = 		input_files_dict['oversamp']    # oversampling factor in `evaluate_supersampled()` [hcipy/field/util.py].
-    gap_padding = 	input_files_dict['aperture']['seg_gap_pad'] # arbitratry padding of gap size to represent gaps on small arrays
+    oversamp = input_files_dict['oversamp']  # oversampling factor in `evaluate_supersampled()` [hcipy/field/util.py].
+    gap_padding = input_files_dict['aperture'][
+        'seg_gap_pad']  # arbitrary padding of gap size to represent gaps on small arrays
 
     # Lyot stop parameters
     lyot_ref_diam = input_files_dict['lyot_stop']['lyot_ref_diam']  # diameter used to reference LS_ID and LS_OD against
-    LS_SPID = 		input_files_dict['lyot_stop']['ls_spid']    # flag for inclusion or exclusion of struts in lyot stop
-    ls_spid_ov = 	input_files_dict['lyot_stop']['ls_spid_ov'] # spider oversize scale
-    LS_OD = 		input_files_dict['lyot_stop']['LS_OD']  # Lyot stop inner diameter(s), relative to inscribed circle
-    LS_ID = 		input_files_dict['lyot_stop']['LS_ID']  # Lyot stop outer diameter(s), relative to inscribed circle
+    LS_SPID = input_files_dict['lyot_stop']['ls_spid']  # flag for inclusion or exclusion of struts in lyot stop
+    ls_spid_ov = input_files_dict['lyot_stop']['ls_spid_ov']  # spider oversize scale
+    LS_OD = input_files_dict['lyot_stop']['LS_OD']  # Lyot stop inner diameter(s), relative to inscribed circle
+    LS_ID = input_files_dict['lyot_stop']['LS_ID']  # Lyot stop outer diameter(s), relative to inscribed circle
 
     pup_filename = filepath + 'TelAp_LUVOIR_gap_pad{0:02d}_bw_ovsamp{1:02d}_N{2:04d}.fits'.format(gap_padding, oversamp,
                                                                                                   N)
@@ -45,9 +45,7 @@ def LUVOIR_inputs_gen(input_files_dict):
 
     config = Path('masks/' + pup_filename)
 
-
-    #Check if aperture file already exists, otherwise creates LUVOIR aperture by calling make_a_luvoir_aperture() [hcipy/aperture/realistic.py]
-
+    # Check if aperture file already exists, otherwise create LUVOIR aperture
     if config.is_file():
         print('{0:s} exists'.format('masks/' + pup_filename))
     else:
@@ -55,7 +53,7 @@ def LUVOIR_inputs_gen(input_files_dict):
         LUVOIR_ap_indexed, _, segment_positions = make_luvoir_a_aperture(gap_padding, return_header=True,
                                                                          segment_transmissions=np.arange(1, 121),
                                                                          return_segments=True)
-                                                                        # return_segment_positions=True, header=True
+        # return_segment_positions=True, header=True
         pupil = evaluate_supersampled(LUVOIR_ap, grid, oversamp)
         pupil_indexed = evaluate_supersampled(LUVOIR_ap_indexed, grid, 1)
 
@@ -77,14 +75,14 @@ def LUVOIR_inputs_gen(input_files_dict):
         hdr.set('EDGE', 'bw', 'black and white, or grey pixels')
         hdr.set('PROV', header['PROV'])
 
-        #hdr_indexed = hdr.copy()
-        #seg_xys = segment_positions.points
-        #for segment in range(seg_xys.shape[0]):
+        # hdr_indexed = hdr.copy()
+        # seg_xys = segment_positions.points
+        # for segment in range(seg_xys.shape[0]):
         #    hdr_indexed.set('seg' + str(segment + 1) + '_x', segment_positions.x[segment], 'x-position segment ' + str(segment + 1))
         #    hdr_indexed.set('seg' + str(segment + 1) + '_y', segment_positions.y[segment], 'y-position segment ' + str(segment + 1))
 
         fits.writeto('masks/' + pup_filename, pupil.shaped, hdr, overwrite=True)
-        #fits.writeto('masks/' + pup_filename_indexed, pupil_indexed.shaped, hdr_indexed, overwrite=True)
+        # fits.writeto('masks/' + pup_filename_indexed, pupil_indexed.shaped, hdr_indexed, overwrite=True)
         print('{0:s} has been written to file'.format('masks/' + pup_filename))
 
     ls_filenames = []
@@ -110,15 +108,15 @@ def LUVOIR_inputs_gen(input_files_dict):
 
             if LS_SPID:
                 ls_filename = filepath + 'LS_LUVOIR_ID{0:04d}_OD{1:04d}_{2:s}_pad{3:02d}_{4:s}_ovsamp{5:d}_N{6:04d}.fits'.format(
-                    int(ls_id * 1000), \
-                    int(ls_od * 1000), \
-                    strut_key, ls_spid_ov, \
+                    int(ls_id * 1000),
+                    int(ls_od * 1000),
+                    strut_key, ls_spid_ov,
                     edge, oversamp, N)
             else:
                 ls_filename = filepath + 'LS_LUVOIR_ID{0:04d}_OD{1:04d}_{2:s}_{3:s}_ovsamp{4:d}_N{5:04d}.fits'.format(
-                    int(ls_id * 1000), \
-                    int(ls_od * 1000), \
-                    strut_key, edge, \
+                    int(ls_id * 1000),
+                    int(ls_od * 1000),
+                    strut_key, edge,
                     oversamp, N)
 
             config = Path('masks/' + ls_filename)
@@ -126,8 +124,11 @@ def LUVOIR_inputs_gen(input_files_dict):
                 print('{0:s} exists'.format('masks/' + ls_filename))
 
             else:
-                LUVOIR_ls, ls_header = make_luvoir_a_lyot_stop(normalized=True, with_spiders=LS_SPID,  spider_oversize=ls_spid_ov, inner_diameter_fraction=ls_id, outer_diameter_fraction=ls_od, return_header=True)
-                ### previously make_luvour_a_lyot_stop(ls_id, ls_od, lyot_ref_diam, spid_oversize=ls_spid_ov, spiders=LS_SPID, header = True)
+                LUVOIR_ls, ls_header = make_luvoir_a_lyot_stop(normalized=True, with_spiders=LS_SPID,
+                                                               spider_oversize=ls_spid_ov,
+                                                               inner_diameter_fraction=ls_id,
+                                                               outer_diameter_fraction=ls_od, return_header=True)
+                # previously make_luvour_a_lyot_stop(ls_id, ls_od, lyot_ref_diam, spid_oversize=ls_spid_ov, spiders=LS_SPID, header = True)
                 lyot_stop = evaluate_supersampled(LUVOIR_ls, grid, oversamp)
 
                 # header.update(ls_header)
@@ -163,8 +164,9 @@ def LUVOIR_inputs_gen(input_files_dict):
         return pup_filename, ls_filenames
 
 
-def make_luvoir_lyot_stop(normalized=True, with_spiders=False, spider_oversize=1, lyot_reference_diameter=13.5, inner_diameter_fraction=0.2,
-                            outer_diameter_fraction=0.9, return_header=False):
+def make_luvoir_lyot_stop(normalized=True, with_spiders=False, spider_oversize=1, lyot_reference_diameter=13.5,
+                          inner_diameter_fraction=0.2,
+                          outer_diameter_fraction=0.9, return_header=False):
     """Make a LUVOIR-A Lyot stop for the APLC coronagraph.
 
     Parameters
@@ -174,7 +176,7 @@ def make_luvoir_lyot_stop(normalized=True, with_spiders=False, spider_oversize=1
         diameter of the pupil will be 15.0 meters.
     with_spiders : boolean
         Include the secondary mirror support structure in the aperture.
-    lyot_reference_diameter : scaler
+    lyot_reference_diameter : scalar
         The diameter used to reference LS id and od against, by default equal to the pupil inscribed diameter.
     inner_diameter_fraction : scalar
         The fractional size of the lyot stop inner diameter(s) as a fraction of the inscribed circle diameter.
@@ -194,14 +196,15 @@ def make_luvoir_lyot_stop(normalized=True, with_spiders=False, spider_oversize=1
         A dictionary containing all important values for the created aperture. Only returned
         if `return_header` is True.
     """
-    pupil_diameter = 15.0  # m actual circumscribed diameter, used for lam/D calculations, other measurements normalized by this diameter
+    pupil_diameter = 15.0  # m actual circumscribed diameter, used for lam/D calculations, other measurements
+    # normalized by this diameter
     pupil_diameter_inscribed = 13.5
     spider_width = 0.150  # m actual strut size
     lower_spider_angle = 12.7  # deg angle at which lower spiders are offset from vertical
     spid_start = 0.30657  # m spider starting point offset from center of aperture
 
-    outer_D = lyot_reference_diameter * outer_diameter_fraction #re-normalize the LS OD against circumscribed pupil diameter
-    inner_D = lyot_reference_diameter * inner_diameter_fraction #re-normalize the LS ID against circumscribed pupil diameter
+    outer_D = lyot_reference_diameter * outer_diameter_fraction  # re-normalize the LS OD against circumscribed pupil diameter
+    inner_D = lyot_reference_diameter * inner_diameter_fraction  # re-normalize the LS ID against circumscribed pupil diameter
     pad_spid_width = spider_width * spider_oversize
 
     lyot_reference_diameter = pupil_diameter

@@ -13,13 +13,13 @@ import warnings
 import matplotlib as mpl
 import numpy as np
 import six
+from matplotlib.backends.backend_pdf import PdfPages
 
 mpl.use('Agg')
-from matplotlib.backends.backend_pdf import PdfPages
 
 
 def is_iterable(arg):
-    '''Check if arguement is iterable but not string_like'''
+    """Check if arguement is iterable but not string_like"""
     return isinstance(arg, collections.Iterable) and not isinstance(arg, six.string_types)
 
 
@@ -63,6 +63,7 @@ class DesignParameterSurvey(object):
     input_files_dir: str
         The location of directory where all the necessary input files for the optimization are located.
     """
+
     def __init__(self, coronagraph_class, parameter_sets, survey_dir, input_files_dir):
         """Constructs all the necessary attributes for the design parameter survey.
 
@@ -82,10 +83,10 @@ class DesignParameterSurvey(object):
         # Set up directories
         survey_dir = os.path.abspath(survey_dir)
         self.file_organization = {'survey_dir': survey_dir}
-        self.file_organization['solution_dir']    = os.path.join(survey_dir, 'solutions')
-        self.file_organization['analysis_dir']    = os.path.join(survey_dir, 'analysis')
-        self.file_organization['drivers_dir']  	  = os.path.join(survey_dir, 'drivers')
-        self.file_organization['log_dir']         = os.path.join(survey_dir, 'logs')
+        self.file_organization['solution_dir'] = os.path.join(survey_dir, 'solutions')
+        self.file_organization['analysis_dir'] = os.path.join(survey_dir, 'analysis')
+        self.file_organization['drivers_dir'] = os.path.join(survey_dir, 'drivers')
+        self.file_organization['log_dir'] = os.path.join(survey_dir, 'logs')
         self.file_organization['input_files_dir'] = os.path.abspath(input_files_dir)
 
         # Make sure all directories exist
@@ -147,7 +148,8 @@ class DesignParameterSurvey(object):
         # format_string = '{:0' + str(len(str(num_parameter_sets))) +  'd}'
 
         format_string = '{:0' + str(len(str(
-            num_parameter_sets))) + 'd}' + '_{:s}_N{:}_FPM{:3d}M0{:d}_IWA{:04d}_OWA0{:04d}_C{:d}_BW{:d}_Nlam{:d}_LS_ID{:s}_OD{:s}_{:s}'
+            num_parameter_sets))) + 'd}' + '_{:s}_N{:}_FPM{:3d}M0{:d}_IWA{:04d}_OWA0{:04d}_C{:d}_BW{:d}_Nlam{' \
+                                           ':d}_LS_ID{:s}_OD{:s}_{:s}'
 
         params = list(itertools.product(*self.varied_parameters))
         if len(self.varied_parameters) == 0:
@@ -368,6 +370,12 @@ class DesignParameterSurvey(object):
         os.chmod(fname, 644)
 
     def run_analyses(self, overwrite=False, run_slow=True):
+        """Run the analysis module on each apodizer solution in the survey.
+
+        Parameters
+        ----------
+        overwrite: bool
+            Whether to overwrite the analysis files if they already exist."""
         for coronagraph in self.coronagraphs:
             coronagraph.run_analysis(overwrite, run_slow)
 
@@ -385,6 +393,7 @@ class Coronagraph(object):
         The file organization structure of the survey.
     analysis_module: bool
     """
+
     def __init__(self, identifier, parameters, file_organization, analysis_module=None):
         """The constructor for the Coronagraph Class.
 
@@ -434,13 +443,13 @@ class Coronagraph(object):
         raise NotImplementedError()
 
     def run_optimization(self, force_rerun=False):
-        '''Run the design optimization.
+        """Run the design optimization.
 
         Parameters
         ----------
         force_rerun: bool
             Whether to force the optimizer to re-run if a solution already exists.
-        '''
+        """
         if (not self.check_driver()) or (not self.check_input_files()):
             print('Not all driver or input files are written.')
             return
@@ -452,14 +461,14 @@ class Coronagraph(object):
         os.system(self.get_driver_command())
 
     def run_analysis(self, overwrite=False, run_slow=True):
-        '''Run analysis module on the solution file.
+        """Run analysis module on the solution file.
 
         Parameters
         ----------
         overwrite: bool
             Whether to overwrite an existing analysis file.
         run_slow: bool
-        '''
+        """
 
         if self.analysis_module is None:
             print('No analysis module was provided. No analysis will be performed.')

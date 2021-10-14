@@ -20,7 +20,7 @@ instrument = 'hicat'  # instrument name
 survey_name = 'launcher_template'  # survey name
 machine = 'local'  # machine the survey is run on.
 
-N = 200  # number of pixels in input (TelAP, LS) and final (apodizer) arrays
+N = 486  # number of pixels in input (TelAP, LS) and final (apodizer) arrays
 
 '''
 Input (aperture and Lyot stop) Array Parameters
@@ -48,7 +48,7 @@ ls_grey: bool
 # Aperture parameters
 pupil_mask_size = 19.85e-3  # m: p1 pupil mask size
 pup_diam = 19.725e-3  # m: p3 apodizer size
-ap_spid = True
+ap_spid = False
 ap_gap = True
 ap_grey = False
 
