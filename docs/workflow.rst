@@ -8,7 +8,7 @@ Using the ``aplc_optimization`` toolkit, the workflow for producing a design sur
 1. Create a new launcher script
 -------------------------
 Within ``aplc_optimization``, *Launcher scripts* are the format by which coronagraph design surveys are defined and executed. Template launcher scripts are provided
-for HiCAT-, LUVOIR- and GPI-like instruments (named :mod:`do_hicat_template.py`, :mod:`do_luvour_template.py` and :mod:`do_gpi_template.py``, respectively).
+for HiCAT-, LUVOIR- and GPI-like instruments (named :mod:`do_hicat_template.py`, :mod:`do_luvoir_template.py` and :mod:`do_gpi_template.py``, respectively).
 
 In order to initiate a new survey, make a copy of the appropriate launcher template and re-name the file with the following naming convention:
 
