@@ -16,7 +16,7 @@ In order to initiate a new survey, make a copy of the appropriate launcher templ
 
 where *<instrument>* is the name of the APLC instrument for which you are are performing the survey; '*<survey>*' is a name
 descriptive of the survey that you intend to run; and '*<machine>*' is the name of the machine on which the survey will be run on. For example,
-a launcher file named ':mod:`do_luvoir_BW10_small_telserv3.py`' designates the BW10 small design run on telserv3 for a LUVOIR-like instrument.
+a launcher file named ':mod:`do_luvoir_BW10_small_local.py`' designates the BW10 small design run on your local machine for a LUVOIR-like instrument.
 
 2. Define a set of design parameters to survey
 -------------------------------------------

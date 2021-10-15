@@ -53,7 +53,8 @@ Getting started with aplc_optimization
 
    In addition to this documentation, the ``aplc_optmization`` toolkit is described in the following references.  Users of ``aplc_optimization`` are encouraged to cite one of these.
 
-    * St. Laurent et al. 2018, `"Apodized pupil Lyot coronagraphs designs for future segmented space telescopes", <https://doi.org/10.1117/12.2313902>`_, Proc. SPIE. 109682W
+    * Por et al. 2020, `"Exploiting symmetries and progressive refinement for apodized pupil Lyot coronagraph design" <https://doi.org/10.1117/12.2562571>`_, Proc. SPIE. 114433P
+    * St. Laurent et al. 2018, `"Apodized pupil Lyot coronagraphs designs for future segmented space telescopes" <https://doi.org/10.1117/12.2313902>`_, Proc. SPIE. 109682W
     * Zimmerman et al. 2016, `"Lyot coronagraph design study for large, segmented space telescope apertures” <https://doi.org/10.1117/12.2233205>`_,  Proc. SPIE. 99041Y
 
    If there is no appropriate place in the body of text to cite these proceedings, please include something along the

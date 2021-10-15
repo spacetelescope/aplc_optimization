@@ -28,10 +28,10 @@ Download and installation instructions can be found here:
 Clone the ``aplc_optimization`` repository
 ==========================================
 First, you will need to clone the current version of ``aplc_optimization``. The simplest way to do this is to go to the
-directory you want your copy of the repository to be located and clone the repository there. Currently, we specifically
-recommend installing the ``develop`` branch using the following command::
+directory you want your copy of the repository to be located and clone the repository there.
+Once you are in the directory you can do the following::
 
-    $  git clone -b develop https://github.com/spacetelescope/aplc_optimization.git
+    $ git clone https://github.com/spacetelescope/aplc_optimization.git
     $ cd aplc_optimization
 
 Environment Installation
@@ -43,7 +43,7 @@ the environment yaml file, which contains all of the dependencies for the projec
 
 and then activate the environment::
 
-    $ source activate aplc_optimization
+    $ conda activate aplc_optimization
 
 Package Installation
 ====================
