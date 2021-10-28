@@ -28,8 +28,8 @@ Getting started with aplc_optimization
 
    introduction.rst
    installing.rst
-   server.rst
    workflow.rst
+   contributing.rst
 
 .. toctree::
    :maxdepth: 1

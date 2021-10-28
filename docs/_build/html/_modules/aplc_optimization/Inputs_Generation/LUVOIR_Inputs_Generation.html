@@ -215,7 +215,7 @@
     <span class="k">if</span> <span class="n">config</span><span class="o">.</span><span class="n">is_file</span><span class="p">():</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{0:s}</span><span class="s1"> exists&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;masks/&#39;</span> <span class="o">+</span> <span class="n">pup_filename</span><span class="p">))</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">LUVOIR_ap</span><span class="p">,</span> <span class="n">header</span> <span class="o">=</span> <span class="n">make_luvoir_a_aperture</span><span class="p">(</span><span class="n">gap_padding</span><span class="p">,</span> <span class="n">return_header</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>  <span class="c1"># header = True</span>
+        <span class="n">LUVOIR_ap</span><span class="p">,</span> <span class="n">header</span> <span class="o">=</span> <span class="n">make_luvoir_aperture</span><span class="p">(</span><span class="n">gap_padding</span><span class="p">,</span> <span class="n">return_header</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>  <span class="c1"># header = True</span>
         <span class="n">LUVOIR_ap_indexed</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">segment_positions</span> <span class="o">=</span> <span class="n">make_luvoir_a_aperture</span><span class="p">(</span><span class="n">gap_padding</span><span class="p">,</span> <span class="n">return_header</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                                                                          <span class="n">segment_transmissions</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">121</span><span class="p">),</span>
                                                                          <span class="n">return_segments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -328,6 +328,135 @@
             <span class="n">ls_filenames</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="n">pup_filename</span><span class="p">,</span> <span class="n">ls_filenames</span></div>
+
+
+<div class="viewcode-block" id="make_luvoir_aperture"><a class="viewcode-back" href="../../../api/aplc_optimization.Inputs_Generation.LUVOIR_Inputs_Generation.make_luvoir_aperture.html#aplc_optimization.Inputs_Generation.LUVOIR_Inputs_Generation.make_luvoir_aperture">[docs]</a><span class="k">def</span> <span class="nf">make_luvoir_aperture</span><span class="p">(</span><span class="n">normalized</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">with_spiders</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">with_segment_gaps</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                 <span class="n">gap_padding</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">segment_transmissions</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">num_rings</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">starting_ring</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">return_header</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                                 <span class="n">return_segments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Make the LUVOIR A aperture.</span>
+<span class="sd">    This aperture changes frequently. This one is based on LUVOIR Apertures dimensions</span>
+<span class="sd">    from Matt Bolcar, LUVOIR lead engineer (as of 10 April 2019)</span>
+<span class="sd">    Spiders and segment gaps can be included or excluded, and the transmission for each</span>
+<span class="sd">    of the segments can also be changed. Segments can be returned as well.</span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    normalized : boolean</span>
+<span class="sd">        If this is True, the pupil diameter will be scaled to 1. Otherwise, the</span>
+<span class="sd">        diameter of the pupil will be 15.0 meters.</span>
+<span class="sd">    with_spiders : boolean</span>
+<span class="sd">        Include the secondary mirror support structure in the aperture.</span>
+<span class="sd">    with_segment_gaps : boolean</span>
+<span class="sd">        Include the gaps between individual segments in the aperture.</span>
+<span class="sd">    gap_padding : scalar</span>
+<span class="sd">        Arbitrary padding of gap size to represent gaps on smaller arrays - this effectively</span>
+<span class="sd">        makes the gaps larger and the segments smaller to preserve the same segment pitch.</span>
+<span class="sd">    segment_transmissions : scalar or array_like</span>
+<span class="sd">        The transmission for each of the segments. If this is a scalar, this transmission</span>
+<span class="sd">        will be used for all segments.</span>
+<span class="sd">    num_rings : int</span>
+<span class="sd">        The number of rings of hexagons to include, not counting the central segment.</span>
+<span class="sd">        Default is 6.</span>
+<span class="sd">    starting_ring : int</span>
+<span class="sd">        The first ring of segments. This can be used to exclude the center segment (by</span>
+<span class="sd">        setting it to one), or the center segment and first ring (by setting it to two).</span>
+<span class="sd">        The default (zero) includes the center segment.</span>
+<span class="sd">    return_header : boolean</span>
+<span class="sd">        If this is True, a header will be returned giving all important values for the</span>
+<span class="sd">        created aperture for reference.</span>
+<span class="sd">    return_segments : boolean</span>
+<span class="sd">        If this is True, the segments will also be returned as a ModeBasis.</span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    aperture : Field generator</span>
+<span class="sd">        The LUVOIR A aperture.</span>
+<span class="sd">    aperture_header : dict</span>
+<span class="sd">        A dictionary containing all quantities used when making this aperture. Only returned if</span>
+<span class="sd">    `return_header` is True.</span>
+<span class="sd">    segments : list of Field generators</span>
+<span class="sd">        The segments. Only returned when `return_segments` is True.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">pupil_diameter</span> <span class="o">=</span> <span class="mf">15.0</span>  <span class="c1"># m actual circumscribed diameter, used for lam/D calculations other measurements normalized by this diameter</span>
+    <span class="n">pupil_inscribed</span> <span class="o">=</span> <span class="mf">13.5</span>  <span class="c1"># m actual inscribed diameter</span>
+    <span class="n">actual_segment_flat_diameter</span> <span class="o">=</span> <span class="p">(</span><span class="mi">13</span> <span class="o">*</span> <span class="mf">1.2225</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">num_rings</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>  <span class="c1"># m actual segment flat-to-flat diameter</span>
+    <span class="n">actual_segment_gap</span> <span class="o">=</span> <span class="mf">0.006</span>  <span class="c1"># m actual gap size between segments</span>
+    <span class="n">spider_width</span> <span class="o">=</span> <span class="mf">0.150</span>  <span class="c1"># m actual strut size</span>
+    <span class="n">spid_start</span> <span class="o">=</span> <span class="mf">0.30657</span>  <span class="c1"># m spider starting point distance from center of aperture</span>
+    <span class="n">lower_spider_angle</span> <span class="o">=</span> <span class="mf">12.7</span>  <span class="c1"># deg spiders are upside-down &#39;Y&#39; shaped; degree the lower two spiders are offset from vertical by this amount</span>
+
+    <span class="c1"># padding out the segmentation gaps so they are visible and not sub-pixel</span>
+    <span class="n">segment_gap</span> <span class="o">=</span> <span class="n">actual_segment_gap</span> <span class="o">*</span> <span class="n">gap_padding</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">with_segment_gaps</span><span class="p">:</span>
+        <span class="n">segment_gap</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="n">segment_flat_diameter</span> <span class="o">=</span> <span class="n">actual_segment_flat_diameter</span> <span class="o">-</span> <span class="p">(</span><span class="n">segment_gap</span> <span class="o">-</span> <span class="n">actual_segment_gap</span><span class="p">)</span>
+    <span class="n">segment_circum_diameter</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">*</span> <span class="n">segment_flat_diameter</span>  <span class="c1"># segment circumscribed diameter</span>
+
+    <span class="n">aperture_header</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;TELESCOP&#39;</span><span class="p">:</span> <span class="s1">&#39;LUVOIR A&#39;</span><span class="p">,</span> <span class="s1">&#39;D_CIRC&#39;</span><span class="p">:</span> <span class="n">pupil_diameter</span><span class="p">,</span> <span class="s1">&#39;D_INSC&#39;</span><span class="p">:</span> <span class="n">pupil_inscribed</span><span class="p">,</span>
+                       <span class="s1">&#39;SEG_F2F_D&#39;</span><span class="p">:</span> <span class="n">actual_segment_flat_diameter</span><span class="p">,</span> <span class="s1">&#39;SEG_GAP&#39;</span><span class="p">:</span> <span class="n">actual_segment_gap</span><span class="p">,</span>
+                       <span class="s1">&#39;STRUT_W&#39;</span><span class="p">:</span> <span class="n">spider_width</span><span class="p">,</span> <span class="s1">&#39;STRUT_AN&#39;</span><span class="p">:</span> <span class="n">lower_spider_angle</span><span class="p">,</span> <span class="s1">&#39;NORM&#39;</span><span class="p">:</span> <span class="n">normalized</span><span class="p">,</span>
+                       <span class="s1">&#39;SEG_TRAN&#39;</span><span class="p">:</span> <span class="n">segment_transmissions</span><span class="p">,</span> <span class="s1">&#39;GAP_PAD&#39;</span><span class="p">:</span> <span class="n">gap_padding</span><span class="p">,</span> <span class="s1">&#39;STRUT_ST&#39;</span><span class="p">:</span> <span class="n">spid_start</span><span class="p">,</span>
+                       <span class="s1">&#39;PROV&#39;</span><span class="p">:</span> <span class="s1">&#39;MBolcar ppt 20180815&#39;</span><span class="p">}</span>
+
+    <span class="k">if</span> <span class="n">normalized</span><span class="p">:</span>
+        <span class="n">segment_circum_diameter</span> <span class="o">/=</span> <span class="n">pupil_diameter</span>
+        <span class="n">actual_segment_flat_diameter</span> <span class="o">/=</span> <span class="n">pupil_diameter</span>
+        <span class="n">actual_segment_gap</span> <span class="o">/=</span> <span class="n">pupil_diameter</span>
+        <span class="n">spider_width</span> <span class="o">/=</span> <span class="n">pupil_diameter</span>
+        <span class="n">spid_start</span> <span class="o">/=</span> <span class="n">pupil_diameter</span>
+        <span class="n">pupil_diameter</span> <span class="o">=</span> <span class="mf">1.0</span>
+
+    <span class="n">segment_positions</span> <span class="o">=</span> <span class="n">make_hexagonal_grid</span><span class="p">(</span><span class="n">actual_segment_flat_diameter</span> <span class="o">+</span> <span class="n">actual_segment_gap</span><span class="p">,</span> <span class="n">num_rings</span><span class="p">)</span>
+
+    <span class="c1"># clipping the &quot;corner&quot; segments of the outermost rings</span>
+    <span class="n">segment_positions</span> <span class="o">=</span> <span class="n">segment_positions</span><span class="o">.</span><span class="n">subset</span><span class="p">(</span><span class="n">circular_aperture</span><span class="p">(</span><span class="n">pupil_diameter</span> <span class="o">*</span> <span class="mf">0.98</span><span class="p">))</span>
+    <span class="c1"># segment_positions = segment_positions.subset(lambda grid: ~(circular_aperture(segment_circum_diameter)(grid) &lt; 0))</span>
+
+    <span class="k">if</span> <span class="n">starting_ring</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">starting_segment</span> <span class="o">=</span> <span class="mi">3</span> <span class="o">*</span> <span class="p">(</span><span class="n">starting_ring</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">starting_ring</span> <span class="o">+</span> <span class="mi">1</span>
+
+        <span class="n">mask</span> <span class="o">=</span> <span class="n">segment_positions</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;bool&#39;</span><span class="p">)</span>
+        <span class="n">mask</span><span class="p">[</span><span class="n">starting_segment</span><span class="p">:]</span> <span class="o">=</span> <span class="kc">True</span>
+
+        <span class="n">segment_positions</span> <span class="o">=</span> <span class="n">segment_positions</span><span class="o">.</span><span class="n">subset</span><span class="p">(</span><span class="n">mask</span><span class="p">)</span>
+
+    <span class="n">segment</span> <span class="o">=</span> <span class="n">hexagonal_aperture</span><span class="p">(</span><span class="n">segment_circum_diameter</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">with_spiders</span><span class="p">:</span>
+        <span class="n">spider1</span> <span class="o">=</span> <span class="n">make_spider_infinite</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="mi">90</span><span class="p">,</span> <span class="n">spider_width</span><span class="p">)</span>
+        <span class="n">spider2</span> <span class="o">=</span> <span class="n">make_spider_infinite</span><span class="p">([</span><span class="n">spid_start</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="mi">270</span> <span class="o">-</span> <span class="n">lower_spider_angle</span><span class="p">,</span> <span class="n">spider_width</span><span class="p">)</span>
+        <span class="n">spider3</span> <span class="o">=</span> <span class="n">make_spider_infinite</span><span class="p">([</span><span class="o">-</span><span class="n">spid_start</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="mi">270</span> <span class="o">+</span> <span class="n">lower_spider_angle</span><span class="p">,</span> <span class="n">spider_width</span><span class="p">)</span>
+
+    <span class="n">segmented_aperture</span> <span class="o">=</span> <span class="n">make_segmented_aperture</span><span class="p">(</span><span class="n">segment</span><span class="p">,</span> <span class="n">segment_positions</span><span class="p">,</span> <span class="n">segment_transmissions</span><span class="p">,</span>
+                                                 <span class="n">return_segments</span><span class="o">=</span><span class="n">return_segments</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">return_segments</span><span class="p">:</span>
+        <span class="n">segmented_aperture</span><span class="p">,</span> <span class="n">segments</span> <span class="o">=</span> <span class="n">segmented_aperture</span>
+
+    <span class="k">def</span> <span class="nf">func</span><span class="p">(</span><span class="n">grid</span><span class="p">):</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="n">segmented_aperture</span><span class="p">(</span><span class="n">grid</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">with_spiders</span><span class="p">:</span>
+            <span class="n">res</span> <span class="o">*=</span> <span class="n">spider1</span><span class="p">(</span><span class="n">grid</span><span class="p">)</span> <span class="o">*</span> <span class="n">spider2</span><span class="p">(</span><span class="n">grid</span><span class="p">)</span> <span class="o">*</span> <span class="n">spider3</span><span class="p">(</span><span class="n">grid</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">Field</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="n">grid</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">with_spiders</span> <span class="ow">and</span> <span class="n">return_segments</span><span class="p">:</span>
+        <span class="c1"># Use function to return the lambda, to avoid incorrect binding of variables</span>
+        <span class="k">def</span> <span class="nf">segment_with_spider</span><span class="p">(</span><span class="n">segment</span><span class="p">):</span>
+            <span class="k">return</span> <span class="k">lambda</span> <span class="n">grid</span><span class="p">:</span> <span class="n">segment</span><span class="p">(</span><span class="n">grid</span><span class="p">)</span> <span class="o">*</span> <span class="n">spider1</span><span class="p">(</span><span class="n">grid</span><span class="p">)</span> <span class="o">*</span> <span class="n">spider2</span><span class="p">(</span><span class="n">grid</span><span class="p">)</span> <span class="o">*</span> <span class="n">spider3</span><span class="p">(</span><span class="n">grid</span><span class="p">)</span>
+
+        <span class="n">segments</span> <span class="o">=</span> <span class="p">[</span><span class="n">segment_with_spider</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">segments</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="n">return_header</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">return_segments</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">func</span><span class="p">,</span> <span class="n">aperture_header</span><span class="p">,</span> <span class="n">segments</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">func</span><span class="p">,</span> <span class="n">aperture_header</span>
+    <span class="k">elif</span> <span class="n">return_segments</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">func</span><span class="p">,</span> <span class="n">segments</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span></div>
 
 
 <div class="viewcode-block" id="make_luvoir_lyot_stop"><a class="viewcode-back" href="../../../api/aplc_optimization.Inputs_Generation.LUVOIR_Inputs_Generation.make_luvoir_lyot_stop.html#aplc_optimization.Inputs_Generation.LUVOIR_Inputs_Generation.make_luvoir_lyot_stop">[docs]</a><span class="k">def</span> <span class="nf">make_luvoir_lyot_stop</span><span class="p">(</span><span class="n">normalized</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">with_spiders</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">spider_oversize</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">lyot_reference_diameter</span><span class="o">=</span><span class="mf">13.5</span><span class="p">,</span>

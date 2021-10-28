@@ -11,3 +11,4 @@ notebooks/Untitled.ipynb
 .idea/
 .DS_Store
 ._readme.txt
+docs/_build/

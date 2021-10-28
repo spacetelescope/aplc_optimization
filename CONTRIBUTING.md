@@ -136,8 +136,8 @@ It is recommended to check that your issue complies with the
 following rules before submitting:
 
 -  Verify that your issue is not being currently addressed by other
-   [issues](https://github.com/astromam/Coronagraphs/issues?q=)
-   or [pull requests](https://github.com/astromam/Coronagraphs/pulls?q=).
+   [issues](https://github.com/spacetelescope/aplc_optimization/issues?q=)
+   or [pull requests](https://github.com/spacetelescope/aplc_optimization/pulls?q=).
 
 -  Please ensure all code snippets and error messages are formatted in
    appropriate code blocks.

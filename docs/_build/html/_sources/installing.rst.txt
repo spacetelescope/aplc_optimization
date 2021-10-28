@@ -75,6 +75,8 @@ This allows for easy updates by simply pulling the git repository::
     git setup.py egg_info
 
 
+For the preferred workflow for contributing to ``aplc_optimization``, please see :ref:`contributing`.
+
 
 .. _installing-gurobi:
 
