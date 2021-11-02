@@ -52,6 +52,8 @@ gap_padding: int
     and the segments smaller to preserve the same segment pitch.
 num_rings : int
     The number of rings of hexagons to include, not counting the central segment.
+clipped : bool
+    Remove corner segments to maximize the diameter of the inscribed circle.
 ap_spid : bool
     Include the secondary mirror support structure in the aperture.
 ap_obs : bool
@@ -74,7 +76,8 @@ pupil_diameter = 15.0  # m: actual LUVOIR A circumscribed pupil diameter
 pupil_inscribed = 13.5  # m: actual LUVOIR A inscribed pupil diameter
 oversamp = 4
 gap_padding = 1
-num_rings = 9
+num_rings = 6
+clipped = False
 ap_spid = False
 ap_obs = True
 
@@ -87,7 +90,7 @@ LS_OD = 0.982
 
 # INPUT FILES PARAMETER DICTIONARY
 input_files_dict = {'directory': 'SCDA/', 'N': N, 'oversamp': oversamp,
-                    'aperture': {'seg_gap_pad': gap_padding, 'num_rings': num_rings,
+                    'aperture': {'seg_gap_pad': gap_padding, 'num_rings': num_rings, 'clipped': clipped,
                                  'ap_spid': ap_spid, 'ap_obs': ap_obs},
                     'lyot_stop': {'lyot_ref_diam': lyot_ref_diam, 'ls_spid': ls_spid, 'ls_spid_ov': ls_spid_ov,
                                   'LS_ID': [LS_ID], 'LS_OD': [LS_OD]}}
