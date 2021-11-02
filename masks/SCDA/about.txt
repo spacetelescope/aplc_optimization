@@ -1,0 +1,1 @@
+Input mask directory for SCDA experiments.
