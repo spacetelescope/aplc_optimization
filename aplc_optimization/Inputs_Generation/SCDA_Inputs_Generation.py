@@ -41,12 +41,12 @@ def SCDA_inputs_gen(input_files_dict):
     LS_ID = input_files_dict['lyot_stop']['LS_ID']  # Lyot stop outer diameter(s), relative to inscribed circle
 
     if not clipped:
-        pup_filename = filepath + 'TelAp_SCDA_rings{0:02d}_gap_pad{1:02d}_bw_ovsamp{2:02d}_N{3:04d}.fits'.format(num_rings,
+        pup_filename = filepath + 'TelAp_SCDA_Hex{0:02d}_gap_pad{1:02d}_bw_ovsamp{2:02d}_N{3:04d}.fits'.format(num_rings,
                                                                                                              gap_padding,
                                                                                                              oversamp,
                                                                                                              N)
     else:
-        pup_filename = filepath + 'TelAp_SCDA_rings{0:02d}_clipped_gap_pad{1:02d}_bw_ovsamp{2:02d}_N{3:04d}.fits'.format(
+        pup_filename = filepath + 'TelAp_SCDA_Hex{0:02d}_clipped_gap_pad{1:02d}_bw_ovsamp{2:02d}_N{3:04d}.fits'.format(
             num_rings, gap_padding, oversamp, N)
 
 
@@ -77,7 +77,9 @@ def SCDA_inputs_gen(input_files_dict):
         hdr.set('STRUT_AN', header['STRUT_AN'], 'deg: angle lower spiders offset from vertical')
         hdr.set('NORM', header['NORM'], 'normalization keyword, OD scaled to 1 by Dcirc')
         hdr.set('SEG_TRAN', header['SEG_TRAN'], 'The transmission for each of the segments')
-        hdr.set('NUM_RINGS', header['NUM_RINGS'], 'Number of rings of hexagons')
+        hdr.set('NUM_RINGS', header['NUM_RINGS'], 'Number of rings of segments')
+        hdr.set('CLIPPED', header['CLIPPED'], 'Whether the corner segments are omitted.')
+        hdr.set('NUM_SEG', header['NUM_SEG'], 'Number of segments in the telescope aperture')
         hdr.set('EDGE', 'bw', 'black and white, or grey pixels')
 
         fits.writeto('masks/' + pup_filename, pupil.shaped, hdr, overwrite=True)
@@ -210,47 +212,49 @@ def make_SCDA_hex_aperture(normalized=True, with_spiders=False, with_obstruction
     '''
     pupil_diameter = 15.0  # m actual circumscribed diameter, used for lam/D calculations other measurements normalized by this diameter
     pupil_inscribed = 13.5  # m actual inscribed diameter
+    segment_gap = 0.006 #m gap size between segments
+
+    if clipped and num_rings < 4:
+        clipped = False #re-assign 'clipped' parameter to false, since below 5-rings clipping the corner segments
+                        #will instead decrease the inscribed circle
+
     if clipped:
-        actual_obstruction_flat_diameter = 1.2225
-        actual_segment_flat_diameter = (12.5 * 1.2225)/(2*num_rings+0.5)
+        obstruction_flat_diameter = 1.2225
+        segment_flat_diameter = (12.5 * 1.2225)/(2*num_rings+0.5)  # based on the flat-to-flat diameter LUVOIR A
+        num_segments = 3*num_rings*(num_rings+1)-5 # including the central segment, minus the ommitted corner segments
     else:
-        actual_obstruction_flat_diameter = 15 / 13  # m actual flat-to-flat diameter of the central obstruction
-        actual_segment_flat_diameter = 15 / (2 * num_rings + 1)  # m actual segment flat-to-flat diameter
-    actual_segment_gap = 0.006  # m actual gap size between segments
+        #based on pup_diam = flattoflat*(2M+1) + gapsize*2*M
+        obstruction_flat_diameter = (pupil_diameter - 12*segment_gap) / 13 #15 / 13  # m actual flat-to-flat diameter of the central obstruction
+        segment_flat_diameter = (pupil_diameter - 2*num_rings*segment_gap) / (2*num_rings+1)  # m actual segment flat-to-flat diameter
+        num_segments = 3 * num_rings * (num_rings + 1) + 1
+
     spider_width = 0.150  # m actual strut size
     spid_start = 0.30657  # m spider starting point distance from center of aperture
     lower_spider_angle = 12.7  # deg spiders are upside-down 'Y' shaped; degree the lower two spiders are offset from vertical by this amount
 
-    # padding out the segmentation gaps so they are visible and not sub-pixel
-    segment_gap = actual_segment_gap * gap_padding
-
-    if not with_segment_gaps:
-        segment_gap = 0
-
-    segment_flat_diameter = actual_segment_flat_diameter - (segment_gap - actual_segment_gap)
     segment_circum_diameter = 2 / np.sqrt(3) * segment_flat_diameter  # segment circumscribed diameter
 
     if with_obstruction:
-        obstruction_flat_diameter = actual_obstruction_flat_diameter - (segment_gap - actual_segment_gap)
+        obstruction_flat_diameter = obstruction_flat_diameter
         obstruction_circum_diameter = 2 / np.sqrt(3) * obstruction_flat_diameter  # obstruction circumscribed diameter
 
         aperture_header = {'TELESCOP': 'SCDA', 'D_CIRC': pupil_diameter, 'D_INSC': pupil_inscribed,
-                           'SEG_F2F_D': actual_segment_flat_diameter, 'SEG_GAP': actual_segment_gap,
+                           'SEG_F2F_D': segment_flat_diameter, 'SEG_GAP': segment_gap,
                            'STRUT_W': spider_width, 'STRUT_AN': lower_spider_angle, 'NORM': normalized,
                            'SEG_TRAN': segment_transmissions, 'GAP_PAD': gap_padding, 'STRUT_ST': spid_start,
-                           'NUM_RINGS': num_rings}
+                           'NUM_RINGS': num_rings, 'CLIPPED': clipped, 'NUM_SEG': num_segments}
 
     if normalized:
         segment_circum_diameter /= pupil_diameter
         obstruction_circum_diameter /= pupil_diameter
-        actual_segment_flat_diameter /= pupil_diameter
-        actual_obstruction_flat_diameter /= pupil_diameter
-        actual_segment_gap /= pupil_diameter
+        segment_flat_diameter /= pupil_diameter
+        obstruction_flat_diameter /= pupil_diameter
+        segment_gap /= pupil_diameter
         spider_width /= pupil_diameter
         spid_start /= pupil_diameter
         pupil_diameter = 1.0
 
-    segment_positions = make_hexagonal_grid(actual_segment_flat_diameter + actual_segment_gap, num_rings)
+    segment_positions = make_hexagonal_grid(segment_flat_diameter + segment_gap, num_rings)
 
     # clipping the "corner" segments of the outermost rings
     # clipping the corner segments maximizes the telescope geometry to render it as circular as possible

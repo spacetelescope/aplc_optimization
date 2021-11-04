@@ -76,7 +76,7 @@ pupil_diameter = 15.0  # m: actual LUVOIR A circumscribed pupil diameter
 pupil_inscribed = 13.5  # m: actual LUVOIR A inscribed pupil diameter
 oversamp = 4
 gap_padding = 1
-num_rings = 6
+num_rings = 5
 clipped = False
 ap_spid = False
 ap_obs = True
@@ -144,13 +144,13 @@ survey_parameters = {'pupil': {'N': N, 'filename': pup_filename},
                                'num_wavelengths': num_wavelengths}}
 
 # RUN DESIGN SURVEY
-luvoir = DesignParameterSurvey(APLC, survey_parameters,
+SCDA = DesignParameterSurvey(APLC, survey_parameters,
                                'surveys/{}_{}_N{:04d}_{}/'.format(instrument, survey_name, N, machine), 'masks/')
-luvoir.describe()
+SCDA.describe()
 
-luvoir.write_drivers(False)
-luvoir.run_optimizations(False)
-luvoir.run_analyses(False)
+SCDA.write_drivers(False)
+SCDA.run_optimizations(False)
+SCDA.run_analyses(False)
 
 '''
 Example for multiple design parameters NOT as a grid
