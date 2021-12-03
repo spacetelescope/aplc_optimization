@@ -75,10 +75,11 @@ LS_OD: float
 pupil_diameter = 15.0  # m: actual LUVOIR A circumscribed pupil diameter
 pupil_inscribed = 13.5  # m: actual LUVOIR A inscribed pupil diameter
 oversamp = 4
+seg_gap_pad = 1
 num_rings = 10
 clipped = True
 ap_spid = False
-ap_obs = True
+ap_obs = False
 
 # Lyot stop parameters
 lyot_ref_diam = pupil_inscribed
@@ -89,7 +90,8 @@ LS_OD = 0.982
 
 # INPUT FILES PARAMETER DICTIONARY
 input_files_dict = {'directory': 'SCDA/', 'N': N, 'oversamp': oversamp,
-                    'aperture': {'num_rings': num_rings, 'clipped': clipped, 'ap_spid': ap_spid, 'ap_obs': ap_obs},
+                    'aperture': {'num_rings': num_rings, 'clipped': clipped, 'ap_spid': ap_spid, 'ap_obs': ap_obs
+                                 'seg_gap_pad': seg_gap_pad},
                     'lyot_stop': {'lyot_ref_diam': lyot_ref_diam, 'ls_spid': ls_spid, 'ls_spid_ov': ls_spid_ov,
                                   'LS_ID': [LS_ID], 'LS_OD': [LS_OD]}}
 

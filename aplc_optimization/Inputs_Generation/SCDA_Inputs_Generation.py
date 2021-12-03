@@ -27,10 +27,12 @@ def SCDA_inputs_gen(input_files_dict):
 
     # Aperture parameters
     oversamp = input_files_dict['oversamp']  # oversampling factor in `evaluate_supersampled()` [hcipy/field/util.py].
-    num_rings = input_files_dict['aperture']['num_rings'] # number of rings of hexagons around central segment
-    ap_spid = input_files_dict['aperture']['ap_spid'] # include the secondary mirror support structure in the aperture.
-    ap_obs = input_files_dict['aperture']['ap_obs'] # include the secondary obstruction in the aperture.
+    num_rings = input_files_dict['aperture']['num_rings']  # number of rings of hexagons around central segment
+    ap_spid = input_files_dict['aperture']['ap_spid']  # include the secondary mirror support structure in the aperture.
+    ap_obs = input_files_dict['aperture']['ap_obs']  # include the secondary obstruction in the aperture.
     clipped = input_files_dict['aperture']['clipped']
+    gap_padding = input_files_dict['aperture']['seg_gap_pad']  # arbitrary padding of gap to represent gaps on small arrays
+
 
     # oversampling factor, black and white or grey pixels
     if oversamp == 1:
@@ -45,14 +47,12 @@ def SCDA_inputs_gen(input_files_dict):
     LS_OD = input_files_dict['lyot_stop']['LS_OD']  # Lyot stop inner diameter(s), relative to inscribed circle
     LS_ID = input_files_dict['lyot_stop']['LS_ID']  # Lyot stop outer diameter(s), relative to inscribed circle
 
-
     if not clipped:
-        pup_filename = filepath + 'TelAp_SCDA_{0:02d}-Hex_{1:s}_ovsamp{2:02d}_N{3:04d}.fits'.format(num_rings, edge,
-                                                                                                    oversamp, N)
+        pup_filename = filepath + 'TelAp_SCDA_{0:02d}-Hex_{1:s}_gap_pad{2:02d}_ovsamp{3:02d}_N{4:04d}.fits'.format(
+            num_rings, edge, gap_padding, oversamp, N)
     else:
-        pup_filename = filepath + 'TelAp_SCDA_{0:02d}-Hex_clipped_{1:s}_ovsamp{2:02d}_N{3:04d}.fits'.format(
-            num_rings, edge, oversamp, N)
-
+        pup_filename = filepath + 'TelAp_SCDA_{0:02d}-Hex_clipped_{1:s}_gap_pad{2:02d}_ovsamp{3:02d}_N{4:04d}.fits'.format(
+            num_rings, edge, gap_padding, oversamp, N)
 
     grid = make_pupil_grid(N)
 
@@ -63,7 +63,8 @@ def SCDA_inputs_gen(input_files_dict):
         print('{0:s} exists'.format('masks/' + pup_filename))
     else:
         HEX_ap, header = make_SCDA_hex_aperture(num_rings=num_rings, clipped=clipped, with_spiders=ap_spid,
-                                                with_obstruction=ap_obs, return_header=True)
+                                                with_segment_gaps=True, gap_padding=gap_padding, with_obstruction=ap_obs,
+                                                return_header=True)
         pupil = evaluate_supersampled(HEX_ap, grid, oversamp)
 
         hdr = fits.Header()
@@ -72,6 +73,7 @@ def SCDA_inputs_gen(input_files_dict):
         hdr.set('D_INSC', header['D_INSC'], 'm: inscribed diameter')
         hdr.set('SEG_F2F', header['SEG_F2F_D'], 'm: actual segment flat-to-flat diameter')
         hdr.set('SEG_GAP', header['SEG_GAP'], 'm: actual gap size between segments')
+        hdr.set('GAP_PAD', header['GAP_PAD'], 'arbitrary multiplicative padding of gaps')
         hdr.set('STRUT_W', header['STRUT_W'], 'm: actual support strut width')
         hdr.set('STRUT_ST', header['STRUT_ST'], 'm: lower spider starting point d from center')
         hdr.set('STRUT_AN', header['STRUT_AN'], 'deg: angle lower spiders offset from vertical')
@@ -165,8 +167,9 @@ def SCDA_inputs_gen(input_files_dict):
         return pup_filename, ls_filenames
 
 
-def make_SCDA_hex_aperture(normalized=True, with_spiders=False, with_obstruction=True, clipped=False, with_segment_gaps=True,
-                           num_rings=6, segment_transmissions=1, return_header=False, return_segments=False):
+def make_SCDA_hex_aperture(normalized=True, with_spiders=False, with_obstruction=True, clipped=False,
+                           with_segment_gaps=True, gap_padding=0, num_rings=6, segment_transmissions=1,
+                           return_header=False, return_segments=False):
     '''Make a hexagonal segmented aperture.
     Spiders and segment gaps can be included or excluded, and the transmission for each
     of the segments can also be changed. Segments can be returned as well.
@@ -182,6 +185,9 @@ def make_SCDA_hex_aperture(normalized=True, with_spiders=False, with_obstruction
         Include the secondary obstruction in the aperture.
     with_segment_gaps : boolean
         Include the gaps between individual segments in the aperture.
+    gap_padding : scalar
+        Arbitrary padding of gap size to represent gaps on smaller arrays - this effectively
+        makes the gaps larger and the segments smaller to preserve the same segment pitch.
     num_rings : int
         The number of rings of hexagons to include, not counting the central segment.
         Default is 6.
@@ -208,7 +214,7 @@ def make_SCDA_hex_aperture(normalized=True, with_spiders=False, with_obstruction
     '''
     pupil_diameter = 15.0  # m actual circumscribed diameter, used for lam/D calculations other measurements normalized by this diameter
     pupil_inscribed = 13.5  # m actual inscribed diameter
-    segment_gap = 0.006 #m gap size between segments
+    actual_segment_gap = 0.006 #m gap size between segments
     spider_width = 0.150  # m actual strut size
     spid_start = 0.30657  # m spider starting point distance from center of aperture
     lower_spider_angle = 12.7  # deg spiders are upside-down 'Y' shaped; degree the lower two spiders are offset from vertical by this amount
@@ -223,7 +229,7 @@ def make_SCDA_hex_aperture(normalized=True, with_spiders=False, with_obstruction
 
     if clipped:
         obstruction_flat_diameter = 1.2225
-        segment_flat_diameter = (12 * 1.2225)/(2*num_rings)  # based on the flat-to-flat diameter LUVOIR A
+        actual_segment_flat_diameter = (12 * 1.2225)/(2*num_rings)  # based on the flat-to-flat diameter LUVOIR A
         num_segments = num_segments-6  #subtract the 6 ommitted corner segments
     else:
         # based on equation for circumscribed diameter provided in P. Janin-Potiron
@@ -231,27 +237,27 @@ def make_SCDA_hex_aperture(normalized=True, with_spiders=False, with_obstruction
 
         # coefficients
         a = 1 + 3 * (2 * num_rings + 1) ** 2
-        b = 4 * math.sqrt(3) * num_rings * segment_gap * (2 * num_rings + 1)
-        c = (2 * num_rings * segment_gap) ** 2 - pupil_diameter ** 2
+        b = 4 * math.sqrt(3) * num_rings * actual_segment_gap * (2 * num_rings + 1)
+        c = (2 * num_rings * actual_segment_gap) ** 2 - pupil_diameter ** 2
         # discriminant
         d = b ** 2 - 4 * a * c
 
         segment_radius = (-b + math.sqrt(b ** 2 - 4 * a * c)) / (2 * a)
-        segment_flat_diameter = segment_radius * math.sqrt(3)
+        actual_segment_flat_diameter = segment_radius * math.sqrt(3)
         # actual_segment_flat_diameter = (pupil_diameter - 2*num_rings*segment_gap) / (2*num_rings+1)
-        obstruction_flat_diameter = (pupil_diameter - 12 * segment_gap) / 13
+        obstruction_flat_diameter = (pupil_diameter - 12 * actual_segment_gap) / 13
+
+    segment_gap = actual_segment_gap * gap_padding  # padding out the segmentation gaps so they are visible and not sub-pixel
+    segment_flat_diameter = actual_segment_flat_diameter - (segment_gap - actual_segment_gap)
 
     segment_circum_diameter = 2 / np.sqrt(3) * segment_flat_diameter  # segment circumscribed diameter
+    obstruction_circum_diameter = 2 / np.sqrt(3) * obstruction_flat_diameter  # obstruction circumscribed diameter
 
-    if with_obstruction:
-        obstruction_flat_diameter = obstruction_flat_diameter
-        obstruction_circum_diameter = 2 / np.sqrt(3) * obstruction_flat_diameter  # obstruction circumscribed diameter
-
-        aperture_header = {'TELESCOP': 'SCDA', 'D_CIRC': pupil_diameter, 'D_INSC': pupil_inscribed,
-                           'SEG_F2F_D': segment_flat_diameter, 'SEG_GAP': segment_gap,
-                           'STRUT_W': spider_width, 'STRUT_AN': lower_spider_angle, 'NORM': normalized,
-                           'SEG_TRAN': segment_transmissions, 'STRUT_ST': spid_start,
-                           'NUM_RINGS': num_rings, 'CLIPPED': clipped, 'NUM_SEG': num_segments}
+    aperture_header = {'TELESCOP': 'SCDA', 'D_CIRC': pupil_diameter, 'D_INSC': pupil_inscribed,
+                        'SEG_F2F_D': actual_segment_flat_diameter, 'SEG_GAP': actual_segment_gap, 'GAP_PAD':gap_padding,
+                        'STRUT_W': spider_width, 'STRUT_AN': lower_spider_angle, 'NORM': normalized,
+                        'SEG_TRAN': segment_transmissions, 'STRUT_ST': spid_start,
+                        'NUM_RINGS': num_rings, 'CLIPPED': clipped, 'NUM_SEG': num_segments}
 
     if normalized:
         segment_circum_diameter /= pupil_diameter
@@ -291,7 +297,10 @@ def make_SCDA_hex_aperture(normalized=True, with_spiders=False, with_obstruction
         segmented_aperture, segments = segmented_aperture
 
     def func(grid):
-        res = segmented_aperture(grid) * (1 - central_obstruction(grid))
+        if with_obstruction:
+            res = segmented_aperture(grid) * (1 - central_obstruction(grid))
+        else:
+            res = segmented_aperture(grid)
 
         if with_spiders:
             res *= spider1(grid) * spider2(grid) * spider3(grid)
