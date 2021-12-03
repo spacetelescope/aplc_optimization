@@ -1,13 +1,4 @@
-'''
-DO NOT RUN THIS SCRIPT - this is the launcher template for LUVOIR design surveys.
-
-Workflow:
-- Make a copy of this script.
-- rename the copy under the following naming schema: 'do_luvoir_<survey_name>_<machine>.py', designating the survey you
-  are running and the name of the machine you will be running it on.
-- Define the Survey Information, Input File and Design Survey Parameters, as desired.
-- Run the script on the designated machine.
-'''
+'''This is the launcher template for the SCDA segment size survey.'''
 
 import os
 
@@ -27,9 +18,9 @@ machine: str
 N: int
     The number of pixels in the input (TelAP, LS) and final (apodizer) arrays.
 '''
-survey_name = 'scda_hex_template'
-machine = 'local'
-N = 1000
+survey_name = 'scda_segment_size'
+machine = 'telserv3'
+N = 500
 
 '''
 Input File Parameters
@@ -74,9 +65,9 @@ LS_OD: float
 # Aperture parameters
 pupil_diameter = 15.0  # m: actual LUVOIR A circumscribed pupil diameter
 pupil_inscribed = 13.5  # m: actual LUVOIR A inscribed pupil diameter
-oversamp = 4
-seg_gap_pad = 1
-num_rings = 10
+oversamp = 3
+seg_gap_pad = 2
+num_rings = 1
 clipped = True
 ap_spid = False
 ap_obs = False
@@ -90,13 +81,20 @@ LS_OD = 0.982
 
 # INPUT FILES PARAMETER DICTIONARY
 input_files_dict = {'directory': 'SCDA/', 'N': N, 'oversamp': oversamp,
-                    'aperture': {'num_rings': num_rings, 'clipped': clipped, 'ap_spid': ap_spid, 'ap_obs': ap_obs
+                    'aperture': {'num_rings': num_rings, 'clipped': clipped, 'ap_spid': ap_spid, 'ap_obs': ap_obs,
                                  'seg_gap_pad': seg_gap_pad},
                     'lyot_stop': {'lyot_ref_diam': lyot_ref_diam, 'ls_spid': ls_spid, 'ls_spid_ov': ls_spid_ov,
                                   'LS_ID': [LS_ID], 'LS_OD': [LS_OD]}}
 
 # INPUT FILE GENERATION
-pup_filename, ls_filenames = SCDA_inputs_gen(input_files_dict)
+
+# generate multiple pupil files to run in survey mode
+pup_files = []
+for i in range(12):
+    pup_filename, ls_filenames = SCDA_inputs_gen(input_files_dict)
+    pup_files.append(pup_filename)
+    num_rings = num_rings + 1
+    input_files_dict['aperture']['num_rings'] = num_rings
 
 '''
 Survey Design Parameters
@@ -138,20 +136,21 @@ contrast = 10
 
 # SURVEY PARAMS DICTIONARY
 survey_parameters = {'instrument': {'inst_name': instrument.upper()},
-                     'pupil': {'N': N, 'filename': pup_filename},
+                     'pupil': {'N': N, 'filename': pup_files},
                      'lyot_stop': {'filename': ls_filenames},
                      'focal_plane_mask': {'radius': radius, 'num_pix': num_pix, 'grayscale': grayscale},
                      'image': {'contrast': contrast, 'iwa': iwa, 'owa': owa, 'bandwidth': bandwidth,
                                'num_wavelengths': num_wavelengths}}
 
 # RUN DESIGN SURVEY
+
 SCDA = DesignParameterSurvey(APLC, survey_parameters,
                                'surveys/{}_{}_N{:04d}_{}/'.format(instrument, survey_name, N, machine), 'masks/')
 SCDA.describe()
-
 SCDA.write_drivers(True)
 SCDA.run_optimizations(True)
 SCDA.run_analyses(True)
+
 
 '''
 Example for multiple design parameters NOT as a grid
