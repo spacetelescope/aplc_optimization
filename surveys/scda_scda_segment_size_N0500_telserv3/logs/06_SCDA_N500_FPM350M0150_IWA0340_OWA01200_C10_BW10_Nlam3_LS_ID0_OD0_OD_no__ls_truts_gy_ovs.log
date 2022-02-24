@@ -1,0 +1,26 @@
+Traceback (most recent call last):
+  File "/user/bnickson/git_hub/aplc_optimization/surveys/scda_scda_segment_size_N0500_telserv3/drivers/06_SCDA_N500_FPM350M0150_IWA0340_OWA01200_C10_BW10_Nlam3_LS_ID0_OD0_OD_no__ls_truts_gy_ovs.py", line 12, in <module>
+    import asdf
+  File "/home/bnickson/miniconda3/envs/aplc-optimization/lib/python3.7/site-packages/asdf/__init__.py", line 13, in <module>
+    from ._internal_init import *
+  File "/home/bnickson/miniconda3/envs/aplc-optimization/lib/python3.7/site-packages/asdf/_internal_init.py", line 9, in <module>
+    from .version import version as __version__
+  File "/home/bnickson/miniconda3/envs/aplc-optimization/lib/python3.7/site-packages/asdf/version.py", line 1, in <module>
+    from pkg_resources import get_distribution, DistributionNotFound
+  File "/home/bnickson/miniconda3/envs/aplc-optimization/lib/python3.7/site-packages/pkg_resources/__init__.py", line 3252, in <module>
+    @_call_aside
+  File "/home/bnickson/miniconda3/envs/aplc-optimization/lib/python3.7/site-packages/pkg_resources/__init__.py", line 3236, in _call_aside
+    f(*args, **kwargs)
+  File "/home/bnickson/miniconda3/envs/aplc-optimization/lib/python3.7/site-packages/pkg_resources/__init__.py", line 3265, in _initialize_master_working_set
+    working_set = WorkingSet._build_master()
+  File "/home/bnickson/miniconda3/envs/aplc-optimization/lib/python3.7/site-packages/pkg_resources/__init__.py", line 575, in _build_master
+    ws = cls()
+  File "/home/bnickson/miniconda3/envs/aplc-optimization/lib/python3.7/site-packages/pkg_resources/__init__.py", line 568, in __init__
+    self.add_entry(entry)
+  File "/home/bnickson/miniconda3/envs/aplc-optimization/lib/python3.7/site-packages/pkg_resources/__init__.py", line 624, in add_entry
+    for dist in find_distributions(entry, True):
+  File "/home/bnickson/miniconda3/envs/aplc-optimization/lib/python3.7/site-packages/pkg_resources/__init__.py", line 2066, in find_on_path
+    factory = dist_factory(path_item, entry, only)
+  File "/home/bnickson/miniconda3/envs/aplc-optimization/lib/python3.7/site-packages/pkg_resources/__init__.py", line 2082, in dist_factory
+    if is_meta else
+KeyboardInterrupt

@@ -1,0 +1,13 @@
+Traceback (most recent call last):
+  File "/user/bnickson/git_hub/aplc_optimization/surveys/scda_scda_segment_size_N0500_telserv3/drivers/11_SCDA_N500_FPM350M0150_IWA0340_OWA01200_C10_BW10_Nlam3_LS_ID0_OD0_OD_no__ls_truts_gy_ovs.py", line 12, in <module>
+    import asdf
+  File "/home/bnickson/miniconda3/envs/aplc-optimization/lib/python3.7/site-packages/asdf/__init__.py", line 13, in <module>
+    from ._internal_init import *
+  File "<frozen importlib._bootstrap>", line 983, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 963, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 906, in _find_spec
+  File "<frozen importlib._bootstrap_external>", line 1280, in find_spec
+  File "<frozen importlib._bootstrap_external>", line 1252, in _get_spec
+  File "<frozen importlib._bootstrap_external>", line 1368, in find_spec
+  File "<frozen importlib._bootstrap_external>", line 1408, in _fill_cache
+KeyboardInterrupt
