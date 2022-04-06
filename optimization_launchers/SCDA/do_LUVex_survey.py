@@ -18,7 +18,7 @@ machine: str
 N: int
     The number of pixels in the input (TelAP, LS) and final (apodizer) arrays.
 '''
-survey_name = 'LUVex_TestAps_survey'
+survey_name = 'LUVex_TestAps_robust_survey'
 machine = 'telserv3'
 N = 1024
 
@@ -64,7 +64,7 @@ LS_OD: float
 '''
 # Aperture parameters
                 #hex1,  hex2,    hex3,   hex4,   hex5
-pupil_diameter = 7.9445, 7.2617, 7.7231, 7.1522, 5.9941
+pupil_diameter = 7.9445, 7.2617, 7.7231, 7.1522, 5.9941    # As provided by GSFC
 pupil_inscribed = 6.0023, 5.9994, 5.9899, 5.9937, 6.8526
 oversamp = 4
 seg_gap_pad = 1
@@ -72,6 +72,7 @@ num_rings = 1
 clipped = True
 ap_spid = False
 ap_obs = False
+
 
 # Lyot stop parameters
 lyot_ref_diam = pupil_inscribed
@@ -94,11 +95,12 @@ pup_files = []
 ls_files = []
 for i in range(5):
     if i < 2:
-        pup_filename = 'SCDA/TelAp_LUVex_{0:02d}-Hex_gy_ovsamp04__N1024.fits'.format(i + 1)
-    else:
-        pup_filename = 'SCDA/TelAp_LUVex_{0:02d}-Hex_gy_clipped_ovsamp04__N1024.fits'.format(i+1)
+        pup_filename = 'SCDA/TelAp_LUVex_{0:02d}-Hex_gy_ovsamp{1:02d}__N{2:04d}.fits'.format(i+1, oversamp, N)
 
-    ls_filename = 'SCDA/LS_LUVex_{0:02d}-Hex_ID0000_OD0982_no_struts_gy_ovsamp4_N1024.fits'.format(i+1)
+    else:
+        pup_filename = 'SCDA/TelAp_LUVex_{0:02d}-Hex_gy_clipped_ovsamp{1:02d}__N{2:04d}.fits'.format(i+1, oversamp, N)
+
+    ls_filename = 'SCDA/LS_LUVex_{0:02d}-Hex_ID0000_OD0982_no_struts_gy_ovsamp{1:d}_N{2:04d}.fits'.format(i+1, oversamp, N)
     pup_files.append(pup_filename)
     ls_files.append(ls_filename)
 
@@ -111,6 +113,10 @@ Survey Design Parameters
 
 Parameters
 ----------  
+alignment_tolerance: int
+    The Lyot stop alignment tolerance in pixels. 
+num_lyot_stops: int
+    The number of translated Lyot stops to optimize for simultaneously. If 1, design will be non-robust.
 radius: float  
     The radius of the FPM in lamda_0/D.
 num_pix: float
@@ -127,7 +133,20 @@ num_wavelengths: int
     The number of wavelengths spanning the bandpass.
 contrast: int
     The contrast goal in the dark zone (exponent of 10). 
+resolution: 
+    The image resolution.
+starting_scale: int
+    The number of pixels per unit cell for the initial solution. This is used for the adaptive algorithm. 
+    It must be a power of 2 times the `ending_scale`.
+ending_scale: int
+    The number of pixels per unit cell for the final solution. If this is the same as `starting_scale`,
+    the adaptive algorithm is essentially turned off.
+
 '''
+# Lyot stop parameters
+alignment_tolerance = 4, 2, 1
+num_lyot_stops = 9
+
 # FPM Parameters
 radius = 3.5
 num_pix = 150
@@ -141,12 +160,14 @@ num_wavelengths = 3
 contrast = 10
 starting_scale = 4
 
-
+# Loop through each N-Hex design, saving to separate 'N-Hex/' directories
 for i in range(5):
     # SURVEY PARAMS DICTIONARY
     survey_parameters = {'instrument': {'inst_name': instrument.upper()},
                         'pupil': {'N': N, 'filename': pup_files[i]},
-                        'lyot_stop': {'filename': ls_files[i]},
+                        'lyot_stop': {'filename': ls_files[i],
+                                      'alignment_tolerance': alignment_tolerance,
+                                      'num_lyot_stops': num_lyot_stops},
                         'focal_plane_mask': {'radius': radius, 'num_pix': num_pix, 'grayscale': grayscale},
                         'image': {'contrast': contrast, 'iwa': iwa, 'owa': owa, 'bandwidth': bandwidth,
                                    'num_wavelengths': num_wavelengths},
