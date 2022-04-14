@@ -1,7 +1,0 @@
-Fatal Python error: initsite: Failed to import the site module
-Traceback (most recent call last):
-  File "/home/bnickson/miniconda3/envs/aplc-optimization/lib/python3.7/site.py", line 73, in <module>
-    import os
-  File "/home/bnickson/miniconda3/envs/aplc-optimization/lib/python3.7/os.py", line 67, in <module>
-    __all__.extend(_get_exports_list(posix))
-KeyboardInterrupt
