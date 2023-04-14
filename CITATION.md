@@ -1,5 +1,7 @@
 Users of aplc-optimization are encouraged to cite one of the following:
 
+- Por et al. 2020, "Exploiting symmetries and progressive refinement for apodized pupil Lyot coronagraph design", Proc. SPIE. 114433P
+
 - St. Laurent et al. 2018, "Apodized pupil Lyot coronagraphs designs for future segmented space telescopes," Proc. SPIE 10698
 
 - Zimmerman et al. 2016, “Lyot coronagraph design study for large, segmented space telescope apertures,” Proc. SPIE 9904, 99041Y

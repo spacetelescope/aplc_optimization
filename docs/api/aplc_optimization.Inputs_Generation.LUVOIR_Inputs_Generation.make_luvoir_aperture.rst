@@ -1,6 +1,6 @@
-LUVOIR_inputs_gen
-=================
+make_luvoir_aperture
+====================
 
 .. currentmodule:: aplc_optimization.Inputs_Generation.LUVOIR_Inputs_Generation
 
-.. autofunction:: LUVOIR_inputs_gen
+.. autofunction:: make_luvoir_aperture
