@@ -3,7 +3,7 @@ import os
 import gurobipy as gp
 import numpy as np
 from hcipy import *
-from scipy.ndimage.morphology import grey_erosion, grey_dilation\
+from scipy.ndimage.morphology import grey_erosion, grey_dilation
 from aplc_optimization.optics import LyotCoronagraphWithFieldStop
 
 
