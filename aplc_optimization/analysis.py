@@ -9,6 +9,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from astropy.io import fits
 from hcipy import *
+from .optics import LyotCoronagraphWithFieldStop
 
 
 def create_coronagraph(solution_filename):
@@ -43,6 +44,7 @@ def create_coronagraph(solution_filename):
     fpm_radius = parameters['focal_plane_mask']['radius']
     fpm_num_pix = parameters['focal_plane_mask']['num_pix']
     fpm_grayscale = parameters['focal_plane_mask']['grayscale']
+    field_stop_radius = parameters['focal_plane_mask']['field_stop_radius']
     ls_fname = parameters['lyot_stop']['filename']
     ls_alignment_tolerance = parameters['lyot_stop']['alignment_tolerance']
     ls_num_stops = parameters['lyot_stop']['num_lyot_stops']
@@ -90,7 +92,7 @@ def create_coronagraph(solution_filename):
             lyot_stops.extend(
                 [lyot_stop_pos_x_pos_y, lyot_stop_pos_x_neg_y, lyot_stop_neg_x_pos_y, lyot_stop_neg_x_neg_y])
 
-        # Build focal plane mask
+    # Build focal plane mask
     q_foc = fpm_num_pix / (fpm_radius * 2)
     x_foc = (np.arange(fpm_num_pix) + 0.5 - fpm_num_pix / 2) / q_foc
     focal_mask_grid = CartesianGrid(RegularCoords(1.0 / q_foc, [fpm_num_pix, fpm_num_pix], x_foc.min()))
@@ -100,7 +102,18 @@ def create_coronagraph(solution_filename):
     else:
         focal_plane_mask = 1 - circular_aperture(2 * fpm_radius)(focal_mask_grid)
 
-    return pupil, apodizer, focal_plane_mask, lyot_stops, parameters, file_organization
+    # Build the field stop.
+    if field_stop_radius is None:
+        field_stop = None
+    else:
+        field_stop_grid = make_pupil_grid(8 * field_stop_radius, field_stop_radius)
+        field_stop = circular_aperture(2 * field_stop_radius)(field_stop_grid)
+
+    # Build the coronagraph.
+    coro = LyotCoronagraphWithFieldStop(pupil.grid, focal_plane_mask, lyot_stop, field_stop=field_stop)
+    coro_without_lyot = LyotCoronagraphWithFieldStop(pupil.grid, focal_plane_mask, field_stop=field_stop)
+
+    return pupil, apodizer, focal_plane_mask, lyot_stops, coro, coro_without_lyot, parameters, file_organization
 
 
 def analyze_aplc_design_summary(solution_filename, pdf=None):
