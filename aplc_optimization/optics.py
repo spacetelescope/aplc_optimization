@@ -2,7 +2,7 @@ import hcipy
 import numpy as np
 
 
-class LyotCoronagraph(hcipy.OpticalElement):
+class LyotCoronagraphWithFieldStop(hcipy.OpticalElement):
     '''A Lyot coronagraph with a small focal-plane mask and potentially a field stop.
 
     The area outside of this focal-plane mask is assumed to be fully transmisive. The
