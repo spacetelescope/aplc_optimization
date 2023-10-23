@@ -131,7 +131,7 @@ def analyze_aplc_design_summary(solution_filename, pdf=None):
     An empty dictionary.
     """
 
-    pupil, apodizer, focal_plane_mask, lyot_stops, parameters, file_organization = create_coronagraph(solution_filename)
+    pupil, apodizer, focal_plane_mask, lyot_stops, coro, coro_without_lyot, parameters, file_organization = create_coronagraph(solution_filename)
     core_throughput = analyze_throughput(solution_filename, pdf=None)
     # FPM
     fpm_radius = parameters['focal_plane_mask']['radius']
@@ -258,7 +258,7 @@ def analyze_contrast(solution_filename, pdf=None):
     -------
     The monochromatic normalized irradiance image and radial profile.
     """
-    pupil, apodizer, focal_plane_mask, lyot_stops, parameters, file_organization = create_coronagraph(solution_filename)
+    pupil, apodizer, focal_plane_mask, lyot_stops, coro, coro_without_lyot, parameters, file_organization = create_coronagraph(solution_filename)
     iwa = parameters['image']['iwa']
     owa = parameters['image']['owa']
     contrast = parameters['image']['contrast']
@@ -267,7 +267,6 @@ def analyze_contrast(solution_filename, pdf=None):
     bandwidth = parameters['image']['bandwidth']
     lyot_stop = lyot_stops[0]
 
-    coro = LyotCoronagraph(pupil.grid, focal_plane_mask, lyot_stop)
     focal_grid = make_focal_grid(8, owa * 1.2)  # make_focal_grid(q, fov) - grid for a focal plane
     prop = FraunhoferPropagator(pupil.grid, focal_grid)
 
@@ -453,7 +452,7 @@ def analyze_max_throughput(solution_filename, pdf=None):
     -------
     The Band-averaged r=.7 lam/D throughput.
     """
-    Pupil, Apodizer, focal_plane_mask, lyot_stops, parameters, file_organization = create_coronagraph(solution_filename)
+    Pupil, Apodizer, focal_plane_mask, lyot_stops, coro, coro_without_lyot, parameters, file_organization = create_coronagraph(solution_filename)
 
     fname_pup = parameters['pupil']['filename']
     fname_ls = parameters['lyot_stop']['filename']
@@ -535,7 +534,7 @@ def analyze_summary(solution_filename, pdf=None):
     -------
     An empty dictionary.
     """
-    pupil, apodizer, focal_plane_mask, lyot_stops, parameters, file_organization = create_coronagraph(solution_filename)
+    pupil, apodizer, focal_plane_mask, lyot_stops, coro, coro_without_lyot, parameters, file_organization = create_coronagraph(solution_filename)
     lyot_stop = lyot_stops[0]
     owa = parameters['image']['owa']
     bandwidth = parameters['image']['bandwidth']
@@ -547,8 +546,6 @@ def analyze_summary(solution_filename, pdf=None):
         monochromatic = True
     else:
         monochromatic = False
-    coro = LyotCoronagraph(pupil.grid, focal_plane_mask, lyot_stop)
-    coro_without_lyot = LyotCoronagraph(pupil.grid, focal_plane_mask)
     focal_grid = make_focal_grid(8, owa * 1.2)
     prop = FraunhoferPropagator(pupil.grid, focal_grid)
     wavelengths = np.linspace(-bandwidth / 2, bandwidth / 2, 11) + 1
@@ -655,7 +652,7 @@ def analyze_lyot_robustness(solution_filename, pdf=None):
     -------
     An empty dictionary.
     """
-    pupil, apodizer, focal_plane_mask, lyot_stops, parameters, file_organization = create_coronagraph(solution_filename)
+    pupil, apodizer, focal_plane_mask, lyot_stops, coro, coro_without_lyot, parameters, file_organization = create_coronagraph(solution_filename)
     owa = parameters['image']['owa']
     bandwidth = parameters['image']['bandwidth']
     contrast = parameters['image']['contrast']
@@ -664,7 +661,6 @@ def analyze_lyot_robustness(solution_filename, pdf=None):
 
     focal_grid = make_focal_grid(8, owa * 1.2)
     prop = FraunhoferPropagator(pupil.grid, focal_grid)
-    coro_no_lyot = LyotCoronagraph(pupil.grid, focal_plane_mask)
     lyot_stop = lyot_stops[0]
 
     def get_image(coronagraphic=True, lyot_dx=0, lyot_dy=0):
@@ -674,7 +670,7 @@ def analyze_lyot_robustness(solution_filename, pdf=None):
         for wl in np.linspace(1 - bandwidth / 2, 1 + bandwidth / 2, 11):
             wf = Wavefront(apodizer * pupil, wl)
             if coronagraphic:
-                wf = coro_no_lyot(wf)
+                wf = coro_without_lyot(wf)
             wf.electric_field *= lyot_stop_shifted
             img += prop(wf).power
         return img
@@ -699,7 +695,7 @@ def analyze_lyot_robustness(solution_filename, pdf=None):
             lyot_stop_shifted = np.roll(lyot_stop.shaped, (dy, dx), (1, 0)).ravel()
 
             wf = Wavefront(apodizer * pupil)
-            img_wf = coro_no_lyot(wf)
+            img_wf = coro_without_lyot(wf)
             img_wf.electric_field *= lyot_stop_shifted
             wf.electric_field *= lyot_stop_shifted
 
@@ -754,7 +750,7 @@ def analyze_lyot_robustness(solution_filename, pdf=None):
             lyot_stop_shifted = np.roll(lyot_stop.shaped, (dy, dx), (1, 0)).ravel()
 
             wf = Wavefront(apodizer * pupil)
-            img_wf = coro_no_lyot(wf)
+            img_wf = coro_without_lyot(wf)
             img_wf.electric_field *= lyot_stop_shifted
             img = prop(img_wf).power
 
@@ -787,7 +783,7 @@ def analyze_lyot_robustness(solution_filename, pdf=None):
 
 
 def analyze_throughput(solution_filename, pdf=None):
-    pupil, apodizer, focal_plane_mask, lyot_stops, parameters, file_organization = create_coronagraph(solution_filename)
+    pupil, apodizer, focal_plane_mask, lyot_stops, coro, coro_without_lyot, parameters, file_organization = create_coronagraph(solution_filename)
     bandwidth = parameters['image']['bandwidth']
     fpm_radius = parameters['focal_plane_mask']['radius']
     num_wavelengths = parameters['image']['bandwidth']
@@ -798,7 +794,6 @@ def analyze_throughput(solution_filename, pdf=None):
         monochromatic = False
 
     lyot_stop = lyot_stops[0]
-    coro = LyotCoronagraph(pupil.grid, focal_plane_mask, lyot_stop)
 
     focal_grid_hires = make_focal_grid(64, 2)
     prop_hires = FraunhoferPropagator(pupil.grid, focal_grid_hires)
@@ -924,7 +919,7 @@ def analyze_throughput(solution_filename, pdf=None):
 
 
 def analyze_tt_jitter(solution_filename, pdf=None):
-    pupil, apodizer, focal_plane_mask, lyot_stops, parameters, file_organization = create_coronagraph(solution_filename)
+    pupil, apodizer, focal_plane_mask, lyot_stops, coro, coro_without_lyot, parameters, file_organization = create_coronagraph(solution_filename)
     iwa = parameters['image']['iwa']
     owa = parameters['image']['owa']
     bandwidth = parameters['image']['bandwidth']
@@ -935,7 +930,6 @@ def analyze_tt_jitter(solution_filename, pdf=None):
 
     focal_grid = make_focal_grid(8, owa * 1.2)
 
-    coro = LyotCoronagraph(pupil.grid, focal_plane_mask, lyot_stop)
     prop = FraunhoferPropagator(pupil.grid, focal_grid)
 
     imgs_tt = []
