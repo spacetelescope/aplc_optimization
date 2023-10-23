@@ -3,7 +3,8 @@ import os
 import gurobipy as gp
 import numpy as np
 from hcipy import *
-from scipy.ndimage.morphology import grey_erosion, grey_dilation
+from scipy.ndimage.morphology import grey_erosion, grey_dilation\
+from .optics import LyotCoronagraphWithFieldStop
 
 
 def calculate_pixels_to_optimize(last_optim, pupil_subsampled, edge_width_for_prior):
@@ -46,7 +47,7 @@ def calculate_pixels_to_optimize(last_optim, pupil_subsampled, edge_width_for_pr
     return np.logical_and(c, pupil_subsampled > 0)
 
 
-def optimize_aplc(pupil, focal_plane_mask, lyot_stops, dark_zone_mask, wavelengths, contrast,
+def optimize_aplc(pupil, focal_plane_mask, lyot_stops, dark_zone_mask, wavelengths, contrast, field_stop=None,
                   starting_scale=1, ending_scale=1, force_no_x_symmetry=False, force_no_y_symmetry=False,
                   force_no_hermitian_symmetry=False, maximize_planet_throughput=True, num_throughput_iterations=2,
                   initial_throughput_estimate=1, edge_width_for_prior=2, solver_num_threads=0, solver_crossover=0,
@@ -67,6 +68,9 @@ def optimize_aplc(pupil, focal_plane_mask, lyot_stops, dark_zone_mask, wavelengt
         An array of wavelengths as fractions of lambda_0.
     contrast : scalar
         The contrast that needs to be achieved in the dark zone.
+    field_stop : Field or None
+        The field stop of the APLC. The grid is assumed to be in lambda_0/D. If this is
+        None, no field stop will be used.
     starting_scale : int
         The number of pixels per unit cell for the initial solution. This is used for the
         adaptive algorithm. It must be a power of 2 times the `ending_scale`.
@@ -117,10 +121,12 @@ def optimize_aplc(pupil, focal_plane_mask, lyot_stops, dark_zone_mask, wavelengt
 
     pupil_grid = pupil.grid
     focal_grid = dark_zone_mask.grid
+
     # Create Lyot coronagraph
-    aplc = LyotCoronagraph(pupil_grid, focal_plane_mask)
+    aplc = LyotCoronagraphWithFieldStop(pupil_grid, focal_plane_mask, field_stop=field_stop)
     focal_grid_0 = CartesianGrid(UnstructuredCoords([np.array([0.0]), np.array([0.0])]), np.array([1.0]))
-    # Propogate wavefront
+
+    # Propagate wavefront
     prop_0 = FraunhoferPropagator(pupil_grid, focal_grid_0)
 
     prior = None

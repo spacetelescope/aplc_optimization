@@ -25,6 +25,7 @@ pup_fname = parameters['pupil']['filename']
 fpm_radius = parameters['focal_plane_mask']['radius']
 fpm_num_pix = parameters['focal_plane_mask']['num_pix']
 fpm_grayscale = parameters['focal_plane_mask']['grayscale']
+field_stop_radius = parameters['focal_plane_mask']['field_stop_radius']
 ls_fname = parameters['lyot_stop']['filename']
 ls_alignment_tolerance = parameters['lyot_stop']['alignment_tolerance']
 ls_num_stops = parameters['lyot_stop']['num_lyot_stops']
@@ -106,6 +107,12 @@ if fpm_grayscale:
 else:
     focal_plane_mask = 1 - circular_aperture(2 * fpm_radius)(focal_mask_grid)
 
+if field_stop_radius is None:
+    field_stop = None
+else:
+    field_stop_grid = make_pupil_grid(8 * field_stop_radius, field_stop_radius)
+    field_stop = circular_aperture(2 * field_stop_radius)(field_stop_grid)
+
 if img_num_wavelengths == 1:
     wavelengths = [1]
 else:
@@ -119,6 +126,7 @@ apodizer = optimize_aplc(
     dark_zone_mask=dark_zone_mask,
     wavelengths=wavelengths,
     contrast=img_contrast,
+    field_stop=field_stop,
     starting_scale=method_starting_scale,
     ending_scale=method_ending_scale,
     force_no_x_symmetry=method_force_no_x_mirror_symmetry,
