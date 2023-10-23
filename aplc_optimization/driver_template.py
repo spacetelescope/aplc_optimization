@@ -149,6 +149,8 @@ hdr.set('PUP', parameters['pupil']['filename'], 'pupil filename')
 hdr.set('FPM_RAD', fpm_radius, 'lam/d')
 hdr.set('FPM_PIX', fpm_num_pix, '# pix across FPM')
 hdr.set('FPM_GY', fpm_grayscale, 'is FPM greyscale?')
+if field_stop is not None:
+    hdr.set('FS_RAD', field_stop_radius, 'lam/d')
 hdr.set('LS', parameters['lyot_stop']['filename'], 'LS filename')
 hdr.set('LS_ALIGN_TOl', ls_alignment_tolerance, 'pix of ls alignment tolerance')
 hdr.set('LS_NUM_STOPS', ls_num_stops, '# of LS shifts')
