@@ -110,7 +110,7 @@ else:
 if field_stop_radius is None:
     field_stop = None
 else:
-    field_stop_grid = make_pupil_grid(8 * field_stop_radius, field_stop_radius)
+    field_stop_grid = make_pupil_grid(8 * field_stop_radius, 2 * field_stop_radius)
     field_stop = circular_aperture(2 * field_stop_radius)(field_stop_grid)
 
 if img_num_wavelengths == 1:
