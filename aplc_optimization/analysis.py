@@ -62,6 +62,7 @@ def create_coronagraph(solution_filename):
 
     try:
         lyot_stops = [Field(read_fits(ls_fname.format(i)).ravel(), pupil_grid) for i in range(ls_num_stops)]
+        lyot_stop = lyot_stops[0]
     except:
         lyot_stop = Field(read_fits(ls_fname).ravel(), pupil_grid)
 
