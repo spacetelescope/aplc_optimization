@@ -39,22 +39,23 @@ class LyotCoronagraphWithFieldStop(hcipy.OpticalElement):
             fpm_grid = focal_plane_mask.grid
             focal_plane_mask = hcipy.Apodizer(focal_plane_mask)
 
+        self.prop_fpm = hcipy.FraunhoferPropagator(input_grid, fpm_grid, focal_length=focal_length)
+
         if lyot_stop is not None and not hasattr(lyot_stop, 'input_grid'):
             lyot_stop = hcipy.Apodizer(lyot_stop)
 
         if field_stop is not None:
-            if hasattr(lyot_stop, 'input_grid'):
+            if hasattr(field_stop, 'input_grid'):
                 fs_grid = field_stop.input_grid
             else:
                 fs_grid = field_stop.grid
                 field_stop = hcipy.Apodizer(field_stop)
 
+            self.prop_fs = hcipy.FraunhoferPropagator(input_grid, fs_grid, focal_length=focal_length)
+
         self.focal_plane_mask = focal_plane_mask
         self.lyot_stop = lyot_stop
         self.field_stop = field_stop
-
-        self.prop_fpm = hcipy.FraunhoferPropagator(input_grid, fpm_grid, focal_length=focal_length)
-        self.prop_fs = hcipy.FraunhoferPropagator(input_grid, fs_grid, focal_length=focal_length)
 
     def forward(self, wavefront):
         '''Propagate the wavefront through the Lyot coronagraph.
