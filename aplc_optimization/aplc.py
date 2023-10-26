@@ -30,7 +30,7 @@ class APLC(Coronagraph):
             'radius': 4.0,
             'num_pix': 50,
             'grayscale': True,
-            'field_stop_radius': -1.0
+            'field_stop_radius': None
         },
         'lyot_stop': {
             'filename': 'NoFilename',
