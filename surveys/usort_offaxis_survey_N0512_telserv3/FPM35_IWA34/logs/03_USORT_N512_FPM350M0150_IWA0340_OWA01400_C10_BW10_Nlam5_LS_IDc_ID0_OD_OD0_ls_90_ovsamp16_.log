@@ -1,0 +1,496 @@
+Optimizer called with the following parameters:
+{'focal_plane_mask': {'field_stop_radius': 14.5,
+                      'grayscale': True,
+                      'num_pix': 150,
+                      'radius': 3.5},
+ 'image': {'bandwidth': 0.1,
+           'contrast': 10,
+           'iwa': 3.4,
+           'num_wavelengths': 5,
+           'owa': 14.0,
+           'resolution': 2},
+ 'instrument': {'inst_name': 'USORT'},
+ 'lyot_stop': {'alignment_tolerance': 1,
+               'filename': 'USORT/LS_USORT_circ_ID0000_OD0990_ovsamp16_N0512.fits',
+               'num_lyot_stops': 9},
+ 'method': {'edge_width_for_prior': 2,
+            'ending_scale': 1,
+            'force_no_hermitian_symmetry': False,
+            'force_no_x_mirror_symmetry': False,
+            'force_no_y_mirror_symmetry': False,
+            'initial_throughput_estimate': 1,
+            'maximize_planet_throughput': True,
+            'num_throughput_iterations': 2,
+            'starting_scale': 1},
+ 'pupil': {'N': 512,
+           'filename': 'USORT/TelAp_USORT_offaxis_ovsamp16_N0512.fits'},
+ 'solver': {'crossover': 0,
+            'method': 2,
+            'num_threads': 0}}
+
+File organization:
+{'analysis_dir': '/user/bnickson/GitHub/LUVex_TelAps/aplc_optimization/surveys/usort_offaxis_survey_N0512_telserv3/FPM35_IWA34/analysis',
+ 'drivers_dir': '/user/bnickson/GitHub/LUVex_TelAps/aplc_optimization/surveys/usort_offaxis_survey_N0512_telserv3/FPM35_IWA34/drivers',
+ 'input_files_dir': '/user/bnickson/GitHub/LUVex_TelAps/aplc_optimization/masks',
+ 'log_dir': '/user/bnickson/GitHub/LUVex_TelAps/aplc_optimization/surveys/usort_offaxis_survey_N0512_telserv3/FPM35_IWA34/logs',
+ 'solution_dir': '/user/bnickson/GitHub/LUVex_TelAps/aplc_optimization/surveys/usort_offaxis_survey_N0512_telserv3/FPM35_IWA34/solutions',
+ 'survey_dir': '/user/bnickson/GitHub/LUVex_TelAps/aplc_optimization/surveys/usort_offaxis_survey_N0512_telserv3/FPM35_IWA34'}
+
+Telescope pupil:
+   Mirror symmetry in x: yes
+   Mirror symmetry in y: yes
+
+Lyot stop #0:
+   Mirror symmetry in x: yes
+Lyot stop #1:
+   Mirror symmetry in x: no
+   Searching for mirror symmetric Lyot stops in x...
+      Found Lyot stop #2 to fit.
+Lyot stop #2:
+   Will be ignored due to symmetries with Lyot stops #[1]
+Lyot stop #3:
+   Mirror symmetry in x: yes
+Lyot stop #4:
+   Mirror symmetry in x: yes
+Lyot stop #5:
+   Mirror symmetry in x: no
+   Searching for mirror symmetric Lyot stops in x...
+      Found Lyot stop #7 to fit.
+Lyot stop #6:
+   Mirror symmetry in x: no
+   Searching for mirror symmetric Lyot stops in x...
+      Found Lyot stop #8 to fit.
+Lyot stop #7:
+   Will be ignored due to symmetries with Lyot stops #[5]
+Lyot stop #8:
+   Will be ignored due to symmetries with Lyot stops #[6]
+Lyot stop #0:
+   Mirror symmetry in y: yes
+Lyot stop #1:
+   Mirror symmetry in y: yes
+Lyot stop #2:
+   Will be ignored due to symmetries with Lyot stops #[1]
+Lyot stop #3:
+   Mirror symmetry in y: no
+   Searching for mirror symmetric Lyot stops in y...
+      Found Lyot stop #4 to fit.
+Lyot stop #4:
+   Will be ignored due to symmetries with Lyot stops #[3]
+Lyot stop #5:
+   Mirror symmetry in y: no
+   Searching for mirror symmetric Lyot stops in y...
+      Found Lyot stop #6 to fit.
+Lyot stop #6:
+   Will be ignored due to symmetries with Lyot stops #[5]
+Lyot stop #7:
+   Will be ignored due to symmetries with Lyot stops #[5]
+Lyot stop #8:
+   Will be ignored due to symmetries with Lyot stops #[6]
+
+Complete APLC:
+   Mirror symmetry in x: yes
+   Mirror symmetry in y: yes
+
+Starting optimization at scale 1 with 42875 variables and 26145 constraints.
+Creating model...
+Set parameter Username
+Academic license - for non-commercial use only - expires 2024-10-25
+Set parameter Crossover to value 0
+Set parameter Method to value 2
+Calculating and adding constraints...
+Wavelength 1/5; Variable 1000/42875
+Wavelength 1/5; Variable 2000/42875
+Wavelength 1/5; Variable 3000/42875
+Wavelength 1/5; Variable 4000/42875
+Wavelength 1/5; Variable 5000/42875
+Wavelength 1/5; Variable 6000/42875
+Wavelength 1/5; Variable 7000/42875
+Wavelength 1/5; Variable 8000/42875
+Wavelength 1/5; Variable 9000/42875
+Wavelength 1/5; Variable 10000/42875
+Wavelength 1/5; Variable 11000/42875
+Wavelength 1/5; Variable 12000/42875
+Wavelength 1/5; Variable 13000/42875
+Wavelength 1/5; Variable 14000/42875
+Wavelength 1/5; Variable 15000/42875
+Wavelength 1/5; Variable 16000/42875
+Wavelength 1/5; Variable 17000/42875
+Wavelength 1/5; Variable 18000/42875
+Wavelength 1/5; Variable 19000/42875
+Wavelength 1/5; Variable 20000/42875
+Wavelength 1/5; Variable 21000/42875
+Wavelength 1/5; Variable 22000/42875
+Wavelength 1/5; Variable 23000/42875
+Wavelength 1/5; Variable 24000/42875
+Wavelength 1/5; Variable 25000/42875
+Wavelength 1/5; Variable 26000/42875
+Wavelength 1/5; Variable 27000/42875
+Wavelength 1/5; Variable 28000/42875
+Wavelength 1/5; Variable 29000/42875
+Wavelength 1/5; Variable 30000/42875
+Wavelength 1/5; Variable 31000/42875
+Wavelength 1/5; Variable 32000/42875
+Wavelength 1/5; Variable 33000/42875
+Wavelength 1/5; Variable 34000/42875
+Wavelength 1/5; Variable 35000/42875
+Wavelength 1/5; Variable 36000/42875
+Wavelength 1/5; Variable 37000/42875
+Wavelength 1/5; Variable 38000/42875
+Wavelength 1/5; Variable 39000/42875
+Wavelength 1/5; Variable 40000/42875
+Wavelength 1/5; Variable 41000/42875
+Wavelength 1/5; Variable 42000/42875
+Warning for adding constraints: zero or small (< 1e-13) coefficients, ignored
+Wavelength 2/5; Variable 1000/42875
+Wavelength 2/5; Variable 2000/42875
+Wavelength 2/5; Variable 3000/42875
+Wavelength 2/5; Variable 4000/42875
+Wavelength 2/5; Variable 5000/42875
+Wavelength 2/5; Variable 6000/42875
+Wavelength 2/5; Variable 7000/42875
+Wavelength 2/5; Variable 8000/42875
+Wavelength 2/5; Variable 9000/42875
+Wavelength 2/5; Variable 10000/42875
+Wavelength 2/5; Variable 11000/42875
+Wavelength 2/5; Variable 12000/42875
+Wavelength 2/5; Variable 13000/42875
+Wavelength 2/5; Variable 14000/42875
+Wavelength 2/5; Variable 15000/42875
+Wavelength 2/5; Variable 16000/42875
+Wavelength 2/5; Variable 17000/42875
+Wavelength 2/5; Variable 18000/42875
+Wavelength 2/5; Variable 19000/42875
+Wavelength 2/5; Variable 20000/42875
+Wavelength 2/5; Variable 21000/42875
+Wavelength 2/5; Variable 22000/42875
+Wavelength 2/5; Variable 23000/42875
+Wavelength 2/5; Variable 24000/42875
+Wavelength 2/5; Variable 25000/42875
+Wavelength 2/5; Variable 26000/42875
+Wavelength 2/5; Variable 27000/42875
+Wavelength 2/5; Variable 28000/42875
+Wavelength 2/5; Variable 29000/42875
+Wavelength 2/5; Variable 30000/42875
+Wavelength 2/5; Variable 31000/42875
+Wavelength 2/5; Variable 32000/42875
+Wavelength 2/5; Variable 33000/42875
+Wavelength 2/5; Variable 34000/42875
+Wavelength 2/5; Variable 35000/42875
+Wavelength 2/5; Variable 36000/42875
+Wavelength 2/5; Variable 37000/42875
+Wavelength 2/5; Variable 38000/42875
+Wavelength 2/5; Variable 39000/42875
+Wavelength 2/5; Variable 40000/42875
+Wavelength 2/5; Variable 41000/42875
+Wavelength 2/5; Variable 42000/42875
+Wavelength 3/5; Variable 1000/42875
+Wavelength 3/5; Variable 2000/42875
+Wavelength 3/5; Variable 3000/42875
+Wavelength 3/5; Variable 4000/42875
+Wavelength 3/5; Variable 5000/42875
+Wavelength 3/5; Variable 6000/42875
+Wavelength 3/5; Variable 7000/42875
+Wavelength 3/5; Variable 8000/42875
+Wavelength 3/5; Variable 9000/42875
+Wavelength 3/5; Variable 10000/42875
+Wavelength 3/5; Variable 11000/42875
+Wavelength 3/5; Variable 12000/42875
+Wavelength 3/5; Variable 13000/42875
+Wavelength 3/5; Variable 14000/42875
+Wavelength 3/5; Variable 15000/42875
+Wavelength 3/5; Variable 16000/42875
+Wavelength 3/5; Variable 17000/42875
+Wavelength 3/5; Variable 18000/42875
+Wavelength 3/5; Variable 19000/42875
+Wavelength 3/5; Variable 20000/42875
+Wavelength 3/5; Variable 21000/42875
+Wavelength 3/5; Variable 22000/42875
+Wavelength 3/5; Variable 23000/42875
+Wavelength 3/5; Variable 24000/42875
+Wavelength 3/5; Variable 25000/42875
+Wavelength 3/5; Variable 26000/42875
+Wavelength 3/5; Variable 27000/42875
+Wavelength 3/5; Variable 28000/42875
+Wavelength 3/5; Variable 29000/42875
+Wavelength 3/5; Variable 30000/42875
+Wavelength 3/5; Variable 31000/42875
+Wavelength 3/5; Variable 32000/42875
+Wavelength 3/5; Variable 33000/42875
+Wavelength 3/5; Variable 34000/42875
+Wavelength 3/5; Variable 35000/42875
+Wavelength 3/5; Variable 36000/42875
+Wavelength 3/5; Variable 37000/42875
+Wavelength 3/5; Variable 38000/42875
+Wavelength 3/5; Variable 39000/42875
+Wavelength 3/5; Variable 40000/42875
+Wavelength 3/5; Variable 41000/42875
+Wavelength 3/5; Variable 42000/42875
+Wavelength 4/5; Variable 1000/42875
+Wavelength 4/5; Variable 2000/42875
+Wavelength 4/5; Variable 3000/42875
+Wavelength 4/5; Variable 4000/42875
+Wavelength 4/5; Variable 5000/42875
+Wavelength 4/5; Variable 6000/42875
+Wavelength 4/5; Variable 7000/42875
+Wavelength 4/5; Variable 8000/42875
+Wavelength 4/5; Variable 9000/42875
+Wavelength 4/5; Variable 10000/42875
+Wavelength 4/5; Variable 11000/42875
+Wavelength 4/5; Variable 12000/42875
+Wavelength 4/5; Variable 13000/42875
+Wavelength 4/5; Variable 14000/42875
+Wavelength 4/5; Variable 15000/42875
+Wavelength 4/5; Variable 16000/42875
+Wavelength 4/5; Variable 17000/42875
+Wavelength 4/5; Variable 18000/42875
+Wavelength 4/5; Variable 19000/42875
+Wavelength 4/5; Variable 20000/42875
+Wavelength 4/5; Variable 21000/42875
+Wavelength 4/5; Variable 22000/42875
+Wavelength 4/5; Variable 23000/42875
+Wavelength 4/5; Variable 24000/42875
+Wavelength 4/5; Variable 25000/42875
+Wavelength 4/5; Variable 26000/42875
+Wavelength 4/5; Variable 27000/42875
+Wavelength 4/5; Variable 28000/42875
+Wavelength 4/5; Variable 29000/42875
+Wavelength 4/5; Variable 30000/42875
+Wavelength 4/5; Variable 31000/42875
+Wavelength 4/5; Variable 32000/42875
+Wavelength 4/5; Variable 33000/42875
+Wavelength 4/5; Variable 34000/42875
+Wavelength 4/5; Variable 35000/42875
+Wavelength 4/5; Variable 36000/42875
+Wavelength 4/5; Variable 37000/42875
+Wavelength 4/5; Variable 38000/42875
+Wavelength 4/5; Variable 39000/42875
+Wavelength 4/5; Variable 40000/42875
+Wavelength 4/5; Variable 41000/42875
+Wavelength 4/5; Variable 42000/42875
+Wavelength 5/5; Variable 1000/42875
+Wavelength 5/5; Variable 2000/42875
+Wavelength 5/5; Variable 3000/42875
+Wavelength 5/5; Variable 4000/42875
+Wavelength 5/5; Variable 5000/42875
+Wavelength 5/5; Variable 6000/42875
+Wavelength 5/5; Variable 7000/42875
+Wavelength 5/5; Variable 8000/42875
+Wavelength 5/5; Variable 9000/42875
+Wavelength 5/5; Variable 10000/42875
+Wavelength 5/5; Variable 11000/42875
+Wavelength 5/5; Variable 12000/42875
+Wavelength 5/5; Variable 13000/42875
+Wavelength 5/5; Variable 14000/42875
+Wavelength 5/5; Variable 15000/42875
+Wavelength 5/5; Variable 16000/42875
+Wavelength 5/5; Variable 17000/42875
+Wavelength 5/5; Variable 18000/42875
+Wavelength 5/5; Variable 19000/42875
+Wavelength 5/5; Variable 20000/42875
+Wavelength 5/5; Variable 21000/42875
+Wavelength 5/5; Variable 22000/42875
+Wavelength 5/5; Variable 23000/42875
+Wavelength 5/5; Variable 24000/42875
+Wavelength 5/5; Variable 25000/42875
+Wavelength 5/5; Variable 26000/42875
+Wavelength 5/5; Variable 27000/42875
+Wavelength 5/5; Variable 28000/42875
+Wavelength 5/5; Variable 29000/42875
+Wavelength 5/5; Variable 30000/42875
+Wavelength 5/5; Variable 31000/42875
+Wavelength 5/5; Variable 32000/42875
+Wavelength 5/5; Variable 33000/42875
+Wavelength 5/5; Variable 34000/42875
+Wavelength 5/5; Variable 35000/42875
+Wavelength 5/5; Variable 36000/42875
+Wavelength 5/5; Variable 37000/42875
+Wavelength 5/5; Variable 38000/42875
+Wavelength 5/5; Variable 39000/42875
+Wavelength 5/5; Variable 40000/42875
+Wavelength 5/5; Variable 41000/42875
+Wavelength 5/5; Variable 42000/42875
+Start optimization...
+Gurobi Optimizer version 10.0.3 build v10.0.3rc0 (linux64)
+
+CPU model: Intel(R) Xeon(R) Gold 6146 CPU @ 3.20GHz, instruction set [SSE2|AVX|AVX2|AVX512]
+Thread count: 24 physical cores, 48 logical processors, using up to 24 threads
+
+Optimize a model with 52290 rows, 42875 columns and 2241933694 nonzeros
+Model fingerprint: 0x7e929131
+Coefficient statistics:
+  Matrix range     [1e-13, 3e-05]
+  Objective range  [4e-03, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e-05, 1e-05]
+Presolve removed 0 rows and 0 columns (presolve time = 82s) ...
+Presolve removed 0 rows and 0 columns (presolve time = 126s) ...
+Presolve removed 0 rows and 0 columns (presolve time = 133s) ...
+Presolve removed 0 rows and 0 columns (presolve time = 136s) ...
+Presolve removed 0 rows and 0 columns (presolve time = 141s) ...
+Presolve removed 0 rows and 0 columns (presolve time = 145s) ...
+Presolve removed 0 rows and 0 columns (presolve time = 223s) ...
+Presolve removed 0 rows and 0 columns (presolve time = 611s) ...
+Presolve removed 0 rows and 0 columns (presolve time = 877s) ...
+Presolve removed 0 rows and 0 columns (presolve time = 883s) ...
+Presolve removed 0 rows and 0 columns (presolve time = 889s) ...
+Presolve removed 0 rows and 0 columns (presolve time = 909s) ...
+Presolve removed 0 rows and 0 columns (presolve time = 912s) ...
+Presolve removed 0 rows and 0 columns (presolve time = 917s) ...
+Presolve removed 0 rows and 0 columns (presolve time = 921s) ...
+Presolve removed 10000 rows and 0 columns (presolve time = 926s) ...
+Presolve removed 26145 rows and 0 columns (presolve time = 931s) ...
+Presolve removed 26145 rows and 0 columns
+Presolve time: 955.72s
+Presolved: 26145 rows, 69020 columns, 1120992961 nonzeros
+Error: invalid user locale; possible fix is to set the system environment
+       variable 'LC_ALL' to a valid locale (e.g., to 'C')
+Ordering time: 3.96s
+
+Barrier statistics:
+ AA' NZ     : 3.418e+08
+ Factor NZ  : 3.418e+08 (roughly 3.0 GB of memory)
+ Factor Ops : 5.958e+12 (roughly 40 seconds per iteration)
+ Threads    : 24
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0   8.01029386e+07  1.22635208e+05  2.61e+02 0.00e+00  4.51e+03  1238s
+   1   9.23447847e+04  1.22579975e+05  2.49e-01 1.31e-10  5.07e+00  1381s
+   2   3.96079508e+04  8.56333408e+04  7.95e-02 1.19e-07  1.59e+00  1550s
+   3   1.99568740e+04  5.35673899e+04  1.97e-02 3.01e-07  4.84e-01  1717s
+   4   1.58196309e+04  2.81448646e+04  7.27e-03 3.12e-07  1.50e-01  1889s
+   5   1.45456022e+04  2.06217826e+04  4.04e-03 3.84e-07  7.24e-02  2073s
+   6   1.39684189e+04  1.79283238e+04  2.64e-03 3.47e-07  4.62e-02  2253s
+   7   1.35788445e+04  1.60253903e+04  1.74e-03 4.42e-07  2.88e-02  2446s
+   8   1.33561258e+04  1.49838745e+04  1.22e-03 4.69e-07  1.95e-02  2642s
+   9   1.32349307e+04  1.44848627e+04  9.38e-04 4.45e-07  1.50e-02  2796s
+  10   1.31550494e+04  1.40167920e+04  7.55e-04 4.23e-07  1.11e-02  2957s
+  11   1.30819554e+04  1.37203579e+04  5.87e-04 4.25e-07  8.46e-03  3147s
+  12   1.30289370e+04  1.35612821e+04  4.66e-04 4.66e-07  6.96e-03  3333s
+  13   1.29909129e+04  1.33743317e+04  3.84e-04 4.05e-07  5.40e-03  3515s
+  14   1.29596180e+04  1.32691000e+04  3.19e-04 4.26e-07  4.45e-03  3704s
+  15   1.29240543e+04  1.31787329e+04  2.45e-04 3.86e-07  3.57e-03  3891s
+  16   1.28854921e+04  1.30537098e+04  1.68e-04 4.45e-07  2.43e-03  4122s
+  17   1.28654127e+04  1.29790211e+04  1.26e-04 3.60e-07  1.74e-03  4276s
+  18   1.28455836e+04  1.29282602e+04  8.40e-05 4.21e-07  1.22e-03  4426s
+  19   1.28346764e+04  1.28898516e+04  5.96e-05 4.49e-07  8.39e-04  4576s
+  20   1.28272171e+04  1.28641635e+04  4.18e-05 5.10e-07  5.77e-04  4731s
+  21   1.28206500e+04  1.28416523e+04  2.54e-05 6.38e-07  3.40e-04  4896s
+  22   1.28171216e+04  1.28304572e+04  1.55e-05 4.81e-07  2.11e-04  5055s
+  23   1.28145963e+04  1.28230240e+04  7.86e-06 6.73e-07  1.19e-04  5219s
+  24   1.28138678e+04  1.28197507e+04  5.31e-06 5.61e-07  8.19e-05  5359s
+  25   1.28133540e+04  1.28172353e+04  3.40e-06 4.95e-07  5.33e-05  5503s
+  26   1.28129116e+04  1.28140544e+04  1.75e-06 5.01e-07  2.12e-05  5667s
+  27   1.28127434e+04  1.28132140e+04  9.81e-07 5.87e-07  1.07e-05  5817s
+  28   1.28126160e+04  1.28127038e+04  3.79e-07 5.45e-07  3.45e-06  5982s
+  29   1.28125681e+04  1.28125771e+04  1.03e-07 5.64e-07  8.26e-07  6175s
+  30   1.28125548e+04  1.28125588e+04  9.82e-09 4.83e-07  1.02e-07  6413s
+  31   1.28125541e+04  1.28125549e+04  5.94e-10 1.41e-06  9.53e-09  6670s
+  32   1.28125543e+04  1.28125543e+04  3.35e-12 5.29e-07  5.17e-10  6930s
+
+Barrier solved model in 32 iterations and 6930.25 seconds (3678.95 work units)
+Optimal objective 1.28125543e+04
+
+Optimization finished!
+Restarting optimization for throughput iteration 1...
+Gurobi Optimizer version 10.0.3 build v10.0.3rc0 (linux64)
+
+CPU model: Intel(R) Xeon(R) Gold 6146 CPU @ 3.20GHz, instruction set [SSE2|AVX|AVX2|AVX512]
+Thread count: 24 physical cores, 48 logical processors, using up to 24 threads
+
+Optimize a model with 52290 rows, 42875 columns and 2241933694 nonzeros
+Model fingerprint: 0x058899a3
+Coefficient statistics:
+  Matrix range     [1e-13, 3e-05]
+  Objective range  [4e-03, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [4e-06, 4e-06]
+Presolve removed 0 rows and 0 columns (presolve time = 136s) ...
+Presolve removed 0 rows and 0 columns (presolve time = 178s) ...
+Presolve removed 0 rows and 0 columns (presolve time = 182s) ...
+Presolve removed 0 rows and 0 columns (presolve time = 186s) ...
+Presolve removed 0 rows and 0 columns (presolve time = 194s) ...
+Presolve removed 0 rows and 0 columns (presolve time = 196s) ...
+Presolve removed 0 rows and 0 columns (presolve time = 317s) ...
+Presolve removed 0 rows and 0 columns (presolve time = 986s) ...
+Presolve removed 0 rows and 0 columns (presolve time = 1262s) ...
+Presolve removed 0 rows and 0 columns (presolve time = 1277s) ...
+Presolve removed 0 rows and 0 columns (presolve time = 1287s) ...
+Presolve removed 0 rows and 0 columns (presolve time = 1308s) ...
+Presolve removed 0 rows and 0 columns (presolve time = 1313s) ...
+Presolve removed 0 rows and 0 columns (presolve time = 1318s) ...
+Presolve removed 0 rows and 0 columns (presolve time = 1322s) ...
+Presolve removed 10000 rows and 0 columns (presolve time = 1327s) ...
+Presolve removed 20000 rows and 0 columns (presolve time = 1331s) ...
+Presolve removed 26145 rows and 0 columns
+Presolve time: 1363.31s
+Presolved: 26145 rows, 69020 columns, 1120992961 nonzeros
+Ordering time: 3.91s
+
+Barrier statistics:
+ AA' NZ     : 3.418e+08
+ Factor NZ  : 3.418e+08 (roughly 3.0 GB of memory)
+ Factor Ops : 5.958e+12 (roughly 80 seconds per iteration)
+ Threads    : 24
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0   8.01029386e+07  1.07889984e+05  2.61e+02 0.00e+00  4.51e+03  1746s
+   1   9.23255850e+04  1.07838801e+05  2.49e-01 1.16e-10  4.96e+00  1957s
+   2   3.98291526e+04  7.28597517e+04  8.18e-02 1.45e-07  1.59e+00  2171s
+   3   1.71600826e+04  4.53484183e+04  1.48e-02 4.35e-07  4.09e-01  2420s
+   4   1.35177186e+04  2.26879135e+04  5.43e-03 3.67e-07  1.20e-01  2657s
+   5   1.24620561e+04  1.59230640e+04  2.90e-03 4.99e-07  4.70e-02  2856s
+   6   1.20542141e+04  1.42133811e+04  1.93e-03 3.73e-07  2.89e-02  3091s
+   7   1.18595295e+04  1.31844368e+04  1.46e-03 4.34e-07  1.89e-02  3334s
+   8   1.17523008e+04  1.25947408e+04  1.21e-03 4.72e-07  1.35e-02  3578s
+   9   1.16328181e+04  1.22497041e+04  9.24e-04 3.82e-07  9.99e-03  3816s
+  10   1.15405277e+04  1.20018399e+04  7.01e-04 4.11e-07  7.46e-03  4038s
+  11   1.14493134e+04  1.17401871e+04  4.73e-04 4.87e-07  4.86e-03  4269s
+  12   1.13952794e+04  1.16142456e+04  3.38e-04 4.05e-07  3.55e-03  4489s
+  13   1.13726011e+04  1.15687147e+04  2.78e-04 4.28e-07  3.04e-03  4729s
+  14   1.13493030e+04  1.14776409e+04  2.18e-04 4.09e-07  2.22e-03  4965s
+  15   1.13181674e+04  1.14009132e+04  1.41e-04 4.45e-07  1.45e-03  5223s
+  16   1.13045223e+04  1.13488688e+04  1.06e-04 4.76e-07  9.70e-04  5497s
+  17   1.12968677e+04  1.13308751e+04  8.63e-05 4.97e-07  7.78e-04  5734s
+  18   1.12890894e+04  1.13136558e+04  6.58e-05 3.60e-07  5.88e-04  5972s
+  19   1.12816856e+04  1.12971366e+04  4.70e-05 4.52e-07  4.07e-04  6234s
+  20   1.12782811e+04  1.12882946e+04  3.84e-05 3.89e-07  3.15e-04  6461s
+  21   1.12733690e+04  1.12784021e+04  2.60e-05 4.24e-07  2.02e-04  6759s
+  22   1.12707321e+04  1.12736657e+04  1.94e-05 4.92e-07  1.45e-04  7012s
+  23   1.12677600e+04  1.12707253e+04  1.21e-05 4.30e-07  9.95e-05  7256s
+  24   1.12666559e+04  1.12681535e+04  9.26e-06 4.21e-07  7.06e-05  7507s
+  25   1.12653532e+04  1.12666285e+04  6.14e-06 5.25e-07  4.90e-05  7767s
+  26   1.12643060e+04  1.12652143e+04  3.60e-06 5.62e-07  3.00e-05  8029s
+  27   1.12636010e+04  1.12640103e+04  1.83e-06 4.81e-07  1.49e-05  8225s
+  28   1.12633750e+04  1.12636356e+04  1.26e-06 5.41e-07  1.01e-05  8369s
+  29   1.12631545e+04  1.12632075e+04  6.90e-07 4.55e-07  4.89e-06  8537s
+  30   1.12629890e+04  1.12630415e+04  2.58e-07 5.53e-07  2.06e-06  8696s
+  31   1.12629332e+04  1.12629453e+04  1.07e-07 5.64e-07  7.86e-07  8848s
+  32   1.12629091e+04  1.12629142e+04  3.53e-08 4.19e-07  2.68e-07  8994s
+  33   1.12629055e+04  1.12629044e+04  2.36e-08 4.72e-07  1.46e-07  9134s
+  34   1.12629018e+04  1.12629019e+04  1.03e-08 5.10e-07  6.89e-08  9275s
+  35   1.12628997e+04  1.12629003e+04  2.86e-09 6.01e-07  2.30e-08  9414s
+  36   1.12628991e+04  1.12628995e+04  6.25e-10 5.15e-07  6.81e-09  9554s
+  37   1.12628990e+04  1.12628992e+04  2.76e-10 5.90e-07  2.74e-09  9696s
+  38   1.12628990e+04  1.12628990e+04  6.82e-11 6.24e-07  5.08e-10  9857s
+
+Barrier solved model in 38 iterations and 9856.61 seconds (4321.30 work units)
+Optimal objective 1.12628990e+04
+
+/user/bnickson/GitHub/LUVex_TelAps/aplc_optimization/surveys/usort_offaxis_survey_N0512_telserv3/FPM35_IWA34/drivers/03_USORT_N512_FPM350M0150_IWA0340_OWA01400_C10_BW10_Nlam5_LS_IDc_ID0_OD_OD0_ls_90_ovsamp16_.py:102: DeprecationWarning: circular_aperture is deprecated. Its new name is make_circular_aperture.
+  dark_zone_mask = circular_aperture(img_owa * 2)(focal_grid) - circular_aperture(img_iwa * 2)(focal_grid)
+/user/bnickson/GitHub/LUVex_TelAps/aplc_optimization/surveys/usort_offaxis_survey_N0512_telserv3/FPM35_IWA34/drivers/03_USORT_N512_FPM350M0150_IWA0340_OWA01400_C10_BW10_Nlam5_LS_IDc_ID0_OD_OD0_ls_90_ovsamp16_.py:110: DeprecationWarning: circular_aperture is deprecated. Its new name is make_circular_aperture.
+  focal_plane_mask = 1 - evaluate_supersampled(circular_aperture(2 * fpm_radius), focal_mask_grid, 8)
+/user/bnickson/GitHub/LUVex_TelAps/aplc_optimization/surveys/usort_offaxis_survey_N0512_telserv3/FPM35_IWA34/drivers/03_USORT_N512_FPM350M0150_IWA0340_OWA01400_C10_BW10_Nlam5_LS_IDc_ID0_OD_OD0_ls_90_ovsamp16_.py:118: DeprecationWarning: circular_aperture is deprecated. Its new name is make_circular_aperture.
+  field_stop = circular_aperture(2 * field_stop_radius)(field_stop_grid)
+WARNING: VerifyWarning: Keyword name 'LS_ALIGN_TOl' is greater than 8 characters or contains characters not allowed by the FITS standard; a HIERARCH card will be created. [astropy.io.fits.card]
+WARNING: VerifyWarning: Keyword name 'LS_NUM_STOPS' is greater than 8 characters or contains characters not allowed by the FITS standard; a HIERARCH card will be created. [astropy.io.fits.card]
+WARNING: VerifyWarning: Keyword name 'PROG_START' is greater than 8 characters or contains characters not allowed by the FITS standard; a HIERARCH card will be created. [astropy.io.fits.card]
+WARNING: VerifyWarning: Keyword name 'PROG_EDGE' is greater than 8 characters or contains characters not allowed by the FITS standard; a HIERARCH card will be created. [astropy.io.fits.card]
+WARNING: VerifyWarning: Keyword name 'THRPT_ITER' is greater than 8 characters or contains characters not allowed by the FITS standard; a HIERARCH card will be created. [astropy.io.fits.card]
+WARNING: VerifyWarning: Keyword name 'THRPT_ESTIM' is greater than 8 characters or contains characters not allowed by the FITS standard; a HIERARCH card will be created. [astropy.io.fits.card]
+WARNING: VerifyWarning: Keyword name 'MAX_THRPT' is greater than 8 characters or contains characters not allowed by the FITS standard; a HIERARCH card will be created. [astropy.io.fits.card]
+WARNING: VerifyWarning: Keyword name 'SLV_THRDS' is greater than 8 characters or contains characters not allowed by the FITS standard; a HIERARCH card will be created. [astropy.io.fits.card]
+WARNING: VerifyWarning: Keyword name 'SLV_XOVER' is greater than 8 characters or contains characters not allowed by the FITS standard; a HIERARCH card will be created. [astropy.io.fits.card]
+Optimization finished!
