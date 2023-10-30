@@ -15,7 +15,7 @@ dependencies:
   - sphinx-automodapi
   - sphinx_rtd_theme
   - pip:
-    - asdf
+    - asdf=2.14.4
     - gurobipy
     - hcipy
     - poppy
