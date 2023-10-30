@@ -1,0 +1,400 @@
+Optimizer called with the following parameters:
+{'focal_plane_mask': {'field_stop_radius': None,
+                      'grayscale': True,
+                      'num_pix': 150,
+                      'radius': 3.9000000000000004},
+ 'image': {'bandwidth': 0.2,
+           'contrast': 10,
+           'iwa': 3.8000000000000003,
+           'num_wavelengths': 5,
+           'owa': 14.0,
+           'resolution': 2},
+ 'instrument': {'inst_name': 'USORT'},
+ 'lyot_stop': {'alignment_tolerance': 0,
+               'filename': 'USORT/LS_USORT_hex_ID0000_OD0990_ovsamp16_N0128.fits',
+               'num_lyot_stops': 1},
+ 'method': {'edge_width_for_prior': 2,
+            'ending_scale': 1,
+            'force_no_hermitian_symmetry': False,
+            'force_no_x_mirror_symmetry': False,
+            'force_no_y_mirror_symmetry': False,
+            'initial_throughput_estimate': 1,
+            'maximize_planet_throughput': True,
+            'num_throughput_iterations': 2,
+            'starting_scale': 1},
+ 'pupil': {'N': 128,
+           'filename': 'USORT/TelAp_USORT_offaxis_ovsamp16_N0128.fits'},
+ 'solver': {'crossover': 0,
+            'method': 2,
+            'num_threads': 0}}
+
+File organization:
+{'analysis_dir': '/user/bnickson/GitHub/LUVex_TelAps/aplc_optimization/surveys/usort_offaxis_survey_N0128_telserv3/FPM39_IWA38/analysis',
+ 'drivers_dir': '/user/bnickson/GitHub/LUVex_TelAps/aplc_optimization/surveys/usort_offaxis_survey_N0128_telserv3/FPM39_IWA38/drivers',
+ 'input_files_dir': '/user/bnickson/GitHub/LUVex_TelAps/aplc_optimization/masks',
+ 'log_dir': '/user/bnickson/GitHub/LUVex_TelAps/aplc_optimization/surveys/usort_offaxis_survey_N0128_telserv3/FPM39_IWA38/logs',
+ 'solution_dir': '/user/bnickson/GitHub/LUVex_TelAps/aplc_optimization/surveys/usort_offaxis_survey_N0128_telserv3/FPM39_IWA38/solutions',
+ 'survey_dir': '/user/bnickson/GitHub/LUVex_TelAps/aplc_optimization/surveys/usort_offaxis_survey_N0128_telserv3/FPM39_IWA38'}
+
+Telescope pupil:
+   Mirror symmetry in x: yes
+   Mirror symmetry in y: yes
+
+Lyot stop #0:
+   Mirror symmetry in x: yes
+Lyot stop #0:
+   Mirror symmetry in y: yes
+
+Complete APLC:
+   Mirror symmetry in x: yes
+   Mirror symmetry in y: yes
+
+Starting optimization at scale 1 with 2726 variables and 2865 constraints.
+Creating model...
+Set parameter Username
+Academic license - for non-commercial use only - expires 2024-10-25
+Set parameter Crossover to value 0
+Set parameter Method to value 2
+Calculating and adding constraints...
+Wavelength 1/5; Variable 1000/2726
+Wavelength 1/5; Variable 2000/2726
+Wavelength 2/5; Variable 1000/2726
+Wavelength 2/5; Variable 2000/2726
+Wavelength 3/5; Variable 1000/2726
+Wavelength 3/5; Variable 2000/2726
+Wavelength 4/5; Variable 1000/2726
+Wavelength 4/5; Variable 2000/2726
+Wavelength 5/5; Variable 1000/2726
+Wavelength 5/5; Variable 2000/2726
+Start optimization...
+Gurobi Optimizer version 10.0.3 build v10.0.3rc0 (linux64)
+
+CPU model: Intel(R) Xeon(R) Gold 6146 CPU @ 3.20GHz, instruction set [SSE2|AVX|AVX2|AVX512]
+Thread count: 24 physical cores, 48 logical processors, using up to 24 threads
+
+Optimize a model with 5730 rows, 2726 columns and 15619980 nonzeros
+Model fingerprint: 0x91d92efb
+Coefficient statistics:
+  Matrix range     [3e-13, 6e-04]
+  Objective range  [4e-03, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e-05, 1e-05]
+Presolve removed 0 rows and 0 columns (presolve time = 6s) ...
+Presolve time: 7.12s
+Presolved: 2726 rows, 8456 columns, 15622706 nonzeros
+Error: invalid user locale; possible fix is to set the system environment
+       variable 'LC_ALL' to a valid locale (e.g., to 'C')
+Ordering time: 0.06s
+
+Barrier statistics:
+ AA' NZ     : 3.714e+06
+ Factor NZ  : 3.717e+06 (roughly 34 MB of memory)
+ Factor Ops : 6.756e+09 (less than 1 second per iteration)
+ Threads    : 24
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0   5.62434019e+03  0.00000000e+00  0.00e+00 0.00e+00  9.79e-01    11s
+   1   2.78797989e+03  8.64025998e+02  0.00e+00 8.22e-02  2.48e-01    11s
+   2   2.01318056e+03  1.10338745e+03  0.00e+00 5.67e-02  1.24e-01    12s
+   3   1.81211087e+03  1.23587906e+03  0.00e+00 3.96e-02  8.29e-02    14s
+   4   1.69387481e+03  1.31798996e+03  0.00e+00 2.67e-02  5.58e-02    15s
+   5   1.61364861e+03  1.32436386e+03  0.00e+00 2.47e-02  4.74e-02    16s
+   6   1.52199723e+03  1.33430963e+03  0.00e+00 2.05e-02  3.60e-02    17s
+   7   1.45090258e+03  1.33114880e+03  0.00e+00 1.68e-02  2.79e-02    17s
+   8   1.43777802e+03  1.32831743e+03  0.00e+00 1.59e-02  2.64e-02    18s
+   9   1.39771106e+03  1.32442300e+03  0.00e+00 1.44e-02  2.27e-02    19s
+  10   1.37295526e+03  1.31566283e+03  0.00e+00 1.30e-02  2.03e-02    19s
+  11   1.31595097e+03  1.30390730e+03  0.00e+00 1.13e-02  1.52e-02    20s
+  12   1.28558076e+03  1.29319567e+03  0.00e+00 9.59e-03  1.17e-02    21s
+  13   1.27765030e+03  1.28318092e+03  0.00e+00 8.34e-03  1.04e-02    22s
+  14   1.25952177e+03  1.27804515e+03  0.00e+00 7.75e-03  8.61e-03    22s
+  15   1.24397347e+03  1.27399458e+03  0.00e+00 7.22e-03  6.95e-03    23s
+  16   1.23560821e+03  1.27068153e+03  0.00e+00 6.83e-03  6.01e-03    24s
+  17   1.22886769e+03  1.26302671e+03  0.00e+00 5.83e-03  4.89e-03    24s
+  18   1.22692763e+03  1.24672849e+03  0.00e+00 3.84e-03  3.49e-03    25s
+  19   1.22469758e+03  1.24491680e+03  0.00e+00 3.64e-03  3.28e-03    26s
+  20   1.22038844e+03  1.23761981e+03  0.00e+00 2.92e-03  2.65e-03    28s
+  21   1.21583994e+03  1.23320191e+03  0.00e+00 2.50e-03  2.12e-03    29s
+  22   1.21376766e+03  1.23104914e+03  0.00e+00 2.30e-03  1.88e-03    30s
+  23   1.21064897e+03  1.22733044e+03  0.00e+00 1.95e-03  1.48e-03    30s
+  24   1.20778627e+03  1.22308314e+03  0.00e+00 1.56e-03  1.09e-03    31s
+  25   1.20697975e+03  1.22012482e+03  0.00e+00 1.33e-03  9.31e-04    32s
+  26   1.20618701e+03  1.21809649e+03  0.00e+00 1.16e-03  8.03e-04    32s
+  27   1.20589488e+03  1.21672621e+03  0.00e+00 1.06e-03  7.30e-04    33s
+  28   1.20542191e+03  1.21544176e+03  0.00e+00 9.54e-04  6.46e-04    33s
+  29   1.20488318e+03  1.21384782e+03  0.00e+00 8.25e-04  5.44e-04    34s
+  30   1.20445382e+03  1.21270080e+03  0.00e+00 7.36e-04  4.81e-04    35s
+  31   1.20415656e+03  1.21227227e+03  0.00e+00 7.03e-04  4.45e-04    35s
+  32   1.20396019e+03  1.21157827e+03  0.00e+00 6.50e-04  4.06e-04    36s
+  33   1.20366799e+03  1.21130136e+03  0.00e+00 6.30e-04  3.81e-04    37s
+  34   1.20356997e+03  1.21101333e+03  0.00e+00 6.06e-04  3.66e-04    37s
+  35   1.20355131e+03  1.20875871e+03  0.00e+00 4.31e-04  2.62e-04    39s
+  36   1.20331077e+03  1.20687781e+03  0.00e+00 2.94e-04  1.84e-04    41s
+  37   1.20314476e+03  1.20588912e+03  0.00e+00 2.24e-04  1.39e-04    43s
+  38   1.20302890e+03  1.20535239e+03  0.00e+00 1.86e-04  1.13e-04    44s
+  39   1.20296463e+03  1.20522463e+03  0.00e+00 1.77e-04  1.04e-04    45s
+  40   1.20292058e+03  1.20466889e+03  0.00e+00 1.38e-04  8.28e-05    47s
+  41   1.20282820e+03  1.20427714e+03  0.00e+00 1.10e-04  6.22e-05    48s
+  42   1.20278595e+03  1.20386076e+03  0.00e+00 8.07e-05  4.47e-05    50s
+  43   1.20275356e+03  1.20362305e+03  0.00e+00 6.43e-05  3.47e-05    52s
+  44   1.20273451e+03  1.20346966e+03  2.20e-07 5.37e-05  2.84e-05    54s
+  45   1.20272628e+03  1.20331102e+03  1.04e-06 4.28e-05  2.29e-05    56s
+  46   1.20271611e+03  1.20312115e+03  2.93e-06 2.95e-05  1.57e-05    57s
+  47   1.20271006e+03  1.20297229e+03  3.44e-06 1.94e-05  1.07e-05    59s
+  48   1.20269975e+03  1.20285417e+03  8.16e-06 1.13e-05  6.07e-06    61s
+  49   1.20269412e+03  1.20278170e+03  3.55e-06 6.38e-06  3.39e-06    65s
+  50   1.20269013e+03  1.20273866e+03  1.41e-06 3.46e-06  1.75e-06    69s
+  51   1.20268971e+03  1.20271930e+03  1.13e-06 2.14e-06  1.12e-06    74s
+  52   1.20268905e+03  1.20270546e+03  9.65e-07 1.20e-06  6.43e-07    78s
+  53   1.20268901e+03  1.20269867e+03  8.87e-07 7.31e-07  4.26e-07    83s
+  54   1.20268894e+03  1.20269260e+03  1.57e-06 3.15e-07  2.28e-07    87s
+  55   1.20268889e+03  1.20269043e+03  2.53e-06 1.66e-07  1.56e-07    91s
+  56   1.20268886e+03  1.20268986e+03  3.14e-06 1.27e-07  1.34e-07    97s
+  57   1.20268884e+03  1.20268948e+03  4.19e-06 9.99e-08  1.19e-07   101s
+  58   1.20268873e+03  1.20268871e+03  4.51e-06 4.75e-08  8.61e-08   104s
+  59   1.20268874e+03  1.20268871e+03  7.18e-06 4.75e-08  8.61e-08   106s
+  60   1.20268873e+03  1.20268864e+03  7.84e-06 4.26e-08  8.36e-08   110s
+  61   1.20268862e+03  1.20268843e+03  9.85e-06 2.84e-08  6.92e-08   115s
+  62   1.20268827e+03  1.20268811e+03  8.23e-06 6.37e-09  3.29e-08   118s
+  63   1.20268814e+03  1.20268808e+03  1.03e-05 4.20e-09  2.22e-09   122s
+  64   1.20268814e+03  1.20268807e+03  1.16e-05 3.36e-09  1.85e-09   126s
+  65   1.20268812e+03  1.20268804e+03  1.10e-05 1.24e-09  8.44e-10   134s
+  66   1.20268809e+03  1.20268802e+03  9.44e-06 1.92e-11  2.56e-10   140s
+  67   1.20268817e+03  1.20268802e+03  1.71e-05 4.34e-13  7.85e-11   149s
+
+Barrier performed 67 iterations in 149.05 seconds (35.80 work units)
+Sub-optimal termination - objective 1.20268894e+03
+
+Optimization finished!
+Restarting optimization for throughput iteration 1...
+Gurobi Optimizer version 10.0.3 build v10.0.3rc0 (linux64)
+
+CPU model: Intel(R) Xeon(R) Gold 6146 CPU @ 3.20GHz, instruction set [SSE2|AVX|AVX2|AVX512]
+Thread count: 24 physical cores, 48 logical processors, using up to 24 threads
+
+Optimize a model with 5730 rows, 2726 columns and 15619980 nonzeros
+Model fingerprint: 0xf6d2db7d
+Coefficient statistics:
+  Matrix range     [3e-13, 6e-04]
+  Objective range  [4e-03, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [6e-06, 6e-06]
+Presolve removed 0 rows and 0 columns (presolve time = 8s) ...
+Presolve removed 0 rows and 0 columns (presolve time = 12s) ...
+Presolve time: 13.48s
+Presolved: 2726 rows, 8456 columns, 15622706 nonzeros
+Ordering time: 0.13s
+
+Barrier statistics:
+ AA' NZ     : 3.714e+06
+ Factor NZ  : 3.717e+06 (roughly 34 MB of memory)
+ Factor Ops : 6.756e+09 (less than 1 second per iteration)
+ Threads    : 24
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0   5.55386696e+03  0.00000000e+00  0.00e+00 0.00e+00  9.70e-01    20s
+   1   2.71944158e+03  8.51972024e+02  0.00e+00 8.51e-02  2.47e-01    22s
+   2   1.91646208e+03  1.06078875e+03  0.00e+00 6.47e-02  1.30e-01    24s
+   3   1.75227115e+03  1.19970471e+03  0.00e+00 4.61e-02  9.00e-02    28s
+   4   1.64787303e+03  1.26065893e+03  0.00e+00 3.57e-02  6.87e-02    31s
+   5   1.52998142e+03  1.26975724e+03  0.00e+00 3.32e-02  5.90e-02    34s
+   6   1.43934553e+03  1.28416091e+03  0.00e+00 2.50e-02  4.34e-02    37s
+   7   1.32825954e+03  1.27745853e+03  0.00e+00 2.19e-02  3.36e-02    40s
+   8   1.30208360e+03  1.25901123e+03  0.00e+00 1.69e-02  2.68e-02    43s
+   9   1.26727310e+03  1.25043449e+03  0.00e+00 1.58e-02  2.38e-02    45s
+  10   1.23074149e+03  1.24642694e+03  0.00e+00 1.52e-02  2.08e-02    47s
+  11   1.21173475e+03  1.23752826e+03  0.00e+00 1.40e-02  1.86e-02    49s
+  12   1.18914462e+03  1.22824590e+03  0.00e+00 1.26e-02  1.59e-02    51s
+  13   1.18094043e+03  1.20425751e+03  0.00e+00 9.81e-03  1.30e-02    51s
+  14   1.17077505e+03  1.20191703e+03  0.00e+00 9.59e-03  1.22e-02    52s
+  15   1.14612104e+03  1.19211316e+03  0.00e+00 8.62e-03  9.83e-03    53s
+  16   1.14208494e+03  1.18865600e+03  0.00e+00 8.31e-03  9.39e-03    54s
+  17   1.13699420e+03  1.18404301e+03  0.00e+00 7.93e-03  8.83e-03    55s
+  18   1.12447335e+03  1.18054729e+03  0.00e+00 7.59e-03  7.95e-03    56s
+  19   1.11787298e+03  1.17657303e+03  0.00e+00 7.26e-03  7.45e-03    56s
+  20   1.11452606e+03  1.16654441e+03  0.00e+00 6.62e-03  7.05e-03    57s
+  21   1.09952099e+03  1.16107056e+03  0.00e+00 6.18e-03  5.83e-03    58s
+  22   1.09821795e+03  1.15751462e+03  0.00e+00 5.91e-03  5.61e-03    58s
+  23   1.09730540e+03  1.15410549e+03  0.00e+00 5.65e-03  5.41e-03    59s
+  24   1.09527542e+03  1.15342156e+03  0.00e+00 5.61e-03  5.30e-03    60s
+  25   1.09068913e+03  1.14421934e+03  0.00e+00 5.06e-03  4.91e-03    61s
+  26   1.08831748e+03  1.13941474e+03  0.00e+00 4.77e-03  4.67e-03    62s
+  27   1.08019274e+03  1.13170597e+03  0.00e+00 4.31e-03  3.97e-03    63s
+  28   1.07296224e+03  1.12468841e+03  0.00e+00 3.90e-03  3.32e-03    63s
+  29   1.06869156e+03  1.11121748e+03  0.00e+00 3.11e-03  2.66e-03    64s
+  30   1.06333510e+03  1.10868686e+03  0.00e+00 2.98e-03  2.26e-03    65s
+  31   1.06226512e+03  1.10752223e+03  0.00e+00 2.91e-03  2.17e-03    65s
+  32   1.06157133e+03  1.10358551e+03  0.00e+00 2.70e-03  2.03e-03    66s
+  33   1.06032182e+03  1.09960805e+03  0.00e+00 2.48e-03  1.86e-03    67s
+  34   1.05923185e+03  1.09873958e+03  0.00e+00 2.43e-03  1.78e-03    69s
+  35   1.05811450e+03  1.09601002e+03  0.00e+00 2.30e-03  1.69e-03    69s
+  36   1.05718277e+03  1.09456853e+03  0.00e+00 2.23e-03  1.60e-03    70s
+  37   1.05595483e+03  1.09046472e+03  0.00e+00 2.02e-03  1.43e-03    71s
+  38   1.05503975e+03  1.08546129e+03  0.00e+00 1.77e-03  1.25e-03    71s
+  39   1.05439357e+03  1.08343466e+03  0.00e+00 1.67e-03  1.18e-03    72s
+  40   1.05398746e+03  1.08154550e+03  0.00e+00 1.58e-03  1.11e-03    74s
+  41   1.05336458e+03  1.08053638e+03  0.00e+00 1.53e-03  1.07e-03    75s
+  42   1.05281185e+03  1.07899689e+03  0.00e+00 1.45e-03  1.00e-03    76s
+  43   1.05217878e+03  1.07679514e+03  0.00e+00 1.35e-03  9.28e-04    76s
+  44   1.05123354e+03  1.07623644e+03  0.00e+00 1.32e-03  8.49e-04    77s
+  45   1.05064831e+03  1.06879552e+03  0.00e+00 9.84e-04  6.77e-04    78s
+  46   1.04968595e+03  1.06337854e+03  0.00e+00 7.36e-04  5.03e-04    79s
+  47   1.04950461e+03  1.06113654e+03  0.00e+00 6.33e-04  4.48e-04    80s
+  48   1.04847263e+03  1.06085106e+03  0.00e+00 6.20e-04  3.73e-04    81s
+  49   1.04824434e+03  1.05977893e+03  0.00e+00 5.71e-04  3.38e-04    85s
+  50   1.04802941e+03  1.05766234e+03  0.00e+00 4.75e-04  2.85e-04    88s
+  51   1.04792263e+03  1.05647343e+03  0.00e+00 4.22e-04  2.56e-04    90s
+  52   1.04749390e+03  1.05379752e+03  0.00e+00 3.04e-04  1.77e-04    94s
+  53   1.04715490e+03  1.05279703e+03  0.00e+00 2.61e-04  1.35e-04    97s
+  54   1.04713072e+03  1.05154498e+03  0.00e+00 2.06e-04  1.12e-04   100s
+  55   1.04704824e+03  1.05086337e+03  0.00e+00 1.77e-04  9.34e-05   103s
+  56   1.04702712e+03  1.04974468e+03  0.00e+00 1.29e-04  7.34e-05   105s
+  57   1.04694149e+03  1.04834523e+03  0.00e+00 6.85e-05  4.28e-05   107s
+  58   1.04688928e+03  1.04770967e+03  3.79e-06 4.11e-05  2.77e-05   110s
+  59   1.04683501e+03  1.04718075e+03  9.89e-06 1.85e-05  1.47e-05   113s
+  60   1.04678588e+03  1.04702287e+03  4.33e-06 1.18e-05  7.95e-06   116s
+  61   1.04677008e+03  1.04691350e+03  2.24e-06 7.14e-06  4.77e-06   121s
+  62   1.04676985e+03  1.04685030e+03  5.37e-06 4.40e-06  3.66e-06   126s
+  63   1.04676940e+03  1.04683599e+03  7.65e-06 3.79e-06  3.40e-06   130s
+  64   1.04676813e+03  1.04679191e+03  1.45e-05 1.90e-06  2.56e-06   137s
+  65   1.04676783e+03  1.04678931e+03  2.66e-05 1.79e-06  2.49e-06   143s
+  66   1.04676514e+03  1.04678271e+03  4.80e-05 1.51e-06  2.18e-06   148s
+  67   1.04676214e+03  1.04677792e+03  7.88e-05 1.31e-06  1.83e-06   151s
+  68   1.04676036e+03  1.04677230e+03  4.96e-05 1.07e-06  1.58e-06   155s
+  69   1.04675893e+03  1.04676700e+03  5.52e-05 8.42e-07  1.37e-06   161s
+  70   1.04675774e+03  1.04676583e+03  6.62e-05 7.92e-07  1.27e-06   164s
+  71   1.04675735e+03  1.04676413e+03  7.28e-05 7.19e-07  1.20e-06   168s
+  72   1.04675670e+03  1.04676000e+03  7.45e-05 5.42e-07  1.06e-06   171s
+  73   1.04675668e+03  1.04675930e+03  5.56e-05 5.12e-07  1.03e-06   175s
+  74   1.04675501e+03  1.04675338e+03  8.16e-05 2.57e-07  7.51e-07   180s
+  75   1.04675416e+03  1.04675117e+03  1.05e-04 1.62e-07  6.05e-07   185s
+  76   1.04675311e+03  1.04675046e+03  1.10e-04 1.32e-07  4.98e-07   188s
+  77   1.04675283e+03  1.04675013e+03  1.01e-04 1.18e-07  4.53e-07   191s
+  78   1.04675261e+03  1.04674949e+03  8.76e-05 9.08e-08  4.08e-07   195s
+  79   1.04675177e+03  1.04674921e+03  1.27e-04 7.89e-08  3.34e-07   200s
+  80   1.04675166e+03  1.04674888e+03  1.38e-04 6.48e-08  3.15e-07   204s
+  81   1.04675090e+03  1.04674856e+03  1.05e-04 5.15e-08  2.57e-07   208s
+  82   1.04675083e+03  1.04674852e+03  1.01e-04 4.96e-08  2.49e-07   212s
+  83   1.04675063e+03  1.04674841e+03  1.13e-04 4.51e-08  2.30e-07   217s
+  84   1.04674975e+03  1.04674830e+03  1.13e-04 4.03e-08  1.91e-07   221s
+  85   1.04674980e+03  1.04674830e+03  1.15e-04 4.03e-08  1.91e-07   224s
+  86   1.04674976e+03  1.04674827e+03  1.18e-04 3.89e-08  1.80e-07   225s
+  87   1.04674912e+03  1.04674820e+03  9.92e-05 3.61e-08  1.50e-07   226s
+  88   1.04674917e+03  1.04674820e+03  1.02e-04 3.61e-08  1.50e-07   227s
+  89   1.04674907e+03  1.04674806e+03  9.89e-05 3.00e-08  1.42e-07   229s
+  90   1.04674866e+03  1.04674789e+03  1.21e-04 2.30e-08  1.01e-07   231s
+  91   1.04674847e+03  1.04674784e+03  9.72e-05 2.06e-08  8.96e-08   232s
+  92   1.04674807e+03  1.04674783e+03  1.31e-04 2.04e-08  8.78e-08   233s
+  93   1.04674796e+03  1.04674780e+03  1.19e-04 1.90e-08  8.40e-08   234s
+  94   1.04674806e+03  1.04674775e+03  9.68e-05 1.68e-08  6.99e-08   235s
+  95   1.04674773e+03  1.04674775e+03  1.14e-04 1.68e-08  6.99e-08   236s
+  96   1.04674787e+03  1.04674770e+03  1.02e-04 1.49e-08  5.49e-08   237s
+  97   1.04674775e+03  1.04674769e+03  9.52e-05 1.45e-08  5.34e-08   238s
+  98   1.04674829e+03  1.04674767e+03  9.86e-05 1.37e-08  4.10e-08   239s
+  99   1.04674833e+03  1.04674767e+03  9.82e-05 1.34e-08  3.77e-08   241s
+ 100   1.04674828e+03  1.04674767e+03  1.12e-04 1.34e-08  3.77e-08   243s
+ 101   1.04674807e+03  1.04674752e+03  1.08e-04 7.14e-09  2.73e-08   244s
+ 102   1.04674806e+03  1.04674752e+03  1.16e-04 7.13e-09  2.73e-08   245s
+ 103   1.04674806e+03  1.04674752e+03  1.17e-04 7.07e-09  2.71e-08   246s
+ 104   1.04674797e+03  1.04674752e+03  1.16e-04 7.06e-09  2.70e-08   247s
+ 105   1.04674795e+03  1.04674752e+03  1.17e-04 7.06e-09  2.70e-08   249s
+ 106   1.04674786e+03  1.04674751e+03  1.16e-04 7.02e-09  2.66e-08   250s
+ 107   1.04674781e+03  1.04674745e+03  1.06e-04 4.48e-09  2.33e-08   253s
+ 108   1.04674771e+03  1.04674744e+03  1.07e-04 3.81e-09  2.28e-08   255s
+ 109   1.04674781e+03  1.04674742e+03  9.85e-05 3.11e-09  2.20e-08   256s
+ 110   1.04674767e+03  1.04674738e+03  1.69e-04 1.52e-09  1.70e-08   259s
+ 111   1.04674790e+03  1.04674738e+03  1.63e-04 1.52e-09  1.70e-08   260s
+ 112   1.04674784e+03  1.04674738e+03  1.61e-04 1.48e-09  1.67e-08   261s
+ 113   1.04674778e+03  1.04674738e+03  1.52e-04 1.44e-09  1.57e-08   262s
+ 114   1.04674777e+03  1.04674738e+03  1.46e-04 1.43e-09  1.53e-08   264s
+ 115   1.04674779e+03  1.04674738e+03  1.43e-04 1.40e-09  1.52e-08   265s
+ 116   1.04674781e+03  1.04674737e+03  1.30e-04 1.19e-09  1.44e-08   266s
+ 117   1.04674803e+03  1.04674737e+03  1.58e-04 1.18e-09  1.39e-08   267s
+ 118   1.04674802e+03  1.04674737e+03  1.54e-04 1.15e-09  1.36e-08   267s
+ 119   1.04674811e+03  1.04674737e+03  1.55e-04 1.15e-09  1.33e-08   268s
+ 120   1.04674829e+03  1.04674737e+03  1.47e-04 1.11e-09  1.28e-08   269s
+ 121   1.04674810e+03  1.04674737e+03  1.36e-04 1.02e-09  1.10e-08   270s
+ 122   1.04674745e+03  1.04674737e+03  1.42e-04 8.95e-10  8.52e-09   271s
+ 123   1.04674748e+03  1.04674737e+03  1.38e-04 8.36e-10  8.09e-09   272s
+ 124   1.04674780e+03  1.04674737e+03  1.23e-04 8.04e-10  6.39e-09   273s
+ 125   1.04674786e+03  1.04674737e+03  1.21e-04 8.03e-10  6.38e-09   274s
+ 126   1.04674809e+03  1.04674736e+03  1.50e-04 7.37e-10  6.10e-09   275s
+ 127   1.04674826e+03  1.04674736e+03  1.37e-04 7.21e-10  5.32e-09   276s
+ 128   1.04674783e+03  1.04674736e+03  1.39e-04 6.61e-10  5.07e-09   278s
+ 129   1.04674778e+03  1.04674736e+03  1.44e-04 6.14e-10  4.63e-09   279s
+ 130   1.04674773e+03  1.04674736e+03  1.47e-04 5.33e-10  4.46e-09   281s
+ 131   1.04674770e+03  1.04674736e+03  1.36e-04 4.75e-10  4.05e-09   282s
+ 132   1.04674762e+03  1.04674736e+03  1.54e-04 4.31e-10  3.86e-09   283s
+ 133   1.04674763e+03  1.04674736e+03  1.58e-04 4.31e-10  3.86e-09   284s
+ 134   1.04674764e+03  1.04674736e+03  1.57e-04 4.28e-10  3.82e-09   285s
+ 135   1.04674765e+03  1.04674736e+03  1.39e-04 3.90e-10  3.49e-09   286s
+ 136   1.04674768e+03  1.04674736e+03  1.38e-04 3.69e-10  3.31e-09   288s
+ 137   1.04674765e+03  1.04674736e+03  1.40e-04 3.68e-10  3.27e-09   290s
+ 138   1.04674765e+03  1.04674735e+03  1.28e-04 2.96e-10  3.11e-09   292s
+ 139   1.04674748e+03  1.04674735e+03  1.22e-04 2.52e-10  3.00e-09   294s
+ 140   1.04674768e+03  1.04674735e+03  1.36e-04 2.52e-10  3.00e-09   295s
+ 141   1.04674828e+03  1.04674735e+03  1.14e-04 2.37e-10  2.68e-09   296s
+ 142   1.04674826e+03  1.04674735e+03  1.16e-04 2.37e-10  2.68e-09   297s
+ 143   1.04674823e+03  1.04674735e+03  1.18e-04 2.35e-10  2.65e-09   298s
+ 144   1.04674835e+03  1.04674735e+03  1.21e-04 2.14e-10  2.39e-09   299s
+ 145   1.04674846e+03  1.04674735e+03  1.12e-04 2.07e-10  2.06e-09   301s
+ 146   1.04674818e+03  1.04674735e+03  1.19e-04 2.04e-10  1.96e-09   302s
+ 147   1.04674765e+03  1.04674735e+03  1.05e-04 1.74e-10  1.80e-09   305s
+ 148   1.04674762e+03  1.04674735e+03  1.03e-04 1.65e-10  1.78e-09   307s
+ 149   1.04674784e+03  1.04674735e+03  1.09e-04 1.41e-10  1.47e-09   308s
+ 150   1.04674777e+03  1.04674735e+03  1.09e-04 1.39e-10  1.45e-09   309s
+ 151   1.04674763e+03  1.04674735e+03  9.34e-05 1.33e-10  1.33e-09   310s
+ 152   1.04674784e+03  1.04674735e+03  8.90e-05 1.31e-10  1.28e-09   311s
+ 153   1.04674782e+03  1.04674735e+03  8.83e-05 1.09e-10  1.22e-09   314s
+ 154   1.04674790e+03  1.04674735e+03  8.07e-05 1.05e-10  1.19e-09   316s
+ 155   1.04674782e+03  1.04674735e+03  1.08e-04 8.67e-11  1.00e-09   317s
+ 156   1.04674791e+03  1.04674735e+03  1.40e-04 8.41e-11  9.34e-10   318s
+ 157   1.04674775e+03  1.04674735e+03  1.28e-04 7.97e-11  8.79e-10   319s
+ 158   1.04674777e+03  1.04674735e+03  1.20e-04 7.34e-11  8.47e-10   320s
+ 159   1.04674776e+03  1.04674735e+03  1.19e-04 7.06e-11  8.38e-10   322s
+ 160   1.04674774e+03  1.04674735e+03  1.12e-04 6.61e-11  8.00e-10   324s
+ 161   1.04674789e+03  1.04674735e+03  1.07e-04 2.67e-11  5.41e-10   325s
+ 162   1.04674763e+03  1.04674735e+03  1.15e-04 2.60e-11  5.16e-10   326s
+ 163   1.04674803e+03  1.04674735e+03  1.35e-04 2.49e-11  4.95e-10   327s
+ 164   1.04674811e+03  1.04674735e+03  1.21e-04 2.37e-11  4.66e-10   328s
+ 165   1.04674808e+03  1.04674735e+03  1.21e-04 2.12e-11  4.62e-10   330s
+ 166   1.04674794e+03  1.04674735e+03  1.42e-04 2.07e-11  4.32e-10   331s
+ 167   1.04674796e+03  1.04674735e+03  1.40e-04 1.96e-11  4.25e-10   334s
+ 168   1.04674806e+03  1.04674735e+03  1.42e-04 1.96e-11  4.21e-10   338s
+ 169   1.04674810e+03  1.04674735e+03  1.41e-04 1.93e-11  4.16e-10   343s
+ 170   1.04674826e+03  1.04674735e+03  1.10e-04 1.82e-11  2.69e-10   351s
+ 171   1.04674799e+03  1.04674735e+03  1.11e-04 1.82e-11  2.68e-10   354s
+ 172   1.04674792e+03  1.04674735e+03  1.17e-04 1.82e-11  2.64e-10   356s
+ 173   1.04674791e+03  1.04674735e+03  1.18e-04 1.80e-11  2.63e-10   358s
+ 174   1.04674819e+03  1.04674735e+03  9.46e-05 1.31e-11  2.48e-10   361s
+ 175   1.04674774e+03  1.04674735e+03  8.53e-05 1.12e-11  2.12e-10   363s
+ 176   1.04674730e+03  1.04674735e+03  1.61e-04 9.54e-12  2.59e-10   365s
+ 177   1.04674784e+03  1.04674735e+03  1.59e-04 7.33e-12  2.16e-10   368s
+ 178   1.04674809e+03  1.04674735e+03  1.47e-04 6.74e-12  1.97e-10   370s
+ 179   1.04674798e+03  1.04674735e+03  1.55e-04 6.72e-12  1.85e-10   371s
+ 180   1.04674866e+03  1.04674735e+03  1.41e-04 4.00e-12  1.48e-10   374s
+ 181   1.04674865e+03  1.04674735e+03  1.34e-04 3.26e-12  1.34e-10   376s
+ 182   1.04674900e+03  1.04674735e+03  1.23e-04 3.15e-12  1.33e-10   377s
+ 183   1.04674892e+03  1.04674735e+03  1.22e-04 2.25e-12  1.31e-10   378s
+ 184   1.04674901e+03  1.04674735e+03  1.13e-04 2.34e-12  1.25e-10   380s
+ 185   1.04674829e+03  1.04674735e+03  1.65e-04 2.08e-12  9.35e-11   381s
+
+Barrier performed 185 iterations in 381.46 seconds (117.74 work units)
+Sub-optimal termination - objective 1.04676813e+03
+
+/user/bnickson/GitHub/LUVex_TelAps/aplc_optimization/surveys/usort_offaxis_survey_N0128_telserv3/FPM39_IWA38/drivers/08_USORT_N128_FPM390M0150_IWA0380_OWA01400_C10_BW20_Nlam5_LS_ID_ID00_ODOD09_ls_0_ovsamp16_N.py:102: DeprecationWarning: circular_aperture is deprecated. Its new name is make_circular_aperture.
+  dark_zone_mask = circular_aperture(img_owa * 2)(focal_grid) - circular_aperture(img_iwa * 2)(focal_grid)
+/user/bnickson/GitHub/LUVex_TelAps/aplc_optimization/surveys/usort_offaxis_survey_N0128_telserv3/FPM39_IWA38/drivers/08_USORT_N128_FPM390M0150_IWA0380_OWA01400_C10_BW20_Nlam5_LS_ID_ID00_ODOD09_ls_0_ovsamp16_N.py:110: DeprecationWarning: circular_aperture is deprecated. Its new name is make_circular_aperture.
+  focal_plane_mask = 1 - evaluate_supersampled(circular_aperture(2 * fpm_radius), focal_mask_grid, 8)
+WARNING: VerifyWarning: Keyword name 'LS_ALIGN_TOl' is greater than 8 characters or contains characters not allowed by the FITS standard; a HIERARCH card will be created. [astropy.io.fits.card]
+WARNING: VerifyWarning: Keyword name 'LS_NUM_STOPS' is greater than 8 characters or contains characters not allowed by the FITS standard; a HIERARCH card will be created. [astropy.io.fits.card]
+WARNING: VerifyWarning: Keyword name 'PROG_START' is greater than 8 characters or contains characters not allowed by the FITS standard; a HIERARCH card will be created. [astropy.io.fits.card]
+WARNING: VerifyWarning: Keyword name 'PROG_EDGE' is greater than 8 characters or contains characters not allowed by the FITS standard; a HIERARCH card will be created. [astropy.io.fits.card]
+WARNING: VerifyWarning: Keyword name 'THRPT_ITER' is greater than 8 characters or contains characters not allowed by the FITS standard; a HIERARCH card will be created. [astropy.io.fits.card]
+WARNING: VerifyWarning: Keyword name 'THRPT_ESTIM' is greater than 8 characters or contains characters not allowed by the FITS standard; a HIERARCH card will be created. [astropy.io.fits.card]
+WARNING: VerifyWarning: Keyword name 'MAX_THRPT' is greater than 8 characters or contains characters not allowed by the FITS standard; a HIERARCH card will be created. [astropy.io.fits.card]
+WARNING: VerifyWarning: Keyword name 'SLV_THRDS' is greater than 8 characters or contains characters not allowed by the FITS standard; a HIERARCH card will be created. [astropy.io.fits.card]
+WARNING: VerifyWarning: Keyword name 'SLV_XOVER' is greater than 8 characters or contains characters not allowed by the FITS standard; a HIERARCH card will be created. [astropy.io.fits.card]
+Optimization finished!

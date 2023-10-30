@@ -1,0 +1,211 @@
+Optimizer called with the following parameters:
+{'focal_plane_mask': {'field_stop_radius': 14.5,
+                      'grayscale': True,
+                      'num_pix': 150,
+                      'radius': 3.6},
+ 'image': {'bandwidth': 0.15,
+           'contrast': 10,
+           'iwa': 3.5,
+           'num_wavelengths': 5,
+           'owa': 14.0,
+           'resolution': 2},
+ 'instrument': {'inst_name': 'USORT'},
+ 'lyot_stop': {'alignment_tolerance': 0,
+               'filename': 'USORT/LS_USORT_circ_ID0000_OD0990_ovsamp16_N0128.fits',
+               'num_lyot_stops': 1},
+ 'method': {'edge_width_for_prior': 2,
+            'ending_scale': 1,
+            'force_no_hermitian_symmetry': False,
+            'force_no_x_mirror_symmetry': False,
+            'force_no_y_mirror_symmetry': False,
+            'initial_throughput_estimate': 1,
+            'maximize_planet_throughput': True,
+            'num_throughput_iterations': 2,
+            'starting_scale': 1},
+ 'pupil': {'N': 128,
+           'filename': 'USORT/TelAp_USORT_offaxis_ovsamp16_N0128.fits'},
+ 'solver': {'crossover': 0,
+            'method': 2,
+            'num_threads': 0}}
+
+File organization:
+{'analysis_dir': '/user/bnickson/GitHub/LUVex_TelAps/aplc_optimization/surveys/usort_offaxis_survey_N0128_telserv3/FPM36_IWA35/analysis',
+ 'drivers_dir': '/user/bnickson/GitHub/LUVex_TelAps/aplc_optimization/surveys/usort_offaxis_survey_N0128_telserv3/FPM36_IWA35/drivers',
+ 'input_files_dir': '/user/bnickson/GitHub/LUVex_TelAps/aplc_optimization/masks',
+ 'log_dir': '/user/bnickson/GitHub/LUVex_TelAps/aplc_optimization/surveys/usort_offaxis_survey_N0128_telserv3/FPM36_IWA35/logs',
+ 'solution_dir': '/user/bnickson/GitHub/LUVex_TelAps/aplc_optimization/surveys/usort_offaxis_survey_N0128_telserv3/FPM36_IWA35/solutions',
+ 'survey_dir': '/user/bnickson/GitHub/LUVex_TelAps/aplc_optimization/surveys/usort_offaxis_survey_N0128_telserv3/FPM36_IWA35'}
+
+Telescope pupil:
+   Mirror symmetry in x: yes
+   Mirror symmetry in y: yes
+
+Lyot stop #0:
+   Mirror symmetry in x: yes
+Lyot stop #0:
+   Mirror symmetry in y: yes
+
+Complete APLC:
+   Mirror symmetry in x: yes
+   Mirror symmetry in y: yes
+
+Starting optimization at scale 1 with 2726 variables and 2895 constraints.
+Creating model...
+Set parameter Username
+Academic license - for non-commercial use only - expires 2024-10-25
+Set parameter Crossover to value 0
+Set parameter Method to value 2
+Calculating and adding constraints...
+Wavelength 1/5; Variable 1000/2726
+Wavelength 1/5; Variable 2000/2726
+Wavelength 2/5; Variable 1000/2726
+Wavelength 2/5; Variable 2000/2726
+Wavelength 3/5; Variable 1000/2726
+Wavelength 3/5; Variable 2000/2726
+Wavelength 4/5; Variable 1000/2726
+Wavelength 4/5; Variable 2000/2726
+Wavelength 5/5; Variable 1000/2726
+Wavelength 5/5; Variable 2000/2726
+Start optimization...
+Gurobi Optimizer version 10.0.3 build v10.0.3rc0 (linux64)
+
+CPU model: Intel(R) Xeon(R) Gold 6146 CPU @ 3.20GHz, instruction set [SSE2|AVX|AVX2|AVX512]
+Thread count: 24 physical cores, 48 logical processors, using up to 24 threads
+
+Optimize a model with 5790 rows, 2726 columns and 15783540 nonzeros
+Model fingerprint: 0xb611e88b
+Coefficient statistics:
+  Matrix range     [2e-12, 5e-04]
+  Objective range  [2e-03, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e-05, 1e-05]
+Presolve removed 0 rows and 0 columns (presolve time = 6s) ...
+Presolve time: 7.27s
+Presolved: 2726 rows, 8516 columns, 15786266 nonzeros
+Error: invalid user locale; possible fix is to set the system environment
+       variable 'LC_ALL' to a valid locale (e.g., to 'C')
+Ordering time: 0.07s
+
+Barrier statistics:
+ AA' NZ     : 3.714e+06
+ Factor NZ  : 3.717e+06 (roughly 34 MB of memory)
+ Factor Ops : 6.756e+09 (less than 1 second per iteration)
+ Threads    : 24
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0   5.49376281e+03  0.00000000e+00  0.00e+00 0.00e+00  9.56e-01    11s
+   1   2.56463741e+03  5.56776383e+02  0.00e+00 1.89e-01  3.56e-01    11s
+   2   1.68269529e+03  8.53900444e+02  0.00e+00 1.10e-01  1.82e-01    12s
+   3   1.16741249e+03  9.20172479e+02  0.00e+00 6.16e-02  8.70e-02    13s
+   4   1.00014641e+03  8.89354527e+02  0.00e+00 4.32e-02  5.57e-02    14s
+   5   9.25478368e+02  8.52691860e+02  0.00e+00 3.27e-02  4.03e-02    14s
+   6   8.64970750e+02  8.25144925e+02  0.00e+00 2.33e-02  2.66e-02    15s
+   7   8.23531280e+02  8.01024157e+02  0.00e+00 1.51e-02  1.57e-02    16s
+   8   7.92452690e+02  7.86718489e+02  0.00e+00 1.07e-02  9.29e-03    17s
+   9   7.82760406e+02  7.78961450e+02  0.00e+00 8.41e-03  7.01e-03    17s
+  10   7.77081210e+02  7.71720817e+02  0.00e+00 6.35e-03  5.43e-03    18s
+  11   7.68207451e+02  7.63086950e+02  0.00e+00 3.92e-03  3.41e-03    19s
+  12   7.60412227e+02  7.57464074e+02  0.00e+00 2.48e-03  2.07e-03    20s
+  13   7.55801475e+02  7.52940271e+02  0.00e+00 1.38e-03  1.24e-03    21s
+  14   7.53590434e+02  7.50889072e+02  0.00e+00 9.04e-04  8.77e-04    21s
+  15   7.50737028e+02  7.49820555e+02  0.00e+00 6.63e-04  5.43e-04    22s
+  16   7.49075446e+02  7.48794537e+02  0.00e+00 4.34e-04  3.25e-04    23s
+  17   7.48096809e+02  7.48027003e+02  0.00e+00 2.62e-04  1.86e-04    23s
+  18   7.47514658e+02  7.47554260e+02  0.00e+00 1.58e-04  1.05e-04    24s
+  19   7.47158002e+02  7.47090262e+02  0.00e+00 5.65e-05  4.50e-05    25s
+  20   7.47047652e+02  7.46925091e+02  0.00e+00 2.02e-05  2.48e-05    26s
+  21   7.46957025e+02  7.46861898e+02  0.00e+00 6.02e-06  1.26e-05    26s
+  22   7.46916314e+02  7.46848287e+02  0.00e+00 2.90e-06  8.05e-06    27s
+  23   7.46900102e+02  7.46837638e+02  0.00e+00 3.56e-07  5.80e-06    28s
+  24   7.46838022e+02  7.46836709e+02  6.53e-08 2.94e-08  1.37e-07    29s
+  25   7.46836937e+02  7.46836685e+02  1.35e-08 1.12e-08  3.02e-08    32s
+  26   7.46836935e+02  7.46836679e+02  7.48e-08 2.83e-09  2.48e-08    33s
+  27   7.46836936e+02  7.46836679e+02  1.12e-07 1.75e-09  2.40e-08    34s
+  28   7.46836691e+02  7.46836679e+02  1.61e-08 8.96e-12  1.05e-09    36s
+  29   7.46836690e+02  7.46836679e+02  5.65e-08 2.37e-13  9.85e-10    37s
+  30   7.46836680e+02  7.46836679e+02  1.01e-06 3.70e-13  1.81e-13    38s
+  31   7.46836689e+02  7.46836679e+02  1.84e-06 3.26e-13  1.31e-16    38s
+  32   7.46836679e+02  7.46836679e+02  1.34e-06 2.74e-13  1.27e-20    39s
+  33   7.46836688e+02  7.46836679e+02  1.94e-06 6.10e-14  6.03e-23    40s
+
+Barrier solved model in 33 iterations and 39.81 seconds (18.93 work units)
+Optimal objective 7.46836691e+02
+
+Optimization finished!
+Restarting optimization for throughput iteration 1...
+Gurobi Optimizer version 10.0.3 build v10.0.3rc0 (linux64)
+
+CPU model: Intel(R) Xeon(R) Gold 6146 CPU @ 3.20GHz, instruction set [SSE2|AVX|AVX2|AVX512]
+Thread count: 24 physical cores, 48 logical processors, using up to 24 threads
+
+Optimize a model with 5790 rows, 2726 columns and 15783540 nonzeros
+Model fingerprint: 0xfcd95e9c
+Coefficient statistics:
+  Matrix range     [2e-12, 5e-04]
+  Objective range  [2e-03, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [3e-06, 3e-06]
+Presolve removed 0 rows and 0 columns (presolve time = 6s) ...
+Presolve time: 7.24s
+Presolved: 2726 rows, 8516 columns, 15786266 nonzeros
+Ordering time: 0.06s
+
+Barrier statistics:
+ AA' NZ     : 3.714e+06
+ Factor NZ  : 3.717e+06 (roughly 34 MB of memory)
+ Factor Ops : 6.756e+09 (less than 1 second per iteration)
+ Threads    : 24
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0   5.41152373e+03  0.00000000e+00  0.00e+00 0.00e+00  9.47e-01    11s
+   1   2.48277780e+03  5.41033564e+02  0.00e+00 1.93e-01  3.60e-01    11s
+   2   1.47758160e+03  8.07594556e+02  0.00e+00 1.18e-01  1.90e-01    12s
+   3   1.05665452e+03  8.51044441e+02  0.00e+00 7.39e-02  1.09e-01    13s
+   4   8.76903092e+02  8.16543750e+02  0.00e+00 4.63e-02  6.41e-02    14s
+   5   8.13266171e+02  7.73816542e+02  0.00e+00 2.94e-02  4.14e-02    15s
+   6   7.66634877e+02  7.69382021e+02  0.00e+00 2.79e-02  3.53e-02    15s
+   7   7.31123180e+02  7.40424422e+02  0.00e+00 1.82e-02  2.20e-02    16s
+   8   7.21623845e+02  7.18504200e+02  0.00e+00 1.17e-02  1.45e-02    17s
+   9   7.14703594e+02  7.11621695e+02  0.00e+00 9.98e-03  1.22e-02    17s
+  10   7.06095910e+02  7.03375610e+02  0.00e+00 7.94e-03  9.46e-03    18s
+  11   6.96226257e+02  6.93171388e+02  0.00e+00 5.45e-03  6.21e-03    19s
+  12   6.90064462e+02  6.86473281e+02  0.00e+00 3.90e-03  4.42e-03    19s
+  13   6.81523317e+02  6.81476648e+02  0.00e+00 2.77e-03  2.69e-03    20s
+  14   6.77488871e+02  6.78458567e+02  0.00e+00 2.14e-03  1.90e-03    21s
+  15   6.73508305e+02  6.72746307e+02  0.00e+00 1.04e-03  9.96e-04    21s
+  16   6.71691624e+02  6.70658916e+02  0.00e+00 6.86e-04  6.76e-04    22s
+  17   6.69146414e+02  6.69013975e+02  0.00e+00 3.91e-04  3.39e-04    23s
+  18   6.67834048e+02  6.67979173e+02  0.00e+00 2.01e-04  1.56e-04    23s
+  19   6.67453723e+02  6.67439987e+02  0.00e+00 1.07e-04  9.12e-05    24s
+  20   6.67145678e+02  6.67159184e+02  0.00e+00 5.81e-05  4.75e-05    25s
+  21   6.66957356e+02  6.66970816e+02  0.00e+00 2.60e-05  2.05e-05    25s
+  22   6.66900059e+02  6.66899639e+02  0.00e+00 1.33e-05  1.12e-05    26s
+  23   6.66861587e+02  6.66845986e+02  0.00e+00 3.84e-06  4.59e-06    27s
+  24   6.66850105e+02  6.66833868e+02  0.00e+00 1.59e-06  2.78e-06    28s
+  25   6.66832144e+02  6.66828703e+02  0.00e+00 6.12e-07  8.21e-07    29s
+  26   6.66826903e+02  6.66826506e+02  1.94e-08 1.67e-07  1.76e-07    30s
+  27   6.66825779e+02  6.66825778e+02  4.35e-08 1.68e-08  1.42e-08    32s
+  28   6.66825779e+02  6.66825747e+02  8.26e-08 9.90e-09  1.11e-08    33s
+  29   6.66825703e+02  6.66825703e+02  8.00e-09 3.66e-13  1.14e-11    34s
+
+Barrier solved model in 29 iterations and 34.44 seconds (16.13 work units)
+Optimal objective 6.66825703e+02
+
+/user/bnickson/GitHub/LUVex_TelAps/aplc_optimization/surveys/usort_offaxis_survey_N0128_telserv3/FPM36_IWA35/drivers/04_USORT_N128_FPM360M0150_IWA0350_OWA01400_C10_BW15_Nlam5_LS_IDc_ID0_OD_OD0_ls_90_ovsamp16_.py:102: DeprecationWarning: circular_aperture is deprecated. Its new name is make_circular_aperture.
+  dark_zone_mask = circular_aperture(img_owa * 2)(focal_grid) - circular_aperture(img_iwa * 2)(focal_grid)
+/user/bnickson/GitHub/LUVex_TelAps/aplc_optimization/surveys/usort_offaxis_survey_N0128_telserv3/FPM36_IWA35/drivers/04_USORT_N128_FPM360M0150_IWA0350_OWA01400_C10_BW15_Nlam5_LS_IDc_ID0_OD_OD0_ls_90_ovsamp16_.py:110: DeprecationWarning: circular_aperture is deprecated. Its new name is make_circular_aperture.
+  focal_plane_mask = 1 - evaluate_supersampled(circular_aperture(2 * fpm_radius), focal_mask_grid, 8)
+/user/bnickson/GitHub/LUVex_TelAps/aplc_optimization/surveys/usort_offaxis_survey_N0128_telserv3/FPM36_IWA35/drivers/04_USORT_N128_FPM360M0150_IWA0350_OWA01400_C10_BW15_Nlam5_LS_IDc_ID0_OD_OD0_ls_90_ovsamp16_.py:118: DeprecationWarning: circular_aperture is deprecated. Its new name is make_circular_aperture.
+  field_stop = circular_aperture(2 * field_stop_radius)(field_stop_grid)
+WARNING: VerifyWarning: Keyword name 'LS_ALIGN_TOl' is greater than 8 characters or contains characters not allowed by the FITS standard; a HIERARCH card will be created. [astropy.io.fits.card]
+WARNING: VerifyWarning: Keyword name 'LS_NUM_STOPS' is greater than 8 characters or contains characters not allowed by the FITS standard; a HIERARCH card will be created. [astropy.io.fits.card]
+WARNING: VerifyWarning: Keyword name 'PROG_START' is greater than 8 characters or contains characters not allowed by the FITS standard; a HIERARCH card will be created. [astropy.io.fits.card]
+WARNING: VerifyWarning: Keyword name 'PROG_EDGE' is greater than 8 characters or contains characters not allowed by the FITS standard; a HIERARCH card will be created. [astropy.io.fits.card]
+WARNING: VerifyWarning: Keyword name 'THRPT_ITER' is greater than 8 characters or contains characters not allowed by the FITS standard; a HIERARCH card will be created. [astropy.io.fits.card]
+WARNING: VerifyWarning: Keyword name 'THRPT_ESTIM' is greater than 8 characters or contains characters not allowed by the FITS standard; a HIERARCH card will be created. [astropy.io.fits.card]
+WARNING: VerifyWarning: Keyword name 'MAX_THRPT' is greater than 8 characters or contains characters not allowed by the FITS standard; a HIERARCH card will be created. [astropy.io.fits.card]
+WARNING: VerifyWarning: Keyword name 'SLV_THRDS' is greater than 8 characters or contains characters not allowed by the FITS standard; a HIERARCH card will be created. [astropy.io.fits.card]
+WARNING: VerifyWarning: Keyword name 'SLV_XOVER' is greater than 8 characters or contains characters not allowed by the FITS standard; a HIERARCH card will be created. [astropy.io.fits.card]
+Optimization finished!

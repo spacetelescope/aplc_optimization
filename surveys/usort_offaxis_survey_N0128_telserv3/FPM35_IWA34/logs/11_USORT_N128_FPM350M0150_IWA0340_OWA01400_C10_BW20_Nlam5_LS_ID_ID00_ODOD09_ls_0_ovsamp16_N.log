@@ -1,0 +1,58 @@
+Optimizer called with the following parameters:
+{'focal_plane_mask': {'field_stop_radius': 14.5,
+                      'grayscale': True,
+                      'num_pix': 150,
+                      'radius': 3.5},
+ 'image': {'bandwidth': 0.2,
+           'contrast': 10,
+           'iwa': 3.4,
+           'num_wavelengths': 5,
+           'owa': 14.0,
+           'resolution': 2},
+ 'instrument': {'inst_name': 'USORT'},
+ 'lyot_stop': {'alignment_tolerance': 0,
+               'filename': 'USORT/LS_USORT_hex_ID0000_OD0990_ovsamp16_N0128.fits',
+               'num_lyot_stops': 1},
+ 'method': {'edge_width_for_prior': 2,
+            'ending_scale': 1,
+            'force_no_hermitian_symmetry': False,
+            'force_no_x_mirror_symmetry': False,
+            'force_no_y_mirror_symmetry': False,
+            'initial_throughput_estimate': 1,
+            'maximize_planet_throughput': True,
+            'num_throughput_iterations': 2,
+            'starting_scale': 1},
+ 'pupil': {'N': 128,
+           'filename': 'USORT/TelAp_USORT_offaxis_ovsamp16_N0128.fits'},
+ 'solver': {'crossover': 0,
+            'method': 2,
+            'num_threads': 0}}
+
+File organization:
+{'analysis_dir': '/System/Volumes/Data/user/bnickson/GitHub/LUVex_TelAps/aplc_optimization/surveys/usort_offaxis_survey_N0128_telserv3/FPM35_IWA34/analysis',
+ 'drivers_dir': '/System/Volumes/Data/user/bnickson/GitHub/LUVex_TelAps/aplc_optimization/surveys/usort_offaxis_survey_N0128_telserv3/FPM35_IWA34/drivers',
+ 'input_files_dir': '/System/Volumes/Data/user/bnickson/GitHub/LUVex_TelAps/aplc_optimization/masks',
+ 'log_dir': '/System/Volumes/Data/user/bnickson/GitHub/LUVex_TelAps/aplc_optimization/surveys/usort_offaxis_survey_N0128_telserv3/FPM35_IWA34/logs',
+ 'solution_dir': '/System/Volumes/Data/user/bnickson/GitHub/LUVex_TelAps/aplc_optimization/surveys/usort_offaxis_survey_N0128_telserv3/FPM35_IWA34/solutions',
+ 'survey_dir': '/System/Volumes/Data/user/bnickson/GitHub/LUVex_TelAps/aplc_optimization/surveys/usort_offaxis_survey_N0128_telserv3/FPM35_IWA34'}
+
+Traceback (most recent call last):
+  File "/user/bnickson/GitHub/LUVex_TelAps/aplc_optimization/surveys/usort_offaxis_survey_N0128_telserv3/FPM35_IWA34/drivers/11_USORT_N128_FPM350M0150_IWA0340_OWA01400_C10_BW20_Nlam5_LS_ID_ID00_ODOD09_ls_0_ovsamp16_N.py", line 60, in <module>
+    pupil = read_fits(pup_fname)
+  File "/home/bnickson/miniconda3/envs/aplc_optimization/lib/python3.8/site-packages/hcipy/util/io.py", line 29, in read_fits
+    return fits.getdata(filename, extension).copy()
+  File "/home/bnickson/miniconda3/envs/aplc_optimization/lib/python3.8/site-packages/astropy/io/fits/convenience.py", line 221, in getdata
+    hdulist, extidx = _getext(filename, mode, *args, **kwargs)
+  File "/home/bnickson/miniconda3/envs/aplc_optimization/lib/python3.8/site-packages/astropy/io/fits/convenience.py", line 1125, in _getext
+    hdulist = fitsopen(filename, mode=mode, **kwargs)
+  File "/home/bnickson/miniconda3/envs/aplc_optimization/lib/python3.8/site-packages/astropy/io/fits/hdu/hdulist.py", line 214, in fitsopen
+    return HDUList.fromfile(
+  File "/home/bnickson/miniconda3/envs/aplc_optimization/lib/python3.8/site-packages/astropy/io/fits/hdu/hdulist.py", line 482, in fromfile
+    return cls._readfrom(
+  File "/home/bnickson/miniconda3/envs/aplc_optimization/lib/python3.8/site-packages/astropy/io/fits/hdu/hdulist.py", line 1170, in _readfrom
+    fileobj = _File(
+  File "/home/bnickson/miniconda3/envs/aplc_optimization/lib/python3.8/site-packages/astropy/io/fits/file.py", line 218, in __init__
+    self._open_filename(fileobj, mode, overwrite)
+  File "/home/bnickson/miniconda3/envs/aplc_optimization/lib/python3.8/site-packages/astropy/io/fits/file.py", line 636, in _open_filename
+    self._file = open(self.name, IO_FITS_MODES[mode])
+FileNotFoundError: [Errno 2] No such file or directory: '/System/Volumes/Data/user/bnickson/GitHub/LUVex_TelAps/aplc_optimization/masks/USORT/TelAp_USORT_offaxis_ovsamp16_N0128.fits'
