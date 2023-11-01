@@ -501,3 +501,77 @@ Iter       Primal          Dual         Primal    Dual     Compl     Time
   65   1.00196015e+04  9.92440867e+03  1.70e-05 3.51e-06  1.77e-04  18642s
   66   1.00108615e+04  9.92309538e+03  1.56e-05 3.28e-06  1.64e-04  18799s
   67   1.00089206e+04  9.92190747e+03  1.53e-05 3.59e-06  1.59e-04  18983s
+  68   9.99814547e+03  9.92159541e+03  1.36e-05 2.54e-06  1.49e-04  19205s
+  69   9.99358751e+03  9.92033268e+03  1.29e-05 2.98e-06  1.40e-04  19401s
+  70   9.98976955e+03  9.91830184e+03  1.23e-05 2.71e-06  1.30e-04  19601s
+  71   9.98215295e+03  9.91760546e+03  1.11e-05 3.59e-06  1.21e-04  19813s
+  72   9.97974543e+03  9.91523334e+03  1.08e-05 2.93e-06  1.12e-04  20013s
+  73   9.97541106e+03  9.91405549e+03  1.01e-05 3.00e-06  1.05e-04  20220s
+  74   9.97044390e+03  9.91274825e+03  9.37e-06 2.96e-06  9.56e-05  20435s
+  75   9.96667997e+03  9.91193045e+03  8.82e-06 3.93e-06  8.99e-05  20629s
+  76   9.96205031e+03  9.91096890e+03  8.14e-06 2.94e-06  8.23e-05  20833s
+  77   9.95927197e+03  9.91028165e+03  7.74e-06 3.18e-06  7.81e-05  21013s
+  78   9.95400167e+03  9.90963269e+03  6.98e-06 3.40e-06  7.08e-05  21206s
+  79   9.95096414e+03  9.90894549e+03  6.55e-06 3.35e-06  6.53e-05  21383s
+  80   9.94920185e+03  9.90867178e+03  6.30e-06 3.25e-06  6.26e-05  21575s
+  81   9.94636419e+03  9.90821155e+03  5.89e-06 2.84e-06  5.80e-05  21770s
+  82   9.94218353e+03  9.90774622e+03  5.30e-06 2.86e-06  5.20e-05  21974s
+  83   9.93850204e+03  9.90719546e+03  4.78e-06 2.91e-06  4.60e-05  22179s
+  84   9.93480489e+03  9.90665801e+03  4.26e-06 2.96e-06  3.98e-05  22350s
+  85   9.93230759e+03  9.90636902e+03  3.90e-06 3.75e-06  3.61e-05  22503s
+  86   9.93004514e+03  9.90619152e+03  3.58e-06 3.49e-06  3.33e-05  22673s
+  87   9.92840315e+03  9.90588807e+03  3.35e-06 4.60e-06  3.03e-05  22842s
+  88   9.92550136e+03  9.90555088e+03  2.95e-06 4.79e-06  2.63e-05  23009s
+  89   9.92313234e+03  9.90533611e+03  2.62e-06 7.03e-06  2.33e-05  23193s
+  90   9.92045218e+03  9.90514193e+03  2.25e-06 4.52e-06  2.03e-05  23369s
+  91   9.91850959e+03  9.90487872e+03  1.99e-06 5.09e-06  1.73e-05  23529s
+  92   9.91631443e+03  9.90476287e+03  1.69e-06 2.74e-06  1.50e-05  23697s
+  93   9.91561047e+03  9.90454233e+03  1.59e-06 3.64e-06  1.31e-05  23873s
+  94   9.91354042e+03  9.90447642e+03  1.31e-06 3.00e-06  1.11e-05  24047s
+  95   9.91243865e+03  9.90436712e+03  1.16e-06 3.90e-06  9.55e-06  24225s
+  96   9.91166129e+03  9.90430059e+03  1.05e-06 3.68e-06  8.56e-06  24394s
+  97   9.91002725e+03  9.90419455e+03  8.29e-07 3.36e-06  6.66e-06  24577s
+  98   9.90938379e+03  9.90413669e+03  7.42e-07 3.18e-06  5.86e-06  24852s
+  99   9.90874981e+03  9.90408780e+03  6.57e-07 3.23e-06  5.09e-06  25143s
+ 100   9.90852510e+03  9.90406347e+03  6.26e-07 3.22e-06  4.77e-06  25417s
+ 101   9.90760993e+03  9.90403118e+03  5.03e-07 3.02e-06  3.89e-06  25692s
+ 102   9.90665069e+03  9.90397401e+03  3.75e-07 7.14e-06  2.82e-06  25968s
+ 103   9.90592550e+03  9.90393067e+03  2.78e-07 6.32e-06  2.02e-06  26230s
+ 104   9.90573505e+03  9.90392300e+03  2.52e-07 6.30e-06  1.83e-06  26472s
+ 105   9.90542289e+03  9.90391330e+03  2.10e-07 7.26e-06  1.55e-06  26717s
+ 106   9.90522661e+03  9.90390506e+03  1.84e-07 4.63e-06  1.36e-06  26949s
+ 107   9.90474256e+03  9.90389587e+03  1.20e-07 3.39e-06  9.74e-07  27217s
+ 108   9.90448720e+03  9.90387296e+03  8.56e-08 3.52e-06  6.36e-07  27482s
+ 109   9.90425403e+03  9.90385800e+03  5.45e-08 7.48e-06  3.70e-07  27758s
+ 110   9.90405024e+03  9.90385277e+03  2.73e-08 7.07e-06  1.95e-07  28000s
+ 111   9.90399446e+03  9.90384933e+03  1.98e-08 3.41e-06  1.32e-07  28246s
+ 112   9.90392053e+03  9.90384786e+03  9.98e-09 3.76e-06  6.93e-08  28493s
+ 113   9.90389400e+03  9.90384626e+03  6.35e-09 4.25e-06  3.94e-08  28741s
+ 114   9.90388227e+03  9.90384606e+03  4.46e-09 4.08e-06  2.81e-08  29008s
+ 115   9.90386129e+03  9.90384565e+03  1.98e-09 4.37e-06  1.24e-08  29283s
+ 116   9.90385246e+03  9.90384559e+03  1.07e-09 5.23e-06  7.23e-09  29553s
+ 117   9.90385430e+03  9.90384559e+03  9.78e-10 5.05e-06  6.76e-09  29801s
+ 118   9.90385689e+03  9.90384550e+03  7.78e-10 4.89e-06  5.05e-09  30069s
+ 119   9.90384877e+03  9.90384539e+03  1.92e-10 6.24e-06  1.36e-09  30343s
+ 120   9.90384928e+03  9.90384539e+03  1.48e-10 6.09e-06  1.10e-09  30577s
+ 121   9.90384858e+03  9.90384535e+03  1.24e-10 1.60e-05  6.09e-10  30833s
+
+Barrier solved model in 121 iterations and 30832.95 seconds (12764.08 work units)
+Optimal objective 9.90384858e+03
+
+/user/bnickson/GitHub/LUVex_TelAps/aplc_optimization/surveys/usort_offaxis_survey_N0512_telserv3/FPM35_IWA34/drivers/05_USORT_N512_FPM350M0150_IWA0340_OWA01400_C10_BW20_Nlam5_LS_IDc_ID0_OD_OD0_ls_90_ovsamp16_.py:102: DeprecationWarning: circular_aperture is deprecated. Its new name is make_circular_aperture.
+  dark_zone_mask = circular_aperture(img_owa * 2)(focal_grid) - circular_aperture(img_iwa * 2)(focal_grid)
+/user/bnickson/GitHub/LUVex_TelAps/aplc_optimization/surveys/usort_offaxis_survey_N0512_telserv3/FPM35_IWA34/drivers/05_USORT_N512_FPM350M0150_IWA0340_OWA01400_C10_BW20_Nlam5_LS_IDc_ID0_OD_OD0_ls_90_ovsamp16_.py:110: DeprecationWarning: circular_aperture is deprecated. Its new name is make_circular_aperture.
+  focal_plane_mask = 1 - evaluate_supersampled(circular_aperture(2 * fpm_radius), focal_mask_grid, 8)
+/user/bnickson/GitHub/LUVex_TelAps/aplc_optimization/surveys/usort_offaxis_survey_N0512_telserv3/FPM35_IWA34/drivers/05_USORT_N512_FPM350M0150_IWA0340_OWA01400_C10_BW20_Nlam5_LS_IDc_ID0_OD_OD0_ls_90_ovsamp16_.py:118: DeprecationWarning: circular_aperture is deprecated. Its new name is make_circular_aperture.
+  field_stop = circular_aperture(2 * field_stop_radius)(field_stop_grid)
+WARNING: VerifyWarning: Keyword name 'LS_ALIGN_TOl' is greater than 8 characters or contains characters not allowed by the FITS standard; a HIERARCH card will be created. [astropy.io.fits.card]
+WARNING: VerifyWarning: Keyword name 'LS_NUM_STOPS' is greater than 8 characters or contains characters not allowed by the FITS standard; a HIERARCH card will be created. [astropy.io.fits.card]
+WARNING: VerifyWarning: Keyword name 'PROG_START' is greater than 8 characters or contains characters not allowed by the FITS standard; a HIERARCH card will be created. [astropy.io.fits.card]
+WARNING: VerifyWarning: Keyword name 'PROG_EDGE' is greater than 8 characters or contains characters not allowed by the FITS standard; a HIERARCH card will be created. [astropy.io.fits.card]
+WARNING: VerifyWarning: Keyword name 'THRPT_ITER' is greater than 8 characters or contains characters not allowed by the FITS standard; a HIERARCH card will be created. [astropy.io.fits.card]
+WARNING: VerifyWarning: Keyword name 'THRPT_ESTIM' is greater than 8 characters or contains characters not allowed by the FITS standard; a HIERARCH card will be created. [astropy.io.fits.card]
+WARNING: VerifyWarning: Keyword name 'MAX_THRPT' is greater than 8 characters or contains characters not allowed by the FITS standard; a HIERARCH card will be created. [astropy.io.fits.card]
+WARNING: VerifyWarning: Keyword name 'SLV_THRDS' is greater than 8 characters or contains characters not allowed by the FITS standard; a HIERARCH card will be created. [astropy.io.fits.card]
+WARNING: VerifyWarning: Keyword name 'SLV_XOVER' is greater than 8 characters or contains characters not allowed by the FITS standard; a HIERARCH card will be created. [astropy.io.fits.card]
+Optimization finished!
